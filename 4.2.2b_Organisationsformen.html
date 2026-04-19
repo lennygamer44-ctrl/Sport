@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.2.2b Organisationsformen: Organisierter und nichtorganisierter Sport</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Theme: Urban & Institutional */
+            --bg-page: #f8fafc;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            
+            /* Institutional (Organized) */
+            --inst-blue: #1d4ed8;
+            --inst-light: #eff6ff;
+            --inst-border: #bfdbfe;
+            
+            /* Urban (Unorganized) */
+            --urban-orange: #f97316;
+            --urban-light: #fff7ed;
+            --urban-border: #fed7aa;
+            
+            /* Abitur Premium Box */
+            --abi-dark: #111827;
+            --abi-gold: #f59e0b;
+            --abi-gradient: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            padding-bottom: 5rem;
+            overflow-x: hidden;
+        }
+
+        /* --- Dynamic Header --- */
+        header {
+            background: #ffffff;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 4rem;
+            overflow: hidden;
+        }
+
+        /* Background Split Graphic */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 50%; bottom: 0; left: 0;
+            background: linear-gradient(to right, rgba(29, 78, 216, 0.05), transparent);
+            z-index: 0;
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 50%;
+            background: linear-gradient(to left, rgba(249, 115, 22, 0.05), transparent);
+            z-index: 0;
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #f1f5f9;
+            color: #64748b;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            color: var(--text-dark);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Split Section (Cards) --- */
+        .split-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .info-card {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem 2.5rem;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-inst {
+            border-top: 8px solid var(--inst-blue);
+        }
+
+        .card-urban {
+            border-top: 8px solid var(--urban-orange);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .info-card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .card-inst h2 { color: var(--inst-blue); }
+        .card-urban h2 { color: var(--urban-orange); }
+
+        .sub-heading {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 1.5rem 0 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-card p {
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        /* --- Wandel Section --- */
+        .wandel-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 4rem;
+            border-left: 6px solid #8b5cf6;
+        }
+
+        .wandel-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        /* --- Canvas Wrapper --- */
+        .canvas-wrapper {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* --- Comparison Table --- */
+        .table-section {
+            margin-bottom: 5rem;
+        }
+
+        .table-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            border: 1px solid #e2e8f0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1.5rem;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .comparison-table th {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .th-inst { background: var(--inst-blue); width: 40%; }
+        .th-urban { background: var(--urban-orange); width: 40%; }
+        .th-param { background: #cbd5e1; color: var(--text-dark) !important; width: 20%; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem !important;}
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table td:first-child {
+            font-weight: 600;
+            color: var(--text-dark);
+            background: #f8fafc;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .comparison-table td:nth-child(2) {
+            border-right: 1px dashed #e2e8f0;
+        }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-premium {
+            background: var(--abi-gradient);
+            color: #f1f5f9;
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            margin-top: 6rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+            border: 1px solid #374151;
+        }
+
+        .abitur-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--abi-gold);
+            color: #451a03;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            padding: 0.6rem 2.5rem;
+            border-radius: 30px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.3);
+            white-space: nowrap;
+        }
+
+        .abitur-intro {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.15rem;
+            margin-bottom: 3rem;
+        }
+
+        .transfer-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .transfer-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .transfer-card h4 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--abi-gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .transfer-card p {
+            margin-bottom: 0;
+            color: #cbd5e1;
+        }
+
+        .transfer-card strong {
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-table, .comparison-table tbody, .comparison-table tr, .comparison-table th, .comparison-table td {
+                display: block;
+                width: 100%;
+            }
+            .comparison-table tr { margin-bottom: 2rem; border: 2px solid #e2e8f0; border-radius: 8px; }
+            .th-param { display: none; }
+            .comparison-table td:first-child { background: #e2e8f0; font-weight: 700; text-align: center;}
+            .comparison-table td { border-right: none !important; border-bottom: 1px solid #e2e8f0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <span class="tag">Lernbereich 4.2.2b</span>
+            <h1>Organisationsformen: Organisierter und nichtorganisierter Sport</h1>
+            <p class="intro">
+                Die gesellschaftliche Bedeutung des Sports manifestiert sich maßgeblich in der Art und Weise, wie er strukturell verankert ist. In der Sportsoziologie wird grundsätzlich zwischen dem traditionellen, organisierten Sport (z. B. im Verein) und dem nichtorganisierten, informellen Sport differenziert.
+            </p>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="split-grid">
+            <!-- Organisierter Sport -->
+            <article class="info-card card-inst">
+                <span class="card-icon">🏛️</span>
+                <h2>Der organisierte Sport</h2>
+                <span style="color: var(--inst-blue); font-weight: 600; text-transform: uppercase; font-size: 0.9rem;">(Das Vereinswesen)</span>
+                
+                <p style="margin-top: 1rem;">
+                    Der organisierte Sport in Deutschland ist stark institutionalisiert und hierarchisch strukturiert (z. B. unter dem Dach des DOSB). Er zeichnet sich durch formelle Mitgliedschaften, feste Trainingszeiten, gewählte Vereinsstrukturen (Demokratielernen) und ein verbindliches Regelwerk aus.
+                </p>
+
+                <div class="sub-heading">Bedeutung und Funktion</div>
+                <p>
+                    Der Sportverein ist die traditionelle Säule des Wettkampf- und Leistungssports. Durch das systematische Training und das geregelte Ligensystem ermöglicht er die objektive Leistungsmessung. 
+                </p>
+                <p>
+                    Weit über den motorischen Aspekt hinaus fungiert der Verein als <strong>primäre sportliche Sozialisationsinstanz</strong>. Er vermittelt durch Kontinuität und soziale Kontrolle nachhaltig Werte (Fairplay, Toleranz) und fördert die gesellschaftliche Integration. Der Verein verlangt dem Individuum jedoch auch eine Unterordnung unter das Kollektiv und feste Strukturen ab.
+                </p>
+            </article>
+
+            <!-- Nichtorganisierter Sport -->
+            <article class="info-card card-urban">
+                <span class="card-icon">🛹</span>
+                <h2>Der nichtorganisierte Sport</h2>
+                <span style="color: var(--urban-orange); font-weight: 600; text-transform: uppercase; font-size: 0.9rem;">(Informeller Sport)</span>
+                
+                <p style="margin-top: 1rem;">
+                    Als Reaktion auf den gesellschaftlichen Megatrend der Individualisierung hat sich der nichtorganisierte Sport rasant entwickelt. Hierzu zählen selbstorganisierte Aktivitäten wie Joggen im Park, Streetball, Parkour oder das Training in kommerziellen Fitnessstudios.
+                </p>
+
+                <div class="sub-heading">Bedeutung und Funktion</div>
+                <p>
+                    Der informelle Sport zeichnet sich durch <strong>maximale Flexibilität</strong> aus: Sport wird unabhängig von festen Zeiten, Orten und institutionellen Verpflichtungen betrieben. 
+                </p>
+                <p>
+                    Die Motive verschieben sich hier oft weg von der "Leistung" hin zu "Gesundheit, Fitness", "Ästhetik" oder "Spannung und Abenteuer". Der Sport dient hier primär als Ausdruck des individuellen Lifestyles und der Selbstverwirklichung. Die soziale Bindung ist meist temporär (z. B. spontane Laufgruppen) und weniger verbindlich als im Verein.
+                </p>
+            </article>
+        </div>
+
+
+        <!-- Wandel Section mit Canvas -->
+        <section class="wandel-section">
+            <h2>Gesellschaftlicher Wandel</h2>
+            <p>
+                In der Soziologie wird beobachtet, dass traditionelle Vereine oft mit Mitgliederschwund zu kämpfen haben, während der informelle Sport boomt. Diese Entwicklung erfordert vom organisierten Sport Anpassungsstrategien (z. B. das Anbieten flexibler Kurssysteme ohne feste Mitgliedschaft), um nicht an gesellschaftlicher Relevanz zu verlieren.
+            </p>
+            
+            <div class="canvas-wrapper">
+                <canvas id="trendCanvas" width="800" height="350"></canvas>
+            </div>
+        </section>
+
+
+        <!-- Comparison Table (KI 2 Task) -->
+        <section class="table-section">
+            <h2>Tabellarische Gegenüberstellung</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="th-param">Parameter</th>
+                        <th class="th-inst">Organisierter Sport (Verein)</th>
+                        <th class="th-urban">Nichtorganisierter Sport (Informell)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Struktur / Bindung</td>
+                        <td><strong>Fest & Hierarchisch:</strong> Feste Trainingszeiten, formelle Mitgliedschaft, Verbindlichkeit, Unterordnung unter das Kollektiv.</td>
+                        <td><strong>Flexibel & Spontan:</strong> Unabhängig von Zeiten und Orten, keine institutionelle Verpflichtung, maximale Individualität.</td>
+                    </tr>
+                    <tr>
+                        <td>Dominante Motive</td>
+                        <td><strong>Leistung & Wettkampf:</strong> Objektive Leistungsmessung, Ligensystem, sportlicher Erfolg, Anschluss (Soziales).</td>
+                        <td><strong>Lifestyle & Fitness:</strong> Gesundheit, Körperformung (Ästhetik), Spannung/Abenteuer, Selbstverwirklichung.</td>
+                    </tr>
+                    <tr>
+                        <td>Soziale Funktion</td>
+                        <td><strong>Starke Sozialisationsinstanz:</strong> Nachhaltige Wertevermittlung (Fairplay), gesellschaftliche Integration, soziales Lernen.</td>
+                        <td><strong>Individuelle Selbstverwirklichung:</strong> Temporäre, unverbindliche soziale Bindungen (z.B. Lauf-Treffs), Fokus auf das "Ich".</td>
+                    </tr>
+                    <tr>
+                        <td>Beispiele</td>
+                        <td>Fußballverein, Leichtathletik-Abteilung, Schwimm-Club (DOSB-Strukturen).</td>
+                        <td>Joggen im Park, Parkour, Streetball, kommerzielle Fitnessstudios.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-premium">
+            <div class="abitur-badge">🏆 ABITUR-TRANSFER & PRAXIS (eA)</div>
+            <p class="abitur-intro">
+                In Klausuren auf erhöhtem Anforderungsniveau wird reines Definitionswissen kaum isoliert abgefragt. Die Thematik ist vielmehr der Kern materialgestützter Analyseaufgaben zum gesellschaftlichen Wandel.
+            </p>
+
+            <div class="transfer-grid">
+                
+                <div class="transfer-card">
+                    <h4>1. Verknüpfung mit Motivklassen</h4>
+                    <p>Eine typische Transferaufgabe besteht darin, den Boom des informellen Sports psychologisch zu begründen.<br><br>
+                    <strong>Transferleistung:</strong> Du musst argumentieren, dass der nichtorganisierte Sport wächst, weil er perfekt die modernen Sinnperspektiven <em>"Gesundheit/Fitness"</em> und <em>"Ästhetik"</em> bedient, während das klassische Motiv <em>"Leistung/Wettkampf"</em> (die absolute Domäne des Vereins) in der Breite an Dominanz verliert.</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>2. Analyse des Sozialisationsverlusts</h4>
+                    <p>Ein häufiger Prüfungsaspekt ist die kritische Bewertung der Individualisierung. Wenn Menschen nur noch isoliert trainieren, droht der Gesellschaft der Verlust des Sports als integratives Bindeglied.<br><br>
+                    <strong>Transferleistung:</strong> Du musst soziologisch argumentieren können, dass beim rein individualisierten Sport die essenziellen Aspekte der <em>Erziehung durch Sport</em> (Konfliktaushandlung in der Gruppe, Kompromissbereitschaft, gelebte Integration) verloren gehen.</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>3. Synthese und Anpassung</h4>
+                    <p>Oft wird ein Text eines Sportvereins vorgelegt, der neue Kurse (z. B. "Zumba ohne Vereinsbindung") anbietet.<br><br>
+                    <strong>Transferleistung:</strong> Du musst dieses Angebot als <em>strategische Reaktion auf den gesellschaftlichen Wandel</em> analysieren, bei der der organisierte Sport versucht, Elemente des informellen Sports zu integrieren, um ökonomisch und gesellschaftlich relevant zu bleiben.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Canvas Setup for Trend Chart
+        function drawTrendChart() {
+            const canvas = document.getElementById('trendCanvas');
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            
+            const rect = canvas.getBoundingClientRect();
+            const logicalW = rect.width || 800;
+            const logicalH = rect.height || 350;
+            
+            canvas.width = logicalW * dpr;
+            canvas.height = logicalH * dpr;
+            ctx.scale(dpr, dpr);
+            
+            const w = logicalW;
+            const h = logicalH;
+            
+            const padding = { top: 40, right: 120, bottom: 40, left: 60 };
+            const graphW = w - padding.left - padding.right;
+            const graphH = h - padding.top - padding.bottom;
+
+            // Colors
+            const colorVerein = '#1d4ed8'; // Blue
+            const colorInformell = '#f97316'; // Orange
+            const colorGrid = '#e2e8f0';
+
+            // Data Points (Simulated trend over decades)
+            // Values mapped roughly 0 to 100
+            const decades = ["1980", "1990", "2000", "2010", "2020", "2030"];
+            const dataVerein = [70, 75, 78, 76, 72, 68]; 
+            const dataInformell = [15, 25, 40, 65, 85, 95];
+
+            let animationProgress = 0;
+            const duration = 1500; // ms
+            const startTime = performance.now();
+
+            function render(currentTime) {
+                const elapsed = currentTime - startTime;
+                animationProgress = Math.min(elapsed / duration, 1);
+                
+                // EaseOut function
+                const ease = 1 - Math.pow(1 - animationProgress, 3);
+
+                ctx.clearRect(0, 0, w, h);
+
+                // --- 1. Draw Grid & Axes ---
+                ctx.beginPath();
+                ctx.strokeStyle = colorGrid;
+                ctx.lineWidth = 1;
+                
+                // Horizontal lines
+                for(let i = 0; i <= 4; i++) {
+                    const y = padding.top + (graphH / 4) * i;
+                    ctx.moveTo(padding.left, y);
+                    ctx.lineTo(w - padding.right, y);
+                }
+                ctx.stroke();
+
+                // Axes
+                ctx.beginPath();
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2;
+                // Y-Axis
+                ctx.moveTo(padding.left, padding.top);
+                ctx.lineTo(padding.left, h - padding.bottom);
+                // X-Axis
+                ctx.lineTo(w - padding.right, h - padding.bottom);
+                ctx.stroke();
+
+                // Labels
+                ctx.fillStyle = '#64748b';
+                ctx.font = '12px Inter';
+                ctx.textAlign = 'center';
+                decades.forEach((dec, i) => {
+                    const x = padding.left + (graphW / (decades.length - 1)) * i;
+                    ctx.fillText(dec, x, h - padding.bottom + 20);
+                });
+
+                ctx.save();
+                ctx.translate(padding.left - 20, h/2);
+                ctx.rotate(-Math.PI/2);
+                ctx.textAlign = 'center';
+                ctx.fillText("Aktive Beteiligung", 0, 0);
+                ctx.restore();
+
+                // --- 2. Draw Lines ---
+                function drawLine(data, color, label) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 4;
+                    
+                    const points = [];
+                    data.forEach((val, i) => {
+                        const x = padding.left + (graphW / (data.length - 1)) * i;
+                        const y = padding.top + graphH - (val / 100) * graphH;
+                        points.push({x, y});
+                    });
+
+                    // Draw curve up to animation progress
+                    const segmentsToDraw = (points.length - 1) * ease;
+                    const fullSegments = Math.floor(segmentsToDraw);
+                    const partial = segmentsToDraw - fullSegments;
+
+                    ctx.moveTo(points[0].x, points[0].y);
+
+                    for (let i = 0; i < fullSegments; i++) {
+                        // Smooth curves using bezier
+                        const curr = points[i];
+                        const next = points[i+1];
+                        const cpX = curr.x + (next.x - curr.x) / 2;
+                        ctx.bezierCurveTo(cpX, curr.y, cpX, next.y, next.x, next.y);
+                    }
+
+                    if (partial > 0 && fullSegments < points.length - 1) {
+                        const curr = points[fullSegments];
+                        const next = points[fullSegments + 1];
+                        const currentX = curr.x + (next.x - curr.x) * partial;
+                        const currentY = curr.y + (next.y - curr.y) * partial;
+                        
+                        const cpX = curr.x + (currentX - curr.x) / 2;
+                        ctx.bezierCurveTo(cpX, curr.y, cpX, currentY, currentX, currentY);
+                    }
+                    
+                    ctx.stroke();
+
+                    // Draw Label if animation is complete
+                    if (animationProgress > 0.9) {
+                        const lastP = points[points.length - 1];
+                        ctx.globalAlpha = (animationProgress - 0.9) * 10;
+                        ctx.fillStyle = color;
+                        ctx.font = 'bold 14px Outfit';
+                        ctx.textAlign = 'left';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(label, lastP.x + 10, lastP.y);
+                        
+                        // Draw dot
+                        ctx.beginPath();
+                        ctx.arc(lastP.x, lastP.y, 6, 0, Math.PI*2);
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fill();
+                        ctx.lineWidth = 3;
+                        ctx.stroke();
+                        ctx.globalAlpha = 1.0;
+                    }
+                }
+
+                drawLine(dataVerein, colorVerein, "Vereinswesen");
+                drawLine(dataInformell, colorInformell, "Informeller Sport");
+
+                // Chart Title
+                ctx.fillStyle = '#334155';
+                ctx.font = 'bold 16px Outfit';
+                ctx.textAlign = 'left';
+                ctx.fillText("Entsportlichung vs. Neusportlichung (Trend)", padding.left, padding.top - 15);
+
+                if (animationProgress < 1) {
+                    requestAnimationFrame(render);
+                }
+            }
+
+            requestAnimationFrame(render);
+        }
+
+        window.addEventListener('load', drawTrendChart);
+        
+        // Handle Resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(drawTrendChart, 250);
+        });
+
+    </script>
+</body>
+</html>

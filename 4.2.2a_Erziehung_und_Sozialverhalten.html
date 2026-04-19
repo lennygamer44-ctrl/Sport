@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.2.2a Erziehung und Sozialverhalten</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;0,900;1,300&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Theme: Campus & Pedagogy */
+            --bg-page: #fcfbf8; /* Warm Ivory */
+            --text-main: #334155;
+            --text-muted: #64748b;
+            
+            /* Academic Colors */
+            --oxford-blue: #1e3a8a;
+            --oxford-light: #eff6ff;
+            
+            /* Dual Pillars Colors */
+            --sage-green: #2a9d8f; /* Erziehung IM Sport */
+            --terracotta: #e63946; /* Erziehung DURCH Sport */
+            
+            /* Ambivalence / Critique */
+            --amber-warning: #f59e0b;
+            --amber-light: #fffbeb;
+
+            /* Premium Abitur */
+            --abi-bg: #0f172a;
+            --abi-gold: #fbbf24;
+
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-float: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.75;
+            font-size: 1.1rem;
+            padding-bottom: 5rem;
+            overflow-x: hidden;
+        }
+
+        /* --- Academic Header --- */
+        header {
+            background-color: var(--oxford-blue);
+            color: #ffffff;
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            position: relative;
+            border-bottom: 8px solid var(--terracotta);
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #e0e7ff;
+            font-weight: 700;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Merriweather', serif;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 900;
+            line-height: 1.2;
+            max-width: 900px;
+            margin: 0 auto 1.5rem;
+            color: #ffffff;
+        }
+
+        .intro-text {
+            font-size: 1.25rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #bfdbfe;
+            font-style: italic;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Headings --- */
+        h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.2rem;
+            color: var(--oxford-blue);
+            margin: 5rem 0 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 80px;
+            background-color: var(--sage-green);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Dual Pillar Text Section --- */
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pillar-card {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            border-top: 6px solid;
+        }
+
+        .card-im {
+            border-top-color: var(--sage-green);
+        }
+
+        .card-durch {
+            border-top-color: var(--terracotta);
+        }
+
+        .pillar-card h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--oxford-blue);
+        }
+
+        .pillar-card strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-im strong { color: var(--sage-green); }
+        .card-durch strong { color: var(--terracotta); }
+
+        /* --- Canvas Section --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-float);
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .canvas-section h3 {
+            font-family: 'Merriweather', serif;
+            color: var(--oxford-blue);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* --- Holistic Education (Ganzheitlich) --- */
+        .holistic-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .holistic-list li {
+            background: var(--oxford-light);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--oxford-blue);
+        }
+
+        .holistic-list li strong {
+            display: block;
+            color: var(--oxford-blue);
+            font-family: 'Merriweather', serif;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* --- Ambivalence Box (Warning) --- */
+        .ambivalence-box {
+            background: var(--amber-light);
+            border: 2px solid #fde68a;
+            border-left: 6px solid var(--amber-warning);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .ambivalence-box h3 {
+            color: #b45309;
+            font-family: 'Merriweather', serif;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-premium {
+            background: var(--abi-bg);
+            color: #f8fafc;
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            margin-top: 6rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+            border-bottom: 8px solid var(--abi-gold);
+        }
+
+        .abitur-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--abi-gold);
+            color: #451a03;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            padding: 0.6rem 2.5rem;
+            border-radius: 30px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 10px 15px -3px rgba(251, 191, 36, 0.3);
+            white-space: nowrap;
+        }
+
+        .abitur-intro {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.15rem;
+            margin-bottom: 3rem;
+        }
+
+        .transfer-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .transfer-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--abi-gold);
+        }
+
+        .transfer-card h4 {
+            font-family: 'Merriweather', serif;
+            color: var(--abi-gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .transfer-card p {
+            margin-bottom: 0;
+            color: #e2e8f0;
+        }
+
+        .transfer-card strong {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-badge">Lernbereich 4.2.2a</div>
+        <h1>Erziehung und Sozialverhalten</h1>
+        <p class="intro-text">
+            Der Sport ist in unserer modernen Gesellschaft weit mehr als nur ein Feld zur körperlichen Ertüchtigung; er fungiert als eine der zentralen und einflussreichsten Bildungs- und Sozialisationsinstanzen. Die differenzierte Betrachtung von Bildung, Erziehung und Sozialverhalten bildet das soziologische Fundament.
+        </p>
+    </header>
+
+    <main>
+
+        <h2>Der pädagogische Doppelauftrag</h2>
+        <p>
+            In der Sportpädagogik und Sportsoziologie wird der Bildungs- und Erziehungsanspruch des Sports traditionell durch den sogenannten <strong>„pädagogischen Doppelauftrag“</strong> (in Anlehnung an den DOSB) definiert. Dieser muss in Klausuren strikt in zwei Dimensionen getrennt werden:
+        </p>
+
+        <div class="pillar-grid">
+            <article class="pillar-card card-im">
+                <h3>Erziehung „im“ Sport</h3>
+                <strong>Die funktionale Qualifikation</strong>
+                <p>
+                    Dies umfasst die sportimmanente, funktionale Bildung. Es geht um das Erlernen von motorischen Fertigkeiten, das Verstehen von Taktiken, die Aneignung von sportspezifischem Wissen (z. B. Trainingslehre) sowie das Befolgen der konstitutiven sportlichen Regeln. Der Athlet wird befähigt, am System Sport kompetent teilzunehmen.
+                </p>
+            </article>
+
+            <article class="pillar-card card-durch">
+                <h3>Erziehung „durch“ Sport</h3>
+                <strong>Die Persönlichkeitsbildung</strong>
+                <p>
+                    Dies beschreibt die sportübergreifende, intentionale Bildung. Der Sport wird hier als Medium verstanden, um allgemeingültige, gesellschaftlich relevante Kompetenzen und Haltungen zu vermitteln. Im Fokus stehen die Charakterbildung, das Erlernen von Frustrationstoleranz, die Schulung von Empathie und die Internalisierung grundlegender Werte (Fairplay).
+                </p>
+            </article>
+        </div>
+
+        <!-- Canvas Visual: Pädagogischer Doppelauftrag -->
+        <section class="canvas-section">
+            <h3>Architektur der Sportpädagogik</h3>
+            <p class="subtitle">Visuelles Brückenmodell des pädagogischen Doppelauftrags und der ganzheitlichen Bildung.</p>
+            <canvas id="doppelauftragCanvas" width="900" height="550"></canvas>
+        </section>
+
+
+        <h2>Bildung und der ganzheitliche Anspruch</h2>
+        <p>
+            Bildung im Sport darf nicht auf rein kognitive Wissensvermittlung reduziert werden. Der Sport beansprucht für sich einen <strong>ganzheitlichen Bildungsbegriff</strong>, der den Menschen in all seinen Dimensionen anspricht:
+        </p>
+
+        <ul class="holistic-list">
+            <li>
+                <strong>Motorische Dimension</strong>
+                Körperbeherrschung, physische Leistungsfähigkeit und Bewegungserfahrung.
+            </li>
+            <li>
+                <strong>Kognitive Dimension</strong>
+                Taktisches Verständnis, Regelkenntnis und strategisches Problemlösen unter Druck.
+            </li>
+            <li>
+                <strong>Sozial-affektive Dimension</strong>
+                Emotionsregulation, Selbstwirksamkeitserfahrung und der Umgang mit Sieg und Niederlage im sozialen Kontext.
+            </li>
+        </ul>
+
+
+        <h2>Sozialisation und das Ambivalenz-Problem</h2>
+        <p>
+            Sozialisation bezeichnet den lebenslangen Prozess der Einordnung des Individuums in die Gesellschaft durch das Verinnerlichen (Internalisieren) von Normen, Werten und Verhaltensmustern. Neben der Familie und der Schule nimmt der organisierte Sport (z. B. der Verein) eine dominante Rolle bei der <strong>sekundären und tertiären Sozialisation</strong> ein.
+        </p>
+        <p>
+            <strong>Entwicklung prosozialen Verhaltens:</strong> Das sportliche Miteinander zwingt das Individuum zur Kooperation, zur Unterordnung individueller Bedürfnisse unter das Gruppenziel und zur Übernahme von Verantwortung. Dies fördert prosoziales Verhalten, das direkt auf zivilgesellschaftliche Bereiche übertragbar ist.
+        </p>
+
+        <div class="ambivalence-box">
+            <h3>⚠️ Das Ambivalenz-Problem (Der Sport-Mythos)</h3>
+            <p>
+                Die Sportsoziologie betont jedoch vehement, dass Sport nicht automatisch und per se den Charakter positiv formt ("Sport builds character"-Mythos). 
+            </p>
+            <p style="margin-bottom: 0;">
+                Ohne den richtigen pädagogischen Rahmen (z. B. durch qualifizierte Trainer) kann Sport auch unsolidarisches, egoistisches oder gar <strong>deviantes (abweichendes) Sozialverhalten</strong> fördern, wie etwa unfaires Spiel, Ausgrenzung schwächerer Mitspieler, Doping oder blinden Gehorsam.
+            </p>
+        </div>
+
+
+        <!-- Premium Abitur Transfer Box -->
+        <section class="abitur-premium">
+            <div class="abitur-badge">ABITUR-TRANSFER & PRAXIS (eA)</div>
+            <p class="abitur-intro">
+                In Abiturklausuren auf erhöhtem Anforderungsniveau ist dieses theoretische Wissen die zwingende Voraussetzung, um Textquellen, Zitate oder Projektbeschreibungen gesellschaftspolitisch auswerten zu können.
+            </p>
+
+            <div class="transfer-grid">
+                
+                <div class="transfer-card">
+                    <h4>1. Dekonstruktion des "Sport-Mythos"</h4>
+                    <p>Eine materialgestützte Aufgabe präsentiert oft ein Zitat eines Politikers, der behauptet: <em>"Sport fördert automatisch gute Bürger"</em>.<br><br>
+                    <strong>Transferleistung:</strong> Du musst soziologisch fundiert argumentieren (unter Verwendung des Ambivalenz-Problems), dass Sport diese Erziehungswirkung (Erziehung durch Sport) <strong>nur dann entfaltet</strong>, wenn die Rahmenbedingungen und die handelnden Personen (Trainer/Pädagogen) diesen Wertekanon auch aktiv und intentional vorleben und einfordern.</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>2. Terminologische Präzision</h4>
+                    <p>Wenn du das Sozialverhalten von Athleten in einer Klausur analysierst, reicht es nicht aus, von "gutem Miteinander" zu sprechen.<br><br>
+                    <strong>Transferleistung:</strong> Nutze zwingend die Fachterminologie. Sprich von <em>prosozialem Verhalten</em>, der <em>Internalisierung von Normen</em>, der <em>Gruppenkohäsion</em> (Zusammenhalt) und definiere den Sportverein als sekundäre <em>Sozialisationsinstanz</em>.</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>3. Analyse von Programmen</h4>
+                    <p>Gelegentlich müssen pädagogische Programme (z. B. "Integration durch Sport" oder Gewaltprävention) bewertet werden.<br><br>
+                    <strong>Transferleistung:</strong> Hier musst du den <strong>ganzheitlichen Bildungsbegriff</strong> anwenden und systematisch analysieren, wie das Projekt konkret auf die motorische, kognitive und sozial-affektive Dimension der Jugendlichen abzielt, um deviantes Verhalten abzubauen.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // High DPI Canvas Setup
+        function setupCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            
+            const logicalW = 900;
+            const logicalH = 550;
+            
+            canvas.width = logicalW * dpr;
+            canvas.height = logicalH * dpr;
+            ctx.scale(dpr, dpr);
+            
+            return { ctx, w: logicalW, h: logicalH };
+        }
+
+        function drawPillarModel() {
+            const { ctx, w, h } = setupCanvas('doppelauftragCanvas');
+            
+            // Palette
+            const colorRoof = '#1e3a8a';     // Oxford Blue
+            const colorPillarLeft = '#2a9d8f'; // Sage Green (IM Sport)
+            const colorPillarRight = '#e63946';// Terracotta (DURCH Sport)
+            const colorBase = '#94a3b8';     // Slate Grey
+            const colorText = '#ffffff';
+            const colorTextDark = '#334155';
+
+            let animationProgress = 0;
+            const duration = 2000; // ms
+            const startTime = performance.now();
+
+            function render(currentTime) {
+                const elapsed = currentTime - startTime;
+                animationProgress = Math.min(elapsed / duration, 1);
+                
+                // Easing (easeOutExpo)
+                const ease = animationProgress === 1 ? 1 : 1 - Math.pow(2, -10 * animationProgress);
+
+                ctx.clearRect(0, 0, w, h);
+
+                const cx = w / 2;
+                
+                // Dimensions
+                const baseWidth = 700;
+                const baseHeight = 60;
+                const baseY = h - 60;
+
+                const pillarWidth = 220;
+                const pillarHeight = 280;
+                const pillarY = baseY - pillarHeight;
+                
+                const leftPillarX = cx - 250;
+                const rightPillarX = cx + 250;
+
+                const roofWidth = 800;
+                const roofHeight = 120;
+                const roofY = pillarY - roofHeight;
+
+                // Helper to draw text list
+                function drawTextList(x, y, items, color) {
+                    ctx.fillStyle = color;
+                    ctx.font = '15px Nunito';
+                    ctx.textAlign = 'center';
+                    items.forEach((item, index) => {
+                        ctx.fillText("• " + item, x, y + (index * 30));
+                    });
+                }
+
+                // 1. Draw Base (Fades in first)
+                const baseEase = Math.min(ease * 1.5, 1);
+                if (baseEase > 0) {
+                    ctx.globalAlpha = baseEase;
+                    ctx.fillStyle = colorBase;
+                    ctx.beginPath();
+                    ctx.roundRect(cx - baseWidth/2, baseY, baseWidth, baseHeight, 4);
+                    ctx.fill();
+                    
+                    ctx.fillStyle = colorText;
+                    ctx.font = 'bold 20px Merriweather';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText("GESELLSCHAFT & SPORTPRAXIS", cx, baseY + baseHeight/2);
+                    ctx.globalAlpha = 1.0;
+                }
+
+                // 2. Draw Pillars (Grow from bottom)
+                const pillarEase = Math.max(0, Math.min((ease - 0.2) * 1.5, 1));
+                if (pillarEase > 0) {
+                    const currentPillarH = pillarHeight * pillarEase;
+                    const currentPillarY = baseY - currentPillarH;
+
+                    // Left Pillar (IM)
+                    ctx.fillStyle = colorPillarLeft;
+                    ctx.beginPath();
+                    ctx.roundRect(leftPillarX - pillarWidth/2, currentPillarY, pillarWidth, currentPillarH, 4);
+                    ctx.fill();
+
+                    // Right Pillar (DURCH)
+                    ctx.fillStyle = colorPillarRight;
+                    ctx.beginPath();
+                    ctx.roundRect(rightPillarX - pillarWidth/2, currentPillarY, pillarWidth, currentPillarH, 4);
+                    ctx.fill();
+
+                    // Pillar Texts (Fade in)
+                    if (pillarEase > 0.8) {
+                        const textAlpha = (pillarEase - 0.8) * 5;
+                        ctx.globalAlpha = textAlpha;
+                        
+                        // Left Text
+                        ctx.fillStyle = colorText;
+                        ctx.font = 'bold 20px Merriweather';
+                        ctx.fillText("Erziehung IM Sport", leftPillarX, pillarY + 40);
+                        ctx.font = 'italic 14px Nunito';
+                        ctx.fillText("(Funktionale Qualifikation)", leftPillarX, pillarY + 65);
+                        
+                        drawTextList(leftPillarX, pillarY + 110, [
+                            "Motorische Fertigkeiten",
+                            "Taktisches Verständnis",
+                            "Sportspezifische Regeln",
+                            "Trainingslehre"
+                        ], colorText);
+
+                        // Right Text
+                        ctx.font = 'bold 20px Merriweather';
+                        ctx.fillText("Erziehung DURCH Sport", rightPillarX, pillarY + 40);
+                        ctx.font = 'italic 14px Nunito';
+                        ctx.fillText("(Persönlichkeitsbildung)", rightPillarX, pillarY + 65);
+
+                        drawTextList(rightPillarX, pillarY + 110, [
+                            "Wertevermittlung & Fairplay",
+                            "Charakterbildung",
+                            "Prosoziales Verhalten",
+                            "Frustrationstoleranz"
+                        ], colorText);
+
+                        ctx.globalAlpha = 1.0;
+                    }
+                }
+
+                // 3. Draw Roof (Drops down)
+                const roofEase = Math.max(0, Math.min((ease - 0.5) * 2, 1));
+                if (roofEase > 0) {
+                    const startY = roofY - 50;
+                    const currentRoofY = startY + (50 * roofEase);
+
+                    // Draw Greek Temple Roof (Triangle)
+                    ctx.fillStyle = colorRoof;
+                    ctx.beginPath();
+                    ctx.moveTo(cx, currentRoofY); // Top peak
+                    ctx.lineTo(cx + roofWidth/2, currentRoofY + roofHeight); // Right corner
+                    ctx.lineTo(cx - roofWidth/2, currentRoofY + roofHeight); // Left corner
+                    ctx.closePath();
+                    
+                    // Add subtle shadow
+                    ctx.shadowColor = 'rgba(0,0,0,0.2)';
+                    ctx.shadowBlur = 15;
+                    ctx.shadowOffsetY = 5;
+                    ctx.fill();
+                    ctx.shadowColor = 'transparent';
+
+                    // Roof Text
+                    if (roofEase > 0.5) {
+                        const roofTextAlpha = (roofEase - 0.5) * 2;
+                        ctx.globalAlpha = roofTextAlpha;
+                        ctx.fillStyle = colorText;
+                        ctx.font = 'bold 24px Merriweather';
+                        ctx.fillText("Ganzheitliche Bildung & Sozialisation", cx, currentRoofY + roofHeight - 40);
+                        ctx.font = '16px Nunito';
+                        ctx.fillStyle = '#bfdbfe';
+                        ctx.fillText("Der pädagogische Doppelauftrag", cx, currentRoofY + roofHeight - 15);
+                        ctx.globalAlpha = 1.0;
+                    }
+                }
+
+                if (animationProgress < 1) {
+                    requestAnimationFrame(render);
+                }
+            }
+
+            requestAnimationFrame(render);
+        }
+
+        window.addEventListener('load', drawPillarModel);
+    </script>
+</body>
+</html>

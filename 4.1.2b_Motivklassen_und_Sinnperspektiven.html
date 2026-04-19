@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.1.2b Motivklassen und Sinnperspektiven</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Vibrant Spectrum Theme */
+            --bg-body: #f4f7f9;
+            --text-dark: #1e293b;
+            --text-body: #475569;
+            
+            /* Motive Colors */
+            --color-leistung: #e11d48;    /* Rose/Red */
+            --color-soziales: #059669;    /* Emerald */
+            --color-gesundheit: #0284c7;  /* Light Blue */
+            --color-aesthetik: #7c3aed;   /* Violet */
+            --color-spannung: #ea580c;    /* Orange */
+            
+            /* Abitur Premium Gold */
+            --gold-gradient: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            --gold-light: #fffbeb;
+            --gold-border: #f59e0b;
+
+            --radius-xl: 24px;
+            --radius-lg: 16px;
+            --shadow-float: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.7;
+            padding: 0 0 5rem 0;
+            overflow-x: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: #ffffff;
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--color-leistung), 
+                var(--color-soziales), 
+                var(--color-gesundheit), 
+                var(--color-aesthetik), 
+                var(--color-spannung));
+        }
+
+        .header-label {
+            display: inline-block;
+            background: #f1f5f9;
+            color: #64748b;
+            font-weight: 700;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            color: var(--text-dark);
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .intro {
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-body);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Canvas Section --- */
+        .visual-section {
+            background: #ffffff;
+            border-radius: var(--radius-xl);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-float);
+            margin-bottom: 5rem;
+            text-align: center;
+        }
+
+        .visual-section h2 {
+            color: var(--text-dark);
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-section p {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* --- Motive Grid --- */
+        .grid-header {
+            text-align: center;
+            font-weight: 800;
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 3rem;
+        }
+
+        .motive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .motive-card {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .motive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-float);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            padding: 1rem;
+            border-radius: 50%;
+            background: #f8fafc;
+        }
+
+        /* Card specific styles */
+        .card-1 .card-icon { background: #ffe4e6; color: var(--color-leistung); }
+        .card-1 { border-top: 5px solid var(--color-leistung); }
+        .card-1 h3 { color: var(--color-leistung); }
+
+        .card-2 .card-icon { background: #d1fae5; color: var(--color-soziales); }
+        .card-2 { border-top: 5px solid var(--color-soziales); }
+        .card-2 h3 { color: var(--color-soziales); }
+
+        .card-3 .card-icon { background: #e0f2fe; color: var(--color-gesundheit); }
+        .card-3 { border-top: 5px solid var(--color-gesundheit); }
+        .card-3 h3 { color: var(--color-gesundheit); }
+
+        .card-4 .card-icon { background: #ede9fe; color: var(--color-aesthetik); }
+        .card-4 { border-top: 5px solid var(--color-aesthetik); }
+        .card-4 h3 { color: var(--color-aesthetik); }
+
+        .card-5 .card-icon { background: #ffedd5; color: var(--color-spannung); }
+        .card-5 { border-top: 5px solid var(--color-spannung); }
+        .card-5 h3 { color: var(--color-spannung); }
+
+        .motive-card h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .motive-card p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .example-box {
+            margin-top: auto;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border-left: 3px solid #cbd5e1;
+        }
+        
+        .card-1 .example-box { border-left-color: var(--color-leistung); }
+        .card-2 .example-box { border-left-color: var(--color-soziales); }
+        .card-3 .example-box { border-left-color: var(--color-gesundheit); }
+        .card-4 .example-box { border-left-color: var(--color-aesthetik); }
+        .card-5 .example-box { border-left-color: var(--color-spannung); }
+
+
+        /* --- Premium Abitur Box --- */
+        .abitur-premium {
+            background: var(--text-dark);
+            border-radius: var(--radius-xl);
+            padding: 4rem 3rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            color: #f1f5f9;
+        }
+
+        .abitur-premium::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 6px;
+            background: var(--gold-gradient);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        }
+
+        .abitur-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .abitur-header h2 {
+            color: #ffffff;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .abitur-intro {
+            text-align: center;
+            color: #cbd5e1;
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .transfer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .transfer-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            position: relative;
+        }
+
+        .transfer-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0; width: 4px;
+            background: var(--gold-gradient);
+            border-radius: 4px 0 0 4px;
+        }
+
+        .transfer-card h4 {
+            color: #fbbf24;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .transfer-card p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .transfer-card strong {
+            color: #ffffff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-label">Lernbereich 4.1.2b</div>
+        <h1>Motivklassen und Sinnperspektiven</h1>
+        <p class="intro">
+            Sportliches Handeln ist selten monokausal, sondern in der Regel multimotiviert. Um die unzähligen, hochgradig individuellen Beweggründe von Menschen wissenschaftlich fassbar und analysierbar zu machen, ordnet die Sportpsychologie (häufig in Anlehnung an Modelle von Gabler oder Kurz) diese in übergeordnete Kategorien ein. Man spricht hierbei von Motivklassen oder Sinnperspektiven.
+        </p>
+    </header>
+
+    <main>
+
+        <!-- Interactive Visual Section -->
+        <section class="visual-section">
+            <h2>Die 5 zentralen Motivklassen</h2>
+            <p>Zusammenfassendes Radial-Diagramm der primären Antriebsdimensionen im Sport.</p>
+            <canvas id="motiveCanvas" width="600" height="600"></canvas>
+        </section>
+
+        <h2 class="grid-header">Die Dimensionen im Detail</h2>
+
+        <div class="motive-grid">
+            
+            <!-- Leistung -->
+            <article class="motive-card card-1">
+                <div class="card-icon">🏆</div>
+                <h3>Leistung als Selbstbestätigung</h3>
+                <p>Das dominierende Motiv im leistungsorientierten Sport. Es beschreibt das intrinsische Streben, eine gestellte Aufgabe zu meistern, die eigene Kompetenz zu erweitern und sich anhand objektivierbarer Gütekriterien selbst zu bestätigen.</p>
+                <div class="example-box">
+                    <strong>Beispiel:</strong> Das gezielte Training und Anstreben der Bewältigung einer anspruchsvollen Alpenüberquerung mit dem Mountainbike.
+                </div>
+            </article>
+
+            <!-- Soziales -->
+            <article class="motive-card card-2">
+                <div class="card-icon">🤝</div>
+                <h3>Soziale Interaktion & Anschluss</h3>
+                <p>Sport dient als Plattform zur Befriedigung des grundlegenden menschlichen Bedürfnisses nach Zugehörigkeit, Kommunikation und Gemeinschaft. Das Anschlussmotiv zeigt sich hier besonders stark.</p>
+                <div class="example-box">
+                    <strong>Beispiel:</strong> Mannschaftssportarten, bei denen Teamdynamik, der Austausch in der Kabine und das gemeinsame Erleben im Vordergrund stehen.
+                </div>
+            </article>
+
+            <!-- Gesundheit -->
+            <article class="motive-card card-3">
+                <div class="card-icon">🧘</div>
+                <h3>Gesundheit, Fitness & Wohlbefinden</h3>
+                <p>Ein stark präventiv und rehabilitativ geprägtes Motiv. Sport wird funktional als Instrument zur physischen Gesunderhaltung und zur Steigerung der psychischen Widerstandsfähigkeit (Salutogenese) genutzt.</p>
+                <div class="example-box">
+                    <strong>Beispiel:</strong> Regelmäßiges Ausdauertraining zum Ausgleich von Alltagsstress und zur Stärkung des Herz-Kreislauf-Systems.
+                </div>
+            </article>
+
+            <!-- Ästhetik -->
+            <article class="motive-card card-4">
+                <div class="card-icon">✨</div>
+                <h3>Ästhetik & Körperformung</h3>
+                <p>Der Fokus dieses Motivs liegt entweder auf der Ausführung expressiver, normativ "schöner" Bewegungen oder auf der gezielten, sichtbaren Modifikation des eigenen körperlichen Erscheinungsbildes.</p>
+                <div class="example-box">
+                    <strong>Beispiel:</strong> Ästhetische Performance im Eiskunstlauf/Tanz oder reine Körperformung im Bodybuilding.
+                </div>
+            </article>
+
+            <!-- Spannung / Risiko -->
+            <article class="motive-card card-5">
+                <div class="card-icon">⚡</div>
+                <h3>Spannung, Risiko & Abenteuer</h3>
+                <p>Sensation Seeking: Die gezielte Suche nach außergewöhnlichen Reizen, dem "Kick" und dem bewussten Erleben von Grenzsituationen. Es ist der Antrieb, das Risiko zu kalkulieren und Angst zu überwinden.</p>
+                <div class="example-box">
+                    <strong>Beispiel:</strong> Typisch für Extrem- und Natursportarten wie Freeriden, Fallschirmspringen oder Free-Solo-Klettern.
+                </div>
+            </article>
+
+        </div>
+
+
+        <!-- Premium Abitur Transfer Box -->
+        <section class="abitur-premium">
+            <div class="abitur-header">
+                <h2>★ Abitur-Transfer & Praxis ★</h2>
+            </div>
+            <p class="abitur-intro">
+                In Abiturklausuren auf erhöhtem Anforderungsniveau (eA) dient die Kenntnis dieser Motivklassen als notwendiges Handwerkszeug für die materialgestützte Analyse psychologischer Fallbeispiele.
+            </p>
+
+            <div class="transfer-grid">
+                
+                <div class="transfer-card">
+                    <h4>1. Identifikation und Zuordnung</h4>
+                    <p>In Prüfungsaufgaben erhältst du häufig Biografien oder Blogauszüge von Athleten. Die primäre Transferleistung besteht darin, Alltagssprache in Fachsprache zu übersetzen.<br><br>
+                    <strong>Anwendung:</strong> Wenn eine Schülerin formuliert, sie trainiere hart, "um den Alpencross zu schaffen", musst du ableiten, dass es sich hierbei zwingend um ein Motiv aus dem Bereich <em>„Leistung als Selbstbestätigung und sachbezogener Erfolg“</em> handelt.</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>2. Analyse multimotivierten Handelns</h4>
+                    <p>Das Kultusministerium fordert häufig eine differenzierte Betrachtung von Quellen, um zu zeigen, dass Handlungen multimotiviert sind.<br><br>
+                    <strong>Anwendung:</strong> Ein Athlet im Sportverein kann sowohl das Leistungsmotiv (Aufstieg) als auch das soziale Motiv (Gemeinschaft) verfolgen. Deine Argumentation muss herausarbeiten, welches Motiv in einer gegebenen Situation dominant ist.</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>3. Motivkonflikte (Intra-Rollen-Konflikt)</h4>
+                    <p>Eine besonders anspruchsvolle Analyseaufgabe verlangt das Aufdecken von inneren Konflikten.<br><br>
+                    <strong>Anwendung:</strong> Du musst biopsychologisch argumentieren können, was passiert, wenn Sinnperspektiven kollidieren – etwa wenn das Motiv <em>"Leistung"</em> (Trotz Schmerzen weiterspielen wollen) in direktem, fatalen Widerspruch zum Motiv <em>"Gesundheit"</em> (Eine Verletzung zwingend auskurieren müssen) steht.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Canvas Donut Chart Logic
+        function drawRadialChart() {
+            const canvas = document.getElementById('motiveCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // High DPI adjustment
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            // Default logical size
+            const logicalSize = 600; 
+            
+            canvas.width = logicalSize * dpr;
+            canvas.height = logicalSize * dpr;
+            ctx.scale(dpr, dpr);
+            
+            const w = logicalSize;
+            const h = logicalSize;
+            const cx = w / 2;
+            const cy = h / 2;
+
+            // Data Definition
+            const data = [
+                { id: "leistung", label: "Leistung &\nErfolg", color: "#e11d48", icon: "🏆" },
+                { id: "soziales", label: "Soziales &\nAnschluss", color: "#059669", icon: "🤝" },
+                { id: "gesundheit", label: "Gesundheit &\nWohlbefinden", color: "#0284c7", icon: "🧘" },
+                { id: "aesthetik", label: "Ästhetik &\nKörperform", color: "#7c3aed", icon: "✨" },
+                { id: "spannung", label: "Spannung &\nRisiko", color: "#ea580c", icon: "⚡" }
+            ];
+
+            const totalSegments = data.length;
+            const anglePerSegment = (Math.PI * 2) / totalSegments;
+            
+            const outerRadius = 220;
+            const innerRadius = 110;
+            const labelRadius = 265; // Distance for text/icons
+
+            // Animation setup
+            let progress = 0;
+            const duration = 1200; // ms
+            const startTime = performance.now();
+
+            function animate(currentTime) {
+                const elapsed = currentTime - startTime;
+                progress = Math.min(elapsed / duration, 1);
+                
+                // Easing function (easeOutQuart)
+                const easeProgress = 1 - Math.pow(1 - progress, 4);
+
+                ctx.clearRect(0, 0, w, h);
+
+                // Draw Segments
+                let startAngle = -Math.PI / 2; // Start at top
+
+                data.forEach((segment, index) => {
+                    const currentAnglePerSegment = anglePerSegment * easeProgress;
+                    const endAngle = startAngle + currentAnglePerSegment;
+
+                    // Draw Donut Slice
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, outerRadius, startAngle, endAngle);
+                    ctx.arc(cx, cy, innerRadius, endAngle, startAngle, true);
+                    ctx.closePath();
+
+                    // Fill & Stroke
+                    ctx.fillStyle = segment.color;
+                    ctx.fill();
+                    ctx.lineWidth = 4;
+                    ctx.strokeStyle = "#ffffff";
+                    ctx.stroke();
+
+                    // Draw Labels only when animation is almost done
+                    if (progress > 0.8) {
+                        const opacity = (progress - 0.8) * 5; // fade in 0 to 1
+                        ctx.globalAlpha = opacity;
+
+                        // Calculate label position (middle of the segment)
+                        const midAngle = startAngle + (anglePerSegment / 2);
+                        const lx = cx + Math.cos(midAngle) * labelRadius;
+                        const ly = cy + Math.sin(midAngle) * labelRadius;
+
+                        // Draw Icon
+                        ctx.font = '28px sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(segment.icon, lx, ly - 20);
+
+                        // Draw Text (split by \n)
+                        ctx.font = 'bold 14px "Plus Jakarta Sans"';
+                        ctx.fillStyle = '#1e293b';
+                        const lines = segment.label.split('\n');
+                        lines.forEach((line, i) => {
+                            ctx.fillText(line, lx, ly + 10 + (i * 18));
+                        });
+                        
+                        ctx.globalAlpha = 1.0;
+                    }
+
+                    startAngle += anglePerSegment;
+                });
+
+                // Center Text
+                if (progress > 0.5) {
+                    const opacity = (progress - 0.5) * 2;
+                    ctx.globalAlpha = opacity;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = '#1e293b';
+                    
+                    ctx.font = 'bold 32px "Plus Jakarta Sans"';
+                    ctx.fillText("5", cx, cy - 10);
+                    
+                    ctx.font = 'bold 14px "Plus Jakarta Sans"';
+                    ctx.fillStyle = '#64748b';
+                    ctx.fillText("MOTIV", cx, cy + 15);
+                    ctx.fillText("KLASSEN", cx, cy + 30);
+                    
+                    ctx.globalAlpha = 1.0;
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Initialize on load
+        window.addEventListener('load', drawRadialChart);
+        
+    </script>
+</body>
+</html>

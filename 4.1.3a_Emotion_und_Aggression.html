@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.1.3a Entstehung und Formen: Emotion und Aggression</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&family=Rubik:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Theme: Action & Control */
+            --bg-body: #f1f5f9;
+            --text-dark: #0f172a;
+            --text-body: #334155;
+            
+            /* Action / Aggression (Crimson/Red) */
+            --action-primary: #e11d48;
+            --action-light: #ffe4e6;
+            --action-dark: #be123c;
+
+            /* Control / Regulation (Teal/Cyan) */
+            --control-primary: #0d9488;
+            --control-light: #ccfbf1;
+            --control-dark: #0f766e;
+
+            /* Abitur Gold */
+            --gold: #f59e0b;
+            --gold-gradient: linear-gradient(135deg, #fcd34d 0%, #d97706 100%);
+            
+            --white: #ffffff;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            padding-bottom: 4rem;
+        }
+
+        /* --- Asymmetric Header --- */
+        header {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 6rem 2rem 5rem;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .header-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .topic-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            color: #cbd5e1;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .intro-lead {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 800px;
+            font-weight: 300;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Section Titles --- */
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin: 4rem 0 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Emotion Section (Cognitive Appraisal) --- */
+        .emotion-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            border-left: 6px solid #8b5cf6; /* Purple for Emotion */
+            margin-bottom: 3rem;
+        }
+
+        .highlight-box {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-top: 1.5rem;
+            font-style: italic;
+            border-left: 3px solid #cbd5e1;
+        }
+
+        /* --- Aggression Definition & Forms --- */
+        .kriterien-box {
+            background: var(--action-light);
+            border: 2px solid var(--action-primary);
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2.5rem;
+            color: var(--action-dark);
+        }
+
+        .kriterien-box strong {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .form-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-feindselig {
+            border-top: 5px solid var(--action-primary);
+        }
+        
+        .card-instrumentell {
+            border-top: 5px solid var(--text-dark);
+        }
+
+        .form-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Canvas Wrapper --- */
+        .canvas-container {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .canvas-container h3 {
+            color: var(--action-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-container p.subtitle {
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background-color: #fafbfc;
+        }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-premium {
+            background: #1e293b;
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            margin-top: 5rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+        }
+
+        .abitur-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold-gradient);
+            color: #451a03;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            padding: 0.5rem 2.5rem;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.3);
+            white-space: nowrap;
+        }
+
+        .abitur-intro {
+            color: #cbd5e1;
+            text-align: center;
+            font-size: 1.15rem;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .transfer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .transfer-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--gold);
+        }
+
+        .transfer-card h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .transfer-card p {
+            color: #f1f5f9;
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .transfer-card strong {
+            color: var(--gold);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <div class="topic-badge">Lernbereich 4.1.3a</div>
+            <h1>Emotion & Aggression im sportlichen Kontext</h1>
+            <p class="intro-lead">
+                Der Sport ist ein hochemotionales Handlungsfeld. Siege, Niederlagen, Schiedsrichterentscheidungen oder das Verhalten von Zuschauern und Mitspielern sind ständige Auslöser für affektive Reaktionen. Um das Verhalten von Athleten in kritischen Wettkampfsituationen zu verstehen, müssen die psychologischen Mechanismen wissenschaftlich differenziert werden.
+            </p>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Kognitive Bewertung -->
+        <h2 style="color: #8b5cf6;"><span style="color: #8b5cf6;">■</span> Entstehung von Emotionen</h2>
+        <div class="emotion-card">
+            <h3>Die Kognitive Bewertungstheorie</h3>
+            <p>
+                Emotionen im Sport sind keine zufälligen Gefühlsaufwallungen, sondern komplexe psychophysiologische Reaktionsmuster. Ihre Entstehung wird in der Sportpsychologie primär durch kognitive Bewertungstheorien (z. B. nach Lazarus) erklärt.
+            </p>
+            <p>
+                Ein <strong>objektiver Reiz</strong> (z. B. ein Rückstand im Spiel) führt <em>nicht automatisch</em> zu einer spezifischen Emotion. Erst die <strong>subjektive Bewertung (Appraisal)</strong> der Situation durch den Athleten entscheidet über die emotionale Reaktion.
+            </p>
+            
+            <div class="highlight-box">
+                <strong>Beispiel Rückstand:</strong><br><br>
+                ➔ Bewertet der Athlet den Rückstand als <em>bedrohlich</em> für sein Selbstwertgefühl, entsteht Versagensangst oder Frustration.<br>
+                ➔ Bewertet er ihn als <em>Herausforderung</em>, resultieren daraus Kampfgeist und eine erhöhte (positive) Aktivierung.
+            </div>
+        </div>
+
+
+        <!-- Aggression -->
+        <h2 style="color: var(--action-primary);"><span style="color: var(--action-primary);">■</span> Formen und Definition der Aggression</h2>
+        <p>
+            In der Sportwissenschaft muss der alltagssprachliche Begriff der Aggression scharf von bloßer körperlicher Härte oder sportlichem Einsatz (Assertiveness) abgegrenzt werden.
+        </p>
+
+        <div class="kriterien-box">
+            <strong>⚠️ Die zwei Zwangskriterien der Aggression:</strong>
+            Eine Handlung gilt <em>erst und nur dann</em> als Aggression, wenn...<br>
+            1. die <strong>Absicht</strong> besteht, jemanden physisch oder psychisch zu schädigen, <strong>UND</strong><br>
+            2. die Handlung gegen die geltenden <strong>Normen oder Regeln</strong> der jeweiligen Sportart verstößt.
+        </div>
+
+        <p>Innerhalb dieser Definition werden zwei Hauptformen der Aggression unterschieden:</p>
+
+        <div class="forms-grid">
+            <!-- Feindselig -->
+            <article class="form-card card-feindselig">
+                <div class="form-icon">💢</div>
+                <h3 style="color: var(--action-primary);">Feindselige (reaktive) Aggression</h3>
+                <p>Das primäre Handlungsziel ist die unmittelbare Schädigung des Gegners. Sie ist oft affektgesteuert, stark emotionsgeladen (Wut) und dient der Vergeltung.</p>
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; font-size: 0.95rem; border-left: 3px solid var(--action-primary); margin-top: 1rem;">
+                    <strong>Klassisches Beispiel:</strong> Das Revanchefoul (Nachtreten) nach einem vorangegangenen Zweikampf.
+                </div>
+            </article>
+
+            <!-- Instrumentell -->
+            <article class="form-card card-instrumentell">
+                <div class="form-icon">♟️</div>
+                <h3>Instrumentelle Aggression</h3>
+                <p>Die Schädigung des Gegners ist hier nicht das Hauptziel, sondern lediglich das "Instrument" (Mittel zum Zweck), um einen sportlichen Vorteil zu erlangen oder ein übergeordnetes Ziel zu erreichen. Die Handlung ist rationaler und weniger affektgesteuert.</p>
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; font-size: 0.95rem; border-left: 3px solid var(--text-dark); margin-top: 1rem;">
+                    <strong>Typisches Beispiel:</strong> Das taktische Foul (z. B. das Ziehen am Trikot), um einen gefährlichen Konter zu unterbinden.
+                </div>
+            </article>
+        </div>
+
+
+        <!-- Ursachen & Frustrationstoleranz -->
+        <h2><span style="color: var(--control-primary);">■</span> Ursachen und Frustrationstoleranz</h2>
+        <p>
+            Zur Erklärung der Entstehung von Aggression im Sport wird häufig die <strong>Frustrations-Aggressions-Hypothese</strong> herangezogen. Eine Frustration entsteht immer dann, wenn eine zielgerichtete Handlung blockiert oder gestört wird (z. B. durch eine Fehlentscheidung des Schiedsrichters, provoziertes Verhalten des Gegners oder eigenes Versagen). Diese Frustration führt zu einer starken psychischen und physischen Erregung (Arousal).
+        </p>
+        <p>
+            Ob sich diese Erregung tatsächlich in einer aggressiven Handlung entlädt, hängt maßgeblich von der <strong>Frustrationstoleranz</strong> des Athleten ab. Sie beschreibt die individuelle psychische Widerstandsfähigkeit, ein frustrierendes Erlebnis ohne den Kontrollverlust in Form einer destruktiven, aggressiven Reaktion zu ertragen. Athleten mit hoher Frustrationstoleranz können den negativen Affekt kognitiv umstrukturieren (Emotionsregulation) und die Energie in legale, sportliche Leistung kanalisieren.
+        </p>
+
+        <!-- Canvas Flowchart -->
+        <div class="canvas-container">
+            <h3>Frustrations-Aggressions-Theorie</h3>
+            <p class="subtitle">Kausal-Flussdiagramm: Der Entscheidungsknoten zwischen Kontrollverlust und Regulation.</p>
+            <canvas id="aggressionFlowCanvas" width="900" height="450"></canvas>
+        </div>
+
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-premium">
+            <div class="abitur-badge">🏆 ABITUR-TRANSFER & PRAXIS (eA)</div>
+            <p class="abitur-intro">
+                In Abiturklausuren auf erhöhtem Anforderungsniveau ist die Aggressionstheorie ein klassisches Feld für die fallbasierte Analyse von konkreten Spielsituationen.
+            </p>
+
+            <div class="transfer-grid">
+                
+                <div class="transfer-card">
+                    <h4>1. Scharfe begriffliche Abgrenzung</h4>
+                    <p>
+                        Eine typische Transferaufgabe besteht darin, eine Zweikampfsituation (z.B. Bodycheck) zu bewerten. Du musst hier <strong>zwingend das Kriterium der Regelverletzung prüfen</strong>.<br><br>
+                        Ist der Check regelkonform, handelt es sich um sportliche Härte (Assertiveness), nicht um Aggression. Fehlt die Schädigungsabsicht (unglücklicher Zusammenprall), liegt ebenfalls keine Aggression vor. Diese diagnostische Trennschärfe ist essenziell für Punkte.
+                    </p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>2. Klassifikation der Form</h4>
+                    <p>
+                        Wird in einem Text ein Foul beschrieben (z.B. Festhalten eines Stürmers), musst du nicht nur die Aggression erkennen, sondern die <strong>Form exakt benennen und begründen</strong>.<br><br>
+                        Du musst argumentieren, dass das Festhalten berechnend (instrumentell) war, um ein Gegentor zu verhindern, und nicht primär aus dem Affekt der Wut (feindselig) geschah, um den Spieler zu verletzen.
+                    </p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>3. Das Frustrations-Konstrukt</h4>
+                    <p>
+                        Wenn ein Spieler nach Fehlentscheidungen verbal entgleist, wird erwartet, dass du die <strong>Kausalkette aufbaust</strong>.<br><br>
+                        Fehlentscheidung = "Blockade der zielgerichteten Handlung". Dies erzeugt aufgestaute Erregung (Arousal). Das letztendliche Ausrasten musst du als Zeichen einer in diesem Moment <strong>überschrittenen Frustrationstoleranz</strong> diagnostizieren.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // High DPI Canvas Setup
+        function setupCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            
+            const logicalW = 900;
+            const logicalH = 450;
+            
+            canvas.width = logicalW * dpr;
+            canvas.height = logicalH * dpr;
+            ctx.scale(dpr, dpr);
+            
+            return { ctx, w: logicalW, h: logicalH };
+        }
+
+        // Animated Flowchart Logic
+        function drawFlowchart() {
+            const { ctx, w, h } = setupCanvas('aggressionFlowCanvas');
+            
+            // Palette
+            const colorBlock = '#475569';     // Slate
+            const colorArousal = '#ea580c';   // Orange/Fire
+            const colorWeiche = '#3b82f6';    // Blue
+            const colorAggro = '#e11d48';     // Crimson
+            const colorRegul = '#0d9488';     // Teal
+
+            let time = 0;
+
+            function render() {
+                ctx.clearRect(0, 0, w, h);
+                time += 0.03;
+
+                // Utility: Draw Node
+                function drawNode(x, y, width, height, color, title, subtitleLines, glow = false) {
+                    if (glow) {
+                        ctx.shadowColor = color;
+                        ctx.shadowBlur = 15 + Math.sin(time*2) * 5;
+                    } else {
+                        ctx.shadowColor = 'rgba(0,0,0,0.1)';
+                        ctx.shadowBlur = 10;
+                    }
+                    ctx.shadowOffsetY = 4;
+
+                    ctx.beginPath();
+                    ctx.roundRect(x - width/2, y - height/2, width, height, 8);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fill();
+                    ctx.lineWidth = 3;
+                    ctx.strokeStyle = color;
+                    ctx.stroke();
+                    
+                    ctx.shadowBlur = 0; // reset
+                    ctx.shadowColor = 'transparent';
+
+                    // Title Header
+                    ctx.beginPath();
+                    ctx.roundRect(x - width/2, y - height/2, width, 35, 8);
+                    ctx.rect(x - width/2, y - height/2 + 20, width, 15); // square bottom
+                    ctx.fillStyle = color;
+                    ctx.fill();
+
+                    // Text
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = 'bold 15px Poppins, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(title, x, y - height/2 + 18);
+
+                    ctx.fillStyle = '#334155';
+                    ctx.font = '14px Rubik, sans-serif';
+                    let textY = y - height/2 + 55;
+                    subtitleLines.forEach(line => {
+                        ctx.fillText(line, x, textY);
+                        textY += 20;
+                    });
+                }
+
+                // Utility: Draw Arrow
+                function drawArrow(fromX, fromY, toX, toY, color, isDashed = false) {
+                    ctx.beginPath();
+                    ctx.moveTo(fromX, fromY);
+                    
+                    // Route logic for clean right angles if y differs significantly
+                    if (Math.abs(fromY - toY) > 20) {
+                        const midX = fromX + (toX - fromX) / 2;
+                        ctx.lineTo(midX, fromY);
+                        ctx.lineTo(midX, toY);
+                        ctx.lineTo(toX, toY);
+                    } else {
+                        ctx.lineTo(toX, toY);
+                    }
+
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 3;
+                    if (isDashed) {
+                        ctx.setLineDash([8, 6]);
+                        ctx.lineDashOffset = -time * 15;
+                    } else {
+                        ctx.setLineDash([]);
+                    }
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    // Arrowhead
+                    const angle = Math.abs(fromY - toY) > 20 ? 0 : Math.atan2(toY - fromY, toX - fromX);
+                    ctx.beginPath();
+                    ctx.moveTo(toX, toY);
+                    ctx.lineTo(toX - 12 * Math.cos(angle - Math.PI/6), toY - 12 * Math.sin(angle - Math.PI/6));
+                    ctx.lineTo(toX - 12 * Math.cos(angle + Math.PI/6), toY - 12 * Math.sin(angle + Math.PI/6));
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                }
+
+                // --- Node Coordinates ---
+                const startX = 140;
+                const midX1 = 390;
+                const midX2 = 620;
+                const endX = 760;
+                const centerY = h / 2;
+
+                // --- Draw Arrows First (so they go under boxes) ---
+                drawArrow(startX + 100, centerY, midX1 - 90, centerY, colorArousal, true);
+                
+                // From Arousal to Weiche
+                drawArrow(midX1 + 90, centerY, midX2 - 80, centerY, colorWeiche);
+
+                // Weiche to Outcomes
+                drawArrow(midX2, centerY - 25, endX - 100, centerY - 100, colorAggro); // Top
+                drawArrow(midX2, centerY + 25, endX - 100, centerY + 100, colorRegul); // Bottom
+
+
+                // --- Draw Nodes ---
+                // 1. Start
+                drawNode(startX, centerY, 200, 100, colorBlock, 
+                    "1. BLOCKADE", 
+                    ["Störung einer", "zielgerichteten Handlung", "(z.B. Foul, Rückstand)"]);
+
+                // 2. Frustration / Arousal
+                drawNode(midX1, centerY, 180, 100, colorArousal, 
+                    "2. FRUSTRATION", 
+                    ["Erhöhtes Arousal", "(Physische &", "Psychische Erregung)"], 
+                    true); // Pulsing glow
+
+                // 3. Weiche (Frustrationstoleranz)
+                // Draw a Diamond shape for decision
+                ctx.beginPath();
+                ctx.moveTo(midX2, centerY - 45);
+                ctx.lineTo(midX2 + 45, centerY);
+                ctx.lineTo(midX2, centerY + 45);
+                ctx.lineTo(midX2 - 45, centerY);
+                ctx.fillStyle = colorWeiche;
+                ctx.fill();
+                ctx.shadowColor = 'transparent'; // reset
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 24px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText("?", midX2, centerY);
+                
+                // Labels for Diamond
+                ctx.fillStyle = '#334155';
+                ctx.font = 'bold 12px Rubik';
+                ctx.fillText("Frustrationstoleranz", midX2, centerY - 60);
+
+                // Path Labels
+                ctx.fillStyle = colorAggro;
+                ctx.fillText("Niedrig", midX2 + 40, centerY - 35);
+                ctx.fillStyle = colorRegul;
+                ctx.fillText("Hoch", midX2 + 40, centerY + 35);
+
+
+                // 4a. Top Outcome (Aggression)
+                drawNode(endX, centerY - 100, 210, 110, colorAggro, 
+                    "3A. AGGRESSION", 
+                    ["Kontrollverlust", "• Feindselig (Affekt)", "• Instrumentell (Taktik)"]);
+
+                // 4b. Bottom Outcome (Regulation)
+                drawNode(endX, centerY + 100, 210, 110, colorRegul, 
+                    "3B. REGULATION", 
+                    ["Kognitive Umstrukturierung", "Kanalisation in", "legale sportliche Leistung"]);
+
+                requestAnimationFrame(render);
+            }
+
+            render();
+        }
+
+        window.addEventListener('load', drawFlowchart);
+    </script>
+</body>
+</html>

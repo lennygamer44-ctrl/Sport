@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lernzettel Sport Theorie LK - Übersicht</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --surface-hover: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #10b981;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-primary);
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Background Shapes */
+        .bg-shape-1 {
+            position: fixed;
+            top: -20%;
+            left: -10%;
+            width: 70vw;
+            height: 70vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(0,0,0,0) 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bg-shape-2 {
+            position: fixed;
+            bottom: -20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, rgba(0,0,0,0) 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #818cf8, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        p.subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tabs Navigation */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 0.2s backwards;
+        }
+
+        .tab-button {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tab-button:hover {
+            color: var(--text-primary);
+            background: var(--surface-hover);
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Tab Content Area */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Accordion Grid */
+        .accordion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Accordion Item */
+        .accordion-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .accordion-item:hover {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .accordion-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.02);
+            transition: background 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .accordion-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .topic-badge {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .accordion-icon {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: var(--text-secondary);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.open .accordion-icon {
+            transform: rotate(180deg);
+            stroke: var(--primary);
+        }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin-top: 0.5rem;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            padding: 0.85rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            position: relative;
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid transparent;
+        }
+
+        a:hover {
+            color: #ffffff;
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateX(5px);
+        }
+
+        .link-number {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent);
+            min-width: 45px;
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .tabs { flex-direction: column; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-shape-1"></div>
+    <div class="bg-shape-2"></div>
+
+    <div class="container">
+        <header>
+            <h1>Sport Theorie LK</h1>
+            <p class="subtitle">Interaktive Themenübersicht</p>
+        </header>
+
+        <!-- Dynamic Tabs Navigation -->
+        <div class="tabs" id="tabs-container">
+            <!-- Filled by loop -->
+            <button class="tab-button active" onclick="openTab('1')">1. Trainingslehre</button>
+            <button class="tab-button " onclick="openTab('2')">2. Bewegungslehre & Biomechanik</button>
+            <button class="tab-button " onclick="openTab('3')">3. Sportmedizin</button>
+            <button class="tab-button " onclick="openTab('4')">4. Sportsoziologie & Psychologie</button>
+        </div>
+
+        <!-- Tab Contents -->
+        <div id="tab-1" class="tab-content active">
+            <div class="accordion-grid">
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">1.1</span>
+                            <span>Themenblock 1</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="1.1.1a_Trainingsbegriffe.html">
+                                        <span class="link-number">1.1.1a</span>
+                                        <span class="link-title">Trainingsbegriffe</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.1.1b_Belastungskomponenten.html">
+                                        <span class="link-number">1.1.1b</span>
+                                        <span class="link-title">Belastungskomponenten</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.1.2a_Regeln_der_Anpassung.html">
+                                        <span class="link-number">1.1.2a</span>
+                                        <span class="link-title">Regeln Der Anpassung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.1.2b_Superkompensation.html">
+                                        <span class="link-number">1.1.2b</span>
+                                        <span class="link-title">Superkompensation</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.1.3a_Prinzipien_der_Belastung.html">
+                                        <span class="link-number">1.1.3a</span>
+                                        <span class="link-title">Prinzipien Der Belastung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.1.3b_Prinzipien_der_Steuerung.html">
+                                        <span class="link-number">1.1.3b</span>
+                                        <span class="link-title">Prinzipien Der Steuerung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.1.3c_Anwendung_und_Transfer.html">
+                                        <span class="link-number">1.1.3c</span>
+                                        <span class="link-title">Anwendung Und Transfer</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.1.4a_Langfristiger_Aufbau.html">
+                                        <span class="link-number">1.1.4a</span>
+                                        <span class="link-title">Langfristiger Aufbau</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.1.4b_Zyklen_und_Diagnostik.html">
+                                        <span class="link-number">1.1.4b</span>
+                                        <span class="link-title">Zyklen Und Diagnostik</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.1.5a_Erholungsprozesse.html">
+                                        <span class="link-number">1.1.5a</span>
+                                        <span class="link-title">Erholungsprozesse</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.1.5b_Überlastung.html">
+                                        <span class="link-number">1.1.5b</span>
+                                        <span class="link-title">Überlastung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.1.6a_Aufwaermen.html">
+                                        <span class="link-number">1.1.6a</span>
+                                        <span class="link-title">Aufwaermen</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.1.6b_Abwaermen.html">
+                                        <span class="link-number">1.1.6b</span>
+                                        <span class="link-title">Abwaermen</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">1.2</span>
+                            <span>Themenblock 2</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="1.2.1a_Knochen_und_Gelenke.html">
+                                        <span class="link-number">1.2.1a</span>
+                                        <span class="link-title">Knochen Und Gelenke</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.2.1b_Anatomie_der_Wirbelsaeule.html">
+                                        <span class="link-number">1.2.1b</span>
+                                        <span class="link-title">Anatomie Der Wirbelsaeule</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.2.1c_Funktionen_der_Wirbelsaeule.html">
+                                        <span class="link-number">1.2.1c</span>
+                                        <span class="link-title">Funktionen Der Wirbelsaeule</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.2.2a_Muskulatur_makroskopisch.html">
+                                        <span class="link-number">1.2.2a</span>
+                                        <span class="link-title">Muskulatur Makroskopisch</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.2.2b_Muskulatur_mikroskopisch.html">
+                                        <span class="link-number">1.2.2b</span>
+                                        <span class="link-title">Muskulatur Mikroskopisch</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.2.3a_Arbeitsweisen.html">
+                                        <span class="link-number">1.2.3a</span>
+                                        <span class="link-title">Arbeitsweisen</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.2.3b_Muskelkater.html">
+                                        <span class="link-number">1.2.3b</span>
+                                        <span class="link-title">Muskelkater</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.2.3c_Molekulare_Ebene.html">
+                                        <span class="link-number">1.2.3c</span>
+                                        <span class="link-title">Molekulare Ebene</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">1.3</span>
+                            <span>Themenblock 3</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="1.3.1a_Hauptkategorien_der_Kraft.html">
+                                        <span class="link-number">1.3.1a</span>
+                                        <span class="link-title">Hauptkategorien Der Kraft</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.3.1b_Ausdauer_und_Mischformen.html">
+                                        <span class="link-number">1.3.1b</span>
+                                        <span class="link-title">Ausdauer Und Mischformen</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.3.2a_Leistungsfaktoren_der_Kraft.html">
+                                        <span class="link-number">1.3.2a</span>
+                                        <span class="link-title">Leistungsfaktoren Der Kraft</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.3.2b_Biologische_Adaption.html">
+                                        <span class="link-number">1.3.2b</span>
+                                        <span class="link-title">Biologische Adaption</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.3.3a_Muskelaufbau.html">
+                                        <span class="link-number">1.3.3a</span>
+                                        <span class="link-title">Muskelaufbau</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.3.3b_Koordination_und_Maximalkraft.html">
+                                        <span class="link-number">1.3.3b</span>
+                                        <span class="link-title">Koordination Und Maximalkraft</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.3.4a_Diagnostik.html">
+                                        <span class="link-number">1.3.4a</span>
+                                        <span class="link-title">Diagnostik</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.3.4b_Praxis_Planung_und_Prophylaxe.html">
+                                        <span class="link-number">1.3.4b</span>
+                                        <span class="link-title">Praxis Planung Und Prophylaxe</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">1.4</span>
+                            <span>Themenblock 4</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="1.4.1a_Energiebereitstellung_ATP_und_KP.html">
+                                        <span class="link-number">1.4.1a</span>
+                                        <span class="link-title">Energiebereitstellung Atp Und Kp</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.4.1b_Aerobe_Energiebereitstellung.html">
+                                        <span class="link-number">1.4.1b</span>
+                                        <span class="link-title">Aerobe Energiebereitstellung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.4.1c_Anwendungsbezug_Energiebereitstellung.html">
+                                        <span class="link-number">1.4.1c</span>
+                                        <span class="link-title">Anwendungsbezug Energiebereitstellung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.4.2a_Periphere_Ermuedung.html">
+                                        <span class="link-number">1.4.2a</span>
+                                        <span class="link-title">Periphere Ermuedung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.4.3a_Anatomie_und_Kreislauf.html">
+                                        <span class="link-number">1.4.3a</span>
+                                        <span class="link-title">Anatomie Und Kreislauf</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.4.3b_Kenngroessen_Herzfunktion.html">
+                                        <span class="link-number">1.4.3b</span>
+                                        <span class="link-title">Kenngroessen Herzfunktion</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.4.3c_Das_Blut.html">
+                                        <span class="link-number">1.4.3c</span>
+                                        <span class="link-title">Das Blut</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.4.4a_Anatomie_und_Mechanik_der_Atmung.html">
+                                        <span class="link-number">1.4.4a</span>
+                                        <span class="link-title">Anatomie Und Mechanik Der Atmung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.4.4b_Respiratorische_Kenngroessen_und_Belastung.html">
+                                        <span class="link-number">1.4.4b</span>
+                                        <span class="link-title">Respiratorische Kenngroessen Und Belastung</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">1.5</span>
+                            <span>Themenblock 5</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="1.5.1a_Klassifizierung_nach_Dauer_und_Energie.html">
+                                        <span class="link-number">1.5.1a</span>
+                                        <span class="link-title">Klassifizierung Nach Dauer Und Energie</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.5.1b_Klassifizierung_nach_Funktion_und_Muskel.html">
+                                        <span class="link-number">1.5.1b</span>
+                                        <span class="link-title">Klassifizierung Nach Funktion Und Muskel</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.5.2a_Schwellenkonzepte.html">
+                                        <span class="link-number">1.5.2a</span>
+                                        <span class="link-title">Schwellenkonzepte</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.5.2b_Sauerstoffkinetik.html">
+                                        <span class="link-number">1.5.2b</span>
+                                        <span class="link-title">Sauerstoffkinetik</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.5.2c_Diagnostik_und_Auswertung_Laktatleistungskurven.html">
+                                        <span class="link-number">1.5.2c</span>
+                                        <span class="link-title">Diagnostik Und Auswertung Laktatleistungskurven</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.5.3a_Determinanten_der_Ausdauer.html">
+                                        <span class="link-number">1.5.3a</span>
+                                        <span class="link-title">Determinanten Der Ausdauer</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.5.3b_Interaktion_der_Faehigkeiten.html">
+                                        <span class="link-number">1.5.3b</span>
+                                        <span class="link-title">Interaktion Der Faehigkeiten</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.5.4a_Kernmethoden_Dauermethode_und_Intervallmethode.html">
+                                        <span class="link-number">1.5.4a</span>
+                                        <span class="link-title">Kernmethoden Dauermethode Und Intervallmethode</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.5.4b_Weitere_Trainingsmethoden_Wiederholung_und_Wettkampf.html">
+                                        <span class="link-number">1.5.4b</span>
+                                        <span class="link-title">Weitere Trainingsmethoden Wiederholung Und Wettkampf</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.5.4c_Biologische_Adaptation.html">
+                                        <span class="link-number">1.5.4c</span>
+                                        <span class="link-title">Biologische Adaptation</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.5.5a_Ausdauertraining_und_Tests.html">
+                                        <span class="link-number">1.5.5a</span>
+                                        <span class="link-title">Ausdauertraining Und Tests</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.5.5b_Individuelle_Belastungssteuerung.html">
+                                        <span class="link-number">1.5.5b</span>
+                                        <span class="link-title">Individuelle Belastungssteuerung</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">1.6</span>
+                            <span>Themenblock 6</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="1.6.1a_Reine_Schnelligkeitsformen.html">
+                                        <span class="link-number">1.6.1a</span>
+                                        <span class="link-title">Reine Schnelligkeitsformen</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.6.1b_Komplexe_Schnelligkeit.html">
+                                        <span class="link-number">1.6.1b</span>
+                                        <span class="link-title">Komplexe Schnelligkeit</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.6.2a_Determinanten_der_Schnelligkeit.html">
+                                        <span class="link-number">1.6.2a</span>
+                                        <span class="link-title">Determinanten Der Schnelligkeit</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.6.2b_Interaktion_der_Faehigkeiten.html">
+                                        <span class="link-number">1.6.2b</span>
+                                        <span class="link-title">Interaktion Der Faehigkeiten</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.6.3a_Methoden_und_Uebungen_der_Schnelligkeit.html">
+                                        <span class="link-number">1.6.3a</span>
+                                        <span class="link-title">Methoden Und Uebungen Der Schnelligkeit</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.6.3b_Biologische_Adaptation_Schnelligkeit.html">
+                                        <span class="link-number">1.6.3b</span>
+                                        <span class="link-title">Biologische Adaptation Schnelligkeit</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.6.4a_Praktische_Umsetzung_und_Tests.html">
+                                        <span class="link-number">1.6.4a</span>
+                                        <span class="link-title">Praktische Umsetzung Und Tests</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.6.4b_Verletzungsprophylaxe.html">
+                                        <span class="link-number">1.6.4b</span>
+                                        <span class="link-title">Verletzungsprophylaxe</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">1.7</span>
+                            <span>Themenblock 7</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="1.7.1a_Grundlagen_der_Beweglichkeit.html">
+                                        <span class="link-number">1.7.1a</span>
+                                        <span class="link-title">Grundlagen Der Beweglichkeit</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.7.2a_Determinanten_der_Beweglichkeit.html">
+                                        <span class="link-number">1.7.2a</span>
+                                        <span class="link-title">Determinanten Der Beweglichkeit</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.7.2b_Interaktion_der_Faehigkeiten.html">
+                                        <span class="link-number">1.7.2b</span>
+                                        <span class="link-title">Interaktion Der Faehigkeiten</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.7.3a_Trainingsmethoden_der_Beweglichkeit.html">
+                                        <span class="link-number">1.7.3a</span>
+                                        <span class="link-title">Trainingsmethoden Der Beweglichkeit</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.7.3b_Biologische_Adaptation_Beweglichkeit.html">
+                                        <span class="link-number">1.7.3b</span>
+                                        <span class="link-title">Biologische Adaptation Beweglichkeit</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.7.4a_Umsetzung_und_Tests.html">
+                                        <span class="link-number">1.7.4a</span>
+                                        <span class="link-title">Umsetzung Und Tests</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">1.8</span>
+                            <span>Themenblock 8</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="1.8.1a_Kognitive_und_physische_Erweiterungen.html">
+                                        <span class="link-number">1.8.1a</span>
+                                        <span class="link-title">Kognitive Und Physische Erweiterungen</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.8.1b_Apparative_und_strukturelle_Erweiterungen.html">
+                                        <span class="link-number">1.8.1b</span>
+                                        <span class="link-title">Apparative Und Strukturelle Erweiterungen</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="1.8.2a_Planung_und_Erprobung_weiterer_Trainingsformen.html">
+                                        <span class="link-number">1.8.2a</span>
+                                        <span class="link-title">Planung Und Erprobung Weiterer Trainingsformen</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+        </div>
+        <div id="tab-2" class="tab-content ">
+            <div class="accordion-grid">
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">2.1</span>
+                            <span>Themenblock 1</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="2.1.1a_Mechanische_Grundlagen.html">
+                                        <span class="link-number">2.1.1a</span>
+                                        <span class="link-title">Mechanische Grundlagen</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.1.1b_Bewegungsarten_und_Anwendung.html">
+                                        <span class="link-number">2.1.1b</span>
+                                        <span class="link-title">Bewegungsarten Und Anwendung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.1.2a_Biomechanische_Prinzipien.html">
+                                        <span class="link-number">2.1.2a</span>
+                                        <span class="link-title">Biomechanische Prinzipien</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.1.2b_Funktionale_Anwendung.html">
+                                        <span class="link-number">2.1.2b</span>
+                                        <span class="link-title">Funktionale Anwendung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.1.3a_Morphologische_Bewegungsanalyse.html">
+                                        <span class="link-number">2.1.3a</span>
+                                        <span class="link-title">Morphologische Bewegungsanalyse</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.1.3b_Bewegungsmerkmale.html">
+                                        <span class="link-number">2.1.3b</span>
+                                        <span class="link-title">Bewegungsmerkmale</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.1.3c_Bewegungsoptimierung.html">
+                                        <span class="link-number">2.1.3c</span>
+                                        <span class="link-title">Bewegungsoptimierung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.1.4a_Experimente_und_digitale_Analyse.html">
+                                        <span class="link-number">2.1.4a</span>
+                                        <span class="link-title">Experimente Und Digitale Analyse</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">2.2</span>
+                            <span>Themenblock 2</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="2.2.1a_Informationsaufnahme_und_Leitungsbahnen.html">
+                                        <span class="link-number">2.2.1a</span>
+                                        <span class="link-title">Informationsaufnahme Und Leitungsbahnen</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.2.1b_Muskelsteuerung.html">
+                                        <span class="link-number">2.2.1b</span>
+                                        <span class="link-title">Muskelsteuerung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.2.2ab_Motorischer_Lernprozess.html">
+                                        <span class="link-number">2.2.2ab</span>
+                                        <span class="link-title">Motorischer Lernprozess</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.2.3a_Faehigkeiten_und_Determinanten.html">
+                                        <span class="link-number">2.2.3a</span>
+                                        <span class="link-title">Faehigkeiten Und Determinanten</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.2.3b_Trainingsmethoden_und_Praxis.html">
+                                        <span class="link-number">2.2.3b</span>
+                                        <span class="link-title">Trainingsmethoden Und Praxis</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.2.4a_Theoretische_Grundlagen_Technik_und_Taktik.html">
+                                        <span class="link-number">2.2.4a</span>
+                                        <span class="link-title">Theoretische Grundlagen Technik Und Taktik</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.2.4b_Methoden_des_Techniktrainings.html">
+                                        <span class="link-number">2.2.4b</span>
+                                        <span class="link-title">Methoden Des Techniktrainings</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="2.2.4c_Praxistransfer.html">
+                                        <span class="link-number">2.2.4c</span>
+                                        <span class="link-title">Praxistransfer</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+        </div>
+        <div id="tab-3" class="tab-content ">
+            <div class="accordion-grid">
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">3.1</span>
+                            <span>Themenblock 1</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="3.1.1_Der_Gesundheitsbegriff_und_Risikofaktoren.html">
+                                        <span class="link-number">3.1.1</span>
+                                        <span class="link-title">Der Gesundheitsbegriff Und Risikofaktoren</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.1.2_Gesundheitsmodelle_Salutogenese.html">
+                                        <span class="link-number">3.1.2</span>
+                                        <span class="link-title">Gesundheitsmodelle Salutogenese</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">3.2</span>
+                            <span>Themenblock 2</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="3.2.1a_Motorische_Hauptbeanspruchungsformen.html">
+                                        <span class="link-number">3.2.1a</span>
+                                        <span class="link-title">Motorische Hauptbeanspruchungsformen</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.2.1b_Training_und_Lebensstil.html">
+                                        <span class="link-number">3.2.1b</span>
+                                        <span class="link-title">Training Und Lebensstil</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.2.2a_Verletzungen_und_Soforthilfe.html">
+                                        <span class="link-number">3.2.2a</span>
+                                        <span class="link-title">Verletzungen Und Soforthilfe</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.2.2b_Verletzungsprophylaxe.html">
+                                        <span class="link-number">3.2.2b</span>
+                                        <span class="link-title">Verletzungsprophylaxe</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.2.3a_Praktische_Umsetzung_Auf_und_Abwaermen.html">
+                                        <span class="link-number">3.2.3a</span>
+                                        <span class="link-title">Praktische Umsetzung Auf Und Abwaermen</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">3.3</span>
+                            <span>Themenblock 3</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="3.3.1a_Makro_und_Mikronaehrstoffe.html">
+                                        <span class="link-number">3.3.1a</span>
+                                        <span class="link-title">Makro Und Mikronaehrstoffe</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.3.1b_Energieumsatz.html">
+                                        <span class="link-number">3.3.1b</span>
+                                        <span class="link-title">Energieumsatz</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.3.2a_Ernaehrung_vor_und_waehrend_der_Belastung.html">
+                                        <span class="link-number">3.3.2a</span>
+                                        <span class="link-title">Ernaehrung Vor Und Waehrend Der Belastung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.3.2b_Regeneration_und_Ergaenzung.html">
+                                        <span class="link-number">3.3.2b</span>
+                                        <span class="link-title">Regeneration Und Ergaenzung</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.3.3a_Ernaehrungsplanung.html">
+                                        <span class="link-number">3.3.3a</span>
+                                        <span class="link-title">Ernaehrungsplanung</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">3.4</span>
+                            <span>Themenblock 4</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="3.4.1a_Definition_und_Formen_von_Doping.html">
+                                        <span class="link-number">3.4.1a</span>
+                                        <span class="link-title">Definition Und Formen Von Doping</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.4.1b_Biologische_Mechanismen.html">
+                                        <span class="link-number">3.4.1b</span>
+                                        <span class="link-title">Biologische Mechanismen</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.4.2a_Muskel_und_Kraftaufbau.html">
+                                        <span class="link-number">3.4.2a</span>
+                                        <span class="link-title">Muskel Und Kraftaufbau</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.4.2b_Ausdauerleistungsfaehigkeit.html">
+                                        <span class="link-number">3.4.2b</span>
+                                        <span class="link-title">Ausdauerleistungsfaehigkeit</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="3.4.2c_Beeinflussung_und_Verschleierung.html">
+                                        <span class="link-number">3.4.2c</span>
+                                        <span class="link-title">Beeinflussung Und Verschleierung</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+        </div>
+        <div id="tab-4" class="tab-content ">
+            <div class="accordion-grid">
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">4.1</span>
+                            <span>Themenblock 1</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="4.1.1_Grundlagen_der_Sportpsychologie.html">
+                                        <span class="link-number">4.1.1</span>
+                                        <span class="link-title">Grundlagen Der Sportpsychologie</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="4.1.2a_Motiv_vs_Motivation.html">
+                                        <span class="link-number">4.1.2a</span>
+                                        <span class="link-title">Motiv Vs Motivation</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="4.1.2b_Motivklassen_und_Sinnperspektiven.html">
+                                        <span class="link-number">4.1.2b</span>
+                                        <span class="link-title">Motivklassen Und Sinnperspektiven</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="4.1.2c_Fallanalyse_und_Transfer.html">
+                                        <span class="link-number">4.1.2c</span>
+                                        <span class="link-title">Fallanalyse Und Transfer</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="4.1.3a_Emotion_und_Aggression.html">
+                                        <span class="link-number">4.1.3a</span>
+                                        <span class="link-title">Emotion Und Aggression</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="4.1.3b_Auswirkungen_und_Bewertung.html">
+                                        <span class="link-number">4.1.3b</span>
+                                        <span class="link-title">Auswirkungen Und Bewertung</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="accordion-title">
+                            <span class="topic-badge">4.2</span>
+                            <span>Themenblock 2</span>
+                        </div>
+                        <svg class="accordion-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <ul>
+        
+                                <li>
+                                    <a href="4.2.1_Auseinandersetzung_und_kritische_Reflexion.html">
+                                        <span class="link-number">4.2.1</span>
+                                        <span class="link-title">Auseinandersetzung Und Kritische Reflexion</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="4.2.2a_Erziehung_und_Sozialverhalten.html">
+                                        <span class="link-number">4.2.2a</span>
+                                        <span class="link-title">Erziehung Und Sozialverhalten</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="4.2.2b_Organisationsformen.html">
+                                        <span class="link-number">4.2.2b</span>
+                                        <span class="link-title">Organisationsformen</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="4.2.3a_Fairness_und_Doping.html">
+                                        <span class="link-number">4.2.3a</span>
+                                        <span class="link-title">Fairness Und Doping</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="4.2.3b_Kommerzialisierung_und_Medien.html">
+                                        <span class="link-number">4.2.3b</span>
+                                        <span class="link-title">Kommerzialisierung Und Medien</span>
+                                    </a>
+                                </li>
+            
+                                <li>
+                                    <a href="4.2.3c_Umwelt_und_Sport.html">
+                                        <span class="link-number">4.2.3c</span>
+                                        <span class="link-title">Umwelt Und Sport</span>
+                                    </a>
+                                </li>
+            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Tab functionality
+        function openTab(chapId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById('tab-' + chapId).classList.add('active');
+            
+            // Activate corresponding button
+            event.currentTarget.classList.add('active');
+        }
+
+        // Accordion functionality
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const body = item.querySelector('.accordion-body');
+            const isOpen = item.classList.contains('open');
+            
+            // Close all accordions in the current tab if you want single-open behavior
+            // (Optional: currently allows multiple open)
+            /*
+            item.closest('.accordion-grid').querySelectorAll('.accordion-item').forEach(otherItem => {
+                if(otherItem !== item) {
+                    otherItem.classList.remove('open');
+                    otherItem.querySelector('.accordion-body').style.maxHeight = null;
+                }
+            });
+            */
+
+            if (isOpen) {
+                item.classList.remove('open');
+                body.style.maxHeight = null;
+            } else {
+                item.classList.add('open');
+                // Calculate height dynamically
+                body.style.maxHeight = body.scrollHeight + "px";
+            }
+        }
+    </script>
+</body>
+</html>

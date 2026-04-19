@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.2.3b Kommerzialisierung und Medien: Abhängigkeiten im Profisport</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Theme: Corporate Media & Global Market */
+            --bg-body: #f8fafc;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            
+            /* Core Entities Colors */
+            --color-sport: #f43f5e;     /* Rose / Passion */
+            --color-media: #8b5cf6;     /* Violet / Broadcast */
+            --color-economy: #10b981;   /* Emerald / Money */
+            
+            --corporate-blue: #1e293b;
+            --corporate-light: #f1f5f9;
+
+            /* Abitur Premium Box */
+            --abi-gold: #f59e0b;
+            --abi-dark: #171717;
+            --abi-gradient: linear-gradient(135deg, #171717 0%, #262626 100%);
+
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-card: 0 12px 24px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            padding-bottom: 5rem;
+            overflow-x: hidden;
+        }
+
+        /* --- Broadcast Header --- */
+        header {
+            background-color: #ffffff;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            text-align: center;
+        }
+
+        /* Abstract media waves background */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-radial-gradient(circle at 50% 150%, rgba(139, 92, 246, 0.03) 0, rgba(139, 92, 246, 0.03) 20px, transparent 20px, transparent 40px);
+            z-index: 0;
+        }
+
+        .header-inner {
+            max-width: 950px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--corporate-light);
+            color: #64748b;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            color: var(--text-dark);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro {
+            font-size: 1.2rem;
+            color: #475569;
+            font-weight: 300;
+        }
+
+        main {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Section Headings --- */
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin: 4rem 0 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-media), transparent);
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Magisches Dreieck Entities --- */
+        .entities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .entity-card {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-subtle);
+            border-top: 5px solid;
+        }
+
+        .entity-sport { border-color: var(--color-sport); }
+        .entity-media { border-color: var(--color-media); }
+        .entity-economy { border-color: var(--color-economy); }
+
+        .entity-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .entity-sport h3 { color: var(--color-sport); }
+        .entity-media h3 { color: var(--color-media); }
+        .entity-economy h3 { color: var(--color-economy); }
+
+        /* --- Interactive Canvas --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-card);
+            margin: 4rem 0;
+            text-align: center;
+            border: 1px solid #f1f5f9;
+        }
+
+        .canvas-section h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            color: var(--corporate-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p.subtitle {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 850px;
+            height: auto;
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* --- Entwicklungen & Abhängigkeiten (Cards) --- */
+        .dev-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .dev-card {
+            background: #ffffff;
+            border-left: 6px solid var(--corporate-blue);
+            padding: 2rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.2s;
+        }
+
+        .dev-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .dev-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            color: var(--corporate-blue);
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- Kritisches Hinterfragen (Ambivalenz Split) --- */
+        .ambivalence-split {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        @media (min-width: 768px) {
+            .ambivalence-split {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .pro-con-box {
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            position: relative;
+        }
+
+        .box-pro {
+            background: #f0fdf4; /* Light Emerald */
+            border: 1px solid #a7f3d0;
+        }
+
+        .box-con {
+            background: #fff1f2; /* Light Rose */
+            border: 1px solid #fecdd3;
+        }
+
+        .pro-con-box h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .box-pro h3 { color: #047857; }
+        .box-con h3 { color: #be123c; }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-premium {
+            background: var(--abi-gradient);
+            color: #f1f5f9;
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            margin-top: 6rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            border-bottom: 6px solid var(--abi-gold);
+            border-top: 1px solid #333;
+        }
+
+        .abitur-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--abi-gold);
+            color: #000000;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            padding: 0.6rem 2.5rem;
+            border-radius: 4px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            white-space: nowrap;
+        }
+
+        .abitur-intro {
+            text-align: center;
+            color: #a3a3a3;
+            font-size: 1.15rem;
+            margin-bottom: 3rem;
+        }
+
+        .transfer-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .transfer-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .transfer-item h4 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--abi-gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .transfer-item p {
+            margin-bottom: 0;
+            color: #d4d4d8;
+        }
+
+        .transfer-item strong {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <span class="tag">Lernbereich 4.2.3b</span>
+            <h1>Kommerzialisierung und Medien: Abhängigkeiten im Profisport</h1>
+            <p class="intro">
+                Der moderne Spitzensport hat sich im Zuge der Globalisierung von einer reinen Freizeit- und Kulturbewegung zu einer hochgradig professionalisierten, globalen Milliardenindustrie entwickelt. Um diese Entwicklung soziologisch analysieren und kritisch hinterfragen zu können, muss der untrennbare, symbiotische Zusammenschluss von Sport, Massenmedien und Wirtschaft verstanden werden.
+            </p>
+        </div>
+    </header>
+
+    <main>
+
+        <h2>Das magische Dreieck</h2>
+        <p>Die Kommerzialisierung des Sports basiert auf einer tiefgreifenden gegenseitigen Abhängigkeit dieser drei zentralen Akteure. Keine der Parteien kann in der modernen Struktur ohne die anderen auf dem jetzigen Niveau existieren:</p>
+
+        <div class="entities-grid">
+            <article class="entity-card entity-sport">
+                <h3>🏅 Der Sport (Das Produkt)</h3>
+                <p>Der Spitzensport liefert das emotionale, unvorhersehbare und massenwirksame "Produkt" (Heldenmythen, Dramatik, nationale Identifikation). Er benötigt im Gegenzug immense finanzielle Mittel zur Professionalisierung (Infrastruktur, Trainergehälter, Talentförderung).</p>
+            </article>
+
+            <article class="entity-card entity-media">
+                <h3>📺 Die Medien (Multiplikator)</h3>
+                <p>Fernsehsender, Streamingdienste und soziale Medien kaufen die exklusiven Übertragungsrechte. Sie generieren Reichweite, binden ein Millionenpublikum und verkaufen diese Aufmerksamkeit (Sendeplätze) extrem lukrativ weiter. Ohne den Sport fehlen emotionale Quotenbringer.</p>
+            </article>
+
+            <article class="entity-card entity-economy">
+                <h3>💼 Die Wirtschaft (Finanzier)</h3>
+                <p>Unternehmen nutzen den Sport durch Sponsoring, um ihre Markenbotschaften in einem emotional positiv besetzten Umfeld zu platzieren (Image-Transfer). Sie kaufen sich Zugang zur gigantischen Reichweite der Medien. Das Sponsoring finanziert wiederum den Sport.</p>
+            </article>
+        </div>
+
+        <!-- Interactive Canvas -->
+        <section class="canvas-section">
+            <h3>Der Sport-Medien-Wirtschaft-Komplex</h3>
+            <p class="subtitle">Das "Magische Dreieck" der Kommerzialisierung und seine bidirektionalen Austauschprozesse.</p>
+            <canvas id="triangleCanvas" width="850" height="650"></canvas>
+        </section>
+
+
+        <h2>Entwicklungen und Abhängigkeiten</h2>
+        <p>Diese Symbiose hat weitreichende, teils höchst problematische Konsequenzen für die Struktur und die Akteure des Sports:</p>
+
+        <div class="dev-grid">
+            <article class="dev-card">
+                <h3>1. Mediatisierung (Anpassung an die Medienlogik)</h3>
+                <p>Der Sport wird zunehmend den Bedürfnissen der TV-Übertragung untergeordnet. Dies führt zu tiefgreifenden Regeländerungen, um den Sport telegener, spannender und werbekompatibler zu machen (z. B. Einführung des Tie-Breaks im Tennis zur Planbarkeit der Sendezeit, Viertel- statt Halbzeiten im Basketball für mehr Werbepausen, farbige Judogi zur besseren Unterscheidbarkeit auf dem Bildschirm).</p>
+            </article>
+
+            <article class="dev-card">
+                <h3>2. Kommodifizierung der Athleten (Warenförmigkeit)</h3>
+                <p>Athleten werden zu globalen Marken und austauschbaren Werbeträgern degradiert. Der Marktwert eines Sportlers definiert sich zunehmend nicht mehr nur über die reine motorische Leistungsfähigkeit, sondern über seine mediale Reichweite (Follower-Zahlen) und sein Charisma.</p>
+            </article>
+
+            <article class="dev-card">
+                <h3>3. Extreme finanzielle Abhängigkeiten</h3>
+                <p>Die totale Abhängigkeit von TV-Geldern und Sponsoren macht Vereine und ganze Ligen extrem krisenanfällig. Der Rückzug eines Hauptsponsors oder das Ausbleiben von TV-Einnahmen kann den sofortigen Bankrott bedeuten. Zudem fokussiert sich das Geld fast ausschließlich auf stark mediatisierte Sportarten (wie Fußball), während nicht-televisierte Randsportarten finanziell ausbluten.</p>
+            </article>
+        </div>
+
+
+        <h2>Kritisches Hinterfragen (Ambivalenz)</h2>
+        <p>Eine fundierte soziologische Bewertung erfordert das Abwägen der Vor- und Nachteile dieser Entwicklungen:</p>
+
+        <div class="ambivalence-split">
+            <div class="pro-con-box box-pro">
+                <h3>(+) Positive Entwicklungen</h3>
+                <p>Auf der positiven Seite ermöglicht die Kommerzialisierung erst das heutige <strong>Leistungsniveau</strong>. Athleten können sich durch die Professionalisierung voll auf ihren Sport konzentrieren (eine duale Karriere neben dem Beruf ist nicht zwingend nötig).</p>
+                <p>Zudem sind die Trainingsbedingungen auf dem neuesten wissenschaftlichen Stand, und der Sport erreicht, emotionalisiert und verbindet Menschen global.</p>
+            </div>
+
+            <div class="pro-con-box box-con">
+                <h3>(-) Negative Entwicklungen</h3>
+                <p>Auf der negativen Seite droht der Verlust der eigentlichen sportlichen Werte <strong>(Entfremdung)</strong>. Die totale Gewinnmaximierung führt zu Überbelastungen der Athleten durch aufgeblähte Spielpläne und begünstigt systematisches Doping aus existenziellem Druck.</p>
+                <p>Zudem fördert dies Korruption bei der Vergabe von Großereignissen und öffnet autokratischen Staaten die Tür zum <strong>"Sportswashing"</strong> (Nutzung von Sportsponsoring zur Aufbesserung der politischen Reputation).</p>
+            </div>
+        </div>
+
+
+        <!-- Premium Abitur Transfer Box -->
+        <section class="abitur-premium">
+            <div class="abitur-badge">🏆 ABITUR-TRANSFER & PRAXIS (eA)</div>
+            <p class="abitur-intro">
+                In Abiturklausuren auf erhöhtem Anforderungsniveau ist die Kommerzialisierung ein zentraler Bewertungsgegenstand, da sie fast alle anderen soziologischen und psychologischen Phänomene des Spitzensports durchdringt.
+            </p>
+
+            <div class="transfer-grid">
+                
+                <div class="transfer-item">
+                    <h4>1. Regeländerungen soziologisch deuten</h4>
+                    <p>Eine typische Transferaufgabe präsentiert die historische Veränderung eines Regelwerks einer Sportart.<br><br>
+                    <strong>Transfer:</strong> Du musst erkennen und begründen, dass diese Änderung <em>nicht aus sportwissenschaftlichen Gründen</em> erfolgte, sondern auf die <strong>Mediatisierung</strong> zurückzuführen ist. Argumentiere, dass der Sport seine Regeln an die Medienlogik (höhere Taktung, Werbepausen, TV-Optik) anpasst, um ökonomisch relevant zu bleiben.</p>
+                </div>
+
+                <div class="transfer-item">
+                    <h4>2. Multiperspektivische Bewertung von Sponsoring</h4>
+                    <p>Wenn ein Fallbeispiel den Einstieg eines Großinvestors bei einem Traditionsverein beschreibt, wird eine dialektische Erörterung erwartet.<br><br>
+                    <strong>Transfer:</strong> Stelle die Perspektive der Befürworter (Standortsicherung, sportliche Konkurrenzfähigkeit) der Perspektive der Kritiker (Verlust von Mitbestimmung, Abhängigkeit vom Wohlwollen eines Einzelnen, Entfremdung der Basis-Fans) objektiv gegenüber.</p>
+                </div>
+
+                <div class="transfer-item">
+                    <h4>3. Vernetzung mit Psychologie und Doping</h4>
+                    <p>Das Kultusministerium bewertet vernetztes Denken besonders hoch. Wenn eine Quelle den extrem vollen Terminkalender im Profifußball kritisiert, musst du dies interdisziplinär verknüpfen.<br><br>
+                    <strong>Transfer:</strong> Führe dies auf die Kommerzialisierung (Gewinnmaximierung durch mehr Spiele) zurück und leite die biologisch-psychologischen Folgen ab (Burnout, Verletzungsrisiko, Griff zu Doping). Die ökonomische Dimension ist somit die <em>soziologische Ursache für die biologische Belastung</em> des Individuums.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // High DPI Canvas Setup
+        function setupCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 850;
+            const logicalH = 650;
+            
+            canvas.width = logicalW * dpr;
+            canvas.height = logicalH * dpr;
+            ctx.scale(dpr, dpr);
+            
+            return { ctx, w: logicalW, h: logicalH };
+        }
+
+        function drawMagicTriangle() {
+            const { ctx, w, h } = setupCanvas('triangleCanvas');
+            
+            // Colors
+            const colSport = '#f43f5e'; // Rose
+            const colMedia = '#8b5cf6'; // Violet
+            const colEcon = '#10b981';  // Emerald
+            const colTextDark = '#1e293b';
+            const colTextLight = '#64748b';
+            
+            // Node Positions
+            const cx = w / 2;
+            const cy = h / 2 + 30; // Shift down slightly
+            const radius = 220; // Distance from center
+            
+            const nodeSport = { x: cx, y: cy - radius, color: colSport, label: "SPORT", icon: "🏅" };
+            const nodeMedia = { x: cx - radius * Math.cos(Math.PI/6), y: cy + radius * Math.sin(Math.PI/6), color: colMedia, label: "MEDIEN", icon: "📺" };
+            const nodeEcon = { x: cx + radius * Math.cos(Math.PI/6), y: cy + radius * Math.sin(Math.PI/6), color: colEcon, label: "WIRTSCHAFT", icon: "💼" };
+
+            let time = 0;
+
+            function render() {
+                ctx.clearRect(0, 0, w, h);
+                time += 0.02;
+
+                // --- Helper: Draw Bidirectional Curved Arrows ---
+                function drawCurvedArrow(startNode, endNode, curveOffset, textLines, isForward) {
+                    const dx = endNode.x - startNode.x;
+                    const dy = endNode.y - startNode.y;
+                    const angle = Math.atan2(dy, dx);
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    
+                    // Midpoint
+                    const mx = startNode.x + dx/2;
+                    const my = startNode.y + dy/2;
+
+                    // Control point for quadratic bezier (perpendicular offset)
+                    const perpAngle = angle - Math.PI/2;
+                    const cpx = mx + Math.cos(perpAngle) * curveOffset;
+                    const cpy = my + Math.sin(perpAngle) * curveOffset;
+
+                    // Node radii to avoid drawing inside nodes
+                    const nodeR = 50;
+                    
+                    // Calculate start and end on the curve (approximation via bounding box/radius)
+                    // For simplicity, we draw the full curve but start/end nodes will cover it
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(startNode.x, startNode.y);
+                    ctx.quadraticCurveTo(cpx, cpy, endNode.x, endNode.y);
+                    
+                    // Style the line
+                    ctx.strokeStyle = isForward ? startNode.color : endNode.color; // Color based on source
+                    ctx.lineWidth = 3;
+                    // Add animated dashes (pulses)
+                    ctx.setLineDash([15, 25]);
+                    ctx.lineDashOffset = isForward ? -time * 30 : time * 30;
+                    ctx.stroke();
+                    ctx.setLineDash([]); // Reset
+
+                    // Draw Arrow Head near the end node
+                    // We need the tangent at t=0.85 approx
+                    const t = 0.85;
+                    const arrowX = (1-t)*(1-t)*startNode.x + 2*(1-t)*t*cpx + t*t*endNode.x;
+                    const arrowY = (1-t)*(1-t)*startNode.y + 2*(1-t)*t*cpy + t*t*endNode.y;
+                    
+                    // Derivative for tangent angle
+                    const dtx = 2*(1-t)*(cpx - startNode.x) + 2*t*(endNode.x - cpx);
+                    const dty = 2*(1-t)*(cpy - startNode.y) + 2*t*(endNode.y - cpy);
+                    const arrowAngle = Math.atan2(dty, dtx);
+
+                    ctx.beginPath();
+                    ctx.moveTo(arrowX, arrowY);
+                    ctx.lineTo(arrowX - 12 * Math.cos(arrowAngle - Math.PI/6), arrowY - 12 * Math.sin(arrowAngle - Math.PI/6));
+                    ctx.lineTo(arrowX - 12 * Math.cos(arrowAngle + Math.PI/6), arrowY - 12 * Math.sin(arrowAngle + Math.PI/6));
+                    ctx.fillStyle = isForward ? startNode.color : endNode.color;
+                    ctx.fill();
+
+                    // --- Text Label on Curve ---
+                    // Calculate t=0.5 for text placement
+                    const txtX = 0.25*startNode.x + 0.5*cpx + 0.25*endNode.x;
+                    const txtY = 0.25*startNode.y + 0.5*cpy + 0.25*endNode.y;
+
+                    // Text Box Background
+                    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+                    ctx.shadowColor = 'rgba(0,0,0,0.1)';
+                    ctx.shadowBlur = 10;
+                    ctx.beginPath();
+                    ctx.roundRect(txtX - 90, txtY - 20, 180, 40, 6);
+                    ctx.fill();
+                    ctx.shadowBlur = 0; // reset
+                    
+                    ctx.strokeStyle = isForward ? startNode.color : endNode.color;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // Text
+                    ctx.fillStyle = colTextDark;
+                    ctx.font = 'bold 11px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    textLines.forEach((line, i) => {
+                        ctx.fillText(line, txtX, txtY - 7 + (i*14));
+                    });
+                }
+
+                const curveAmt = 60; // How much the arrows bow outwards
+
+                // 1. Sport <-> Media
+                drawCurvedArrow(nodeSport, nodeMedia, curveAmt, ["Liefert emotionales", "Produkt / Quoten"], true);
+                drawCurvedArrow(nodeMedia, nodeSport, curveAmt, ["Zahlt TV-Gelder &", "generiert Reichweite"], true);
+
+                // 2. Media <-> Economy
+                drawCurvedArrow(nodeMedia, nodeEcon, curveAmt, ["Bietet exklusive", "Werbeplattform"], true);
+                drawCurvedArrow(nodeEcon, nodeMedia, curveAmt, ["Zahlt für Sendezeit &", "Werbeanzeigen"], true);
+
+                // 3. Economy <-> Sport
+                drawCurvedArrow(nodeEcon, nodeSport, curveAmt, ["Zahlt Sponsoring &", "Finanzierung"], true);
+                drawCurvedArrow(nodeSport, nodeEcon, curveAmt, ["Bietet Image-Transfer", "und Markenbindung"], true);
+
+
+                // --- Helper: Draw Nodes ---
+                function drawCircleNode(node) {
+                    // Glow
+                    ctx.shadowColor = node.color;
+                    ctx.shadowBlur = 20 + Math.sin(time*3)*5;
+                    
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, 55, 0, Math.PI*2);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fill();
+                    
+                    ctx.shadowBlur = 0; // reset
+                    ctx.lineWidth = 4;
+                    ctx.strokeStyle = node.color;
+                    ctx.stroke();
+
+                    // Inner Icon/Text
+                    ctx.font = '30px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(node.icon, node.x, node.y - 10);
+                    
+                    ctx.fillStyle = colTextDark;
+                    ctx.font = 'bold 14px Outfit';
+                    ctx.fillText(node.label, node.x, node.y + 20);
+                }
+
+                drawCircleNode(nodeSport);
+                drawCircleNode(nodeMedia);
+                drawCircleNode(nodeEcon);
+
+                requestAnimationFrame(render);
+            }
+
+            render();
+        }
+
+        window.addEventListener('load', drawMagicTriangle);
+    </script>
+</body>
+</html>

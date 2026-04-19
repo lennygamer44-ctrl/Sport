@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.1.1 Grundlagen der Sportpsychologie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Colors: Elite Mental Coaching Theme */
+            --bg-color: #fafbfc;
+            --text-main: #2c3e50;
+            --text-light: #5a6c7d;
+            
+            --primary: #1e293b;
+            --accent-cog: #009688; /* Teal for Cognition */
+            --accent-mot: #ff9800; /* Amber for Motivation */
+            --accent-emo: #e91e63; /* Coral/Pink for Emotion */
+            
+            --gold-light: #fef9e7;
+            --gold-border: #d4af37;
+            --gold-text: #b8860b;
+            
+            --white: #ffffff;
+            --radius-soft: 16px;
+            --shadow-subtle: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            padding: 0;
+            font-size: 1.05rem;
+        }
+
+        /* --- Header Section --- */
+        header {
+            background-color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 6px;
+            background: linear-gradient(90deg, var(--accent-cog), var(--accent-mot), var(--accent-emo));
+        }
+
+        .topic-badge {
+            display: inline-block;
+            background: #f1f5f9;
+            color: var(--text-light);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .lead-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* --- 3 Dimensions Grid --- */
+        .dimensions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .dim-card {
+            background: var(--white);
+            border-radius: var(--radius-soft);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #f1f5f9;
+        }
+
+        .dim-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .dim-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+        }
+
+        .card-cog::before { background-color: var(--accent-cog); }
+        .card-mot::before { background-color: var(--accent-mot); }
+        .card-emo::before { background-color: var(--accent-emo); }
+
+        .dim-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .dim-card h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-cog h3 { color: var(--accent-cog); }
+        .card-mot h3 { color: var(--accent-mot); }
+        .card-emo h3 { color: var(--accent-emo); }
+
+        .dim-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* --- Mikro/Makro Split --- */
+        .impact-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 5rem;
+            background: var(--white);
+            border-radius: var(--radius-soft);
+            padding: 3rem;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .impact-col {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .impact-col h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .impact-col h3::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .impact-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Canvas Mindmap --- */
+        .canvas-container {
+            background: var(--white);
+            border-radius: var(--radius-soft);
+            padding: 2rem;
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 5rem;
+            text-align: center;
+        }
+
+        .canvas-container h3 {
+            font-family: 'Merriweather', serif;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .canvas-container p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            border-radius: 8px;
+            background-color: #fafbfc;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-premium {
+            background: var(--gold-light);
+            border: 2px solid var(--gold-border);
+            border-radius: var(--radius-soft);
+            padding: 3.5rem;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
+        }
+
+        .abitur-premium::before {
+            content: '★ ABITUR-TRANSFER & PRAXIS ★';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold-border);
+            color: var(--white);
+            padding: 0.6rem 2.5rem;
+            border-radius: 30px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.4);
+            white-space: nowrap;
+        }
+
+        .abitur-premium > p {
+            text-align: center;
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+            color: var(--gold-text);
+            font-weight: 600;
+        }
+
+        .transfer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .transfer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .transfer-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 3px solid var(--gold-border);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .transfer-card h4 {
+            color: var(--gold-text);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-family: 'Merriweather', serif;
+        }
+
+        .transfer-card p {
+            color: var(--text-main);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="topic-badge">Lernbereich 4.1.1</div>
+        <h1>Grundlagen der Sportpsychologie</h1>
+        <p class="lead-text">
+            Die Sportpsychologie ist eine interdisziplinäre und empirische Wissenschaft, die das menschliche Verhalten, Handeln und Erleben im sportlichen Kontext untersucht. Sie bildet die theoretische Basis, um zu verstehen, warum physisch gleichwertige Athleten unter Druck völlig unterschiedliche Leistungen erbringen.
+        </p>
+    </header>
+
+    <main>
+
+        <h2>4.1.1a Psychologische Aspekte: Kennen und Erläutern</h2>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem;">Die grundlegenden psychologischen Aspekte des Sports lassen sich in drei zentrale Dimensionen unterteilen:</p>
+
+        <div class="dimensions-grid">
+            
+            <article class="dim-card card-cog">
+                <div class="dim-icon">🧠</div>
+                <h3>Kognitive Prozesse</h3>
+                <p>Umfassen die Informationsaufnahme, -verarbeitung und -speicherung.</p>
+                <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light); font-size: 0.95rem;">
+                    <li><strong>Selektive Aufmerksamkeit:</strong> Fokus auf wettkampfrelevante Reize.</li>
+                    <li><strong>Antizipation:</strong> Vorwegnahme von Bewegungsabläufen (z. B. im Volleyball-Block).</li>
+                    <li><strong>Mental-taktische Handlungsplanung.</strong></li>
+                </ul>
+            </article>
+
+            <article class="dim-card card-mot">
+                <div class="dim-icon">🔥</div>
+                <h3>Motivationale Prozesse</h3>
+                <p>Bilden den energetischen Antrieb für sportliches Handeln.</p>
+                <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light); font-size: 0.95rem;">
+                    <li><strong>Zielgerichtete Steuerung:</strong> Bestimmt die Richtung, Intensität und Ausdauer der Anstrengung.</li>
+                    <li><strong>Motive:</strong> Die zugrundeliegenden, überdauernden Bedürfnisse des Athleten.</li>
+                </ul>
+            </article>
+
+            <article class="dim-card card-emo">
+                <div class="dim-icon">❤️</div>
+                <h3>Emotionale Prozesse</h3>
+                <p>Beziehen sich auf die affektive Begleitung des sportlichen Handelns.</p>
+                <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-light); font-size: 0.95rem;">
+                    <li><strong>Erregungsregulation:</strong> Steuerung des Arousals (Aktivierungsniveaus).</li>
+                    <li><strong>Wettkampfangst:</strong> Umgang mit State- (Zustands-) und Trait- (Eigenschafts-) Angst.</li>
+                    <li><strong>Erleben:</strong> Erreichen von Flow-Zuständen oder Frustrationstoleranz.</li>
+                </ul>
+            </article>
+
+        </div>
+
+
+        <h2>4.1.1b Bedeutung und Bewertung</h2>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem;">Die sportpsychologischen Erkenntnisse entfalten ihre Relevanz auf zwei Ebenen, die stets multiperspektivisch bewertet werden müssen.</p>
+
+        <div class="impact-section">
+            <div class="impact-col">
+                <h3>Bedeutung für den Einzelnen (Mikroebene)</h3>
+                <p>Auf individueller Ebene ist die Sportpsychologie entscheidend für die Leistungsoptimierung und die Persönlichkeitsentwicklung.</p>
+                
+                <div class="impact-box">
+                    <strong>Leistungsoptimierung:</strong> Durch psychologisches Training (z. B. Visualisierung, Selbstgesprächsregulation) lernen Athleten, ihre Erregung zu kontrollieren und ihre optimale Leistungsfähigkeit punktgenau abzurufen.
+                </div>
+                <div class="impact-box">
+                    <strong>Persönlichkeitsentwicklung:</strong> Die Bewältigung sportlicher Herausforderungen und Krisen fördert die Resilienz, die Frustrationstoleranz und die Selbstwirksamkeitserwartung. Dies wirkt sich ganzheitlich positiv auf die psychische Gesundheit (im Sinne der Salutogenese) aus.
+                </div>
+            </div>
+
+            <div class="impact-col">
+                <h3>Bedeutung für die Gesellschaft (Makroebene)</h3>
+                <p>Sport agiert als Spiegelbild gesellschaftlicher Prozesse. Psychologische Phänomene im Sport prägen das gesellschaftliche Zusammenleben.</p>
+                
+                <div class="impact-box">
+                    <strong>Sozialisationsfunktion:</strong> Der organisierte Sport vermittelt essenzielle Werte (Fairplay, Kooperation), fördert die Integration und bietet ein Übungsfeld für prosoziales Verhalten.
+                </div>
+                <div class="impact-box">
+                    <strong>Kritische Reflexion:</strong> Negative Entwicklungen – wie extreme Leistungserwartungen der Gesellschaft, die zu Burnout oder dysfunktionaler Aggression bei Athleten führen – müssen psychologisch fundiert hinterfragt und kritisch bewertet werden.
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Kausaldiagramm -->
+        <div class="canvas-container">
+            <h3>Kausaldiagramm: Sportpsychologie</h3>
+            <p>Strukturierte Übersicht der psychologischen Dimensionen und deren multiperspektivische Auswirkungen.</p>
+            <canvas id="mindmapCanvas" width="900" height="550"></canvas>
+        </div>
+
+        <!-- Abitur Transfer Premium Box -->
+        <section class="abitur-premium">
+            <p>
+                In Abiturklausuren auf erhöhtem Anforderungsniveau (eA) dient dieser Grundlagenbereich meist als methodischer Ausgangspunkt für komplexe, materialgestützte Analyseaufgaben.
+            </p>
+
+            <div class="transfer-content">
+                <div class="transfer-card">
+                    <h4>1. Multiperspektivische Bewertung</h4>
+                    <p>Wenn in einer Aufgabe ein Zitat oder ein Fallbeispiel zur psychischen Belastung im Spitzensport gegeben ist, reicht es nicht aus, nur die Minderung der sportlichen Leistung zu betrachten. Du musst die Bedeutung immer zweigeteilt bewerten:<br><br>
+                    <strong>Mikroebene:</strong> Was bedeutet dieser Druck für die Psyche des Einzelnen (z. B. Versagensangst, Verlust der intrinsischen Motivation, Burnout)?<br><br>
+                    <strong>Makroebene:</strong> Welche Rolle spielt die Gesellschaft (z. B. mediale Erwartungshaltung, Sponsorendruck, kommerzielle Zwänge)?</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>2. Basis für Diagnostik</h4>
+                    <p>Dieses Kapitel ist das Fundament für alle weiteren psychologischen Themen. Wenn ein Athlet im Wettkampf unerwartet versagt, wird in Transferaufgaben oft verlangt, dass du differenzierst:<br><br>
+                    <strong>Ursachenanalyse:</strong> Handelt es sich um ein kognitives Problem (Konzentrationsverlust, falsche Antizipation), ein motivationales Problem (fehlende Zielbindung) oder ein emotionales Problem (Übererregung, Angst)?<br><br>
+                    <strong>Fazit:</strong> Nur wer diese Ebenen sauber trennt, kann fundierte psychologische Interventionen (z. B. Mentales Training) ableiten.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // High DPI Canvas Setup
+        function setupCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            
+            return { ctx, w: rect.width, h: rect.height };
+        }
+
+        function drawMindmap() {
+            const { ctx, w, h } = setupCanvas('mindmapCanvas');
+            ctx.clearRect(0, 0, w, h);
+
+            // Styling variables
+            const colorRoot = '#1e293b';
+            const colorCog = '#009688';
+            const colorMot = '#ff9800';
+            const colorEmo = '#e91e63';
+            const colorImpact = '#5a6c7d';
+            
+            const fontTitle = 'bold 16px Merriweather, serif';
+            const fontSub = '13px Open Sans, sans-serif';
+
+            // Coordinates
+            const centerX = w / 2;
+            const row1Y = 50;  // Root
+            const row2Y = 180; // 3 Dimensions
+            const row3Y = 400; // 2 Impacts
+            
+            const col1X = w * 0.2;
+            const col2X = w * 0.5;
+            const col3X = w * 0.8;
+
+            const impactLeftX = w * 0.3;
+            const impactRightX = w * 0.7;
+
+            // Helper function to draw rounded rectangles with text
+            function drawNode(x, y, width, height, title, examples, bgColor, textColor = '#fff') {
+                // Shadow
+                ctx.shadowColor = 'rgba(0,0,0,0.1)';
+                ctx.shadowBlur = 15;
+                ctx.shadowOffsetY = 5;
+                
+                // Box
+                ctx.beginPath();
+                ctx.roundRect(x - width/2, y - height/2, width, height, 10);
+                ctx.fillStyle = bgColor;
+                ctx.fill();
+                
+                // Reset shadow for text
+                ctx.shadowColor = 'transparent';
+                
+                // Title
+                ctx.fillStyle = textColor;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.font = fontTitle;
+                
+                if (examples && examples.length > 0) {
+                    ctx.fillText(title, x, y - height/2 + 20);
+                    
+                    // Draw line separator
+                    ctx.beginPath();
+                    ctx.moveTo(x - width/2 + 20, y - height/2 + 35);
+                    ctx.lineTo(x + width/2 - 20, y - height/2 + 35);
+                    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // Examples
+                    ctx.font = fontSub;
+                    let textY = y - height/2 + 55;
+                    examples.forEach(ex => {
+                        ctx.fillText("• " + ex, x, textY);
+                        textY += 20;
+                    });
+                } else {
+                    ctx.fillText(title, x, y);
+                }
+            }
+
+            // Helper to draw connecting lines
+            function drawConnection(x1, y1, x2, y2, color) {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                
+                // Curved lines for organic feel
+                const cp1x = x1;
+                const cp1y = y1 + (y2 - y1) / 2;
+                const cp2x = x2;
+                const cp2y = y1 + (y2 - y1) / 2;
+                
+                ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x2, y2);
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Arrow head at destination
+                const angle = Math.atan2(y2 - cp2y, x2 - cp2x);
+                ctx.beginPath();
+                ctx.moveTo(x2, y2);
+                ctx.lineTo(x2 - 10 * Math.cos(angle - Math.PI/6), y2 - 10 * Math.sin(angle - Math.PI/6));
+                ctx.lineTo(x2 - 10 * Math.cos(angle + Math.PI/6), y2 - 10 * Math.sin(angle + Math.PI/6));
+                ctx.fillStyle = color;
+                ctx.fill();
+            }
+
+            // 1. Draw Connections First (so they render behind boxes)
+            // Root to Dimensions
+            drawConnection(centerX, row1Y + 30, col1X, row2Y - 60, '#cbd5e1');
+            drawConnection(centerX, row1Y + 30, col2X, row2Y - 60, '#cbd5e1');
+            drawConnection(centerX, row1Y + 30, col3X, row2Y - 60, '#cbd5e1');
+
+            // Dimensions to Impact Container
+            const impactBoxY = row3Y - 80;
+            drawConnection(col1X, row2Y + 60, centerX, impactBoxY, '#cbd5e1');
+            drawConnection(col2X, row2Y + 60, centerX, impactBoxY, '#cbd5e1');
+            drawConnection(col3X, row2Y + 60, centerX, impactBoxY, '#cbd5e1');
+
+            // Impact Hub to specific impacts
+            drawConnection(centerX, impactBoxY + 15, impactLeftX, row3Y - 50, '#cbd5e1');
+            drawConnection(centerX, impactBoxY + 15, impactRightX, row3Y - 50, '#cbd5e1');
+
+            // 2. Draw Nodes
+            // Level 1: Root
+            drawNode(centerX, row1Y, 320, 60, "Psychologische Aspekte des Sports", [], colorRoot);
+
+            // Level 2: Dimensions
+            drawNode(col1X, row2Y, 220, 120, "Kognition", ["Selektive Aufmerksamkeit", "Antizipation"], colorCog);
+            drawNode(col2X, row2Y, 220, 120, "Motivation", ["Zielgerichtete Steuerung", "Zugrundeliegende Motive"], colorMot);
+            drawNode(col3X, row2Y, 220, 120, "Emotion", ["Regulation von Erregung", "Umgang mit Wettkampfangst"], colorEmo);
+
+            // Level 3: Connecting Label
+            ctx.fillStyle = '#1e293b';
+            ctx.font = 'italic 14px Open Sans';
+            ctx.textAlign = 'center';
+            ctx.fillText("resultierende Bedeutung & Bewertung", centerX, impactBoxY);
+
+            // Level 4: Impacts
+            drawNode(impactLeftX, row3Y, 250, 100, "Das Individuum", ["Leistungsoptimierung", "Aufbau von Resilienz"], colorImpact);
+            drawNode(impactRightX, row3Y, 250, 100, "Die Gesellschaft", ["Wertevermittlung & Integration", "Umgang mit Leistungsdruck"], colorImpact);
+        }
+
+        // Initialize and handle resize
+        window.addEventListener('load', drawMindmap);
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(drawMindmap, 200);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.1.3b Auswirkungen und Bewertung: Emotionen und Aggressionen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Theme: Duality & Editorial */
+            --bg-base: #f8fafc;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            
+            /* Duality Colors */
+            --pos-color: #10b981; /* Emerald Green */
+            --pos-light: #ecfdf5;
+            --pos-border: #34d399;
+            
+            --neg-color: #f43f5e; /* Rose / Crimson */
+            --neg-light: #fff1f2;
+            --neg-border: #fb7185;
+
+            /* Neutral / structural */
+            --primary: #1e293b;
+            --surface: #ffffff;
+            
+            /* Abitur Premium Gold */
+            --gold-primary: #d97706;
+            --gold-bg: #fffbeb;
+            --gold-border: #f59e0b;
+            
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --shadow-float: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            padding-bottom: 5rem;
+            overflow-x: hidden;
+        }
+
+        /* --- Editorial Header --- */
+        header {
+            background-color: var(--surface);
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .header-tag {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.15;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--text-dark);
+            margin: 2rem auto 0;
+        }
+
+        .intro-text {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #475569;
+            font-weight: 300;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- Typography & Headings --- */
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin: 4rem 0 2rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Duality Layout: Positive / Negative Cards --- */
+        .duality-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (min-width: 768px) {
+            .duality-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .duality-card {
+            background: var(--surface);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #f1f5f9;
+        }
+
+        .card-positive {
+            background: var(--pos-light);
+            border-top: 6px solid var(--pos-color);
+        }
+
+        .card-negative {
+            background: var(--neg-light);
+            border-top: 6px solid var(--neg-color);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .card-positive .icon-circle { background: var(--pos-color); color: white; }
+        .card-negative .icon-circle { background: var(--neg-color); color: white; }
+
+        .duality-card h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .highlight-term {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* --- Intro Quote Style --- */
+        .yerkes-box {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--text-dark);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        /* --- Canvas Interactive Visual --- */
+        .canvas-section {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-float);
+            margin: 5rem 0;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .canvas-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .canvas-section p.subtitle {
+            color: #64748b;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            background: #ffffff;
+            border-radius: var(--radius-md);
+        }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-premium {
+            background: var(--gold-bg);
+            border: 2px solid var(--gold-border);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            margin-top: 6rem;
+            position: relative;
+            box-shadow: 0 20px 40px -10px rgba(217, 119, 6, 0.15);
+        }
+
+        .abitur-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold-primary);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            padding: 0.6rem 2.5rem;
+            border-radius: 30px;
+            letter-spacing: 1.5px;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3);
+            white-space: nowrap;
+        }
+
+        .abitur-intro {
+            text-align: center;
+            color: #92400e;
+            font-size: 1.15rem;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .transfer-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .transfer-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--gold-primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .transfer-card h4 {
+            font-family: 'Playfair Display', serif;
+            color: #92400e;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .transfer-card p {
+            color: var(--text-main);
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        .transfer-card strong {
+            color: var(--gold-primary);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="header-tag">Lernbereich 4.1.3b</span>
+        <h1>Auswirkungen und Bewertung: Emotionen und Aggressionen</h1>
+        <p class="intro-text">
+            Emotionen und das aus ihnen resultierende psychophysische Erregungsniveau (Arousal) sind im Sport niemals neutral. Sie entfalten stets eine multidimensionale Wirkung, die sowohl die individuelle sportliche Leistungsfähigkeit als auch das soziale Miteinander im Team oder Wettkampf drastisch beeinflussen kann. In der Sportpsychologie erfordert dies eine differenzierte, zweiseitige Bewertung.
+        </p>
+    </header>
+
+    <main>
+
+        <h2>1. Auswirkungen auf die sportliche Leistung (Individuum)</h2>
+        
+        <div class="yerkes-box">
+            Der Einfluss von Emotionen auf die Leistung ist nicht linear. Er wird in der Sportpsychologie klassischerweise durch das <strong>Yerkes-Dodson-Gesetz (Inverted-U-Hypothese)</strong> beschrieben, welches besagt, dass für jede sportliche Aufgabe ein spezifisches, optimales Erregungsniveau existiert.
+        </div>
+
+        <div class="duality-grid">
+            <!-- Positive Leistung -->
+            <article class="duality-card card-positive">
+                <div class="card-header">
+                    <div class="icon-circle">+</div>
+                    <h3>Positive Auswirkungen<br><span style="font-size: 0.9rem; font-weight: 400; color: #047857;">(Leistungsoptimierung)</span></h3>
+                </div>
+                <p>
+                    Ein moderater Anstieg emotionaler Erregung – sei es durch Freude, Antizipation oder auch kanalisierte, instrumentelle Aggression – mobilisiert den Organismus. Es kommt zu einer optimalen Aktivierung des Sympathikus: Die selektive Aufmerksamkeit wird fokussiert, die Muskelspannung steigt und Energiereserven werden bereitgestellt. 
+                </p>
+                <p style="margin-bottom: 0;">
+                    Gelingt es dem Athleten, diese Emotionen perfekt zu regulieren, kann dies zum <span class="highlight-term">"Flow-Erleben"</span> führen, einem Zustand maximaler, müheloser Leistungsbereitschaft.
+                </p>
+            </article>
+
+            <!-- Negative Leistung -->
+            <article class="duality-card card-negative">
+                <div class="card-header">
+                    <div class="icon-circle">-</div>
+                    <h3>Negative Auswirkungen<br><span style="font-size: 0.9rem; font-weight: 400; color: #be123c;">(Leistungsabfall)</span></h3>
+                </div>
+                <p>
+                    Überschreitet die Erregung das individuelle Optimum (Übererregung / Over-Arousal), beispielsweise durch extreme Frustration, Versagensangst oder unkontrollierte, feindselige Aggression, blockiert das System. Kognitiv führt dies zu einem "Tunnelblick", bei dem wichtige periphere Informationen nicht mehr wahrgenommen werden. 
+                </p>
+                <p style="margin-bottom: 0;">
+                    Motorisch kommt es zu einer Hypertonus (Überkrampfung) der Muskulatur. Dieser durch Emotionen ausgelöste extreme Leistungseinbruch wird als <span class="highlight-term">"Choking under pressure"</span> bezeichnet. Zudem resultiert blinde Wut oft in taktischen Fehlentscheidungen.
+                </p>
+            </article>
+        </div>
+
+
+        <h2>2. Auswirkungen auf das sportliche Miteinander (Team / Gesellschaft)</h2>
+        <p>Auf der Makroebene wirken Emotionen und Aggressionen entweder als sozialer Klebstoff oder als zerstörerische Kraft für das System Sport.</p>
+
+        <div class="duality-grid">
+            <!-- Positive Miteinander -->
+            <article class="duality-card card-positive">
+                <div class="card-header">
+                    <div class="icon-circle">+</div>
+                    <h3>Positive Auswirkungen<br><span style="font-size: 0.9rem; font-weight: 400; color: #047857;">(Kohäsion & Integration)</span></h3>
+                </div>
+                <p>
+                    Geteilte positive Emotionen (z. B. der gemeinsame Jubel nach einem hart erkämpften Sieg, das Meistern von Krisen) sind der stärkste Katalysator für die <span class="highlight-term">Gruppenkohäsion (Teamzusammenhalt)</span>. 
+                </p>
+                <p style="margin-bottom: 0;">
+                    Sie fördern prosoziales Verhalten, Empathie und Vertrauen innerhalb der Mannschaft. Dadurch erfüllt der Sport seine gesellschaftspolitische Funktion der Integration und Wertevermittlung.
+                </p>
+            </article>
+
+            <!-- Negative Miteinander -->
+            <article class="duality-card card-negative">
+                <div class="card-header">
+                    <div class="icon-circle">-</div>
+                    <h3>Negative Auswirkungen<br><span style="font-size: 0.9rem; font-weight: 400; color: #be123c;">(Destruktion & Toxizität)</span></h3>
+                </div>
+                <p>
+                    Dysfunktionale Emotionen, die sich in feindseliger Aggression entladen, zerstören den fundamentalen Fairplay-Gedanken des Sports. Ein aggressives Klima führt zu einer <span class="highlight-term">toxischen Teamdynamik</span> (z. B. Mobbing, Schuldzuweisungen). 
+                </p>
+                <p style="margin-bottom: 0;">
+                    Auf gesellschaftlicher Ebene hat unkontrolliertes, aggressives Verhalten von Spitzensportlern eine katastrophale Vorbildfunktion, die sich auf den Jugendsport und das Verhalten von Zuschauern (z. B. Hooliganismus) übertragen kann.
+                </p>
+            </article>
+        </div>
+
+
+        <!-- Canvas 2x2 Matrix -->
+        <section class="canvas-section">
+            <h3>Die 2x2 Bewertungs-Matrix</h3>
+            <p class="subtitle">Multidimensionale Verortung der sportpsychologischen Fachbegriffe hinsichtlich ihrer Auswirkung auf Leistung und Miteinander.</p>
+            <canvas id="matrixCanvas" width="800" height="600"></canvas>
+        </section>
+
+
+        <!-- Premium Abitur Transfer Box -->
+        <section class="abitur-premium">
+            <div class="abitur-badge">ABITUR-TRANSFER & PRAXIS (eA)</div>
+            <p class="abitur-intro">
+                In Abiturklausuren auf erhöhtem Anforderungsniveau wird bei diesem Thema fast immer eine "multiperspektivische Bewertung" anhand von Fallbeispielen oder materialgestützten Texten gefordert.
+            </p>
+
+            <div class="transfer-grid">
+                
+                <div class="transfer-card">
+                    <h4>1. Bewertung von Aussagen</h4>
+                    <p>Wenn du in einer Klausur mit der Aussage konfrontiert wirst <em>"Aggression gehört zum Spitzensport dazu"</em>, darfst du nicht eindimensional antworten. Du musst differenzieren:<br><br>
+                    <strong>Transfer:</strong> Instrumentelle Aggression (taktisches Foul) kann positiv für die Leistung/das Ergebnis sein, hat aber gleichzeitig einen negativen Einfluss auf das Miteinander (Regelbruch, Unfairness). Das Abwägen dieser Pole ist die geforderte Transferleistung.</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>2. Anwendung des Yerkes-Dodson-Gesetzes</h4>
+                    <p>Ein klassisches Szenario ist der Biathlet, der nach einem Fehlschuss wütend wird und anschließend alle weiteren Scheiben verfehlt. Du musst biologisch-psychologisch argumentieren:<br><br>
+                    <strong>Transfer:</strong> Die Frustration führt zu unkontrolliertem <strong>Over-Arousal</strong>. Da Schießen eine extrem feinmotorische Aufgabe ist, liegt das optimale Erregungsniveau sehr niedrig. Die Wut verschiebt das Arousal weit über das Optimum hinaus, was die intramuskuläre Koordination zerstört <strong>("Choking under pressure")</strong>.</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>3. Gesellschaftliche Reflexion</h4>
+                    <p>Im Bereich der materialgestützten Textaufgaben wird oft die gesellschaftliche Vorbildfunktion thematisiert.<br><br>
+                    <strong>Transfer:</strong> Du musst argumentieren können, inwiefern emotionale Entgleisungen von Profis im Fernsehen negative Lerneffekte (Lernen am Modell / Bandura) bei Jugendlichen im Breitensport auslösen und toxische Umfelder legitimieren.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Canvas Setup
+        function setupCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 800;
+            const logicalH = 600;
+            
+            canvas.width = logicalW * dpr;
+            canvas.height = logicalH * dpr;
+            ctx.scale(dpr, dpr);
+            
+            return { ctx, w: logicalW, h: logicalH };
+        }
+
+        function drawAnimatedMatrix() {
+            const { ctx, w, h } = setupCanvas('matrixCanvas');
+            
+            // Margins and Grid definition
+            const margin = 60;
+            const gridW = w - (margin * 2);
+            const gridH = h - (margin * 2);
+            const cx = w / 2;
+            const cy = h / 2;
+
+            // Colors
+            const colPos = 'rgba(16, 185, 129, 0.15)'; // Emerald
+            const colNeg = 'rgba(244, 63, 94, 0.15)';  // Rose
+            const textDark = '#1e293b';
+            const lineCol = '#94a3b8';
+
+            let progress = 0;
+            const duration = 1500; // ms
+            const startTime = performance.now();
+
+            function render(currentTime) {
+                const elapsed = currentTime - startTime;
+                progress = Math.min(elapsed / duration, 1);
+                
+                // Ease out cubic
+                const ease = 1 - Math.pow(1 - progress, 3);
+
+                ctx.clearRect(0, 0, w, h);
+
+                // --- 1. Draw Quadrant Backgrounds (growing outwards) ---
+                const quadW = (gridW / 2) * ease;
+                const quadH = (gridH / 2) * ease;
+
+                // Top Left (Pos/Leistung)
+                ctx.fillStyle = colPos;
+                ctx.fillRect(cx - quadW, cy - quadH, quadW, quadH);
+                
+                // Top Right (Pos/Miteinander)
+                ctx.fillStyle = colPos;
+                ctx.fillRect(cx, cy - quadH, quadW, quadH);
+
+                // Bottom Left (Neg/Leistung)
+                ctx.fillStyle = colNeg;
+                ctx.fillRect(cx - quadW, cy, quadW, quadH);
+
+                // Bottom Right (Neg/Miteinander)
+                ctx.fillStyle = colNeg;
+                ctx.fillRect(cx, cy, quadW, quadH);
+
+                // --- 2. Draw Axes ---
+                ctx.strokeStyle = lineCol;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                // X-Axis
+                ctx.moveTo(cx - (gridW/2)*ease, cy);
+                ctx.lineTo(cx + (gridW/2)*ease, cy);
+                // Y-Axis
+                ctx.moveTo(cx, cy - (gridH/2)*ease);
+                ctx.lineTo(cx, cy + (gridH/2)*ease);
+                ctx.stroke();
+
+                // --- 3. Draw Axis Labels ---
+                if (progress > 0.5) {
+                    const alpha = (progress - 0.5) * 2;
+                    ctx.globalAlpha = alpha;
+                    
+                    ctx.fillStyle = textDark;
+                    ctx.font = 'bold 16px Inter';
+                    ctx.textAlign = 'center';
+                    
+                    // Top (Positive)
+                    ctx.fillStyle = '#047857';
+                    ctx.fillText("POSITIVE AUSWIRKUNGEN (+)", cx, margin - 20);
+                    
+                    // Bottom (Negative)
+                    ctx.fillStyle = '#be123c';
+                    ctx.fillText("NEGATIVE AUSWIRKUNGEN (-)", cx, h - margin + 30);
+                    
+                    // Left (Leistung)
+                    ctx.fillStyle = textDark;
+                    ctx.save();
+                    ctx.translate(margin - 20, cy);
+                    ctx.rotate(-Math.PI/2);
+                    ctx.fillText("LEISTUNG (Individuum)", 0, 0);
+                    ctx.restore();
+
+                    // Right (Miteinander)
+                    ctx.save();
+                    ctx.translate(w - margin + 20, cy);
+                    ctx.rotate(Math.PI/2);
+                    ctx.fillText("MITEINANDER (Gesellschaft)", 0, 0);
+                    ctx.restore();
+
+                    ctx.globalAlpha = 1.0;
+                }
+
+                // --- 4. Draw Content inside Quadrants ---
+                if (progress > 0.8) {
+                    const alpha = (progress - 0.8) * 5;
+                    ctx.globalAlpha = alpha;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    function drawTextList(x, y, title, items, color) {
+                        ctx.fillStyle = color;
+                        ctx.font = 'bold 18px Playfair Display';
+                        ctx.fillText(title, x, y - 40);
+                        
+                        ctx.fillStyle = '#475569';
+                        ctx.font = '14px Inter';
+                        items.forEach((item, index) => {
+                            ctx.fillText("• " + item, x, y + (index * 25) - 5);
+                        });
+                    }
+
+                    // Q1: Top Left
+                    drawTextList(cx - quadW/2, cy - quadH/2, "Leistungsoptimierung", 
+                        ["Flow-Erleben", "Yerkes-Dodson-Optimum", "Sympathikus-Aktivierung", "Kanalisierte Energie"], 
+                        '#047857');
+
+                    // Q2: Top Right
+                    drawTextList(cx + quadW/2, cy - quadH/2, "Kohäsion & Integration", 
+                        ["Teamkohäsion", "Prosoziales Verhalten", "Wertevermittlung", "Gemeinsamer Jubel"], 
+                        '#047857');
+
+                    // Q3: Bottom Left
+                    drawTextList(cx - quadW/2, cy + quadH/2, "Leistungsabfall", 
+                        ["Choking under pressure", "Tunnelblick", "Motorischer Hypertonus", "Over-Arousal"], 
+                        '#be123c');
+
+                    // Q4: Bottom Right
+                    drawTextList(cx + quadW/2, cy + quadH/2, "Destruktion & Toxizität", 
+                        ["Toxisches Klima (Mobbing)", "Feindselige Aggression", "Verletzungsrisiko", "Hooliganismus"], 
+                        '#be123c');
+
+                    ctx.globalAlpha = 1.0;
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(render);
+                }
+            }
+
+            requestAnimationFrame(render);
+        }
+
+        window.addEventListener('load', drawAnimatedMatrix);
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.2.3c Umwelt und Sport: Nutzungskonflikte und Nachhaltigkeit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Space+Grotesk:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Theme: Eco-Active & Natural Terrain */
+            --bg-earth: #f4f4f0;
+            --text-main: #292524;
+            --text-muted: #57534e;
+            
+            /* Eco Colors */
+            --forest-green: #14532d;
+            --forest-light: #dcfce7;
+            --leaf-green: #22c55e;
+            
+            --river-blue: #0369a1;
+            --river-light: #e0f2fe;
+            
+            --wood-brown: #78350f;
+            --wood-light: #fef3c7;
+            
+            --conflict-orange: #ea580c;
+            --conflict-light: #ffedd5;
+
+            /* Abitur Premium Box */
+            --abi-dark: #1c1917;
+            --abi-gold: #eab308;
+
+            --radius-leaf: 24px 4px 24px 4px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            
+            --shadow-soft: 0 4px 20px rgba(0,0,0,0.04);
+            --shadow-hover: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg-earth);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            padding-bottom: 5rem;
+            overflow-x: hidden;
+        }
+
+        /* --- Organic Header --- */
+        header {
+            background: linear-gradient(135deg, var(--forest-green) 0%, #064e3b 100%);
+            color: #ffffff;
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            margin-bottom: 4rem;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(20, 83, 45, 0.2);
+            overflow: hidden;
+        }
+
+        /* Subtle topo pattern in header */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 1px, transparent 1px),
+                              radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            color: #ecfdf5;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro {
+            font-size: 1.2rem;
+            color: #a7f3d0;
+            font-weight: 400;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Headings --- */
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--forest-green);
+            margin: 4rem 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        h2::before {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--leaf-green);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Concept Box --- */
+        .concept-box {
+            background: #ffffff;
+            border-left: 6px solid var(--conflict-orange);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+        }
+
+        .concept-box strong {
+            color: var(--conflict-orange);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        /* --- Perspectives Grid --- */
+        .perspectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .persp-card {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: var(--radius-leaf);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .persp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .persp-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        /* Card specific styling */
+        .card-sport { border-top: 4px solid var(--river-blue); }
+        .card-sport h3 { color: var(--river-blue); }
+        
+        .card-eco { border-top: 4px solid var(--forest-green); }
+        .card-eco h3 { color: var(--forest-green); }
+        
+        .card-econ { border-top: 4px solid var(--wood-brown); }
+        .card-econ h3 { color: var(--wood-brown); }
+
+        .issue-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .issue-list li {
+            background: var(--conflict-light);
+            color: #9a3412;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            border-left: 3px solid var(--conflict-orange);
+        }
+
+        .issue-list li strong {
+            display: block;
+            color: #7c2d12;
+            margin-bottom: 0.2rem;
+        }
+
+        /* --- Canvas Wrapper --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            margin: 5rem 0;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            border: 1px solid #e7e5e4;
+        }
+
+        .canvas-section h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            color: var(--forest-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            background: #fdfbf7;
+            border-radius: var(--radius-md);
+            border: 1px dashed #d6d3d1;
+        }
+
+        /* --- Solutions Section --- */
+        .solutions-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .solution-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-soft);
+            border-left: 4px solid var(--leaf-green);
+        }
+
+        .sol-icon {
+            font-size: 2rem;
+            background: var(--forest-light);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .solution-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            color: var(--forest-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .solution-card p { margin-bottom: 0; font-size: 1rem; }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-premium {
+            background: var(--abi-dark);
+            color: #f5f5f4;
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            margin-top: 6rem;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-bottom: 6px solid var(--abi-gold);
+        }
+
+        .abitur-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--abi-gold);
+            color: #000000;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0.6rem 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4);
+            white-space: nowrap;
+        }
+
+        .abitur-intro {
+            text-align: center;
+            color: #a8a29e;
+            font-size: 1.15rem;
+            margin-bottom: 3rem;
+        }
+
+        .transfer-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .transfer-item {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--abi-gold);
+        }
+
+        .transfer-item h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--abi-gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .transfer-item p {
+            color: #d6d3d1;
+            margin-bottom: 0;
+        }
+
+        .transfer-item strong {
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .solution-card { flex-direction: column; align-items: center; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <span class="tag">Lernbereich 4.2.3c</span>
+            <h1>Umwelt und Sport: Nutzungskonflikte und Nachhaltigkeit</h1>
+            <p class="intro">
+                Der Sport und insbesondere der rasante Anstieg von Outdoor- und Trendsportarten stehen in einem hochgradig ambivalenten Verhältnis zur natürlichen Umwelt. Ein intaktes Ökosystem ist unsere sportliche Grundlage – und zugleich oft unser erstes Opfer.
+            </p>
+        </div>
+    </header>
+
+    <main>
+
+        <h2>Das Wesen von Nutzungskonflikten</h2>
+        <div class="concept-box">
+            Ein <strong>Nutzungskonflikt</strong> im Kontext von Umwelt und Sport entsteht immer dann, wenn die legitimen Interessen der Sportausübung direkt mit dem Schutzbedürfnis sensibler Ökosysteme oder den Interessen anderer Nutzergruppen kollidieren. 
+            <br><br>
+            <em>Klassische Beispiele:</em> Mountainbiker vs. Wanderer um Wegenutzungsrechte, oder Skigebietsbetreiber vs. Naturschützer bei Pisten- und Schneekanonen-Ausbau. Um diese Konflikte auf Abiturniveau zu analysieren, müssen sie zwingend aus verschiedenen, teils antagonistischen Perspektiven beleuchtet werden:
+        </div>
+
+        <div class="perspectives-grid">
+            <!-- Sportler -->
+            <article class="persp-card card-sport">
+                <h3>🧗 Die Perspektive der Sportler <span style="font-size:0.9rem; font-weight:400; color:var(--text-muted);">(Sozio-kulturell)</span></h3>
+                <p>Der Individualsportler sucht in der Natur Ausgleich, Erholung (Salutogenese) oder den "Kick" (Sensation Seeking). Die Ausübung in freier Natur wird oft als Ausdruck persönlicher Freiheit und Grundrecht auf Erholung verstanden. Restriktionen (z.B. Betretungsverbote) gelten als massive Einschränkung.</p>
+            </article>
+
+            <!-- Ökologie -->
+            <article class="persp-card card-eco">
+                <h3>🌲 Die Perspektive der Umwelt <span style="font-size:0.9rem; font-weight:400; color:var(--text-muted);">(Ökologisch)</span></h3>
+                <p>Aus biologischer Sicht stellt die sportliche Nutzung eine massive Störung dar. Problematisch sind insbesondere:</p>
+                <ul class="issue-list">
+                    <li><strong>Strukturelle Eingriffe:</strong> Bodenverdichtung, Erosion durch Stollenreifen, Zerstörung der Vegetationsdecke.</li>
+                    <li><strong>Störung der Fauna:</strong> Aufschrecken von Wildtieren (z.B. durch Skitourengeher im Winter), was zu tödlicher Erschöpfung führt.</li>
+                    <li><strong>Ressourcen & Emissionen:</strong> Wasser-/Energieverbrauch und hoher CO₂-Fußabdruck durch die individuelle Anreise.</li>
+                </ul>
+            </article>
+
+            <!-- Wirtschaft -->
+            <article class="persp-card card-econ">
+                <h3>🚠 Die Perspektive der Wirtschaft <span style="font-size:0.9rem; font-weight:400; color:var(--text-muted);">(Ökonomisch)</span></h3>
+                <p>Ganze Regionen (z. B. der Alpenraum) sind existenziell vom Sporttourismus abhängig. Die lokale Wirtschaft (Hotellerie, Seilbahnen) pocht auf den Ausbau der Infrastruktur zur Sicherung von Arbeitsplätzen. Umweltschutzauflagen gelten oft als Investitionshindernis.</p>
+            </article>
+        </div>
+
+
+        <!-- Interactive Canvas: Venn Diagram -->
+        <section class="canvas-section">
+            <h3>Modell der Nachhaltigkeit im Natursport</h3>
+            <p class="subtitle">Venn-Diagramm: Reibungspunkte der 3 Perspektiven und die Synthese im Sanften Tourismus.</p>
+            <canvas id="vennCanvas" width="800" height="650"></canvas>
+        </section>
+
+
+        <h2>Wege zur Nachhaltigkeit im Sport</h2>
+        <p>Um die Zerstörung der eigenen sportlichen Grundlage zu verhindern, bedarf es nachhaltiger Konzepte, die einen Kompromiss zwischen diesen drei Säulen (Ökologie, Ökonomie, Soziales) anstreben. In der Praxis äußert sich dies im Konzept des <strong>"Sanften Tourismus"</strong> (Sportökologie):</p>
+
+        <div class="solutions-grid">
+            <article class="solution-card">
+                <div class="sol-icon">🗺️</div>
+                <div>
+                    <h4>Raumordnerische Lenkungskonzepte</h4>
+                    <p>Die strikte Trennung in "Ruhezonen" (absolute Naturschutzgebiete ohne sportliche Nutzung) und "Intensivnutzungszonen" (z. B. ausgewiesene Bikeparks oder Pisten), um den Nutzungsdruck gezielt zu steuern (Besucherlenkung).</p>
+                </div>
+            </article>
+
+            <article class="solution-card">
+                <div class="sol-icon">🧠</div>
+                <div>
+                    <h4>Verhaltenskodizes und Bildung</h4>
+                    <p>Die Sensibilisierung der Athleten (z. B. über Alpenvereine) für naturverträgliches Verhalten (z. B. das strikte Einhalten von Wegegeboten und das Respektieren von Wildruhezonen).</p>
+                </div>
+            </article>
+
+            <article class="solution-card">
+                <div class="sol-icon">🚄</div>
+                <div>
+                    <h4>Technologische & infrastrukturelle Anpassungen</h4>
+                    <p>Die Förderung des öffentlichen Nahverkehrs bei der Anreise. Da die individuelle Anreise-Mobilität oft über 70 % der sportbezogenen Emissionen verursacht, liegt hier der größte Hebel für CO₂-Reduktion.</p>
+                </div>
+            </article>
+        </div>
+
+
+        <!-- Premium Abitur Transfer Box -->
+        <section class="abitur-premium">
+            <div class="abitur-badge">ABITUR-TRANSFER & PRAXIS (eA)</div>
+            <p class="abitur-intro">
+                In Abiturklausuren auf erhöhtem Anforderungsniveau wird bei diesem Thema ein hohes Maß an dialektischer Argumentationsfähigkeit gefordert. Die Qualität der Argumente schlägt die Quantität.
+            </p>
+
+            <div class="transfer-grid">
+                
+                <div class="transfer-card">
+                    <h4>1. Multiperspektivische Analyse</h4>
+                    <p>Eine typische Aufgabe präsentiert einen Text über ein umstrittenes Projekt (z. B. Skigebiets-Erweiterung). Die reine Zusammenfassung reicht nicht!<br><br>
+                    <strong>Transfer:</strong> Strukturiere die Argumente: Wer spricht hier? Argumentiert der Autor aus Sicht der Wirtschaft oder des Ökologen? Decke auf, welche Perspektive im Text möglicherweise <em>absichtlich verschwiegen</em> wird.</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>2. Dialektische Erörterung</h4>
+                    <p>Bei der Aufgabe <em>"Bewerten Sie das geplante Betretungsverbot für Mountainbiker"</em> wird methodischer Aufbau erwartet.<br><br>
+                    <strong>Transfer:</strong> Kontrastiere ökologische Notwendigkeiten (Erosionsvermeidung) mit sozio-kulturellen Rechten (Erholung, Salutogenese). Ein exzellentes Fazit formuliert einen lösungsorientierten Kompromiss (z. B. räumliches Lenkungskonzept statt pauschales Verbot).</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>3. Vernetzung mit Lernbereich 3.x</h4>
+                    <p>Brillante Abiturleistungen vernetzen dieses Thema mit der Sportbiologie.<br><br>
+                    <strong>Transfer:</strong> Analysiere bei der "Alpenüberquerung" nicht nur die Energiebereitstellung der Athletin, sondern hinterfrage im gleichen Atemzug gesellschaftspolitisch kritisch, welchen ökologischen Fußabdruck (Bodenverdichtung, Störung von Wildtieren) dieses Massenphänomen im Alpenraum hinterlässt.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // High DPI Canvas Setup
+        function setupCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 800;
+            const logicalH = 650;
+            
+            canvas.width = logicalW * dpr;
+            canvas.height = logicalH * dpr;
+            ctx.scale(dpr, dpr);
+            
+            return { ctx, w: logicalW, h: logicalH };
+        }
+
+        // Draw Venn Diagram
+        function drawVennDiagram() {
+            const { ctx, w, h } = setupCanvas('vennCanvas');
+            
+            // Base coordinates for the 3 circles (forming an equilateral triangle)
+            const cx = w / 2;
+            const cy = h / 2 + 20;
+            const r = 160; // Radius of each circle
+            const offset = 90; // Distance from center
+
+            // Target positions for the circles
+            const ecoPosTarget = { x: cx - offset, y: cy - offset }; // Top Left: Ecology
+            const econPosTarget = { x: cx + offset, y: cy - offset }; // Top Right: Economy
+            const socPosTarget = { x: cx, y: cy + offset * 1.1 }; // Bottom: Social/Sport
+
+            // Colors (Using rgba for natural blending)
+            const colorEco = 'rgba(20, 83, 45, 0.6)';    // Forest Green
+            const colorEcon = 'rgba(120, 53, 15, 0.6)';  // Wood Brown
+            const colorSoc = 'rgba(3, 105, 161, 0.6)';   // River Blue
+            const colorText = '#292524';
+            const colorConflict = '#ea580c'; // Orange for conflicts
+
+            let animationProgress = 0;
+            const duration = 2000; // ms
+            const startTime = performance.now();
+
+            function render(currentTime) {
+                const elapsed = currentTime - startTime;
+                animationProgress = Math.min(elapsed / duration, 1);
+                
+                // Ease out elastic for a nice pop-in effect
+                const ease = animationProgress === 1 ? 1 : 1 - Math.pow(2, -10 * animationProgress);
+
+                ctx.clearRect(0, 0, w, h);
+
+                // Use Multiply for Venn color blending
+                ctx.globalCompositeOperation = 'multiply';
+
+                // Calculate current positions (sliding in from outside)
+                const ecoPos = {
+                    x: cx - (w/2) * (1-ease) - offset * ease,
+                    y: cy - (h/2) * (1-ease) - offset * ease
+                };
+                const econPos = {
+                    x: cx + (w/2) * (1-ease) + offset * ease,
+                    y: cy - (h/2) * (1-ease) - offset * ease
+                };
+                const socPos = {
+                    x: cx,
+                    y: cy + (h/2) * (1-ease) + offset * 1.1 * ease
+                };
+
+                // Draw Circles
+                function drawCircle(pos, color) {
+                    ctx.beginPath();
+                    ctx.arc(pos.x, pos.y, r, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                }
+
+                drawCircle(ecoPos, colorEco);
+                drawCircle(econPos, colorEcon);
+                drawCircle(socPos, colorSoc);
+
+                // Reset composite operation for text
+                ctx.globalCompositeOperation = 'source-over';
+
+                // Only draw text when circles have mostly settled
+                if (animationProgress > 0.7) {
+                    const textAlpha = (animationProgress - 0.7) * 3.33;
+                    ctx.globalAlpha = textAlpha;
+
+                    // Helper to draw text boxes
+                    function drawTextBox(x, y, title, sub, isConflict=false, isCenter=false) {
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        
+                        if (isCenter) {
+                            ctx.fillStyle = '#ffffff';
+                            ctx.font = 'bold 18px "Space Grotesk"';
+                            ctx.shadowColor = 'rgba(0,0,0,0.8)';
+                            ctx.shadowBlur = 10;
+                            ctx.fillText(title, x, y - 10);
+                            ctx.font = 'bold 14px "DM Sans"';
+                            ctx.fillText(sub, x, y + 10);
+                            ctx.shadowBlur = 0; // reset
+                            return;
+                        }
+
+                        if (isConflict) {
+                            ctx.fillStyle = '#ffffff';
+                            ctx.font = 'bold 12px "Space Grotesk"';
+                            ctx.shadowColor = 'rgba(0,0,0,0.8)';
+                            ctx.shadowBlur = 4;
+                            ctx.fillText(title, x, y - 8);
+                            ctx.font = 'italic 11px "DM Sans"';
+                            ctx.fillText(sub, x, y + 8);
+                            ctx.shadowBlur = 0; // reset
+                        } else {
+                            // Main Category Labels (Outer edges)
+                            ctx.fillStyle = colorText;
+                            ctx.font = 'bold 20px "Space Grotesk"';
+                            ctx.fillText(title, x, y - 10);
+                            ctx.font = '14px "DM Sans"';
+                            ctx.fillText(sub, x, y + 15);
+                        }
+                    }
+
+                    // 1. Main Category Texts (placed towards the outer edge of circles)
+                    drawTextBox(ecoPosTarget.x - 50, ecoPosTarget.y - 50, "ÖKOLOGIE", "(Naturschutz, Emissionen)");
+                    drawTextBox(econPosTarget.x + 50, econPosTarget.y - 50, "ÖKONOMIE", "(Tourismus, Infrastruktur)");
+                    drawTextBox(socPosTarget.x, socPosTarget.y + 80, "SOZIALES/SPORT", "(Erholung, Gesundheit)");
+
+                    // 2. Intersection Texts (Conflicts)
+                    // Top (Eco x Econ)
+                    drawTextBox(cx, cy - offset - 40, "Nutzungskonflikt", "Pistenausbau vs. Waldschutz", true);
+                    
+                    // Left (Eco x Soc)
+                    drawTextBox(cx - offset - 10, cy + 30, "Nutzungskonflikt", "Wegegebote vs. Freie Fahrt", true);
+
+                    // Right (Econ x Soc)
+                    drawTextBox(cx + offset + 10, cy + 30, "Nutzungskonflikt", "Kommerz vs. Zugang für Alle", true);
+
+                    // 3. Center Target (Sustainability)
+                    drawTextBox(cx, cy - 10, "SANFTER TOURISMUS", "Nachhaltigkeit", false, true);
+
+                    ctx.globalAlpha = 1.0;
+                }
+
+                if (animationProgress < 1) {
+                    requestAnimationFrame(render);
+                }
+            }
+
+            requestAnimationFrame(render);
+        }
+
+        window.addEventListener('load', drawVennDiagram);
+    </script>
+</body>
+</html>

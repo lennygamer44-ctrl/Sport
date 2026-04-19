@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.1.2a Begriffliche Abgrenzung: Motiv vs. Motivation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Theme: Academic & Focus */
+            --bg-color: #f8fafc;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            
+            /* Indigo for stable, theoretical constructs */
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --primary-light: #e0e7ff;
+            
+            /* Amber for dynamic energy/motivation */
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --accent-light: #fef3c7;
+            
+            /* Gold for Abitur */
+            --gold: #eab308;
+            --gold-gradient: linear-gradient(135deg, #fef08a 0%, #eab308 100%);
+            
+            --white: #ffffff;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 0;
+            font-size: 1.05rem;
+        }
+
+        /* --- Header --- */
+        header {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 5rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--bg-color);
+            transform: skewY(-2deg);
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .intro {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            font-weight: 300;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 2rem 6rem;
+        }
+
+        /* --- Content Sections --- */
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            margin: 4rem 0 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Flex Layout for Characteristics --- */
+        .characteristics {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .char-item {
+            background: var(--white);
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .char-icon {
+            background: var(--primary-light);
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .char-item strong {
+            display: block;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--primary-dark);
+            font-size: 1.15rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Highlight Box for Motivation */
+        .motivation-box {
+            background: var(--white);
+            border: 2px solid var(--accent);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .motivation-box::before {
+            content: '⚡ DYNAMISCH';
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.3rem 1.2rem;
+            border-radius: 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        /* --- Canvas Infographic --- */
+        .infographic-wrapper {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .infographic-wrapper h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .infographic-wrapper p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            background: #ffffff;
+            border-radius: var(--radius-md);
+        }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-box {
+            background: var(--white);
+            border: 2px solid var(--gold);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem;
+            margin-top: 5rem;
+            position: relative;
+            box-shadow: 0 20px 40px -10px rgba(234, 179, 8, 0.15);
+        }
+
+        .abitur-header {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold-gradient);
+            color: #451a03;
+            padding: 0.8rem 2.5rem;
+            border-radius: 30px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .abitur-intro {
+            text-align: center;
+            font-size: 1.15rem;
+            margin-bottom: 3rem;
+            color: #713f12;
+            font-weight: 600;
+        }
+
+        .transfer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .transfer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .transfer-card {
+            background: #fffbeb;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--gold);
+        }
+
+        .transfer-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: #854d0e;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .transfer-card p {
+            color: var(--text-main);
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="badge">Lernbereich 4.1.2a</div>
+            <h1>Begriffliche Abgrenzung: Motiv vs. Motivation</h1>
+            <p class="intro">
+                Um menschliches Verhalten im Sport wissenschaftlich fundiert analysieren zu können, ist eine trennscharfe Abgrenzung der grundlegenden Antriebskräfte unerlässlich. In der Sportpsychologie werden die Termini „Motiv“ und „Motivation“ streng voneinander unterschieden, da sie völlig unterschiedliche Ebenen der menschlichen Psyche beschreiben.
+            </p>
+        </div>
+    </header>
+
+    <main>
+
+        <h2 class="section-title">Das Motiv: Die latente Verhaltensbereitschaft</h2>
+        <p>
+            Ein Motiv ist <strong>kein direkt von außen beobachtbares Phänomen</strong>, sondern ein <em>hypothetisches Konstrukt</em> der Psychologie. Es definiert sich als die grundlegende Bereitschaft eines Individuums, sich in einer gegebenen Situation in einer bestimmten Art und Weise zielgerichtet zu verhalten. 
+        </p>
+        <p>Diese Bereitschaft weist drei zentrale, definitorische Merkmale auf:</p>
+
+        <div class="characteristics">
+            <div class="char-item">
+                <div class="char-icon">1</div>
+                <div>
+                    <strong>Situationsüberdauernd (generell)</strong>
+                    Das Motiv ist nicht an einen einzigen, spezifischen Moment gebunden, sondern zeigt sich in einer Vielzahl ähnlicher Situationen.
+                </div>
+            </div>
+            <div class="char-item">
+                <div class="char-icon">2</div>
+                <div>
+                    <strong>Zeitlich überdauernd (zeitstabil)</strong>
+                    Es handelt sich um ein relativ konstantes Merkmal, das sich über lange Zeiträume in der Biografie eines Menschen kaum verändert.
+                </div>
+            </div>
+            <div class="char-item">
+                <div class="char-icon">3</div>
+                <div>
+                    <strong>Persönlichkeitsspezifisch (individuell)</strong>
+                    Motive sind feste Bestandteile der individuellen Persönlichkeitsstruktur eines Athleten (z. B. ein stark ausgeprägtes Leistungsmotiv oder ein hohes Anschlussmotiv).
+                </div>
+            </div>
+        </div>
+
+
+        <h2 class="section-title">Die Motivation: Der aktuelle Zustand</h2>
+        
+        <div class="motivation-box">
+            <p style="font-size: 1.15rem;">
+                Im absoluten Gegensatz zum zeitstabilen Motiv steht die Motivation. Sie ist ein <strong>dynamischer, flüchtiger und vor allem situationsspezifischer Zustand</strong>. Motivation definiert sich exakt als das Ergebnis des Prozesses der Motivanregung.
+            </p>
+            <p style="margin-bottom: 0;">
+                Sie entsteht erst und exakt dann, wenn eine Person mit ihrem spezifischen, latenten Motiv auf eine konkrete Situation trifft, die einen passgenauen <strong>Aufforderungscharakter (Anreiz)</strong> besitzt. Die Motivation ist somit die unmittelbare Vorstufe zur sichtbaren, zielgerichteten Handlung (z. B. dem konkreten Beginn eines harten Trainings).
+            </p>
+        </div>
+
+        <!-- Canvas Infographic -->
+        <div class="infographic-wrapper">
+            <h3>Der Prozess der Motivanregung</h3>
+            <p class="subtitle">Gegenüberstellung und das Zusammenspiel von Motiv, Anreiz und Motivation.</p>
+            <canvas id="motivationCanvas" width="900" height="450"></canvas>
+        </div>
+
+
+        <!-- Abitur Transfer Premium Box -->
+        <section class="abitur-box">
+            <div class="abitur-header">
+                🏆 ABITUR-TRANSFER & PRAXIS (eA)
+            </div>
+            <p class="abitur-intro">
+                Die exakte begriffliche Differenzierung zwischen Motiv und Motivation ist ein absoluter Kernbestandteil des neuen Fachlehrplans auf erhöhtem Anforderungsniveau und wird als direkte Reproduktions- und Transferleistung gefordert.
+            </p>
+
+            <div class="transfer-grid">
+                <div class="transfer-card">
+                    <h4>1. Terminologische Präzision</h4>
+                    <p>In der schriftlichen Prüfung reicht es nicht, Motivation umgangssprachlich als "Lust auf Sport" zu umschreiben. Wenn die Abgrenzung gefordert ist, erwartet das Kultusministerium zwingend die exakten Fachtermini.<br><br>
+                    <strong>Wichtig:</strong> Für die volle Punktzahl müssen beim Motiv die Eigenschaften <em>situationsüberdauernd</em>, <em>zeitstabil</em> und <em>persönlichkeitsspezifisch</em> genannt werden. Motivation muss zwingend als das konkrete Ergebnis des Prozesses der <em>Motivanregung</em> definiert werden.</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>2. Anwendung auf Quellen (Textanalyse)</h4>
+                    <p>In materialgestützten Aufgaben (z. B. Blogauszüge) musst du diese Konstrukte identifizieren. Äußert eine Schülerin, sie sei "total motiviert, hart zu trainieren, um die Alpenüberquerung zu schaffen", musst du herausarbeiten:<br><br>
+                    • <strong>Latentes Motiv:</strong> Das generelle Anstreben der Bewältigung dieser Herausforderung.<br>
+                    • <strong>Situation/Anreiz:</strong> Bevorstehende Ferien/Tour regt das Motiv an.<br>
+                    • <strong>Motivation:</strong> Die daraus resultierende, aktuelle Handlungsbereitschaft (das harte Training). <br><br>
+                    <em>Wer beides synonym verwendet, verliert entscheidende Bewertungseinheiten!</em></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Setup Canvas with High DPI support
+        function setupCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            
+            return { canvas, ctx, w: rect.width, h: rect.height };
+        }
+
+        let animationFrameId;
+        let time = 0;
+
+        function drawInfographic() {
+            const { canvas, ctx, w, h } = setupCanvas('motivationCanvas');
+            
+            // Colors
+            const colorMotiv = '#4f46e5'; // Indigo
+            const colorMotivation = '#f59e0b'; // Amber
+            const colorAnreiz = '#ef4444'; // Red
+            const textDark = '#334155';
+            
+            // Dimensions
+            const boxWidth = w * 0.35;
+            const boxHeight = 220;
+            const leftX = w * 0.25;
+            const rightX = w * 0.75;
+            const centerY = h * 0.55;
+
+            function render() {
+                ctx.clearRect(0, 0, w, h);
+                time += 0.03;
+
+                // --- Helper: Draw Box ---
+                function drawBox(x, y, width, height, color, title, attrs) {
+                    // Shadow
+                    ctx.shadowColor = 'rgba(0,0,0,0.1)';
+                    ctx.shadowBlur = 20;
+                    ctx.shadowOffsetY = 10;
+                    
+                    ctx.beginPath();
+                    ctx.roundRect(x - width/2, y - height/2, width, height, 16);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fill();
+                    ctx.lineWidth = 3;
+                    ctx.strokeStyle = color;
+                    ctx.stroke();
+                    ctx.shadowColor = 'transparent';
+
+                    // Header Area
+                    ctx.beginPath();
+                    ctx.roundRect(x - width/2, y - height/2, width, 50, 16);
+                    // Square bottom corners for header
+                    ctx.rect(x - width/2, y - height/2 + 25, width, 25); 
+                    ctx.fillStyle = color;
+                    ctx.fill();
+
+                    // Title
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = 'bold 20px "Space Grotesk", sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(title, x, y - height/2 + 25);
+
+                    // Attributes
+                    ctx.fillStyle = textDark;
+                    ctx.font = '14px Inter, sans-serif';
+                    ctx.textAlign = 'left';
+                    let textY = y - height/2 + 80;
+                    attrs.forEach(attr => {
+                        // Bullet point
+                        ctx.beginPath();
+                        ctx.arc(x - width/2 + 25, textY, 4, 0, Math.PI*2);
+                        ctx.fillStyle = color;
+                        ctx.fill();
+                        
+                        ctx.fillStyle = textDark;
+                        ctx.fillText(attr, x - width/2 + 40, textY);
+                        textY += 35;
+                    });
+                }
+
+                // --- 1. Draw Connection / Process Flow ---
+                const startX = leftX + boxWidth/2;
+                const endX = rightX - boxWidth/2;
+                const midX = w / 2;
+                
+                // Animated flowing dashed line
+                ctx.beginPath();
+                ctx.moveTo(startX, centerY);
+                ctx.lineTo(endX, centerY);
+                ctx.strokeStyle = '#cbd5e1';
+                ctx.lineWidth = 4;
+                ctx.setLineDash([10, 10]);
+                ctx.lineDashOffset = -time * 20; // Animate flow
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // --- 2. Situativer Anreiz (Top Arrow dropping down) ---
+                const anreizY = 40;
+                const arrowTipY = centerY - 10;
+                
+                // Pulsing effect for the Anreiz
+                const pulse = Math.sin(time * 2) * 5;
+                
+                // Arrow line
+                ctx.beginPath();
+                ctx.moveTo(midX, anreizY + pulse);
+                ctx.lineTo(midX, arrowTipY);
+                ctx.strokeStyle = colorAnreiz;
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+                // Arrow head
+                ctx.beginPath();
+                ctx.moveTo(midX, arrowTipY + 5);
+                ctx.lineTo(midX - 10, arrowTipY - 15);
+                ctx.lineTo(midX + 10, arrowTipY - 15);
+                ctx.fillStyle = colorAnreiz;
+                ctx.fill();
+
+                // Anreiz Label
+                ctx.fillStyle = colorAnreiz;
+                ctx.font = 'bold 16px "Space Grotesk", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText("Situativer Anreiz", midX, anreizY - 15 + pulse);
+
+                // Central Node: Motivanregung
+                ctx.beginPath();
+                ctx.arc(midX, centerY, 40 + Math.sin(time)*3, 0, Math.PI*2);
+                ctx.fillStyle = '#ffffff';
+                ctx.fill();
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = colorAnreiz;
+                ctx.stroke();
+
+                ctx.fillStyle = colorAnreiz;
+                ctx.font = 'bold 13px Inter';
+                ctx.fillText("Motiv-", midX, centerY - 6);
+                ctx.fillText("anregung", midX, centerY + 8);
+
+                // Main Arrow pointing to Motivation
+                ctx.beginPath();
+                ctx.moveTo(endX - 15, centerY - 15);
+                ctx.lineTo(endX + 5, centerY);
+                ctx.lineTo(endX - 15, centerY + 15);
+                ctx.fillStyle = '#cbd5e1';
+                ctx.fill();
+
+                // --- 3. Draw Boxes ---
+                drawBox(leftX, centerY, boxWidth, boxHeight, colorMotiv, "Das Motiv", [
+                    "Hypothetisches Konstrukt",
+                    "Situationsüberdauernd",
+                    "Zeitlich überdauernd (stabil)",
+                    "Persönlichkeitsspezifisch"
+                ]);
+
+                drawBox(rightX, centerY, boxWidth, boxHeight, colorMotivation, "Die Motivation", [
+                    "Dynamischer Zustand",
+                    "Situationsspezifisch",
+                    "Ergebnis der Motivanregung",
+                    "Vorstufe zur Handlung"
+                ]);
+
+                animationFrameId = requestAnimationFrame(render);
+            }
+
+            render();
+        }
+
+        // Initialize and handle resize
+        window.addEventListener('load', drawInfographic);
+        
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            cancelAnimationFrame(animationFrameId);
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(drawInfographic, 200);
+        });
+    </script>
+</body>
+</html>
