@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Kognitive und physische Erweiterungen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: 'Exo 2' for a bio-hacking/tech feel, 'Nunito' for highly readable academic text -->
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800;900&family=Nunito:wght@300;400;600;700&swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        display: ['Exo 2', 'sans-serif'],
+                    },
+                    colors: {
+                        neuro: {
+                            900: '#1e1b4b', // Deep dark purple
+                            800: '#312e81',
+                            600: '#4f46e5',
+                            500: '#6366f1', // Bright Indigo
+                            400: '#818cf8',
+                        },
+                        alpine: {
+                            900: '#082f49', // Deep ice blue
+                            800: '#0c4a6e',
+                            600: '#0284c7',
+                            400: '#38bdf8', // Ice cyan
+                            50: '#f0f9ff',
+                        },
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b', // Gold
+                            dark: '#b45309',
+                            vault: '#0f172a',
+                        }
+                    },
+                    boxShadow: {
+                        'neuro': '0 10px 40px -10px rgba(79, 70, 229, 0.3)',
+                        'alpine': '0 10px 40px -10px rgba(2, 132, 199, 0.3)',
+                        'glow-abitur': '0 0 30px rgba(245, 158, 11, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f172a; /* Deep slate base */
+            color: #f8fafc;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Dynamic Split Background */
+        .bg-split {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -2;
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #082f49 100%);
+        }
+
+        /* Floating Ambient Particles */
+        .ambient-particle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        /* Content Cards */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .border-neuro { border-color: rgba(99, 102, 241, 0.4); }
+        .border-alpine { border-color: rgba(56, 189, 248, 0.4); }
+
+        /* Canvas Wrapper */
+        .canvas-container {
+            background: #09090b;
+            border-radius: 1rem;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            box-shadow: inset 0 0 40px rgba(79, 70, 229, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hypoxia Table */
+        .hypoxia-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .hypoxia-table th {
+            background: rgba(8, 47, 73, 0.9);
+            color: #38bdf8;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.1rem;
+            padding: 1.25rem;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid #0284c7;
+        }
+        .hypoxia-table td {
+            padding: 1.25rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-right: 1px dashed rgba(255,255,255,0.05);
+            vertical-align: top;
+            color: #cbd5e1;
+        }
+        .hypoxia-table tr:hover td { background: rgba(2, 132, 199, 0.1); }
+        .hypoxia-table td:last-child { border-right: none; }
+
+        /* Abitur Vault Box */
+        .abitur-vault {
+            background: linear-gradient(135deg, #171717 0%, #000000 100%);
+            border-top: 4px solid #f59e0b;
+            border-bottom: 1px solid #b45309;
+            box-shadow: 0 25px 50px -12px rgba(245, 158, 11, 0.15);
+            position: relative;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+    </style>
+</head>
+<body class="leading-relaxed py-12 px-4 sm:px-6">
+
+    <!-- Background Elements -->
+    <div class="bg-split"></div>
+    <div class="ambient-particle w-[600px] h-[600px] bg-neuro-600 top-[-100px] left-[-200px]"></div>
+    <div class="ambient-particle w-[500px] h-[500px] bg-alpine-600 bottom-[-100px] right-[-150px]" style="animation-delay: -3s;"></div>
+
+    <div class="max-w-6xl mx-auto space-y-16 relative z-10">
+        
+        <!-- Header -->
+        <header class="glass-card p-8 md:p-14 shadow-neuro relative overflow-hidden">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8 border-b border-white/10 pb-6">
+                <div class="flex items-center gap-4">
+                    <span class="bg-neuro-500 text-white font-bold px-4 py-1.5 rounded text-sm font-display tracking-widest uppercase shadow-lg">1.8.1a</span>
+                    <span class="text-slate-300 font-semibold tracking-widest text-xs uppercase border border-slate-600 px-3 py-1.5 rounded">Bio-Hacking & Grenzbereiche</span>
+                </div>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-display font-black text-white mb-6 leading-tight tracking-tight uppercase">
+                Kognitive & Physische <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neuro-400 to-alpine-400">Erweiterungen</span>
+            </h1>
+            
+            <div class="max-w-4xl">
+                <p class="text-lg md:text-xl text-slate-300 font-medium leading-relaxed mb-6">
+                    Während die klassische Trainingslehre primär die konditionellen und koordinativen Fähigkeiten fokussiert, erfordert der moderne Hochleistungssport zunehmend ergänzende, interdisziplinäre Ansätze.
+                </p>
+                <div class="bg-slate-900/50 border-l-4 border-neuro-500 p-5 rounded-r-xl">
+                    <p class="text-slate-200 text-sm md:text-base font-medium">
+                        Zu diesen kognitiven und physischen Erweiterungen gehören das <strong class="text-neuro-400">Mentale Training</strong> sowie das <strong class="text-alpine-400">Höhentraining</strong>, welche beide das Ziel verfolgen, verborgene Leistungsreserven abseits der reinen muskulären Belastung zu erschließen.
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Section 1: Mentales Training (Neuro Theme) -->
+        <section>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-14 rounded-2xl bg-neuro-900/80 border border-neuro-500 flex items-center justify-center text-neuro-400 shadow-neuro">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-wide">1. Mentales Training</h2>
+            </div>
+
+            <p class="text-slate-300 mb-8 text-lg max-w-4xl border-l-2 border-neuro-500 pl-4">
+                Das planmäßige, wiederholte und bewusste Sich-Vorstellen einer sportlichen Bewegungsabfolge, ohne dass diese Bewegung gleichzeitig physisch ausgeführt wird. Es ist <strong>keine esoterische Entspannungstechnik</strong>, sondern ein knallhartes, neuromuskuläres Steuerungstraining.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10">
+                
+                <!-- Carpenter Effect Text -->
+                <div class="lg:col-span-5 glass-card border-neuro p-8 hover:shadow-neuro">
+                    <h3 class="text-2xl font-display font-bold text-neuro-400 mb-4">Der Carpenter-Effekt</h3>
+                    <strong class="text-xs uppercase tracking-widest text-slate-400 block mb-3">Die Physiologische Grundlage</strong>
+                    
+                    <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        Die Wirksamkeit basiert auf dem ideomotorischen Prinzip. Wenn sich ein Athlet eine Bewegung intensiv kinästhetisch und optisch vorstellt, werden im <strong>motorischen Kortex des Gehirns exakt dieselben neuronalen Netzwerke aktiviert</strong> wie bei der realen Ausführung.
+                    </p>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        Das Gehirn sendet schwache (subliminale) Aktionspotenziale über absteigende Nervenbahnen an die Zielmuskulatur.
+                    </p>
+                    <div class="bg-neuro-900/50 p-4 rounded-xl border border-neuro-500/30 text-sm text-neuro-100">
+                        Diese minimalen Kontraktionen sind äußerlich nicht sichtbar, lassen sich aber mittels <strong>Elektromyografie (EMG)</strong> wissenschaftlich nachweisen. Die Koordination wird quasi "trocken" programmiert.
+                    </div>
+                </div>
+
+                <!-- Canvas Visualisation (KI 2 Task 1) -->
+                <div class="lg:col-span-7 canvas-container p-6 flex flex-col">
+                    <div class="flex justify-between items-center mb-4 border-b border-neuro-500/20 pb-3">
+                        <h4 class="text-xl font-display font-bold text-white tracking-wider">Neuromuskuläres Interface</h4>
+                        <span class="text-xs font-mono bg-neuro-900 text-neuro-400 px-2 py-1 rounded border border-neuro-500/50">LIVE EMG DATA</span>
+                    </div>
+                    <canvas id="carpenterCanvas" class="w-full h-[350px] bg-black/50 rounded-lg flex-grow"></canvas>
+                </div>
+            </div>
+
+            <!-- Methodische Stufen -->
+            <h3 class="text-2xl font-display font-bold text-white mb-6 mt-12">Methodische Stufen des Mentalen Trainings</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 border-t-2 border-t-slate-600">
+                    <h4 class="font-bold text-white mb-2 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-slate-800 flex items-center justify-center text-xs font-mono">1</span>
+                        Subvokales Training
+                    </h4>
+                    <strong class="text-xs text-neuro-400 uppercase tracking-wider block mb-2">Selbstgesprächsregulation</strong>
+                    <p class="text-sm text-slate-400">Der Athlet spricht in Gedanken Kernpunkte der Bewegung durch (z. B. Hürdensprint: "Knie hoch, aktiv ziehen"). Lenkt Konzentration und blockiert Störgedanken.</p>
+                </div>
+                
+                <div class="glass-card p-6 border-t-2 border-t-neuro-500">
+                    <h4 class="font-bold text-white mb-2 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-neuro-900 flex items-center justify-center text-xs font-mono text-neuro-400">2</span>
+                        Verdeckte Wahrnehmung
+                    </h4>
+                    <strong class="text-xs text-neuro-400 uppercase tracking-wider block mb-2">Visualisierung</strong>
+                    <p class="text-sm text-slate-400">Der Sportler betrachtet die Bewegung vor dem geistigen Auge aus der Beobachterperspektive (als sähe er ein Video) oder direkt aus der Eigenperspektive (durch die eigenen Augen).</p>
+                </div>
+
+                <div class="glass-card p-6 border-t-2 border-t-purple-500 shadow-neuro">
+                    <h4 class="font-bold text-white mb-2 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded bg-purple-900 flex items-center justify-center text-xs font-mono text-purple-400">3</span>
+                        Ideomotorisches Training
+                    </h4>
+                    <strong class="text-xs text-purple-400 uppercase tracking-wider block mb-2">Die Königsklasse</strong>
+                    <p class="text-sm text-slate-400">Athlet versetzt sich <em>vollständig in das kinästhetische Gefühl</em>. Er spürt Muskelspannung, Fliehkräfte und Beschleunigung, während er physisch völlig reglos verharrt.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Höhentraining (Alpine Theme) -->
+        <section class="mt-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-14 rounded-2xl bg-alpine-900/80 border border-alpine-500 flex items-center justify-center text-alpine-400 shadow-alpine">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-wide">2. Höhentraining</h2>
+            </div>
+
+            <p class="text-slate-300 mb-8 text-lg max-w-4xl border-l-2 border-alpine-500 pl-4">
+                Spezifische Maßnahme zur Steigerung der aeroben Ausdauerleistungsfähigkeit. Nutzt den reduzierten Sauerstoffpartialdruck <strong class="text-alpine-400">(Hypoxie)</strong> in Höhenlagen (1.800 - 2.500m), um eine systemische Anpassung des Blutes und der Zellatmung zu erzwingen.
+            </p>
+
+            <div class="glass-card border-alpine p-8 mb-12">
+                <h3 class="text-2xl font-display font-bold text-alpine-400 mb-4">Die physiologische Anpassungskaskade</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-slate-300 font-medium">
+                    <div class="bg-slate-900/50 p-4 rounded-lg border border-alpine-900 text-center relative">
+                        <div class="text-3xl mb-2">🏔️</div>
+                        Geringer Luftdruck bewirkt Abfall des O₂-Partialdrucks im Blut (<strong class="text-alpine-400">Hypoxämie</strong>).
+                        <div class="hidden md:block absolute right-[-15px] top-1/2 transform -translate-y-1/2 text-alpine-500">→</div>
+                    </div>
+                    <div class="bg-slate-900/50 p-4 rounded-lg border border-alpine-900 text-center relative">
+                        <div class="text-3xl mb-2">🫀</div>
+                        Nieren registrieren O₂-Mangel und schütten das Hormon <strong class="text-red-400">EPO (Erythropoetin)</strong> aus.
+                        <div class="hidden md:block absolute right-[-15px] top-1/2 transform -translate-y-1/2 text-alpine-500">→</div>
+                    </div>
+                    <div class="bg-slate-900/50 p-4 rounded-lg border border-alpine-900 text-center relative">
+                        <div class="text-3xl mb-2">🩸</div>
+                        Stimuliert im roten Knochenmark massiv die Produktion roter Blutkörperchen (<strong class="text-red-400">Erythropoese</strong>).
+                        <div class="hidden md:block absolute right-[-15px] top-1/2 transform -translate-y-1/2 text-alpine-500">→</div>
+                    </div>
+                    <div class="bg-alpine-900/50 p-4 rounded-lg border border-alpine-500 text-center shadow-alpine">
+                        <div class="text-3xl mb-2">⚡</div>
+                        Rückkehr ins Tal: Massiv erhöhte O₂-Transportkapazität = <strong class="text-white">gesteigerte VO₂max!</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KI 2 Task 2: Table LHTH vs LHTL -->
+            <h3 class="text-2xl font-display font-bold text-white mb-6">Trainingsmethodische Konzepte im Vergleich</h3>
+            
+            <div class="overflow-x-auto shadow-alpine rounded-2xl">
+                <table class="hypoxia-table">
+                    <thead>
+                        <tr>
+                            <th class="w-1/4 bg-slate-900 text-slate-400 border-r border-slate-700">Parameter</th>
+                            <th class="w-3/8 text-center"><span class="text-white">LHTH</span><br><span class="text-xs font-sans text-alpine-400 normal-case">(Live High, Train High)</span></th>
+                            <th class="w-3/8 text-center"><span class="text-white">LHTL</span><br><span class="text-xs font-sans text-alpine-400 normal-case">(Live High, Train Low)</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm font-medium">
+                        <tr>
+                            <td class="font-bold text-slate-300 bg-slate-900/50 border-r border-slate-700">Ort der Regeneration (Leben/Schlafen)</td>
+                            <td class="text-center">In der Höhe<br><span class="text-xs text-slate-500">(1.800 - 2.500m)</span></td>
+                            <td class="text-center">In der Höhe oder im Hypoxiezelt<br><span class="text-xs text-slate-500">(> 2.500m)</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-300 bg-slate-900/50 border-r border-slate-700">Ort des Trainings (Belastung)</td>
+                            <td class="text-center">In der Höhe<br><span class="text-xs text-slate-500">(Hypoxische Bedingungen)</span></td>
+                            <td class="text-center text-alpine-400 font-bold">Im Tal / Meeresniveau<br><span class="text-xs text-slate-500">(Normoxische Bedingungen)</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-300 bg-slate-900/50 border-r border-slate-700">Auswirkung auf Erythropoese (EPO)</td>
+                            <td class="text-center text-green-400">Hoch (Natürliche Adaptation)</td>
+                            <td class="text-center text-green-400">Maximal (Sehr starker Reiz durch Schlafhöhe)</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-slate-300 bg-slate-900/50 border-r border-slate-700">Auswirkung auf Trainingsintensität</td>
+                            <td class="text-center text-red-400">
+                                <strong>Nachteilig!</strong><br>
+                                Wegen O₂-Mangel kann nicht mit absoluter Intensität trainiert werden. Verlust der Tempohärte droht.
+                            </td>
+                            <td class="text-center text-green-400">
+                                <strong>Der Goldstandard!</strong><br>
+                                Da im Tal trainiert wird, bleiben absolute Trainingsgeschwindigkeiten bei maximaler O₂-Versorgung erhalten.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Abitur Premium Vault -->
+        <section class="abitur-vault rounded-[2rem] p-8 md:p-14 mt-24 overflow-hidden z-20">
+            <!-- Decorative Vector -->
+            <svg class="absolute right-0 top-0 opacity-5 pointer-events-none transform translate-x-1/4 -translate-y-1/4 w-[500px] h-[500px] text-abitur" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2v-2zm0-6h2v4h-2v-4z"/>
+            </svg>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b border-slate-800 pb-8">
+                    <div class="bg-gradient-to-br from-yellow-500 to-red-600 text-slate-900 p-5 rounded-2xl shadow-glow-abitur">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-5xl font-display font-black text-white tracking-tight mb-2">Abitur-Transfer & Praxis</h2>
+                        <div class="inline-flex items-center gap-3">
+                            <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider font-mono">eA-Niveau</span>
+                            <span class="text-abitur font-medium text-lg">Differenzierungsaufgaben (Physiologie-Transfer)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    
+                    <!-- Transfer 1: Neuro -->
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800">
+                        <h3 class="text-xl font-display font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-abitur text-2xl">A</span> Verletzungsphasen & Neurologie
+                        </h3>
+                        <div class="bg-slate-800 p-4 rounded text-sm text-slate-400 mb-4 font-mono border-l-2 border-neuro-500">
+                            <strong>Szenario:</strong> Ein Skirennfahrer mit Kreuzbandriss liegt bettlägerig in absoluter Ruhigstellung. Welche Trainingsmaßnahme ist sinnvoll?
+                        </div>
+                        <strong class="text-abitur block mb-2 uppercase tracking-wide text-sm">Der Abitur-Schlüssel:</strong>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-3">
+                            Du musst das <strong>ideomotorische Training</strong> anführen und über den <strong>Carpenter-Effekt</strong> argumentieren!
+                        </p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Obwohl das Knie nicht bewegt werden darf, verhindert die intensive mentale Vorstellung der Schwünge den Abbau der synaptischen Verbindungen (Engramme) im ZNS. Der Athlet verliert sein neuromuskuläres "Bewegungsgefühl" nicht und kann nach der Heilung <em>deutlich schneller in die Feinkoordination</em> zurückkehren.
+                        </p>
+                    </div>
+
+                    <!-- Transfer 2: Alpine -->
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800">
+                        <h3 class="text-xl font-display font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-abitur text-2xl">B</span> Höhentraining vs. Doping
+                        </h3>
+                        <div class="bg-slate-800 p-4 rounded text-sm text-slate-400 mb-4 font-mono border-l-2 border-alpine-500">
+                            <strong>Szenario:</strong> Leistungssprung eines 1500-m-Läufers. Grenzabwägung zwischen legaler Adaptation und Blutdoping.
+                        </div>
+                        <strong class="text-abitur block mb-2 uppercase tracking-wide text-sm">Die Kausale Abgrenzung:</strong>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-3">
+                            Du musst darlegen, dass die künstliche EPO-Zufuhr via Spritze (Doping) zwar denselben zellulären Effekt auslöst (Erythropoese im Knochenmark)...
+                        </p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            ... das natürliche Höhentraining (z.B. nach dem <strong>LHTL-Prinzip</strong>) jedoch eine völlig <strong>legale, endogene (körpereigene) Reizadaptation</strong> des Hormonsystems zur Optimierung der Blutkenngrößen darstellt. Es ist eine biologische Anpassung an Umweltreize, kein externer pharmakologischer Eingriff.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="mt-16 pt-8 pb-12 border-t border-slate-800 text-center relative z-10">
+        <p class="font-display font-bold text-slate-600 tracking-widest text-sm mb-1 uppercase">Abiturwissen Sport (G9, eA)</p>
+        <p class="text-slate-500 font-sans text-sm">Lernbereich 1.8.1a Kognitive und physische Erweiterungen</p>
+    </footer>
+
+    <!-- Interactive Canvas Logic: Carpenter Effect -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('carpenterCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let time = 0;
+            
+            // EMG Data array for the screen
+            const emgData = new Array(100).fill(0);
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time++;
+
+                // --- Layout ---
+                const brainX = w * 0.25;
+                const brainY = 80;
+                const muscleX = w * 0.25;
+                const muscleY = h - 80;
+                
+                const emgX = w * 0.5;
+                const emgY = h * 0.2;
+                const emgW = w * 0.4;
+                const emgH = h * 0.6;
+
+                // --- 1. Draw Nerve Pathway ---
+                ctx.beginPath();
+                ctx.moveTo(brainX, brainY + 30);
+                ctx.lineTo(muscleX, muscleY - 30);
+                ctx.strokeStyle = '#334155'; // Dark grey path
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+                // Signal Animation (Subliminal Action Potential)
+                // Loops every 120 frames
+                const cycle = time % 120;
+                let signalY = -1;
+                
+                if (cycle > 20 && cycle < 100) {
+                    const progress = (cycle - 20) / 80;
+                    signalY = (brainY + 30) + progress * ((muscleY - 30) - (brainY + 30));
+                    
+                    ctx.shadowColor = '#818cf8';
+                    ctx.shadowBlur = 15;
+                    ctx.fillStyle = '#818cf8'; // Glowing purple
+                    ctx.beginPath();
+                    ctx.arc(brainX, signalY, 5, 0, Math.PI*2);
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+
+                // --- 2. Draw Brain ---
+                // Brain glow intensity based on signal start
+                let brainGlow = 0;
+                if (cycle < 40) {
+                    brainGlow = Math.sin((cycle/40)*Math.PI) * 20;
+                }
+
+                ctx.shadowColor = '#6366f1';
+                ctx.shadowBlur = 10 + brainGlow;
+                ctx.fillStyle = '#1e1b4b'; // Dark base
+                ctx.strokeStyle = '#6366f1'; // Bright border
+                ctx.lineWidth = 2;
+                
+                // Stylized brain shape
+                ctx.beginPath();
+                ctx.arc(brainX - 15, brainY - 10, 20, 0, Math.PI*2);
+                ctx.arc(brainX + 15, brainY - 10, 20, 0, Math.PI*2);
+                ctx.arc(brainX, brainY + 10, 20, 0, Math.PI*2);
+                ctx.fill();
+                ctx.stroke();
+                
+                // Motor cortex highlight
+                ctx.fillStyle = `rgba(129, 140, 248, ${0.2 + brainGlow/40})`;
+                ctx.beginPath(); ctx.arc(brainX, brainY - 15, 12, 0, Math.PI*2); ctx.fill();
+                ctx.shadowBlur = 0;
+
+                ctx.fillStyle = '#cbd5e1';
+                ctx.font = '10px "Exo 2"';
+                ctx.textAlign = 'center';
+                ctx.fillText("Motorischer Kortex", brainX, brainY - 45);
+
+                // --- 3. Draw Muscle (Resting) ---
+                ctx.fillStyle = '#312e81'; // Resting color
+                ctx.strokeStyle = '#4f46e5';
+                
+                // Slight quiver when signal hits, but no gross movement
+                let muscleQuiver = 0;
+                let emgSpikeAmp = 0;
+                if (cycle > 90 && cycle < 110) {
+                    muscleQuiver = Math.sin(time*10) * 1.5; // Tiny shake
+                    emgSpikeAmp = Math.sin((cycle-90)/20 * Math.PI) * 40; // High amplitude for EMG
+                }
+
+                ctx.beginPath();
+                ctx.ellipse(muscleX + muscleQuiver, muscleY, 25, 15, 0, 0, Math.PI*2);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = '#cbd5e1';
+                ctx.fillText("Zielmuskulatur (ruhend)", muscleX, muscleY + 30);
+
+                // --- 4. Draw EMG Monitor ---
+                // Box
+                ctx.fillStyle = '#020617';
+                ctx.strokeStyle = '#38bdf8';
+                ctx.beginPath(); ctx.roundRect(emgX, emgY, emgW, emgH, 8); ctx.fill(); ctx.stroke();
+                
+                // Grid
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+                ctx.lineWidth = 1;
+                for(let i=1; i<5; i++) {
+                    ctx.beginPath(); ctx.moveTo(emgX, emgY + (i/5)*emgH); ctx.lineTo(emgX+emgW, emgY + (i/5)*emgH); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(emgX + (i/5)*emgW, emgY); ctx.lineTo(emgX + (i/5)*emgW, emgY+emgH); ctx.stroke();
+                }
+
+                // Update EMG Data
+                emgData.shift(); // Remove oldest
+                // Generate new point: mostly noise, but spikes if signal hit
+                let noise = (Math.random() - 0.5) * 5;
+                let newPoint = noise;
+                if (emgSpikeAmp > 0) {
+                    newPoint += (Math.random() - 0.5) * emgSpikeAmp;
+                }
+                emgData.push(newPoint);
+
+                // Draw EMG Line
+                ctx.beginPath();
+                ctx.strokeStyle = '#38bdf8'; // Cyan line
+                ctx.lineWidth = 2;
+                ctx.shadowColor = '#38bdf8';
+                ctx.shadowBlur = 5;
+
+                const sliceW = emgW / (emgData.length - 1);
+                const midEmgY = emgY + emgH/2;
+
+                for(let i=0; i<emgData.length; i++) {
+                    let x = emgX + i * sliceW;
+                    let y = midEmgY - emgData[i];
+                    if(i===0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                // Monitor Labels
+                ctx.fillStyle = '#38bdf8';
+                ctx.textAlign = 'left';
+                ctx.fillText("EMG Readout", emgX + 10, emgY + 20);
+                
+                if (emgSpikeAmp > 10) {
+                    ctx.fillStyle = '#f59e0b'; // Gold warning
+                    ctx.fillText("Subliminale Aktivität!", emgX + 10, emgY + 40);
+                }
+
+                // Connection line from muscle to monitor
+                ctx.beginPath();
+                ctx.moveTo(muscleX + 25, muscleY);
+                ctx.lineTo(emgX, midEmgY);
+                ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+                ctx.setLineDash([4, 4]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.5.3b Interaktion der Fähigkeiten</title>
+    <style>
+        /* Synergy & Interlock Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Synergy Theme Colors */
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            
+            --text-dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            
+            /* The Core Abilities Colors */
+            --color-ausdauer: #3b82f6; /* Blue */
+            --color-kraft: #ef4444;    /* Red */
+            --color-speed: #f59e0b;    /* Amber/Yellow */
+            --color-coord: #10b981;    /* Emerald */
+            
+            /* Abitur Colors */
+            --abi-bg: #171717;
+            --abi-gold: #fbbf24;
+            --abi-glow: #eab308;
+            
+            --radius-soft: 20px;
+            --radius-pill: 50px;
+            
+            --shadow-card: 0 10px 40px -10px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 40px -10px rgba(0,0,0,0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Abstract overlapping background shapes */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.15;
+        }
+        body::before { top: -200px; left: -200px; background: var(--color-kraft); }
+        body::after { bottom: -200px; right: -200px; background: var(--color-ausdauer); }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        /* Synergy Header */
+        .hero-header {
+            background: var(--bg-card);
+            border-radius: var(--radius-soft);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, var(--color-kraft), var(--color-ausdauer), var(--color-speed), var(--color-coord));
+        }
+
+        .sys-badge {
+            display: inline-block;
+            background: #f1f5f9;
+            color: var(--text-muted);
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .lead-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--text-main);
+            max-width: 900px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        /* Synergy Cards (Interactions) */
+        .interaction-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .interact-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-soft);
+            padding: 3rem;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            transition: all 0.3s ease;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .interact-card { grid-template-columns: 1fr; }
+        }
+
+        .interact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Card specific gradients */
+        .card-ka { border-left: 8px solid; border-image: linear-gradient(to bottom, var(--color-kraft), var(--color-ausdauer)) 1; }
+        .card-sa { border-left: 8px solid; border-image: linear-gradient(to bottom, var(--color-speed), var(--color-ausdauer)) 1; }
+        .card-ko { border-left: 8px solid; border-image: linear-gradient(to bottom, var(--color-coord), var(--color-ausdauer)) 1; }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon-merge {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+        }
+
+        .interact-def {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #cbd5e1;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin: 1.5rem 0 0.8rem 0;
+            display: inline-block;
+            background: #f1f5f9;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        .physio-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .physio-box strong {
+            display: block;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .example-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f0fdfa;
+            color: #0f766e;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            border: 1px solid #ccfbf1;
+        }
+
+        /* Canvas Wrapper */
+        .canvas-section {
+            background: var(--bg-card);
+            border-radius: var(--radius-soft);
+            padding: 3rem 2rem;
+            margin: 4rem 0;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.02), var(--shadow-card);
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .canvas-header {
+            margin-bottom: 2rem;
+        }
+
+        .canvas-header h2 {
+            justify-content: center;
+            font-size: 2.2rem;
+            border: none;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Massive Abitur Transfer Box */
+        .exam-intersection {
+            background: var(--abi-bg);
+            color: #f1f5f9;
+            padding: 4rem;
+            border-radius: var(--radius-soft);
+            margin-top: 5rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .exam-intersection::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 100% 0%, rgba(251, 191, 36, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .exam-badge {
+            position: absolute;
+            top: -20px;
+            left: 3rem;
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.6rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2);
+            font-size: 1.1rem;
+        }
+
+        .exam-intersection h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1.5rem;
+        }
+
+        .model-application {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .model-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2.5rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .model-card h4 {
+            color: var(--abi-gold);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .model-card p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .argumentation-block {
+            background: rgba(0,0,0,0.5);
+            border-left: 4px solid var(--abi-gold);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1.5rem;
+        }
+
+        .argumentation-block strong {
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header class="hero-header">
+        <div class="sys-badge">Lernbereich 1.5.3b</div>
+        <h1>Interaktion der Fähigkeiten</h1>
+        <p class="lead-text">In der sportlichen Praxis treten die motorischen Hauptbeanspruchungsformen so gut wie niemals völlig isoliert auf. Vielmehr existieren komplexe Wechselbeziehungen. Die Ausdauer nimmt dabei eine fundamentale Basisrolle ein: Sie stützt und ermöglicht die optimale Ausprägung der anderen Fähigkeiten.</p>
+    </header>
+
+    <div class="interaction-list">
+
+        <!-- 1. Kraftausdauer -->
+        <div class="interact-card card-ka">
+            <div class="content-area">
+                <h2>
+                    <span class="icon-merge">💪<span style="font-size: 1rem; margin: 0 5px;">+</span>🫀</span>
+                    Ausdauer & Kraft (Kraftausdauer)
+                </h2>
+                <div class="interact-def">
+                    Die Kraftausdauer ist die Ermüdungswiderstandsfähigkeit bei lang andauernden oder sich wiederholenden Krafteinsätzen. Sie stellt die klassische Schnittmenge aus Kraft und Ausdauer dar.
+                </div>
+                
+                <h3>Wie die Ausdauer die Kraft stützt</h3>
+                <p>Bei wiederholten Krafteinsätzen (z. B. beim Rudern oder Mountainbiken am Berg) bestimmt die Maximalkraft das absolute Kraftniveau. Damit dieses Kraftniveau jedoch über einen längeren Zeitraum gehalten werden kann, bedarf es einer exzellenten aeroben und anaeroben Ausdauer.</p>
+                
+                <div class="physio-box">
+                    <strong>🔬 Physiologische Begründung</strong>
+                    Erhöhte Energiespeicher (Glykogen) und optimierte Stoffwechselprozesse (z. B. eine hohe Laktattoleranz und schnelle Laktatelimination) verzögern die periphere Ermüdung (Übersäuerung) in der arbeitenden Muskulatur. Der Muskel kann die Kraft länger generieren, ohne die Arbeit einstellen zu müssen.
+                </div>
+                
+                <div class="example-tag">
+                    🚴 Beispiel: Beim Mountainbiken bergauf wird ein deutlicher Kraftanteil pro Pedaltritt benötigt. Die Ausdauer sorgt dafür, dass dieser Krafteinsatz über die gesamte Dauer der Steigung gehalten wird.
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Schnelligkeitsausdauer -->
+        <div class="interact-card card-sa">
+            <div class="content-area">
+                <h2>
+                    <span class="icon-merge">⚡<span style="font-size: 1rem; margin: 0 5px;">+</span>🫀</span>
+                    Ausdauer & Schnelligkeit
+                </h2>
+                <div class="interact-def">
+                    Schnelligkeit und Ausdauer scheinen auf den ersten Blick Gegensätze zu sein (anaerob-alaktazid vs. aerob). Dennoch ist die Ausdauer für wiederholte Schnelligkeitsleistungen essenziell.
+                </div>
+                
+                <h3>Wie die Ausdauer die Schnelligkeit stützt</h3>
+                <p>Bei azyklischen oder zyklischen Schnelligkeitsleistungen (z. B. einem 100-m-Sprint) ist die rein energetische Ausdauer während des Sprints zweitrangig. Müssen solche Sprints jedoch häufig wiederholt werden (z. B. bei Spielsportarten wie Fußball oder im Intervalltraining), wird die aerobe Ausdauer zum Schlüsselfaktor.</p>
+                
+                <div class="physio-box">
+                    <strong>🔬 Physiologische Begründung</strong>
+                    Eine gut ausgebildete Grundlagenausdauer (Kapillarisierung, Mitochondriendichte) sorgt in den kurzen Pausen zwischen den Sprints für eine massiv beschleunigte aerobe Resynthese der energiereichen Phosphate (ATP und KP) und einen schnellen Abtransport von Laktat.
+                </div>
+                
+                <p style="font-weight: 700; color: #b45309; margin-top: 1rem;">Fazit: Je besser die Ausdauer, desto geringer ist der ermüdungsbedingte Geschwindigkeitsabfall bei wiederholten Sprints.</p>
+            </div>
+        </div>
+
+        <!-- 3. Koordination -->
+        <div class="interact-card card-ko">
+            <div class="content-area">
+                <h2>
+                    <span class="icon-merge">🎯<span style="font-size: 1rem; margin: 0 5px;">+</span>🫀</span>
+                    Ausdauer & Koordination / Technik
+                </h2>
+                <div class="interact-def">
+                    Die koordinativen Fähigkeiten gelten als "informationsorientiert", hängen jedoch indirekt extrem stark von der energetischen Ausdauer ab.
+                </div>
+                
+                <h3>Das Problem der Ermüdung</h3>
+                <p>Bei zunehmender Belastungsdauer tritt sowohl eine periphere (muskuläre) als auch eine zentrale (nervale) Ermüdung auf. Das Zentralnervensystem (ZNS) und die kinästhetischen Analysatoren ermüden. Die Reizaufnahme und -verarbeitung verlangsamt sich.</p>
+                
+                <h3>Wie die Ausdauer die Koordination stützt</h3>
+                <p>Eine hohe Grundlagenausdauer zögert diese Ermüdung des ZNS drastisch hinaus. Ebenso bleibt die technische Bewegungsökonomie (z. B. der Laufstil) bei guter Ausdauer länger stabil.</p>
+                
+                <div class="example-tag" style="background: #fdf4ff; color: #86198f; border-color: #f5d0fe;">
+                    🎯 Beispiel: Ein Biathlet muss nach einer extrem ausdauernden Laufleistung am Schießstand präzise feinmotorische Abläufe unter Zeitdruck ausführen. Nur durch überragende Ausdauer bleibt das ZNS frisch genug, um zitterfrei zu treffen.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Canvas Bös Model -->
+    <div class="canvas-section">
+        <div class="canvas-header">
+            <h2>Modell der motorischen Fähigkeiten</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Schnittmengen-Diagramm der motorischen Grundeigenschaften (nach Bös, 1987)</p>
+        </div>
+        <canvas id="boesDiagram" width="800" height="700"></canvas>
+    </div>
+
+    <!-- Abitur Transfer: Exam Rubric -->
+    <div class="exam-intersection">
+        <div class="exam-badge">Abitur-Transfer & Praxis (eA)</div>
+        <h2>Prüfungsfokus: Bös-Modell anwenden</h2>
+        <p class="lead-text" style="color: #94a3b8; font-style: normal; margin-bottom: 3rem;">In der G9-Abiturprüfung wird dieses Wissen sehr systematisch abgefragt. Der Lehrplan stützt sich hierbei maßgeblich auf das Modell der motorischen Fähigkeiten nach Bös (1987).</p>
+
+        <div class="model-application">
+            
+            <div class="model-card">
+                <h4>🧠 1. Energetisch determinierte Fähigkeiten begründen</h4>
+                <p>In den Prüfungen (vgl. Illustrierende Abituraufgabe III) musst du erklären können, warum Ausdauer, Kraft und Schnelligkeit in diesem Modell als "energetisch determinierte Fähigkeiten" zusammengefasst werden.</p>
+                
+                <div class="argumentation-block">
+                    <strong>Deine Klausur-Argumentation:</strong>
+                    Die Ausdauer hängt maßgeblich von der aeroben/anaeroben Energiebereitstellung (ATP-Resynthese) ab. Da auch die Kraft (Muskelkontraktion) und die Schnelligkeit (schnellstmögliches Überwinden von Widerständen) <strong>zwingend von der ständigen Verfügbarkeit von ATP abhängen</strong>, sind all diese drei Grundeigenschaften primär energetisch verknüpft und limitiert.
+                </div>
+            </div>
+
+            <div class="model-card">
+                <h4>🎯 2. Dimensionen der allgemeinen motorischen Leistungsfähigkeit ableiten</h4>
+                <p>Das Kultusministerium verlangt, dass du sogenannte "Dimensionen" (die Mischformen / Schnittmengen im Diagramm) sportpraktisch belegst und herleitest.</p>
+                
+                <div class="argumentation-block">
+                    <strong>Zweiseitige Argumentation (Bsp. Kraftausdauer):</strong>
+                    Wählst du im Abitur das Beispiel "Kraftausdauer" (z.B. Sportklettern), musst du zwingend beide Seiten der Wechselbeziehung beleuchten:<br><br>
+                    1. Es hängt von der <strong>Kraft</strong> ab (Wie leicht kann ein physischer Widerstand bewegt werden?).<br>
+                    2. Es hängt von der <strong>Ausdauer</strong> ab (Wie gut ist die lokale Energiebereitstellung / Laktattoleranz, um dieses Kraftniveau lange zu halten?).
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Canvas: Bös (1987) Venn Diagram
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('boesDiagram');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Display Setup
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+
+        function drawVenn() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Circle settings
+            const radius = 160;
+            const cx = width / 2;
+            const cy = height / 2 + 20;
+            
+            // Centers for the 3 circles (forming a triangle)
+            const d = 110; // distance from center
+            const cKraft = { x: cx - d, y: cy - d * 0.8 };
+            const cSpeed = { x: cx + d, y: cy - d * 0.8 };
+            const cEndur = { x: cx, y: cy + d * 1.1 };
+
+            // Colors with mix-blend-mode via rgba
+            const colKraft = 'rgba(239, 68, 68, 0.65)';  // Red
+            const colSpeed = 'rgba(245, 158, 11, 0.65)'; // Amber
+            const colEndur = 'rgba(59, 130, 246, 0.65)'; // Blue
+
+            // We use globalCompositeOperation to make the overlapping colors mix nicely
+            ctx.globalCompositeOperation = 'multiply';
+
+            // Draw Kraft (Top Left)
+            ctx.beginPath();
+            ctx.arc(cKraft.x, cKraft.y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = colKraft;
+            ctx.fill();
+
+            // Draw Schnelligkeit (Top Right)
+            ctx.beginPath();
+            ctx.arc(cSpeed.x, cSpeed.y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = colSpeed;
+            ctx.fill();
+
+            // Draw Ausdauer (Bottom Center)
+            ctx.beginPath();
+            ctx.arc(cEndur.x, cEndur.y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = colEndur;
+            ctx.fill();
+
+            // Reset composite operation for text and borders
+            ctx.globalCompositeOperation = 'source-over';
+
+            // Draw Borders
+            ctx.lineWidth = 3;
+            
+            ctx.beginPath(); ctx.arc(cKraft.x, cKraft.y, radius, 0, Math.PI * 2); 
+            ctx.strokeStyle = '#b91c1c'; ctx.stroke();
+            
+            ctx.beginPath(); ctx.arc(cSpeed.x, cSpeed.y, radius, 0, Math.PI * 2); 
+            ctx.strokeStyle = '#b45309'; ctx.stroke();
+            
+            ctx.beginPath(); ctx.arc(cEndur.x, cEndur.y, radius, 0, Math.PI * 2); 
+            ctx.strokeStyle = '#1d4ed8'; ctx.stroke();
+
+            // --- TEXT LABELS ---
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            function drawLabel(text, x, y, size = '18px', bold = true, color = '#ffffff') {
+                ctx.font = `${bold ? 'bold' : 'normal'} ${size} Outfit`;
+                // Add soft shadow for readability over mixed colors
+                ctx.shadowColor = 'rgba(0,0,0,0.6)';
+                ctx.shadowBlur = 6;
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
+                ctx.fillStyle = color;
+                
+                const lines = text.split('\n');
+                const lineHeight = parseInt(size) * 1.3;
+                let startY = y - ((lines.length - 1) * lineHeight) / 2;
+                
+                lines.forEach(line => {
+                    ctx.fillText(line, x, startY);
+                    startY += lineHeight;
+                });
+                
+                ctx.shadowBlur = 0; // reset
+            }
+
+            // Main Abilities (Motorische Grundeigenschaften)
+            drawLabel('KRAFT', cKraft.x - 60, cKraft.y - 40, '26px');
+            drawLabel('SCHNELLIGKEIT', cSpeed.x + 60, cSpeed.y - 40, '26px');
+            drawLabel('AUSDAUER', cEndur.x, cEndur.y + 70, '26px');
+
+            // Intersections (Dimensionen / Mischformen)
+            // 1. Kraftausdauer (KA) - between Kraft and Ausdauer
+            const kaX = (cKraft.x + cEndur.x) / 2 - 35;
+            const kaY = (cKraft.y + cEndur.y) / 2 + 10;
+            drawLabel('Kraft-\nausdauer\n(KA)', kaX, kaY, '16px');
+
+            // 2. Schnelligkeitsausdauer (AnA) - between Speed and Ausdauer
+            const saX = (cSpeed.x + cEndur.x) / 2 + 35;
+            const saY = (cSpeed.y + cEndur.y) / 2 + 10;
+            drawLabel('Schnelligkeits-\nausdauer\n(AnA)', saX, saY, '16px');
+
+            // 3. Schnellkraft (SK) - between Kraft and Speed
+            const skX = (cKraft.x + cSpeed.x) / 2;
+            const skY = (cKraft.y + cSpeed.y) / 2 - 40;
+            drawLabel('Schnellkraft\n(SK)', skX, skY, '16px');
+
+            // 4. Center (All 3)
+            drawLabel('Reaktiv-\nkraft', cx, cy - 10, '14px');
+
+            // Title Above Diagram
+            ctx.fillStyle = '#0f172a';
+            ctx.shadowBlur = 0;
+            ctx.font = 'bold 22px Outfit';
+            ctx.fillText('Energetisch determinierte Fähigkeiten', cx, 40);
+            ctx.font = '16px Outfit';
+            ctx.fillStyle = '#64748b';
+            ctx.fillText('(Motorische Grundeigenschaften & Dimensionen)', cx, 65);
+            
+            // Annotation
+            ctx.beginPath();
+            ctx.moveTo(cx, 80);
+            ctx.lineTo(cx, 110);
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(cx, 110, 4, 0, Math.PI*2);
+            ctx.fillStyle = '#cbd5e1';
+            ctx.fill();
+        }
+
+        drawVenn();
+
+        // Responsive redrawing
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawVenn();
+        });
+    });
+</script>
+
+</body>
+</html>

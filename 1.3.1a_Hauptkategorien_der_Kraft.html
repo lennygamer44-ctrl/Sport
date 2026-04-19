@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.3.1a Hauptkategorien der Kraft - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Athletic Force & Power Vectors */
+            --bg-base: #0a0a0a;        /* Pitch Black */
+            --bg-card: #141414;        /* Dark Gray */
+            --bg-lighter: #1f1f1f;
+            
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            
+            /* Maximalkraft (Heavy, Steady, Absolute) */
+            --max-blue: #2563eb;
+            --max-blue-dark: #1e3a8a;
+            
+            /* Schnellkraft (Explosive, Fast, Reactive) */
+            --speed-yellow: #facc15;
+            --speed-orange: #f97316;
+            
+            --abi-bg: #2a0a18;
+            --abi-red: #ef4444;
+            --abi-white: #ffffff;
+            
+            --radius-sm: 4px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        h1, h2, h3, h4, .power-font {
+            font-family: 'Teko', sans-serif;
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Brutalist Hero Section --- */
+        .hero {
+            padding: 6rem 2rem 5rem;
+            background: var(--bg-card);
+            position: relative;
+            border-bottom: 8px solid var(--speed-yellow);
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: 'FORCE';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 12rem;
+            font-family: 'Teko', sans-serif;
+            color: rgba(255,255,255,0.03);
+            pointer-events: none;
+        }
+
+        .tag-wrap {
+            transform: skewX(-15deg);
+            display: inline-block;
+            background: var(--max-blue);
+            padding: 0.2rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-tag {
+            color: white;
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transform: skewX(15deg);
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 800px;
+        }
+
+        /* --- Intro Card --- */
+        .intro-box {
+            background: var(--bg-card);
+            padding: 2.5rem 3rem;
+            margin: 3rem auto 5rem;
+            border-left: 6px solid var(--text-muted);
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Section 1: Maximalkraft (Heavy Design) --- */
+        .max-section {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--max-blue-dark) 200%);
+            border: 2px solid var(--max-blue);
+            border-radius: var(--radius-sm);
+            padding: 4rem;
+            margin-bottom: 4rem;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+        }
+
+        .max-section::before {
+            content: 'MAX';
+            position: absolute;
+            top: 20px; right: 20px;
+            font-family: 'Teko', sans-serif;
+            font-size: 8rem;
+            color: rgba(37, 99, 235, 0.1);
+            line-height: 0.8;
+            pointer-events: none;
+        }
+
+        .sec-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .sec-num {
+            background: var(--max-blue);
+            color: white;
+            width: 60px; height: 60px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 2.5rem; font-family: 'Teko', sans-serif;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        }
+
+        .max-section h2 {
+            font-size: 3.5rem;
+            color: white;
+        }
+
+        .max-intro {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+            padding-bottom: 2rem;
+        }
+
+        .determinants-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 800px) {
+            .determinants-grid { grid-template-columns: 1fr; }
+        }
+
+        .det-card {
+            background: rgba(0,0,0,0.3);
+            padding: 2rem;
+            border-left: 4px solid var(--max-blue);
+        }
+
+        .det-card h3 {
+            color: var(--max-blue);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .max-practice {
+            background: rgba(37, 99, 235, 0.1);
+            padding: 2rem;
+            border-radius: var(--radius-sm);
+        }
+
+        /* --- Section 2: Schnellkraft (Speed Design) --- */
+        .speed-section {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #3a1a00 200%);
+            border: 2px solid var(--speed-orange);
+            border-radius: var(--radius-sm);
+            padding: 4rem;
+            margin-bottom: 5rem;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.1);
+            transform: skewY(-1deg);
+        }
+        
+        .speed-section > * { transform: skewY(1deg); }
+
+        .speed-section::before {
+            content: 'SPEED';
+            position: absolute;
+            top: 20px; right: 20px;
+            font-family: 'Teko', sans-serif;
+            font-size: 8rem;
+            color: rgba(250, 204, 21, 0.05);
+            line-height: 0.8;
+            pointer-events: none;
+            transform: skewY(1deg);
+        }
+
+        .speed-section .sec-num {
+            background: var(--speed-yellow);
+            color: black;
+            clip-path: polygon(20% 0%, 100% 0, 80% 100%, 0% 100%);
+        }
+
+        .speed-section h2 {
+            font-size: 3.5rem;
+            color: var(--speed-yellow);
+        }
+
+        .speed-section .det-card {
+            border-left-color: var(--speed-yellow);
+        }
+
+        .speed-section .det-card h3 {
+            color: var(--speed-yellow);
+        }
+
+        .sub-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .sub-grid { grid-template-columns: 1fr; }
+        }
+
+        .sub-card {
+            background: var(--bg-base);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            padding: 1.5rem;
+            border-top: 4px solid var(--speed-orange);
+        }
+
+        .sub-card h4 {
+            color: var(--speed-orange);
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Canvas F-t-Diagramm --- */
+        .canvas-section {
+            background: var(--bg-card);
+            padding: 4rem 2rem;
+            margin-bottom: 6rem;
+            border: 1px solid var(--bg-lighter);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        .canvas-section h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            position: relative;
+            background: #050505;
+            border: 1px solid #333;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+
+        .color-box {
+            width: 20px; height: 10px;
+            transform: skewX(-15deg);
+        }
+
+        /* --- Premium Abitur Transfer Box --- */
+        .abitur-prep {
+            background: var(--abi-bg);
+            color: #f87171;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 2px solid var(--abi-red);
+            box-shadow: 0 0 50px rgba(239, 68, 68, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-prep::before {
+            content: 'EXAM ZONE';
+            position: absolute;
+            font-size: 8rem;
+            font-family: 'Teko', sans-serif;
+            font-weight: 700;
+            color: rgba(239, 68, 68, 0.03);
+            top: -20px;
+            right: 0;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-red);
+            color: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            font-family: 'Teko', sans-serif;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        }
+
+        .abi-header h2 {
+            font-size: 3rem;
+            color: white;
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #fca5a5;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .abi-card {
+            background: rgba(0,0,0,0.4);
+            padding: 2.5rem;
+            border-left: 4px solid var(--abi-red);
+        }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .hl-red { color: var(--abi-red); font-weight: 700; }
+        .hl-white { color: white; font-weight: 700; }
+
+        .alert-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px dashed var(--abi-red);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <div class="tag-wrap">
+                <span class="hero-tag">Lernbereich 1.3.1a</span>
+            </div>
+            <h1>Hauptkategorien der Kraft</h1>
+            <p>Maximalkraft und Schnellkraft – Die fundamentale Basis für explosive und leistungsorientierte Sportarten.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-box">
+            Kraft im sportbiologischen Sinne ist die Fähigkeit des neuromuskulären Systems, durch Muskelkontraktion Widerstände zu überwinden (konzentrisch), ihnen entgegenzuwirken (exzentrisch) oder sie zu halten (isometrisch). Da sportliche Bewegungen extrem heterogen sind, manifestiert sich Kraft in verschiedenen Erscheinungsformen. <strong>Die beiden absoluten Hauptkategorien für explosive und leistungsorientierte Sportarten sind die Maximalkraft und die Schnellkraft.</strong>
+        </div>
+
+        <!-- Section 1: Maximalkraft -->
+        <section class="max-section">
+            <div class="sec-header">
+                <div class="sec-num">1</div>
+                <h2 class="power-font">Maximalkraft</h2>
+            </div>
+            <p class="max-intro">Die Maximalkraft ist die größtmögliche Kraft, die das neuromuskuläre System willkürlich gegen einen unüberwindbaren Widerstand ausüben kann. Sie stellt die absolute Basis (Basiskraft) dar, da alle anderen Kraftarten (insbesondere die Schnellkraft) in direkter physiologischer Abhängigkeit von ihr stehen.</p>
+
+            <h3 class="power-font" style="font-size: 2rem; color: var(--text-muted); margin-bottom: 1rem;">Physiologische Determinanten</h3>
+            <div class="determinants-grid">
+                <div class="det-card">
+                    <h3 class="power-font">Muskelquerschnitt (Hypertrophie)</h3>
+                    <p>Je dicker der Muskel, desto mehr kontraktile Elemente (Aktin und Myosin) stehen für den Querbrückenzyklus zur Verfügung.</p>
+                </div>
+                <div class="det-card">
+                    <h3 class="power-font">Intramuskuläre Koordination</h3>
+                    <p>Die Fähigkeit des zentralen Nervensystems, möglichst viele motorische Einheiten (insbesondere die kräftigen FT-Fasern) synchron zu rekrutieren und zu frequentieren.</p>
+                </div>
+            </div>
+
+            <div class="max-practice">
+                <strong style="color: var(--max-blue); display: block; margin-bottom: 0.5rem; font-family: 'Teko'; font-size: 1.5rem; letter-spacing: 1px;">Sportpraktische Bedeutung:</strong>
+                Sie ist entscheidend bei der Überwindung sehr hoher Lasten (z. B. Gewichtheben, Ringen) oder als fundamentale Voraussetzung für Sprung- und Wurfdisziplinen. Man differenziert hierbei noch zwischen der <strong>absoluten Kraft</strong> (das theoretische Maximum inkl. autonomer Schutzreserven, nur abrufbar in Todesangst/Doping) und der <strong>willkürlich abrufbaren Maximalkraft</strong>.
+            </div>
+        </section>
+
+        <!-- Section 2: Schnellkraft -->
+        <section class="speed-section">
+            <div class="sec-header">
+                <div class="sec-num">2</div>
+                <h2 class="power-font">Schnellkraft</h2>
+            </div>
+            <p class="max-intro" style="border-color: rgba(250, 204, 21, 0.3);">Die Schnellkraft ist die Fähigkeit des neuromuskulären Systems, einen eigenen Körper oder ein Gerät in der zur Verfügung stehenden Zeit mit der größtmöglichen Geschwindigkeit zu bewegen (zu beschleunigen).</p>
+
+            <div class="det-card" style="margin-bottom: 3rem;">
+                <h3 class="power-font">Physiologische Determinanten</h3>
+                <p>Sie ist elementar abhängig von der <strong>Maximalkraft</strong> (wer keinen starken Muskel hat, kann diesen auch nicht schnell kontrahieren) und dem genetisch determinierten <strong>Anteil an FT-Fasern</strong> (Fast-Twitch-Fasern).</p>
+            </div>
+
+            <h3 class="power-font" style="font-size: 2rem; color: var(--speed-orange);">Subkategorien der Schnellkraft</h3>
+            <div class="sub-grid">
+                <div class="sub-card">
+                    <h4 class="power-font">Startkraft</h4>
+                    <p>Die Fähigkeit, einen extrem hohen Kraftanstieg bereits in den ersten 30 Millisekunden nach Kontraktionsbeginn zu erzeugen.<br><br><em>(z. B. entscheidend beim Startschuss im 100-m-Sprint).</em></p>
+                </div>
+                <div class="sub-card">
+                    <h4 class="power-font">Explosivkraft</h4>
+                    <p>Die Fähigkeit, einen möglichst steilen Kraftanstieg (hohen maximalen Kraftgradienten) im weiteren Verlauf der Kontraktion zu realisieren.<br><br><em>(z. B. der Absprung beim Hochsprung).</em></p>
+                </div>
+                <div class="sub-card" style="border-color: var(--vec-dvz); border-top-color: var(--vec-dvz);">
+                    <h4 class="power-font" style="color: var(--vec-dvz);">Reaktivkraft (DVZ)</h4>
+                    <p>Ein exzentrisches Abbremsen (Speicherung von Dehnungsenergie) wird blitzschnell in einen konzentrischen Schnellkraft-Stoß umgewandelt.<br><br><em>(z. B. Stemmschritt beim Kugelstoßen/Speerwurf).</em></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Canvas: F-t-Kurve -->
+        <section class="canvas-section">
+            <h2 class="power-font">Biomechanische Kraft-Zeit-Kurve (F-t-Diagramm)</h2>
+            <p class="subtitle">Vergleichende Analyse des Spannungsaufbaus von Maximalkraft und Schnellkraft über die Zeit.</p>
+            
+            <div class="canvas-container">
+                <canvas id="ftCanvas" width="900" height="450"></canvas>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item"><div class="color-box" style="background: var(--max-blue);"></div> Kurve 1: Maximalkraft</div>
+                <div class="legend-item"><div class="color-box" style="background: var(--speed-yellow);"></div> Kurve 2: Schnellkraft</div>
+                <div class="legend-item"><div class="color-box" style="background: var(--abi-red); height: 2px;"></div> Tangenten (Start- & Explosivkraft)</div>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2 class="power-font">Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                In der neuen G9-Abiturprüfung (eA) wird strenges Transferwissen verlangt. Du musst das theoretische Konstrukt der Kraftarten zwingend auf sportpraktische Leistungsanalysen übertragen können.
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card">
+                    <h3 class="power-font">⛓️ Die Abhängigkeit erklären (Kugelstoßer-Szenario)</h3>
+                    <p>Ein klassischer Klausur-Operator lautet: <em>"Beurteilen Sie die Bedeutung der Maximalkraft für einen Kugelstoßer im Zehnkampf!"</em></p>
+                    <div class="alert-box">
+                        <strong class="hl-red">FALSCH:</strong> "Der braucht Maximalkraft, weil die Kugel schwer ist."
+                    </div>
+                    <p style="margin-top: 1rem;">Das sportliche Ziel beim Kugelstoßen ist eine maximale Abfluggeschwindigkeit (also Schnellkraft). <span class="hl-white">Du musst zwingend mit der Abhängigkeit argumentieren:</span></p>
+                    <p>Die Kugel ist mit über 7 kg so schwer, dass die Schnellkraft durch das Gewicht stark limitiert wird. Nur durch eine Erhöhung der Maximalkraft (als Basiskraft) ist das neuromuskuläre System überhaupt in der Lage, dieses hohe Gewicht noch explosiv (schnellkräftig) zu beschleunigen.</p>
+                </div>
+
+                <div class="abi-card">
+                    <h3 class="power-font">📋 Fallbeispiele mit Krafttests diagnostizieren</h3>
+                    <p>Wenn dir in einer Aufgabe die Testergebnisse eines Athleten vorliegen (z.B. hohe Maximalkraftwerte in der Kniebeuge, aber schlechte Werte im Jump-and-Reach-Test), musst du die <span class="hl-white">Dysbalance diagnostizieren:</span></p>
+                    <p>Der Athlet hat zwar ein hohes Maximalkraftpotenzial, kann dieses aber nicht in Schnellkraft (Explosivkraft) umsetzen. Der Grund: Die neuronale Steuerung für explosive Kontraktionen oder die spezifische intramuskuläre Koordination für schnelle Kraftentfaltung ist defizitär.</p>
+                </div>
+
+                <div class="abi-card">
+                    <h3 class="power-font">⚙️ Verknüpfung mit Biomechanik (Lernbereich 2.1)</h3>
+                    <p>Nutze die Schnellkraft immer als Begründung für das <strong>Prinzip der maximalen Anfangskraft</strong> oder der <strong>optimalen Beschleunigungswege</strong>. Eine Ausholbewegung dient immer dazu, die physikalischen Voraussetzungen für einen optimalen schnellkräftigen Kraftstoß zu schaffen.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('ftCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 900;
+            const logicalH = 450;
+            
+            let time = 0;
+            let animationId;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayW = Math.min(rect.width, logicalW);
+                const scale = displayW / logicalW;
+                const displayH = logicalH * scale;
+                
+                canvas.width = displayW * dpr;
+                canvas.height = displayH * dpr;
+                canvas.style.width = `${displayW}px`;
+                canvas.style.height = `${displayH}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // Mathematical models for the curves
+            // F(t) = F_max * (1 - e^(-t/tau))^n (to create an S-curve for speed to show distinct start/explosive force)
+            function maxForceCurve(t) {
+                const Fmax = 300; 
+                const tau = 150; // Slow rise
+                return Fmax * (1 - Math.exp(-t/tau));
+            }
+
+            function speedForceCurve(t) {
+                const Fmax = 200; // Lower absolute peak
+                const tau = 40;  // Fast rise
+                // Squaring creates the slight S-curve (inflection point) for clear "Explosivkraft" max slope
+                const val = (1 - Math.exp(-t/tau));
+                return Fmax * val * val; 
+            }
+
+            function drawGraph() {
+                ctx.clearRect(0, 0, logicalW, logicalH);
+
+                const padL = 80;
+                const padB = 60;
+                const padR = 40;
+                const padT = 40;
+                const plotW = logicalW - padL - padR;
+                const plotH = logicalH - padB - padT;
+
+                // Draw Grid
+                ctx.strokeStyle = '#1f2937';
+                ctx.lineWidth = 1;
+                for(let i=1; i<=5; i++) {
+                    let y = padT + (plotH/5)*i;
+                    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(logicalW - padR, y); ctx.stroke();
+                    let x = padL + (plotW/5)*i;
+                    ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, logicalH - padB); ctx.stroke();
+                }
+
+                // Draw Axes
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                // Y-Axis
+                ctx.moveTo(padL, padT);
+                ctx.lineTo(padL, logicalH - padB);
+                // X-Axis
+                ctx.lineTo(logicalW - padR, logicalH - padB);
+                ctx.stroke();
+
+                // Arrows
+                ctx.beginPath(); ctx.moveTo(padL-5, padT+10); ctx.lineTo(padL, padT); ctx.lineTo(padL+5, padT+10); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(logicalW-padR-10, logicalH-padB-5); ctx.lineTo(logicalW-padR, logicalH-padB); ctx.lineTo(logicalW-padR-10, logicalH-padB+5); ctx.stroke();
+
+                // Labels
+                ctx.fillStyle = '#f3f4f6';
+                ctx.font = 'bold 16px Inter';
+                ctx.textAlign = 'right';
+                ctx.fillText('Kraft F [N]', padL - 10, padT + 10);
+                ctx.textAlign = 'center';
+                ctx.fillText('Zeit t [ms]', logicalW - padR, logicalH - padB + 25);
+
+                // --- Animation Progress ---
+                const maxT = 600; // Simulation time units
+                const currentT = Math.min(time * 3, maxT);
+
+                // Drawing curves
+                ctx.lineJoin = 'round';
+                
+                // 1. Maximalkraft Kurve
+                ctx.beginPath();
+                ctx.moveTo(padL, logicalH - padB);
+                for(let t=0; t<=currentT; t+=2) {
+                    let x = padL + (t/maxT) * plotW;
+                    let y = (logicalH - padB) - maxForceCurve(t);
+                    ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = '#2563eb';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                
+                // Maxkraft Label
+                if (currentT > 400) {
+                    ctx.fillStyle = '#2563eb';
+                    ctx.font = 'bold 16px Teko';
+                    let lx = padL + (400/maxT) * plotW;
+                    let ly = (logicalH - padB) - maxForceCurve(400) - 15;
+                    ctx.fillText('MAXIMALKRAFT', lx, ly);
+                }
+
+                // 2. Schnellkraft Kurve
+                ctx.beginPath();
+                ctx.moveTo(padL, logicalH - padB);
+                for(let t=0; t<=currentT; t+=2) {
+                    let x = padL + (t/maxT) * plotW;
+                    let y = (logicalH - padB) - speedForceCurve(t);
+                    ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = '#facc15';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+                // Speedkraft Label
+                if (currentT > 200) {
+                    ctx.fillStyle = '#facc15';
+                    ctx.font = 'bold 16px Teko';
+                    let lx = padL + (200/maxT) * plotW;
+                    let ly = (logicalH - padB) - speedForceCurve(200) + 25;
+                    ctx.fillText('SCHNELLKRAFT', lx, ly);
+                }
+
+                // --- Tangents & Annotations for Schnellkraft ---
+                if (currentT > 100) {
+                    // Startkraft (Tangent at ~30ms)
+                    const tStart = 30;
+                    const xStart = padL + (tStart/maxT) * plotW;
+                    const yStart = (logicalH - padB) - speedForceCurve(tStart);
+                    
+                    // Derivative approximation for slope
+                    const dt = 1;
+                    const slopeStart = (speedForceCurve(tStart+dt) - speedForceCurve(tStart)) / dt;
+                    const displaySlopeStart = slopeStart * (plotW/maxT); // Scale slope to display
+                    
+                    // Draw Tangent line
+                    ctx.beginPath();
+                    ctx.moveTo(padL, (logicalH - padB));
+                    ctx.lineTo(padL + 150, (logicalH - padB) - displaySlopeStart*150);
+                    ctx.strokeStyle = '#ef4444'; // Red
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                    
+                    // Annotation
+                    ctx.fillStyle = '#ef4444';
+                    ctx.font = 'bold 14px Inter';
+                    ctx.textAlign = 'left';
+                    ctx.fillText('Startkraft', padL + 10, (logicalH - padB) - displaySlopeStart*100 - 10);
+                    ctx.font = '12px Inter';
+                    ctx.fillText('(Steigung am Beginn)', padL + 10, (logicalH - padB) - displaySlopeStart*100 + 5);
+
+                    // Explosivkraft (Maximal Tangent at inflection point ~50ms for this function)
+                    const tExp = 55;
+                    const xExp = padL + (tExp/maxT) * plotW;
+                    const yExp = (logicalH - padB) - speedForceCurve(tExp);
+                    
+                    const slopeExp = (speedForceCurve(tExp+dt) - speedForceCurve(tExp)) / dt;
+                    const displaySlopeExp = slopeExp * (plotW/maxT);
+                    
+                    // Draw Tangent line
+                    ctx.beginPath();
+                    ctx.moveTo(xExp - 40, yExp + displaySlopeExp*40);
+                    ctx.lineTo(xExp + 100, yExp - displaySlopeExp*100);
+                    ctx.strokeStyle = '#ef4444';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                    
+                    // Point
+                    ctx.beginPath();
+                    ctx.arc(xExp, yExp, 5, 0, Math.PI*2);
+                    ctx.fillStyle = '#ef4444';
+                    ctx.fill();
+
+                    // Annotation
+                    ctx.textAlign = 'right';
+                    ctx.font = 'bold 14px Inter';
+                    ctx.fillText('Explosivkraft', xExp + 80, yExp - displaySlopeExp*80 - 15);
+                    ctx.font = '12px Inter';
+                    ctx.fillText('(Maximale Steigung ΔF/Δt)', xExp + 80, yExp - displaySlopeExp*80);
+                }
+
+                // Reset logic to loop animation
+                if (currentT >= maxT + 200) {
+                    time = 0; // pause then restart
+                }
+            }
+
+            function animate() {
+                drawGraph();
+                time++;
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

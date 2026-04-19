@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Anwendungsbezug Energiebereitstellung</title>
+    <style>
+        /* Importiere dynamische, sportliche Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Dark-Mode / Neon Sports Theme */
+            --bg-body: #0f172a;      /* Slate 900 */
+            --bg-card: #1e293b;      /* Slate 800 */
+            --bg-card-alt: #334155;  /* Slate 700 */
+            
+            --text-main: #f8fafc;    /* Slate 50 */
+            --text-muted: #cbd5e1;   /* Slate 300 */
+            
+            --neon-red: #f43f5e;     /* Alaktazid (explosiv) */
+            --neon-yellow: #eab308;  /* Laktazid (intensiv) */
+            --neon-green: #10b981;   /* Aerob (ausdauernd) */
+            --neon-blue: #38bdf8;    /* Akzente */
+            
+            --abi-gold: #fbbf24;
+            --abi-orange: #ea580c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Hero / Header Section */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #000000 100%);
+            border-left: 8px solid var(--neon-blue);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--neon-blue);
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lead {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Typography & Content Elements */
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            color: var(--text-main);
+            margin: 3rem 0 1.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--bg-card-alt);
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2 .icon {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            color: var(--neon-blue);
+            margin: 2rem 0 1rem 0;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Energy Systems List Styling */
+        .energy-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .energy-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            border-left: 5px solid transparent;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .energy-card:hover {
+            transform: translateX(10px);
+            background: var(--bg-card-alt);
+        }
+
+        .energy-card.alaktazid { border-left-color: var(--neon-red); }
+        .energy-card.laktazid { border-left-color: var(--neon-yellow); }
+        .energy-card.aerob { border-left-color: var(--neon-green); }
+
+        .energy-card h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        .energy-card.alaktazid h4 { color: var(--neon-red); }
+        .energy-card.laktazid h4 { color: var(--neon-yellow); }
+        .energy-card.aerob h4 { color: var(--neon-green); }
+
+        /* Mountainbike Grid */
+        .mtb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .mtb-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--bg-card-alt);
+        }
+
+        .mtb-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .mtb-card h4 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Canvas Container */
+        .canvas-wrapper {
+            background: #000000;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--bg-card-alt);
+            margin: 3rem 0;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+        }
+
+        .canvas-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .canvas-header h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            letter-spacing: 1px;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        /* Abitur Transfer Box - Glowing / Massive */
+        .abi-transfer {
+            position: relative;
+            background: linear-gradient(to bottom right, #2a1508, #1a0d05);
+            border: 2px dashed var(--abi-orange);
+            border-radius: 16px;
+            padding: 3.5rem 3rem 3rem 3rem;
+            margin-top: 5rem;
+            box-shadow: 0 0 30px rgba(234, 88, 12, 0.2);
+        }
+
+        .abi-title {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--abi-orange), var(--abi-gold));
+            color: #000;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            padding: 0.5rem 3rem;
+            border-radius: 30px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(234, 88, 12, 0.5);
+            white-space: nowrap;
+        }
+
+        .abi-transfer p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #fed7aa;
+        }
+
+        .abi-rule {
+            background: rgba(0,0,0,0.4);
+            border-left: 4px solid var(--abi-gold);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .abi-rule strong {
+            color: var(--abi-gold);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Keyword Highlights */
+        .highlight {
+            color: var(--neon-blue);
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 2rem; }
+            h1 { font-size: 2.2rem; }
+            .abi-transfer { padding: 2.5rem 1.5rem 1.5rem 1.5rem; }
+            .abi-title { font-size: 1.2rem; padding: 0.5rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hero">
+        <span class="badge">Lernbereich 1.4.1c</span>
+        <h1>Anwendungsbezug: Energiebereitstellung</h1>
+        <p class="lead">Zuordnung der Prozesse zu Belastungen hinsichtlich Dauer und Intensität. Das Zusammenspiel der energetischen Systeme in der sportlichen Praxis.</p>
+    </div>
+
+    <p>In der sportlichen Praxis laufen die verschiedenen Prozesse der Energiebereitstellung (anaerob-alaktazid, anaerob-laktazid, aerob) fast nie vollständig isoliert ab, sondern greifen fließend ineinander über. Welcher Stoffwechselweg zu einem bestimmten Zeitpunkt die Hauptlast der ATP-Resynthese trägt, wird durch zwei zentrale Faktoren determiniert: die <span class="highlight">Belastungsintensität</span> (wie schnell muss ATP nachgeliefert werden?) und die <span class="highlight">Belastungsdauer</span> (wie lange muss die Belastung aufrechterhalten werden?).</p>
+
+    <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--neon-blue); margin: 2rem 0; font-style: italic;">
+        <strong>Dabei gilt der physiologische Grundsatz:</strong> Je höher die Intensität einer Belastung, desto schneller muss die Energiebereitstellung erfolgen (hohe Energieflussrate) und desto dominanter sind die anaeroben Prozesse. Je länger die Belastung andauert, desto dominanter wird der aerobe Stoffwechsel.
+    </div>
+
+    <!-- Section 1 -->
+    <h2><span class="icon">🏃</span> 1. Anwendung am Beispiel des Zehnkampfs (Leichtathletik)</h2>
+    <p>Der Zehnkampf stellt durch seine unterschiedlichen Disziplinen ein perfektes Modell dar, um die Spezifik der Energiebereitstellung zu verdeutlichen:</p>
+
+    <div class="energy-list">
+        <div class="energy-card alaktazid">
+            <h4>Anaerob-alaktazide Dominanz</h4>
+            <p>Bei extrem kurzen, hochintensiven Belastungen unter 10 Sekunden dominiert die Spaltung von ATP und Kreatinphosphat (KP). Ein klassisches Beispiel ist das <strong>Kugelstoßen</strong>, bei dem eine maximale Kraftentfaltung im Bereich weniger Sekunden gefordert ist. Auch beim <strong>Weitsprung</strong> (ca. 40 m Anlauf, Absprung und Landung) kann die Energie nicht allein durch vorhandenes ATP gedeckt werden, sondern erfordert zwingend die Resynthese durch KP.</p>
+        </div>
+        
+        <div class="energy-card laktazid">
+            <h4>Anaerob-laktazide Dominanz</h4>
+            <p>Bei intensiven Belastungen, die zwischen ca. 15 und 60 Sekunden andauern, reicht die alaktazide Energie nicht mehr aus. Beim <strong>400-m-Lauf</strong> (ca. 50–60 Sekunden Belastung) wird die ATP-Resynthese maßgeblich durch die unvollständige, anaerobe Verbrennung von Glukose unter massiver Laktatbildung (anaerobe Glykolyse) gesichert.</p>
+        </div>
+
+        <div class="energy-card aerob">
+            <h4>Aerobe Dominanz</h4>
+            <p>Sobald Belastungen mehrere Minuten andauern, schaltet der Körper auf den sauerstoffabhängigen Stoffwechsel um. Beim <strong>1500-m-Lauf</strong>, der etwa 4 bis 5 Minuten andauert, erfolgt die ATP-Gewinnung primär durch die aerobe Verbrennung von Glukose bzw. Glykogen und freien Fettsäuren.</p>
+        </div>
+    </div>
+
+    <!-- Canvas Diagramm -->
+    <div class="canvas-wrapper">
+        <div class="canvas-header">
+            <h4>Zusammenspiel der Energiebereitstellungssysteme</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin:0;">In Abhängigkeit von der Belastungsdauer (0 Sekunden bis 2 Stunden)</p>
+        </div>
+        <canvas id="energyTimeChart" width="900" height="450"></canvas>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-color" style="background: var(--neon-red);"></div> Anaerob-Alaktazid (ATP/KP)</div>
+            <div class="legend-item"><div class="legend-color" style="background: var(--neon-yellow);"></div> Anaerob-Laktazid (Glykolyse)</div>
+            <div class="legend-item"><div class="legend-color" style="background: var(--neon-green);"></div> Aerob (Glykolyse/Lipolyse)</div>
+        </div>
+    </div>
+
+    <!-- Section 2 -->
+    <h2><span class="icon">🚵</span> 2. Anwendung am Beispiel von Ausdauerbelastungen (z.B. Mountainbike)</h2>
+    <p>Auch innerhalb einer einzigen, längeren Trainingseinheit oder eines Wettkampfs wechseln die dominierenden Systeme je nach Streckenprofil und Profilanforderung:</p>
+
+    <div class="mtb-grid">
+        <div class="mtb-card">
+            <span class="mtb-icon">➡️</span>
+            <h4 style="color: var(--neon-green);">Flache Abschnitte <br><span style="font-size:0.9rem; color: var(--text-muted);">(Moderate Intensität)</span></h4>
+            <p style="font-size: 0.95rem;">Auf weitgehend flachen Streckenverläufen ist die Belastungsintensität eher gering. Der Sauerstoffbedarf kann gedeckt werden, die Energiebereitstellung erfolgt vorherrschend aerob durch die Verbrennung von Kohlenhydraten und Fettsäuren.</p>
+        </div>
+        <div class="mtb-card">
+            <span class="mtb-icon">↗️</span>
+            <h4 style="color: var(--neon-red);">Steile Anstiege <br><span style="font-size:0.9rem; color: var(--text-muted);">(Hohe Intensität)</span></h4>
+            <p style="font-size: 0.95rem;">Sobald starke Steigungen (z.B. 24%) überwunden werden, steigt die Intensität drastisch. Es kommt zu einem zunehmenden Bedeutungsgewinn der anaerob-laktaziden Energiebereitstellung. Das Laktat-Steady-State wird überschritten (Übersäuerung).</p>
+        </div>
+        <div class="mtb-card">
+            <span class="mtb-icon">↘️</span>
+            <h4 style="color: var(--neon-blue);">Bergab-Passagen <br><span style="font-size:0.9rem; color: var(--text-muted);">(Regeneration)</span></h4>
+            <p style="font-size: 0.95rem;">Bei Abfahrten sinkt die Intensität rapide. Die aerobe Energiebereitstellung dominiert wieder. Diese Phase wird genutzt, um das in den Muskeln angehäufte Laktat unter Sauerstoffverbrauch aerob zu verbrennen (Regeneration).</p>
+        </div>
+    </div>
+
+    <!-- Abitur Transfer -->
+    <div class="abi-transfer">
+        <div class="abi-title">Abitur-Transfer & Praxis (eA)</div>
+        
+        <p>Gemäß den Vorgaben des Fachlehrplans Sport (LehrplanPLUS) für das erhöhte Anforderungsniveau (eA) liegt der klare Schwerpunkt in den Prüfungen auf der Anwendungsorientierung. Überwiegend reproduktive Aufgaben (z. B. das isolierte Aufschreiben exakter Reaktionsgleichungen) treten zugunsten des Transfers auf reale Sportszenarien (wie den Zehnkampf) in den Hintergrund.</p>
+
+        <div class="abi-rule">
+            <strong>Quellenanalyse (Diskontinuierliche Texte)</strong>
+            <p style="margin-bottom:0;">In materialgestützten Abituraufgaben wird von dir erwartet, aus Texten Indikatoren für die Belastungsintensität herauszufiltern.</p>
+            <ul style="color: #fed7aa; margin-left: 1.5rem; margin-top: 10px;">
+                <li>Steht in einem Material, dass eine <em>„Unterhaltung“</em> während der Belastung möglich ist, musst du dies zwingend als Indikator für eine <strong>geringe Intensität und damit eine aerobe Energiebereitstellung</strong> werten.</li>
+                <li style="margin-top:10px;">Berichtet ein Athlet von Gefühlen der <em>„völligen Erschöpfung“</em> oder dem Einstellen einer Unterhaltung, ist das der Beleg für eine <strong>sehr hohe Intensität und die zwingende Überschreitung des aeroben Bereichs</strong> hin zur anaerob-laktaziden Energiebereitstellung (Laktat-Akkumulation).</li>
+            </ul>
+        </div>
+
+        <div class="abi-rule" style="border-left-color: #ef4444;">
+            <strong style="color: #ef4444;">Die Begründungspflicht</strong>
+            <p style="margin-bottom:0;">Es reicht im Abitur niemals aus, nur den Stoffwechselweg zu nennen. Du musst die Zuordnung zu einer Disziplin oder einem Streckenabschnitt immer über die Kriterien <strong>„Dauer“</strong> und <strong>„Intensität“</strong> (bzw. dem nötigen Energiefluss) kausal begründen.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Canvas Logic for Energy Systems over Time
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('energyTimeChart');
+        const ctx = canvas.getContext('2d');
+        
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+        const padding = 60;
+        const bottomPadding = 80;
+        const graphWidth = width - padding * 2;
+        const graphHeight = height - padding - bottomPadding;
+
+        // Custom mapping to create a pseudo-logarithmic x-axis
+        // 0-10s -> 20% width
+        // 10-60s -> 20% width (up to 40%)
+        // 60-300s (5m) -> 30% width (up to 70%)
+        // 300-7200s (2h) -> 30% width (up to 100%)
+        function timeToX(seconds) {
+            let percentage = 0;
+            if (seconds <= 10) {
+                percentage = (seconds / 10) * 0.20;
+            } else if (seconds <= 60) {
+                percentage = 0.20 + ((seconds - 10) / 50) * 0.20;
+            } else if (seconds <= 300) {
+                percentage = 0.40 + ((seconds - 60) / 240) * 0.30;
+            } else if (seconds <= 7200) {
+                percentage = 0.70 + ((seconds - 300) / 6900) * 0.30;
+            } else {
+                percentage = 1;
+            }
+            return padding + percentage * graphWidth;
+        }
+
+        function percentToY(percent) {
+            return height - bottomPadding - (percent / 100) * graphHeight;
+        }
+
+        function drawGraph() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw Background Grid (Y-Axis: 0%, 25%, 50%, 75%, 100%)
+            ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+            ctx.lineWidth = 1;
+            ctx.fillStyle = '#cbd5e1';
+            ctx.font = '12px Nunito';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+
+            for (let i = 0; i <= 4; i++) {
+                const y = percentToY(i * 25);
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+                ctx.fillText((i * 25) + '%', padding - 10, y);
+            }
+
+            // Draw X-Axis Ticks & Labels
+            const timePoints = [
+                { s: 0, label: '0s' },
+                { s: 10, label: '10s' },
+                { s: 60, label: '1 min' },
+                { s: 300, label: '5 min' },
+                { s: 3600, label: '1 h' },
+                { s: 7200, label: '2 h' }
+            ];
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            timePoints.forEach(tp => {
+                const x = timeToX(tp.s);
+                ctx.beginPath();
+                ctx.moveTo(x, height - bottomPadding);
+                ctx.lineTo(x, height - bottomPadding + 5);
+                ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+                ctx.stroke();
+                ctx.fillText(tp.label, x, height - bottomPadding + 10);
+            });
+
+            // Y-Axis Title
+            ctx.save();
+            ctx.translate(15, height/2 - bottomPadding/2);
+            ctx.rotate(-Math.PI/2);
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 14px Oswald';
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillText('Anteil Gesamtenergie (%)', 0, 0);
+            ctx.restore();
+
+            // Function to draw smooth lines
+            function drawSystemCurve(dataPoints, color) {
+                ctx.beginPath();
+                ctx.moveTo(timeToX(dataPoints[0].t), percentToY(dataPoints[0].p));
+                for (let i = 1; i < dataPoints.length; i++) {
+                    // Use lineTo for simplicity, or bezierCurveTo for smooth (doing lines with many points)
+                    ctx.lineTo(timeToX(dataPoints[i].t), percentToY(dataPoints[i].p));
+                }
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 4;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.stroke();
+            }
+
+            // Data Points for each system
+            // 1. Alaktazid (Red)
+            const dataAlak = [
+                {t:0, p:100}, {t:2, p:95}, {t:5, p:60}, {t:10, p:10}, {t:15, p:0}, {t:7200, p:0}
+            ];
+            
+            // 2. Laktazid (Yellow)
+            const dataLak = [
+                {t:0, p:0}, {t:5, p:30}, {t:15, p:65}, {t:30, p:75}, {t:60, p:60}, {t:120, p:30}, {t:300, p:5}, {t:7200, p:0}
+            ];
+
+            // 3. Aerob (Green)
+            const dataAerob = [
+                {t:0, p:0}, {t:10, p:5}, {t:30, p:20}, {t:60, p:40}, {t:120, p:70}, {t:300, p:95}, {t:3600, p:99}, {t:7200, p:100}
+            ];
+
+            // Draw Curves
+            drawSystemCurve(dataAlak, '#f43f5e'); // neon-red
+            drawSystemCurve(dataLak, '#eab308');  // neon-yellow
+            drawSystemCurve(dataAerob, '#10b981'); // neon-green
+
+            // Add Sport Icons (Piktogramme)
+            ctx.font = '24px Arial'; // Emojis need standard fonts
+            
+            // Kugelstoßer at 2s
+            ctx.fillText('🏋️‍♂️', timeToX(2), percentToY(95) - 20);
+            
+            // 400m Läufer at 50s
+            ctx.fillText('🏃🏾', timeToX(50), percentToY(65) - 20);
+            
+            // 1500m Läufer at 4m (240s)
+            ctx.fillText('🏃‍♀️', timeToX(240), percentToY(90) - 20);
+
+            // X-Axis Label
+            ctx.fillStyle = '#f8fafc';
+            ctx.font = 'bold 14px Oswald';
+            ctx.fillText('Belastungsdauer', width/2, height - bottomPadding + 40);
+        }
+
+        drawGraph();
+
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawGraph();
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.2.2a Muskulatur makroskopisch - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Athletic & Kinetic (Volt & Carbon) */
+            --carbon-base: #0f1115;
+            --carbon-card: #1a1d24;
+            --carbon-light: #2a2e37;
+            
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            
+            --volt-green: #ccff00;    /* High-energy kinetic accent */
+            --electric-blue: #00d2ff; /* Fascia & Connective tissue */
+            --muscle-red: #ff3366;    /* Active muscle tissue */
+            
+            --abi-bg: #2d1a11;
+            --abi-red: #ff4757;
+            --abi-gold: #ffa502;
+            
+            --radius-sharp: 4px;
+            --radius-smooth: 12px;
+            
+            --shadow-volt: 0 0 20px rgba(204, 255, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--carbon-base);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            /* Subtle dark athletic texture */
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.02) 75%, rgba(255,255,255,0.02)), 
+                linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.02) 75%, rgba(255,255,255,0.02));
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        h1, h2, h3, h4, .kinetic-font {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Kinetic Hero Section --- */
+        .hero {
+            padding: 6rem 2rem 5rem;
+            position: relative;
+            background: radial-gradient(circle at 100% 0%, rgba(204, 255, 0, 0.15), transparent 50%),
+                        radial-gradient(circle at 0% 100%, rgba(0, 210, 255, 0.1), transparent 50%);
+            border-bottom: 2px solid var(--carbon-light);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; width: 6px; height: 100%;
+            background: var(--volt-green);
+            box-shadow: 0 0 15px var(--volt-green);
+        }
+
+        .tag {
+            background: var(--volt-green);
+            color: var(--carbon-base);
+            padding: 0.3rem 1rem;
+            font-weight: 800;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            transform: skewX(-10deg);
+        }
+
+        .tag span {
+            display: inline-block;
+            transform: skewX(10deg);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 800px;
+        }
+
+        /* --- Intro Block --- */
+        .intro-box {
+            background: var(--carbon-card);
+            padding: 2.5rem 3rem;
+            margin: 4rem 0;
+            border-radius: var(--radius-sharp);
+            border-left: 4px solid var(--electric-blue);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-weight: 300;
+        }
+
+        /* --- Section Titles --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 5rem 0 2.5rem;
+        }
+
+        .section-num {
+            background: var(--carbon-light);
+            color: var(--volt-green);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            font-family: 'Oswald', sans-serif;
+            transform: skewX(-10deg);
+            border: 1px solid rgba(204, 255, 0, 0.3);
+        }
+
+        .section-num span { transform: skewX(10deg); }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        /* --- 1. Makroskopischer Aufbau --- */
+        .anatomy-layers {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .layer-card {
+            background: var(--carbon-card);
+            border: 1px solid var(--carbon-light);
+            padding: 2rem;
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .layer-card:hover {
+            transform: translateX(10px);
+            border-color: var(--electric-blue);
+        }
+
+        .layer-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; width: 4px; height: 100%;
+        }
+
+        .layer-card:nth-child(1)::before { background: var(--text-muted); } /* Bone/Tendon */
+        .layer-card:nth-child(2)::before { background: var(--muscle-red); } /* Muscle Belly */
+        .layer-card:nth-child(3)::before { background: var(--electric-blue); } /* Fascia */
+
+        .layer-title h3 {
+            font-size: 1.5rem;
+            color: var(--electric-blue);
+            min-width: 250px;
+        }
+        
+        .layer-card:nth-child(1) .layer-title h3 { color: var(--text-main); }
+        .layer-card:nth-child(2) .layer-title h3 { color: var(--muscle-red); }
+
+        .layer-content {
+            color: var(--text-muted);
+        }
+        
+        .layer-content strong {
+            color: var(--text-main);
+        }
+
+        @media (max-width: 800px) {
+            .layer-card { flex-direction: column; gap: 0.5rem; }
+            .layer-title h3 { min-width: auto; }
+        }
+
+        /* --- 2. Wichtige Muskelgruppen --- */
+        .muscle-intro {
+            margin-bottom: 3rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--carbon-light);
+            padding-bottom: 2rem;
+        }
+
+        .muscle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 950px) {
+            .muscle-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 650px) {
+            .muscle-grid { grid-template-columns: 1fr; }
+        }
+
+        .muscle-card {
+            background: linear-gradient(180deg, var(--carbon-card) 0%, var(--carbon-base) 100%);
+            border: 1px solid var(--carbon-light);
+            padding: 2rem;
+            border-top: 3px solid var(--volt-green);
+            border-radius: var(--radius-sharp);
+            position: relative;
+        }
+
+        .muscle-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 0.2rem;
+        }
+
+        .lat-name {
+            font-family: 'Manrope', sans-serif;
+            font-style: italic;
+            color: var(--volt-green);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .muscle-card p {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Interactive Canvas Infographic --- */
+        .canvas-section {
+            background: var(--carbon-card);
+            border: 1px solid var(--carbon-light);
+            padding: 3rem 2rem;
+            border-radius: var(--radius-smooth);
+            margin-bottom: 6rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .canvas-section h2 {
+            color: var(--volt-green);
+            margin-bottom: 0.5rem;
+        }
+        
+        .canvas-section p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            background: var(--carbon-base);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- Premium Abitur Transfer Box --- */
+        .abitur-prep {
+            background: linear-gradient(145deg, var(--abi-bg), var(--carbon-base));
+            padding: 4rem;
+            border-radius: var(--radius-smooth);
+            margin-bottom: 6rem;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            box-shadow: 0 0 40px rgba(255, 71, 87, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-prep::before {
+            content: 'TRANSFER';
+            position: absolute;
+            font-size: 8rem;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            color: rgba(255, 71, 87, 0.03);
+            top: -20px;
+            right: 0;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-red);
+            color: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 900;
+            transform: skewX(-10deg);
+        }
+
+        .abi-icon span { transform: skewX(10deg); }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #ff9f43;
+            margin-bottom: 3rem;
+            font-weight: 400;
+            border-bottom: 1px solid rgba(255, 71, 87, 0.2);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .abi-card {
+            background: rgba(0,0,0,0.3);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--abi-red);
+        }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .abi-card p {
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+        
+        .abi-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .eval-box {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .eval-item {
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+
+        .eval-item.wrong {
+            background: rgba(255, 71, 87, 0.1);
+            border-left-color: var(--abi-red);
+        }
+
+        .eval-item.right {
+            background: rgba(46, 204, 113, 0.1);
+            border-left-color: #2ecc71;
+        }
+
+        .eval-item strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1px;
+        }
+        .eval-item.wrong strong { color: var(--abi-red); }
+        .eval-item.right strong { color: #2ecc71; }
+
+        .hl-volt { color: var(--volt-green); font-weight: 700; }
+        .hl-red { color: var(--abi-red); font-weight: 700; }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <div class="tag"><span>Lernbereich 1.2.2a</span></div>
+            <h1>Muskulatur makroskopisch</h1>
+            <p>Wichtige Muskeln und Muskelgruppen im sportlichen Kontext sowie der hierarchische Aufbau des Skelettmuskels.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-box">
+            Während Knochen und Gelenke das passive Gerüst bilden, stellt die quergestreifte Skelettmuskulatur den <strong>aktiven Bewegungsapparat</strong> dar. Sie ist das motorische Zugsystem des Körpers, welches durch aktive Verkürzung (Kontraktion) die Knochenhebel in den Gelenken bewegt und somit sportliche Leistungen überhaupt erst ermöglicht.
+        </div>
+
+        <!-- Section 1 -->
+        <div class="section-header">
+            <div class="section-num"><span>1</span></div>
+            <h2>Makroskopischer Aufbau des Skelettmuskels</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Ein Skelettmuskel ist keine homogene Masse, sondern ein hochgradig strukturiertes, hierarchisches System aus kontraktilen Elementen und bindegewebigen Hüllen (Faszien), die der Kraftübertragung und Formgebung dienen:</p>
+
+        <div class="anatomy-layers">
+            <div class="layer-card">
+                <div class="layer-title">
+                    <h3 class="kinetic-font">Ursprung & Ansatz</h3>
+                    <span style="font-size: 0.9rem; color: var(--text-muted);">Origo & Insertio</span>
+                </div>
+                <div class="layer-content">
+                    <p>Der Muskel ist über <strong>Sehnen</strong> (starke, wenig dehnbare Bindegewebsstränge) an den Knochen befestigt. Der Ursprung liegt meist rumpfnah (proximal) und bewegt sich bei Kontraktion weniger, der Ansatz liegt rumpffern (distal) am bewegteren Knochenteil.</p>
+                </div>
+            </div>
+
+            <div class="layer-card">
+                <div class="layer-title">
+                    <h3 class="kinetic-font">Muskelbauch</h3>
+                    <span style="font-size: 0.9rem; color: var(--text-muted);">Venter</span>
+                </div>
+                <div class="layer-content">
+                    <p>Der fleischige, kontraktile Mittelteil des Muskels, in dem die eigentliche Verkürzung (Kontraktion) der Fasern stattfindet.</p>
+                </div>
+            </div>
+
+            <div class="layer-card">
+                <div class="layer-title">
+                    <h3 class="kinetic-font">Bindegewebige Hüllen</h3>
+                    <span style="font-size: 0.9rem; color: var(--text-muted);">Faszien-System</span>
+                </div>
+                <div class="layer-content">
+                    <p>Der gesamte Muskelbauch wird von einer straffen Bindegewebshülle (<strong>Epimysium/Faszie</strong>) umschlossen. Im Inneren unterteilt das <strong>Perimysium</strong> den Muskel in gut sichtbare Muskelfaserbündel (Faszikel). Jede einzelne Muskelfaser innerhalb dieses Bündels ist wiederum vom <strong>Endomysium</strong> umhüllt.</p>
+                    <p style="margin-top: 0.5rem; border-top: 1px dashed var(--carbon-light); padding-top: 0.5rem;"><em>Funktion:</em> Diese Faszienstrukturen gehen an den Muskelenden fließend in die Sehnen über und übertragen die Zugkraft gebündelt auf den Knochen.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section-header">
+            <div class="section-num"><span>2</span></div>
+            <h2>Wichtige Muskelgruppen im sportlichen Kontext</h2>
+        </div>
+        <p class="muscle-intro">Der Fachlehrplan verlangt kein medizinisches Auswendiglernen aller über 600 Muskeln, sondern den Fokus auf die <strong>sportartspezifisch relevanten Hauptmuskelgruppen</strong>. Am Paradebeispiel der Sportart Volleyball lassen sich die wichtigsten funktionellen Muskelgruppen und ihre Aufgaben im Bewegungsablauf exakt ableiten:</p>
+
+        <div class="muscle-grid">
+            <div class="muscle-card">
+                <h3 class="kinetic-font">Oberschenkelvorderseite</h3>
+                <span class="lat-name">M. quadriceps femoris</span>
+                <p>Die vierköpfige Kniestreckermuskulatur. Sie ist bei allen Absprung- und Landebewegungen (z. B. beim Block oder Angriffsschlag) essenziell beteiligt.</p>
+            </div>
+            <div class="muscle-card">
+                <h3 class="kinetic-font">Oberschenkelrückseite</h3>
+                <span class="lat-name">Ischiocrurale Musk. / Hamstrings</span>
+                <p>Die Kniebeuger und Hüftstrecker. Sie sind bei allen Laufbewegungen (z. B. dem Anlauf zum Schmetterschlag) maßgeblich beteiligt.</p>
+            </div>
+            <div class="muscle-card">
+                <h3 class="kinetic-font">Wadenmuskulatur</h3>
+                <span class="lat-name">M. triceps surae</span>
+                <p>Bestehend aus Zwillingswadenmuskel und Schollenmuskel. Sie ist für die Plantarflexion (Streckung im Sprunggelenk) verantwortlich und damit zwingend bei allen Sprüngen beteiligt.</p>
+            </div>
+            <div class="muscle-card">
+                <h3 class="kinetic-font">Rumpfmuskulatur (Bauch)</h3>
+                <span class="lat-name">M. rectus abdominis u.a.</span>
+                <p>Zuständig für die Rumpfbeugung. Im Volleyball dient sie der massiven Unterstützung der Schlagbewegung im Angriffsschlag (Auflösen der Bogenspannung / "Klappmesser-Bewegung").</p>
+            </div>
+            <div class="muscle-card">
+                <h3 class="kinetic-font">Rumpfmuskulatur (Rücken)</h3>
+                <span class="lat-name">Erector spinae, M. latissimus dorsi</span>
+                <p>Stabilisiert die Wirbelsäule und dient beim Volleyball der essenziellen Unterstützung der Ausholbewegung beim Angriffsschlag (Aufbau der Bogenspannung).</p>
+            </div>
+            <div class="muscle-card">
+                <h3 class="kinetic-font">Schultermuskulatur</h3>
+                <span class="lat-name">M. deltoideus</span>
+                <p>Der Deltamuskel hebt den Arm in der Schulter an (Abduktion/Elevation) und ist logischerweise bei allen Überkopfbewegungen der Arme (wie Pritschen, Blocken, Schlagen) intensiv beteiligt.</p>
+            </div>
+        </div>
+
+        <!-- Canvas Graphic -->
+        <section class="canvas-section">
+            <h2 class="kinetic-font">Strukturanalyse & Kinetik</h2>
+            <p class="subtitle">Links: Fasziale Hierarchie des Muskels. Rechts: Muskelaktivierung im Volleyball-Angriffsschlag.</p>
+            <div class="canvas-container">
+                <canvas id="muscleCanvas" width="1000" height="550"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-icon"><span>!</span></div>
+                <h2 class="kinetic-font">Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                Dieser scheinbar reine Anatomie-Teil ist in den illustrierenden Abiturprüfungen (eA) raffiniert mit der Trainingslehre (insbesondere dem Beweglichkeitstraining) verknüpft!
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card">
+                    <h3 class="kinetic-font">🧘 Der Transfer auf Dehnmethoden</h3>
+                    <p>In Klausuren wird fast nie stumpf nach <em>"Nenne den lateinischen Namen des Brustmuskels"</em> gefragt. Stattdessen lautet ein typischer Arbeitsauftrag (siehe offizielle Beispielaufgabe III, 3.4):</p>
+                    <p style="padding: 1rem; background: rgba(255,255,255,0.05); border-left: 2px solid var(--volt-green); margin-top: 1rem; font-style: italic;">
+                        "Nennen Sie sechs für die Sportart Volleyball wichtige Muskelgruppen, die (beim Dehnen) gedehnt werden sollten, und begründen Sie Ihre Auswahl!"
+                    </p>
+                </div>
+
+                <div class="abi-card">
+                    <h3 class="kinetic-font">⚖️ Die korrekte Argumentation</h3>
+                    <p>Du musst die Muskelgruppe nennen und <span class="hl-red">zwingend ihre biomechanische Funktion in der spezifischen Sportart als Begründung anführen!</span></p>
+                    
+                    <div class="eval-box">
+                        <div class="eval-item wrong">
+                            <strong>FALSCH / UNZUREICHEND</strong>
+                            "Ich dehne die Schultermuskulatur, weil man die im Volleyball braucht."
+                        </div>
+                        <div class="eval-item right">
+                            <strong>RICHTIG FÜR DIE VOLLE PUNKTZAHL</strong>
+                            "Ich dehne die Schultermuskulatur (M. deltoideus), da sie den Arm im Schultergelenk hebt (Elevation/Abduktion) und somit bei allen Überkopfbewegungen der Arme, wie dem Block oder Angriffsschlag, zwingend beteiligt ist."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="abi-card">
+                    <h3 class="kinetic-font">🎯 Sportartspezifität beachten</h3>
+                    <p>Trainiere diese Transferleistung auch für andere Lehrplan-Sportarten. Beim <strong>Kugelstoßen</strong> (Zehnkampf) rückt beispielsweise die Brustmuskulatur (<span class="hl-volt">M. pectoralis major</span>) und der Trizeps für die abstoßende Stoßbewegung in den Fokus der Begründung.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('muscleCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Handle high DPI displays
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 1000;
+            const logicalH = 550;
+            
+            let time = 0;
+            let animationId;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayW = Math.min(rect.width, logicalW);
+                const scale = displayW / logicalW;
+                const displayH = logicalH * scale;
+                
+                canvas.width = displayW * dpr;
+                canvas.height = displayH * dpr;
+                canvas.style.width = `${displayW}px`;
+                canvas.style.height = `${displayH}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // Helpers
+            function drawLabel(text, x, y, lineX, lineY, align = 'left', color = '#00d2ff') {
+                ctx.beginPath();
+                ctx.moveTo(x + (align === 'right' ? 60 : -60), y);
+                ctx.lineTo(x, y);
+                ctx.lineTo(lineX, lineY);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.arc(lineX, lineY, 4, 0, Math.PI*2);
+                ctx.fillStyle = color;
+                ctx.shadowColor = color;
+                ctx.shadowBlur = 10;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                ctx.fillStyle = '#f3f4f6';
+                ctx.font = '600 13px Manrope';
+                ctx.textAlign = align;
+                ctx.fillText(text, x + (align === 'right' ? 65 : -65), y + 4);
+            }
+
+            function drawCylinder(x, y, w, h, depth, colorTop, colorSide) {
+                // Side
+                ctx.fillStyle = colorSide;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x + w, y);
+                ctx.lineTo(x + w, y + h);
+                ctx.lineTo(x, y + h);
+                ctx.closePath();
+                ctx.fill();
+
+                // Curved end (right)
+                ctx.beginPath();
+                ctx.ellipse(x + w, y + h/2, depth, h/2, 0, -Math.PI/2, Math.PI/2);
+                ctx.fill();
+
+                // Top/Cut Face (left)
+                ctx.fillStyle = colorTop;
+                ctx.beginPath();
+                ctx.ellipse(x, y + h/2, depth, h/2, 0, 0, Math.PI*2);
+                ctx.fill();
+                
+                // Outline
+                ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.ellipse(x, y + h/2, depth, h/2, 0, 0, Math.PI*2);
+                ctx.stroke();
+            }
+
+            // --- Left Graphic: Muscle Cross-Section ---
+            function drawMuscleStructure() {
+                const cx = 150;
+                const cy = 250;
+
+                // Bone (Knochen)
+                ctx.fillStyle = '#e2e8f0';
+                ctx.beginPath();
+                // Custom roundRect draw for compatibility
+                const rx = cx - 100, ry = cy - 60, rw = 40, rh = 120, rr = 10;
+                ctx.moveTo(rx + rr, ry);
+                ctx.lineTo(rx + rw - rr, ry); ctx.quadraticCurveTo(rx + rw, ry, rx + rw, ry + rr);
+                ctx.lineTo(rx + rw, ry + rh - rr); ctx.quadraticCurveTo(rx + rw, ry + rh, rx + rw - rr, ry + rh);
+                ctx.lineTo(rx + rr, ry + rh); ctx.quadraticCurveTo(rx, ry + rh, rx, ry + rh - rr);
+                ctx.lineTo(rx, ry + rr); ctx.quadraticCurveTo(rx, ry, rx + rr, ry);
+                ctx.closePath();
+                ctx.fill();
+                
+                // Tendon (Sehne)
+                ctx.fillStyle = '#f8fafc';
+                ctx.beginPath();
+                ctx.moveTo(cx - 60, cy - 40);
+                ctx.lineTo(cx, cy - 25);
+                ctx.lineTo(cx, cy + 25);
+                ctx.lineTo(cx - 60, cy + 40);
+                ctx.fill();
+                
+                // Muscle Belly (Epimysium)
+                drawCylinder(cx + 80, cy - 70, 100, 140, 20, '#ff3366', '#be123c');
+                
+                // Draw internal circles on the cut face (Fascicles)
+                ctx.fillStyle = '#9f1239';
+                for(let r=0; r<5; r++) {
+                    for(let a=0; a<Math.PI*2; a+=Math.PI/3) {
+                        if(r===0 && a>0) continue;
+                        let px = cx + 80 + Math.cos(a) * (r*4);
+                        let py = cy + Math.sin(a) * (r*12);
+                        ctx.beginPath();
+                        ctx.ellipse(px, py, 3, 10, 0, 0, Math.PI*2);
+                        ctx.fill();
+                    }
+                }
+                // Fascia Outer (Epimysium)
+                ctx.strokeStyle = '#00d2ff';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.ellipse(cx + 80, cy, 20, 70, 0, 0, Math.PI*2);
+                ctx.stroke();
+
+                // Fascicle (Perimysium) Extruding
+                drawCylinder(cx + 170, cy - 30, 80, 60, 10, '#f43f5e', '#9f1239');
+                ctx.strokeStyle = '#00d2ff';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.ellipse(cx + 170, cy, 10, 30, 0, 0, Math.PI*2);
+                ctx.stroke();
+
+                // Muscle Fiber (Endomysium) Extruding
+                drawCylinder(cx + 250, cy - 10, 80, 20, 5, '#fda4af', '#e11d48');
+                ctx.strokeStyle = '#00d2ff';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.ellipse(cx + 250, cy, 5, 10, 0, 0, Math.PI*2);
+                ctx.stroke();
+
+                // Labels
+                drawLabel('Knochen', cx - 40, cy - 100, cx - 80, cy - 60, 'right', '#e2e8f0');
+                drawLabel('Sehne (Insertio)', cx + 20, cy + 120, cx - 30, cy + 30, 'right', '#f8fafc');
+                drawLabel('Epimysium (Muskelbauch)', cx + 180, cy - 110, cx + 80, cy - 70, 'left', '#00d2ff');
+                drawLabel('Perimysium (Faszikel)', cx + 260, cy - 60, cx + 170, cy - 30, 'left', '#00d2ff');
+                drawLabel('Endomysium (Muskelfaser)', cx + 320, cy + 50, cx + 250, cy + 10, 'left', '#00d2ff');
+            }
+
+            // --- Right Graphic: Volleyball Silhouette & Glowing Muscles ---
+            function drawVolleyballPlayer() {
+                const cx = 750;
+                const cy = 250;
+
+                // Center glowing background
+                ctx.fillStyle = '#0f1115';
+                ctx.shadowColor = 'rgba(204, 255, 0, 0.05)';
+                ctx.shadowBlur = 50;
+                ctx.beginPath();
+                ctx.arc(cx, cy, 180, 0, Math.PI*2);
+                ctx.fill();
+                ctx.shadowColor = 'transparent';
+
+                // --- Draw Stylized Silhouette (Jumping, Spiking pose facing left) ---
+                ctx.fillStyle = '#2a2e37'; // Dark gray body
+                ctx.strokeStyle = '#2a2e37';
+                ctx.lineWidth = 20;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                // Head
+                ctx.beginPath();
+                ctx.arc(cx - 20, cy - 120, 18, 0, Math.PI*2);
+                ctx.fill();
+
+                // Torso (Bowing back for Bogenspannung)
+                ctx.beginPath();
+                ctx.moveTo(cx - 15, cy - 90); // neck
+                ctx.quadraticCurveTo(cx + 20, cy - 30, cx, cy + 30); // curved back to hips
+                ctx.stroke();
+
+                // Left Arm (Hitting arm, swung back)
+                ctx.beginPath();
+                ctx.moveTo(cx - 15, cy - 80); // shoulder
+                ctx.lineTo(cx + 40, cy - 90); // elbow
+                ctx.lineTo(cx + 60, cy - 140); // hand
+                ctx.lineWidth = 14;
+                ctx.stroke();
+
+                // Right Arm (Pointing forward/up for balance)
+                ctx.beginPath();
+                ctx.moveTo(cx - 15, cy - 80); // shoulder
+                ctx.lineTo(cx - 60, cy - 100); // hand
+                ctx.stroke();
+
+                // Right Leg (Forward, bent)
+                ctx.beginPath();
+                ctx.moveTo(cx, cy + 30); // hip
+                ctx.lineTo(cx - 40, cy + 80); // knee
+                ctx.lineTo(cx - 30, cy + 150); // foot
+                ctx.lineWidth = 18;
+                ctx.stroke();
+
+                // Left Leg (Back, bent)
+                ctx.beginPath();
+                ctx.moveTo(cx, cy + 30); // hip
+                ctx.lineTo(cx + 30, cy + 90); // knee
+                ctx.lineTo(cx + 60, cy + 130); // foot
+                ctx.stroke();
+
+
+                // --- Glowing Muscle Groups (Animated) ---
+                const pulse = (Math.sin(time * 3) + 1) / 2; // 0 to 1
+                const glowSize = 10 + pulse * 5;
+                
+                ctx.shadowColor = '#ccff00';
+                ctx.shadowBlur = glowSize * 1.5;
+                ctx.fillStyle = '#ccff00';
+
+                // 1. Schulter (Deltoideus)
+                ctx.beginPath(); ctx.arc(cx - 15, cy - 80, 8, 0, Math.PI*2); ctx.fill();
+                // 2. Rücken (Erector/Lat) - lower back curve
+                ctx.beginPath(); ctx.ellipse(cx + 10, cy - 20, 6, 15, -Math.PI/6, 0, Math.PI*2); ctx.fill();
+                // 3. Bauch (Rectus) - front of torso
+                ctx.beginPath(); ctx.ellipse(cx - 10, cy - 20, 5, 15, -Math.PI/6, 0, Math.PI*2); ctx.fill();
+                // 4. Oberschenkel Vorderseite (Quad)
+                ctx.beginPath(); ctx.ellipse(cx - 20, cy + 55, 7, 20, Math.PI/4, 0, Math.PI*2); ctx.fill();
+                // 5. Oberschenkel Rückseite (Hamstring)
+                ctx.beginPath(); ctx.ellipse(cx + 15, cy + 60, 6, 20, -Math.PI/6, 0, Math.PI*2); ctx.fill();
+                // 6. Wade (Triceps Surae)
+                ctx.beginPath(); ctx.ellipse(cx - 35, cy + 115, 5, 15, -Math.PI/8, 0, Math.PI*2); ctx.fill();
+
+                ctx.shadowBlur = 0; // reset
+
+                // --- Labels for Muscles ---
+                const labelColor = '#ccff00';
+                drawLabel('Schultermuskulatur', cx + 70, cy - 100, cx - 10, cy - 80, 'left', labelColor);
+                drawLabel('Rückenmuskulatur', cx + 110, cy - 30, cx + 15, cy - 20, 'left', labelColor);
+                drawLabel('Oberschenkel (Rück)', cx + 110, cy + 60, cx + 20, cy + 60, 'left', labelColor);
+                
+                drawLabel('Bauchmuskulatur', cx - 180, cy - 20, cx - 15, cy - 20, 'right', labelColor);
+                drawLabel('Oberschenkel (Vor)', cx - 180, cy + 55, cx - 25, cy + 55, 'right', labelColor);
+                drawLabel('Wadenmuskulatur', cx - 180, cy + 115, cx - 40, cy + 115, 'right', labelColor);
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, logicalW, logicalH);
+                time += 0.02;
+                
+                // Divider Line
+                ctx.beginPath();
+                ctx.moveTo(500, 50);
+                ctx.lineTo(500, 500);
+                ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Draw Sections
+                drawMuscleStructure();
+                drawVolleyballPlayer();
+                
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

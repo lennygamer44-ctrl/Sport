@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.4b Zyklen und Diagnostik - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: High-Performance Lab */
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --text-main: #2d3436;
+            --text-light: #636e72;
+            
+            --indigo-dark: #1e1b4b;   /* Deep Makro Blue */
+            --indigo-main: #4338ca;   /* Electric Indigo - Meso */
+            --indigo-light: #818cf8;  /* Light Blue - Mikro */
+            
+            --diagnostics-green: #10b981; /* Valid/Reliable Green */
+            
+            --abi-bg: #0f172a;
+            --abi-accent: #38bdf8;
+            --abi-warn: #fbbf24;
+            
+            --border-rad: 8px;
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 30px rgba(67, 56, 202, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .tech-font {
+            font-family: 'Exo 2', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Hero Header --- */
+        .header-lab {
+            background-color: var(--indigo-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(67, 56, 202, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.15) 0%, transparent 40%);
+            color: white;
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            border-bottom: 4px solid var(--diagnostics-green);
+        }
+
+        .tag-pill {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #c7d2fe;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .header-lab h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 0 0 30px rgba(67, 56, 202, 0.8);
+        }
+
+        .header-lab p {
+            font-size: 1.25rem;
+            color: #a5b4fc;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Intro Paragraph --- */
+        .intro-lead {
+            background: var(--bg-card);
+            padding: 2.5rem 3rem;
+            border-radius: var(--border-rad);
+            box-shadow: var(--shadow-soft);
+            margin-top: -2.5rem;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 10;
+            font-size: 1.2rem;
+            border-left: 6px solid var(--indigo-main);
+        }
+
+        /* --- Section 1: Periodisierung --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-icon {
+            background: var(--indigo-main);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: 900;
+            font-size: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--indigo-dark);
+            margin: 0;
+        }
+
+        .cycle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        @media(max-width: 900px) {
+            .cycle-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cycle-card {
+            background: var(--bg-card);
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-rad);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cycle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .cycle-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 6px;
+        }
+
+        .cycle-card.makro::before { background: var(--indigo-dark); }
+        .cycle-card.meso::before { background: var(--indigo-main); }
+        .cycle-card.mikro::before { background: var(--indigo-light); }
+
+        .cycle-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cycle-card.makro h3 { color: var(--indigo-dark); }
+        .cycle-card.meso h3 { color: var(--indigo-main); }
+        .cycle-card.mikro h3 { color: var(--indigo-light); }
+
+        .timeframe {
+            display: inline-block;
+            background: #f1f5f9;
+            color: var(--text-light);
+            padding: 0.2rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        /* --- Canvas Gantt Chart --- */
+        .chart-container {
+            background: var(--bg-card);
+            padding: 3rem 2rem;
+            border-radius: var(--border-rad);
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 6rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .chart-container h3 {
+            text-align: center;
+            color: var(--indigo-dark);
+            margin-bottom: 2rem;
+        }
+
+        .chart-wrapper {
+            width: 100%;
+            overflow-x: auto; /* Fallback for small screens */
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- Section 2: Diagnostik --- */
+        .diagnostics-box {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 1px solid #e2e8f0;
+            padding: 3rem;
+            border-radius: var(--border-rad);
+            margin-bottom: 5rem;
+            border-left: 6px solid var(--diagnostics-green);
+        }
+
+        .diag-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        @media(max-width: 800px) {
+            .diag-grid { grid-template-columns: 1fr; }
+        }
+
+        .diag-item h4 {
+            color: var(--diagnostics-green);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .diag-item p {
+            color: var(--text-main);
+        }
+
+        /* --- Abitur Transfer Premium Box --- */
+        .abitur-premium {
+            background-color: var(--abi-bg);
+            color: #cbd5e1;
+            padding: 4rem;
+            border-radius: 12px;
+            margin-bottom: 5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            border-top: 4px solid var(--abi-accent);
+        }
+
+        .abitur-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+
+        .abitur-header h2 {
+            font-size: 2.5rem;
+            color: var(--abi-accent);
+            margin: 0;
+        }
+
+        .abitur-premium p.intro {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .abi-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .abi-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .abi-card h3 {
+            color: var(--abi-warn);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card.highlight {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.05), transparent);
+            border-left: 4px solid var(--abi-accent);
+        }
+
+        .abi-card.highlight h3 {
+            color: var(--abi-accent);
+        }
+
+        .highlight-text {
+            color: white;
+            font-weight: 700;
+            border-bottom: 1px solid var(--abi-warn);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-lab">
+        <div class="container">
+            <span class="tag-pill">Lernbereich 1.1.4b</span>
+            <h1>Zyklen und Diagnostik</h1>
+            <p>Periodisierung (Makro-, Meso-, Mikrozyklen) und Leistungsdiagnostik für den exakten Formaufbau.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-lead">
+            Um sportliche Höchstleistungen zu einem exakt definierten Zeitpunkt (z. B. den Olympischen Spielen oder einem zweitägigen Zehnkampf) abrufen zu können, muss das Training systematisch strukturiert und überwacht werden. Dies geschieht über die wissenschaftlichen Instrumente der <strong>Periodisierung</strong> und der <strong>Leistungsdiagnostik</strong>.
+        </div>
+
+        <section>
+            <div class="section-header">
+                <div class="section-icon">1</div>
+                <h2>Periodisierung (Zyklisierung des Trainings)</h2>
+            </div>
+            <p>Unter Periodisierung versteht man die planmäßige, systematische und phasenhafte Strukturierung des langfristigen Trainingsprozesses in definierte Zeitabschnitte (Zyklen). Ziel ist es, durch den gezielten Wechsel von Belastung und Erholung sowie von Umfang und Intensität eine optimale Formausprägung (Top-Form) zum Wettkampfhöhepunkt zu erreichen und gleichzeitig Übertraining zu vermeiden. Die Trainingswissenschaft unterscheidet drei hierarchische Zyklen:</p>
+
+            <div class="cycle-grid">
+                <!-- Makro -->
+                <div class="cycle-card makro">
+                    <span class="timeframe">Monate bis Jahre</span>
+                    <h3>Der Makrozyklus</h3>
+                    <p>Er ist der übergeordnete, langfristige Trainingsplan. Bei einem Zehnkämpfer umfasst er oft ein ganzes Trainingsjahr und gliedert sich klassisch in drei Perioden: die <strong>Vorbereitungsperiode</strong> (Aufbau der sportlichen Form, hoher Umfang), die <strong>Wettkampfperiode</strong> (Ausprägung und Stabilisierung der Höchstform, hohe Intensität, geringerer Umfang) und die <strong>Übergangsperiode</strong> (aktive Erholung, Verlust der Spitzenform).</p>
+                </div>
+                
+                <!-- Meso -->
+                <div class="cycle-card meso">
+                    <span class="timeframe">Wochen bis Monate</span>
+                    <h3>Der Mesozyklus</h3>
+                    <p>Ein Makrozyklus wird in mehrere mittelfristige Mesozyklen (meist 3 bis 6 Wochen) unterteilt. Jeder Mesozyklus verfolgt ein spezifisches, isoliertes Trainingsziel, beispielsweise einen 4-wöchigen Mesozyklus mit dem reinen Fokus auf "Muskelaufbau" (Hypertrophie) oder "Grundlagenausdauer".</p>
+                </div>
+
+                <!-- Mikro -->
+                <div class="cycle-card mikro">
+                    <span class="timeframe">Tage bis 1 Woche</span>
+                    <h3>Der Mikrozyklus</h3>
+                    <p>Er ist der kleinste Baustein der Trainingsplanung und umfasst detailliert die Abfolge der einzelnen Trainingseinheiten und Ruhetage innerhalb einer Woche. Hier wird die exakte Belastungsdynamik (z. B. der Wechsel zwischen intensiven Reizen und regenerativen Einheiten) über die Tage hinweg gesteuert.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interaktives Canvas: Gantt Chart -->
+        <section class="chart-container">
+            <h3 class="tech-font">Zeitliche Einbettung der Zyklen (Struktur-Modell)</h3>
+            <div class="chart-wrapper">
+                <canvas id="ganttCanvas" width="900" height="350"></canvas>
+            </div>
+            <p style="text-align: center; font-size: 0.9rem; color: #64748b; margin-top: 1rem;">Animiertes Modell: Die hierarchische Verschachtelung vom Jahresplan bis zur Trainingswoche.</p>
+        </section>
+
+        <!-- Section 2: Diagnostik -->
+        <section class="diagnostics-box">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--diagnostics-green);">2</div>
+                <h2 style="color: var(--text-main);">Leistungsdiagnostik</h2>
+            </div>
+            <p>Die Leistungsdiagnostik umfasst alle sportmotorischen, biomechanischen und sportmedizinischen Test- und Untersuchungsverfahren, die dazu dienen, den aktuellen Leistungsstand (Ist-Zustand) eines Athleten objektiv, valide und reliabel zu erfassen. Sie ist das unabdingbare Fundament für die Trainingssteuerung.</p>
+
+            <div class="diag-grid">
+                <div class="diag-item">
+                    <h4><span style="font-size: 1.5rem;">⚙️</span> Funktion</h4>
+                    <p>Ohne Diagnostik ist keine zielgerichtete Periodisierung möglich. Die Ergebnisse liefern die exakten Daten (z. B. Herzfrequenzen, Laktatwerte, Maximalkraftwerte), um die Belastungskomponenten (Intensität, Umfang) für den kommenden Mesozyklus individuell festzulegen.</p>
+                </div>
+                <div class="diag-item">
+                    <h4><span style="font-size: 1.5rem;">📊</span> Beispiele</h4>
+                    <p>Laktatstufentests auf dem Laufband oder Ergometer zur Bestimmung der aeroben und anaeroben Schwelle, der Jump-and-Reach-Test zur Ermittlung der relativen Sprungkraft oder der Shuttle-Run-Test für die Ausdauer.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Abitur Transfer Premium Box -->
+        <section class="abitur-premium">
+            <div class="abitur-header">
+                <div style="font-size: 2.5rem;">🎓</div>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="intro">
+                In der neuen bayerischen Abiturprüfung (eA) wird ein massiver Fokus auf die Leistungsdiagnostik und deren praktische Auswertung gelegt. Du musst Testverfahren nicht nur kennen, sondern kritisch beurteilen können.
+            </p>
+
+            <div class="abi-cards">
+                
+                <div class="abi-card highlight">
+                    <h3>📏 Die Gütekriterien als Argumentationsbasis</h3>
+                    <p>Wenn in einer Klausur ein Testverfahren wie der <em>Jump-and-Reach-Test</em> vorgestellt wird, musst du begründen können, warum standardisierte Maßnahmen wichtig sind. Argumentiere zwingend mit den sportwissenschaftlichen Hauptgütekriterien:</p>
+                    <ul style="margin-top: 1rem; margin-left: 1.5rem; color: #cbd5e1;">
+                        <li><span class="highlight-text">Objektivität:</span> Unabhängigkeit vom Testleiter (z. B. durch Videoanalyse).</li>
+                        <li><span class="highlight-text">Validität:</span> Misst der Test wirklich Sprungkraft? (Standardisierung schließt Anlauf aus).</li>
+                        <li><span class="highlight-text">Reliabilität:</span> Zuverlässigkeit/Messgenauigkeit (z. B. durch mehrere Versuche).</li>
+                    </ul>
+                </div>
+
+                <div class="abi-card">
+                    <h3>📈 Laktatleistungskurven auswerten</h3>
+                    <p>Ein absoluter Klausurschwerpunkt ist die Auswertung von Laktatleistungskurven. Du musst die Kurvenverläufe zweier Athleten (oder eines Athleten vor und nach einem Makrozyklus) vergleichen.</p>
+                    <p style="margin-top: 1rem;">Eine <span class="highlight-text">Rechtsverschiebung der Kurve</span> musst du als Indikator für einen verbesserten Trainingszustand erklären können (Laktatschwellen werden erst bei deutlich höherer Intensität erreicht).</p>
+                </div>
+
+                <div class="abi-card">
+                    <h3>🔗 Die Vernetzung</h3>
+                    <p>Verknüpfe die Diagnostik immer mit der Planung! Erkläre, dass die Ergebnisse aus der Laktatdiagnostik genutzt werden, um die Intensität für die Trainingsmethoden (z. B. Dauermethode) in den kommenden Mikrozyklen exakt zu parametrisieren.</p>
+                    <p style="margin-top: 1rem;">Nur so wird das <span class="highlight-text">Prinzip der individualisierten Belastung</span> eingehalten.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('ganttCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            let animationProgress = 0;
+            let reqId;
+
+            // Responsive Handling
+            function resizeCanvas() {
+                const container = canvas.parentElement;
+                canvas.width = Math.min(container.clientWidth, 900);
+                canvas.height = canvas.width < 600 ? 400 : 350;
+                
+                animationProgress = 0; // Restart animation on resize
+                cancelAnimationFrame(reqId);
+                animateGantt();
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+
+            // Draw Function
+            function drawGantt(progress) {
+                const w = canvas.width;
+                const h = canvas.height;
+                const isMobile = w < 600;
+                
+                ctx.clearRect(0, 0, w, h);
+
+                const paddingLeft = isMobile ? 20 : 150;
+                const paddingRight = 20;
+                const paddingTop = 40;
+                const trackWidth = w - paddingLeft - paddingRight;
+
+                // Title Area (Left Side)
+                ctx.fillStyle = '#2d3436';
+                ctx.font = 'bold 14px Roboto';
+                ctx.textAlign = isMobile ? 'left' : 'right';
+                
+                if (!isMobile) {
+                    ctx.fillText('Makrozyklus', paddingLeft - 20, paddingTop + 30);
+                    ctx.fillText('Mesozyklen', paddingLeft - 20, paddingTop + 100);
+                    ctx.fillText('Mikrozyklen', paddingLeft - 20, paddingTop + 170);
+                } else {
+                    ctx.fillText('Hierarchie der Zyklen', 20, 20);
+                }
+
+                // 1. MAKROZYKLUS (Level 1)
+                const makroY = isMobile ? paddingTop : paddingTop + 10;
+                const makroH = 30;
+                ctx.fillStyle = '#1e1b4b'; // Deep Dark Blue
+                // Animate width
+                const currentMakroW = trackWidth * Math.min(progress * 2, 1); 
+                
+                if (currentMakroW > 0) {
+                    ctx.fillRect(paddingLeft, makroY, currentMakroW, makroH);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = 'bold 12px Exo 2';
+                    ctx.textAlign = 'center';
+                    if (currentMakroW > 100) {
+                        ctx.fillText('Makrozyklus (z.B. 1 Jahr)', paddingLeft + currentMakroW/2, makroY + 20);
+                    }
+                }
+
+                // 2. MESOZYKLEN (Level 2)
+                const mesoY = makroY + 70;
+                const mesoH = 30;
+                const numMesos = 4;
+                const mesoGap = 5;
+                const mesoW = (trackWidth - (mesoGap * (numMesos - 1))) / numMesos;
+
+                // Animate based on progress (starts after makro finishes at 0.5)
+                const mesoProgress = Math.max(0, (progress - 0.3) * 2);
+
+                for (let i = 0; i < numMesos; i++) {
+                    const startX = paddingLeft + i * (mesoW + mesoGap);
+                    // Cascade animation for each block
+                    const blockProg = Math.min(Math.max(mesoProgress * numMesos - i, 0), 1);
+                    const currentMesoW = mesoW * blockProg;
+
+                    if (currentMesoW > 0) {
+                        // Connection line from Makro
+                        if (blockProg > 0) {
+                            ctx.beginPath();
+                            ctx.moveTo(startX + mesoW/2, makroY + makroH);
+                            ctx.lineTo(startX + mesoW/2, mesoY);
+                            ctx.strokeStyle = 'rgba(67, 56, 202, 0.3)';
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+
+                        ctx.fillStyle = '#4338ca'; // Medium Indigo
+                        ctx.fillRect(startX, mesoY, currentMesoW, mesoH);
+                        
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = 'bold 11px Roboto';
+                        ctx.textAlign = 'center';
+                        if (currentMesoW > 40) {
+                            ctx.fillText(`Meso ${i+1}`, startX + currentMesoW/2, mesoY + 20);
+                        }
+                    }
+                }
+
+                // 3. MIKROZYKLEN (Level 3 - Zoom into first 2 Mesozyklen for visual clarity)
+                const mikroY = mesoY + 70;
+                const mikroH = 25;
+                const numMikrosPerMeso = 4;
+                const mikroGap = 2;
+                
+                // Starts after meso progress at 0.6
+                const mikroProgress = Math.max(0, (progress - 0.6) * 2.5);
+
+                for (let m = 0; m < 2; m++) { // Only draw for first 2 mesos to avoid clutter
+                    const mesoStartX = paddingLeft + m * (mesoW + mesoGap);
+                    const mikroW = (mesoW - (mikroGap * (numMikrosPerMeso - 1))) / numMikrosPerMeso;
+
+                    for (let i = 0; i < numMikrosPerMeso; i++) {
+                        const startX = mesoStartX + i * (mikroW + mikroGap);
+                        // Cascade
+                        const blockProg = Math.min(Math.max(mikroProgress * (numMikrosPerMeso*2) - (m*numMikrosPerMeso + i), 0), 1);
+                        const currentMikroW = mikroW * blockProg;
+
+                        if (currentMikroW > 0) {
+                            // Connection Line
+                            ctx.beginPath();
+                            ctx.moveTo(startX + mikroW/2, mesoY + mesoH);
+                            ctx.lineTo(startX + mikroW/2, mikroY);
+                            ctx.strokeStyle = 'rgba(129, 140, 248, 0.3)';
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+
+                            ctx.fillStyle = '#818cf8'; // Light Indigo
+                            ctx.fillRect(startX, mikroY, currentMikroW, mikroH);
+                            
+                            if (currentMikroW > 20 && !isMobile) {
+                                ctx.fillStyle = '#ffffff';
+                                ctx.font = '9px Roboto';
+                                ctx.fillText(`W${i+1}`, startX + currentMikroW/2, mikroY + 16);
+                            }
+                        }
+                    }
+                }
+                
+                // Add ellipsis or text to show it continues
+                if (progress > 0.9 && !isMobile) {
+                    ctx.fillStyle = '#64748b';
+                    ctx.font = 'italic 12px Roboto';
+                    ctx.textAlign = 'left';
+                    ctx.fillText('weitere Mikrozyklen...', paddingLeft + 2 * (mesoW + mesoGap), mikroY + 16);
+                }
+
+            }
+
+            // Animation Loop
+            function animateGantt() {
+                if (animationProgress < 1) {
+                    animationProgress += 0.005; // Adjust speed
+                    if(animationProgress > 1) animationProgress = 1;
+                    drawGantt(animationProgress);
+                    reqId = requestAnimationFrame(animateGantt);
+                }
+            }
+
+            // Init intersection observer to animate when in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        animationProgress = 0;
+                        animateGantt();
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            observer.observe(canvas);
+            resizeCanvas();
+        });
+    </script>
+</body>
+</html>

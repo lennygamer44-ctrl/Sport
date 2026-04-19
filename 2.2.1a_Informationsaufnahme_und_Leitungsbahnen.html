@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.2.1a Informationsaufnahme und Leitungsbahnen - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+        :root {
+            --bg-main: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            
+            /* Neuro Theme Colors */
+            --afferent-color: #06b6d4; /* Cyan/Teal for sensory */
+            --efferent-color: #f43f5e; /* Rose/Red for motor */
+            --zns-color: #6366f1;      /* Indigo for Brain/ZNS */
+            
+            --card-bg: #ffffff;
+            
+            --abi-bg: #020617;
+            --abi-gold: #fbbf24;
+            --abi-glow: rgba(251, 191, 36, 0.2);
+
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            position: relative;
+        }
+
+        /* Ambient Neural Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.03) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Header */
+        .doc-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0; height: 6px;
+            background: linear-gradient(90deg, var(--afferent-color), var(--zns-color), var(--efferent-color));
+        }
+
+        .doc-header h1 {
+            font-size: 2.8rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .doc-header p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Section 1: Analysatoren */
+        .analyzer-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 30px; height: 4px;
+            background: var(--zns-color);
+            border-radius: 2px;
+        }
+
+        .analyzer-intro {
+            margin-bottom: 2rem;
+            background: #e0e7ff;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--zns-color);
+        }
+
+        .analyzer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .analyzer-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-soft);
+            border: 1px solid #f1f5f9;
+            transition: transform 0.2s ease;
+        }
+
+        .analyzer-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .analyzer-card h3 {
+            font-size: 1.2rem;
+            color: var(--zns-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .analyzer-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .analyzer-card strong {
+            color: var(--text-dark);
+        }
+
+        /* Canvas Wrap */
+        .canvas-container {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            margin-bottom: 4rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Section 2: Leitungsbahnen (Split Cards) */
+        .pathway-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .path-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .path-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 6px; height: 100%;
+        }
+
+        .path-afferent::before { background: var(--afferent-color); }
+        .path-efferent::before { background: var(--efferent-color); }
+
+        .path-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .path-afferent h3 { color: var(--afferent-color); }
+        .path-efferent h3 { color: var(--efferent-color); }
+
+        /* Section 3: Bewegungssteuerung */
+        .control-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 2rem;
+        }
+
+        .control-list {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .control-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius-md);
+        }
+
+        .control-item h4 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge-bewusst { color: #8b5cf6; }
+        .badge-unbewusst { color: #10b981; }
+        .badge-reflex { color: #ef4444; }
+
+        /* Abitur Premium Box */
+        .abitur-box {
+            background: var(--abi-bg);
+            color: #f8fafc;
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            border-top: 2px solid var(--abi-gold);
+        }
+
+        .abitur-box h2 {
+            font-size: 2.5rem;
+            color: var(--abi-gold);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px var(--abi-glow);
+        }
+
+        .abi-intro {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .abi-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--abi-gold);
+            padding: 1.5rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .abi-card h4 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .abi-card p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .highlight {
+            color: var(--abi-gold);
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .pathway-grid { grid-template-columns: 1fr; }
+            .doc-header, .abitur-box { padding: 2rem; }
+            .doc-header h1 { font-size: 2.2rem; }
+            .section-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>2.2.1a Informationsaufnahme und Leitungsbahnen</h1>
+        <p>
+            Jede sportliche Bewegung, egal wie kraftvoll oder schnell sie ist, basiert auf der ständigen Aufnahme und Verarbeitung von Informationen. Das <strong>zentrale Nervensystem (ZNS)</strong> ist der Dirigent, der die Muskulatur steuert. Der Weg vom Reiz zur Muskelkontraktion folgt dabei einer strengen Hierarchie.
+        </p>
+    </header>
+
+    <!-- 1. Informationsaufnahme: Analysatoren -->
+    <section class="analyzer-section">
+        <h2 class="section-title">1. Die Informationsaufnahme: Die Analysatoren</h2>
+        <div class="analyzer-intro">
+            Der Mensch nimmt Reize aus der Umwelt und dem eigenen Körper nicht einfach nur über "Sinnesorgane" auf, sondern über sogenannte <strong>Analysatoren</strong>. Ein Analysator besteht immer aus drei Teilen: dem <strong>Rezeptor</strong> (Nervenende), der <strong>zuführenden Nervenbahn</strong> und dem <strong>Verarbeitungszentrum</strong> im Gehirn. 
+        </div>
+
+        <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Für den Sport sind fünf Analysatoren von zentraler Bedeutung:</p>
+
+        <div class="analyzer-grid">
+            <article class="analyzer-card">
+                <h3>👁️ Optischer Analysator (Sehsinn)</h3>
+                <p>Liefert Informationen über die Umwelt (Fremdinformation). Essenziell zur Einschätzung von Entfernungen, Flugbahnen (z. B. Ball beim Volleyball) oder Bewegungen von Gegnern und Mitspielern.</p>
+            </article>
+
+            <article class="analyzer-card">
+                <h3>👂 Akustischer Analysator (Hörsinn)</h3>
+                <p>Wichtig für die Rhythmisierung von Bewegungen (z. B. beim Tanzen), die Aufnahme von verbalen Informationen (Trainer/Mitspieler) oder akustischen Signalen (Startschuss beim Sprint).</p>
+            </article>
+
+            <article class="analyzer-card">
+                <h3>🖐️ Taktiler Analysator (Tastsinn)</h3>
+                <p>Rezeptoren in der Haut liefern Informationen über Form und Oberfläche von berührten Objekten (z. B. Wasserwiderstand beim Schwimmen, Grip am Ball, Bodenkontakt).</p>
+            </article>
+
+            <article class="analyzer-card" style="border-color: var(--zns-color); border-width: 2px;">
+                <h3>💪 Kinästhetischer Analysator (Bewegungssinn)</h3>
+                <p><strong>Der wohl wichtigste Analysator im Sport!</strong> Rezeptoren (Propriozeptoren) in Muskeln, Sehnen und Gelenkkapseln melden permanent den Spannungszustand und die Stellung der Gliedmaßen zueinander (Eigeninformation). Er ermöglicht die "blinde" Kontrolle von Bewegungen.</p>
+            </article>
+
+            <article class="analyzer-card">
+                <h3>⚖️ Vestibulärer Analysator (Gleichgewichtssinn)</h3>
+                <p>Befindet sich im Innenohr und registriert Lageveränderungen des Kopfes sowie Dreh- und Linearbeschleunigungen (extrem wichtig z. B. bei Rotationen im Turnen oder Wasserspringen).</p>
+            </article>
+        </div>
+
+        <!-- Canvas 1: Hexagon Cluster -->
+        <div class="canvas-container">
+            <h3 style="margin-bottom: 1rem; color: var(--text-dark);">Die 5 sportrelevanten Analysatoren</h3>
+            <canvas id="hexagonCanvas" width="800" height="400"></canvas>
+        </div>
+    </section>
+
+    <!-- 2. Informationsweiterleitung -->
+    <section style="margin-bottom: 4rem;">
+        <h2 class="section-title">2. Die Informationsweiterleitung</h2>
+        <p style="margin-bottom: 2rem; color: var(--text-muted); font-size: 1.1rem;">Wie kommen die Informationen vom Rezeptor zum Gehirn und von dort zum Muskel?</p>
+
+        <div class="pathway-grid">
+            <article class="path-card path-afferent">
+                <h3>Afferente Leitungsbahnen</h3>
+                <p style="font-weight: 600; color: var(--text-muted); margin-bottom: 1rem;">(sensorisch / hinführend)</p>
+                <p>Sie leiten die elektrischen Impulse von den Rezeptoren der Analysatoren (aus der Peripherie) zum zentralen Nervensystem (Rückenmark und Gehirn).</p>
+                <p style="margin-top: 1rem; font-size: 0.95rem;">Speziell bei der kinästhetischen Wahrnehmung werden hier Millionen von Datenbruchteilen pro Sekunde gesendet (<strong>Rückkopplung / Re-Afferenzprinzip</strong>).</p>
+            </article>
+
+            <article class="path-card path-efferent">
+                <h3>Efferente Leitungsbahnen</h3>
+                <p style="font-weight: 600; color: var(--text-muted); margin-bottom: 1rem;">(motorisch / wegführend)</p>
+                <p>Nach der Verarbeitung der Informationen im ZNS senden diese Bahnen die Befehle <strong>weg</strong> vom Gehirn/Rückenmark hin zu den Effektoren (der ausführenden Arbeitsmuskulatur), damit diese kontrahiert.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- 3. Arten der Steuerung -->
+    <section class="control-section">
+        <h2 class="section-title">3. Arten der Bewegungssteuerung</h2>
+        <p style="color: var(--text-muted);">Je nach Komplexität und Erfahrungsgrad unterscheidet man drei Stufen der Steuerung:</p>
+
+        <div class="control-list">
+            <div class="control-item">
+                <h4 class="badge-bewusst">🧠 Bewusste Steuerung</h4>
+                <p>Die Informationsverarbeitung erfolgt über die Großhirnrinde (Kortex). Der Athlet denkt aktiv über die Bewegung nach (z. B. beim Erlernen einer neuen Technik wie dem Angriffsschlag). Dies ist relativ langsam, kostet viel kognitive Energie, ermöglicht aber das präzise Korrigieren von Fehlern.</p>
+            </div>
+
+            <div class="control-item">
+                <h4 class="badge-unbewusst">⚡ Unbewusste Steuerung (Automatisierung)</h4>
+                <p>Bei vielfach geübten Bewegungen übernehmen tieferliegende Gehirnstrukturen (Kleinhirn, Basalganglien) die Steuerung. Die Bewegung läuft flüssig ab, ohne dass der Kortex stark belastet wird (z. B. normales Laufen oder das Dribbling eines Profis). Die Reaktionszeit ist deutlich schneller.</p>
+            </div>
+
+            <div class="control-item" style="border-left: 4px solid #ef4444;">
+                <h4 class="badge-reflex">🛡️ Reflexe</h4>
+                <p><strong>Die schnellste Form der Reizbeantwortung.</strong> Der Reiz wandert über die afferente Bahn nur bis zum Rückenmark, wird dort sofort umgeschaltet (Reflexbogen) und geht direkt über die efferente Bahn zum Muskel zurück, <strong>ohne das Gehirn einzubeziehen</strong>. Dies dient primär dem Schutz (z. B. Wegziehen der Hand von einer heißen Herdplatte) oder der unbewussten Stabilisierung der Gelenke (Dehnungsreflex).</p>
+            </div>
+        </div>
+
+        <!-- Canvas 2: Sensomotorischer Regelkreis -->
+        <div class="canvas-container" style="margin-top: 3rem; margin-bottom: 0;">
+            <h3 style="margin-bottom: 1rem; color: var(--text-dark);">Sensomotorischer Regelkreis</h3>
+            <canvas id="flowchartCanvas" width="900" height="300"></canvas>
+        </div>
+    </section>
+
+    <!-- Abitur Transfer -->
+    <section class="abitur-box">
+        <h2><span style="font-size: 2.5rem;">🎯</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die Anatomie der Nervenbahnen wird im Abitur selten isoliert abgefragt. Das Kultusministerium fordert hier fast immer einen <strong>Anwendungsbezug auf sportpraktische Situationen</strong>.
+        </p>
+
+        <div class="abi-grid">
+            <div class="abi-card">
+                <h4>1. Analysatoren priorisieren</h4>
+                <p>Du könntest eine komplexe Spielsituation (z. B. einen Basketball-Rebound oder den Volleyball-Block) vorgelegt bekommen. Die Aufgabe lautet dann: <em>"Erläutern Sie die Informationsaufnahme bei dieser sportlichen Bewegung."</em> Du musst die <strong>dominierenden Analysatoren</strong> benennen. <br><br>Beispiel: Der optische Analysator erfasst die Flugbahn des Balls. Der <span class="highlight">kinästhetische Analysator</span> koordiniert die Absprungbewegung ohne hinzusehen.</p>
+            </div>
+
+            <div class="abi-card">
+                <h4>2. Bewusste vs. Unbewusste Steuerung (Ermüdung)</h4>
+                <p>Dies wird gerne mit dem Thema "Ermüdung" oder "Stress" verknüpft. Warum passieren am Ende eines langen Zehnkampfs mehr Technikfehler? Weil die Ermüdung des ZNS die <span class="highlight">unbewusste Steuerung (Automatisierung) stört</span> und der Athlet wieder auf die langsame, störanfällige bewusste Steuerung zurückfallen muss.</p>
+            </div>
+
+            <div class="abi-card">
+                <h4>3. Reflexe in der Praxis</h4>
+                <p>Nutze das Wissen über afferente/efferente Leitungsbahnen, um zu erklären, warum bestimmte Bewegungen nicht mehr bewusst korrigiert werden können. Die Latenzzeit (Zeit zwischen Reiz und Muskelantwort) ist bei einer bewussten Handlung oft zu lang, weshalb der Körper auf <span class="highlight">Rückenmarksreflexe</span> angewiesen ist, um Stürze in Bruchteilen von Sekunden abzufangen.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    // --- Utils for Canvas ---
+    function drawHexagon(ctx, x, y, size, fill, stroke) {
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+            const angle_deg = 60 * i - 30;
+            const angle_rad = Math.PI / 180 * angle_deg;
+            const px = x + size * Math.cos(angle_rad);
+            const py = y + size * Math.sin(angle_rad);
+            if (i === 0) {
+                ctx.moveTo(px, py);
+            } else {
+                ctx.lineTo(px, py);
+            }
+        }
+        ctx.closePath();
+        ctx.fillStyle = fill;
+        ctx.fill();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = stroke;
+        ctx.stroke();
+    }
+
+    function drawArrow(ctx, fromX, fromY, toX, toY, color, dashed = false) {
+        const headlen = 12;
+        const angle = Math.atan2(toY - fromY, toX - fromX);
+        
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        if(dashed) ctx.setLineDash([8, 8]);
+        else ctx.setLineDash([]);
+        
+        ctx.beginPath();
+        ctx.moveTo(fromX, fromY);
+        ctx.lineTo(toX, toY);
+        ctx.stroke();
+        
+        ctx.setLineDash([]); // reset for head
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(toX, toY);
+        ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+        ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+        ctx.fill();
+    }
+
+    // ==========================================
+    // Canvas 1: Hexagon Cluster (Analysatoren)
+    // ==========================================
+    const canvas1 = document.getElementById('hexagonCanvas');
+    const ctx1 = canvas1.getContext('2d');
+    const cx = canvas1.width / 2;
+    const cy = canvas1.height / 2;
+
+    // Draw central node
+    drawHexagon(ctx1, cx, cy, 60, '#e0e7ff', '#6366f1');
+    ctx1.fillStyle = '#1e293b';
+    ctx1.font = 'bold 16px Space Grotesk';
+    ctx1.textAlign = 'center';
+    ctx1.fillText('ZNS', cx, cy + 5);
+
+    // Positions for 5 surrounding hexagons
+    const hexRadius = 130;
+    const angles = [-90, -18, 54, 126, 198]; // 5 points around circle
+    const labels = ['Optisch', 'Akustisch', 'Taktil', 'Vestibulär', 'Kinästhetisch'];
+    const icons = ['👁️', '👂', '🖐️', '⚖️', '💪'];
+
+    angles.forEach((angle, i) => {
+        const rad = Math.PI / 180 * angle;
+        const hx = cx + hexRadius * Math.cos(rad);
+        const hy = cy + hexRadius * Math.sin(rad);
+
+        // Draw connecting line
+        ctx1.strokeStyle = '#cbd5e1';
+        ctx1.lineWidth = 2;
+        ctx1.beginPath();
+        ctx1.moveTo(cx, cy);
+        ctx1.lineTo(hx, hy);
+        ctx1.stroke();
+
+        // Draw Hex
+        const isKinesthetic = (i === 4);
+        const bgColor = isKinesthetic ? '#dcfce7' : '#ffffff';
+        const borderColor = isKinesthetic ? '#10b981' : '#94a3b8';
+        
+        drawHexagon(ctx1, hx, hy, 45, bgColor, borderColor);
+
+        // Draw Icon and Text
+        ctx1.font = '24px Arial';
+        ctx1.fillText(icons[i], hx, hy + 5);
+        
+        ctx1.font = '14px Outfit';
+        ctx1.fillStyle = '#475569';
+        if(isKinesthetic) {
+            ctx1.font = 'bold 14px Outfit';
+            ctx1.fillStyle = '#059669';
+        }
+        
+        // Adjust text position based on angle
+        let textY = hy + 65;
+        if (angle === -90) textY = hy - 55;
+        ctx1.fillText(labels[i], hx, textY);
+    });
+
+    // ==========================================
+    // Canvas 2: Sensomotorischer Regelkreis
+    // ==========================================
+    const canvas2 = document.getElementById('flowchartCanvas');
+    const ctx2 = canvas2.getContext('2d');
+
+    // Box dimensions
+    const bW = 200;
+    const bH = 80;
+    const yPos = 80;
+    
+    const x1 = 50;  // Box 1: Reizaufnahme
+    const x2 = 350; // Box 2: ZNS
+    const x3 = 650; // Box 3: Effektor
+
+    function drawSystemBox(x, y, title, subtitle, bgColor, borderColor) {
+        ctx2.fillStyle = bgColor;
+        ctx2.strokeStyle = borderColor;
+        ctx2.lineWidth = 2;
+        ctx2.beginPath();
+        ctx2.roundRect(x, y, bW, bH, 8);
+        ctx2.fill();
+        ctx2.stroke();
+
+        ctx2.textAlign = 'center';
+        ctx2.fillStyle = '#0f172a';
+        ctx2.font = 'bold 16px Space Grotesk';
+        ctx2.fillText(title, x + bW/2, y + 35);
+        ctx2.font = '13px Outfit';
+        ctx2.fillStyle = '#475569';
+        ctx2.fillText(subtitle, x + bW/2, y + 55);
+    }
+
+    // Draw Boxes
+    drawSystemBox(x1, yPos, '1. Reizaufnahme', '(Analysator/Rezeptor)', '#eff6ff', '#3b82f6');
+    drawSystemBox(x2, yPos, '2. ZNS', '(Gehirn/Rückenmark)', '#e0e7ff', '#6366f1');
+    drawSystemBox(x3, yPos, '3. Effektor', '(Muskelkontraktion)', '#ffe4e6', '#f43f5e');
+
+    // Arrows
+    // Afferent (1 to 2)
+    drawArrow(ctx2, x1 + bW, yPos + bH/2, x2 - 5, yPos + bH/2, '#06b6d4');
+    ctx2.fillStyle = '#06b6d4';
+    ctx2.font = 'bold 13px Outfit';
+    ctx2.fillText('Afferente Bahn', x1 + bW + 45, yPos + bH/2 - 10);
+
+    // Efferent (2 to 3)
+    drawArrow(ctx2, x2 + bW, yPos + bH/2, x3 - 5, yPos + bH/2, '#f43f5e');
+    ctx2.fillStyle = '#f43f5e';
+    ctx2.fillText('Efferente Bahn', x2 + bW + 45, yPos + bH/2 - 10);
+
+    // Re-Afferenz Loop (3 back to 1)
+    const loopY = yPos + bH + 60;
+    
+    // Draw curved dashed line
+    ctx2.strokeStyle = '#10b981';
+    ctx2.lineWidth = 3;
+    ctx2.setLineDash([8, 8]);
+    ctx2.beginPath();
+    ctx2.moveTo(x3 + bW/2, yPos + bH);
+    ctx2.lineTo(x3 + bW/2, loopY);
+    ctx2.lineTo(x1 + bW/2, loopY);
+    ctx2.lineTo(x1 + bW/2, yPos + bH + 10); // leave gap for arrow head
+    ctx2.stroke();
+    
+    // Draw Arrow head manually for the upward pointing dashed line
+    ctx2.setLineDash([]);
+    ctx2.fillStyle = '#10b981';
+    ctx2.beginPath();
+    ctx2.moveTo(x1 + bW/2, yPos + bH);
+    ctx2.lineTo(x1 + bW/2 - 6, yPos + bH + 12);
+    ctx2.lineTo(x1 + bW/2 + 6, yPos + bH + 12);
+    ctx2.fill();
+
+    ctx2.fillStyle = '#10b981';
+    ctx2.font = 'bold 14px Outfit';
+    ctx2.fillText('Re-Afferenz (kinästhetische Rückmeldung)', canvas2.width/2, loopY - 10);
+
+</script>
+</body>
+</html>

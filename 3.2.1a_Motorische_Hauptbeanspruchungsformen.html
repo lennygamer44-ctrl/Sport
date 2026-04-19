@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.2.1a Motorische Hauptbeanspruchungsformen - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+        :root {
+            /* General Theme */
+            --bg-body: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            
+            /* 4 Motoric Forms Palette */
+            --col-ausdauer: #ef4444;    /* Crimson Red */
+            --bg-ausdauer: #fef2f2;
+            
+            --col-kraft: #2563eb;       /* Royal Blue */
+            --bg-kraft: #eff6ff;
+            
+            --col-beweg: #10b981;       /* Emerald Green */
+            --bg-beweg: #ecfdf5;
+            
+            --col-schnell: #f59e0b;     /* Amber/Yellow */
+            --bg-schnell: #fffbeb;
+
+            /* Abitur Exam Box */
+            --abi-bg: #1e293b;          /* Slate Dark */
+            --abi-accent: #38bdf8;      /* Light Blue */
+            --abi-text: #f8fafc;
+
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER SECTION --- */
+        .doc-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 6px;
+            background: linear-gradient(90deg, var(--col-ausdauer), var(--col-kraft), var(--col-beweg), var(--col-schnell));
+        }
+
+        .doc-header h1 {
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .doc-header .intro {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 900px;
+        }
+
+        /* --- THE 4 FORMS GRID --- */
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .form-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        /* Card Variations */
+        .card-ausdauer h2 { color: var(--col-ausdauer); border-color: var(--bg-ausdauer); }
+        .card-kraft h2 { color: var(--col-kraft); border-color: var(--bg-kraft); }
+        .card-beweg h2 { color: var(--col-beweg); border-color: var(--bg-beweg); }
+        .card-schnell h2 { color: var(--col-schnell); border-color: var(--bg-schnell); }
+
+        .feature-box {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.2rem;
+            border-left: 4px solid;
+        }
+
+        .card-ausdauer .feature-box { border-left-color: var(--col-ausdauer); }
+        .card-kraft .feature-box { border-left-color: var(--col-kraft); }
+        .card-beweg .feature-box { border-left-color: var(--col-beweg); }
+        .card-schnell .feature-box { border-left-color: var(--col-schnell); }
+
+        .feature-box h4 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+        }
+
+        .feature-box p {
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        /* --- CANVAS MATRIX --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 4rem 2rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .canvas-section h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .canvas-section p {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .canvas-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- ABITUR TRANSFER BOX --- */
+        .abitur-matrix {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            border-top: 6px solid var(--abi-accent);
+        }
+
+        .abitur-matrix h2 {
+            color: var(--abi-accent);
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .transfer-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--abi-accent);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .transfer-block h4 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 4px;
+        }
+
+        .transfer-block p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+        
+        .transfer-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-text {
+            color: var(--abi-accent);
+            font-weight: bold;
+        }
+
+        .connection-box {
+            background: rgba(16, 185, 129, 0.1); /* Emerald tint */
+            border: 1px dashed #10b981;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-top: 3rem;
+        }
+
+        .connection-box h4 {
+            color: #34d399;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        @media (max-width: 900px) {
+            .forms-grid { grid-template-columns: 1fr; }
+            .doc-header, .abitur-matrix { padding: 2.5rem; }
+            .doc-header h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>3.2.1a Motorische Hauptbeanspruchungsformen</h1>
+        <p class="intro">
+            Ausgehend vom multidimensionalen Gesundheitsbegriff der WHO erfüllt sportliches Training nur dann einen präventiven und gesundheitsfördernden Zweck, wenn es ganzheitlich ansetzt. Die vier motorischen Hauptbeanspruchungsformen haben jeweils hochspezifische physiologische Adaptationswege, die den Organismus vor degenerativen Erkrankungen schützen und die körperliche sowie psychische Belastbarkeit im Alltag sichern.
+        </p>
+    </header>
+
+    <!-- 4 Forms Grid -->
+    <section class="forms-grid">
+        
+        <!-- 1. Ausdauer -->
+        <article class="form-card card-ausdauer">
+            <h2><span style="font-size: 2rem;">❤️</span> 1. Ausdauer</h2>
+            <p style="margin-bottom: 1.5rem;">Das Ausdauertraining (insbesondere im aeroben Bereich) ist die wirksamste Waffe gegen die Zivilisationskrankheiten unserer Zeit (z. B. metabolisches Syndrom).</p>
+            
+            <div class="feature-box">
+                <h4 style="color: var(--col-ausdauer);">Kardioprotektive Wirkung</h4>
+                <p>Ökonomisierung der Herzarbeit (Senkung von Ruhepuls und Blutdruck, Vergrößerung des Herzmuskels, verbesserte Kapillarisierung). Das Risiko für Herzinfarkte und Arteriosklerose sinkt massiv.</p>
+            </div>
+            <div class="feature-box">
+                <h4 style="color: var(--col-ausdauer);">Stoffwechsel</h4>
+                <p>Der Fett- und Kohlenhydratstoffwechsel wird optimiert, die Insulinsensibilität der Zellen steigt, was der Entstehung von Diabetes mellitus Typ 2 vorbeugt.</p>
+            </div>
+            <div class="feature-box">
+                <h4 style="color: var(--col-ausdauer);">Psychische Komponente</h4>
+                <p>Regelmäßiges Ausdauertraining fördert die Ausschüttung von Endorphinen und Serotonin (stimmungsaufhellend) und beschleunigt den Abbau von Stresshormonen (Cortisol), was Burnout und Depressionen entgegenwirkt.</p>
+            </div>
+        </article>
+
+        <!-- 2. Kraft -->
+        <article class="form-card card-kraft">
+            <h2><span style="font-size: 2rem;">🏋️</span> 2. Kraft</h2>
+            <p style="margin-bottom: 1.5rem;">Während Ausdauer das Herz-Kreislauf-System schützt, sichert das Krafttraining den passiven Bewegungsapparat ab.</p>
+            
+            <div class="feature-box">
+                <h4 style="color: var(--col-kraft);">Muskuläres Korsett</h4>
+                <p>Eine gut ausgebildete Muskulatur (besonders Rumpf-, Bauch-, Rückenmuskulatur) stabilisiert Wirbelsäule und Gelenke. Dies ist die effektivste Prophylaxe gegen Haltungsschwächen und Bandscheibenvorfälle.</p>
+            </div>
+            <div class="feature-box">
+                <h4 style="color: var(--col-kraft);">Knochenstoffwechsel</h4>
+                <p>Durch mechanische Zug- und Druckbelastungen auf die Knochen wird vermehrt Kalzium eingelagert. Die Knochendichte steigt – die beste Prävention gegen Osteoporose (Knochenschwund).</p>
+            </div>
+            <div class="feature-box">
+                <h4 style="color: var(--col-kraft);">Sarkopenie-Prävention</h4>
+                <p>Es wirkt dem altersbedingten Muskelabbau entgegen und sichert die motorische Unabhängigkeit in der Alltagsmotorik (Heben, Tragen).</p>
+            </div>
+        </article>
+
+        <!-- 3. Beweglichkeit -->
+        <article class="form-card card-beweg">
+            <h2><span style="font-size: 2rem;">🧘</span> 3. Beweglichkeit</h2>
+            <p style="margin-bottom: 1.5rem;">Beweglichkeitstraining (Dehnen) dient der Aufrechterhaltung der strukturellen und funktionellen Integrität des Körpers.</p>
+            
+            <div class="feature-box">
+                <h4 style="color: var(--col-beweg);">Vermeidung von Dysbalancen</h4>
+                <p>Durch einseitige Alltagsbelastungen (z. B. langes Sitzen) verkürzen bestimmte Muskelgruppen (z. B. der Hüftbeuger). Gezieltes Beweglichkeitstraining stellt das muskuläre Gleichgewicht zwischen Agonist und Antagonist wieder her.</p>
+            </div>
+            <div class="feature-box">
+                <h4 style="color: var(--col-beweg);">Verletzungsprophylaxe</h4>
+                <p>Ein optimaler Bewegungsradius (Range of Motion) in den Gelenken verhindert Überdehnungen und Zerrungen bei abrupten Alltags- oder Sportbewegungen.</p>
+            </div>
+        </article>
+
+        <!-- 4. Schnelligkeit -->
+        <article class="form-card card-schnell">
+            <h2><span style="font-size: 2rem;">⚡</span> 4. Schnelligkeit</h2>
+            <p style="margin-bottom: 1.5rem;">Die Schnelligkeit wird im классиischen "Gesundheitssport" oft vernachlässigt, spielt aber eine elementare Rolle für die körperliche Unversehrtheit.</p>
+            
+            <div class="feature-box">
+                <h4 style="color: var(--col-schnell);">Reaktions- und Sturzprophylaxe</h4>
+                <p>Die Fähigkeit, auf unerwartete Reize (z. B. Stolpern auf einem unebenen Gehweg) in Bruchteilen von Sekunden mit einem Ausfallschritt zu reagieren, bewahrt vor schweren Stürzen.</p>
+            </div>
+            <div class="feature-box">
+                <h4 style="color: var(--col-schnell);">Erhalt der FT-Fasern</h4>
+                <p>Im Alter bauen sich die schnellen, kräftigen Muskelfasern (Fast-Twitch-Fasern) zuerst ab. Schnelligkeitstraining zögert diesen degenerativen neuromuskulären Prozess aktiv hinaus.</p>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- Canvas 2x2 Matrix -->
+    <section class="canvas-section">
+        <h3>Gesundheits-Matrix der Beanspruchungsformen</h3>
+        <p>Die spezifischen Präventionseffekte auf einen Blick</p>
+        <div class="canvas-wrapper">
+            <canvas id="healthMatrixCanvas" width="900" height="600"></canvas>
+        </div>
+    </section>
+
+    <!-- Abitur Transfer Box -->
+    <section class="abitur-matrix">
+        <h2><span style="font-size: 2.8rem;">🎯</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: In Klausuren auf erhöhtem Anforderungsniveau wird dieses Wissen selten als reine Definition abgefragt, sondern als <strong>Grundlage für Kritik und Planungsaufgaben</strong> genutzt.
+        </p>
+
+        <div class="transfer-block">
+            <h4>Kritische Analyse von Trainingsplänen</h4>
+            <p style="font-style: italic; color: #94a3b8; margin-bottom: 1rem;">Szenario: Du bekommst beispielsweise den Trainingsplan eines fiktiven Patienten vorgelegt, der ausschließlich 4-mal pro Woche 10 Kilometer joggt, um "gesund zu bleiben". Der Operator lautet: "Beurteilen Sie diesen Trainingsplan vor dem Hintergrund der gesundheitlichen Bedeutung der motorischen Hauptbeanspruchungsformen."</p>
+            
+            <p><strong>Die Lösungsstrategie:</strong> Du musst erkennen, dass der Plan zu einseitig ist! Du argumentierst:</p>
+            <p style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; margin-top: 10px;">
+                Das Joggen deckt zwar die Ausdauer exzellent ab (kardioprotektive Wirkung), vernachlässigt aber die Kraft und Beweglichkeit komplett. Ohne Rumpfkräftigung und Dehnung der verkürzenden Beinmuskulatur führt das monotone Laufen langfristig zu muskulären <span class="highlight-text">Dysbalancen und Gelenkverschleiß</span>. Ein gesundheitsorientiertes Training muss <strong>alle vier Formen</strong> abdecken.
+            </p>
+        </div>
+
+        <div class="connection-box">
+            <h4>🧠 Die Verknüpfung mit dem Gesundheitsbegriff (Level Up!)</h4>
+            <p style="color: #e2e8f0; margin-bottom: 0;">
+                Wenn du argumentierst, nutze zwingend das Wissen aus Kapitel 3.1.1! Betone, dass ein starkes "muskuläres Korsett" (<span style="color:#10b981; font-weight:bold;">physische Dimension</span>) nicht nur Rückenschmerzen verhindert, sondern dem Athleten dadurch auch ein gesteigertes Körper- und Selbstwertgefühl sowie Selbstwirksamkeit (<span style="color:#10b981; font-weight:bold;">psychische Dimension</span>) verleiht. Diese multidimensionale Vernetzung bringt die entscheidenden Punkte für das eA-Niveau.
+            </p>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('healthMatrixCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Palette matches UI
+    const colors = {
+        ausdauer: '#ef4444',
+        ausdauerBg: '#fef2f2',
+        kraft: '#2563eb',
+        kraftBg: '#eff6ff',
+        beweg: '#10b981',
+        bewegBg: '#ecfdf5',
+        schnell: '#f59e0b',
+        schnellBg: '#fffbeb',
+        text: '#0f172a',
+        textSub: '#475569'
+    };
+
+    // Layout configuration
+    const padding = 20;
+    const gap = 20;
+    const boxW = (w - 2 * padding - gap) / 2;
+    const boxH = (h - 2 * padding - gap) / 2;
+
+    // Quadrants coordinates
+    const q1 = { x: padding, y: padding }; // Top Left: Ausdauer
+    const q2 = { x: padding + boxW + gap, y: padding }; // Top Right: Kraft
+    const q3 = { x: padding, y: padding + boxH + gap }; // Bottom Left: Beweglichkeit
+    const q4 = { x: padding + boxW + gap, y: padding + boxH + gap }; // Bottom Right: Schnelligkeit
+
+    /**
+     * Helper: Draw a Quadrant Box
+     */
+    function drawQuadrant(x, y, title, subtitle, bgColor, accentColor, drawIconFn) {
+        // Box background
+        ctx.fillStyle = bgColor;
+        ctx.beginPath();
+        ctx.roundRect(x, y, boxW, boxH, 16);
+        ctx.fill();
+
+        // Border / Accent line on top
+        ctx.strokeStyle = accentColor;
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(x + 16, y);
+        ctx.lineTo(x + boxW - 16, y);
+        ctx.stroke();
+        
+        ctx.strokeStyle = 'rgba(0,0,0,0.05)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x, y, boxW, boxH);
+
+        // Icon Circle
+        const iconCx = x + boxW / 2;
+        const iconCy = y + 80;
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(iconCx, iconCy, 40, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = accentColor;
+        ctx.stroke();
+
+        // Draw the specific icon
+        drawIconFn(iconCx, iconCy, accentColor);
+
+        // Texts
+        ctx.textAlign = 'center';
+        ctx.fillStyle = colors.text;
+        ctx.font = 'bold 24px "Space Grotesk"';
+        ctx.fillText(title, x + boxW / 2, y + 160);
+
+        ctx.fillStyle = accentColor;
+        ctx.font = 'bold 16px "Plus Jakarta Sans"';
+        // Handle multiline subtitle if necessary
+        const lines = subtitle.split('|');
+        lines.forEach((line, index) => {
+            ctx.fillText(line.trim(), x + boxW / 2, y + 200 + (index * 25));
+        });
+    }
+
+    // --- ICONS DRAWING FUNCTIONS ---
+
+    const drawHeart = (cx, cy, color) => {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        // Custom bezier heart
+        const topY = cy - 15;
+        ctx.moveTo(cx, topY + 10);
+        ctx.bezierCurveTo(cx, topY - 10, cx - 25, topY - 10, cx - 25, topY + 10);
+        ctx.bezierCurveTo(cx - 25, topY + 25, cx, topY + 35, cx, cy + 25);
+        ctx.bezierCurveTo(cx, topY + 35, cx + 25, topY + 25, cx + 25, topY + 10);
+        ctx.bezierCurveTo(cx + 25, topY - 10, cx, topY - 10, cx, topY + 10);
+        ctx.fill();
+    };
+
+    const drawDumbbell = (cx, cy, color) => {
+        ctx.fillStyle = color;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 4;
+        
+        // Handle
+        ctx.beginPath();
+        ctx.moveTo(cx - 15, cy);
+        ctx.lineTo(cx + 15, cy);
+        ctx.stroke();
+        
+        // Weights left
+        ctx.fillRect(cx - 22, cy - 15, 8, 30);
+        ctx.fillRect(cx - 28, cy - 10, 6, 20);
+        
+        // Weights right
+        ctx.fillRect(cx + 14, cy - 15, 8, 30);
+        ctx.fillRect(cx + 22, cy - 10, 6, 20);
+    };
+
+    const drawYoga = (cx, cy, color) => {
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        // Head
+        ctx.beginPath();
+        ctx.arc(cx, cy - 15, 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Torso
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - 5);
+        ctx.lineTo(cx, cy + 15);
+        ctx.stroke();
+
+        // Arms (up in V shape)
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx - 15, cy - 15);
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + 15, cy - 15);
+        ctx.stroke();
+
+        // Legs (Tree pose: one straight, one bent)
+        ctx.beginPath();
+        ctx.moveTo(cx, cy + 15);
+        ctx.lineTo(cx, cy + 35); // straight leg
+        ctx.moveTo(cx, cy + 15);
+        ctx.lineTo(cx + 15, cy + 20);
+        ctx.lineTo(cx + 5, cy + 28); // bent leg resting on straight leg
+        ctx.stroke();
+    };
+
+    const drawLightning = (cx, cy, color) => {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(cx + 5, cy - 20);
+        ctx.lineTo(cx - 15, cy + 5);
+        ctx.lineTo(cx + 2, cy + 5);
+        ctx.lineTo(cx - 5, cy + 25);
+        ctx.lineTo(cx + 15, cy - 2);
+        ctx.lineTo(cx - 2, cy - 2);
+        ctx.closePath();
+        ctx.fill();
+    };
+
+    // --- RENDER MATRIX ---
+
+    // Q1: Ausdauer
+    drawQuadrant(q1.x, q1.y, 'AUSDAUER', 'Herz-Kreislauf-Schutz | & Stoffwechsel', colors.ausdauerBg, colors.ausdauer, drawHeart);
+
+    // Q2: Kraft
+    drawQuadrant(q2.x, q2.y, 'KRAFT', 'Gelenkstabilisierung | & Osteoporose-Prävention', colors.kraftBg, colors.kraft, drawDumbbell);
+
+    // Q3: Beweglichkeit
+    drawQuadrant(q3.x, q3.y, 'BEWEGLICHKEIT', 'Dysbalancen-Prävention | & Verletzungsschutz', colors.bewegBg, colors.beweg, drawYoga);
+
+    // Q4: Schnelligkeit
+    drawQuadrant(q4.x, q4.y, 'SCHNELLIGKEIT', 'Reaktions- | & Sturzprophylaxe', colors.schnellBg, colors.schnell, drawLightning);
+
+    // Center Crosshair visual aid (subtle)
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(w/2, h/2, 25, 0, Math.PI*2);
+    ctx.fill();
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    
+    ctx.fillStyle = '#cbd5e1';
+    ctx.beginPath();
+    ctx.arc(w/2, h/2, 8, 0, Math.PI*2);
+    ctx.fill();
+
+</script>
+</body>
+</html>

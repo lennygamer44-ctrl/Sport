@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.2.1b Anatomie der Wirbelsäule - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Anatomy Atlas / X-Ray Mode */
+            --bg-deep: #0f172a;        /* Slate 900 */
+            --bg-card: #1e293b;        /* Slate 800 */
+            --bg-element: #334155;     /* Slate 700 */
+            
+            --text-main: #f8fafc;      /* Slate 50 */
+            --text-muted: #cbd5e1;     /* Slate 300 */
+            
+            --bone-white: #f1f5f9;     /* Slate 100 */
+            --xray-cyan: #22d3ee;      /* Cyan 400 */
+            --marrow-red: #f43f5e;     /* Rose 500 */
+            --cartilage-blue: #38bdf8; /* Light Blue 400 */
+            
+            /* Spine Regions */
+            --cervical-color: #06b6d4; /* Cyan */
+            --thoracic-color: #3b82f6; /* Blue */
+            --lumbar-color: #eab308;   /* Yellow */
+            --sacral-color: #ec4899;   /* Pink */
+
+            --abi-gold: #fbbf24;       /* Amber 400 */
+            --abi-bg: #1e1b4b;         /* Indigo 900 */
+            
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow-glow: 0 0 25px rgba(34, 211, 238, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        h1, h2, h3, .atlas-font {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.5px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- X-Ray Hero Header --- */
+        .hero {
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            border-bottom: 1px solid var(--bg-element);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-tag {
+            background: transparent;
+            color: var(--xray-cyan);
+            border: 1px solid var(--xray-cyan);
+            padding: 0.4rem 1.2rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--bone-white);
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* --- Intro Block --- */
+        .intro-text {
+            background: var(--bg-card);
+            padding: 2.5rem 3rem;
+            border-radius: var(--radius-md);
+            margin: 4rem auto;
+            border-left: 4px solid var(--xray-cyan);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* --- Custom Section Titles --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 5rem 0 2rem;
+        }
+
+        .section-num {
+            color: var(--bg-deep);
+            background: var(--xray-cyan);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+        }
+
+        .section-header h2 {
+            font-size: 2.4rem;
+            color: var(--bone-white);
+            margin: 0;
+        }
+
+        /* --- Section 1: Doppel-S-Form --- */
+        .curve-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 950px) {
+            .curve-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .curve-grid { grid-template-columns: 1fr; }
+        }
+
+        .curve-card {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-element);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .curve-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .curve-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+        }
+
+        .curve-card.cervical::before { background: var(--cervical-color); }
+        .curve-card.thoracic::before { background: var(--thoracic-color); }
+        .curve-card.lumbar::before { background: var(--lumbar-color); }
+        .curve-card.sacral::before { background: var(--sacral-color); }
+
+        .curve-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--bone-white);
+        }
+
+        .curve-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .curve-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .curve-card.cervical .curve-tag { color: var(--cervical-color); }
+        .curve-card.thoracic .curve-tag { color: var(--thoracic-color); }
+        .curve-card.lumbar .curve-tag { color: var(--lumbar-color); }
+        .curve-card.sacral .curve-tag { color: var(--sacral-color); }
+
+        /* --- Section 2: Wirbel und Bandscheiben --- */
+        .micro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 800px) {
+            .micro-grid { grid-template-columns: 1fr; }
+        }
+
+        .micro-card {
+            background: linear-gradient(145deg, var(--bg-card), var(--bg-deep));
+            border: 1px solid var(--bg-element);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--xray-cyan);
+        }
+
+        .micro-card h3 {
+            color: var(--xray-cyan);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .micro-card p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-word {
+            color: var(--bone-white);
+            font-weight: 700;
+        }
+
+        /* --- Section 3: Atlas & Axis --- */
+        .atlas-axis-container {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 3rem;
+            border: 1px solid var(--cartilage-blue);
+            box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.05);
+            margin-bottom: 4rem;
+        }
+
+        .c-vertebra {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--bg-element);
+        }
+
+        .c-vertebra:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .c-vertebra h3 {
+            color: var(--bone-white);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .c-vertebra h3 span {
+            background: var(--bg-element);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--cartilage-blue);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .c-vertebra p {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* --- Canvas Wrapper --- */
+        .canvas-section {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid var(--bg-element);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .canvas-section h2 {
+            text-align: center;
+            color: var(--xray-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p.subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            background: var(--bg-deep);
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-transfer {
+            background: linear-gradient(145deg, var(--abi-bg), #2e1065);
+            color: #e2e8f0;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-transfer::before {
+            content: 'EXAM';
+            position: absolute;
+            font-size: 8rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            color: rgba(255,255,255,0.03);
+            top: -20px;
+            right: 0;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: var(--abi-gold);
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #fde68a;
+            margin-bottom: 3rem;
+            font-weight: 400;
+            border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .abi-card {
+            background: rgba(0,0,0,0.2);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .abi-card.alert {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .abi-card p {
+            line-height: 1.8;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+        
+        .abi-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .hl-gold { color: var(--abi-gold); font-weight: 700; }
+        .hl-cyan { color: var(--xray-cyan); font-weight: 700; }
+
+        ul.abi-list {
+            list-style-type: none;
+            padding-left: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        ul.abi-list li {
+            position: relative;
+            margin-bottom: 0.8rem;
+        }
+
+        ul.abi-list li::before {
+            content: '>';
+            position: absolute;
+            left: -1.5rem;
+            color: var(--abi-gold);
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="chapter-tag">Lernbereich 1.2.1b</span>
+            <h1>Anatomie der Wirbelsäule</h1>
+            <p>Halslordose, Wirbelkörper, Bandscheiben und die spezielle funktionelle Anatomie von Atlas und Axis.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-text">
+            Die Wirbelsäule (Columna vertebralis) bildet die zentrale Längsachse des menschlichen Skeletts. Im Gegensatz zum restlichen passiven Bewegungsapparat fordert der bayerische Fachlehrplan (eA) hier ausdrücklich <strong>vertiefte anatomische Kenntnisse</strong>.
+        </div>
+
+        <!-- Section 1: Form -->
+        <div class="section-header">
+            <div class="section-num">1</div>
+            <h2>Makroskopische Form: Die Doppel-S-Krümmung</h2>
+        </div>
+        <p class="bone-intro" style="margin-bottom: 2rem; color: var(--text-muted);">Betrachtet man die Wirbelsäule von der Seite (sagittal), verläuft sie nicht gerade, sondern weist eine physiologische Doppel-S-Form auf. Diese Krümmungen fangen axiale Belastungen (wie Stöße beim Laufen oder Springen) federnd ab:</p>
+
+        <div class="curve-grid">
+            <div class="curve-card cervical">
+                <span class="curve-tag">HWS (7 Wirbel)</span>
+                <h3>Halslordose</h3>
+                <p>Eine konvexe Krümmung nach vorne im Bereich der Halswirbelsäule.</p>
+            </div>
+            <div class="curve-card thoracic">
+                <span class="curve-tag">BWS (12 Wirbel)</span>
+                <h3>Brustkyphose</h3>
+                <p>Eine konkave Krümmung nach hinten im Bereich der Brustwirbelsäule.</p>
+            </div>
+            <div class="curve-card lumbar">
+                <span class="curve-tag">LWS (5 Wirbel)</span>
+                <h3>Lendenlordose</h3>
+                <p>Eine erneute konvexe Krümmung nach vorne, bestehend aus massiven Lendenwirbeln.</p>
+            </div>
+            <div class="curve-card sacral">
+                <span class="curve-tag">Os sacrum</span>
+                <h3>Sakralkyphose</h3>
+                <p>Die Verschmelzung von Kreuz- und Steißbein ist starr nach hinten gekrümmt.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Mikroskopischer Aufbau -->
+        <div class="section-header">
+            <div class="section-num">2</div>
+            <h2>Mikroskopischer Aufbau: Wirbel und Bandscheiben</h2>
+        </div>
+        <p class="bone-intro" style="margin-bottom: 2rem; color: var(--text-muted);">Die Wirbelsäule ist ein segmentales Konstrukt aus Knochen, Knorpeln und Bändern. Ein <em>Bewegungssegment</em> besteht aus zwei benachbarten Wirbeln und der dazwischenliegenden Struktur:</p>
+
+        <div class="micro-grid">
+            <div class="micro-card">
+                <h3>Wirbelkörper <br><span style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">(Corpus vertebrae)</span></h3>
+                <p>Der massive, tragende vordere Teil des Knochens. Die Größe der Wirbelkörper nimmt von der Hals- zur Lendenwirbelsäule stetig zu, da die statische Gewichtsbelastung nach unten hin ansteigt.</p>
+                <p>Hinten schließt sich der knöcherne <span class="highlight-word">Wirbelbogen</span> an, der das Wirbelloch (für das Rückenmark) umschließt.</p>
+            </div>
+            <div class="micro-card">
+                <h3>Bandscheiben <br><span style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">(Disci intervertebrales)</span></h3>
+                <p>Sie liegen als faserknorpelige Puffer zwischen den Wirbelkörpern. Sie bestehen aus einem derben äußeren Faserring (<span class="highlight-word">Anulus fibrosus</span>) und einem gallertartigen, wasserreichen Kern (<span class="highlight-word">Nucleus pulposus</span>).</p>
+                <p>Dieser Kern verteilt den Druck bei Belastung gleichmäßig auf den Faserring (hydrostatisches System).</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Atlas & Axis -->
+        <div class="section-header">
+            <div class="section-num">3</div>
+            <h2>Die Halswirbelsäule im Detail: Atlas und Axis</h2>
+        </div>
+        <p class="bone-intro" style="margin-bottom: 2rem; color: var(--text-muted);">Eine anatomische Sonderstellung nehmen die ersten beiden Halswirbel ein, da sie das Gewicht des Kopfes (ca. 4–5 kg) tragen und eine enorme dreidimensionale Beweglichkeit ermöglichen müssen:</p>
+
+        <div class="atlas-axis-container">
+            <div class="c-vertebra">
+                <h3>Atlas <span>1. Halswirbel / C1</span></h3>
+                <p>Er besitzt im Gegensatz zu allen anderen Wirbeln <strong>keinen Wirbelkörper</strong>, sondern gleicht einem knöchernen Ring. Er trägt den Schädel und bildet das obere Kopfgelenk, welches primär Nickbewegungen (Flexion/Extension) ermöglicht.</p>
+            </div>
+            <div class="c-vertebra">
+                <h3>Axis <span>2. Halswirbel / C2</span></h3>
+                <p>Er zeichnet sich durch einen markanten, zahnartigen Knochenfortsatz aus – den <strong>Dens axis</strong> –, der nach oben in den Ring des Atlas ragt.</p>
+            </div>
+            <div class="c-vertebra" style="border-left: 4px solid var(--xray-cyan); padding-left: 1.5rem; background: rgba(34, 211, 238, 0.05); padding-top: 1.5rem; border-bottom: none;">
+                <h3 style="color: var(--xray-cyan);">Das Zapfengelenk</h3>
+                <p>Atlas und Axis bilden zusammen mit dem <em>Dens axis</em> das untere Kopfgelenk in Form eines <strong>Zapfengelenks</strong>. Dieses Gelenk ist mechanisch für die Rotationsbewegung (das "Kopfschütteln") verantwortlich.</p>
+            </div>
+        </div>
+
+        <!-- Canvas Graphic -->
+        <section class="canvas-section">
+            <h2 class="atlas-font">Medizinische Illustration: Columna vertebralis & Kopfgelenke</h2>
+            <p class="subtitle">Makroskopische Doppel-S-Form und mikroskopisches Detail des Zapfengelenks.</p>
+            <div class="canvas-container">
+                <canvas id="spineCanvas" width="1000" height="600"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-transfer">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                Dieser Unterpunkt ist <strong>hochgradig klausurrelevant!</strong> Im offiziellen Erwartungshorizont der Musterabituraufgaben wird explizit verlangt, dass Schüler den anatomischen Aufbau der Halswirbelsäule skizzieren und funktionell ableiten können.
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card">
+                    <h3>🚴♀️ Der Praxistransfer (Mountainbike-Szenario)</h3>
+                    <p>In einer materialgestützten Abituraufgabe müssen Schüler aus der Anatomie direkt Überlastungssymptome für bestimmte Sportarten ableiten.</p>
+                    <p><strong>Die biomechanische Argumentation:</strong> Wenn du begründen sollst, warum eine Mountainbikerin Nackenschmerzen bekommt, nutzt du genau diese anatomischen Fakten:</p>
+                    <ul class="abi-list">
+                        <li>Die extremen mechanischen Belastungen durch harte Stöße im unebenen Gelände wirken direkt auf die sensiblen <span class="hl-gold">Bandscheiben und Wirbelkörper der HWS</span>.</li>
+                        <li>Die spezifische Sitzposition (vorgebeugter Rumpf, stark überstreckter Kopf / Blick nach vorne) führt zu einer dauerhaften, unphysiologischen Belastung.</li>
+                        <li>Diese <span class="hl-gold">Überstreckung in den Kopfgelenken (Atlas/Axis)</span> führt zu muskulären Verspannungen und einer pathologischen Stauchung der Halslordose.</li>
+                    </ul>
+                </div>
+
+                <div class="abi-card alert">
+                    <h3>💡 Strategie für Klausuren</h3>
+                    <p>Lerne die Fachbegriffe <span class="hl-cyan">Atlas, Axis und Zapfengelenk</span> absolut sicher. Sie sind in der Sporttheorie das Vorzeige-Beispiel für ein Gelenk, das enorme dreidimensionale Beweglichkeit garantiert, aber gleichzeitig bei Stößen oder Zwangshaltungen hochgradig verletzungs- und verschleißanfällig ist.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('spineCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Handle high DPI
+            const dpr = window.devicePixelRatio || 1;
+            const logicalWidth = 1000;
+            const logicalHeight = 600;
+            
+            let time = 0;
+            let animationId;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayWidth = Math.min(rect.width, logicalWidth);
+                
+                const scale = displayWidth / logicalWidth;
+                const displayHeight = logicalHeight * scale;
+                
+                canvas.width = displayWidth * dpr;
+                canvas.height = displayHeight * dpr;
+                
+                canvas.style.width = `${displayWidth}px`;
+                canvas.style.height = `${displayHeight}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // Helpers
+            function drawLabel(ctx, text, x, y, lineX, lineY, align = 'left', color = '#22d3ee') {
+                ctx.beginPath();
+                ctx.moveTo(x + (align === 'right' ? 80 : -80), y);
+                ctx.lineTo(x, y);
+                ctx.lineTo(lineX, lineY);
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 1.5;
+                ctx.setLineDash([2, 2]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                ctx.beginPath();
+                ctx.arc(lineX, lineY, 4, 0, Math.PI*2);
+                ctx.fillStyle = color;
+                ctx.fill();
+
+                ctx.fillStyle = '#f8fafc';
+                ctx.font = '500 13px Inter';
+                ctx.textAlign = align;
+                ctx.fillText(text, x + (align === 'right' ? 85 : -85), y + 4);
+            }
+
+            // Function to calculate points on a cubic bezier curve
+            function getBezierXY(t, sx, sy, cp1x, cp1y, cp2x, cp2y, x, y) {
+                const ex = x;
+                const ey = y;
+                return {
+                    x: Math.pow(1-t,3) * sx + 3 * t * Math.pow(1 - t, 2) * cp1x + 3 * t * t * (1 - t) * cp2x + t * t * t * ex,
+                    y: Math.pow(1-t,3) * sy + 3 * t * Math.pow(1 - t, 2) * cp1y + 3 * t * t * (1 - t) * cp2y + t * t * t * ey
+                };
+            }
+
+            // Calculate derivative (tangent angle) of bezier curve
+            function getBezierAngle(t, sx, sy, cp1x, cp1y, cp2x, cp2y, x, y) {
+                const ex = x;
+                const ey = y;
+                let dx = 3 * Math.pow(1-t,2) * (cp1x - sx) + 6 * (1-t) * t * (cp2x - cp1x) + 3 * t * t * (ex - cp2x);
+                let dy = 3 * Math.pow(1-t,2) * (cp1y - sy) + 6 * (1-t) * t * (cp2y - cp1y) + 3 * t * t * (ey - cp2y);
+                return Math.atan2(dy, dx);
+            }
+
+            function drawSpineLeft() {
+                const cx = 250;
+                const sy = 50;
+                const ey = 550;
+                
+                // Draw Base Reference Line (Straight axis)
+                ctx.beginPath();
+                ctx.moveTo(cx, sy);
+                ctx.lineTo(cx, ey);
+                ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // Define Bezier Control Points for Double-S (Sagittal View, face looking right)
+                // HWS (Lordose) -> bends forward (right)
+                // BWS (Kyphose) -> bends backward (left)
+                // LWS (Lordose) -> bends forward (right)
+                // Sakrum (Kyphose) -> bends backward (left)
+                
+                const b_sx = cx; 
+                const b_sy = sy;
+                const b_cp1x = cx + 80;
+                const b_cp1y = 200;
+                const b_cp2x = cx - 120;
+                const b_cp2y = 350;
+                const b_ex = cx + 20;
+                const b_ey = ey;
+
+                // Draw the central spinal cord line
+                ctx.beginPath();
+                ctx.moveTo(b_sx, b_sy);
+                ctx.bezierCurveTo(b_cp1x, b_cp1y, b_cp2x, b_cp2y, b_ex, b_ey);
+                ctx.strokeStyle = 'rgba(34, 211, 238, 0.2)';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+                // Draw Vertebrae along the curve
+                const numVertebrae = 24; // 7 HWS + 12 BWS + 5 LWS
+                
+                for (let i = 0; i <= numVertebrae; i++) {
+                    let t = i / numVertebrae;
+                    let pt = getBezierXY(t, b_sx, b_sy, b_cp1x, b_cp1y, b_cp2x, b_cp2y, b_ex, b_ey);
+                    let angle = getBezierAngle(t, b_sx, b_sy, b_cp1x, b_cp1y, b_cp2x, b_cp2y, b_ex, b_ey);
+                    
+                    // Determine region color & size
+                    let color = '#ec4899'; // Sacral default
+                    let vWidth = 20;
+                    let vHeight = 10;
+                    
+                    if (i < 7) { 
+                        color = '#06b6d4'; // Cervical
+                        vWidth = 14 + (i*0.5);
+                        vHeight = 8;
+                    } else if (i < 19) { 
+                        color = '#3b82f6'; // Thoracic
+                        vWidth = 18 + ((i-7)*0.5);
+                        vHeight = 10;
+                    } else if (i < 24) { 
+                        color = '#eab308'; // Lumbar
+                        vWidth = 26 + ((i-19)*1);
+                        vHeight = 14;
+                    } else {
+                        color = '#ec4899'; // Sacrum (fused)
+                        vWidth = 20 - ((i-24)*2);
+                        vHeight = 16;
+                    }
+
+                    ctx.save();
+                    ctx.translate(pt.x, pt.y);
+                    // The tangent is along the curve (downwards). We want the vertebra perpendicular to it.
+                    ctx.rotate(angle); 
+                    
+                    // Draw Vertebral Body (Corpus) - face is on the right
+                    ctx.fillStyle = '#f1f5f9';
+                    ctx.fillRect(-vHeight/2, -vWidth/2, vHeight, vWidth);
+                    
+                    // Draw Spinous Process (Wirbelbogen/Dornfortsatz) - pointing back (left)
+                    if (i < 24) {
+                        ctx.beginPath();
+                        ctx.moveTo(-vHeight/2, 0);
+                        ctx.lineTo(-vHeight/2 - 15, -2);
+                        ctx.lineTo(-vHeight/2 - 15, +2);
+                        ctx.fillStyle = '#cbd5e1';
+                        ctx.fill();
+                    }
+
+                    // Draw Intervertebral Disc (Bandscheibe) below the vertebra
+                    if (i < 24) {
+                        ctx.fillStyle = 'rgba(56, 189, 248, 0.8)';
+                        // Add slight animated bulging to simulate shock absorption
+                        let bulge = Math.sin(time*2 + i) * 1;
+                        ctx.fillRect(vHeight/2 + 1, -vWidth/2 - bulge, 3, vWidth + bulge*2);
+                    }
+                    
+                    ctx.restore();
+                }
+
+                // Region Brackets & Labels
+                ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                
+                // Cervical
+                let ptC1 = getBezierXY(0, b_sx, b_sy, b_cp1x, b_cp1y, b_cp2x, b_cp2y, b_ex, b_ey);
+                let ptC7 = getBezierXY(7/24, b_sx, b_sy, b_cp1x, b_cp1y, b_cp2x, b_cp2y, b_ex, b_ey);
+                drawLabel(ctx, 'Halslordose (HWS)', 80, 100, ptC7.x - 40, ptC7.y - 30, 'right', '#06b6d4');
+
+                // Thoracic
+                let ptT12 = getBezierXY(19/24, b_sx, b_sy, b_cp1x, b_cp1y, b_cp2x, b_cp2y, b_ex, b_ey);
+                drawLabel(ctx, 'Brustkyphose (BWS)', 80, 250, ptC7.x - 30, ptC7.y + 70, 'right', '#3b82f6');
+                
+                // Lumbar
+                let ptL5 = getBezierXY(24/24, b_sx, b_sy, b_cp1x, b_cp1y, b_cp2x, b_cp2y, b_ex, b_ey);
+                drawLabel(ctx, 'Lendenlordose (LWS)', 80, 400, ptT12.x - 20, ptT12.y + 40, 'right', '#eab308');
+            }
+
+            function drawAtlasAxisRight() {
+                const cx = 750;
+                const cy = 300;
+
+                // Title for Right Section
+                ctx.fillStyle = '#22d3ee';
+                ctx.font = 'bold 18px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText('Detail: Atlas & Axis (Zapfengelenk)', cx, 80);
+
+                // Background subtle glow
+                ctx.shadowColor = 'rgba(34, 211, 238, 0.05)';
+                ctx.shadowBlur = 50;
+                ctx.beginPath();
+                ctx.arc(cx, cy, 150, 0, Math.PI*2);
+                ctx.fillStyle = '#0f172a';
+                ctx.fill();
+                ctx.shadowColor = 'transparent';
+
+                // --- Axis (C2) --- Below
+                ctx.fillStyle = '#cbd5e1';
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2;
+                
+                ctx.beginPath();
+                // Axis Body
+                // Using roundRect manual since older browsers might fail or need polyfill in some environments
+                const rx = cx - 50, ry = cy + 20, rw = 100, rh = 60, rr = 10;
+                ctx.moveTo(rx + rr, ry);
+                ctx.lineTo(rx + rw - rr, ry); ctx.quadraticCurveTo(rx + rw, ry, rx + rw, ry + rr);
+                ctx.lineTo(rx + rw, ry + rh - rr); ctx.quadraticCurveTo(rx + rw, ry + rh, rx + rw - rr, ry + rh);
+                ctx.lineTo(rx + rr, ry + rh); ctx.quadraticCurveTo(rx, ry + rh, rx, ry + rh - rr);
+                ctx.lineTo(rx, ry + rr); ctx.quadraticCurveTo(rx, ry, rx + rr, ry);
+                ctx.closePath();
+                ctx.fill(); ctx.stroke();
+                
+                // Dens Axis (Odontoid process) - pointing up
+                ctx.fillStyle = '#f1f5f9';
+                ctx.beginPath();
+                ctx.moveTo(cx - 18, cy + 20);
+                ctx.lineTo(cx - 15, cy - 40); // tip left
+                ctx.quadraticCurveTo(cx, cy - 50, cx + 15, cy - 40); // tip curve
+                ctx.lineTo(cx + 18, cy + 20);
+                ctx.fill(); ctx.stroke();
+
+                // Axis Articular Facets
+                ctx.fillStyle = '#38bdf8'; // Cartilage
+                ctx.beginPath();
+                ctx.ellipse(cx - 35, cy + 20, 20, 8, 0, 0, Math.PI*2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(cx + 35, cy + 20, 20, 8, 0, 0, Math.PI*2);
+                ctx.fill();
+
+                // --- Atlas (C1) --- Above, rendered as a ring viewed slightly from top/front
+                // Atlas anterior arch (crossing in front of Dens)
+                ctx.fillStyle = '#e2e8f0';
+                ctx.beginPath();
+                ctx.moveTo(cx - 25, cy - 10);
+                ctx.quadraticCurveTo(cx, cy + 10, cx + 25, cy - 10);
+                ctx.lineTo(cx + 25, cy - 25);
+                ctx.quadraticCurveTo(cx, cy - 5, cx - 25, cy - 25);
+                ctx.closePath();
+                ctx.fill(); ctx.stroke();
+
+                // Atlas lateral masses (resting on Axis facets)
+                ctx.fillStyle = '#f1f5f9';
+                ctx.beginPath();
+                const ax1 = cx - 60, ay1 = cy - 25, aw1 = 40, ah1 = 35, ar1 = 8;
+                ctx.moveTo(ax1 + ar1, ay1); ctx.lineTo(ax1 + aw1 - ar1, ay1); ctx.quadraticCurveTo(ax1 + aw1, ay1, ax1 + aw1, ay1 + ar1);
+                ctx.lineTo(ax1 + aw1, ay1 + ah1 - ar1); ctx.quadraticCurveTo(ax1 + aw1, ay1 + ah1, ax1 + aw1 - ar1, ay1 + ah1);
+                ctx.lineTo(ax1 + ar1, ay1 + ah1); ctx.quadraticCurveTo(ax1, ay1 + ah1, ax1, ay1 + ah1 - ar1);
+                ctx.lineTo(ax1, ay1 + ar1); ctx.quadraticCurveTo(ax1, ay1, ax1 + ar1, ay1);
+                ctx.fill(); ctx.stroke();
+                
+                ctx.beginPath();
+                const ax2 = cx + 20, ay2 = cy - 25, aw2 = 40, ah2 = 35, ar2 = 8;
+                ctx.moveTo(ax2 + ar2, ay2); ctx.lineTo(ax2 + aw2 - ar2, ay2); ctx.quadraticCurveTo(ax2 + aw2, ay2, ax2 + aw2, ay2 + ar2);
+                ctx.lineTo(ax2 + aw2, ay2 + ah2 - ar2); ctx.quadraticCurveTo(ax2 + aw2, ay2 + ah2, ax2 + aw2 - ar2, ay2 + ah2);
+                ctx.lineTo(ax2 + ar2, ay2 + ah2); ctx.quadraticCurveTo(ax2, ay2 + ah2, ax2, ay2 + ah2 - ar2);
+                ctx.lineTo(ax2, ay2 + ar2); ctx.quadraticCurveTo(ax2, ay2, ax2 + ar2, ay2);
+                ctx.fill(); ctx.stroke();
+
+                // Cartilage under Atlas masses
+                ctx.fillStyle = '#38bdf8';
+                ctx.beginPath();
+                ctx.ellipse(cx - 40, cy + 10, 20, 6, 0, 0, Math.PI*2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(cx + 40, cy + 10, 20, 6, 0, 0, Math.PI*2);
+                ctx.fill();
+
+                // Transverse Ligament (holding the Dens)
+                ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+                ctx.lineWidth = 6;
+                ctx.beginPath();
+                ctx.moveTo(cx - 25, cy - 15);
+                ctx.quadraticCurveTo(cx, cy - 30, cx + 25, cy - 15);
+                ctx.stroke();
+
+                // --- Animation: Rotation Indicator (Kopfschütteln) ---
+                ctx.save();
+                ctx.translate(cx, cy - 35);
+                
+                // Rotational movement using Math.sin
+                let rot = Math.sin(time*2) * 0.5; 
+                ctx.rotate(rot);
+
+                ctx.strokeStyle = 'rgba(244, 63, 94, 0.8)'; // Red arrow
+                ctx.lineWidth = 3;
+                ctx.setLineDash([5, 5]);
+                
+                ctx.beginPath();
+                ctx.ellipse(0, 0, 35, 12, 0, Math.PI, 0); // half circle over dens
+                ctx.stroke();
+                
+                // Arrowheads
+                ctx.fillStyle = 'rgba(244, 63, 94, 0.8)';
+                ctx.setLineDash([]);
+                ctx.beginPath();
+                ctx.moveTo(35, 0); ctx.lineTo(40, -8); ctx.lineTo(30, -8); ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(-35, 0); ctx.lineTo(-40, -8); ctx.lineTo(-30, -8); ctx.fill();
+                
+                ctx.restore();
+
+                // --- Labels ---
+                drawLabel(ctx, 'Atlas (C1) - knöcherner Ring', cx + 180, cy - 50, cx + 55, cy - 20, 'left', '#06b6d4');
+                drawLabel(ctx, 'Dens axis (Zapfen)', cx + 180, cy - 90, cx + 10, cy - 40, 'left', '#f43f5e');
+                drawLabel(ctx, 'Axis (C2) - mit Wirbelkörper', cx + 180, cy + 40, cx + 60, cy + 30, 'left', '#06b6d4');
+                drawLabel(ctx, 'Gelenkknorpel', cx - 180, cy + 15, cx - 45, cy + 15, 'right', '#38bdf8');
+                drawLabel(ctx, 'Rotationsachse', cx - 180, cy - 40, cx - 35, cy - 35, 'right', '#f43f5e');
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, logicalWidth, logicalHeight);
+                time += 0.02;
+                
+                // Divider Line
+                ctx.beginPath();
+                ctx.moveTo(500, 50);
+                ctx.lineTo(500, 550);
+                ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                drawSpineLeft();
+                drawAtlasAxisRight();
+                
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

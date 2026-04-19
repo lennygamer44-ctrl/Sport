@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Apparative und strukturelle Erweiterungen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: 'Rajdhani' for high-tech headers, 'Inter' for highly readable body -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Rajdhani', 'sans-serif'],
+                    },
+                    colors: {
+                        tech: {
+                            900: '#09090b', // Deepest Zinc
+                            800: '#18181b', // Zinc 900
+                            700: '#27272a',
+                        },
+                        ems: {
+                            400: '#a3e635', // Lime 400
+                            50: '#f7fee7',
+                            500: '#84cc16', // Lime 500
+                            600: '#65a30d',
+                        },
+                        fascia: {
+                            400: '#e879f9', // Fuchsia 400
+                            500: '#d946ef', // Fuchsia 500
+                            hydro: '#22d3ee', // Cyan 400 for Hydration
+                        },
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                            vault: '#171717',
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.4)',
+                        'glow-ems': '0 0 25px rgba(163, 230, 53, 0.2)',
+                        'glow-fascia': '0 0 25px rgba(217, 70, 239, 0.2)',
+                        'glow-abitur': '0 0 40px rgba(245, 158, 11, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #09090b;
+            color: #e4e4e7;
+            -webkit-font-smoothing: antialiased;
+            /* Cyber-grid background */
+            background-image: 
+                linear-gradient(rgba(163, 230, 53, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(163, 230, 53, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* Bio-Tech Interface Cards */
+        .interface-card {
+            background: rgba(24, 24, 27, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1.25rem;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .interface-card:hover {
+            transform: translateY(-4px);
+            background: rgba(39, 39, 42, 0.6);
+        }
+
+        .accent-ems { border-top: 2px solid #a3e635; border-left: 1px solid rgba(163, 230, 53, 0.2); }
+        .accent-fascia { border-top: 2px solid #d946ef; border-left: 1px solid rgba(217, 70, 239, 0.2); }
+
+        /* Canvas Wrapper */
+        .simulation-container {
+            background: #000000;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Ambient Glows */
+        .ambient-ems {
+            position: absolute;
+            width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(163, 230, 53, 0.05) 0%, transparent 60%);
+            border-radius: 50%;
+            top: -10vw; left: -10vw;
+            pointer-events: none; z-index: -1;
+        }
+        
+        .ambient-fascia {
+            position: absolute;
+            width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(217, 70, 239, 0.05) 0%, transparent 60%);
+            border-radius: 50%;
+            bottom: -10vw; right: -10vw;
+            pointer-events: none; z-index: -1;
+        }
+
+        /* Abitur Vault */
+        .abitur-vault {
+            background: linear-gradient(135deg, #18181b 0%, #000000 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-top: 4px solid #f59e0b;
+            box-shadow: 0 25px 50px -12px rgba(245, 158, 11, 0.15);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09090b; }
+        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+    </style>
+</head>
+<body class="leading-relaxed py-12 px-4 sm:px-6 relative overflow-x-hidden">
+
+    <div class="ambient-ems"></div>
+    <div class="ambient-fascia"></div>
+
+    <div class="max-w-6xl mx-auto space-y-16 relative z-10">
+        
+        <!-- Header -->
+        <header class="interface-card p-8 md:p-14 shadow-glass relative">
+            <!-- Tech-Dots Background -->
+            <div class="absolute right-0 top-0 w-64 h-64 opacity-20 pointer-events-none" style="background-image: radial-gradient(#a3e635 2px, transparent 2px); background-size: 20px 20px;"></div>
+
+            <div class="flex items-center gap-3 mb-6 relative z-10">
+                <span class="bg-white text-tech-900 font-bold px-3 py-1 text-sm font-display tracking-widest uppercase rounded">1.8.1b</span>
+                <span class="text-slate-400 font-bold tracking-widest text-xs uppercase border border-slate-700 px-3 py-1 rounded bg-tech-900/50">Modern Bio-Engineering</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-display font-bold uppercase tracking-tight text-white mb-6 leading-tight relative z-10">
+                Apparative & Strukturelle <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-ems-400 via-white to-fascia-400">Erweiterungen</span>
+            </h1>
+            
+            <div class="max-w-4xl relative z-10">
+                <p class="text-lg md:text-xl text-slate-300 font-medium leading-relaxed mb-6">
+                    Neben den klassischen Methoden und den kognitiven Erweiterungen (Mentaltraining) haben sich im modernen Fitness- und Leistungssport Methoden etabliert, die auf <strong>externen apparativen Hilfsmitteln</strong> oder einer <strong>veränderten strukturellen Betrachtungsweise</strong> des Bewegungsapparates basieren.
+                </p>
+                <div class="bg-tech-900/80 border-l-4 border-ems-500 p-4 rounded-r-lg">
+                    <p class="text-slate-300 text-sm md:text-base">
+                        Zu den prominentesten Vertretern dieser Kategorien zählen das apparative <strong class="text-ems-400">EMS-Training</strong> und das strukturelle <strong class="text-fascia-400">Faszientraining</strong>.
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Section 1: EMS Training -->
+        <section>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-14 rounded-xl bg-ems-500/10 border border-ems-500/30 flex items-center justify-center text-ems-400 shadow-glow-ems">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-wide">1. EMS-Training <span class="text-lg text-slate-500 normal-case tracking-normal">(Elektromyostimulation)</span></h2>
+            </div>
+            
+            <p class="text-slate-300 mb-8 text-lg max-w-4xl">
+                Das EMS-Training nutzt <strong>externe elektrische Impulse</strong>, um eine Muskelkontraktion zu erzwingen, anstatt sich auf die körpereigenen Aktionspotenziale des ZNS zu verlassen. Ursprünglich aus der medizinischen Reha stammend, heute ein hochintensives Ganzkörpertraining.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Physiologie & Rekrutierung -->
+                <div class="interface-card accent-ems p-8">
+                    <h3 class="text-xl font-display font-bold text-white mb-4">Physiologie: Recruitment Reversal</h3>
+                    <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                        Der entscheidende Unterschied zum klassischen Training liegt in der Rekrutierung der motorischen Einheiten:
+                    </p>
+                    <ul class="space-y-4 text-sm">
+                        <li class="bg-tech-900/50 p-4 rounded-lg border border-white/5">
+                            <strong class="text-white block mb-1">Klassisch (Henneman-Größenprinzip):</strong> ZNS rekrutiert zuerst kleine, ausdauernde ST-Fasern, dann erst die großen FT-Fasern.
+                        </li>
+                        <li class="bg-ems-500/10 p-4 rounded-lg border border-ems-500/20">
+                            <strong class="text-ems-400 block mb-1">EMS-Training (Umkehrung):</strong> Da große Nervenfasern (FT-Fasern) einen <em>geringeren elektrischen Widerstand</em> aufweisen, werden sie durch den Stromimpuls oft <strong>zuerst und extrem stark depolarisiert</strong>. Dies führt zu einer massiven, synchronen Kontraktion!
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pros & Cons -->
+                <div class="flex flex-col gap-6">
+                    <div class="interface-card p-6 border-l-4 border-l-emerald-500">
+                        <h3 class="font-bold text-white mb-2 flex items-center gap-2"><span class="text-emerald-500">⊕</span> Vorteile & Anwendung</h3>
+                        <p class="text-sm text-slate-400 mb-2"><strong class="text-white">Gelenkschonung:</strong> Keine mechanische Kompression durch schwere Hanteln auf Knorpel/Bandscheiben.</p>
+                        <p class="text-sm text-slate-400"><strong class="text-white">Zeitökonomie:</strong> Synchrone Stimulation (Agonist & Antagonist) via Westen erzeugt in 20 Min. massiven Erschöpfungszustand.</p>
+                    </div>
+                    <div class="interface-card p-6 border-l-4 border-l-red-500">
+                        <h3 class="font-bold text-white mb-2 flex items-center gap-2"><span class="text-red-500">⚠️</span> Limitationen & Risiken</h3>
+                        <p class="text-sm text-slate-400 mb-2"><strong class="text-white">Fehlende Koordination:</strong> Trainiert isoliert "im Stehen". Keine Schulung der funktionellen Bewegungskette oder Stabilisation im Raum. Schwer auf komplexe Sportarten übertragbar.</p>
+                        <p class="text-sm text-slate-400"><strong class="text-white">Rhabdomyolyse-Gefahr:</strong> Unphysiologische Reizdichte kann zu massiven Muskelfaserrissen führen. Zuviel Enzym (CK) im Blut kann die Nieren akut überlasten!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas Visualisation (KI 2 Task 1) -->
+            <div class="simulation-container p-6 md:p-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-white/10 pb-4">
+                    <div>
+                        <h4 class="text-2xl font-display font-bold text-white">Simulation: Rekrutierungsmuster</h4>
+                        <p class="text-sm text-slate-400 mt-1">Vergleich: ZNS-Größenprinzip vs. EMS-Massensynchronisation</p>
+                    </div>
+                </div>
+                <canvas id="emsCanvas" class="w-full h-[400px] bg-tech-900 rounded-lg border border-slate-800"></canvas>
+            </div>
+        </section>
+
+        <!-- Section 2: Faszientraining -->
+        <section class="mt-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-14 rounded-xl bg-fascia-500/10 border border-fascia-500/30 flex items-center justify-center text-fascia-400 shadow-glow-fascia">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-wide">2. Faszientraining <span class="text-lg text-slate-500 normal-case tracking-normal">(Strukturell)</span></h2>
+            </div>
+            
+            <p class="text-slate-300 mb-8 text-lg max-w-4xl">
+                Während die klassische Trainingslehre primär die Muskelfaser betrachtet, rückt das Faszientraining das <strong>muskuläre Bindegewebe</strong> in den Fokus. Faszien umhüllen jeden Muskel (Epimysium), jedes Faserbündel (Perimysium) und jede Zelle und bilden ein viskoelastisches Spannungsnetzwerk (Tensegrity-Modell).
+            </p>
+
+            <div class="interface-card accent-fascia p-8 mb-8">
+                <h3 class="text-xl font-display font-bold text-white mb-4">Physiologische Grundlagen</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-300">
+                    <div>
+                        <strong class="text-fascia-400 block mb-2">Aufbau & Innervation</strong>
+                        <p>Bestehen primär aus Kollagen, Elastin und wässriger Grundsubstanz. Sie sind kein "totes" Gewebe, sondern hochgradig innerviert (Mechanorezeptoren wie Ruffini-/Pacini-Körperchen und sympathische Nervenenden).</p>
+                    </div>
+                    <div class="bg-tech-900/50 p-4 rounded border border-white/5">
+                        <strong class="text-red-400 block mb-2">Das Problem (Verfilzung)</strong>
+                        <p>Bei Inaktivität, Stress oder einseitiger Belastung verfilzen die Kollagenfasern (Cross-Links), die Grundsubstanz verliert Wasser und die Viskosität steigt. Der Athlet wird steif und verletzungsanfällig.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Methoden Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <!-- SMR -->
+                <div class="interface-card p-6 border-t-2 border-t-fascia-hydro">
+                    <h3 class="font-bold text-white mb-2">Self-Myofascial Release <span class="text-xs text-slate-500 block">SMR / Eigenmassage</span></h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Nutzung von Hartschaumrollen (Blackroll). Der starke mechanische Druck presst zähe Zellflüssigkeit aus dem Gewebe (<strong>Schwammeffekt</strong>). Löst sich der Druck, saugt sich das Netz mit frischer Flüssigkeit voll. Löst Verklebungen!
+                    </p>
+                </div>
+                <!-- Fascial Stretch -->
+                <div class="interface-card p-6 border-t-2 border-t-fascia-500">
+                    <h3 class="font-bold text-white mb-2">Fascial Stretch <span class="text-xs text-slate-500 block">Mehrdimensionales Dehnen</span></h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Kein isoliertes Dehnen! Es wird in langen, spiralförmigen Muskelketten (z.B. Fußsohle bis Stirn) unter Einbezug von leichten Wippbewegungen gedehnt, um Gewebe in verschiedenen Winkeln zu restrukturieren.
+                    </p>
+                </div>
+                <!-- Rebound -->
+                <div class="interface-card p-6 border-t-2 border-t-emerald-500">
+                    <h3 class="font-bold text-white mb-2">Rebound Elasticity <span class="text-xs text-slate-500 block">Känguru-Effekt</span></h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Training der elastischen Speicherkapazität durch reaktive Sprünge (Plyometrie). Faszien werden wie Gummizugschnur vorgespannt und schnellen explosiv zurück &rarr; spart Energie & maximiert Schnellkraft.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Canvas Visualisation (KI 2 Task 2) -->
+            <div class="simulation-container p-6 md:p-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-white/10 pb-4">
+                    <div>
+                        <h4 class="text-2xl font-display font-bold text-white">Simulation: Der Schwammeffekt (SMR)</h4>
+                        <p class="text-sm text-slate-400 mt-1">Live-Rehydratation des Fasziennetzwerks durch mechanischen Druck</p>
+                    </div>
+                    <div class="flex gap-4 text-xs font-bold font-sans uppercase tracking-widest text-slate-300 mt-4 md:mt-0">
+                        <div class="flex items-center gap-2"><div class="w-3 h-3 bg-purple-900 rounded-sm"></div> Zäh/Verklebt</div>
+                        <div class="flex items-center gap-2"><div class="w-3 h-3 bg-fascia-hydro rounded-sm"></div> Rehydriert</div>
+                    </div>
+                </div>
+                <canvas id="fasciaCanvas" class="w-full h-[300px] bg-tech-900 rounded-lg border border-slate-800"></canvas>
+            </div>
+        </section>
+
+        <!-- Abitur Premium Vault -->
+        <section class="abitur-vault rounded-[2rem] p-8 md:p-14 mt-24 overflow-hidden z-20">
+            <!-- Decorative Hexagons -->
+            <div class="absolute right-0 top-0 opacity-5 pointer-events-none transform translate-x-1/4 -translate-y-1/4 w-[500px] h-[500px] text-abitur">
+                <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="50 1 95 25 95 75 50 99 5 75 5 25"/>
+                </svg>
+            </div>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-12 border-b border-zinc-800 pb-8">
+                    <div class="bg-gradient-to-br from-yellow-500 to-red-600 text-tech-900 p-5 rounded-2xl shadow-glow-abitur">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-5xl font-display font-black text-white tracking-tight mb-2">Abitur-Transfer & Praxis</h2>
+                        <div class="inline-flex items-center gap-3">
+                            <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider font-mono">eA-Niveau</span>
+                            <span class="text-abitur font-medium text-lg">Marketing vs. Sportbiologie</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-lg text-zinc-300 font-medium mb-10 leading-relaxed max-w-4xl">
+                    Obwohl diese Erweiterungen im Lehrplan vom Umfang her als "gering bis mittel" eingestuft werden, eignen sie sich exzellent für komplexe Klausuraufgaben, in denen Marketingversprechen kritisch hinterfragt werden müssen.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    
+                    <!-- Transfer 1: EMS -->
+                    <div class="bg-tech-900/60 p-8 rounded-2xl border border-zinc-800">
+                        <h3 class="text-xl font-display font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-abitur text-2xl">A</span> Kritische Reflexion von EMS
+                        </h3>
+                        <div class="bg-zinc-800 p-4 rounded text-sm text-zinc-400 mb-4 font-mono border-l-2 border-ems-500">
+                            <strong>Werbeslogan:</strong> "20 Minuten EMS ersetzen 3 Stunden hartes Kraft- und Ausdauertraining!"
+                        </div>
+                        <strong class="text-abitur block mb-2 uppercase tracking-wide text-sm">Deine sportbiologische Falsifizierung:</strong>
+                        <div class="text-sm text-zinc-300 leading-relaxed space-y-3">
+                            <p>EMS erzeugt zwar effektiv lokale Muskelhypertrophie, schult aber <strong>keine komplexen, intermuskulären Koordinationsmuster</strong> (Technik).</p>
+                            <p class="text-white border-l-2 border-abitur pl-3"><strong>Das Cardio-KO-Kriterium:</strong> Die fehlende Bewegung im Raum bedeutet, dass das Herz-Kreislauf-System kaum gefordert wird. Es finden durch EMS KEINE Adaptationen im Sinne einer Sportherz-Ausbildung, einer gesteigerte Kapillarisierung oder einer VO2max-Steigerung statt!</p>
+                            <p>Fazit: Die aerobe Ausdauer kann durch EMS nicht ersetzt werden.</p>
+                        </div>
+                    </div>
+
+                    <!-- Transfer 2: Faszien -->
+                    <div class="bg-tech-900/60 p-8 rounded-2xl border border-zinc-800">
+                        <h3 class="text-xl font-display font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-abitur text-2xl">B</span> SMR zur Regeneration
+                        </h3>
+                        <div class="bg-zinc-800 p-4 rounded text-sm text-zinc-400 mb-4 font-mono border-l-2 border-fascia-500">
+                            <strong>Szenario:</strong> Eignet sich die Faszienrolle am Ende eines harten Wettkampftages (z.B. Zehnkampf) zur Regeneration?
+                        </div>
+                        <strong class="text-abitur block mb-2 uppercase tracking-wide text-sm">Die neurophysiologische Begründung:</strong>
+                        <div class="text-sm text-zinc-300 leading-relaxed space-y-3">
+                            <p>Ja, die Faszienrolle ist perfekt geeignet! Aber begründe nicht nur mechanisch, sondern neurologisch:</p>
+                            <p>Der langsame, tiefe Druck stimuliert die <strong>Ruffini-Körperchen und interstitiellen Rezeptoren</strong> im Fasziengewebe.</p>
+                            <p>Diese senden Signale an das autonome Nervensystem &rarr; <strong>Sympathikusaktivität sinkt, Parasympathikus steigt!</strong> Dies senkt den Muskelruhetonus, beschleunigt den Flüssigkeitsaustausch und leitet die physiologische Erholungsphase proaktiv ein.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="mt-16 pt-8 pb-12 border-t border-zinc-800 text-center relative z-10">
+        <p class="font-display font-bold text-zinc-600 tracking-widest text-sm mb-1 uppercase">Abiturwissen Sport (G9, eA)</p>
+        <p class="text-zinc-500 font-sans text-sm">Lernbereich 1.8.1d Apparative und strukturelle Erweiterungen</p>
+    </footer>
+
+    <!-- Interactive Canvas Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Canvas 1: EMS Split Screen ---
+            const cEms = document.getElementById('emsCanvas');
+            const ctxEms = cEms.getContext('2d');
+            
+            // --- Canvas 2: Fascia SMR Roller ---
+            const cFas = document.getElementById('fasciaCanvas');
+            const ctxFas = cFas.getContext('2d');
+            
+            function resizeCanvases() {
+                const dpr = window.devicePixelRatio || 1;
+                [cEms, cFas].forEach(c => {
+                    const rect = c.parentElement.getBoundingClientRect();
+                    c.width = rect.width * dpr;
+                    c.height = rect.height * dpr;
+                    c.getContext('2d').scale(dpr, dpr);
+                    c.style.width = `${rect.width}px`;
+                    c.style.height = `${rect.height}px`;
+                });
+            }
+            window.addEventListener('resize', resizeCanvases);
+            resizeCanvases();
+
+            let time = 0;
+
+            function drawEMS() {
+                const w = cEms.parentElement.clientWidth;
+                const h = cEms.parentElement.clientHeight;
+                ctxEms.clearRect(0, 0, w, h);
+                
+                const midX = w / 2;
+                
+                // Divider
+                ctxEms.beginPath();
+                ctxEms.moveTo(midX, 0); ctxEms.lineTo(midX, h);
+                ctxEms.strokeStyle = '#3f3f46';
+                ctxEms.lineWidth = 2;
+                ctxEms.stroke();
+
+                // Animation Cycle
+                const cycle = time % 120; // Loops every 120 frames
+
+                // --- LEFT: Willkürkontraktion (Größenprinzip) ---
+                ctxEms.fillStyle = '#ffffff';
+                ctxEms.font = 'bold 16px "Rajdhani"';
+                ctxEms.textAlign = 'center';
+                ctxEms.fillText('Klassisch (Henneman-Prinzip)', midX/2, 30);
+                
+                // Brain (Active)
+                ctxEms.fillStyle = cycle < 60 ? '#10b981' : '#3f3f46'; // Pulses green
+                ctxEms.shadowColor = '#10b981'; ctxEms.shadowBlur = cycle < 60 ? 15 : 0;
+                ctxEms.beginPath(); ctxEms.arc(midX/2, 80, 20, 0, Math.PI*2); ctxEms.fill();
+                ctxEms.shadowBlur = 0;
+                ctxEms.fillStyle = '#a1a1aa'; ctxEms.font = '10px Inter'; ctxEms.fillText('ZNS', midX/2, 115);
+
+                // Spinal cord / Nerves
+                ctxEms.strokeStyle = '#52525b'; ctxEms.lineWidth = 2;
+                ctxEms.beginPath(); ctxEms.moveTo(midX/2, 100); ctxEms.lineTo(midX/2, h - 80); ctxEms.stroke();
+                
+                // Branches to muscles
+                ctxEms.beginPath(); ctxEms.moveTo(midX/2, 160); ctxEms.lineTo(midX/2 - 50, 160); ctxEms.stroke(); // Small
+                ctxEms.beginPath(); ctxEms.moveTo(midX/2, 220); ctxEms.lineTo(midX/2 + 50, 220); ctxEms.stroke(); // Med
+                ctxEms.beginPath(); ctxEms.moveTo(midX/2, 280); ctxEms.lineTo(midX/2 - 50, 280); ctxEms.stroke(); // Large
+                
+                // Signals moving down
+                if (cycle > 10 && cycle < 60) {
+                    ctxEms.fillStyle = '#10b981';
+                    const y1 = 100 + ((cycle-10)/50)*60;
+                    ctxEms.beginPath(); ctxEms.arc(midX/2, Math.min(y1, 160), 4, 0, Math.PI*2); ctxEms.fill();
+                }
+                if (cycle > 30 && cycle < 80) {
+                    ctxEms.fillStyle = '#10b981';
+                    const y2 = 160 + ((cycle-30)/50)*60;
+                    ctxEms.beginPath(); ctxEms.arc(midX/2, Math.min(y2, 220), 4, 0, Math.PI*2); ctxEms.fill();
+                }
+                if (cycle > 50 && cycle < 100) {
+                    ctxEms.fillStyle = '#10b981';
+                    const y3 = 220 + ((cycle-50)/50)*60;
+                    ctxEms.beginPath(); ctxEms.arc(midX/2, Math.min(y3, 280), 4, 0, Math.PI*2); ctxEms.fill();
+                }
+
+                // Muscles (Small ST to Large FT)
+                ctxEms.fillStyle = (cycle > 20 && cycle < 110) ? '#f43f5e' : '#4c1d95'; // ST activates early
+                ctxEms.fillRect(midX/2 - 80, 145, 30, 30); ctxEms.fillStyle = '#a1a1aa'; ctxEms.fillText('ST', midX/2 - 65, 185);
+                
+                ctxEms.fillStyle = (cycle > 40 && cycle < 110) ? '#f43f5e' : '#4c1d95'; // Med activates mid
+                ctxEms.fillRect(midX/2 + 50, 195, 40, 50); ctxEms.fillStyle = '#a1a1aa'; ctxEms.fillText('FTa', midX/2 + 70, 260);
+                
+                ctxEms.fillStyle = (cycle > 60 && cycle < 110) ? '#f43f5e' : '#4c1d95'; // Large FT activates late
+                ctxEms.fillRect(midX/2 - 100, 245, 50, 70); ctxEms.fillStyle = '#a1a1aa'; ctxEms.fillText('FTx', midX/2 - 75, 330);
+
+                // --- RIGHT: EMS-Training (Recruitment Reversal) ---
+                ctxEms.fillStyle = '#ffffff';
+                ctxEms.font = 'bold 16px "Rajdhani"';
+                ctxEms.fillText('EMS-Training (Massensynchronisation)', midX + midX/2, 30);
+                
+                // Brain (Inactive)
+                ctxEms.fillStyle = '#18181b';
+                ctxEms.beginPath(); ctxEms.arc(midX + midX/2, 80, 20, 0, Math.PI*2); ctxEms.fill();
+                ctxEms.fillStyle = '#52525b'; ctxEms.font = '10px Inter'; ctxEms.fillText('ZNS (Inaktiv)', midX + midX/2, 115);
+
+                // Electrode on skin
+                ctxEms.fillStyle = '#27272a';
+                ctxEms.fillRect(midX + midX/2 + 40, 180, 20, 80);
+                if (cycle > 20 && cycle < 80) {
+                    ctxEms.shadowColor = '#a3e635'; ctxEms.shadowBlur = 20;
+                    ctxEms.fillStyle = '#a3e635'; ctxEms.fillRect(midX + midX/2 + 40, 180, 20, 80);
+                    ctxEms.shadowBlur = 0;
+                    
+                    // Lightning bolts to FT muscles
+                    ctxEms.strokeStyle = '#a3e635'; ctxEms.lineWidth = 2;
+                    ctxEms.beginPath(); ctxEms.moveTo(midX + midX/2 + 40, 200); ctxEms.lineTo(midX + midX/2 + 20, 220); ctxEms.stroke();
+                    ctxEms.beginPath(); ctxEms.moveTo(midX + midX/2 + 40, 240); ctxEms.lineTo(midX + midX/2 - 30, 280); ctxEms.stroke();
+                }
+                ctxEms.fillStyle = '#a1a1aa'; ctxEms.fillText('Elektrode', midX + midX/2 + 50, 275);
+
+                // Muscles (EMS hits FT first/hardest)
+                ctxEms.fillStyle = (cycle > 20 && cycle < 80) ? '#4c1d95' : '#4c1d95'; // ST barely hits
+                ctxEms.fillRect(midX + midX/2 - 80, 145, 30, 30); ctxEms.fillStyle = '#a1a1aa'; ctxEms.fillText('ST', midX + midX/2 - 65, 185);
+                
+                // FT Hit hard and instantly
+                const ftColor = (cycle > 20 && cycle < 80) ? '#a3e635' : '#4c1d95'; // Neon lime contraction
+                ctxEms.shadowColor = '#a3e635'; ctxEms.shadowBlur = (cycle > 20 && cycle < 80) ? 15 : 0;
+                
+                ctxEms.fillStyle = ftColor;
+                ctxEms.fillRect(midX + midX/2 - 20, 195, 40, 50); ctxEms.shadowBlur=0; ctxEms.fillStyle = '#a1a1aa'; ctxEms.fillText('FTa', midX + midX/2, 260);
+                
+                ctxEms.shadowBlur = (cycle > 20 && cycle < 80) ? 20 : 0;
+                ctxEms.fillStyle = ftColor;
+                ctxEms.fillRect(midX + midX/2 - 80, 245, 50, 70); ctxEms.shadowBlur=0; ctxEms.fillStyle = '#a1a1aa'; ctxEms.fillText('FTx', midX + midX/2 - 55, 330);
+            }
+
+            function drawFascia() {
+                const w = cFas.parentElement.clientWidth;
+                const h = cFas.parentElement.clientHeight;
+                ctxFas.clearRect(0, 0, w, h);
+
+                const rollerSpeed = 2;
+                // Roller moves back and forth
+                const cycle = (time * rollerSpeed) % (w * 2); 
+                let rx = cycle;
+                if (cycle > w) rx = w - (cycle - w); // Reverse direction
+                
+                const rollerW = 40;
+                const rCenter = rx;
+
+                // Draw Fascia Web
+                ctxFas.lineWidth = 2;
+                ctxFas.lineCap = 'round';
+                
+                for(let y = 50; y < h - 50; y += 20) {
+                    ctxFas.beginPath();
+                    for(let x = 0; x < w; x += 10) {
+                        
+                        // State logic based on roller position
+                        // If x is "ahead" of roller direction, it's tangled.
+                        // If it's under the roller, it's squished.
+                        // If it's "behind" the roller, it's hydrated and smooth.
+                        
+                        let dist = Math.abs(x - rCenter);
+                        let isSquished = dist < rollerW;
+                        
+                        // Assume rolling right for coloring logic
+                        let isHydrated = false;
+                        let isTangled = false;
+                        
+                        // Direction check
+                        const rollingRight = (time * rollerSpeed) % (w * 2) < w;
+                        
+                        if (rollingRight) {
+                            isHydrated = x < rCenter - rollerW;
+                            isTangled = x > rCenter + rollerW;
+                        } else {
+                            isHydrated = x > rCenter + rollerW;
+                            isTangled = x < rCenter - rollerW;
+                        }
+
+                        let plotY = y;
+                        
+                        // Set colors and shapes
+                        if (isSquished) {
+                            ctxFas.strokeStyle = '#ffffff'; // White under pressure
+                            plotY = y + (Math.random()-0.5)*2; // Squished flat
+                        } else if (isHydrated) {
+                            ctxFas.strokeStyle = '#22d3ee'; // Cyan (Hydrated)
+                            // Smooth sine wave
+                            plotY = y + Math.sin(x*0.05 + time*0.1) * 8;
+                        } else {
+                            ctxFas.strokeStyle = '#4a044e'; // Deep dark purple (Verklebt)
+                            // Tangled jagged noise
+                            plotY = y + (Math.random()-0.5) * 15;
+                        }
+
+                        if(x===0) ctxFas.moveTo(x, plotY);
+                        else ctxFas.lineTo(x, plotY);
+                    }
+                    ctxFas.stroke();
+                }
+
+                // Draw Roller
+                ctxFas.shadowColor = '#d946ef';
+                ctxFas.shadowBlur = 20;
+                ctxFas.fillStyle = '#d946ef'; // Fuchsia roller
+                ctxFas.beginPath(); ctxFas.roundRect(rx - rollerW/2, 20, rollerW, h-40, 10); ctxFas.fill();
+                ctxFas.shadowBlur = 0;
+
+                // Arrows to show direction
+                ctxFas.fillStyle = '#ffffff';
+                ctxFas.font = '20px Inter';
+                ctxFas.textAlign = 'center';
+                const rollingRight = (time * rollerSpeed) % (w * 2) < w;
+                ctxFas.fillText(rollingRight ? '→' : '←', rx, h/2);
+
+                // Labels
+                ctxFas.fillStyle = '#ffffff';
+                ctxFas.font = 'bold 12px "Rajdhani"';
+                ctxFas.textAlign = 'left';
+                ctxFas.fillText("Mechanischer Druck preßt Zellflüssigkeit aus (Schwamm-Effekt)", 20, 30);
+            }
+
+            function animate() {
+                time++;
+                drawEMS();
+                drawFascia();
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        });
+    </script>
+</body>
+</html>

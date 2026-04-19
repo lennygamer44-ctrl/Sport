@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.5.2c Diagnostik und Auswertung: Laktatleistungskurven</title>
+    <style>
+        /* Sports-Lab / Data Report Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&display=swap');
+
+        :root {
+            /* Lab Palette: Clean, High Contrast */
+            --bg-main: #f8fafc;
+            --bg-paper: #ffffff;
+            
+            --text-dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            
+            --lab-blue: #2563eb;
+            --lab-blue-light: #dbeafe;
+            
+            --curve-untrained: #ef4444; /* Red */
+            --curve-trained: #10b981; /* Green */
+            
+            --abi-navy: #1e1b4b;
+            --abi-gold: #f59e0b;
+            --abi-white: #f8fafc;
+            
+            --radius-soft: 12px;
+            --radius-sharp: 4px;
+            
+            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            /* Subtle dotted background for the lab feel */
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .report-container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        /* Report Header */
+        .report-header {
+            background: var(--bg-paper);
+            padding: 4rem 3rem;
+            border-radius: var(--radius-soft);
+            box-shadow: var(--shadow-subtle);
+            border-top: 6px solid var(--lab-blue);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .report-badge {
+            display: inline-block;
+            font-family: 'IBM Plex Mono', monospace;
+            background: var(--lab-blue-light);
+            color: var(--lab-blue);
+            padding: 0.4rem 1rem;
+            border-radius: var(--radius-sharp);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .lead-text {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 900px;
+            border-left: 3px solid var(--lab-blue);
+            padding-left: 1.5rem;
+        }
+
+        /* Content Sections */
+        .section-card {
+            background: var(--bg-paper);
+            padding: 3rem;
+            border-radius: var(--radius-soft);
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 1rem;
+        }
+
+        h2 .section-num {
+            background: var(--lab-blue);
+            color: white;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.2rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        /* Structured Info Blocks */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .info-block {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .info-block:hover {
+            box-shadow: var(--shadow-hover);
+            border-color: #cbd5e1;
+        }
+
+        .info-block h3 {
+            font-size: 1.2rem;
+            color: var(--lab-blue);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .highlight-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .highlight-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--lab-blue);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .alert-callout {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .alert-callout strong {
+            color: #b45309;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Canvas Wrapper */
+        .canvas-container {
+            background: var(--bg-paper);
+            padding: 2rem;
+            border-radius: var(--radius-soft);
+            box-shadow: inset 0 0 0 1px #e2e8f0, var(--shadow-subtle);
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .canvas-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .canvas-header h3 {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-header p {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            display: block;
+            background: #ffffff;
+        }
+
+        /* Massive Abitur Transfer Box */
+        .exam-rubric {
+            background: var(--abi-navy);
+            color: var(--abi-white);
+            padding: 4rem;
+            border-radius: var(--radius-soft);
+            margin-top: 4rem;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(30, 27, 75, 0.4);
+            overflow: hidden;
+        }
+
+        .exam-rubric::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 8px; height: 100%;
+            background: var(--abi-gold);
+        }
+
+        .rubric-tag {
+            background: var(--abi-gold);
+            color: var(--abi-navy);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-sharp);
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .exam-rubric h2 {
+            color: white;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1.5rem;
+            font-size: 2.2rem;
+        }
+
+        .case-study {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        .case-study strong {
+            display: block;
+            font-style: normal;
+            color: var(--abi-gold);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        /* Argumentation VS Layout */
+        .vs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .vs-grid { grid-template-columns: 1fr; }
+        }
+
+        .vs-card {
+            background: #2e3159; /* Slightly lighter navy */
+            padding: 2rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .vs-card.trained {
+            border-top: 4px solid var(--curve-trained);
+        }
+
+        .vs-card.untrained {
+            border-top: 4px solid var(--curve-untrained);
+        }
+
+        .vs-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vs-card.trained h4 { color: #34d399; }
+        .vs-card.untrained h4 { color: #f87171; }
+
+        .vs-card p {
+            font-size: 1.05rem;
+            color: #f1f5f9;
+            margin-bottom: 0;
+        }
+
+        .vs-card strong {
+            color: white;
+        }
+
+        .conclusion-box {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px dashed rgba(255,255,255,0.2);
+            text-align: center;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #bae6fd;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="report-container">
+    
+    <header class="report-header">
+        <div class="report-badge">Lernbereich 1.5.2c</div>
+        <h1>Diagnostik und Auswertung: Laktatleistungskurven</h1>
+        <p class="lead-text">Die grafische Darstellung der Blutlaktatwerte in Abhängigkeit von der Belastungsintensität – die sogenannte Laktatleistungskurve – ist das wichtigste Instrument der sportmedizinischen Ausdauerdiagnostik. Sie macht die metabolischen Prozesse im Körper (wann reicht der Sauerstoff aus, wann übersäuert der Muskel?) sichtbar und messbar.</p>
+    </header>
+
+    <!-- Section 1 -->
+    <div class="section-card">
+        <h2><span class="section-num">1</span> Aufbau und Verlauf der Laktatleistungskurve</h2>
+        <p>Um eine solche Kurve zu erstellen, absolviert der Athlet einen Stufentest (z. B. auf dem Laufband oder Fahrradergometer). Die Intensität wird stufenweise erhöht, und am Ende jeder Stufe wird ein Tropfen Blut (meist am Ohrläppchen) abgenommen, um die Laktatkonzentration zu messen.</p>
+
+        <div class="info-grid">
+            <div class="info-block">
+                <h3>Die Achsen</h3>
+                <ul class="highlight-list">
+                    <li><strong>X-Achse:</strong> Hier wird die Belastungsintensität aufgetragen (z. B. Geschwindigkeit in m/s oder km/h beim Laufen; Leistung in Watt beim Radfahren).</li>
+                    <li><strong>Y-Achse:</strong> Hier wird die gemessene Laktatkonzentration in Millimol pro Liter Blut (mmol/l) aufgetragen.</li>
+                </ul>
+            </div>
+            
+            <div class="info-block">
+                <h3>Der Kurvenverlauf</h3>
+                <ul class="highlight-list">
+                    <li>Bei geringen Intensitäten verläuft der Graph zunächst <strong>sehr flach</strong>. Die Energiebereitstellung erfolgt aerob.</li>
+                    <li>Ab der aeroben Schwelle (~2 mmol/l) steigt die Kurve moderat an (Übergangsbereich).</li>
+                    <li>Wird die anaerobe Schwelle (~4 mmol/l) überschritten, verlässt die Kurve ihren flachen Verlauf und <strong>schießt steil (exponentiell) nach oben</strong>. Das Laktat-Steady-State ist gebrochen, das Laktat akkumuliert.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section-card">
+        <h2><span class="section-num">2</span> Der Trainingszustand und die Rechtsverschiebung</h2>
+        <p>Das entscheidende Kriterium zur Beurteilung des individuellen Trainingszustands ist die Lage der Kurve im Koordinatensystem. Es gilt der absolute sportbiologische Grundsatz: <strong>Je später (also bei höheren Intensitäten) die Laktatkonzentration im Blut ansteigt, desto besser ist der individuelle Ausdauer-Trainingszustand.</strong></p>
+
+        <div class="alert-callout">
+            <strong>Die Rechtsverschiebung durch Adaptation</strong>
+            Durch regelmäßiges Ausdauertraining passt sich der Körper an. Er bildet z. B. mehr Mitochondrien und verbessert die Kapillarisierung. Dadurch kann er länger aerob arbeiten und Laktat besser abbauen. Vergleicht man die Laktatleistungskurve eines Athleten vor und nach einer mehrmonatigen Trainingsphase, hat sich die Kurve nach rechts verschoben.
+        </div>
+
+        <h3>Die physiologische Konsequenz</h3>
+        <p>Eine Rechtsverschiebung bedeutet, dass die aerobe und die anaerobe Schwelle erst bei einer deutlich höheren Laufgeschwindigkeit oder Wattzahl erreicht werden. Der trainierte Athlet kann also eine viel höhere Geschwindigkeit laufen, während er sich immer noch im sicheren Laktat-Steady-State befindet, während ein Untrainierter bei derselben Geschwindigkeit bereits massiv übersäuert.</p>
+    </div>
+
+    <!-- Canvas Section -->
+    <div class="canvas-container">
+        <div class="canvas-header">
+            <h3>Visualisierung: Die Rechtsverschiebung</h3>
+            <p>[ DATA.PLOT: Untrainiert vs. Trainiert // X: km/h // Y: mmol/l ]</p>
+        </div>
+        <canvas id="lactateShiftCanvas" width="900" height="480"></canvas>
+    </div>
+
+    <!-- Abitur Transfer Box -->
+    <div class="exam-rubric">
+        <div class="rubric-tag">Abitur-Transfer & Praxis (eA)</div>
+        <h2>Materialauswertung & Fallanalyse</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">Dieser Unterpunkt ist in den Abiturprüfungen auf erhöhtem Anforderungsniveau ein garantierter Klausurschwerpunkt! In den vom Ministerium bereitgestellten illustrierenden Prüfungsaufgaben wird genau dieser Sachverhalt anhand von zwei Mountainbikerinnen geprüft.</p>
+
+        <div class="case-study">
+            <strong>Fallanalyse (Blogauszug Teil 2)</strong>
+            "Kurz vor der Gorialm musste meine Freundin erschöpft absteigen, während ich weiterfahren konnte."
+            <br><br>
+            <span style="font-size: 0.95rem; opacity: 0.8;">[Oft ist hierzu in der Prüfung noch ein Diagramm einer Laktatkurve beigefügt.]</span>
+        </div>
+
+        <h3 style="color: var(--abi-gold); font-size: 1.4rem; margin-bottom: 1rem;">Die Transfer-Argumentation für volle Punktzahl</h3>
+        <p>Du musst den beschriebenen Leistungsunterschied exakt mit dem Verlauf von individuellen Laktatleistungskurven erklären:</p>
+        <p><strong>1. Den Unterschied benennen:</strong> Der Leistungsunterschied lässt sich durch den unterschiedlichen Trainingszustand der beiden Fahrerinnen erklären.</p>
+
+        <div class="vs-grid">
+            
+            <div class="vs-card trained">
+                <h4>🟢 Die Trainierte analysieren</h4>
+                <p>Die besser trainierte Fahrerin (die weiterfahren konnte) hat eine <strong>rechtsverschobene Laktatleistungskurve</strong>. Bei der herrschenden Intensität am Berg befindet sie sich noch im aerob-anaeroben Übergangsbereich. Sie arbeitet im <strong>Laktat-Steady-State</strong>, das anfallende Laktat wird ausreichend verstoffwechselt.</p>
+            </div>
+
+            <div class="vs-card untrained">
+                <h4>🔴 Die Untrainierte analysieren</h4>
+                <p>Bei der Freundin steigt die Laktatkurve viel früher an (<strong>Linksverschiebung</strong> im Vergleich). Bei exakt derselben Fahrtgeschwindigkeit hat sie ihre individuelle <strong>anaerobe Schwelle bereits überschritten</strong>. Es fällt mehr Laktat an, als abgepuffert werden kann. Ihre Muskulatur übersäuert zunehmend (periphere Ermüdung), was den zwingenden Belastungsabbruch erklärt.</p>
+            </div>
+
+        </div>
+
+        <div class="conclusion-box">
+            🏆 Wer das sportpraktische Phänomen ("die eine kann noch, die andere nicht mehr") im Abitur auf den biologischen Mechanismus der Rechtsverschiebung und das Laktat-Steady-State herunterbricht, schreibt auf höchstem Niveau.
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Canvas: Rechtsverschiebung
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('lactateShiftCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Support
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+
+        const padX = 60;
+        const padY = 50;
+        const chartW = width - padX * 2;
+        const chartH = height - padY * 2;
+
+        const minKm = 6;
+        const maxKm = 20;
+        const maxLac = 10;
+
+        const mapX = (km) => padX + ((km - minKm) / (maxKm - minKm)) * chartW;
+        const mapY = (lac) => height - padY - (lac / maxLac) * chartH;
+
+        function drawChart() {
+            ctx.clearRect(0, 0, width, height);
+
+            // 1. Background Grid
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 1;
+            
+            // Y-Grid
+            for(let l=0; l<=maxLac; l+=2) {
+                let y = mapY(l);
+                ctx.beginPath(); ctx.moveTo(padX, y); ctx.lineTo(width-padX, y); ctx.stroke();
+                
+                ctx.fillStyle = '#64748b';
+                ctx.font = '12px IBM Plex Mono';
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(l, padX - 10, y);
+            }
+
+            // X-Grid
+            for(let v=minKm; v<=maxKm; v+=2) {
+                let x = mapX(v);
+                ctx.beginPath(); ctx.moveTo(x, height-padY); ctx.lineTo(x, padY); ctx.stroke();
+                
+                ctx.fillStyle = '#64748b';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                ctx.fillText(v, x, height-padY + 10);
+            }
+
+            // Axis Titles
+            ctx.fillStyle = '#334155';
+            ctx.font = 'bold 14px Plus Jakarta Sans';
+            ctx.textAlign = 'center';
+            ctx.fillText('Laufgeschwindigkeit (km/h) / Intensität', padX + chartW/2, height - 10);
+            
+            ctx.save();
+            ctx.translate(20, padY + chartH/2);
+            ctx.rotate(-Math.PI/2);
+            ctx.fillText('Laktatkonzentration (mmol/l)', 0, 0);
+            ctx.restore();
+
+            // 2. Threshold Lines
+            function drawThreshold(yVal, label) {
+                const y = mapY(yVal);
+                ctx.beginPath(); ctx.setLineDash([6, 4]);
+                ctx.moveTo(padX, y); ctx.lineTo(width-padX, y);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.setLineDash([]);
+                
+                ctx.fillStyle = '#64748b';
+                ctx.font = '12px Plus Jakarta Sans';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'bottom';
+                ctx.fillText(label, padX + 10, y - 5);
+            }
+            
+            drawThreshold(2, 'Aerobe Schwelle (2 mmol/l)');
+            drawThreshold(4, 'Anaerobe Schwelle (4 mmol/l)');
+
+            // 3. Draw Curves
+            function drawCurve(points, color, label, labelOffset) {
+                ctx.beginPath();
+                ctx.moveTo(mapX(points[0].x), mapY(points[0].y));
+                
+                // Curve
+                for (let i = 1; i < points.length - 2; i++) {
+                    const xc = (mapX(points[i].x) + mapX(points[i + 1].x)) / 2;
+                    const yc = (mapY(points[i].y) + mapY(points[i + 1].y)) / 2;
+                    ctx.quadraticCurveTo(mapX(points[i].x), mapY(points[i].y), xc, yc);
+                }
+                const l2 = points.length - 2;
+                const l1 = points.length - 1;
+                ctx.quadraticCurveTo(mapX(points[l2].x), mapY(points[l2].y), mapX(points[l1].x), mapY(points[l1].y));
+
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 4;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+
+                // Label at end
+                ctx.fillStyle = color;
+                ctx.font = 'bold 16px Plus Jakarta Sans';
+                ctx.textAlign = 'left';
+                ctx.fillText(label, mapX(points[l1].x) + 10, mapY(points[l1].y) + labelOffset);
+
+                // Dots at 4 mmol/l intersection (approx)
+                let intersectPt = points.find(p => p.y >= 3.8 && p.y <= 4.2);
+                if(intersectPt) {
+                    ctx.beginPath();
+                    ctx.arc(mapX(intersectPt.x), mapY(intersectPt.y), 6, 0, Math.PI*2);
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    
+                    // Drop line to x-axis
+                    ctx.beginPath(); ctx.setLineDash([4,4]);
+                    ctx.moveTo(mapX(intersectPt.x), mapY(intersectPt.y));
+                    ctx.lineTo(mapX(intersectPt.x), height-padY);
+                    ctx.strokeStyle = color;
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+            }
+
+            // Untrained Curve (Red)
+            const ptsUntrained = [
+                {x: 6, y: 1.0}, {x: 8, y: 1.2}, {x: 10, y: 1.8}, 
+                {x: 11, y: 2.5}, {x: 12, y: 4.0}, {x: 13, y: 6.5}, {x: 14, y: 9.5}
+            ];
+            
+            // Trained Curve (Green) - Shifted right by ~4 km/h
+            const ptsTrained = [
+                {x: 6, y: 0.8}, {x: 10, y: 0.9}, {x: 12, y: 1.1}, 
+                {x: 14, y: 1.6}, {x: 15, y: 2.2}, {x: 16, y: 4.0}, {x: 17, y: 6.5}, {x: 18, y: 9.5}
+            ];
+
+            drawCurve(ptsUntrained, '#ef4444', 'Untrainiert', 0);
+            drawCurve(ptsTrained, '#10b981', 'Trainiert', 0);
+
+            // 4. The Big Arrow (Rechtsverschiebung)
+            const arrowStartX = mapX(12) + 15;
+            const arrowStartY = mapY(4);
+            const arrowEndX = mapX(16) - 15;
+
+            ctx.beginPath();
+            ctx.moveTo(arrowStartX, arrowStartY);
+            ctx.lineTo(arrowEndX, arrowStartY);
+            ctx.strokeStyle = '#f59e0b'; // Amber / Gold
+            ctx.lineWidth = 4;
+            ctx.stroke();
+            
+            // Arrow head
+            ctx.beginPath();
+            ctx.moveTo(arrowEndX, arrowStartY);
+            ctx.lineTo(arrowEndX - 12, arrowStartY - 8);
+            ctx.lineTo(arrowEndX - 12, arrowStartY + 8);
+            ctx.fillStyle = '#f59e0b';
+            ctx.fill();
+
+            // Text for Arrow
+            ctx.fillStyle = '#d97706';
+            ctx.font = 'bold 15px Plus Jakarta Sans';
+            ctx.textAlign = 'center';
+            ctx.fillText('Rechtsverschiebung', arrowStartX + (arrowEndX - arrowStartX)/2, arrowStartY - 10);
+            ctx.font = '13px Plus Jakarta Sans';
+            ctx.fillText('durch Ausdauertraining', arrowStartX + (arrowEndX - arrowStartX)/2, arrowStartY + 18);
+        }
+
+        drawChart();
+
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawChart();
+        });
+    });
+</script>
+
+</body>
+</html>

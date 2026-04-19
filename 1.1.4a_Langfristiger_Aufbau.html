@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.4a Langfristiger Aufbau - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Strategic Coach Dashboard */
+            --bg-color: #f8fafc;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            
+            --teal-primary: #0f766e;
+            --teal-light: #ccfbf1;
+            --blue-primary: #1d4ed8;
+            --blue-light: #dbeafe;
+            
+            --abi-bg: #1e293b;
+            --abi-gold: #fbbf24;
+            --abi-alert: #ef4444;
+            
+            --radius: 12px;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-title {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Header / Hero --- */
+        .hero {
+            background: linear-gradient(135deg, var(--text-dark) 0%, var(--teal-primary) 100%);
+            color: white;
+            padding: 5rem 2rem 6rem;
+            position: relative;
+            text-align: center;
+            border-bottom: 6px solid var(--blue-primary);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--teal-light);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(204, 251, 241, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #e2e8f0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* --- Intro Block --- */
+        .intro-box {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: -3rem;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 10;
+            border-left: 6px solid var(--blue-primary);
+        }
+
+        .intro-box strong {
+            color: var(--teal-primary);
+        }
+
+        /* --- Layout Grids --- */
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .section-title .step-badge {
+            background: var(--blue-primary);
+            color: white;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 1.5rem;
+        }
+
+        /* --- Kybernetischer Regelkreis Section --- */
+        .regelkreis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        @media (max-width: 1000px) {
+            .regelkreis-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .regelkreis-list {
+            list-style: none;
+        }
+
+        .regelkreis-list li {
+            background: white;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border-left: 4px solid var(--teal-primary);
+            transition: transform 0.2s ease;
+        }
+
+        .regelkreis-list li:hover {
+            transform: translateX(10px);
+            border-left-color: var(--blue-primary);
+        }
+
+        .regelkreis-list h4 {
+            color: var(--teal-primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Canvas Wrapper */
+        .canvas-wrapper {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .canvas-wrapper h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-width: 500px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- Etappen Timeline --- */
+        .timeline-section {
+            margin-bottom: 6rem;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            right: 50px;
+            height: 4px;
+            background: var(--blue-light);
+            z-index: 1;
+        }
+
+        @media (max-width: 850px) {
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+            .timeline::before {
+                top: 0; left: 40px; bottom: 0; right: auto; width: 4px; height: 100%;
+            }
+        }
+
+        .timeline-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 3rem 2rem 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            border-top: 5px solid var(--blue-primary);
+        }
+
+        @media (max-width: 850px) {
+            .timeline-card {
+                text-align: left;
+                padding-left: 5rem;
+            }
+        }
+
+        .timeline-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--blue-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 5px 15px rgba(29, 78, 216, 0.3);
+            border: 6px solid var(--bg-color);
+        }
+
+        @media (max-width: 850px) {
+            .timeline-icon {
+                left: 42px;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .timeline-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            margin-top: 1rem;
+        }
+
+        /* --- Mikro-Planung --- */
+        .micro-cycle {
+            background: white;
+            border-radius: var(--radius);
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 6rem;
+            border: 2px solid var(--teal-light);
+        }
+
+        .micro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 850px) {
+            .micro-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .micro-card {
+            background: var(--bg-color);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--teal-primary);
+        }
+
+        .micro-card h4 {
+            color: var(--teal-primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Abitur Transfer --- */
+        .abi-box {
+            background: var(--abi-bg);
+            color: white;
+            border-radius: 16px;
+            padding: 4rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abi-box::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .abi-box h2 {
+            font-size: 2.5rem;
+            color: var(--abi-gold);
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-bottom: 3rem;
+        }
+
+        .abi-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .abi-content-grid { grid-template-columns: 1fr; }
+        }
+
+        .abi-case {
+            background: rgba(255,255,255,0.05);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .abi-case.alert {
+            border-left: 4px solid var(--abi-alert);
+        }
+        
+        .abi-case.structure {
+            border-left: 4px solid var(--teal-primary);
+        }
+
+        .abi-case h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .abi-case p {
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+
+        .highlight-text {
+            color: var(--abi-gold);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="hero-tag">Lernbereich 1.1.4a</span>
+            <h1>Langfristiger Aufbau</h1>
+            <p>Planung und Steuerung von Trainingseinheiten und des langfristigen Trainingsprozesses.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="intro-box">
+            Sportliche Höchstleistungen sind niemals das Resultat zufälliger Belastungen, sondern erfordern ein systematisches, theoriegeleitetes Vorgehen. Der LehrplanPLUS fordert daher explizit das Verständnis für die Planung und Steuerung von Trainingseinheiten sowie des langfristigen Trainingsprozesses. Man unterscheidet hierbei den übergeordneten Steuerungszyklus (Regelkreis) und die phasenhafte Gliederung einer Sportlerkarriere.
+        </div>
+
+        <!-- Section 1: Regelkreis -->
+        <section>
+            <h2 class="section-title"><span class="step-badge">1</span> Der kybernetische Regelkreis der Trainingssteuerung</h2>
+            <p style="margin-bottom: 2rem;">Trainingssteuerung wird in der Sportwissenschaft als ein kybernetischer Prozess (Regelkreis) verstanden. Dieser Kreislauf stellt sicher, dass das Training kontinuierlich an die physiologischen Anpassungen des Athleten adaptiert wird. Er besteht aus fünf zwingenden Phasen:</p>
+            
+            <div class="regelkreis-grid">
+                <ul class="regelkreis-list">
+                    <li>
+                        <h4>1. Diagnose (Ist-Zustand)</h4>
+                        Vor jeder Planung muss die aktuelle Leistungsfähigkeit objektiv erfasst werden (Leistungsdiagnostik, z. B. Laktattests oder Krafttests).
+                    </li>
+                    <li>
+                        <h4>2. Zielsetzung (Soll-Zustand)</h4>
+                        Basierend auf der Diagnose werden realistische, messbare und terminierte Trainingsziele formuliert.
+                    </li>
+                    <li>
+                        <h4>3. Trainingsplanung</h4>
+                        Die Auswahl der adäquaten Trainingsinhalte, Trainingsmittel und Trainingsmethoden sowie die exakte Definition der Belastungskomponenten (Umfang, Intensität, etc.).
+                    </li>
+                    <li>
+                        <h4>4. Trainingsdurchführung</h4>
+                        Die praktische Realisation des GePlanten in der Trainingseinheit. Hierzu gehört zwingend auch die praktische Durchführung von allgemeinem und speziellem Aufwärmen sowie dem Abwärmen.
+                    </li>
+                    <li>
+                        <h4>5. Trainingskontrolle und -auswertung</h4>
+                        Der Abgleich von Ist- und Soll-Zustand (z. B. durch erneute Tests oder Wettkampfergebnisse). Bei Abweichungen wird die Planung im nächsten Durchlauf korrigiert.
+                    </li>
+                </ul>
+
+                <div class="canvas-wrapper">
+                    <h3 class="font-title">Visualisierung: Regelkreis</h3>
+                    <canvas id="regelkreisCanvas" width="500" height="500"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Etappen -->
+        <section class="timeline-section">
+            <h2 class="section-title"><span class="step-badge">2</span> Etappen des langfristigen Trainingsprozesses</h2>
+            <p>Spitzensportler (wie beispielsweise Zehnkämpfer) benötigen oft 8 bis 12 Jahre, um ihr maximales Leistungspotenzial zu entfalten. Dieser langfristige Aufbau wird klassischerweise in drei bis vier Hauptetappen unterteilt:</p>
+
+            <div class="timeline">
+                <div class="timeline-card">
+                    <div class="timeline-icon">A</div>
+                    <h3>Grundlagentraining</h3>
+                    <p>Hier steht die vielseitige, sportartübergreifende athletische Ausbildung im Fokus. Das Ziel ist der Erwerb eines breiten motorischen Fundaments und der grundlegenden Techniken.</p>
+                </div>
+                <div class="timeline-card">
+                    <div class="timeline-icon">B</div>
+                    <h3>Aufbautraining</h3>
+                    <p>Die Spezialisierung auf eine bestimmte Sportart (oder Disziplingruppe) beginnt. Der Trainingsumfang und die -intensität steigen signifikant an. Die sportspezifische Kondition und Technik werden systematisch ausgebaut.</p>
+                </div>
+                <div class="timeline-card">
+                    <div class="timeline-icon">C</div>
+                    <h3>Hochleistungstraining</h3>
+                    <p>Die Phase der maximalen Spezialisierung. Das Ziel ist das Erreichen und Stabilisieren der individuellen Höchstleistung. Der Fokus liegt auf der Optimierung winziger technischer Details und der maximalen Ausreizung der Belastungsverträglichkeit.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Mikro-Planung -->
+        <section class="micro-cycle">
+            <h2 class="section-title"><span class="step-badge">3</span> Planung der einzelnen Trainingseinheit</h2>
+            <p>Jede noch so kleine Einheit muss als mikroskopischer Teil dieses langfristigen Prozesses betrachtet werden. Eine methodisch korrekte Trainingseinheit gliedert sich immer in:</p>
+
+            <div class="micro-grid">
+                <div class="micro-card">
+                    <h4>Einleitender Teil</h4>
+                    <p>Allgemeines und spezielles Aufwärmen (Warm-up) zur optimalen physischen und psychischen Vorbereitung auf die Belastung.</p>
+                </div>
+                <div class="micro-card">
+                    <h4>Hauptteil</h4>
+                    <p>Umsetzung des eigentlichen Trainingsziels in korrekter methodischer Reihenfolge (z. B. Technik vor Kondition, Schnelligkeit vor Ausdauer).</p>
+                </div>
+                <div class="micro-card">
+                    <h4>Schlussteil</h4>
+                    <p>Abwärmen (Cool-down) zur Einleitung der physischen und psychischen Regeneration sowie zum schnelleren Laktatabbau.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Abitur Transfer Box -->
+        <section class="abi-box">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                In der Abiturprüfung (eA) wird dieses Steuerungsmodell oft genutzt, um die methodische Kompetenz (oder Inkompetenz) von fiktiven Trainern in Fallbeispielen zu evaluieren.
+            </p>
+
+            <div class="abi-content-grid">
+                <div class="abi-case alert">
+                    <h3>⚠️ Der fehlende Ist-Zustand</h3>
+                    <p>Ein klassischer Fehler in materialgestützten Klausuraufgaben ist ein Trainer, der für eine neue Mannschaft sofort einen hochintensiven Trainingsplan schreibt, ohne vorher eine Leistungsdiagnostik durchgeführt zu haben.</p>
+                    <p style="margin-top:1rem;"><strong>Deine Lösung:</strong> Kritisiere diesen Vorgang mit dem Regelkreis der Trainingssteuerung! Argumentiere, dass ohne eine exakte Diagnose (Ist-Zustand) eine zielgerichtete Trainingsplanung unmöglich ist, da die Belastungskomponenten nicht an das Leistungsniveau der Athleten angepasst werden können (<span class="highlight-text">Verstoß gegen das Prinzip der individualisierten Belastung</span>).</p>
+                </div>
+
+                <div class="abi-case structure">
+                    <h3>📝 Mikro-Strukturierung in der Praxis</h3>
+                    <p>Wenn der Operator "Erstellen Sie" oder "Planen Sie" verlangt wird (z. B. "Planen Sie eine Trainingseinheit zur Verbesserung der Sprungkraft"), musst du <span class="highlight-text">zwingend die dreigliedrige Struktur einhalten</span>.</p>
+                    <p style="margin-top:1rem;"><strong>Punktabzug vermeiden:</strong> Ein bloßes Auflisten von Hauptübungen gibt Punktabzug! Du musst explizit ein sportartspezifisches Aufwärmen (Warm-up) und ein Abwärmen (Cool-down) mit in deine Planung aufnehmen und deren physiologische Funktion kurz begründen!</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('regelkreisCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            let rotationAngle = 0;
+
+            function resize() {
+                const container = canvas.parentElement;
+                canvas.width = Math.min(container.clientWidth, 500);
+                canvas.height = canvas.width; // Keep it square
+            }
+            
+            window.addEventListener('resize', () => {
+                resize();
+                drawLoop();
+            });
+
+            // The 5 Steps
+            const steps = [
+                { title: "Diagnose", color: "#0ea5e9" },    // Light Blue
+                { title: "Zielsetzung", color: "#f59e0b" }, // Amber
+                { title: "Planung", color: "#8b5cf6" },     // Purple
+                { title: "Durchführung", color: "#10b981" },// Green
+                { title: "Auswertung", color: "#ef4444" }   // Red
+            ];
+
+            // Helper to draw simplified icons
+            function drawIcon(ctx, type, x, y, size) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.strokeStyle = '#fff';
+                ctx.fillStyle = '#fff';
+                ctx.lineWidth = 2;
+
+                const s = size / 3;
+
+                switch(type) {
+                    case 0: // Diagnose (Lupe)
+                        ctx.beginPath();
+                        ctx.arc(-2, -2, s, 0, Math.PI*2);
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.moveTo(s-4, s-4);
+                        ctx.lineTo(s+4, s+4);
+                        ctx.lineWidth = 3;
+                        ctx.stroke();
+                        break;
+                    case 1: // Zielsetzung (Target)
+                        ctx.beginPath();
+                        ctx.arc(0, 0, s, 0, Math.PI*2);
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.arc(0, 0, s/2, 0, Math.PI*2);
+                        ctx.fill();
+                        break;
+                    case 2: // Planung (Clipboard)
+                        ctx.strokeRect(-s+2, -s, s*2-4, s*2);
+                        ctx.fillRect(-s/2, -s-2, s, 4);
+                        ctx.beginPath();
+                        ctx.moveTo(-s+5, -s+5); ctx.lineTo(s-5, -s+5);
+                        ctx.moveTo(-s+5, 0); ctx.lineTo(s-5, 0);
+                        ctx.stroke();
+                        break;
+                    case 3: // Durchführung (Dumbbell)
+                        ctx.beginPath();
+                        ctx.moveTo(-s, 0); ctx.lineTo(s, 0);
+                        ctx.stroke();
+                        ctx.fillRect(-s-2, -s/2, 4, s);
+                        ctx.fillRect(s-2, -s/2, 4, s);
+                        break;
+                    case 4: // Auswertung (Chart)
+                        ctx.beginPath();
+                        ctx.moveTo(-s, s); ctx.lineTo(s, s);
+                        ctx.moveTo(-s, s); ctx.lineTo(-s, -s);
+                        ctx.stroke();
+                        ctx.fillRect(-s+3, s-s, 3, s);
+                        ctx.fillRect(-s+8, s-(s*1.5), 3, s*1.5);
+                        ctx.fillRect(-s+13, s-(s*0.5), 3, s*0.5);
+                        break;
+                }
+                ctx.restore();
+            }
+
+            function drawLoop() {
+                const w = canvas.width;
+                const h = canvas.height;
+                const cx = w / 2;
+                const cy = h / 2;
+                const radius = w * 0.35; // Size of the loop
+
+                ctx.clearRect(0, 0, w, h);
+
+                // Draw central text
+                ctx.fillStyle = '#0f172a';
+                ctx.font = 'bold 18px Montserrat';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('Regelkreis', cx, cy - 10);
+                ctx.fillStyle = '#64748b';
+                ctx.font = '14px Open Sans';
+                ctx.fillText('Trainingssteuerung', cx, cy + 15);
+
+                const numSteps = steps.length;
+                
+                // Draw connecting animated arrows
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.rotate(rotationAngle); // Spin the arrows slowly
+                
+                ctx.beginPath();
+                ctx.arc(0, 0, radius, 0, Math.PI * 2);
+                ctx.strokeStyle = '#cbd5e1';
+                ctx.lineWidth = 4;
+                ctx.setLineDash([15, 15]);
+                ctx.stroke();
+                
+                // Draw arrow heads on the circle
+                for(let i=0; i<numSteps; i++) {
+                    const angle = (i * 2 * Math.PI) / numSteps;
+                    const ax = Math.cos(angle) * radius;
+                    const ay = Math.sin(angle) * radius;
+                    
+                    ctx.save();
+                    ctx.translate(ax, ay);
+                    ctx.rotate(angle + Math.PI/2); // Tangent direction
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(-8, -8);
+                    ctx.lineTo(0, 8);
+                    ctx.lineTo(8, -8);
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.fill();
+                    
+                    ctx.restore();
+                }
+                ctx.restore();
+
+                // Draw Nodes
+                for(let i = 0; i < numSteps; i++) {
+                    // Start at top (-PI/2)
+                    const angle = -Math.PI / 2 + (i * 2 * Math.PI) / numSteps;
+                    const nx = cx + Math.cos(angle) * radius;
+                    const ny = cy + Math.sin(angle) * radius;
+
+                    // Node Circle
+                    ctx.beginPath();
+                    ctx.arc(nx, ny, 28, 0, Math.PI * 2);
+                    ctx.fillStyle = steps[i].color;
+                    ctx.fill();
+                    ctx.lineWidth = 4;
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.stroke();
+                    ctx.shadowColor = 'rgba(0,0,0,0.2)';
+                    ctx.shadowBlur = 10;
+                    ctx.stroke();
+                    ctx.shadowColor = 'transparent'; // reset
+
+                    // Draw Icon
+                    drawIcon(ctx, i, nx, ny, 28);
+
+                    // Text Background to make it readable
+                    const textWidth = ctx.measureText(steps[i].title).width + 16;
+                    
+                    // Node Label
+                    let tx = nx;
+                    let ty = ny + 45;
+                    
+                    // Adjust position slightly for specific nodes
+                    if(i === 0) ty = ny - 40; // Top node text goes above
+                    
+                    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+                    ctx.beginPath();
+                    ctx.roundRect(tx - textWidth/2, ty - 12, textWidth, 24, 12);
+                    ctx.fill();
+
+                    ctx.fillStyle = steps[i].color;
+                    ctx.font = 'bold 14px Open Sans';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(steps[i].title, tx, ty);
+                }
+            }
+
+            function animate() {
+                rotationAngle += 0.005; // Slow rotation
+                drawLoop();
+                requestAnimationFrame(animate);
+            }
+
+            resize();
+            animate();
+        });
+    </script>
+</body>
+</html>

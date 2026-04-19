@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.3c Anwendung und Transfer - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Case Study / Blueprint Theme */
+            --bg-main: #f0f4f8;
+            --text-dark: #1e293b;
+            --text-p: #334155;
+            
+            --case-bg: #0f172a; /* Deep Slate */
+            --case-text: #f8fafc;
+            
+            --accent-orange: #ea580c; /* MTB Dirt Orange */
+            --accent-orange-light: #ffedd5;
+            --accent-blue: #0ea5e9; /* Sky Blue */
+            --accent-blue-light: #e0f2fe;
+            
+            --abi-red: #dc2626;
+            --abi-red-light: #fee2e2;
+            
+            --radius-lg: its16px;
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-p);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Blueprint Hero --- */
+        .hero {
+            background-color: var(--case-bg);
+            background-image: linear-gradient(rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--case-text);
+            padding: 5rem 2rem 6rem;
+            border-bottom: 5px solid var(--accent-orange);
+            text-align: center;
+        }
+
+        .hero-tag {
+            background: rgba(234, 88, 12, 0.2);
+            color: var(--accent-orange);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(234, 88, 12, 0.5);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- Intro Section --- */
+        .intro-box {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-top: -3rem;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 10;
+            border-left: 6px solid var(--accent-blue);
+        }
+
+        /* --- Case Study Block --- */
+        .case-study-header {
+            background: var(--accent-orange-light);
+            color: #9a3412;
+            padding: 2rem;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            border: 2px solid #fdba74;
+            border-bottom: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .case-icon {
+            background: var(--accent-orange);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .case-study-header h2 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .case-study-body {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            border: 2px solid #fdba74;
+            border-top: none;
+            margin-bottom: 4rem;
+            box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.1);
+        }
+
+        /* --- Evaluation Cards (The Applications) --- */
+        .eval-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .eval-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media(min-width: 850px) {
+            .eval-card {
+                flex-direction: row;
+            }
+        }
+
+        .eval-theory {
+            background: var(--case-bg);
+            color: white;
+            padding: 2.5rem;
+            flex: 1;
+            border-right: 4px solid var(--accent-blue);
+        }
+
+        .eval-theory h3 {
+            color: var(--accent-blue);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .eval-practice {
+            background: white;
+            padding: 2.5rem;
+            flex: 1.5;
+            position: relative;
+        }
+
+        .eval-practice::before {
+            content: 'BEWERTUNG';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: #e2e8f0;
+            font-size: 2.5rem;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .eval-practice p {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Interactive Flowchart --- */
+        .matrix-section {
+            background: white;
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 6rem;
+        }
+
+        .matrix-section h2 {
+            text-align: center;
+            color: var(--case-bg);
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .matrix-section p.subtitle {
+            text-align: center;
+            color: var(--text-p);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: crosshair;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- Abitur Transfer Box --- */
+        .abitur-transfer {
+            background: var(--abi-red-light);
+            border: 2px solid var(--abi-red);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            margin-bottom: 5rem;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(220, 38, 38, 0.1);
+        }
+
+        .abitur-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-red);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .abitur-header h2 {
+            font-size: 2.5rem;
+            color: #991b1b;
+            margin: 0;
+        }
+
+        .abitur-intro {
+            font-size: 1.25rem;
+            color: #7f1d1d;
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .dreisprung-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media(max-width: 900px) {
+            .dreisprung-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .dreisprung-step {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border-top: 6px solid var(--abi-red);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            background: var(--abi-red);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: 4px solid var(--abi-red-light);
+        }
+
+        .dreisprung-step h3 {
+            color: #991b1b;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .error-box {
+            background: white;
+            border-left: 6px solid #f59e0b;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .error-box h3 {
+            color: #d97706;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="hero-tag">Lernbereich 1.1.3c</span>
+            <h1>Anwendung und Transfer</h1>
+            <p>Konkrete Fallbeispiele anwenden und bewerten – Vom Theoriewissen zur praxisnahen Problemlösung.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-box">
+            Die bloße Reproduktion von Trainingsprinzipien reicht auf dem erhöhten Anforderungsniveau (eA) nicht aus. Im Zentrum steht die <strong>Transferkompetenz</strong>: Das theoretische Fachwissen muss auf konkrete, meist materialgestützte Fallbeispiele aus der sportlichen Praxis angewendet, analysiert und bewertet werden. Die Trainingsprinzipien dienen dabei als analytisches Raster, um Fehler in Trainingsplänen aufzudecken oder Handlungsempfehlungen wissenschaftlich fundiert zu begründen.
+        </div>
+
+        <section class="case-study-section">
+            <div class="case-study-header">
+                <div class="case-icon">🚴</div>
+                <h2>Fallbeispiel-Analyse: Vorbereitung auf eine Alpenüberquerung (Mountainbike)</h2>
+            </div>
+            <div class="case-study-body">
+                <p>Ein klassisches Prüfungsszenario (angelehnt an die offiziellen Abituraufgaben) beschreibt zwei Freundinnen aus der gymnasialen Oberstufe, die sich gemeinsam auf eine mehrtägige Alpenüberquerung (Transalp) vorbereiten. Eine Leistungsdiagnostik zeigt bei beiden ein signifikant unterschiedliches Fitnessniveau. Die Vorbereitung muss zwingend unter Berücksichtigung spezifischer Trainingsprinzipien erfolgen, deren Anwendung wie folgt argumentativ aufgebaut wird:</p>
+            </div>
+        </section>
+
+        <section class="eval-grid">
+            
+            <!-- Application 1 -->
+            <div class="eval-card">
+                <div class="eval-theory">
+                    <h3><span style="color:white; opacity:0.3; margin-right:8px;">01</span> Individualisierte Belastung</h3>
+                    <p>Der Belastungsreiz soll der psychophysischen Belastbarkeit, der individuellen Akzeptanz, den speziellen Bedürfnissen und Gegebenheiten der jeweiligen Person entsprechen.</p>
+                </div>
+                <div class="eval-practice">
+                    <p><strong>Bewertung im Fallbeispiel:</strong> Bei den beiden Schülerinnen kann ein objektiv gleicher Belastungsreiz (z. B. eine mehrstündige Trainingsfahrt mit steilen Anstiegen) für die eine Fahrerin optimal fordernd, für die andere jedoch völlig überfordernd sein. Sie dürfen daher nicht exakt denselben Trainingsplan mit absoluten Geschwindigkeits- oder Wattvorgaben absolvieren, sondern müssen ihre Trainingsintensitäten an ihre individuellen physiologischen Schwellen (z. B. die aerobe und anaerobe Schwelle) anpassen.</p>
+                </div>
+            </div>
+
+            <!-- Application 2 -->
+            <div class="eval-card">
+                <div class="eval-theory" style="border-right-color: var(--accent-orange);">
+                    <h3 style="color: var(--accent-orange);"><span style="color:white; opacity:0.3; margin-right:8px;">02</span> Ansteigende Belastung</h3>
+                    <p>Dieses Prinzip ergibt sich aus der wechselseitigen Beziehung zwischen Belastung, Anpassung und Leistungssteigerung. Dementsprechend müssen die Anforderungen systematisch gesteigert werden.</p>
+                </div>
+                <div class="eval-practice">
+                    <p><strong>Bewertung im Fallbeispiel:</strong> Bleiben die Trainingsbelastungen der Freundinnen über einen längeren Zeitraum konstant (z. B. immer die gleiche Hausrunde), verlieren sie ihre Wirksamkeit für die Leistungssteigerung. Gleichbleibende Belastungen tragen demnach nur maximal zum Erhalt, nicht aber zur Steigerung der Leistungsfähigkeit bei. Um das Ziel der Alpenüberquerung zu erreichen, müssen sie die Belastung kontinuierlich steigern – etwa über den Umfang (längere Touren), die Intensität (mehr Höhenmeter, höheres Tempo) oder durch ein Anheben der Anforderungen an die Bewegungskoordination (anspruchsvollere Trails).</p>
+                </div>
+            </div>
+
+            <!-- Application 3 -->
+            <div class="eval-card">
+                <div class="eval-theory" style="border-right-color: #10b981;">
+                    <h3 style="color: #10b981;"><span style="color:white; opacity:0.3; margin-right:8px;">03</span> Kontinuierliche Belastung</h3>
+                    <p>Kontinuierliche Belastungen im Sinne einer regelmäßigen Trainingsfolge stellen die Grundvoraussetzung für einen Anstieg der sportlichen Leistungsfähigkeit dar.</p>
+                </div>
+                <div class="eval-practice">
+                    <p><strong>Bewertung im Fallbeispiel:</strong> Wird die Kontinuität des Trainings der beiden Freundinnen unterbrochen (z. B. durch Verletzungen, Krankheit, unregelmäßiges Training etc.), kommt es unweigerlich zu einem Abfall der Leistungsfähigkeit. Dabei entspricht die Geschwindigkeit des Leistungsabfalls in etwa der des Anstiegs: schnell erworbene Zuwachsraten gehen schnell, langfristig erworbene langsam zurück.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Interactive Canvas Flowchart -->
+        <section class="matrix-section">
+            <h2 class="font-heading">Klausur-Matrix: Der analytische Pfad</h2>
+            <p class="subtitle">Fahre mit der Maus (Hover) über die Start-Symptome auf der linken Seite, um den korrekten Argumentationspfad für die Klausur aufleuchten zu lassen!</p>
+            
+            <div class="canvas-container">
+                <canvas id="flowCanvas" width="1000" height="450"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-transfer">
+            <div class="abitur-header">
+                <div class="abi-icon">!</div>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abitur-intro">Dieser Unterpunkt ist das Herzstück für den AFB III (Anforderungsbereich III: Reflexion und Problemlösung) in der schriftlichen Abiturprüfung. Das Kultusministerium erwartet hier eine strukturierte und lückenlose Argumentationskette.</p>
+
+            <h3 style="color: #7f1d1d; margin-bottom: 1.5rem; font-size: 1.6rem;" class="font-heading">Die "Dreisprung-Methode" für Klausuren</h3>
+            <p style="margin-bottom: 2rem;">Wenn du ein Fallbeispiel bewerten sollst, gehe immer in drei Schritten vor:</p>
+
+            <div class="dreisprung-grid">
+                <div class="dreisprung-step">
+                    <div class="step-number">1</div>
+                    <h3 class="font-heading">Nennen</h3>
+                    <p>Benenne das verletzte oder erforderliche Trainingsprinzip exakt mit seinem Fachterminus (z.B. "Prinzip der individualisierten Belastung").</p>
+                </div>
+                <div class="dreisprung-step">
+                    <div class="step-number">2</div>
+                    <h3 class="font-heading">Erklären</h3>
+                    <p>Liefere eine kurze, prägnante Definition dieses Prinzips, um dein theoretisches Fachwissen nachzuweisen.</p>
+                </div>
+                <div class="dreisprung-step" style="border-top-color: #ea580c;">
+                    <div class="step-number" style="background: #ea580c; border-color: #ffedd5;">3</div>
+                    <h3 class="font-heading" style="color: #ea580c;">Anwenden <span style="font-size: 0.9rem; color: #94a3b8; display: block;">(Der wichtigste Schritt!)</span></h3>
+                    <p>Verknüpfe die Definition <strong>zwingend</strong> mit den Akteuren aus dem Text (z.B. den Mountainbikerinnen) und nenne konkrete Anpassungen für ihren Trainingsalltag (z.B. Training nach individueller Herzfrequenz statt pauschalem Tempo).</p>
+                </div>
+            </div>
+
+            <div class="error-box">
+                <h3 class="font-heading">⚠️ Fehlerquellen vermeiden</h3>
+                <p>Ein typischer Abiturfehler ist es, nur die Trainingsprinzipien aufzuzählen, ohne den Bezug zum vorliegenden Fallmaterial (den sogenannten Operatorenbezug "anwenden/bewerten") herzustellen. <strong>Eine theoretisch fehlerfreie Definition gibt in Transferaufgaben fast keine Punkte, wenn der Bezug zum vorgegebenen Fallbeispiel fehlt!</strong></p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('flowCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Hover State
+            let activePath = -1; // -1 = None, 0, 1, 2 = specific path
+            
+            // Define Nodes (Columns: 0=Symptom, 1=Principle, 2=Physiology)
+            const nodes = [
+                // Path 0
+                { col: 0, row: 0, text: "Symptom: Athlet stagniert\ntrotz Training", x: 150, y: 80, width: 220, height: 60, pathId: 0 },
+                { col: 1, row: 0, text: "Prinzip d. ansteigenden\nBelastung fehlt", x: 500, y: 80, width: 220, height: 60, pathId: 0 },
+                { col: 2, row: 0, text: "Physiologie: Reiz unterschwellig,\nHomöostase nicht gestört", x: 850, y: 80, width: 240, height: 60, pathId: 0 },
+                
+                // Path 1
+                { col: 0, row: 1, text: "Symptom: Anfänger ist\nvöllig überfordert", x: 150, y: 220, width: 220, height: 60, pathId: 1 },
+                { col: 1, row: 1, text: "Prinzip d. individualisierten\nBelastung verletzt", x: 500, y: 220, width: 220, height: 60, pathId: 1 },
+                { col: 2, row: 1, text: "Physiologie: Objektiver Reiz überschreitet\nsubjektive Leistungsfähigkeit", x: 850, y: 220, width: 240, height: 60, pathId: 1 },
+
+                // Path 2
+                { col: 0, row: 2, text: "Symptom: Leistungsabfall\nnach langer Pause", x: 150, y: 360, width: 220, height: 60, pathId: 2 },
+                { col: 1, row: 2, text: "Prinzip d. kontinuierlichen\nBelastung gebrochen", x: 500, y: 360, width: 220, height: 60, pathId: 2 },
+                { col: 2, row: 2, text: "Physiologie: De-Adaptation (Involution)\nder aufgebauten Strukturen", x: 850, y: 360, width: 240, height: 60, pathId: 2 }
+            ];
+
+            // Colors
+            const colorDefaultLine = "#cbd5e1";
+            const colorActiveLine = "#ea580c"; // Orange
+            const colorBoxBg = "#ffffff";
+            const colorBoxBorder = "#94a3b8";
+            const colorText = "#1e293b";
+
+            function wrapText(context, text, x, y, maxWidth, lineHeight) {
+                const lines = text.split('\n');
+                for(let i = 0; i < lines.length; i++) {
+                    context.fillText(lines[i], x, y + (i * lineHeight));
+                }
+            }
+
+            function drawRoundedRect(ctx, x, y, width, height, radius, fill, stroke, isHovered) {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width - radius, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+                ctx.lineTo(x + width, y + height - radius);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                ctx.lineTo(x + radius, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+                ctx.closePath();
+                
+                if(isHovered) {
+                    ctx.shadowColor = 'rgba(234, 88, 12, 0.4)';
+                    ctx.shadowBlur = 15;
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 5;
+                } else {
+                    ctx.shadowColor = 'transparent';
+                    ctx.shadowBlur = 0;
+                }
+
+                ctx.fillStyle = fill;
+                ctx.fill();
+                ctx.lineWidth = isHovered ? 3 : 1;
+                ctx.strokeStyle = stroke;
+                ctx.stroke();
+                
+                // Reset shadow
+                ctx.shadowColor = 'transparent';
+            }
+
+            function drawArrow(ctx, fromX, fromY, toX, toY, isActive) {
+                const headlen = 10;
+                const dx = toX - fromX;
+                const dy = toY - fromY;
+                const angle = Math.atan2(dy, dx);
+                
+                ctx.beginPath();
+                ctx.moveTo(fromX, fromY);
+                ctx.lineTo(toX, toY);
+                ctx.strokeStyle = isActive ? colorActiveLine : colorDefaultLine;
+                ctx.lineWidth = isActive ? 4 : 2;
+                ctx.stroke();
+                
+                // Arrowhead
+                ctx.beginPath();
+                ctx.moveTo(toX, toY);
+                ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+                ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+                ctx.lineTo(toX, toY);
+                ctx.fillStyle = isActive ? colorActiveLine : colorDefaultLine;
+                ctx.fill();
+            }
+
+            function drawNetwork() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw Column Headers
+                ctx.font = "bold 18px 'Space Grotesk'";
+                ctx.fillStyle = "#0f172a";
+                ctx.textAlign = "center";
+                ctx.fillText("Schritt 1: Symptom", 150, 30);
+                ctx.fillText("Schritt 2: Prinzip", 500, 30);
+                ctx.fillText("Schritt 3: Physiologie", 850, 30);
+
+                // Draw Connections first so they are under boxes
+                for (let i = 0; i < 3; i++) {
+                    const isActive = activePath === i;
+                    
+                    // Node 0 -> Node 1
+                    const n0 = nodes.find(n => n.pathId === i && n.col === 0);
+                    const n1 = nodes.find(n => n.pathId === i && n.col === 1);
+                    drawArrow(ctx, n0.x + n0.width/2, n0.y, n1.x - n1.width/2, n1.y, isActive);
+                    
+                    // Node 1 -> Node 2
+                    const n2 = nodes.find(n => n.pathId === i && n.col === 2);
+                    drawArrow(ctx, n1.x + n1.width/2, n1.y, n2.x - n2.width/2, n2.y, isActive);
+                }
+
+                // Draw Nodes
+                nodes.forEach(node => {
+                    const isActive = activePath === node.pathId;
+                    const fill = isActive ? (node.col === 0 ? "#ea580c" : (node.col === 1 ? "#0f172a" : "#0ea5e9")) : colorBoxBg;
+                    const stroke = isActive ? fill : colorBoxBorder;
+                    const textColor = isActive ? "#ffffff" : colorText;
+
+                    drawRoundedRect(ctx, node.x - node.width/2, node.y - node.height/2, node.width, node.height, 8, fill, stroke, isActive);
+                    
+                    ctx.font = isActive ? "bold 14px 'Nunito Sans'" : "14px 'Nunito Sans'";
+                    ctx.fillStyle = textColor;
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+                    
+                    // Quick multiline vertically centered
+                    const lines = node.text.split('\n');
+                    if(lines.length === 1) {
+                        ctx.fillText(lines[0], node.x, node.y);
+                    } else {
+                        ctx.fillText(lines[0], node.x, node.y - 10);
+                        ctx.fillText(lines[1], node.x, node.y + 12);
+                    }
+                });
+            }
+
+            // Initial Draw
+            drawNetwork();
+
+            // Mouse Interaction Setup
+            function getMousePos(canvas, evt) {
+                var rect = canvas.getBoundingClientRect();
+                return {
+                    x: (evt.clientX - rect.left) * (canvas.width / rect.width),
+                    y: (evt.clientY - rect.top) * (canvas.height / rect.height)
+                };
+            }
+
+            canvas.addEventListener('mousemove', function(evt) {
+                var pos = getMousePos(canvas, evt);
+                let foundPath = -1;
+
+                nodes.forEach(node => {
+                    if (pos.x > node.x - node.width/2 && pos.x < node.x + node.width/2 &&
+                        pos.y > node.y - node.height/2 && pos.y < node.y + node.height/2) {
+                        foundPath = node.pathId;
+                    }
+                });
+
+                if (foundPath !== activePath) {
+                    activePath = foundPath;
+                    canvas.style.cursor = foundPath !== -1 ? 'pointer' : 'crosshair';
+                    drawNetwork();
+                }
+            });
+            
+            canvas.addEventListener('mouseleave', function() {
+                activePath = -1;
+                drawNetwork();
+            });
+        });
+    </script>
+</body>
+</html>

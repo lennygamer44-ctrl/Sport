@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.4.1a Definition und Formen von Doping - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
+
+        :root {
+            /* Legal & Bio-Hazard Theme */
+            --bg-page: #f4f5f7;
+            --text-dark: #111827;
+            --text-mut: #4b5563;
+            
+            --legal-navy: #0f172a;     /* Strict Authority Blue */
+            --legal-blue: #1d4ed8;     /* Highlight Blue */
+            --alert-red: #dc2626;      /* Stop/Danger Red */
+            --alert-light: #fef2f2;
+            --warn-yellow: #f59e0b;    /* Warning Yellow */
+            --warn-light: #fffbeb;
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Premium Tribunal */
+            --abi-bg: #1e1b4b;         /* Deepest Indigo/Purple */
+            --abi-gold: #fbbf24;
+            --abi-text: #f8fafc;
+
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            
+            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-hard: 0 10px 15px -3px rgba(15, 23, 42, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            line-height: 1.65;
+            font-size: 1.05rem;
+            /* Subtle diagonal hazard lines in background */
+            background-image: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 20px,
+                rgba(15, 23, 42, 0.02) 20px,
+                rgba(15, 23, 42, 0.02) 40px
+            );
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            line-height: 1.2;
+            letter-spacing: 0.5px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER --- */
+        .doc-header {
+            background: var(--legal-navy);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-hard);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 8px solid var(--alert-red);
+        }
+
+        .doc-header::after {
+            content: '⚖️';
+            position: absolute;
+            top: 10px; right: 20px;
+            font-size: 7rem;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .doc-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #f8fafc;
+        }
+
+        .doc-header .intro {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            max-width: 850px;
+            font-weight: 300;
+        }
+
+        /* --- SECTION 1: WADA DEFINITION --- */
+        .law-section {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 4rem;
+            border-left: 6px solid var(--legal-blue);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--legal-navy);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '§';
+            color: var(--legal-blue);
+        }
+
+        .law-intro {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .official-def {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+            font-weight: 500;
+            color: var(--legal-navy);
+        }
+
+        .official-def strong {
+            color: var(--alert-red);
+        }
+
+        .rule-list {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        .rule-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-mut);
+        }
+
+        .rule-list li::before {
+            content: '■';
+            position: absolute;
+            left: 0;
+            color: var(--legal-blue);
+            font-size: 0.8rem;
+            top: 4px;
+        }
+
+        .rule-list strong {
+            color: var(--text-dark);
+        }
+
+        /* --- CANVAS SECTION --- */
+        .canvas-section {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 4rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .canvas-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--legal-navy);
+        }
+
+        .canvas-section p {
+            color: var(--text-mut);
+            margin-bottom: 2rem;
+        }
+
+        .canvas-wrapper {
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            overflow-x: auto;
+            border: 1px solid #e2e8f0;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- SECTION 2: FORMEN DES DOPINGS --- */
+        .forms-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-subtle);
+            position: relative;
+            border-top: 5px solid var(--warn-yellow);
+        }
+
+        .form-card h3 {
+            font-size: 1.5rem;
+            color: #b45309;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-card p {
+            color: var(--text-mut);
+            margin-bottom: 1rem;
+        }
+
+        .form-card ul {
+            margin-left: 1.5rem;
+            color: var(--text-mut);
+        }
+
+        /* --- SECTION 3: WIRKUNGSWEISEN & RISIKEN --- */
+        .risk-section {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 4rem;
+            border-left: 6px solid var(--alert-red);
+        }
+
+        .risk-section h2 {
+            color: var(--alert-red);
+        }
+
+        .risk-section .intro-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hazard-box {
+            background: var(--alert-light);
+            border: 1px dashed var(--alert-red);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+        }
+
+        .hazard-box h4 {
+            color: #991b1b;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hazard-box p {
+            color: #7f1d1d;
+        }
+
+        .risk-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .risk-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--legal-navy);
+        }
+
+        .risk-card h4 {
+            color: var(--legal-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-card p {
+            font-size: 0.95rem;
+            color: var(--text-mut);
+        }
+
+        /* --- ABITUR TRANSFER TRIBUNAL --- */
+        .abitur-tribunal {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: var(--shadow-hard);
+            border-top: 8px solid var(--abi-gold);
+            position: relative;
+        }
+
+        .abitur-tribunal h2 {
+            color: var(--abi-gold);
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .case-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--abi-gold);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .case-block h4 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 4px;
+        }
+
+        .scenario-text {
+            color: #fca5a5;
+            font-style: italic;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(220, 38, 38, 0.1);
+            border-radius: 6px;
+        }
+
+        .case-block p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-exam {
+            color: var(--abi-gold);
+            font-weight: bold;
+        }
+
+        .bio-hack {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px dashed #10b981;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .bio-hack strong {
+            color: #34d399;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 900px) {
+            .forms-grid, .risk-split { grid-template-columns: 1fr; }
+            .doc-header, .abitur-tribunal { padding: 2rem; }
+            .doc-header h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>3.4.1a Definition und Formen von Doping</h1>
+        <p class="intro">
+            Das Thema Doping bildet im Lehrplan für das erhöhte Anforderungsniveau (eA) die zentrale Schnittstelle zwischen Biologie, Medizin und Sportethik. Um Dopingvergehen rechtlich und sportwissenschaftlich fundiert bewerten zu können, bedarf es zunächst einer exakten terminologischen Abgrenzung.
+        </p>
+    </header>
+
+    <!-- 1. Definition (WADA) -->
+    <section class="law-section">
+        <h2 class="section-title">1. Die Definition von Doping (nach WADA)</h2>
+        <p class="law-intro">
+            Die Beurteilung dessen, was als Doping gilt, obliegt international der World Anti-Doping Agency (WADA) sowie national der Nationalen Anti-Doping Agentur (NADA). Doping ist nicht – wie umgangssprachlich oft behauptet – schlicht „die Einnahme verbotener Pillen“.
+        </p>
+
+        <div class="official-def">
+            Die offizielle Definition lautet: <strong>Doping ist das Vorliegen eines oder mehrerer Verstöße gegen die Anti-Doping-Regeln.</strong> Ein solcher Verstoß liegt nicht nur beim Nachweis einer verbotenen Substanz (positive A- und B-Probe) vor, sondern umfasst auch weitere Tatbestände.
+        </div>
+
+        <ul class="rule-list">
+            <li><strong>Anwendung:</strong> Die versuchte oder tatsächliche Anwendung einer verbotenen Substanz oder Methode.</li>
+            <li><strong>Verweigerung:</strong> Die Weigerung, sich einer Dopingkontrolle zu unterziehen (ein verweigerter Test wird automatisch als positiver Test gewertet).</li>
+            <li><strong>Whereabouts-Failures:</strong> Meldepflichtverstöße. Leistungssportler müssen ihren Aufenthaltsort 365 Tage im Jahr im Voraus angeben. Drei verpasste unangekündigte Kontrollen innerhalb von 12 Monaten gelten als Dopingverstoß.</li>
+            <li><strong>Distribution:</strong> Besitz, Handel (Trafficking) oder die Verabreichung von Dopingsubstanzen.</li>
+        </ul>
+    </section>
+
+    <!-- WADA Canvas Graphic -->
+    <section class="canvas-section">
+        <h3>Infografik: Die WADA-Dopingdefinition</h3>
+        <p>Ein Anti-Doping-Regelverstoß umfasst weit mehr als nur den positiven Nachweis.</p>
+        <div class="canvas-wrapper">
+            <canvas id="wadaCanvas" width="900" height="500"></canvas>
+        </div>
+    </section>
+
+    <!-- 2. Formen des Dopings -->
+    <section>
+        <h2 class="section-title" style="color: #b45309;"><span style="color: var(--warn-yellow);">❖</span> 2. Formen des Dopings (Substanzen vs. Methoden)</h2>
+        <p style="margin-bottom: 2rem; color: var(--text-mut);">Die WADA veröffentlicht jährlich eine aktualisierte Verbotsliste (Prohibited List). Diese Liste unterscheidet strukturell zwischen zwei Hauptkategorien:</p>
+
+        <div class="forms-grid">
+            <article class="form-card">
+                <h3>💊 Verbotene Substanzen (Wirkstoffe)</h3>
+                <p>Hierzu zählen chemische und biologische Präparate, die dem Körper <strong>exogen zugeführt</strong> werden.</p>
+                <ul>
+                    <li>Anabole Substanzen (z.B. Testosteron)</li>
+                    <li>Peptidhormone (z.B. EPO)</li>
+                    <li>Diuretika (zur Verschleierung oder Gewichtsreduktion)</li>
+                    <li>Stimulanzien & Narkotika</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 0.9rem; font-style: italic;">Hinweis: Einige Substanzen sind jederzeit verboten, andere nur innerhalb des Wettkampfs.</p>
+            </article>
+
+            <article class="form-card">
+                <h3>🩸 Verbotene Methoden</h3>
+                <p>Hierbei handelt es sich nicht primär um die Einnahme von Fremdstoffen, sondern um die <strong>illegale Manipulation körpereigener Systeme</strong>.</p>
+                <ul>
+                    <li><strong>Blutdoping:</strong> Manipulation des Blutes und der Blutbestandteile (z.B. Eigenbluttransfusionen).</li>
+                    <li><strong>Chemische/Physikalische Manipulation:</strong> Austausch oder Verfälschung von Urinproben (z.B. durch Fremdurin via Katheter).</li>
+                    <li><strong>Gendoping:</strong> Modifikation der Genexpression zur Leistungssteigerung.</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <!-- 3. Wirkungsweisen & Risiken -->
+    <section class="risk-section">
+        <h2>3. Allgemeine Wirkungsweisen & Risiken</h2>
+        <p class="intro-text">Aus sportbiologischer Sicht ist die allgemeine Wirkungsweise aller auf Leistung ausgerichteten Dopingmittel identisch: <strong>Sie durchbrechen die autonomen Schutzreserven des menschlichen Körpers.</strong></p>
+
+        <div class="hazard-box">
+            <h4>⚠️ Das physiologische Limit & Die Schutzreserve</h4>
+            <p>Ein gesunder, naturaler Athlet kann bei maximaler willkürlicher Anstrengung (z. B. beim Endspurt eines 400-m-Laufs) nur ca. <strong>70 % bis 85 % seiner absoluten Leistungsfähigkeit</strong> abrufen. Die restlichen 15 % bis 30 % sind die autonome Schutzreserve. Sie kann willkürlich nicht angetastet werden. Das ZNS sendet vorher Erschöpfungssignale (Schmerz, schwere Beine), um den Organismus vor der strukturellen Selbstzerstörung (z. B. Herzversagen, Muskelabrisse) zu bewahren.</p>
+        </div>
+
+        <div class="risk-split">
+            <div class="risk-card">
+                <h4>Die akute Gefahr durch Doping</h4>
+                <p>Dopingsubstanzen (insbesondere Stimulanzien und Narkotika) heben diese zentralnervösen Hemmschwellen und Warnsignale auf. Der Athlet dringt in die autonome Schutzreserve ein. Die akuten Risiken sind letale (tödliche) Erschöpfungszustände, Herz-Kreislauf-Kollapse und akutes Nierenversagen.</p>
+            </div>
+            <div class="risk-card">
+                <h4>Chronische Langzeitrisiken</h4>
+                <p>Zu den irreversiblen chronischen Schäden zählen Kardiomegalie (krankhafte Herzmuskelvergrößerung durch Anabolika), Leberschäden (Toxizität), schwere hormonelle Dysbalancen (Infertilität, Vermännlichung/Verweiblichung) und schwerste psychische Abhängigkeiten.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abitur Transfer Tribunal -->
+    <section class="abitur-tribunal">
+        <h2><span style="font-size: 2.8rem;">⚖️</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die exakte rechtliche und biologische Definition ist die Grundlage für materialgestützte Fallanalysen im Themenbereich Sportethik und Trainingslehre.
+        </p>
+
+        <div class="case-block">
+            <h4>Rechtliche Fallbewertung</h4>
+            <div class="scenario-text">
+                "Ein Athlet verpasst aus Fahrlässigkeit innerhalb eines Jahres drei unangekündigte Trainingskontrollen (Whereabouts), beteuert aber, nie Dopingmittel eingenommen zu haben. Bewerten Sie den Fall."
+            </div>
+            <p><strong>Die eA-Lösungsstrategie:</strong> Du musst hier zwingend mit der offiziellen WADA-Definition argumentieren. Es ist für das Sportgericht völlig irrelevant, ob der Athlet nachweislich Substanzen im Blut hatte.</p>
+            <p>Der dreimalige Meldepflichtverstoß stellt nach WADA-Code <span class="highlight-exam">in sich bereits einen Anti-Doping-Regelverstoß</span> dar. Der Athlet wird rechtlich exakt so gesperrt und behandelt wie ein positiv getesteter Doper.</p>
+        </div>
+
+        <div class="case-block">
+            <h4>Das Prinzip der autonomen Schutzreserve</h4>
+            <p>Wenn in einer Klausur nach der allgemeinen Lebensgefahr von Doping gefragt wird (noch bevor nach spezifischen Substanzen wie EPO gefragt wird), darfst du nicht nur "Herzinfarkt" schreiben.</p>
+            
+            <div class="bio-hack">
+                <strong>Biologische Argumentationskette:</strong>
+                Du musst das biologische Konzept der <span class="highlight-exam">autonomen Schutzreserve</span> und der <span class="highlight-exam">unterdrückten peripheren/zentralen Ermüdung</span> darlegen. Das Überstimmen dieser natürlichen Warnmechanismen des ZNS durch Pharmakologie ist die punktbringende Begründung für die Letalität von Doping.
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('wadaCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Center coordinates
+    const cx = w / 2;
+    const cy = h / 2;
+
+    // Colors
+    const colStop = '#dc2626'; // Red
+    const colBox = '#ffffff';
+    const colBorder = '#94a3b8';
+    const colTextDark = '#0f172a';
+    const colIcon = '#1d4ed8'; // Legal blue
+
+    // --- HELPER: DRAW STOP SIGN ---
+    function drawStopSign(x, y, radius) {
+        ctx.fillStyle = colStop;
+        ctx.beginPath();
+        const sides = 8;
+        for (let i = 0; i < sides; i++) {
+            // Offset angle by pi/8 to get flat top/bottom
+            const angle = (i * 2 * Math.PI) / sides - Math.PI / 8;
+            const px = x + radius * Math.cos(angle);
+            const py = y + radius * Math.sin(angle);
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.fill();
+
+        // White inner border
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        for (let i = 0; i < sides; i++) {
+            const angle = (i * 2 * Math.PI) / sides - Math.PI / 8;
+            const px = x + (radius - 8) * Math.cos(angle);
+            const py = y + (radius - 8) * Math.sin(angle);
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.stroke();
+
+        // Text
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = 'bold 22px Oswald';
+        ctx.fillText('ANTI-DOPING-', x, y - 12);
+        ctx.fillText('REGELVERSTOß', x, y + 12);
+    }
+
+    // --- HELPER: DRAW INFO BOX ---
+    function drawInfoBox(x, y, width, height, textLines, iconDrawer) {
+        // Box
+        ctx.fillStyle = colBox;
+        ctx.strokeStyle = colBorder;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(x - width/2, y - height/2, width, height, 12);
+        ctx.fill();
+        ctx.stroke();
+
+        // Icon Circle
+        const iconY = y - height/2 + 35;
+        ctx.fillStyle = '#f1f5f9';
+        ctx.beginPath();
+        ctx.arc(x, iconY, 22, 0, Math.PI*2);
+        ctx.fill();
+        
+        // Draw Icon
+        iconDrawer(x, iconY);
+
+        // Text
+        ctx.fillStyle = colTextDark;
+        ctx.font = 'bold 15px Roboto';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        const startTextY = iconY + 35;
+        textLines.forEach((line, index) => {
+            ctx.fillText(line, x, startTextY + index * 20);
+        });
+    }
+
+    // --- HELPER: DRAW ARROW ---
+    function drawArrow(fromX, fromY, toX, toY) {
+        const headlen = 15;
+        const angle = Math.atan2(toY - fromY, toX - fromX);
+        
+        ctx.strokeStyle = colStop;
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(fromX, fromY);
+        ctx.lineTo(toX, toY);
+        ctx.stroke();
+        
+        ctx.fillStyle = colStop;
+        ctx.beginPath();
+        ctx.moveTo(toX, toY);
+        ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI/6), toY - headlen * Math.sin(angle - Math.PI/6));
+        ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI/6), toY - headlen * Math.sin(angle + Math.PI/6));
+        ctx.fill();
+    }
+
+    // --- ICON DRAWERS ---
+    
+    // 1. Test Tube
+    function drawTestTube(x, y) {
+        ctx.strokeStyle = colIcon; ctx.lineWidth = 2; ctx.fillStyle = 'rgba(29, 78, 216, 0.2)';
+        ctx.beginPath(); ctx.moveTo(x-8, y-10); ctx.lineTo(x-8, y+5); ctx.arc(x, y+5, 8, Math.PI, 0, true); ctx.lineTo(x+8, y-10); ctx.stroke();
+        // Liquid
+        ctx.beginPath(); ctx.moveTo(x-8, y); ctx.lineTo(x-8, y+5); ctx.arc(x, y+5, 8, Math.PI, 0, true); ctx.lineTo(x+8, y); ctx.fill();
+        // Lip
+        ctx.beginPath(); ctx.moveTo(x-10, y-10); ctx.lineTo(x+10, y-10); ctx.stroke();
+        // Bubbles
+        ctx.fillStyle = colIcon; ctx.beginPath(); ctx.arc(x-2, y+2, 1.5, 0, Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(x+3, y+6, 2, 0, Math.PI*2); ctx.fill();
+    }
+
+    // 2. Refusal (X over a cup)
+    function drawRefusal(x, y) {
+        // Cup
+        ctx.strokeStyle = '#64748b'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(x-8, y-8); ctx.lineTo(x-6, y+8); ctx.lineTo(x+6, y+8); ctx.lineTo(x+8, y-8); ctx.stroke();
+        // Big Red X
+        ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 3; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(x-10, y-10); ctx.lineTo(x+10, y+10); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x+10, y-10); ctx.lineTo(x-10, y+10); ctx.stroke();
+    }
+
+    // 3. Calendar (Whereabouts)
+    function drawCalendar(x, y) {
+        ctx.strokeStyle = colIcon; ctx.lineWidth = 2; ctx.lineJoin = 'round';
+        ctx.beginPath(); ctx.rect(x-10, y-8, 20, 18); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x-10, y-2); ctx.lineTo(x+10, y-2); ctx.stroke(); // header line
+        // Rings
+        ctx.beginPath(); ctx.moveTo(x-5, y-12); ctx.lineTo(x-5, y-6); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x+5, y-12); ctx.lineTo(x+5, y-6); ctx.stroke();
+        // Check/X mark inside
+        ctx.strokeStyle = '#ef4444'; ctx.beginPath(); ctx.moveTo(x-4, y+3); ctx.lineTo(x+4, y+9); ctx.stroke(); ctx.beginPath(); ctx.moveTo(x+4, y+3); ctx.lineTo(x-4, y+9); ctx.stroke();
+    }
+
+    // 4. Crossed-out Handshake (Besitz/Handel)
+    function drawNoHandshake(x, y) {
+        // Abstract handshake (two hands meeting)
+        ctx.strokeStyle = '#64748b'; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        // Left hand
+        ctx.beginPath(); ctx.moveTo(x-12, y); ctx.lineTo(x-2, y+2); ctx.lineTo(x, y-2); ctx.stroke();
+        // Right hand
+        ctx.beginPath(); ctx.moveTo(x+12, y-2); ctx.lineTo(x+2, y); ctx.lineTo(x, y-4); ctx.stroke();
+        
+        // Red Ban Circle/Cross
+        ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(x, y, 12, 0, Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x-8, y-8); ctx.lineTo(x+8, y+8); ctx.stroke();
+    }
+
+    // --- LAYOUT POSITIONS ---
+    const centerRadius = 80;
+    const boxW = 240;
+    const boxH = 130;
+    
+    // 4 Corners
+    const pos1 = { x: cx - 250, y: cy - 130 }; // Top-Left
+    const pos2 = { x: cx + 250, y: cy - 130 }; // Top-Right
+    const pos3 = { x: cx - 250, y: cy + 130 }; // Bottom-Left
+    const pos4 = { x: cx + 250, y: cy + 130 }; // Bottom-Right
+
+    // --- DRAW ARROWS ---
+    // Calculate start points on the edge of the octagon (approximate with circle for simplicity)
+    function getEdgePoint(fromX, fromY, toX, toY, radius) {
+        const angle = Math.atan2(toY - fromY, toX - fromX);
+        return {
+            x: fromX + radius * Math.cos(angle),
+            y: fromY + radius * Math.sin(angle)
+        };
+    }
+    
+    function getBoxEdge(fromX, fromY, toX, toY, bW, bH) {
+        const angle = Math.atan2(fromY - toY, fromX - toX);
+        // Simple bounding box intersection approximation
+        const dx = Math.cos(angle) * (bW/2 + 10);
+        const dy = Math.sin(angle) * (bH/2 + 10);
+        return { x: toX + dx, y: toY + dy };
+    }
+
+    const p1Start = getEdgePoint(cx, cy, pos1.x, pos1.y, centerRadius);
+    const p1End = getBoxEdge(cx, cy, pos1.x, pos1.y, boxW, boxH);
+    drawArrow(p1Start.x, p1Start.y, p1End.x, p1End.y);
+
+    const p2Start = getEdgePoint(cx, cy, pos2.x, pos2.y, centerRadius);
+    const p2End = getBoxEdge(cx, cy, pos2.x, pos2.y, boxW, boxH);
+    drawArrow(p2Start.x, p2Start.y, p2End.x, p2End.y);
+
+    const p3Start = getEdgePoint(cx, cy, pos3.x, pos3.y, centerRadius);
+    const p3End = getBoxEdge(cx, cy, pos3.x, pos3.y, boxW, boxH);
+    drawArrow(p3Start.x, p3Start.y, p3End.x, p3End.y);
+
+    const p4Start = getEdgePoint(cx, cy, pos4.x, pos4.y, centerRadius);
+    const p4End = getBoxEdge(cx, cy, pos4.x, pos4.y, boxW, boxH);
+    drawArrow(p4Start.x, p4Start.y, p4End.x, p4End.y);
+
+
+    // --- DRAW BOXES ---
+    drawInfoBox(pos1.x, pos1.y, boxW, boxH, ["Nachweis oder Anwendung", "von verbotenen", "Substanzen / Methoden"], drawTestTube);
+    drawInfoBox(pos2.x, pos2.y, boxW, boxH, ["Weigerung,", "sich einer", "Dopingkontrolle zu unterziehen"], drawRefusal);
+    drawInfoBox(pos3.x, pos3.y, boxW, boxH, ["Meldepflichtverstöße", "(Whereabouts Failures)"], drawCalendar);
+    drawInfoBox(pos4.x, pos4.y, boxW, boxH, ["Besitz, Handel", "(Trafficking) oder", "Verabreichung"], drawNoHandshake);
+
+    // --- DRAW CENTER ---
+    drawStopSign(cx, cy, centerRadius);
+
+</script>
+</body>
+</html>

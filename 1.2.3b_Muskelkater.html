@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.2.3b Muskelkater - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Pathology & Cellular Trauma */
+            --bg-body: #0a0a0a;
+            --bg-card: #141414;
+            --bg-surface: #1e1e1e;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            --muscle-red: #ef4444;       /* Healthy tissue */
+            --trauma-red: #991b1b;       /* Damaged tissue */
+            --edema-blue: #0ea5e9;       /* Swelling/Fluid */
+            --pain-yellow: #f59e0b;      /* Nociceptors */
+            
+            --abi-bg: #171717;
+            --abi-gold: #fbbf24;
+            --abi-accent: #f43f5e;
+            
+            --radius-md: 12px;
+            --radius-lg: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 0%, rgba(239, 68, 68, 0.05) 0%, transparent 70%);
+        }
+
+        h1, h2, h3, h4, .micro-font {
+            font-family: 'Syne', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Medical Hero Section --- */
+        .hero {
+            padding: 6rem 0 4rem;
+            text-align: center;
+            border-bottom: 1px solid var(--bg-surface);
+            position: relative;
+        }
+
+        .hero-tag {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: var(--muscle-red);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* --- Intro Block --- */
+        .intro-box {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: var(--radius-md);
+            margin: 4rem 0;
+            border-left: 4px solid var(--text-muted);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            font-size: 1.2rem;
+            color: #cbd5e1;
+        }
+
+        /* --- 1. Laktat Mythos --- */
+        .myth-section {
+            background: linear-gradient(135deg, rgba(153, 27, 27, 0.2) 0%, var(--bg-card) 100%);
+            border: 1px solid var(--trauma-red);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .myth-badge {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: var(--muscle-red);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .myth-section h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .myth-section p {
+            margin-bottom: 1.5rem;
+        }
+
+        .myth-proof {
+            background: rgba(0,0,0,0.3);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--muscle-red);
+        }
+
+        .myth-proof strong {
+            color: var(--muscle-red);
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- 2. Kaskade (Mikrotrauma) --- */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .cascade-wrapper {
+            position: relative;
+            margin-bottom: 6rem;
+        }
+
+        /* Connecting vertical line */
+        .cascade-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 40px;
+            width: 2px; height: 100%;
+            background: var(--bg-surface);
+            z-index: 0;
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-surface);
+            border-radius: var(--radius-md);
+            padding: 2.5rem 2.5rem 2.5rem 6rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateX(10px);
+        }
+
+        .step-card:nth-child(1):hover { border-color: var(--muscle-red); }
+        .step-card:nth-child(2):hover { border-color: var(--edema-blue); }
+        .step-card:nth-child(3):hover { border-color: var(--pain-yellow); }
+
+        .step-number {
+            position: absolute;
+            top: 2.5rem; left: 15px;
+            width: 50px; height: 50px;
+            background: var(--bg-body);
+            border: 2px solid var(--bg-surface);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .step-card:nth-child(1) .step-number { border-color: var(--muscle-red); color: var(--muscle-red); }
+        .step-card:nth-child(2) .step-number { border-color: var(--edema-blue); color: var(--edema-blue); }
+        .step-card:nth-child(3) .step-number { border-color: var(--pain-yellow); color: var(--pain-yellow); }
+
+        .step-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .step-subtitle {
+            display: block;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .step-card:nth-child(1) .step-subtitle { color: var(--muscle-red); }
+        .step-card:nth-child(2) .step-subtitle { color: var(--edema-blue); }
+        .step-card:nth-child(3) .step-subtitle { color: var(--pain-yellow); }
+
+        .trigger-box {
+            background: rgba(255,255,255,0.03);
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            margin-top: 1.5rem;
+            font-size: 1.05rem;
+            border-left: 3px solid var(--text-muted);
+        }
+
+        /* --- Interactive Microscope Canvas --- */
+        .microscope-section {
+            background: #000;
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid #262626;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        .microscope-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: var(--bg-card);
+            color: var(--text-muted);
+            border: 1px solid var(--bg-surface);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            color: white;
+            border-color: #525252;
+        }
+
+        .control-btn.active {
+            background: var(--bg-surface);
+            color: white;
+            border-color: white;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid #333;
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- Premium Abitur Transfer Box --- */
+        .abitur-prep {
+            background: var(--abi-bg);
+            color: #e2e8f0;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            box-shadow: 0 0 40px rgba(251, 191, 36, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-prep::before {
+            content: 'EXAM';
+            position: absolute;
+            font-size: 8rem;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            color: rgba(251, 191, 36, 0.03);
+            top: -20px;
+            right: 0;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: var(--abi-gold);
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #fde68a;
+            margin-bottom: 3rem;
+            font-weight: 400;
+            border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .abi-card {
+            background: rgba(0,0,0,0.3);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card.wrong {
+            border-left-color: var(--muscle-red);
+        }
+        .abi-card.wrong h3 { color: var(--muscle-red); }
+
+        .abi-card.right {
+            border-left-color: #2ecc71;
+        }
+        .abi-card.right h3 { color: #2ecc71; }
+
+        .abi-card p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .abi-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .hl-gold { color: var(--abi-gold); font-weight: 700; }
+        .hl-white { color: white; font-weight: 700; }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="hero-tag">Lernbereich 1.2.3b</span>
+            <h1>Muskelkater (DOMS)</h1>
+            <p>Ursachen und Entstehung auf zellulärer Ebene. Vom historischen Irrtum zum aktuellen sportmedizinischen Konsens.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-box">
+            Der Muskelkater (in der Fachliteratur oft als DOMS – <em>Delayed Onset Muscle Soreness</em> bezeichnet) ist ein ubiquitäres Phänomen im Sport. In der modernen Sportbiologie hat sich das Erklärungsmodell für seine Entstehung fundamental gewandelt. Es ist für das Abitur (eA) <strong>zwingend erforderlich</strong>, die veralteten Hypothesen von den evidenzbasierten, zellulären Ursachen trennen zu können.
+        </div>
+
+        <!-- Section 1: Laktat-Mythos -->
+        <section class="myth-section">
+            <div class="myth-badge">Historischer Irrtum</div>
+            <h2 class="micro-font">1. Die Widerlegung der Laktat-Hypothese</h2>
+            <p>Lange Zeit wurde gelehrt, Muskelkater sei die Folge einer extremen Übersäuerung (hohe Laktatkonzentration) und der Auskristallisierung von Milchsäure im Muskelgewebe. <strong style="color: var(--muscle-red);">Diese Theorie ist falsch und gilt als widerlegt.</strong></p>
+            
+            <div class="myth-proof">
+                <strong>Der biologische Gegenbeweis:</strong>
+                Laktat (das Salz der Milchsäure) wird selbst nach hochintensiven anaeroben Belastungen durch eine funktionierende Durchblutung und aktive Erholung <em>innerhalb von maximal 1 bis 2 Stunden vollständig abgebaut</em> (oxidiert). Der klassische Muskelkater erreicht seinen Schmerz-Höhepunkt jedoch erst nach 24 bis 48 Stunden. <br><br>
+                Zudem entsteht nach einem reinen 400-m-Sprint (maximale Laktatproduktion) weitaus seltener ein Muskelkater als nach einem intensiven Krafttraining (geringe Laktatproduktion, aber extrem hohe mechanische Spannung).
+            </div>
+        </section>
+
+        <!-- Section 2: Die Kaskade -->
+        <div class="section-header">
+            <h2 class="micro-font">2. Die Mikrotrauma-Theorie</h2>
+            <p>Der aktuelle wissenschaftliche Konsens. Die Entstehung verläuft in einer exakten chronologischen Kaskade:</p>
+        </div>
+
+        <div class="cascade-wrapper">
+            
+            <!-- Step 1 -->
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="micro-font">Entstehung von Mikrotraumata</h3>
+                <span class="step-subtitle">Die mechanische Ursache</span>
+                <p>Durch ungewohnte oder extrem hohe mechanische Spannungsspitzen in der Muskulatur kommt es zu kleinsten Rissen (Mikrotraumata) in den sogenannten <strong>Z-Scheiben</strong> der Muskelfibrillen. Die Z-Scheiben sind die strukturellen Begrenzungen der Sarkomere (der kleinsten funktionellen Einheit des Muskels).</p>
+                <div class="trigger-box" style="border-left-color: var(--muscle-red);">
+                    <strong>Auslöser:</strong> Diese Risse entstehen fast ausschließlich durch <span style="color: white; font-weight: bold;">exzentrische Muskelarbeit</span> (nachgebende Kontraktionen), wie etwa beim Abbremsen nach Sprüngen (Volleyball, Zehnkampf) oder beim Bergablaufen. Hier reißt das auseinanderweichende Actin-Myosin-Gefüge die Z-Scheiben physisch auf.
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="micro-font">Entzündungsreaktion & Ödembildung</h3>
+                <span class="step-subtitle">Die biologische Reaktion</span>
+                <p>Die strukturellen Risse verursachen lokale Entzündungsprozesse. Durch die geschädigten Zellmembranen dringt Wasser aus dem umliegenden Gewebe in die Muskelfaser ein. Es entsteht ein <strong>interstitielles Ödem</strong> (eine Wassereinlagerung). Die Muskelfaser schwillt mikroskopisch an und dehnt sich aus.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="micro-font">Schmerzentstehung</h3>
+                <span class="step-subtitle">Der zeitliche Verzug</span>
+                <p>Die Muskelfaser selbst besitzt keine Schmerzrezeptoren. Das erklärt, warum der Schmerz nicht sofort während des Trainings auftritt. Erst wenn die Muskelfaser durch die Ödembildung (Schritt 2) stark anschwillt, dehnt sie die umliegende Bindegewebshülle (Faszie/Endomysium).</p>
+                <div class="trigger-box" style="border-left-color: var(--pain-yellow);">
+                    Dort sitzen die sensiblen Schmerzrezeptoren (Nozizeptoren). Der Druck des Ödems sowie austretende Entzündungsstoffe (wie Prostaglandine) reizen diese Rezeptoren, was nach <strong>ca. 24 bis 48 Stunden</strong> als der typische Muskelkater-Schmerz im zentralen Nervensystem registriert wird.
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Interactive Microscope Canvas -->
+        <section class="microscope-section">
+            <h2 class="micro-font">Elektronenmikroskop: Das Sarkomer</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Verfolge die ultrastrukturellen Veränderungen auf zellulärer Ebene.</p>
+            
+            <div class="controls">
+                <button class="control-btn active" onclick="setStage(0, this)">1: Vor der Belastung</button>
+                <button class="control-btn" onclick="setStage(1, this)">2: Nach exzentrischer Belastung</button>
+                <button class="control-btn" onclick="setStage(2, this)">3: 24-48 Stunden später</button>
+            </div>
+
+            <div class="canvas-container">
+                <canvas id="microscopeCanvas" width="900" height="400"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2 class="micro-font">Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                In Klausuren und im mündlichen Abiturkolloquium (eA) wird das Thema Muskelkater primär herangezogen, um dein Transferwissen in den Bereichen Regeneration und Trainingssteuerung abzuprüfen.
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card wrong">
+                    <h3 class="micro-font">❌ Fehlerhafte Erholungsmaßnahmen bewerten</h3>
+                    <p>In einem Fallbeispiel klagt ein Athlet nach einem harten Maximalkrafttraining am nächsten Tag über starken Muskelkater. Sein Trainer rät ihm zu intensivem statischen Dehnen und einer kräftigen Sportmassage, um "die Muskeln wieder langzuziehen".</p>
+                    <p style="margin-top: 1rem;"><span class="hl-white">Deine Aufgabe ist es, dies als massiven methodischen Fehler zu entlarven!</span></p>
+                    <p>Du musst biologisch argumentieren: Da der Muskelkater durch strukturelle Risse (Mikrotraumata) in den Z-Scheiben verursacht wird, führen starker Zug (Dehnen) oder starker Druck (Massage) lediglich zu einer <strong>Vergrößerung dieser Risse</strong>. Die Gewebeschäden nehmen zu und die Regenerationszeit verlängert sich dramatisch.</p>
+                </div>
+
+                <div class="abi-card right">
+                    <h3 class="micro-font">✅ Sinnvolle Maßnahmen begründen</h3>
+                    <p>Was sollte der Athlet stattdessen tun? Er sollte <strong>aktives Abwärmen</strong> oder leichte Ausdauerbelastungen (z. B. lockeres Schwimmen oder Radfahren) mit sehr geringer Intensität durchführen.</p>
+                    <p style="margin-top: 1rem;"><strong>Die Begründung (Verknüpfung 1.1.6b):</strong> Leichte dynamische Arbeit fördert die Durchblutung und beschleunigt somit den Abtransport der Entzündungsstoffe und des Wassers (Rückgang des Ödems), ohne neue mechanische Risse zu erzeugen.</p>
+                </div>
+
+                <div class="abi-card">
+                    <h3 class="micro-font">🛡️ Prävention</h3>
+                    <p>Wenn du nach trainingsmethodischen Maßnahmen zur Vermeidung gefragt wirst, argumentiere mit dem <span class="hl-gold">Prinzip der ansteigenden Belastung</span>. Muskelkater is oft ein Indiz dafür, dass die Belastungsintensität oder der exzentrische Anteil zu abrupt gesteigert wurde.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        let currentStage = 0; // 0=Intakt, 1=Trauma, 2=Ödem
+        let time = 0;
+        let animationId;
+
+        const canvas = document.getElementById('microscopeCanvas');
+        const ctx = canvas.getContext('2d');
+        const logicalW = 900;
+        const logicalH = 400;
+
+        function setStage(stage, btnElement) {
+            currentStage = stage;
+            document.querySelectorAll('.control-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const dpr = window.devicePixelRatio || 1;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayW = Math.min(rect.width, logicalW);
+                const scale = displayW / logicalW;
+                const displayH = logicalH * scale;
+                
+                canvas.width = displayW * dpr;
+                canvas.height = displayH * dpr;
+                canvas.style.width = `${displayW}px`;
+                canvas.style.height = `${displayH}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // Draw a Z-Disc (vertical zig-zag)
+            function drawZDisc(x, y, height, isDamaged) {
+                const segments = 12;
+                const segH = height / segments;
+                const amplitude = 10;
+                
+                ctx.strokeStyle = '#f8fafc'; // White Z-Line
+                ctx.lineWidth = 4;
+                ctx.lineJoin = 'round';
+                ctx.beginPath();
+                ctx.moveTo(x, y - height/2);
+
+                for (let i = 1; i <= segments; i++) {
+                    let py = y - height/2 + i * segH;
+                    let px = x + (i % 2 === 0 ? amplitude : -amplitude);
+                    
+                    // Add random displacement if damaged
+                    if (isDamaged) {
+                        px += (Math.random() * 15 - 7.5);
+                        if (Math.random() > 0.7) { // gaps
+                            ctx.stroke();
+                            ctx.beginPath();
+                            ctx.moveTo(px, py);
+                        } else {
+                            ctx.lineTo(px, py);
+                        }
+                    } else {
+                        ctx.lineTo(px, py);
+                    }
+                }
+                ctx.stroke();
+            }
+
+            function drawPainReceptor(x, y) {
+                ctx.save();
+                ctx.translate(x, y);
+                // Pulsing scale
+                const scale = 1 + Math.sin(time * 5) * 0.2;
+                ctx.scale(scale, scale);
+                
+                ctx.shadowColor = '#f59e0b';
+                ctx.shadowBlur = 15;
+                ctx.fillStyle = '#f59e0b'; // Pain Yellow
+                
+                // Lightning/Spark shape
+                ctx.beginPath();
+                ctx.moveTo(0, -15);
+                ctx.lineTo(5, -5); ctx.lineTo(15, 0); ctx.lineTo(5, 5);
+                ctx.lineTo(0, 15);
+                ctx.lineTo(-5, 5); ctx.lineTo(-15, 0); ctx.lineTo(-5, -5);
+                ctx.closePath();
+                ctx.fill();
+                
+                ctx.restore();
+            }
+
+            function drawMicroscope() {
+                ctx.clearRect(0, 0, logicalW, logicalH);
+
+                const cx = logicalW / 2;
+                const cy = logicalH / 2;
+                let fiberHeight = 200;
+                let bgColor = '#0a0a0a';
+                let isDamaged = currentStage > 0;
+                
+                // Stage 2: Edema Swelling
+                if (currentStage === 2) {
+                    fiberHeight = 280 + Math.sin(time*2)*5; // swollen & throbbing
+                    
+                    // Background turns blueish to indicate fluid
+                    const grad = ctx.createRadialGradient(cx, cy, 50, cx, cy, logicalW);
+                    grad.addColorStop(0, '#0a0a0a');
+                    grad.addColorStop(1, 'rgba(14, 165, 233, 0.2)'); // Edema Blue
+                    ctx.fillStyle = grad;
+                    ctx.fillRect(0, 0, logicalW, logicalH);
+                } else {
+                    ctx.fillStyle = bgColor;
+                    ctx.fillRect(0, 0, logicalW, logicalH);
+                }
+
+                // Outer Fascia / Endomysium
+                ctx.beginPath();
+                ctx.roundRect(100, cy - fiberHeight/2, logicalW - 200, fiberHeight, 20);
+                if (currentStage === 2) {
+                    ctx.strokeStyle = 'rgba(14, 165, 233, 0.8)'; // Tense, swollen fascia
+                    ctx.lineWidth = 4;
+                    ctx.fillStyle = 'rgba(14, 165, 233, 0.05)';
+                    ctx.fill();
+                } else {
+                    ctx.strokeStyle = '#333';
+                    ctx.lineWidth = 2;
+                }
+                ctx.stroke();
+
+                // Draw Filaments (Actin & Myosin)
+                const z1 = 250;
+                const z2 = 650;
+                
+                // Myosin (Thick red lines)
+                ctx.strokeStyle = '#ef4444';
+                ctx.lineWidth = 8;
+                ctx.lineCap = 'round';
+                for (let i = -3; i <= 3; i++) {
+                    let y = cy + i * 25;
+                    let mX1 = z1 + 80;
+                    let mX2 = z2 - 80;
+                    
+                    if (isDamaged) {
+                        mX1 += (Math.random()*20 - 10);
+                        mX2 += (Math.random()*20 - 10);
+                        y += (Math.random()*6 - 3);
+                    }
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(mX1, y);
+                    ctx.lineTo(mX2, y);
+                    ctx.stroke();
+                }
+
+                // Actin (Thin blue lines attached to Z-discs)
+                ctx.strokeStyle = '#38bdf8';
+                ctx.lineWidth = 3;
+                for (let i = -3.5; i <= 3.5; i++) {
+                    let y = cy + i * 25;
+                    // Left attached to Z1
+                    let aX1_L = z1;
+                    let aX2_L = z1 + 120;
+                    // Right attached to Z2
+                    let aX1_R = z2;
+                    let aX2_R = z2 - 120;
+                    
+                    if (isDamaged) {
+                        aX2_L += (Math.random()*15 - 7.5);
+                        aX2_R += (Math.random()*15 - 7.5);
+                        y += (Math.random()*4 - 2);
+                    }
+
+                    ctx.beginPath(); ctx.moveTo(aX1_L, y); ctx.lineTo(aX2_L, y); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(aX1_R, y); ctx.lineTo(aX2_R, y); ctx.stroke();
+                }
+
+                // Draw Z-Discs
+                drawZDisc(z1, cy, fiberHeight - 40, isDamaged);
+                drawZDisc(z2, cy, fiberHeight - 40, isDamaged);
+
+                // Stage 2: Nociceptors (Pain Receptors firing at the swollen fascia)
+                if (currentStage === 2) {
+                    drawPainReceptor(300, cy - fiberHeight/2);
+                    drawPainReceptor(600, cy - fiberHeight/2);
+                    drawPainReceptor(450, cy + fiberHeight/2);
+                }
+
+                // Status Overlay Text
+                ctx.fillStyle = 'rgba(0,0,0,0.7)';
+                ctx.fillRect(logicalW/2 - 150, logicalH - 50, 300, 40);
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 16px Plus Jakarta Sans';
+                ctx.textAlign = 'center';
+                
+                let statusText = "Zustand 1: Intaktes Sarkomer";
+                if (currentStage === 1) statusText = "Zustand 2: Risse in den Z-Scheiben";
+                if (currentStage === 2) statusText = "Zustand 3: Ödem & Schmerz (DOMS)";
+                
+                ctx.fillText(statusText, cx, logicalH - 25);
+            }
+
+            function animate() {
+                time += 0.05;
+                drawMicroscope();
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

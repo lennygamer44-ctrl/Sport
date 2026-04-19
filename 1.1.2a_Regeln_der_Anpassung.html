@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.2a Regeln der Anpassung - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Magazin-Style Farbpalette (Fokus: Biologie/Natur/Medizin) */
+            --bg-color: #f4f9f9;
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --primary: #008080; /* Teal */
+            --primary-light: #81ecec;
+            --secondary: #2d3436;
+            
+            /* Status Colors für das Modell */
+            --zone-gray: #b2bec3;
+            --zone-yellow: #f1c40f;
+            --zone-green: #2ecc71;
+            --zone-red: #e74c3c;
+
+            /* Abitur Box Colors */
+            --abi-bg: #1e272e;
+            --abi-gold: #ffd32a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.8;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Hero Header im Editorial Style */
+        .editorial-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .editorial-header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--bg-color);
+            transform: skewY(-3deg);
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .chapter-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .editorial-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Intro Text */
+        .lead-paragraph {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            max-width: 900px;
+            margin: 3rem auto 5rem;
+            text-align: justify;
+            font-weight: 600;
+            border-left: 5px solid var(--primary);
+            padding-left: 2rem;
+        }
+
+        /* Asymmetrisches Split-Layout */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .split-section.reverse {
+            grid-template-columns: 1.2fr 0.8fr;
+        }
+
+        @media (max-width: 950px) {
+            .split-section, .split-section.reverse {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .text-content h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        /* Custom List Styling */
+        .custom-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .custom-list li {
+            margin-bottom: 1.5rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            position: relative;
+            padding-left: 2rem;
+            border-left: 6px solid var(--primary);
+        }
+
+        .custom-list li strong {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Spezifische Farben für Reizstufen-Punkte */
+        .custom-list li:nth-child(1) { border-color: var(--zone-gray); }
+        .custom-list li:nth-child(2) { border-color: var(--zone-yellow); }
+        .custom-list li:nth-child(3) { border-color: var(--zone-green); }
+        .custom-list li:nth-child(4) { border-color: var(--zone-red); }
+
+        .custom-list li:nth-child(1) strong { color: #7f8c8d; }
+        .custom-list li:nth-child(2) strong { color: #d35400; }
+        .custom-list li:nth-child(3) strong { color: #27ae60; }
+        .custom-list li:nth-child(4) strong { color: #c0392b; }
+
+        /* Interaktives Canvas Element */
+        .interactive-canvas-wrapper {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,128,128,0.1);
+            text-align: center;
+        }
+
+        .interactive-canvas-wrapper h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            background: #fafafa;
+            border-radius: 10px;
+            border: 1px solid #eee;
+        }
+
+        .slider-container {
+            margin-top: 2rem;
+            background: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .slider-container label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        input[type=range] {
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border-radius: 4px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .dynamic-feedback {
+            margin-top: 1rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Karte für Funktionszustandsregel */
+        .concept-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .concept-card::before {
+            content: '§';
+            position: absolute;
+            top: -20px;
+            right: 30px;
+            font-size: 8rem;
+            color: rgba(0, 128, 128, 0.05);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .concept-block {
+            margin-bottom: 2rem;
+        }
+
+        .concept-block h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ABITUR PREMIUM BOX */
+        .abitur-transfer-box {
+            background: var(--abi-bg);
+            color: white;
+            border-radius: 24px;
+            padding: 4rem;
+            margin: 6rem 0;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border: 2px solid #2f3640;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-transfer-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--abi-gold), #f39c12);
+        }
+
+        .abi-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            box-shadow: 0 0 20px rgba(255, 211, 42, 0.3);
+        }
+
+        .abitur-transfer-box h2 {
+            font-size: 2.5rem;
+            color: var(--abi-gold);
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.2rem;
+            color: #dcdde1;
+            margin-bottom: 3rem;
+        }
+
+        .abi-cases {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 800px) {
+            .abi-cases {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .abi-case {
+            background: rgba(255,255,255,0.03);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .abi-case:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .abi-case h3 {
+            color: var(--abi-gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .abi-case p {
+            color: #bdc3c7;
+            font-size: 1.05rem;
+        }
+
+        .abi-highlight {
+            color: white;
+            font-weight: bold;
+            background: rgba(255, 211, 42, 0.2);
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="editorial-header">
+        <div class="header-content">
+            <span class="chapter-tag">Lernbereich 1.1.2a</span>
+            <h1>Regeln der Anpassung:<br>Reizstufenregel & Funktionszustandsregel</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <p class="lead-paragraph">
+            Die biologische Grundlage jedes Trainingserfolgs ist die Fähigkeit des menschlichen Organismus, sich an veränderte innere und äußere Anforderungen anzupassen (Adaptation). Der Körper strebt stets nach einem dynamischen Gleichgewicht, der sogenannten <strong>Homöostase</strong>. Wird dieses Gleichgewicht durch einen adäquaten Trainingsreiz massiv gestört, reagiert der Körper in der anschließenden Erholungsphase mit einer Wiederherstellung und Überkompensation der Energiereserven sowie strukturellen Anpassungen. Um diese Adaptation gezielt auszulösen, müssen zwei fundamentale biologische Gesetzmäßigkeiten beachtet werden.
+        </p>
+
+        <!-- Rule 1: Split Layout -->
+        <section class="split-section">
+            <div class="text-content">
+                <h2>1. Die Reizstufenregel</h2>
+                <p>Die <em>Anatomische Basisregel nach Roux</em> besagt, dass ein Trainingsreiz eine bestimmte Intensitätsschwelle überschreiten muss, um überhaupt eine physiologische und morphologische Anpassung auszulösen. Die Wirkung eines Reizes ist dabei stark abhängig von seiner relativen Stärke:</p>
+                
+                <ul class="custom-list">
+                    <li>
+                        <strong>Unterschwellige Reize</strong>
+                        Sie bleiben wirkungslos und führen zu keiner Adaptation (z. B. langsames Gehen für einen trainierten Marathonläufer).
+                    </li>
+                    <li>
+                        <strong>Überschwellig schwache Reize</strong>
+                        Sie erhalten lediglich das aktuelle Funktions- und Leistungsniveau, bewirken aber keine Leistungssteigerung (z. B. das routinemäßige Joggen auf immer gleicher Strecke im identischen Tempo).
+                    </li>
+                    <li>
+                        <strong>Überschwellig starke (optimale) Reize</strong>
+                        Sie sind stark genug, um die Homöostase signifikant zu stören und lösen die gewünschten physiologischen und anatomischen Veränderungen (Adaptationen) aus.
+                    </li>
+                    <li>
+                        <strong>Zu starke Reize</strong>
+                        Sie schädigen die Funktion, führen zu einem Leistungsabfall und können in ein manifestes Übertraining oder in Verletzungen münden.
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="interactive-canvas-wrapper">
+                <h3>Physiologische Reizschwellen</h3>
+                <canvas id="reizCanvas" width="500" height="400"></canvas>
+                <div class="slider-container">
+                    <label for="stimulusSlider">Aktive Reizintensität steuern:</label>
+                    <input type="range" id="stimulusSlider" min="0" max="100" value="15">
+                    <div id="feedbackText" class="dynamic-feedback">Bewege den Regler</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rule 2: Reverse Split Layout -->
+        <section class="split-section reverse">
+            <div class="concept-card">
+                <h2>2. Die Funktionszustandsregel</h2>
+                <p style="margin-bottom: 2rem;">Die Funktionszustandsregel beschreibt den Zusammenhang zwischen dem aktuellen Leistungsniveau (Funktionszustand) eines Athleten und dem erforderlichen Trainingsreiz für weitere Leistungssteigerungen.</p>
+                
+                <div class="concept-block">
+                    <h4>Kernthese</h4>
+                    <p>Je höher der aktuelle Trainings- und Leistungszustand eines Sportlers ist, desto größer und spezifischer muss der Trainingsreiz sein, um überhaupt noch eine weitere Anpassung auszulösen.</p>
+                </div>
+                
+                <div class="concept-block">
+                    <h4>Praktische Konsequenz</h4>
+                    <p>Anfänger verzeichnen bei relativ unspezifischem und geringem Training schnelle und immense Leistungsfortschritte. Bei Hochleistungssportlern (z. B. einem Zehnkämpfer) nähert sich die Leistungsfähigkeit der absoluten genetischen Leistungsgrenze an. Sie benötigen einen extrem hohen Trainingsaufwand (Umfang und Intensität) für nur noch marginale Leistungszuwächse.</p>
+                </div>
+            </div>
+            
+            <div class="image-placeholder" style="background: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' viewBox=\'0 0 400 400\'><rect width=\'100%\' height=\'100%\' fill=\'%23e8f3f3\'/><path d=\'M50,350 Q150,350 200,200 T350,50\' stroke=\'%23008080\' stroke-width=\'8\' fill=\'none\'/><circle cx=\'50\' cy=\'350\' r=\'10\' fill=\'%232d3436\'/><circle cx=\'350\' cy=\'50\' r=\'10\' fill=\'%232d3436\'/><text x=\'70\' y=\'330\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%232d3436\'>Anfänger (steile Kurve)</text><text x=\'180\' y=\'70\' font-family=\'sans-serif\' font-size=\'14\' fill=\'%232d3436\'>Profi (flache Kurve)</text></svg>') no-repeat center center; background-size: contain; height: 100%; min-height: 300px;">
+                <!-- Dekorative SVG als visuelle Stütze für das Prinzip -->
+            </div>
+        </section>
+
+        <!-- ABITUR TRANSFER -->
+        <section class="abitur-transfer-box">
+            <div class="abi-title-wrapper">
+                <div class="abi-icon">★</div>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                Der Fachlehrplan (eA) fordert explizit, dass du Gesetzmäßigkeiten sportlichen Trainings erläutern und in der Lage sein musst, diese bei der Trainingsplanung anzuwenden. <strong>Pures Auswendiglernen der Definitionen reicht hier nicht aus.</strong>
+            </p>
+
+            <div class="abi-cases">
+                <div class="abi-case">
+                    <h3>1. Fallanalysen (Freizeitsportler)</h3>
+                    <p>In Klausuren werden oft Fallbeispiele präsentiert. Ein klassisches Szenario ist der Freizeitsportler, der seit Jahren dreimal wöchentlich die gleiche 5-Kilometer-Runde im exakt gleichen Tempo läuft und sich wundert, warum er bei einem Volkslauf seine Zeit nicht verbessern kann.</p>
+                    <p style="margin-top: 1rem;"><strong>Deine Argumentation:</strong> Hier musst du mit der <span class="abi-highlight">Reizstufenregel</span> argumentieren. Sein Training stellt lediglich einen "überschwellig schwachen Reiz" dar, der das Leistungsniveau nur erhält, aber die Homöostase nicht mehr ausreichend stört, um eine Adaptation zu provozieren.</p>
+                </div>
+
+                <div class="abi-case">
+                    <h3>2. Leistungsplateaus erklären</h3>
+                    <p>Wenn eine Leistungssportlerin im Trainingslager stagniert, ist die <span class="abi-highlight">Funktionszustandsregel</span> das Argument der Wahl.</p>
+                    <p style="margin-top: 1rem;"><strong>Deine Argumentation:</strong> Du musst biologisch darlegen, dass ihr Organismus aufgrund des bereits hohen Niveaus stark an die Reize adaptiert ist. Eine weitere Steigerung kann nur durch extrem spezifische oder gänzlich neue Reizkonfigurationen (z. B. drastische Erhöhung der Belastungsintensität oder Änderung der Methode) erreicht werden.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('reizCanvas');
+            const ctx = canvas.getContext('2d');
+            const slider = document.getElementById('stimulusSlider');
+            const feedback = document.getElementById('feedbackText');
+
+            // Responsive
+            function resize() {
+                const container = canvas.parentElement;
+                canvas.width = container.clientWidth - 40;
+                canvas.height = 350;
+                draw();
+            }
+
+            window.addEventListener('resize', resize);
+            slider.addEventListener('input', draw);
+
+            // Zonen-Definitionen (Prozentuale Anteile der X-Achse)
+            const zones = [
+                { id: 'gray', limit: 30, color: '#b2bec3', bg: 'rgba(178, 190, 195, 0.2)', label: 'Unterschwellig', effect: 'Keine Adaptation' },
+                { id: 'yellow', limit: 50, color: '#f1c40f', bg: 'rgba(241, 196, 15, 0.2)', label: 'Schwach', effect: 'Erhaltung' },
+                { id: 'green', limit: 85, color: '#2ecc71', bg: 'rgba(46, 204, 113, 0.2)', label: 'Optimal (Stark)', effect: 'Adaptation / Leistungssteigerung' },
+                { id: 'red', limit: 100, color: '#e74c3c', bg: 'rgba(231, 76, 60, 0.2)', label: 'Zu stark', effect: 'Schädigung / Übertraining' }
+            ];
+
+            function draw() {
+                const w = canvas.width;
+                const h = canvas.height;
+                const val = parseInt(slider.value);
+
+                ctx.clearRect(0, 0, w, h);
+
+                // Zeichne die Zonen (Hintergründe)
+                let currentX = 0;
+                zones.forEach(zone => {
+                    const zoneWidth = (zone.limit / 100) * w - currentX;
+                    ctx.fillStyle = zone.bg;
+                    ctx.fillRect(currentX, 0, zoneWidth, h);
+                    
+                    // Zeichne Trennlinien
+                    ctx.beginPath();
+                    ctx.moveTo(currentX + zoneWidth, 0);
+                    ctx.lineTo(currentX + zoneWidth, h);
+                    ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // Label oben
+                    ctx.fillStyle = '#2d3436';
+                    ctx.font = 'bold 12px Nunito';
+                    ctx.textAlign = 'center';
+                    // Text zentriert in der jeweiligen Zone
+                    ctx.fillText(zone.label, currentX + (zoneWidth / 2), 25);
+
+                    currentX += zoneWidth;
+                });
+
+                // Zeichne die "Leistungskurve / Wirkungsebene"
+                ctx.beginPath();
+                ctx.moveTo(0, h - 50); // Start flat
+                
+                // Curve logic based on zones
+                const x30 = w * 0.30;
+                const x50 = w * 0.50;
+                const x85 = w * 0.85;
+
+                ctx.lineTo(x30, h - 50); // Flat in gray
+                ctx.quadraticCurveTo(x50, h - 50, x50, h - 80); // Slight rise in yellow
+                ctx.quadraticCurveTo(x85 - (x85-x50)/2, h - 250, x85, h - 200); // Peak in green
+                ctx.lineTo(w, h - 20); // Crash in red
+
+                ctx.strokeStyle = '#2d3436';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+                // Zeichne den aktuellen Reiz-Indikator (Vertikale Linie + Marker)
+                const indicatorX = (val / 100) * w;
+                
+                ctx.beginPath();
+                ctx.moveTo(indicatorX, 0);
+                ctx.lineTo(indicatorX, h);
+                ctx.strokeStyle = '#2d3436';
+                ctx.setLineDash([5, 5]);
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.setLineDash([]); // Reset dash
+
+                // Marker Kreis auf der Linie
+                // Einfache Annäherung der Y-Position für den Kreis
+                let circleY = h - 50;
+                if (val > 30 && val <= 50) {
+                    const ratio = (val - 30) / 20;
+                    circleY = (h - 50) - (ratio * 30);
+                } else if (val > 50 && val <= 85) {
+                    // Parabola-like peak
+                    const peakX = 67.5; // mid of 50 and 85
+                    const maxH = 250;
+                    if(val <= peakX) {
+                        const ratio = (val - 50) / 17.5;
+                        circleY = (h - 80) - (ratio * (maxH-80));
+                    } else {
+                        const ratio = (val - peakX) / 17.5;
+                        circleY = (h - maxH) + (ratio * (maxH-200));
+                    }
+                } else if (val > 85) {
+                    const ratio = (val - 85) / 15;
+                    circleY = (h - 200) + (ratio * 180);
+                }
+
+                ctx.beginPath();
+                ctx.arc(indicatorX, circleY, 8, 0, Math.PI * 2);
+                ctx.fillStyle = '#2d3436';
+                ctx.fill();
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Update Feedback Text & Colors
+                let activeZone = zones[0];
+                if (val > 30) activeZone = zones[1];
+                if (val > 50) activeZone = zones[2];
+                if (val > 85) activeZone = zones[3];
+
+                feedback.textContent = `Wirkung: ${activeZone.effect}`;
+                feedback.style.backgroundColor = activeZone.color;
+                feedback.style.color = (activeZone.id === 'yellow') ? '#2d3436' : 'white';
+            }
+
+            // Init
+            resize();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Dehnmethoden und Übungsformen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: 'Cinzel' for elegant, authoritative headers, 'Inter' for clean reading -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Cinzel', 'serif'],
+                    },
+                    colors: {
+                        flow: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            400: '#fb7185',
+                            500: '#f43f5e', // Coral/Rose
+                            600: '#e11d48',
+                        },
+                        hold: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            400: '#38bdf8',
+                            500: '#06b6d4', // Aqua/Cyan
+                            600: '#0891b2',
+                        },
+                        pnf: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            400: '#c084fc',
+                            500: '#a855f7', // Purple/Royal
+                            600: '#9333ea',
+                        },
+                        slate: {
+                            850: '#152033',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                            vault: '#171717',
+                        }
+                    },
+                    boxShadow: {
+                        'zen': '0 20px 50px -20px rgba(0, 0, 0, 0.1)',
+                        'glow-flow': '0 0 30px rgba(244, 63, 94, 0.2)',
+                        'glow-hold': '0 0 30px rgba(6, 182, 212, 0.2)',
+                        'glow-pnf': '0 0 30px rgba(168, 85, 247, 0.2)',
+                        'vault': '0 25px 50px -12px rgba(245, 158, 11, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Method Cards */
+        .method-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid #f1f5f9;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .method-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Decorative background blurred circles */
+        .bg-blur {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        /* Table Design */
+        .method-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+        .method-table th {
+            background: #0f172a;
+            color: white;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 1.5rem;
+            text-align: left;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        .method-table td {
+            padding: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            border-right: 1px dashed #e2e8f0;
+            vertical-align: top;
+            font-size: 0.95rem;
+        }
+        .method-table tr:hover td { background-color: #f8fafc; }
+
+        /* Canvas Container */
+        .canvas-wrapper {
+            background: #020617;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            box-shadow: inset 0 0 40px rgba(168, 85, 247, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Abitur Vault Box */
+        .abitur-vault {
+            background: linear-gradient(135deg, #171717 0%, #000000 100%);
+            border: 1px solid #b45309;
+            border-top: 6px solid #f59e0b;
+            color: #f8fafc;
+            position: relative;
+        }
+
+        .drop-cap::first-letter {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            float: left;
+            margin-right: 0.5rem;
+            color: #0f172a;
+            padding-top: 0.2rem;
+        }
+    </style>
+</head>
+<body class="leading-relaxed py-10 px-4 sm:px-6 relative overflow-x-hidden">
+
+    <!-- Ambient Background Colors -->
+    <div class="bg-blur w-[500px] h-[500px] bg-flow-500 top-[5%] left-[-100px]"></div>
+    <div class="bg-blur w-[600px] h-[600px] bg-hold-500 top-[40%] right-[-150px]"></div>
+    <div class="bg-blur w-[700px] h-[700px] bg-pnf-500 bottom-[5%] left-[20%]"></div>
+
+    <div class="max-w-6xl mx-auto space-y-16 relative z-10">
+        
+        <!-- Header -->
+        <header class="bg-white/80 backdrop-blur-xl rounded-[2rem] p-8 md:p-14 shadow-zen border border-white relative overflow-hidden">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-slate-900 text-white font-bold px-4 py-1.5 rounded-full text-sm font-sans tracking-widest uppercase">1.7.3a</span>
+                <span class="text-slate-600 font-bold tracking-widest text-xs uppercase border border-slate-300 px-3 py-1.5 rounded-full">Methodik</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-slate-900 mb-6 leading-[1.1]">
+                Trainingsmethoden der <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-flow-500 via-hold-500 to-pnf-500">Beweglichkeit</span>
+            </h1>
+            
+            <div class="max-w-4xl">
+                <p class="text-lg text-slate-700 leading-relaxed drop-cap mb-6">
+                    Das Beweglichkeitstraining bedient sich unterschiedlicher Dehnmethoden, die je nach sportlichem Ziel, Zeitpunkt im Trainingsprozess (Aufwärmen vs. Abwärmen) und physiologischer Zielsetzung gezielt ausgewählt werden müssen.
+                </p>
+                <div class="bg-slate-50 border-l-4 border-slate-900 p-5 rounded-r-xl">
+                    <p class="text-slate-900 font-medium">
+                        In der Trainingswissenschaft differenziert man primär zwischen <strong>dynamischen</strong>, <strong>statischen</strong> und <strong>neuromuskulären (PNF)</strong> Methoden, die wiederum aktiv oder passiv ausgeführt werden können.
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Method 1: Dynamisch -->
+        <section class="relative">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-14 rounded-full bg-flow-50 flex items-center justify-center text-flow-500 shadow-glow-flow">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900">1. Dynamisches Dehnen</h2>
+                    <p class="text-flow-600 font-medium tracking-wide uppercase text-sm">Schwunggymnastik</p>
+                </div>
+            </div>
+            <p class="text-slate-600 mb-6 text-lg max-w-3xl">
+                Die Gelenkstellung wird durch weiche, rhythmische, federnde oder schwungvolle Bewegungen fortlaufend verändert.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <!-- Aktiv-Dynamisch -->
+                <article class="method-card p-8 border-t-4 border-t-flow-500">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-flow-500"></span> Aktiv-dynamisch
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                        Der Athlet nutzt die Kontraktionskraft seiner Agonisten, um das Gelenk in die Dehnposition zu führen (z. B. schwungvolles Beinkreisen oder Kniehebeläufe).
+                    </p>
+                    <div class="bg-flow-50 p-4 rounded-xl border border-flow-100">
+                        <strong class="text-flow-600 text-xs uppercase tracking-wider block mb-1">Physiologische Wirkung & Vorteil</strong>
+                        <p class="text-sm text-slate-700">Erhöht lokale Durchblutung und Körperkerntemperatur massiv. Optimiert intermuskuläre Koordination. <strong>Entscheidend:</strong> Die Gewebeviskosität sinkt, <em>während die Schnellkraft- und Reaktivkraftfähigkeit erhalten bleibt</em> (da der Ruhetonus nicht herabgesetzt wird).</p>
+                    </div>
+                </article>
+
+                <!-- Passiv-Dynamisch -->
+                <article class="method-card p-8 border-t-4 border-t-flow-300">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-flow-300"></span> Passiv-dynamisch
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                        Ein Partner drückt rhythmisch federnd in die Dehnposition.
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <strong class="text-slate-500 text-xs uppercase tracking-wider block mb-1">Kritik & Risiko</strong>
+                        <p class="text-sm text-slate-700">Wird in der modernen Lehre kritisch gesehen. Bei zu schnellen/unkontrollierten Rucken lösen die <strong>Muskelspindeln den Dehnungsreflex</strong> aus. Der Muskel kontrahiert reflektorisch (Schutz vor Riss). Bei gleichzeitiger äußerer Gewalteinwirkung drohen <em>Mikrotraumata</em> (feine Risse in den Sarkomeren).</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Method 2: Statisch -->
+        <section class="relative">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-14 rounded-full bg-hold-50 flex items-center justify-center text-hold-500 shadow-glow-hold">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900">2. Statisches Dehnen</h2>
+                    <p class="text-hold-600 font-medium tracking-wide uppercase text-sm">Stretching</p>
+                </div>
+            </div>
+            <p class="text-slate-600 mb-6 text-lg max-w-3xl">
+                Langsames, kontrolliertes Einnehmen einer Dehnposition, die ohne weitere Bewegung über einen Zeitraum (10–30 Sekunden) gehalten wird.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <!-- Aktiv-Statisch -->
+                <article class="method-card p-8 border-t-4 border-t-hold-500">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-hold-500"></span> Aktiv-statisch
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                        Endposition wird ausschließlich durch die Kraft der Gegenspieler (Antagonisten) gehalten.
+                    </p>
+                    <div class="bg-hold-50 p-4 rounded-xl border border-hold-100">
+                        <strong class="text-hold-600 text-xs uppercase tracking-wider block mb-1">Reziproke Hemmung</strong>
+                        <p class="text-sm text-slate-700">Wenn das ZNS den Agonisten maximal kontrahiert, hemmt es gleichzeitig den Antagonisten (den zu dehnenden Muskel), damit dieser der Gelenkbewegung nicht im Weg steht.</p>
+                    </div>
+                </article>
+
+                <!-- Passiv-Statisch -->
+                <article class="method-card p-8 border-t-4 border-t-hold-300">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-hold-300"></span> Passiv-statisch
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                        Endposition wird mithilfe der Schwerkraft, eines Partners oder eines Geräts gehalten (z. B. Spagat).
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <strong class="text-slate-500 text-xs uppercase tracking-wider block mb-1">Autogene Hemmung & Limitation</strong>
+                        <p class="text-sm text-slate-700 mb-2">Die <strong>Golgi-Sehnenorgane</strong> messen die hohe Zugbelastung und lösen nach einigen Sekunden eine <em>reflektorische Entspannung (Tonusabfall)</em> aus. Man sinkt tiefer in die Dehnung.</p>
+                        <p class="text-xs text-red-600 font-medium">⚠️ Limitation: Durch den Tonusabfall verliert der Muskel temporär seine Fähigkeit, maximal explosiv zu kontrahieren (Kontraproduktiv vor Schnellkraft-Wettkämpfen!).</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Method 3: PNF & Canvas -->
+        <section class="relative">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-14 rounded-full bg-pnf-50 flex items-center justify-center text-pnf-500 shadow-glow-pnf">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900">3. PNF-Methoden</h2>
+                    <p class="text-pnf-600 font-medium tracking-wide uppercase text-sm">Die Königsklasse</p>
+                </div>
+            </div>
+            
+            <p class="text-slate-600 mb-8 text-lg max-w-4xl">
+                Propriozeptive Neuromuskuläre Fazilitation. Diese Methoden machen sich die neurophysiologischen Schutzreflexe des Körpers aktiv zunutze, um maximale Reichweitensteigerungen zu erzielen. Die bekannteste Subkategorie ist die <strong>CHRS-Methode</strong>.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- CHRS Phasen -->
+                <div class="lg:col-span-5 space-y-4">
+                    <h3 class="font-bold text-slate-900 text-xl mb-4">Der 4-Phasen-Ablauf (CHRS)</h3>
+                    
+                    <div class="bg-white p-4 rounded-xl border-l-4 border-slate-900 shadow-sm">
+                        <strong class="text-slate-900 block">C - Contract (Anspannen)</strong>
+                        <p class="text-sm text-slate-600 mt-1">Muskel wird in vorgedehnter Position (ca. 5-10s) <em>maximal isometrisch</em> angespannt (z. B. gegen Partner).</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-xl border-l-4 border-slate-700 shadow-sm">
+                        <strong class="text-slate-900 block">H - Hold (Halten)</strong>
+                        <p class="text-sm text-slate-600 mt-1">Isometrische Anspannung halten. <em>Effekt:</em> Extrem hohe Spannung reizt die Golgi-Sehnenorgane maximal.</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-xl border-l-4 border-pnf-400 shadow-sm">
+                        <strong class="text-pnf-600 block">R - Relax (Entspannen)</strong>
+                        <p class="text-sm text-slate-600 mt-1">Anspannung für 2-3s lösen. <em>Effekt:</em> Aktivierte autogene Hemmung schaltet den Muskeltonus drastisch ab (Refraktivphase).</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-xl border-l-4 border-pnf-600 shadow-sm">
+                        <strong class="text-pnf-700 block">S - Stretch (Dehnen)</strong>
+                        <p class="text-sm text-slate-600 mt-1">Sofort statisch dehnen. <em>Effekt:</em> Da Tonus neurophysiologisch ausgeschaltet ist, lässt sich Gelenk extrem weit bewegen.</p>
+                    </div>
+                </div>
+
+                <!-- Canvas Visualisierung -->
+                <div class="lg:col-span-7">
+                    <div class="canvas-wrapper p-6 w-full h-full flex flex-col">
+                        <h4 class="text-white font-serif font-bold text-xl mb-2">Neurophysiologische Tonus-Kurve</h4>
+                        <p class="text-pnf-400 text-sm mb-6">Simulation des Muskeltonus während der CHRS-Phase</p>
+                        
+                        <div class="relative flex-grow">
+                            <canvas id="pnfCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- KI 2 Task: Comparison Table -->
+        <section class="mt-16">
+            <h2 class="text-3xl font-serif font-bold text-slate-900 mb-8">Systematischer Methodenvergleich</h2>
+            
+            <div class="overflow-x-auto shadow-zen rounded-[1rem] border border-slate-200">
+                <table class="method-table min-w-[800px]">
+                    <thead>
+                        <tr>
+                            <th class="w-1/4">Methode</th>
+                            <th class="w-1/4">Ausführung</th>
+                            <th class="w-1/4">Neurophysiologischer Effekt</th>
+                            <th class="w-1/4">Auswirkung auf Muskeltonus</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-700">
+                        <tr>
+                            <td>
+                                <strong class="text-flow-600 block text-lg font-sans">Dynamisch</strong>
+                                <span class="text-xs text-slate-500">(Schwunggymnastik)</span>
+                            </td>
+                            <td>
+                                <span class="bg-slate-100 text-slate-800 px-2 py-1 rounded text-xs font-bold mb-2 inline-block">Fortlaufende Bewegung</span><br>
+                                Schwungvolle, federnde oder rhythmische Ausführung.
+                            </td>
+                            <td>
+                                <span class="text-flow-600 font-semibold">Intermuskuläre Koordination</span>. Optimiert Zusammenspiel von Agonist und Antagonist. Erhöht Kerntemperatur.
+                            </td>
+                            <td>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">Bleibt erhalten (Hoch)</span><br>
+                                Ruhetonus wird <em>nicht</em> herabgesetzt. Ideal vor Schnellkraftbelastungen.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong class="text-hold-600 block text-lg font-sans">Statisch</strong>
+                                <span class="text-xs text-slate-500">(Stretching)</span>
+                            </td>
+                            <td>
+                                <span class="bg-slate-100 text-slate-800 px-2 py-1 rounded text-xs font-bold mb-2 inline-block">Halten (10-30 Sek.)</span><br>
+                                Langsames Einnehmen der Endposition. Keine Gelenkbewegung (isometrisch).
+                            </td>
+                            <td>
+                                Löst nach einigen Sekunden die <span class="text-hold-600 font-semibold">Autogene Hemmung</span> (via Golgi-Sehnenorgane) aus.
+                            </td>
+                            <td>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-bold">Wird gesenkt</span><br>
+                                Eigenspannung sinkt reflektorisch. Explosivkraft kurzzeitig gemindert.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong class="text-pnf-600 block text-lg font-sans">PNF (CHRS)</strong>
+                                <span class="text-xs text-slate-500">(Neuromuskulär)</span>
+                            </td>
+                            <td>
+                                <span class="bg-slate-100 text-slate-800 px-2 py-1 rounded text-xs font-bold mb-2 inline-block">Anspannen - Entspannen - Dehnen</span><br>
+                                4 Phasen. Kontraktion gegen Widerstand, kurzes Lösen, dann tiefer Stretch.
+                            </td>
+                            <td>
+                                <span class="text-pnf-600 font-semibold">Maximale Ausnutzung der Golgi-Rezeptoren.</span> Überlistet Schutzreflexe des ZNS.
+                            </td>
+                            <td>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-bold">Wird maximal gehemmt</span><br>
+                                Tonus wird in Refraktivphase fast komplett "ausgeschaltet".
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Abitur Premium Box (Vault) -->
+        <section class="abitur-vault rounded-[2rem] p-8 md:p-14 shadow-vault mt-20 relative overflow-hidden">
+            <!-- Background Graphic -->
+            <svg class="absolute -right-20 top-0 w-96 h-96 opacity-10 text-abitur pointer-events-none transform rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-12 border-b border-slate-800 pb-8">
+                    <div class="bg-gradient-to-br from-yellow-400 to-yellow-600 text-slate-900 p-5 rounded-2xl shadow-lg">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-5xl font-serif font-bold text-white tracking-tight mb-2">Abitur-Transfer & Praxis</h2>
+                        <div class="inline-flex items-center gap-3">
+                            <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">eA-Niveau</span>
+                            <span class="text-abitur font-medium text-lg">Neurophysiologische Begründungen</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-lg text-slate-300 font-medium mb-10 leading-relaxed max-w-4xl">
+                    In den Klausuren des erhöhten Anforderungsniveaus wird reines Faktenwissen zu den Dehnmethoden nicht isoliert abgefragt. Das Kultusministerium fordert stets eine biomechanische oder neurophysiologische Begründung der Methoden!
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    
+                    <!-- Transfer 1 -->
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800 hover:border-abitur/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-abitur/20 text-abitur flex items-center justify-center text-sm font-serif">1</span>
+                            Die Überlegenheit der PNF-Methode
+                        </h3>
+                        <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                            <strong>Standardaufgabe:</strong> Begründe, warum PNF dem statischen Dehnen überlegen ist. <em>Vermeide Trivialitäten wie "Das macht den Muskel weicher".</em>
+                        </p>
+                        <strong class="text-abitur block mb-2 text-sm uppercase tracking-wide">Die Kausalkette der Rezeptoren:</strong>
+                        <div class="text-sm text-slate-300 space-y-2 border-l-2 border-slate-600 pl-4">
+                            <p>Die vorgeschaltete isometrische Maximalkontraktion überschreitet die Reizschwelle der Golgi-Sehnenorgane massiv.</p>
+                            <p>Dies erzwingt über das Rückenmark eine <strong>reflektorische autogene Hemmung</strong> des Muskels.</p>
+                            <p>Nur durch diesen neurophysiologischen Trick (Überlisten der Eigenspannung) kann danach eine extreme Amplitude erreicht werden, ohne dass die Muskelspindeln den gegensteuernden Dehnungsreflex auslösen!</p>
+                        </div>
+                    </div>
+
+                    <!-- Transfer 2 -->
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800 hover:border-abitur/50 transition-colors">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-abitur/20 text-abitur flex items-center justify-center text-sm font-serif">2</span>
+                            Differenzierung der Subkategorien
+                        </h3>
+                        <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                            <strong>Fallanalyse:</strong> Welches Beweglichkeitstraining wählst du für einen Kampfsportler (Karateka, hohe schnelle Kicks)?
+                        </p>
+                        <strong class="text-abitur block mb-2 text-sm uppercase tracking-wide">Die Methodische Begründung:</strong>
+                        <div class="text-sm text-slate-300 space-y-2 border-l-2 border-slate-600 pl-4">
+                            <p>Ein passiv-statisches Dehnen (Spagat halten) vergrößert zwar die <em>anatomische Reserve</em>...</p>
+                            <p>... für den Kick im Wettkampf MUSS aber zwingend die <strong>aktiv-dynamische Beweglichkeit</strong> geschult werden (Schwunggymnastik der Beine).</p>
+                            <p>Warum? Weil die Dehnposition im Wettkampf explosiv und <strong>ausschließlich aus eigener Muskelkraft</strong> (Kraft des Agonisten) erreicht werden muss!</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="mt-16 pt-8 pb-12 text-center border-t border-slate-200 relative z-10">
+        <p class="font-serif font-bold text-slate-800 uppercase tracking-widest text-sm mb-1">Abiturwissen Sport (G9, eA)</p>
+        <p class="text-slate-500 font-sans text-sm">Lernbereich 1.7.3a Trainingsmethoden der Beweglichkeit</p>
+    </footer>
+
+    <!-- Interactive Canvas Logic: CHRS Tonus Graph -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('pnfCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let time = 0;
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time += 0.03;
+
+                // Loop simulation every ~10 seconds
+                const simTime = time % 10; 
+                
+                // Graph Layout
+                const pL = 50;
+                const pR = 30;
+                const pT = 30;
+                const pB = 40;
+                const gw = w - pL - pR;
+                const gh = h - pT - pB;
+
+                // Phases (Timeline mapping)
+                // 0-2s: Prepare (Tonus normal)
+                // 2-5s: Contract & Hold (Tonus max)
+                // 5-6s: Relax (Tonus plummets)
+                // 6-10s: Stretch (Tonus low, length increases)
+
+                // Draw Grid
+                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(pL, pT); ctx.lineTo(pL, h - pB); // Y Axis
+                ctx.moveTo(pL, h - pB); ctx.lineTo(w - pR, h - pB); // X Axis
+                ctx.stroke();
+
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '10px "Inter"';
+                ctx.textAlign = 'right';
+                ctx.fillText('Max. Spannung', pL - 10, pT + 10);
+                ctx.fillText('Ruhetonus', pL - 10, h - pB - 30);
+                ctx.fillText('Hemmung (0)', pL - 10, h - pB);
+                
+                ctx.textAlign = 'center';
+                ctx.fillText('Zeit (s)', w/2, h - pB + 30);
+
+                // Draw Phase Areas
+                function drawPhase(startT, endT, color, label) {
+                    const sx = pL + (startT/10) * gw;
+                    const ex = pL + (endT/10) * gw;
+                    
+                    ctx.fillStyle = color + '20';
+                    ctx.fillRect(sx, pT, ex - sx, gh);
+                    
+                    ctx.fillStyle = color;
+                    ctx.font = 'bold 11px "Inter"';
+                    ctx.fillText(label, sx + (ex-sx)/2, pT - 10);
+                }
+
+                drawPhase(0, 2, '#64748b', 'PREP');
+                drawPhase(2, 5, '#ef4444', 'C / H'); // Contract/Hold
+                drawPhase(5, 6, '#3b82f6', 'R'); // Relax
+                drawPhase(6, 10, '#a855f7', 'STRETCH'); // Stretch
+
+                // Data Functions
+                // Y goes from 0 (bottom) to 100 (top)
+                function getTonus(t) {
+                    if (t < 2) return 20; // Ruhetonus
+                    if (t >= 2 && t < 2.5) return 20 + ((t-2)/0.5) * 70; // Ramp up
+                    if (t >= 2.5 && t < 5) return 90 + Math.sin(t*20)*2; // Hold max (wobble)
+                    if (t >= 5 && t < 5.5) return 90 - ((t-5)/0.5) * 85; // Sharp drop
+                    if (t >= 5.5) return 5; // Deep inhibition
+                    return 20;
+                }
+
+                // Draw Line
+                ctx.beginPath();
+                ctx.strokeStyle = '#a855f7'; // Purple line
+                ctx.lineWidth = 3;
+                
+                for(let t=0; t<=simTime; t+=0.05) {
+                    let x = pL + (t/10) * gw;
+                    let val = getTonus(t);
+                    let y = pT + gh - (val/100) * gh;
+                    
+                    if (t===0) ctx.moveTo(x,y);
+                    else ctx.lineTo(x,y);
+                }
+                
+                ctx.shadowColor = '#a855f7';
+                ctx.shadowBlur = 10;
+                ctx.stroke();
+
+                // Draw leading dot
+                if (simTime > 0) {
+                    let endX = pL + (simTime/10) * gw;
+                    let endY = pT + gh - (getTonus(simTime)/100) * gh;
+                    
+                    ctx.fillStyle = '#ffffff';
+                    ctx.beginPath(); ctx.arc(endX, endY, 5, 0, Math.PI*2); ctx.fill();
+                    
+                    // Value readout
+                    ctx.fillStyle = '#a855f7';
+                    ctx.textAlign = 'left';
+                    ctx.fillText('Muskeltonus', endX + 10, endY);
+                }
+                ctx.shadowBlur = 0;
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

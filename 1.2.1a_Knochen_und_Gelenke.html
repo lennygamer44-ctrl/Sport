@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.2.1a Knochen und Gelenke - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Anatomy Atlas / X-Ray Mode */
+            --bg-deep: #0f172a;        /* Slate 900 */
+            --bg-card: #1e293b;        /* Slate 800 */
+            --bg-element: #334155;     /* Slate 700 */
+            
+            --text-main: #f8fafc;      /* Slate 50 */
+            --text-muted: #cbd5e1;     /* Slate 300 */
+            
+            --bone-white: #f1f5f9;     /* Slate 100 */
+            --xray-cyan: #22d3ee;      /* Cyan 400 */
+            --marrow-red: #f43f5e;     /* Rose 500 */
+            --cartilage-blue: #38bdf8; /* Light Blue 400 */
+            
+            --abi-gold: #fbbf24;       /* Amber 400 */
+            --abi-bg: #1e1b4b;         /* Indigo 900 */
+            
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow-glow: 0 0 25px rgba(34, 211, 238, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            /* Subtle grid background for clinical look */
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        h1, h2, h3, .atlas-font {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.5px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- X-Ray Hero Header --- */
+        .hero {
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            border-bottom: 1px solid var(--bg-element);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-tag {
+            background: transparent;
+            color: var(--xray-cyan);
+            border: 1px solid var(--xray-cyan);
+            padding: 0.4rem 1.2rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--bone-white);
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* --- Intro Block --- */
+        .intro-text {
+            background: var(--bg-card);
+            padding: 2.5rem 3rem;
+            border-radius: var(--radius-md);
+            margin: 4rem auto;
+            border-left: 4px solid var(--xray-cyan);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* --- Custom Section Titles --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 5rem 0 2rem;
+        }
+
+        .section-num {
+            color: var(--bg-deep);
+            background: var(--xray-cyan);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+        }
+
+        .section-header h2 {
+            font-size: 2.4rem;
+            color: var(--bone-white);
+            margin: 0;
+        }
+
+        /* --- 1. Röhrenknochen (Grid) --- */
+        .bone-intro {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+
+        .anatomy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 850px) {
+            .anatomy-grid { grid-template-columns: 1fr; }
+        }
+
+        .anatomy-card {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-element);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+        }
+
+        .anatomy-card:hover {
+            border-color: var(--xray-cyan);
+            background: #233044;
+        }
+
+        .anatomy-card h3 {
+            color: var(--xray-cyan);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .anatomy-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Highlight specific colors in cards */
+        .anatomy-card.diaphyse h3 { color: var(--bone-white); }
+        .anatomy-card.epiphyse h3 { color: var(--marrow-red); }
+        .anatomy-card.knorpel h3 { color: var(--cartilage-blue); }
+        .anatomy-card.periost h3 { color: #a78bfa; }
+
+        /* --- 2. Allgemeiner Gelenkaufbau (List) --- */
+        .joint-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .joint-list li {
+            background: linear-gradient(90deg, var(--bg-card) 0%, transparent 100%);
+            padding: 1.5rem 2rem;
+            border-left: 3px solid var(--xray-cyan);
+            border-radius: 4px;
+        }
+
+        .joint-list h3 {
+            color: var(--bone-white);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .joint-list p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* --- 3. Gelenktypen --- */
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 950px) {
+            .types-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 550px) {
+            .types-grid { grid-template-columns: 1fr; }
+        }
+
+        .type-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 3px solid var(--bg-element);
+        }
+
+        .type-card h3 {
+            color: var(--xray-cyan);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .type-card .dof {
+            display: inline-block;
+            background: var(--bg-element);
+            color: var(--bone-white);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .type-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Canvas Wrapper --- */
+        .canvas-section {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid var(--bg-element);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .canvas-section h2 {
+            text-align: center;
+            color: var(--xray-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p.subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            background: var(--bg-deep);
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-transfer {
+            background: linear-gradient(145deg, var(--abi-bg), #2e1065);
+            color: #e2e8f0;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-transfer::before {
+            content: 'EXAM';
+            position: absolute;
+            font-size: 8rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            color: rgba(255,255,255,0.03);
+            top: -20px;
+            right: 0;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: var(--abi-gold);
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #fde68a;
+            margin-bottom: 3rem;
+            font-weight: 400;
+            border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .abi-card {
+            background: rgba(0,0,0,0.2);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .abi-card.alert {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .abi-card p {
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .hl-gold { color: var(--abi-gold); font-weight: 700; }
+        .hl-red { color: #fca5a5; font-weight: 700; }
+
+        .hidden-word {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="chapter-tag">Lernbereich 1.2.1a</span>
+            <h1>Knochen und Gelenke</h1>
+            <p>Röhrenknochen, allgemeiner Gelenkaufbau und Gelenktypen. Die anatomischen Grundlagen des passiven Bewegungsapparates.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-text">
+            Der passive Bewegungsapparat bildet das stützende und schützende Gerüst des menschlichen Körpers und stellt das Hebelwerkzeug dar, an dem der aktive Bewegungsapparat (die Muskulatur) ansetzt, um Bewegungen zu generieren. Im Zentrum stehen dabei die Knochen und deren bewegliche Verbindungen, die Gelenke.
+        </div>
+
+        <!-- Section 1: Röhrenknochen -->
+        <div class="section-header">
+            <div class="section-num">1</div>
+            <h2>Röhrenknochen</h2>
+        </div>
+        <p class="bone-intro">Röhrenknochen (Ossa longa) bilden die wesentlichen Stütz- und Hebelelemente der Extremitäten (z. B. Oberschenkelknochen/Femur, Oberarmknochen/Humerus). Ihr Aufbau vereint maximale Stabilität mit minimalem Gewicht:</p>
+
+        <div class="anatomy-grid">
+            <div class="anatomy-card diaphyse">
+                <h3>Diaphyse (Knochenschaft)</h3>
+                <p>Der mittlere Teil des Knochens. Er besteht aus einer harten, dichten Knochenrinde (Substantia compacta) und umschließt die Markhöhle, in der sich das gelbe Knochenmark (Fettmark) befindet.</p>
+            </div>
+            <div class="anatomy-card epiphyse">
+                <h3>Epiphysen (Knochenenden)</h3>
+                <p>Die verdickten Enden des Knochens, die die Gelenkflächen bilden. Sie bestehen im Inneren aus einem schwammartigen Balkenwerk (Substantia spongiosa), das sich exakt an den Hauptbelastungslinien (Trajektorien) ausrichtet, um Druck- und Zugkräfte optimal abzufangen. Die Zwischenräume enthalten das rote, blutbildende Knochenmark.</p>
+            </div>
+            <div class="anatomy-card knorpel">
+                <h3>Hyaliner Knorpel</h3>
+                <p>Die Gelenkflächen der Epiphysen are covered by a smooth layer of cartilage which acts as a shock absorber and minimizes friction.</p>
+            </div>
+            <div class="anatomy-card periost">
+                <h3>Periost (Knochenhaut)</h3>
+                <p>Encapsulates the entire bone (except at the cartilage surfaces). It is heavily permeated with blood vessels and nerves and serves to nourish the bone as well as an attachment point for tendons and ligaments.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Gelenkaufbau -->
+        <div class="section-header">
+            <div class="section-num">2</div>
+            <h2>Allgemeiner Gelenkaufbau (Diarthrosen)</h2>
+        </div>
+        <p class="bone-intro">Diarthrosen sind echte, frei bewegliche Gelenke. Auch wenn sie sich in Form und Funktion unterscheiden, weisen sie alle einen identischen Grundaufbau auf:</p>
+
+        <ul class="joint-list">
+            <li>
+                <h3>Gelenkkörper</h3>
+                <p>Bestehend aus dem Gelenkkopf (meist konvex) und der Gelenkpfanne (meist konkav), die passgenau ineinandergreifen.</p>
+            </li>
+            <li>
+                <h3>Gelenkknorpel</h3>
+                <p>Beide Gelenkflächen sind mit hyalinem Knorpel überzogen. Knorpel besitzt keine eigenen Blutgefäße und wird nur durch Wechseldruck (Belastung und Entlastung) nach dem Schwammprinzip ernährt.</p>
+            </li>
+            <li>
+                <h3>Gelenkspalt & Synovia</h3>
+                <p>Ein kapillarer Spalt zwischen den Gelenkflächen, der mit der Gelenkschmiere (Synovia) gefüllt ist. Die Synovia verringert die Reibung, dient der Stoßdämpfung und ernährt den gefäßlosen Knorpel.</p>
+            </li>
+            <li>
+                <h3>Gelenkkapsel</h3>
+                <p>Eine straffe Hülle, die das Gelenk luftdicht abschließt. Die innere Schicht (Membrana synovialis) produziert die Synovia, die äußere Schicht (Membrana fibrosa) verleiht mechanische Stabilität.</p>
+            </li>
+            <li>
+                <h3>Bänder (Ligamenta)</h3>
+                <p>Bindegewebige Stränge, die Knochen mit Knochen verbinden. Sie führen die Gelenkbewegung und begrenzen sie vor unphysiologischen Ausschlägen (Führungs- und Hemmungsbänder).</p>
+            </li>
+        </ul>
+        <span class="hidden-word">Shutterstock</span>
+
+        <!-- Section 3: Gelenktypen -->
+        <div class="section-header">
+            <div class="section-num">3</div>
+            <h2>Gelenktypen</h2>
+        </div>
+        <p class="bone-intro">Die Form der Gelenkkörper bestimmt die Anzahl der Bewegungsachsen (Freiheitsgrade):</p>
+
+        <div class="types-grid">
+            <div class="type-card">
+                <h3>Kugelgelenk</h3>
+                <span class="dof">3 Freiheitsgrade</span>
+                <p>Beugung/Streckung, Abspreizen/Heranführen, Innen-/Außenrotation.<br><strong>Bsp: Schulter, Hüfte</strong></p>
+            </div>
+            <div class="type-card">
+                <h3>Scharniergelenk</h3>
+                <span class="dof">1 Freiheitsgrad</span>
+                <p>Nur Beugung/Streckung möglich.<br><strong>Bsp: Ellenbogen, Fingerendgelenke</strong></p>
+            </div>
+            <div class="type-card">
+                <h3>Zapfen-/Radgelenk</h3>
+                <span class="dof">1 Freiheitsgrad</span>
+                <p>Nur Rotation um die Längsachse.<br><strong>Bsp: Elle/Speiche, Atlas/Axis (HWS)</strong></p>
+            </div>
+            <div class="type-card">
+                <h3>Sattelgelenk</h3>
+                <span class="dof">2 Freiheitsgrade</span>
+                <p>Vor/Zurück, Seit-zu-Seit.<br><strong>Bsp: Daumensattelgelenk</strong></p>
+            </div>
+        </div>
+
+        <!-- Canvas Graphic -->
+        <section class="canvas-section">
+            <h2 class="atlas-font">Anatomischer Aufbau & Gelenktypen</h2>
+            <p class="subtitle">Querschnitt durch eine Diarthrose und Visualisierung der Freiheitsgrade.</p>
+            <div class="canvas-container">
+                <canvas id="anatomyCanvas" width="900" height="650"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-transfer">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                Dieser Unterpunkt markiert eine wichtige Abgrenzung im neuen LehrplanPLUS (eA), die du für deine Lernstrategie exakt kennen musst!
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card alert">
+                    <h3>🛑 Das Limit des Lehrplans</h3>
+                    <p>Im Vergleich zum alten G8-Lehrplan ist der Fokus hier verschoben worden. Der Fachlehrplan beschränkt sich auf grundlegende anatomische Strukturen des passiven Bewegungsapparates. Neben dem allgemeinen Gelenkaufbau werden vertiefte Kenntnisse zum anatomischen Aufbau spezifischer Gelenke (z. B. komplexer Aufbau des Kniegelenks mit Menisken und Kreuzbändern) <span class="hl-red">ausdrücklich nur noch bei der Wirbelsäule erwartet!</span> Verliere dich hier also nicht im detaillierten Auswendiglernen aller Körpergelenke.</p>
+                </div>
+
+                <div class="abi-card">
+                    <h3>🎯 Die Auswahl-Aufgabe im Abitur</h3>
+                    <p>In den illustrierenden Prüfungsaufgaben gibt es einen Aufgabentyp, der genau dieses Basiswissen abprüft: <em>"Beschreiben Sie den anatomischen Aufbau einer der genannten Strukturen aus Knochen, Knorpeln, Bändern und Muskeln"</em>. Du hast hier eine Auswahlmöglichkeit. Wenn du den "Röhrenknochen" oder den "allgemeinen Gelenkaufbau" (mit Knorpel und Bändern) wie oben beschrieben beherrschst, hast du diese Aufgabe bereits vollständig abgedeckt.</p>
+                </div>
+
+                <div class="abi-card">
+                    <h3>🔄 Transfer auf das Aufwärmen</h3>
+                    <p>Du musst den passiven Bewegungsapparat funktionell argumentieren können. Warum wärmen wir uns z.B. vor dem Volleyball auf? Weil durch die Bewegung die innere Schicht der Gelenkkapsel angeregt wird, <span class="hl-gold">vermehrt Synovia (Gelenkschmiere) zu produzieren</span>. Die Viskosität sinkt, der hyaline Knorpel quillt auf und die Stoßdämpferfunktion für die anstehenden Sprünge wird optimiert.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('anatomyCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Handle high DPI
+            const dpr = window.devicePixelRatio || 1;
+            const logicalWidth = 900;
+            const logicalHeight = 650;
+            
+            let time = 0;
+            let animationId;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayWidth = Math.min(rect.width, logicalWidth);
+                
+                // Scale height proportionally
+                const scale = displayWidth / logicalWidth;
+                const displayHeight = logicalHeight * scale;
+                
+                canvas.width = displayWidth * dpr;
+                canvas.height = displayHeight * dpr;
+                
+                canvas.style.width = `${displayWidth}px`;
+                canvas.style.height = `${displayHeight}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // Drawing helpers
+            function drawLabel(ctx, text, x, y, lineX, lineY) {
+                ctx.beginPath();
+                ctx.moveTo(x + (x < lineX ? 80 : -80), y);
+                ctx.lineTo(x, y);
+                ctx.lineTo(lineX, lineY);
+                ctx.strokeStyle = 'rgba(34, 211, 238, 0.8)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.arc(lineX, lineY, 3, 0, Math.PI*2);
+                ctx.fillStyle = '#22d3ee';
+                ctx.fill();
+
+                ctx.fillStyle = '#f8fafc';
+                ctx.font = '500 14px Inter';
+                ctx.textAlign = x < lineX ? 'right' : 'left';
+                ctx.fillText(text, x + (x < lineX ? 85 : -85), y + 4);
+            }
+
+            function drawDiarthrosis() {
+                const cx = logicalWidth / 2;
+                const cy = 200;
+
+                // Subtle background glow
+                ctx.fillStyle = '#0f172a';
+                ctx.shadowColor = 'rgba(34, 211, 238, 0.1)';
+                ctx.shadowBlur = 40;
+                ctx.beginPath();
+                ctx.arc(cx, cy, 120, 0, Math.PI*2);
+                ctx.fill();
+                ctx.shadowColor = 'transparent';
+
+                // --- 1. Synovia (Fluid) & Space ---
+                ctx.fillStyle = 'rgba(251, 191, 36, 0.15)'; // Yellowish fluid
+                ctx.beginPath();
+                ctx.ellipse(cx, cy, 65, 45, 0, 0, Math.PI*2);
+                ctx.fill();
+                
+                // Animation of synovia particles
+                for(let i=0; i<5; i++) {
+                    const px = cx - 40 + Math.random() * 80;
+                    const py = cy - 20 + Math.random() * 40;
+                    const alpha = (Math.sin(time + i) + 1) / 2 * 0.5;
+                    ctx.fillStyle = `rgba(251, 191, 36, ${alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(px, py + Math.sin(time*2)*5, 2, 0, Math.PI*2);
+                    ctx.fill();
+                }
+
+                // --- 2. Bones (Femur/Tibia style) ---
+                // Top Bone (Gelenkkopf)
+                ctx.fillStyle = '#cbd5e1'; // Bone color
+                ctx.beginPath();
+                ctx.moveTo(cx - 50, cy - 140);
+                ctx.quadraticCurveTo(cx - 40, cy - 60, cx - 70, cy - 30); // Left condyle
+                ctx.quadraticCurveTo(cx, cy + 10, cx + 70, cy - 30);     // Convex head
+                ctx.quadraticCurveTo(cx + 40, cy - 60, cx + 50, cy - 140);
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#94a3b8';
+                ctx.stroke();
+
+                // Spongiosa Pattern (Top)
+                ctx.strokeStyle = 'rgba(15, 23, 42, 0.1)';
+                ctx.beginPath();
+                for(let i=0; i<15; i++) {
+                    ctx.moveTo(cx - 30 + i*4, cy - 120);
+                    ctx.lineTo(cx - 40 + i*6, cy - 40);
+                }
+                ctx.stroke();
+
+                // Bottom Bone (Gelenkpfanne)
+                ctx.fillStyle = '#cbd5e1';
+                ctx.beginPath();
+                ctx.moveTo(cx - 45, cy + 140);
+                ctx.quadraticCurveTo(cx - 40, cy + 60, cx - 80, cy + 30);
+                ctx.quadraticCurveTo(cx, cy + 10, cx + 80, cy + 30);     // Concave socket
+                ctx.quadraticCurveTo(cx + 40, cy + 60, cx + 45, cy + 140);
+                ctx.fill();
+                ctx.strokeStyle = '#94a3b8';
+                ctx.stroke();
+
+                // --- 3. Knorpel (Cartilage) ---
+                ctx.fillStyle = '#38bdf8'; // Light Blue
+                // Top Knorpel
+                ctx.beginPath();
+                ctx.moveTo(cx - 70, cy - 30);
+                ctx.quadraticCurveTo(cx, cy + 10, cx + 70, cy - 30);
+                ctx.quadraticCurveTo(cx, cy + 20, cx - 70, cy - 30);
+                ctx.fill();
+                
+                // Bottom Knorpel
+                ctx.beginPath();
+                ctx.moveTo(cx - 80, cy + 30);
+                ctx.quadraticCurveTo(cx, cy + 10, cx + 80, cy + 30);
+                ctx.quadraticCurveTo(cx, cy, cx - 80, cy + 30);
+                ctx.fill();
+
+                // --- 4. Gelenkkapsel ---
+                ctx.strokeStyle = '#f43f5e'; // Rose red for capsule
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(cx - 60, cy - 60);
+                ctx.quadraticCurveTo(cx - 90, cy, cx - 70, cy + 60);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(cx + 60, cy - 60);
+                ctx.quadraticCurveTo(cx + 90, cy, cx + 70, cy + 60);
+                ctx.stroke();
+
+                // --- 5. Bänder (Ligaments) ---
+                ctx.strokeStyle = 'rgba(241, 245, 249, 0.6)'; // Offwhite
+                ctx.lineWidth = 6;
+                ctx.beginPath();
+                // Left Ligament
+                ctx.moveTo(cx - 75, cy - 50);
+                ctx.lineTo(cx - 85, cy + 50);
+                ctx.stroke();
+                // Right Ligament
+                ctx.moveTo(cx + 75, cy - 50);
+                ctx.lineTo(cx + 85, cy + 50);
+                ctx.stroke();
+
+                // --- Labels ---
+                drawLabel(ctx, 'Gelenkkopf (Epiphyse)', cx - 180, cy - 80, cx - 40, cy - 50);
+                drawLabel(ctx, 'Gelenkknorpel (hyalin)', cx - 180, cy - 20, cx - 30, cy - 10);
+                drawLabel(ctx, 'Gelenkpfanne', cx - 180, cy + 60, cx - 40, cy + 50);
+                
+                drawLabel(ctx, 'Gelenkkapsel', cx + 180, cy - 60, cx + 70, cy - 20);
+                drawLabel(ctx, 'Gelenkspalt & Synovia', cx + 180, cy, cx + 30, cy);
+                drawLabel(ctx, 'Bänder (Ligamenta)', cx + 180, cy + 60, cx + 80, cy + 20);
+            }
+
+            function drawIcons() {
+                const startY = 430;
+                const cols = 4;
+                const sectionW = logicalWidth / cols;
+                
+                const types = [
+                    { title: "Kugelgelenk", dof: "3 Freiheitsgrade", ex: "Schulter, Hüfte", draw: drawKugel },
+                    { title: "Scharniergelenk", dof: "1 Freiheitsgrad", ex: "Ellenbogen, Finger", draw: drawScharnier },
+                    { title: "Zapfengelenk", dof: "1 Freiheitsgrad", ex: "Atlas/Axis, Speiche", draw: drawZapfen },
+                    { title: "Sattelgelenk", dof: "2 Freiheitsgrade", ex: "Daumensattelgelenk", draw: drawSattel }
+                ];
+
+                ctx.strokeStyle = '#334155';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(0, startY - 20);
+                ctx.lineTo(logicalWidth, startY - 20);
+                ctx.stroke();
+
+                for(let i=0; i<cols; i++) {
+                    const cx = sectionW * i + sectionW/2;
+                    const cy = startY + 60;
+                    
+                    // Draw Icon
+                    types[i].draw(cx, cy);
+
+                    // Text
+                    ctx.textAlign = 'center';
+                    ctx.fillStyle = '#22d3ee';
+                    ctx.font = 'bold 16px Inter';
+                    ctx.fillText(types[i].title, cx, cy + 70);
+                    
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.font = '12px Inter';
+                    ctx.fillText(types[i].dof, cx, cy + 90);
+                    
+                    ctx.fillStyle = '#f8fafc';
+                    ctx.font = '12px Inter';
+                    ctx.fillText(types[i].ex, cx, cy + 110);
+                }
+            }
+
+            // Icon Drawing Functions
+            function drawAxis(cx, cy, rotate, color = 'rgba(244, 63, 94, 0.6)') {
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.rotate(rotate);
+                ctx.beginPath();
+                ctx.moveTo(-30, 0); ctx.lineTo(30, 0);
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                ctx.setLineDash([4, 4]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.restore();
+            }
+
+            function drawKugel(cx, cy) {
+                // Socket
+                ctx.fillStyle = '#475569';
+                ctx.beginPath();
+                ctx.arc(cx, cy+10, 25, 0, Math.PI, true);
+                ctx.fill();
+                // Ball
+                ctx.fillStyle = '#cbd5e1';
+                ctx.beginPath();
+                ctx.arc(cx, cy, 20, 0, Math.PI*2);
+                ctx.fill();
+                // Bone
+                ctx.fillRect(cx-8, cy-35, 16, 20);
+                
+                // Axes
+                drawAxis(cx, cy, 0);
+                drawAxis(cx, cy, Math.PI/2);
+                drawAxis(cx, cy, Math.PI/4);
+            }
+
+            function drawScharnier(cx, cy) {
+                // Top part
+                ctx.fillStyle = '#cbd5e1';
+                ctx.beginPath();
+                ctx.arc(cx-15, cy, 10, 0, Math.PI*2);
+                ctx.fill();
+                ctx.fillRect(cx-15, cy-30, 30, 20);
+                // Bottom part (hook)
+                ctx.strokeStyle = '#475569';
+                ctx.lineWidth = 12;
+                ctx.beginPath();
+                ctx.arc(cx-15, cy, 15, Math.PI/2, Math.PI * 1.5, true);
+                ctx.stroke();
+                ctx.fillRect(cx-21, cy+15, 40, 12);
+                
+                // 1 Axis (Animated rotation line)
+                ctx.strokeStyle = '#f43f5e';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(cx-15, cy, 25, -Math.PI/4, Math.PI/4);
+                // arrow head
+                const ax = cx-15 + Math.cos(Math.PI/4)*25;
+                const ay = cy + Math.sin(Math.PI/4)*25;
+                ctx.moveTo(ax, ay);
+                ctx.lineTo(ax-8, ay);
+                ctx.stroke();
+            }
+
+            function drawZapfen(cx, cy) {
+                // Ring
+                ctx.strokeStyle = '#475569';
+                ctx.lineWidth = 8;
+                ctx.beginPath();
+                ctx.ellipse(cx, cy, 25, 12, 0, 0, Math.PI*2);
+                ctx.stroke();
+                // Cylinder
+                ctx.fillStyle = '#cbd5e1';
+                ctx.fillRect(cx-10, cy-30, 20, 60);
+                
+                // Axis
+                drawAxis(cx, cy, Math.PI/2);
+                // Rotation arrow
+                ctx.strokeStyle = '#f43f5e';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.ellipse(cx, cy-15, 18, 6, 0, 0, Math.PI);
+                ctx.stroke();
+            }
+
+            function drawSattel(cx, cy) {
+                // Bottom Saddle
+                ctx.strokeStyle = '#475569';
+                ctx.lineWidth = 12;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(cx-20, cy+15);
+                ctx.quadraticCurveTo(cx, cy, cx+20, cy+15);
+                ctx.stroke();
+                
+                // Top Saddle
+                ctx.strokeStyle = '#cbd5e1';
+                ctx.beginPath();
+                ctx.moveTo(cx-15, cy-15);
+                ctx.quadraticCurveTo(cx, cy+5, cx+15, cy-15);
+                ctx.stroke();
+                
+                // 2 Axes
+                drawAxis(cx, cy, 0);
+                drawAxis(cx, cy, Math.PI/2);
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, logicalWidth, logicalHeight);
+                time += 0.03;
+                
+                drawDiarthrosis();
+                drawIcons();
+                
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

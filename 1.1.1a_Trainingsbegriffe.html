@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.1a Trainingsbegriffe - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8faf9;
+            --text-main: #2d3748;
+            --text-light: #718096;
+            --brand-color: #005f73;
+            --brand-light: #e0fbfc;
+            --brand-dark: #0a2472;
+            --accent-color: #ee9b00;
+            --abi-red: #9b2226;
+            --abi-gold: #e9d8a6;
+            --abi-gold-bright: #ffeaab;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 18px;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Reading Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-color), var(--brand-color));
+            width: 0%;
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Animated Hero Section */
+        .hero {
+            background: linear-gradient(-45deg, var(--brand-dark), #003f5c, var(--brand-color), #2f4b7c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            padding: 8rem 2rem 6rem;
+            position: relative;
+            text-align: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background-color: var(--bg-color);
+            transform: skewY(-2deg);
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--brand-light);
+            max-width: 650px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Asymmetrical Layout with Interactive Cards */
+        .intro-text {
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--brand-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 2rem;
+            margin: 5rem auto;
+            max-width: 900px;
+            background: linear-gradient(90deg, rgba(224, 251, 252, 0.5) 0%, transparent 100%);
+            padding: 2rem;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .concept-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+            align-items: start;
+        }
+
+        @media (max-width: 800px) {
+            .concept-row {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .concept-title {
+                position: relative !important;
+                top: 0 !important;
+            }
+        }
+
+        .concept-title {
+            position: sticky;
+            top: 4rem;
+        }
+
+        .concept-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--brand-color);
+            line-height: 1.1;
+            position: relative;
+        }
+
+        .concept-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .concept-row:hover .concept-title h2::after {
+            width: 100px;
+        }
+
+        .concept-title .badge {
+            display: inline-block;
+            background-color: var(--brand-light);
+            color: var(--brand-dark);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .concept-content {
+            background: white;
+            padding: 3.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border-top: 6px solid var(--brand-color);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .concept-content::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top right, rgba(0,95,115,0.03), transparent 60%);
+            pointer-events: none;
+        }
+
+        .concept-content:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0,95,115,0.1);
+        }
+
+        .concept-content p {
+            margin-bottom: 1rem;
+        }
+
+        .concept-content ul {
+            list-style: none;
+            margin-top: 2rem;
+            background: var(--bg-color);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .concept-content li {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 2.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .concept-content li:hover {
+            transform: translateX(5px);
+        }
+
+        .concept-content li:last-child {
+            margin-bottom: 0;
+        }
+
+        .concept-content li::before {
+            content: '➜';
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        .concept-content strong {
+            color: var(--brand-dark);
+            font-size: 1.15rem;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        /* Interactive Canvas Section */
+        .canvas-section {
+            margin: 8rem 0;
+            background: white;
+            padding: 4rem 2rem;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canvas-section::before {
+            content: 'INTERAKTIV';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-weight: bold;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .canvas-section h2 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            color: var(--brand-dark);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+        
+        .canvas-hint {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .canvas-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            display: flex;
+            justify-content: center;
+            cursor: crosshair;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        /* Premium Abitur Box */
+        .abitur-premium-box {
+            background: linear-gradient(135deg, #780000 0%, #a41623 50%, #780000 100%);
+            background-size: 200% 200%;
+            animation: pulseBg 8s ease infinite;
+            color: #fdf0d5;
+            padding: 5rem 4rem 4rem;
+            border-radius: 24px;
+            margin: 8rem 0 4rem;
+            position: relative;
+            border: 3px solid var(--abi-gold);
+            box-shadow: 0 30px 60px -15px rgba(120, 0, 0, 0.6);
+        }
+
+        @keyframes pulseBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .abitur-badge {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--abi-gold);
+            color: #780000;
+            padding: 0.8rem 2.5rem;
+            border-radius: 30px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-50%, 0px); }
+            50% { transform: translate(-50%, -8px); }
+            100% { transform: translate(-50%, 0px); }
+        }
+
+        .abitur-premium-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+        
+        .abitur-premium-box > p {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.25rem;
+            line-height: 1.8;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .abi-grid { grid-template-columns: 1fr; }
+        }
+
+        .abi-card {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border-left: 6px solid var(--abi-gold);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .abi-card:hover {
+            transform: translateY(-5px);
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        .abi-card h3 {
+            color: var(--abi-gold-bright);
+            margin-bottom: 1.2rem;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .abi-card p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+
+        .abi-footer-note {
+            text-align: center;
+            margin-top: 4rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+            background: var(--abi-gold);
+            padding: 2rem;
+            border-radius: 12px;
+            transform: rotate(-1deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .abi-footer-note:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Lese-Fortschrittsbalken -->
+    <div id="progress-bar"></div>
+
+    <header class="hero">
+        <h1 class="reveal">1.1.1a Trainingsbegriffe</h1>
+        <p class="reveal">Sport-Abitur 2026 – Fundament der systematischen Trainingsplanung</p>
+    </header>
+
+    <main class="container">
+        <div class="intro-text reveal">
+            Um sportliches Training systematisch planen, steuern und evaluieren zu können, ist eine exakte begriffliche Differenzierung der Trainingskomponenten zwingend erforderlich. Diese vier fundamentalen Trainingsbegriffe bilden das Grundgerüst jeder wissenschaftlich fundierten Trainingsplanung und stehen in einer engen, hierarchischen Wechselbeziehung zueinander.
+        </div>
+
+        <!-- Begriff 1 -->
+        <section class="concept-row reveal">
+            <div class="concept-title">
+                <h2>1. Trainingsziele</h2>
+                <div class="badge">Was soll erreicht werden?</div>
+            </div>
+            <div class="concept-content">
+                <p>Trainingsziele sind die normativen Richtgrößen des sportlichen Handelns. Sie beschreiben den angestrebten Soll-Zustand, der durch den Trainingsprozess erreicht werden soll. In der Sporttheorie wird differenziert zwischen:</p>
+                <ul>
+                    <li><strong>Motorisch-physischen Zielen:</strong> Verbesserung konditioneller (z. B. Maximalkraft, Grundlagenausdauer) oder koordinativer Fähigkeiten sowie der sportlichen Technik.</li>
+                    <li><strong>Kognitiv-taktischen Zielen:</strong> Erlernen theoretischen Wissens (z. B. Biomechanik) oder taktischer Verhaltensmuster (z. B. Laufwege im Volleyball).</li>
+                    <li><strong>Affektiv-sozialen Zielen:</strong> Entwicklung von Willensstärke, Frustrationstoleranz, Motivation oder Teamfähigkeit.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Begriff 2 -->
+        <section class="concept-row reveal">
+            <div class="concept-title">
+                <h2>2. Trainingsinhalte</h2>
+                <div class="badge">Was wird trainiert?</div>
+            </div>
+            <div class="concept-content">
+                <p>Trainingsinhalte sind die konkreten, strukturierten Bewegungsabläufe und Übungen, die zielgerichtet ausgewählt werden, um das definierte Trainingsziel zu erreichen.</p>
+                <p style="margin-top: 1rem;">Der Inhalt ist quasi das "Medium", durch das der Körper gereizt wird (z. B. die Übung "Kniebeuge" zur Steigerung der Bein- und Gesäßmuskulatur oder der "Dauerlauf" zur Verbesserung der aeroben Ausdauer).</p>
+            </div>
+        </section>
+
+        <!-- Begriff 3 -->
+        <section class="concept-row reveal">
+            <div class="concept-title">
+                <h2>3. Trainingsmittel</h2>
+                <div class="badge">Womit wird trainiert?</div>
+            </div>
+            <div class="concept-content">
+                <p>Trainingsmittel umfassen alle sächlichen, organisatorischen und informativen Hilfsmittel und Maßnahmen, die den Vollzug des Trainingsinhalts ermöglichen oder unterstützen. Sie werden in drei Kategorien unterteilt:</p>
+                <ul>
+                    <li><strong>Geräte- und sächliche Mittel:</strong> Hanteln, Medizinbälle, Pulsuhren, spezielle Schuhe (Spikes).</li>
+                    <li><strong>Organisatorische Mittel:</strong> Aufstellungsformen (z. B. Kreisbetrieb), Stationstraining, Spielformen.</li>
+                    <li><strong>Informative Mittel:</strong> Videoanalysen, akustische Taktgeber, verbale Anweisungen (Korrekturen) des Trainers.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Begriff 4 -->
+        <section class="concept-row reveal">
+            <div class="concept-title">
+                <h2>4. Trainingsmethode</h2>
+                <div class="badge">Wie wird trainiert?</div>
+            </div>
+            <div class="concept-content">
+                <p>Trainingsmethoden sind planmäßige, systematische Verfahren zur Umsetzung der Trainingsziele und -inhalte in biologische Anpassungsreaktionen (Adaptationen).</p>
+                <p style="margin-top: 1rem;">Die Methode definiert das exakte <em>Wie</em> der Ausführung und wird durch das sogenannte Belastungsgefüge (siehe 1.1.1b) bestimmt. Erst durch die Festlegung der Methode (z. B. Dauermethode, Intervallmethode oder die Methode der maximalen Krafteinsätze) entfaltet der Trainingsinhalt seine spezifische pfysiologische Wirkung.</p>
+            </div>
+        </section>
+
+        <!-- Interaktives Canvas -->
+        <section class="canvas-section reveal">
+            <h2>Kausalkette: Von der Zielsetzung zur Methode</h2>
+            <p class="canvas-hint">Bewege die Maus über die Boxen, um den Ablauf interaktiv zu erkunden.</p>
+            <div class="canvas-wrapper">
+                <canvas id="trainingCanvas" width="1000" height="480"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-premium-box reveal">
+            <div class="abitur-badge">★ ABITUR-RELEVANZ ★</div>
+            <h2>Abitur-Transfer & Praxis</h2>
+            <p>In der neuen, anwendungsorientierten Abiturprüfung (eA) ab 2026 wird reines Reproduktionswissen zu diesen Begriffen nur selten isoliert abgefragt. Die Kompetenzerwartung verlangt, dass du diese Systematik bei der konkreten Trainingsplanung anwenden und begründen kannst.</p>
+            
+            <div class="abi-grid">
+                <div class="abi-card">
+                    <h3>⚠️ Der klassische Fehler</h3>
+                    <p>In Klausuren werden "Trainingsinhalt" und "Trainingsmethode" häufig verwechselt. Wenn in einer materialgestützten Aufgabe (wie bei den illustrierenden Abituraufgaben) verlangt wird, eine Krafttrainingsmethode zur Verbesserung der Sprungkraft (z.B. für den Einerblock im Volleyball) zu beschreiben, reicht es nicht, "Kniebeugen" (das ist nur der Inhalt!) zu nennen.</p>
+                    <p style="margin-top: 1.5rem; color: #fff; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px;"><strong>Die Lösung:</strong> Du musst zwingend die Methode (z. B. Methode der maximalen Krafteinsätze) nennen und diese über ihre spezifischen Belastungsparameter (Intensität, Umfang, etc.) definieren.</p>
+                </div>
+
+                <div class="abi-card">
+                    <h3>🎯 Methoden-Transfer</h3>
+                    <p>Ebenso wird im Abitur erwartet, dass du z. B. Methoden zur Verbesserung der aeroben Ausdauer nicht nur nennst, sondern anhand konkreter Trainingsinhalte (z. B. Dauerlauf oder Tempowechselläufe) und der dazugehörigen Belastungskomponenten skizzierst und die beabsichtigten physiologischen Anpassungen des Herz-Kreislauf-Systems aufzeigst.</p>
+                </div>
+            </div>
+
+            <div class="abi-footer-note">
+                Merke dir daher: Eine Methode ohne exakt definierte Belastungsnormative existiert in der Sporttheorie nicht.
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // --- 1. Lese-Fortschrittsbalken ---
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+
+        // --- 2. Scroll Reveal Animation ---
+        document.addEventListener("DOMContentLoaded", function() {
+            const reveals = document.querySelectorAll(".reveal");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            reveals.forEach(reveal => {
+                observer.observe(reveal);
+            });
+        });
+
+        // --- 3. Interaktives Canvas Diagramm ---
+        window.onload = function() {
+            const canvas = document.getElementById('trainingCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // High-DPI Display Support
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            // Fix CSS size
+            canvas.style.width = `${rect.width}px`;
+            canvas.style.height = `${rect.height}px`;
+
+            const colors = {
+                ziel: '#005f73',
+                inhalt: '#0a9396',
+                mittel: '#94d2bd',
+                methode: '#ee9b00',
+                textLight: '#ffffff',
+                textDark: '#1a1a1a',
+                line: '#cbd5e1',
+                hoverGlow: '#e0fbfc'
+            };
+
+            const columns = [
+                { id: "ziel", title: "1. Ziel", sub: "Was?", color: colors.ziel, textColor: colors.textLight },
+                { id: "inhalt", title: "2. Inhalt", sub: "Die Übung", color: colors.inhalt, textColor: colors.textLight },
+                { id: "mittel", title: "3. Mittel", sub: "Hilfsmittel", color: colors.mittel, textColor: colors.textDark },
+                { id: "methode", title: "4. Methode", sub: "Wie? (Belastung)", color: colors.methode, textColor: colors.textLight }
+            ];
+
+            const rows = [
+                {
+                    sport: "Beispiel: Volleyball (Einerblock)",
+                    data: [
+                        "Verbesserung der\nMaximalkraft in den\nBeinstreckern",
+                        "Tiefe Kniebeugen\n(Squats)",
+                        "Langhantel,\nGewichtsscheiben,\nKniebeugenständer",
+                        "Methode der maximalen\nKrafteinsätze\n(90-100% Intensität,\n1-3 Wdh.)"
+                    ]
+                },
+                {
+                    sport: "Beispiel: Zehnkampf (1500m)",
+                    data: [
+                        "Verbesserung der\naeroben Ausdauer\n(Grundlage)",
+                        "Dauerlauf auf\nder Tartanbahn\noder im Wald",
+                        "Pulsuhr,\nLaufschuhe,\nakustischer Taktgeber",
+                        "Extensive Dauermethode\n(60-80% HFmax,\nkontinuierlich, >30 Min.)"
+                    ]
+                }
+            ];
+
+            const colWidth = 220;
+            const rowHeight = 125;
+            const startX = 40;
+            const startY = 80;
+            const gapX = 30;
+            const gapY = 60;
+
+            let hoveredColumn = -1; // -1 means none
+
+            // Mouse interaction
+            canvas.addEventListener('mousemove', function(e) {
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = (e.clientX - rect.left);
+                const mouseY = (e.clientY - rect.top);
+
+                let found = -1;
+                for (let i = 0; i < columns.length; i++) {
+                    const x = startX + i * (colWidth + gapX);
+                    // Check if mouse is within the column boundaries
+                    if (mouseX >= x && mouseX <= x + colWidth) {
+                        found = i;
+                        break;
+                    }
+                }
+                
+                if (hoveredColumn !== found) {
+                    hoveredColumn = found;
+                    canvas.style.cursor = found !== -1 ? 'pointer' : 'crosshair';
+                    draw(); // Redraw with hover effects
+                }
+            });
+
+            canvas.addEventListener('mouseleave', function() {
+                hoveredColumn = -1;
+                draw();
+            });
+
+            // Helper to draw rounded rects
+            function drawRoundRect(x, y, w, h, radius, fill, stroke, isHovered) {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + w - radius, y);
+                ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+                ctx.lineTo(x + w, y + h - radius);
+                ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+                ctx.lineTo(x + radius, y + h);
+                ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+                ctx.closePath();
+                
+                if (isHovered) {
+                    ctx.shadowColor = fill;
+                    ctx.shadowBlur = 20;
+                    ctx.shadowOffsetY = 0;
+                } else {
+                    ctx.shadowColor = 'rgba(0,0,0,0.1)';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowOffsetY = 4;
+                }
+
+                if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+                if (stroke) { ctx.strokeStyle = stroke; ctx.stroke(); }
+                
+                ctx.shadowColor = 'transparent'; // reset
+            }
+
+            // Helper to draw multiline text
+            function fillMultiLineText(text, x, y, lineHeight, font, color, align = "center") {
+                ctx.font = font;
+                ctx.fillStyle = color;
+                ctx.textAlign = align;
+                const lines = text.split('\n');
+                lines.forEach((line, index) => {
+                    ctx.fillText(line, x, y + (index * lineHeight));
+                });
+            }
+
+            // Draw Connection Arrows
+            function drawArrow(fromX, fromY, toX, toY, isHighlighted) {
+                ctx.beginPath();
+                ctx.moveTo(fromX, fromY);
+                ctx.lineTo(toX, fromY);
+                ctx.strokeStyle = isHighlighted ? '#005f73' : colors.line;
+                ctx.lineWidth = isHighlighted ? 4 : 2;
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(toX, fromY);
+                ctx.lineTo(toX - 10, fromY - 6);
+                ctx.lineTo(toX - 10, fromY + 6);
+                ctx.fillStyle = isHighlighted ? '#005f73' : colors.line;
+                ctx.fill();
+            }
+
+            // --- Main Draw Function ---
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw Column Headers
+                columns.forEach((col, i) => {
+                    const x = startX + i * (colWidth + gapX);
+                    const isHovered = (hoveredColumn === i);
+                    
+                    // Dim others if something is hovered
+                    ctx.globalAlpha = (hoveredColumn !== -1 && !isHovered) ? 0.4 : 1.0;
+                    
+                    const yOffset = isHovered ? -5 : 0;
+                    drawRoundRect(x, 20 + yOffset, colWidth, 45, 8, col.color, null, isHovered);
+                    
+                    ctx.fillStyle = col.textColor;
+                    ctx.textAlign = "center";
+                    ctx.font = "bold 16px Source Sans Pro";
+                    ctx.fillText(col.title + " (" + col.sub + ")", x + colWidth / 2, 48 + yOffset);
+                });
+
+                ctx.globalAlpha = 1.0;
+
+                // Draw Rows
+                rows.forEach((row, rIndex) => {
+                    const y = startY + rIndex * (rowHeight + gapY) + 30;
+
+                    // Sport Title
+                    ctx.fillStyle = colors.textDark;
+                    ctx.textAlign = "left";
+                    ctx.font = "bold 18px Source Sans Pro";
+                    ctx.fillText(row.sport, startX, y - 15);
+
+                    // Draw Boxes and Arrows
+                    row.data.forEach((boxText, cIndex) => {
+                        const x = startX + cIndex * (colWidth + gapX);
+                        const isHovered = (hoveredColumn === cIndex);
+                        
+                        ctx.globalAlpha = (hoveredColumn !== -1 && !isHovered) ? 0.3 : 1.0;
+                        const yOffset = isHovered ? -5 : 0;
+
+                        // Box
+                        drawRoundRect(x, y + yOffset, colWidth, rowHeight, 10, '#ffffff', isHovered ? columns[cIndex].color : '#e2e8f0', false);
+
+                        // Text
+                        fillMultiLineText(boxText, x + colWidth / 2, y + 40 + yOffset, 22, (isHovered ? "bold " : "") + "15px Source Sans Pro", colors.textDark);
+
+                        ctx.globalAlpha = 1.0;
+
+                        // Arrows between boxes (highlight if left or right box is hovered)
+                        if (cIndex < row.data.length - 1) {
+                            const highlightArrow = (hoveredColumn === cIndex || hoveredColumn === cIndex + 1);
+                            drawArrow(x + colWidth + 5, y + rowHeight / 2, x + colWidth + gapX - 5, y + rowHeight / 2, highlightArrow);
+                        }
+                    });
+                });
+            }
+
+            // Initial draw
+            draw();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.2.1b Training und Lebensstil - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap');
+
+        :root {
+            /* Wellness & Lifestyle Palette */
+            --bg-base: #f9fafb;
+            --text-dark: #1f2937;
+            --text-muted: #4b5563;
+            
+            --accent-teal: #0d9488;     /* Teal for Principles/Physical */
+            --accent-violet: #7c3aed;   /* Violet for Psych */
+            --accent-rose: #e11d48;     /* Rose for Social */
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Exam Box */
+            --abi-bg: #111827;
+            --abi-gold: #f59e0b;
+            --abi-green: #10b981;
+            
+            --radius-md: 12px;
+            --radius-xl: 28px;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 30px -10px rgba(13, 148, 136, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER SECTION --- */
+        .journal-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-xl);
+            padding: 4rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            text-align: center;
+            border-top: 6px solid var(--accent-teal);
+            position: relative;
+        }
+
+        .journal-header::before {
+            content: '🌿';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            opacity: 0.2;
+        }
+
+        .journal-header h1 {
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+            margin-top: 1rem;
+            color: #111827;
+        }
+
+        .journal-header .lead {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- SECTION 1: PRINZIPIEN --- */
+        .principles-section {
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-teal);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .principle-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f3f4f6;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+            background: #f0fdfa;
+            color: var(--accent-teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .principle-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-teal);
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+        }
+
+        .principle-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- SECTION 2: KONSEQUENZEN (WHO DIMENSIONEN) --- */
+        .consequences-section {
+            margin-bottom: 5rem;
+        }
+
+        .dimension-block {
+            background: var(--card-bg);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dimension-block h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .split-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .split-box {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+        }
+
+        .split-box h4 {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .split-box p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Dimension 1: Physisch */
+        .dim-phys { border-left: 8px solid var(--accent-teal); }
+        .dim-phys h3 { color: var(--accent-teal); }
+        .dim-phys .split-box h4 { color: var(--accent-teal); }
+
+        /* Dimension 2: Psychisch */
+        .dim-psych { border-left: 8px solid var(--accent-violet); }
+        .dim-psych h3 { color: var(--accent-violet); }
+        .dim-psych .split-box h4 { color: var(--accent-violet); }
+
+        /* Dimension 3: Sozial */
+        .dim-social { border-left: 8px solid var(--accent-rose); }
+        .dim-social h3 { color: var(--accent-rose); }
+        .dim-social .split-box h4 { color: var(--accent-rose); }
+
+
+        /* --- CANVAS TABLE SECTION --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 5rem;
+            text-align: center;
+        }
+
+        .canvas-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .canvas-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* --- ABITUR PREMIUM BOX --- */
+        .abitur-diagnostic {
+            background: var(--abi-bg);
+            color: white;
+            border-radius: var(--radius-xl);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-top: 8px solid var(--abi-gold);
+            position: relative;
+        }
+
+        .abitur-diagnostic h2 {
+            color: var(--abi-gold);
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #9ca3af;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 1.5rem;
+        }
+
+        .case-study {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #374151;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+        }
+
+        .case-study h4 {
+            color: #cbd5e1;
+            font-family: 'Lato', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .case-study p {
+            color: #f3f4f6;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .analysis-block {
+            margin-bottom: 2rem;
+        }
+
+        .analysis-block h3 {
+            color: var(--abi-gold);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-family: 'Lato', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .matrix-row {
+            display: flex;
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 3px solid var(--abi-green);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            gap: 1.5rem;
+        }
+
+        .matrix-row .dim-label {
+            font-weight: bold;
+            color: var(--abi-green);
+            width: 100px;
+            flex-shrink: 0;
+        }
+
+        .matrix-row p {
+            color: #d1d5db;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .tip-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px dashed var(--abi-gold);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-top: 3rem;
+        }
+
+        .tip-box h4 {
+            color: var(--abi-gold);
+            margin-bottom: 0.5rem;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 900px) {
+            .split-content { grid-template-columns: 1fr; }
+            .matrix-row { flex-direction: column; gap: 0.5rem; }
+            .matrix-row .dim-label { width: auto; }
+            .journal-header, .abitur-diagnostic { padding: 2rem; }
+            .journal-header h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="wrapper">
+
+    <!-- Header -->
+    <header class="journal-header">
+        <h1>3.2.1b Training und Lebensstil</h1>
+        <p class="lead">
+            Während der Leistungssport die absolute Maximierung der physischen Leistungsfähigkeit anstrebt (oftmals bis an die physiologische Belastungsgrenze und unter Inkaufnahme von Verschleiß), verfolgt der Gesundheitssport eine völlig andere Zielsetzung. Hier geht es um die Erhaltung, Stabilisierung und Wiederherstellung der Gesundheit auf Basis des multidimensionalen Gesundheitsbegriffs der WHO.
+        </p>
+    </header>
+
+    <!-- 1. Prinzipien -->
+    <section class="principles-section">
+        <h2 class="section-title">1. Prinzipien des gesundheitsorientierten Trainings</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">Um einen gesundheitlichen Nutzen zu erzielen, ohne den Organismus zu schädigen, muss das Training bestimmten Leitplanken folgen:</p>
+
+        <div class="principles-grid">
+            <article class="principle-card">
+                <div class="icon-circle">⚖️</div>
+                <h3>Optimaler Reiz</h3>
+                <p>Im Gegensatz zum Leistungssport, der stetig die Reizschwelle verschiebt, reicht im Gesundheitssport ein überschwelliger, aber <strong>moderater Reiz</strong> aus, um degenerative Prozesse aufzuhalten und die Funktionstüchtigkeit der Organe zu erhalten.</p>
+            </article>
+
+            <article class="principle-card">
+                <div class="icon-circle">🎯</div>
+                <h3>Vielseitigkeit</h3>
+                <p>Ein gesundheitsorientiertes Training vermeidet hochspezifische, einseitige Belastungen. Es muss zwingend <strong>alle motorischen Hauptbeanspruchungsformen</strong> abdecken, um muskuläre Dysbalancen zu verhindern.</p>
+            </article>
+
+            <article class="principle-card">
+                <div class="icon-circle">♾️</div>
+                <h3>Regelmäßigkeit</h3>
+                <p>Die positiven Adaptationen (z. B. am Herz-Kreislauf-System) bilden sich bei Inaktivität schnell wieder zurück (Detraining-Effekt). Gesundheitssport muss daher als lebenslanger Prozess <strong>(Life-Time-Sport)</strong> angelegt sein.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- 2. Konsequenzen der Dimensionen -->
+    <section class="consequences-section">
+        <h2 class="section-title">2. Konsequenzen aus dem Gesundheitsbegriff</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">Aus den drei WHO-Dimensionen lassen sich zwingende Konsequenzen für die Trainingsgestaltung und den Lebensstil ableiten:</p>
+
+        <!-- Physisch -->
+        <article class="dimension-block dim-phys">
+            <h3><span style="font-size: 1.5rem;">💪</span> Physische Dimension</h3>
+            <div class="split-content">
+                <div class="split-box">
+                    <h4>🏃♂️ Training</h4>
+                    <p>Vermeidung von Überlastungsschäden durch ausreichende Regenerationszeiten. Die Belastungsintensität muss exakt gesteuert werden, idealerweise im aeroben Bereich, um das Immunsystem zu stärken (Open-Window-Effekt durch zu harte Einheiten vermeiden).</p>
+                </div>
+                <div class="split-box">
+                    <h4>🥗 Lebensstil</h4>
+                    <p>Integration von Alltagsbewegung (Vermeidung von Sedentarismus) sowie eine nährstoffreiche, ausgewogene Ernährung zur Unterstützung der biologischen Anpassungsprozesse.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Psychisch -->
+        <article class="dimension-block dim-psych">
+            <h3><span style="font-size: 1.5rem;">🧠</span> Psychische Dimension</h3>
+            <div class="split-content">
+                <div class="split-box">
+                    <h4>🏃♂️ Training</h4>
+                    <p>Der Sport darf nicht zur psychischen Belastung (Stressfaktor) werden. Wettkampfdruck, ständige Leistungsvergleiche oder Zwänge (z. B. Sportsucht) widersprechen dem Gesundheitsgedanken diametral. Der Fokus liegt auf dem Erlebnis, nicht auf dem Ergebnis.</p>
+                </div>
+                <div class="split-box">
+                    <h4>🧘♀️ Lebensstil</h4>
+                    <p>Die Nutzung von Sport als bewusstem Puffer gegen Alltags- und Berufsstress. Erlernen von Entspannungstechniken zur aktiven Steuerung des vegetativen Nervensystems (Sympathikus-/Parasympathikus-Balance).</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Sozial -->
+        <article class="dimension-block dim-social">
+            <h3><span style="font-size: 1.5rem;">🤝</span> Soziale Dimension</h3>
+            <div class="split-content">
+                <div class="split-box">
+                    <h4>🏃♂️ Training</h4>
+                    <p>Vermeidung von sozialer Isolation durch extremes Einzeltraining. Gesundheitssport sollte idealerweise gruppenorientiert (z. B. im Breitensportverein) stattfinden.</p>
+                </div>
+                <div class="split-box">
+                    <h4>💬 Lebensstil</h4>
+                    <p>Dies fördert die soziale Bindung, gegenseitige Motivation (Adherence) und das emotionale Wohlbefinden im Alltag.</p>
+                </div>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- Canvas Table -->
+    <section class="canvas-section">
+        <h2>Leistungssport vs. Gesundheitssport</h2>
+        <p>Die klare Gegenüberstellung der Paradigmen in der Trainingswissenschaft.</p>
+        <canvas id="comparisonTable" width="1000" height="400"></canvas>
+    </section>
+
+    <!-- Abitur Transfer -->
+    <section class="abitur-diagnostic">
+        <h2>🎓 Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die <strong>"Ableitung von Konsequenzen"</strong> ist ein Operator im höchsten Anforderungsbereich (AFB III). Hier wird verlangt, dass du eine fiktive Ausgangssituation bewertest und konkrete, theoriegeleitete Handlungsanweisungen entwirfst.
+        </p>
+
+        <div class="case-study">
+            <h4>Die Fallstudie des ambitionierten Freizeitsportlers</h4>
+            <p>„Ein Manager beginnt zum Stressabbau mit dem Marathon-Training. Er trainiert verbissen 6-mal die Woche, trackt jede Kalorie und isoliert sich von Freunden, weil er abends trainieren muss. Letztlich ist er oft krank und gestresst.“</p>
+        </div>
+
+        <div class="analysis-block">
+            <h3>Deine eA-Analyse & Konsequenzen (Matrix-Methode)</h3>
+            <p style="color: #9ca3af; margin-bottom: 1.5rem;">Du musst erkennen, dass das Motiv des Managers (Stressabbau) und sein tatsächliches Handeln massiv kollidieren. Wende den ganzheitlichen Gesundheitsbegriff an, um seinen Lebensstil zu korrigieren:</p>
+            
+            <div class="matrix-row">
+                <div class="dim-label">Physisch</div>
+                <p>Er muss Umfang und Intensität reduzieren (z. B. auf 3-mal pro Woche), da die permanente anaerobe Belastung sein Immunsystem schwächt. Krafttraining muss als Ausgleich ergänzt werden.</p>
+            </div>
+            
+            <div class="matrix-row">
+                <div class="dim-label" style="color: #a78bfa;">Psychisch</div>
+                <p>Er muss das Kalorien-Tracking und den Wettkampfgedanken ablegen, um den extrinsischen Druck zu entfernen und intrinsische Motivation (Spaß am Laufen) wiederzufinden.</p>
+            </div>
+            
+            <div class="matrix-row">
+                <div class="dim-label" style="color: #fb7185;">Sozial</div>
+                <p>Er sollte sich einem Lauftreff anschließen, anstatt isoliert zu trainieren, um die soziale Dimension der Gesundheit wieder in seinen Lebensstil zu integrieren.</p>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <h4>💡 Tipp für die Formulierung in der Klausur</h4>
+            <p style="color: #fef3c7; font-style: italic;">
+                Nutze in deinen Antworten immer die <strong>Wenn-Dann-Logik</strong> auf Basis der Biologie. Beispiel: "Wenn der Sportler die Intensität nicht auf ein gesundheitsorientiertes, moderates Niveau senkt, dann haben die Strukturen des passiven Bewegungsapparates (Knorpel, Bänder) keine Zeit zur biologischen Adaptation, was unweigerlich zu chronischen Sportschäden führt."
+            </p>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    // --- Canvas Table Rendering ---
+    const canvas = document.getElementById('comparisonTable');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Layout configuration
+    const cols = [
+        { title: "Kriterium", x: 0, w: 250, align: 'left', headerColor: '#1f2937', color: '#1f2937', bg: '#f9fafb' },
+        { title: "Leistungssport", x: 250, w: 375, align: 'center', headerColor: '#b91c1c', color: '#b91c1c', bg: '#fef2f2' },
+        { title: "Gesundheitssport", x: 625, w: 375, align: 'center', headerColor: '#0d9488', color: '#0d9488', bg: '#f0fdfa' }
+    ];
+
+    const rows = [
+        { 
+            crit: "1. Zielsetzung", 
+            ls: "Leistungsmaximierung", 
+            gs: "Erhalt der Lebensqualität" 
+        },
+        { 
+            crit: "2. Belastungsintensität", 
+            ls: "Maximal / Grenzgängerisch", 
+            gs: "Moderat / Optimal" 
+        },
+        { 
+            crit: "3. Trainingsstruktur", 
+            ls: "Hochspezialisiert", 
+            gs: "Vielseitig / Ganzheitlich" 
+        },
+        { 
+            crit: "4. Psychologischer Fokus", 
+            ls: "Extrinsisch / Sieg / Wettkampf", 
+            gs: "Intrinsisch / Wohlbefinden / Stressabbau" 
+        }
+    ];
+
+    const headerH = 60;
+    const rowH = (h - headerH) / rows.length;
+
+    // Helper: Draw text wrapped/centered
+    function drawCellText(text, x, y, width, height, align, color, font) {
+        ctx.fillStyle = color;
+        ctx.font = font;
+        ctx.textBaseline = 'middle';
+        
+        let posX = x + 20; // default left padding
+        if(align === 'center') {
+            ctx.textAlign = 'center';
+            posX = x + width / 2;
+        } else {
+            ctx.textAlign = 'left';
+        }
+
+        // Simple manual split for long known strings
+        let lines = text.split(" / ");
+        if(lines.length > 1 && width < 300) {
+            // just to handle general wrapping if needed, but our layout is wide enough.
+            // Let's just print it. If it has " / ", we can replace with " / \n" for visual balance if needed.
+        }
+
+        ctx.fillText(text, posX, y + height / 2);
+    }
+
+    // 1. Draw Backgrounds for columns
+    cols.forEach(col => {
+        ctx.fillStyle = col.bg;
+        ctx.fillRect(col.x, headerH, col.w, h - headerH);
+    });
+
+    // 2. Draw Header
+    cols.forEach(col => {
+        ctx.fillStyle = col.headerColor;
+        ctx.fillRect(col.x, 0, col.w, headerH);
+        drawCellText(col.title, col.x, 0, col.w, headerH, 'center', '#ffffff', 'bold 18px Lato');
+    });
+
+    // 3. Draw Rows and Grid Lines
+    ctx.strokeStyle = '#e5e7eb';
+    ctx.lineWidth = 1;
+
+    rows.forEach((row, i) => {
+        const currentY = headerH + i * rowH;
+        
+        // Top border for the row
+        ctx.beginPath();
+        ctx.moveTo(0, currentY);
+        ctx.lineTo(w, currentY);
+        ctx.stroke();
+
+        // Kriterium
+        drawCellText(row.crit, cols[0].x, currentY, cols[0].w, rowH, cols[0].align, cols[0].color, 'bold 16px Lato');
+        // Leistungssport
+        drawCellText(row.ls, cols[1].x, currentY, cols[1].w, rowH, cols[1].align, cols[1].color, '600 16px Lato');
+        // Gesundheitssport
+        drawCellText(row.gs, cols[2].x, currentY, cols[2].w, rowH, cols[2].align, cols[2].color, '600 16px Lato');
+    });
+
+    // Draw Vertical Dividers
+    ctx.beginPath();
+    ctx.moveTo(cols[1].x, 0); ctx.lineTo(cols[1].x, h);
+    ctx.moveTo(cols[2].x, 0); ctx.lineTo(cols[2].x, h);
+    ctx.stroke();
+
+    // Draw Outer Border
+    ctx.strokeStyle = '#cbd5e1';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(0, 0, w, h);
+
+</script>
+</body>
+</html>

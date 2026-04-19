@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Interaktion der Fähigkeiten</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        deep: {
+                            900: '#020617', // Very deep slate/black
+                            800: '#0f172a',
+                            700: '#1e293b',
+                            600: '#334155',
+                        },
+                        node: {
+                            kraft: '#f97316',      // Orange
+                            koord: '#0ea5e9',      // Cyan
+                            ausdauer: '#10b981',   // Emerald
+                            beweglich: '#8b5cf6',  // Violet
+                        },
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#eab308', // Yellow
+                            dark: '#a16207',
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.4)',
+                        'glow-kraft': '0 0 20px rgba(249, 115, 22, 0.2)',
+                        'glow-koord': '0 0 20px rgba(14, 165, 233, 0.2)',
+                        'glow-ausdauer': '0 0 20px rgba(16, 185, 129, 0.2)',
+                        'glow-beweglich': '0 0 20px rgba(139, 92, 246, 0.2)',
+                        'glow-abitur': '0 0 30px rgba(234, 179, 8, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #020617;
+            color: #e2e8f0;
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(249, 115, 22, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 50% 80%, rgba(139, 92, 246, 0.03) 0%, transparent 25%);
+        }
+
+        /* Glassmorphism Connection Cards */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.25rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover Glow Effects */
+        .card-kraft:hover { transform: translateY(-5px); box-shadow: 0 15px 35px -5px rgba(249, 115, 22, 0.2); border-color: rgba(249, 115, 22, 0.4); }
+        .card-koord:hover { transform: translateY(-5px); box-shadow: 0 15px 35px -5px rgba(14, 165, 233, 0.2); border-color: rgba(14, 165, 233, 0.4); }
+        .card-ausdauer:hover { transform: translateY(-5px); box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.4); }
+        .card-beweglich:hover { transform: translateY(-5px); box-shadow: 0 15px 35px -5px rgba(139, 92, 246, 0.2); border-color: rgba(139, 92, 246, 0.4); }
+
+        .card-decorator {
+            position: absolute;
+            top: 0; right: 0;
+            width: 150px; height: 150px;
+            opacity: 0.1;
+            transform: translate(30%, -30%);
+            border-radius: 50%;
+            filter: blur(30px);
+        }
+
+        /* Bös Model Canvas Container */
+        .model-container {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, rgba(2, 6, 23, 0.95) 100%);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 2px 20px rgba(0,0,0,0.8), 0 20px 40px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        /* Abitur Masterclass Box */
+        .abitur-gold-box {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(2, 6, 23, 0.95) 100%);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            border-top: 4px solid #eab308;
+            position: relative;
+        }
+
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans leading-relaxed">
+
+    <!-- Sticky Header -->
+    <header class="bg-deep-900/80 backdrop-blur-lg border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <span class="bg-white/10 text-white font-bold px-3 py-1 rounded-md text-sm font-display tracking-widest">1.6.2b</span>
+                <h1 class="text-xl font-display font-bold text-gray-100 hidden sm:block tracking-wide">Interaktion der Fähigkeiten</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex gap-2">
+                    <div class="w-2 h-2 rounded-full bg-node-kraft animate-pulse"></div>
+                    <div class="w-2 h-2 rounded-full bg-node-koord animate-pulse" style="animation-delay: 0.2s"></div>
+                    <div class="w-2 h-2 rounded-full bg-node-ausdauer animate-pulse" style="animation-delay: 0.4s"></div>
+                </div>
+                <span class="text-xs font-semibold text-gray-400 uppercase tracking-widest border-l border-white/10 pl-3">Systems View</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 space-y-20">
+
+        <!-- Introduction -->
+        <section class="max-w-4xl relative z-10">
+            <h2 class="text-4xl md:text-6xl font-display font-bold text-white mb-6 leading-tight tracking-tight">
+                Wechselbeziehungen im <br>
+                <span class="bg-gradient-to-r from-gray-200 to-gray-500 gradient-text">komplexen Beziehungsgeflecht</span>
+            </h2>
+            <p class="text-xl text-gray-400 leading-relaxed font-light mb-8">
+                Konditionelle und koordinative Fähigkeiten existieren in der sportlichen Bewegungspraxis niemals isoliert. Sie durchdringen sich gegenseitig und bilden ein komplexes Beziehungsgeflecht.
+            </p>
+            <div class="bg-deep-800/50 border-l-2 border-gray-500 p-6 rounded-r-2xl backdrop-blur-sm">
+                <p class="text-gray-300">
+                    Die Schülerinnen und Schüler müssen im Abitur die Wechselbeziehungen zwischen Schnelligkeit und den weiteren konditionellen Fähigkeiten analysieren können. Die <strong class="text-white">Schnelligkeit</strong> weist hierbei besonders enge und spannungsreiche Interaktionen mit Kraft, Ausdauer, Koordination und Beweglichkeit auf.
+                </p>
+            </div>
+        </section>
+
+        <!-- 2x2 Grid for the 4 Interactions -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+            
+            <!-- 1. Schnelligkeit & Kraft -->
+            <article class="glass-card card-kraft p-8 md:p-10">
+                <div class="card-decorator bg-node-kraft"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-node-kraft/10 flex items-center justify-center text-node-kraft border border-node-kraft/20 shadow-glow-kraft">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-display font-bold text-white">1. Schnelligkeit & Kraft</h3>
+                    </div>
+                    <h4 class="text-node-kraft font-semibold text-sm uppercase tracking-wider mb-4">Eine unabdingbare Symbiose</h4>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        Zwischen Schnelligkeit and Kraft besteht die stärkste positive Wechselbeziehung. Das schnellstmögliche Überwinden von Widerständen hängt maßgeblich von der Maximalkraft ab.
+                    </p>
+                    <div class="bg-deep-900/60 p-4 rounded-xl border border-white/5 mb-4">
+                        <strong class="text-white text-xs uppercase block mb-1">Physiologische Begründung</strong>
+                        <p class="text-sm text-gray-400">Arbeitsfähigkeit der Muskelfasern hängt von der Kraft ab, limitiert durch schnelle ATP-Verfügbarkeit. Je höher das absolute Kraftniveau, desto schneller kann ein Gewicht (z. B. Kugel oder eigener Körper) beschleunigt werden.</p>
+                    </div>
+                    <div class="border-l-2 border-node-kraft pl-4">
+                        <strong class="text-white text-sm block">Das Resultat: Die Schnellkraft</strong>
+                        <p class="text-xs text-gray-400 mt-1">Hängt von Maximalkraft (Widerstand bewältigen) und Schnelligkeit (exzellentes Nerv-Muskel-Zusammenspiel für extrem kurzen Kraftstoß) ab.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 2. Schnelligkeit & Koordination -->
+            <article class="glass-card card-koord p-8 md:p-10">
+                <div class="card-decorator bg-node-koord"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-node-koord/10 flex items-center justify-center text-node-koord border border-node-koord/20 shadow-glow-koord">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-display font-bold text-white">2. Schnelligkeit & Koordination</h3>
+                    </div>
+                    <h4 class="text-node-koord font-semibold text-sm uppercase tracking-wider mb-4">Das Strukturmodell nach Bös</h4>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        Schnelligkeit ist untrennbar mit der Koordination verbunden. Neben der energetischen Komponente ist sie <strong class="text-white">hochgradig informationsorientiert</strong> (schnelle Signalaufnahme über Analysatoren & ZNS-Verarbeitung).
+                    </p>
+                    <div class="bg-node-koord/10 border border-node-koord/20 p-5 rounded-xl">
+                        <strong class="text-node-koord block mb-2">Die absolute Sonderrolle</strong>
+                        <p class="text-sm text-gray-300">
+                            Sie ist im System der motorischen Fähigkeiten die <em>einzige</em> Fähigkeit, die gleichzeitig eine <strong>energetisch determinierte (konditionelle)</strong> als auch eine <strong>informationsorientierte (koordinative)</strong> Komponente besitzt. Ohne das ZNS sind Reaktions- und Frequenzschnelligkeit unmöglich!
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 3. Schnelligkeit & Ausdauer -->
+            <article class="glass-card card-ausdauer p-8 md:p-10">
+                <div class="card-decorator bg-node-ausdauer"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-node-ausdauer/10 flex items-center justify-center text-node-ausdauer border border-node-ausdauer/20 shadow-glow-ausdauer">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-display font-bold text-white">3. Schnelligkeit & Ausdauer</h3>
+                    </div>
+                    <h4 class="text-node-ausdauer font-semibold text-sm uppercase tracking-wider mb-4">Konkurrenz & Notwendige Basis</h4>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        Die Beziehung ist ambivalent und findet auf zwei Ebenen statt:
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="bg-deep-900/60 p-4 rounded-xl border border-white/5">
+                            <span class="text-red-400 font-bold text-xs uppercase block mb-1">1. Auf Zellebene (Konkurrenz)</span>
+                            <span class="text-sm text-gray-400">Zu hohes Ausdauervolumen adaptiert Muskulatur zu ST-Fasern. Dies beeinträchtigt die explosive Kontraktionsgeschwindigkeit der FT-Fasern massiv.</span>
+                        </li>
+                        <li class="bg-deep-900/60 p-4 rounded-xl border border-white/5">
+                            <span class="text-node-ausdauer font-bold text-xs uppercase block mb-1">2. Systemische Ebene (Ergänzung)</span>
+                            <span class="text-sm text-gray-400">Solide Aerobe Basis ist zwingend! Bei wiederholten Sprints beschleunigt die Kapillarisierung (Ausdauer) in den Pausen die ATP/KP-Resynthese und den Laktatabbau.</span>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- 4. Schnelligkeit & Beweglichkeit -->
+            <article class="glass-card card-beweglich p-8 md:p-10">
+                <div class="card-decorator bg-node-beweglich"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-node-beweglich/10 flex items-center justify-center text-node-beweglich border border-node-beweglich/20 shadow-glow-beweglich">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-display font-bold text-white">4. Schnelligkeit & Beweglichkeit</h3>
+                    </div>
+                    <h4 class="text-node-beweglich font-semibold text-sm uppercase tracking-wider mb-4">Der mechanische Ermöglicher</h4>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        Die Beweglichkeit wirkt als mechanischer Ermöglicher für maximale Schnelligkeitsleistungen, da sie die physikalischen Hebelbedingungen verbessert.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="border-l-2 border-node-beweglich pl-4">
+                            <strong class="text-white text-sm block">Reduktion innerer Widerstände</strong>
+                            <p class="text-xs text-gray-400 mt-1">Dehnfähigkeit der Antagonisten reduziert inneren Widerstand (z. B. gedehnte Oberschenkelrückseite beim Sprint lässt den Quadrizeps explosiver vorschwingen).</p>
+                        </div>
+                        <div class="border-l-2 border-node-beweglich pl-4 mt-2">
+                            <strong class="text-white text-sm block">Vergrößerung der Amplitude</strong>
+                            <p class="text-xs text-gray-400 mt-1">Hohe Beweglichkeit = längere Beschleunigungswege (Diskuswurf) oder größere Schrittlängen. Resultiert bei gleicher Frequenz in höherer Endgeschwindigkeit.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Dynamic Model Visualization (Canvas) -->
+        <section class="space-y-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-white/10 pb-4">
+                <div>
+                    <h2 class="text-3xl font-display font-bold text-white tracking-tight">Strukturmodell nach Bös</h2>
+                    <p class="text-gray-400 text-sm mt-1">Konzeptionelle Systemarchitektur der motorischen Fähigkeiten</p>
+                </div>
+            </div>
+
+            <!-- Canvas Wrapper -->
+            <div class="model-container p-6 md:p-10 w-full">
+                <!-- Overlay Legend -->
+                <div class="absolute top-4 left-6 flex gap-4 text-xs font-display uppercase tracking-widest text-gray-400 z-10">
+                    <div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-node-kraft"></div> Energie</div>
+                    <div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-node-koord"></div> Information</div>
+                </div>
+                
+                <canvas id="boesCanvas" class="w-full h-[450px] md:h-[550px] block"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Transfer Box -->
+        <section class="abitur-gold-box rounded-2xl p-8 md:p-12 shadow-glow-abitur relative overflow-hidden z-10 mt-20">
+            <!-- Background Graphic Elements -->
+            <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-abitur/5 rounded-full blur-[80px] pointer-events-none"></div>
+            <svg class="absolute right-0 top-0 opacity-10 transform translate-x-1/4 -translate-y-1/4 w-[400px] h-[400px] text-abitur" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b border-gray-700 pb-8">
+                    <div class="bg-gradient-to-br from-yellow-400 to-yellow-600 text-deep-900 p-5 rounded-2xl shadow-lg">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-5xl font-display font-bold text-white tracking-tight mb-2">Abitur-Transfer & Praxis</h2>
+                        <div class="inline-flex items-center gap-2">
+                            <span class="bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded">eA-Niveau</span>
+                            <span class="text-abitur font-medium text-lg">Komplexe Fallanalysen & Modelle</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <!-- Point 1: Bös Model -->
+                    <div class="bg-deep-900/60 p-6 md:p-8 rounded-2xl border border-white/5">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-abitur text-2xl font-display">1.</span> Klausurklassiker: Interpretation des Bös-Modells
+                        </h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            In materialgestützten Klausuren musst du Abbildungen zum Strukturmodell interpretieren (z. B. Abb. 3 aus den illustrierenden Prüfungsaufgaben). Die Argumentation ist hier der Schlüssel zur vollen Punktzahl:
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mt-6">
+                            <div class="border-l-2 border-node-kraft pl-4">
+                                <strong class="text-white block mb-1">Energetisch (Ausdauer/Kraft)</strong>
+                                <span class="text-gray-400">Basiert rein auf der Bereitstellung von Stoffwechselenergie (aerob/anaerob) für die Muskelkontraktion.</span>
+                            </div>
+                            <div class="border-l-2 border-node-koord pl-4">
+                                <strong class="text-white block mb-1">Informationsorientiert (Koord.)</strong>
+                                <span class="text-gray-400">Fußt rein auf der Informationsaufnahme (Analysatoren) und -verarbeitung im Gehirn (ZNS).</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 bg-abitur/10 border border-abitur/30 p-4 rounded-xl text-sm">
+                            <strong class="text-abitur block mb-1">Die Zwitterstellung beweisen!</strong>
+                            <p class="text-gray-200">Du musst kausal erklären, warum Schnelligkeit in der Mitte steht: Sie braucht ATP für das schnelle Überwinden von Widerständen (<em>energetisch</em>) UND das ZNS für die schnelle neuronale Signalverarbeitung (<em>informationsorientiert</em>).</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 2: Leistungsdiagnostik -->
+                    <div class="bg-deep-900/60 p-6 md:p-8 rounded-2xl border border-white/5">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-abitur text-2xl font-display">2.</span> Transferleistung: Leistungsdiagnostik
+                        </h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            <strong>Szenario:</strong> Ein Zehnkämpfer kann seine Sprintzeit über 100m trotz intensivem <em>Sprinttraining</em> nicht mehr verbessern. 
+                        </p>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            <strong>Erwartungshorizont:</strong> Du musst lösungsorientierte Wechselbeziehungen aufzeigen! Argumentiere, dass das Defizit in einer <em>anderen</em> Grundeigenschaft liegt. Zum Beispiel:
+                        </p>
+                        <ul class="list-disc list-inside text-sm text-gray-400 mt-4 space-y-2 ml-2">
+                            <li><strong class="text-white">Unzureichende Maximalkraft</strong>, welche die Schnellkraft (den Antritt aus dem Block) limitiert.</li>
+                            <li><strong class="text-white">Mangelnde Beweglichkeit</strong> (verkürzte ischiocrurale Muskulatur), die als mechanischer Widerstand die Schrittlänge begrenzt.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-deep-900 border-t border-white/5 py-12 mt-12 text-center">
+        <p class="text-gray-500 font-display font-bold uppercase tracking-widest text-xs mb-2">Abiturwissen Sport (G9, eA)</p>
+        <p class="text-gray-600 text-sm">Lernbereich 1.6.2b Interaktion der motorischen Fähigkeiten</p>
+    </footer>
+
+    <!-- Canvas Logic for Bös Model Architecture -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('boesCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let time = 0;
+            let particles = [];
+
+            // Node definitions
+            const nodes = {
+                dach: { text: "ALLGEMEINE MOTORISCHE LEISTUNGSFÄHIGKEIT" },
+                konditionell: { title: "ENERGETISCH DETERMINIERT", sub: "(Konditionell)", color: "#f97316" },
+                koordinativ: { title: "INFORMATIONSORIENTIERT", sub: "(Koordinativ)", color: "#0ea5e9" },
+                ausdauer: { text: "Ausdauer", color: "#10b981" },
+                kraft: { text: "Kraft", color: "#f97316" },
+                koordination: { text: "Koordination", color: "#0ea5e9" },
+                schnelligkeit: { text: "SCHNELLIGKEIT", color: "#eab308", hybrid: true } // Yellow/Hybrid
+            };
+
+            class Particle {
+                constructor(startX, startY, endX, endY, color) {
+                    this.startX = startX;
+                    this.startY = startY;
+                    this.endX = endX;
+                    this.endY = endY;
+                    this.color = color;
+                    this.progress = Math.random(); // Start randomly along path
+                    this.speed = 0.003 + Math.random() * 0.003;
+                }
+                update() {
+                    this.progress += this.speed;
+                    if (this.progress > 1) this.progress = 0;
+                }
+                draw(ctx) {
+                    const x = this.startX + (this.endX - this.startX) * this.progress;
+                    // Add slight sine wave wobble for energy flow feel
+                    const wobble = Math.sin(this.progress * Math.PI * 8) * 5;
+                    const dx = this.endX - this.startX;
+                    const dy = this.endY - this.startY;
+                    const angle = Math.atan2(dy, dx) + Math.PI/2; // Perpendicular
+                    
+                    const finalX = x + Math.cos(angle) * wobble;
+                    const finalY = this.startY + (this.endY - this.startY) * this.progress + Math.sin(angle) * wobble;
+
+                    ctx.shadowColor = this.color;
+                    ctx.shadowBlur = 10;
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(finalX, finalY, 2.5, 0, Math.PI*2);
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            function drawRoundedRect(ctx, x, y, w, h, r, fillStyle, strokeStyle, shadowColor) {
+                ctx.beginPath();
+                ctx.moveTo(x + r, y);
+                ctx.lineTo(x + w - r, y);
+                ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+                ctx.lineTo(x + w, y + h - r);
+                ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+                ctx.lineTo(x + r, y + h);
+                ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+                ctx.lineTo(x, y + r);
+                ctx.quadraticCurveTo(x, y, x + r, y);
+                ctx.closePath();
+                
+                if (shadowColor) {
+                    ctx.shadowColor = shadowColor;
+                    ctx.shadowBlur = 15;
+                }
+                
+                if (fillStyle) {
+                    ctx.fillStyle = fillStyle;
+                    ctx.fill();
+                }
+                
+                ctx.shadowBlur = 0; // reset
+                
+                if (strokeStyle) {
+                    ctx.strokeStyle = strokeStyle;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+            }
+
+            // Create particles once layout dimensions are known inside draw loop
+            let particlesCreated = false;
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time += 0.05;
+
+                // --- Layout Coordinates ---
+                const roofY = h * 0.15;
+                const pillarTopY = h * 0.35;
+                const pillarBottomY = h * 0.75;
+                
+                const leftX = w * 0.25;
+                const rightX = w * 0.75;
+                const centerX = w * 0.5;
+
+                // Initialize particles
+                if (!particlesCreated) {
+                    // From left pillar to speed
+                    for(let i=0; i<30; i++) particles.push(new Particle(leftX, pillarBottomY - 20, centerX - 80, pillarBottomY - 20, nodes.kraft.color));
+                    // From right pillar to speed
+                    for(let i=0; i<30; i++) particles.push(new Particle(rightX, pillarBottomY - 20, centerX + 80, pillarBottomY - 20, nodes.koordinativ.color));
+                    particlesCreated = true;
+                }
+
+                // --- 1. Draw Connections (Lines/Pipes) ---
+                ctx.lineWidth = 4;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                // Roof to Pillars
+                ctx.beginPath();
+                ctx.moveTo(leftX, roofY + 20); ctx.lineTo(leftX, pillarTopY - 30);
+                ctx.moveTo(rightX, roofY + 20); ctx.lineTo(rightX, pillarTopY - 30);
+                // Roof horizontal line
+                ctx.moveTo(leftX, roofY + 20); ctx.lineTo(rightX, roofY + 20);
+                // Roof to Center (Schnelligkeit)
+                ctx.moveTo(centerX, roofY + 20); ctx.lineTo(centerX, pillarBottomY - 50);
+                
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+                ctx.stroke();
+
+                // Connections to Speed Node (The Hybrid Links)
+                ctx.beginPath();
+                ctx.moveTo(leftX, pillarBottomY - 20); ctx.lineTo(centerX - 80, pillarBottomY - 20);
+                ctx.strokeStyle = 'rgba(249, 115, 22, 0.3)'; // Orange tinted
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(rightX, pillarBottomY - 20); ctx.lineTo(centerX + 80, pillarBottomY - 20);
+                ctx.strokeStyle = 'rgba(14, 165, 233, 0.3)'; // Cyan tinted
+                ctx.stroke();
+
+                // --- 2. Draw Particles (Energy & Info Flow) ---
+                particles.forEach(p => {
+                    p.update();
+                    p.draw(ctx);
+                });
+
+                // --- 3. Draw Nodes ---
+                
+                // Roof
+                ctx.font = 'bold 16px "Space Grotesk"';
+                let txtW = ctx.measureText(nodes.dach.text).width;
+                drawRoundedRect(ctx, centerX - txtW/2 - 20, roofY - 20, txtW + 40, 40, 8, 'rgba(30, 41, 59, 0.9)', 'rgba(255,255,255,0.2)', null);
+                ctx.fillStyle = '#ffffff';
+                ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                ctx.fillText(nodes.dach.text, centerX, roofY);
+
+                // Left Pillar (Energetisch)
+                const pWidth = w > 600 ? 200 : 140;
+                drawRoundedRect(ctx, leftX - pWidth/2, pillarTopY, pWidth, 80, 12, 'rgba(15, 23, 42, 0.9)', nodes.konditionell.color, 'rgba(249, 115, 22, 0.2)');
+                ctx.fillStyle = nodes.konditionell.color;
+                ctx.font = 'bold 13px "Space Grotesk"';
+                ctx.fillText(nodes.konditionell.title, leftX, pillarTopY + 30);
+                ctx.font = 'italic 12px "Inter"';
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillText(nodes.konditionell.sub, leftX, pillarTopY + 50);
+
+                // Left Sub-Nodes (Ausdauer & Kraft)
+                drawRoundedRect(ctx, leftX - pWidth/2, pillarBottomY - 40, pWidth/2 - 5, 40, 6, 'rgba(16, 185, 129, 0.2)', nodes.ausdauer.color, null);
+                ctx.fillStyle = nodes.ausdauer.color; ctx.font = '600 13px Inter'; ctx.fillText(nodes.ausdauer.text, leftX - pWidth/4, pillarBottomY - 20);
+                
+                drawRoundedRect(ctx, leftX + 5, pillarBottomY - 40, pWidth/2 - 5, 40, 6, 'rgba(249, 115, 22, 0.2)', nodes.kraft.color, null);
+                ctx.fillStyle = nodes.kraft.color; ctx.font = '600 13px Inter'; ctx.fillText(nodes.kraft.text, leftX + pWidth/4, pillarBottomY - 20);
+
+                // Right Pillar (Koordinativ)
+                drawRoundedRect(ctx, rightX - pWidth/2, pillarTopY, pWidth, 80, 12, 'rgba(15, 23, 42, 0.9)', nodes.koordinativ.color, 'rgba(14, 165, 233, 0.2)');
+                ctx.fillStyle = nodes.koordinativ.color;
+                ctx.font = 'bold 13px "Space Grotesk"';
+                ctx.fillText(nodes.koordinativ.title, rightX, pillarTopY + 30);
+                ctx.font = 'italic 12px "Inter"';
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillText(nodes.koordinativ.sub, rightX, pillarTopY + 50);
+
+                // Right Sub-Node (Koordination)
+                drawRoundedRect(ctx, rightX - pWidth/2, pillarBottomY - 40, pWidth, 40, 6, 'rgba(14, 165, 233, 0.2)', nodes.koordination.color, null);
+                ctx.fillStyle = nodes.koordination.color; ctx.font = '600 13px Inter'; ctx.fillText(nodes.koordination.text, rightX, pillarBottomY - 20);
+
+
+                // Center Node: Schnelligkeit (The Zwitter)
+                // Pulse effect
+                const sPulse = Math.sin(time) * 4;
+                
+                // Draw custom hybrid gradient box
+                const grad = ctx.createLinearGradient(centerX - 80, 0, centerX + 80, 0);
+                grad.addColorStop(0, 'rgba(249, 115, 22, 0.3)'); // Orange left
+                grad.addColorStop(0.5, 'rgba(234, 179, 8, 0.5)'); // Yellow mid
+                grad.addColorStop(1, 'rgba(14, 165, 233, 0.3)'); // Cyan right
+
+                drawRoundedRect(ctx, centerX - 80 - sPulse/2, pillarBottomY - 50 - sPulse/2, 160 + sPulse, 60 + sPulse, 16, grad, nodes.schnelligkeit.color, 'rgba(234, 179, 8, 0.4)');
+                
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '900 18px "Space Grotesk"';
+                ctx.fillText(nodes.schnelligkeit.text, centerX, pillarBottomY - 20);
+                
+                // Add tiny "Zwitterstellung" badge
+                ctx.fillStyle = '#eab308';
+                ctx.font = 'bold 10px Inter';
+                ctx.fillText('ZWITTERSTELLUNG', centerX, pillarBottomY + 25);
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

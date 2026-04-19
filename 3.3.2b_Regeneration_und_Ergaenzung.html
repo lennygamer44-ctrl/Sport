@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.3.2b Regeneration und Ergänzung - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            /* Recovery Theme Colors */
+            --bg-main: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            
+            --regen-dark: #0f172a;       /* Deep Night Blue */
+            --regen-purple: #7c3aed;     /* Recovery Violet */
+            --anabolic-green: #10b981;   /* Anabolic/Growth Green */
+            --hydrate-blue: #0ea5e9;     /* Hydration Cyan */
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Exam Box */
+            --abi-bg: #1e1b4b;           /* Deepest Indigo */
+            --abi-gold: #facc15;         /* Gold/Amber */
+            --abi-text: #f1f5f9;
+
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 30px -10px rgba(124, 58, 237, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            /* Subtle dotted background */
+            background-image: radial-gradient(rgba(124, 58, 237, 0.05) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        /* --- 1. HEADER --- */
+        .doc-header {
+            background: var(--regen-dark);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 8px solid var(--regen-purple);
+        }
+
+        .doc-header::after {
+            content: '🔋';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 6rem;
+            opacity: 0.1;
+        }
+
+        .doc-header h1 {
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .doc-header .intro {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            max-width: 900px;
+        }
+
+        .highlight-green {
+            color: var(--anabolic-green);
+            font-weight: 700;
+        }
+
+        /* --- 2. GRID LAYOUT FOR SECTIONS 1-3 --- */
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .nutri-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .nutri-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .nutri-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Card Variations */
+        .card-window h2 { color: var(--anabolic-green); border-bottom-color: #d1fae5; }
+        .card-carbs h2 { color: #d97706; border-bottom-color: #fef3c7; }
+        .card-protein h2 { color: #be123c; border-bottom-color: #ffe4e6; }
+
+        .infobox {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--text-muted);
+        }
+
+        .card-window .infobox { border-left-color: var(--anabolic-green); background: #f0fdf4; }
+        .card-carbs .infobox { border-left-color: #f59e0b; background: #fffbeb; }
+        .card-protein .infobox { border-left-color: #e11d48; background: #fff1f2; }
+
+        .infobox h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .infobox p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .important-rule {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-weight: 700;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* --- 3. CANVAS SECTION --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .canvas-section h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--regen-dark);
+        }
+
+        .canvas-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .canvas-wrapper {
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            overflow-x: auto;
+            border: 1px solid #e2e8f0;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- 4. NAHRUNGSERGÄNZUNGSMITTEL --- */
+        .nem-section {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            border-left: 8px solid var(--regen-purple);
+        }
+
+        .nem-section h2 {
+            font-size: 2.2rem;
+            color: var(--regen-purple);
+            margin-bottom: 1rem;
+        }
+
+        .nem-intro {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+
+        .nem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .nem-box {
+            padding: 2rem;
+            border-radius: var(--radius-md);
+        }
+
+        .nem-pro {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+        }
+
+        .nem-pro h4 { color: #047857; margin-bottom: 1rem; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+
+        .nem-con {
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+        }
+
+        .nem-con h4 { color: #b91c1c; margin-bottom: 1rem; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+
+        /* --- 5. ABITUR TRANSFER BOX --- */
+        .abitur-strategy {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            position: relative;
+            border-top: 8px solid var(--abi-gold);
+            overflow: hidden;
+        }
+
+        .abitur-strategy::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; width: 400px;
+            background: linear-gradient(90deg, transparent, rgba(250, 204, 21, 0.05));
+            pointer-events: none;
+        }
+
+        .abitur-strategy h2 {
+            color: var(--abi-gold);
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .case-study {
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid var(--abi-gold);
+            padding: 2rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin-bottom: 2rem;
+        }
+
+        .case-study h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .scenario-text {
+            color: #fca5a5;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 6px;
+        }
+
+        .solution-list {
+            list-style: none;
+        }
+
+        .solution-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #e2e8f0;
+        }
+
+        .solution-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--anabolic-green);
+            font-weight: 900;
+        }
+
+        .solution-list strong {
+            color: var(--abi-gold);
+        }
+
+        @media (max-width: 900px) {
+            .nem-grid { grid-template-columns: 1fr; }
+            .doc-header, .abitur-strategy { padding: 2rem; }
+            .doc-header h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>3.3.2b Regeneration und Ergänzung</h1>
+        <p class="intro">
+            Sobald die sportliche Belastung (z. B. der erste Tag eines Zehnkampfes oder ein hartes Ausdauertraining) beendet ist, schaltet der Organismus von der katabolen (abbauenden) in die <span class="highlight-green">anabole (aufbauende) Stoffwechsellage</span> um. Die Ernährung in dieser Phase ist der wichtigste exogene Faktor, um die Erholungsprozesse (Regeneration) einzuleiten und die biologische Anpassung (Superkompensation) zu ermöglichen.
+        </p>
+    </header>
+
+    <!-- 1-3. Nutrition Phases Grid -->
+    <section class="nutrition-grid">
+        
+        <!-- 1. Post-Belastung / Anaboles Fenster -->
+        <article class="nutri-card card-window">
+            <h2>⏱️ 1. Die Post-Belastungs-Phase</h2>
+            <p style="margin-bottom: 1.5rem;">Das sogenannte <strong>„Anabole Fenster“</strong>: In den ersten 45 bis 90 Minuten nach einer intensiven Belastung ist die Aufnahmefähigkeit der Muskelzellen für Nährstoffe massiv erhöht. Die Durchblutung ist noch gesteigert und Enzyme zur Glykogensynthese arbeiten auf Hochtouren.</p>
+            
+            <div class="infobox">
+                <h4>💧 Flüssigkeits- und Elektrolytausgleich</h4>
+                <p>Oberste Priorität hat die Rehydratation. Der Gewichtsverlust durch Schwitzen muss ausgeglichen werden (Natrium, Kalium).</p>
+                <div class="important-rule">Die 150 % - Regel</div>
+                <p style="margin-top: 0.5rem;">Es müssen 150 % der verlorenen Flüssigkeit getrunken werden, da die Niere einen Teil der zugeführten Flüssigkeit sofort wieder ausscheidet.</p>
+            </div>
+        </article>
+
+        <!-- 2. Kohlenhydrate -->
+        <article class="nutri-card card-carbs">
+            <h2>🔋 2. Energiespeicher füllen</h2>
+            <p style="margin-bottom: 1.5rem;">Die entleerten muskulären und hepatischen (in der Leber gelegenen) Glykogendepots müssen schnellstmöglich resynthetisiert werden.</p>
+            
+            <div class="infobox">
+                <h4>Unmittelbar nach Belastung</h4>
+                <p>Zufuhr von schnell verfügbaren, <strong>kurzkettigen Kohlenhydraten</strong> (hoher glykämischer Index, z. B. Maltodextrin, Fruchtschorlen). Sie provozieren einen schnellen <strong>Insulinausstoß</strong>. Insulin ist das stärkste anabole Hormon des Körpers und "schleust" die Glukose aktiv in die erschöpften Muskelzellen.</p>
+            </div>
+            <div class="infobox">
+                <h4>Im weiteren Verlauf</h4>
+                <p>Übergang zu <strong>komplexen Kohlenhydraten</strong> (Nudeln, Reis, Kartoffeln), um die Speicher über die nächsten 24 Stunden vollständig und nachhaltig aufzufüllen.</p>
+            </div>
+        </article>
+
+        <!-- 3. Proteine -->
+        <article class="nutri-card card-protein">
+            <h2>🧬 3. Gewebereparatur & Adaptation</h2>
+            <p style="margin-bottom: 1.5rem;">Während Kohlenhydrate die Energie liefern, sind Proteine (Eiweiße) das strukturelle Baumaterial für die Regeneration.</p>
+            
+            <div class="infobox">
+                <h4>Funktion nach der Belastung</h4>
+                <p>Training verursacht strukturelle <strong>Mikrotraumata</strong> (kleinste Risse) in den Z-Scheiben der Muskelfasern. Zudem müssen neue Enzyme für den Stoffwechsel gebildet werden. Hierfür benötigt der Körper essenzielle Aminosäuren.</p>
+            </div>
+            <div class="infobox">
+                <h4>Biologische Wertigkeit</h4>
+                <p>Entscheidend ist nicht nur die Menge, sondern die <strong>biologische Wertigkeit</strong>. Sie gibt an, wie effizient Nahrungsprotein in körpereigenes Protein umgewandelt wird. Die Kombination pflanzlicher und tierischer Proteinquellen (z. B. Kartoffeln mit Quark) erzielt oft die höchsten Wertigkeiten (über 130).</p>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- Canvas Graphic: Das Anabole Fenster -->
+    <section class="canvas-section">
+        <h3>Das "Anabole Fenster"</h3>
+        <p>Die enzymatische Aufnahmefähigkeit der Muskelzelle nach intensiver Belastung</p>
+        <div class="canvas-wrapper">
+            <canvas id="anabolicChart" width="900" height="400"></canvas>
+        </div>
+    </section>
+
+    <!-- 4. Supplements (NEM) -->
+    <section class="nem-section">
+        <h2>💊 4. Nahrungsergänzungsmittel (NEM)</h2>
+        <p class="nem-intro">Nahrungsergänzungsmittel (Supplements) sind hochkonzentrierte Nährstoffe in isolierter Form (z. B. Whey-Protein-Shakes, Creatin, BCAAs, Vitaminpräparate).</p>
+
+        <div class="nem-grid">
+            <div class="nem-box nem-pro">
+                <h4>✅ Vorteile im Leistungssport</h4>
+                <p>Sie ermöglichen eine exakt getimte, magenschonende und hochkonzentrierte Zufuhr von Makro- und Mikronährstoffen ohne unerwünschte Begleitstoffe (wie z. B. Fett in Fleisch oder Ballaststoffe, die die Verdauung verlangsamen würden).</p>
+            </div>
+
+            <div class="nem-box nem-con">
+                <h4>⚠️ Risiken und Kritik</h4>
+                <p style="margin-bottom: 0.8rem;">Bei einer ausgewogenen Basisernährung sind NEM im Breiten- und Gesundheitssport physiologisch oft überflüssig (Gefahr der <strong>Hypervitaminose</strong> bei fettlöslichen Vitaminen).</p>
+                <p>Im Leistungssport bergen sie zudem die immanente Gefahr der <strong>Dopingfalle</strong> (Verunreinigung von Supplements mit verbotenen anabolen Steroiden oder Stimulanzien während des Produktionsprozesses in Drittländern).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abitur Transfer Box -->
+    <section class="abitur-strategy">
+        <h2><span style="font-size: 2.8rem;">🏆</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die Ernährungsstrategie nach der Belastung ist ein <strong>absolutes Kernthema</strong>, insbesondere in Fallstudien zu Mehrtages-Wettkämpfen wie dem Zehnkampf.
+        </p>
+
+        <!-- Case 1 -->
+        <div class="case-study">
+            <h3>Ernährung am Ende von Tag 1 (Fallbeispiel Zehnkampf)</h3>
+            <div class="scenario-text">
+                Eine klassische eA-Aufgabe verlangt von dir, das Abendessen eines Zehnkämpfers nach dem 400-m-Lauf (letzte Disziplin an Tag 1) zu planen und biologisch zu begründen. Ein schweres Steak mit Pommes ist hier ein massiver Fehler!
+            </div>
+            
+            <p style="color: white; font-weight: bold; margin-bottom: 1rem;">Die Lösungsstrategie (Dein Masterplan):</p>
+            <ul class="solution-list">
+                <li><strong>Das Problem der Magenverweildauer:</strong> Du argumentierst, dass das fette Fleisch und die Pommes zu lange im Magen liegen; die Proteine stehen für die nächtliche Regeneration nicht schnell genug zur Verfügung.</li>
+                <li><strong>Sofortmaßnahme (T=0):</strong> Du forderst stattdessen einen leicht verdaulichen <strong>Recovery-Shake</strong> (kurzkettige KH + schnell resorbierbares Whey-Protein) unmittelbar nach dem Lauf, um das <span style="color: #10b981;">"anabole Fenster"</span> zu nutzen.</li>
+                <li><strong>Hauptmahlzeit (T+2h):</strong> Zwei Stunden später forderst du kohlenhydratreiche Kost (z.B. Nudeln) mit hochwertigem, fettarmem Protein (z.B. Hühnchen), um die <strong>Glykogendepots</strong> für Tag 2 maximal zu füllen und die strukturellen Muskelschäden in der Nacht zu reparieren.</li>
+            </ul>
+        </div>
+
+        <!-- Case 2 -->
+        <div class="case-study">
+            <h3>Kritische Bewertung von Supplements</h3>
+            <p>Wenn in einem Text ein Freizeitsportler Unmengen an Aminosäure-Pillen schluckt, nutzt du dieses Thema zur <strong>kritischen Reflexion</strong>. Du argumentierst, dass der minimale Mehrbedarf an Proteinen im Breitensport problemlos über eine ausgewogene Ernährung (Milchprodukte, Hülsenfrüchte) gedeckt werden kann.</p>
+            <p style="margin-top: 1rem; color: #fde047;">Der Einsatz isolierter Supplements dient hier primär <strong>ökonomischen Interessen der Hersteller</strong>, bringt aber keinen messbaren physiologischen Vorteil gegenüber normaler Nahrung im Hobbysport.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('anabolicChart');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Margins
+    const padL = 70;
+    const padR = 40;
+    const padT = 40;
+    const padB = 60;
+    const graphW = w - padL - padR;
+    const graphH = h - padT - padB;
+
+    // Time points in minutes (X-axis)
+    const timePoints = [0, 30, 45, 60, 90, 120, 180, 240];
+    const maxTime = 240;
+
+    // Helper to get X pixel coordinate
+    function getX(minutes) {
+        return padL + (minutes / maxTime) * graphW;
+    }
+
+    // Enzymatic uptake capacity in % (Y-axis) -> roughly exponential decay
+    // 0: 100%, 45: 90%, 90: 40%, 120: 20%, 240: 10%
+    const curveData = [
+        { t: 0, y: 100 },
+        { t: 30, y: 95 },
+        { t: 45, y: 90 },
+        { t: 60, y: 70 },
+        { t: 90, y: 35 },
+        { t: 120, y: 18 },
+        { t: 180, y: 12 },
+        { t: 240, y: 10 }
+    ];
+    const maxY = 100;
+
+    // Helper to get Y pixel coordinate
+    function getY(percent) {
+        return padT + graphH - (percent / maxY) * graphH;
+    }
+
+    // 1. Draw Grid & Axes
+    ctx.strokeStyle = '#cbd5e1';
+    ctx.lineWidth = 2;
+    
+    // Y-Axis
+    ctx.beginPath(); ctx.moveTo(padL, padT); ctx.lineTo(padL, h - padB); ctx.stroke();
+    // X-Axis
+    ctx.beginPath(); ctx.moveTo(padL, h - padB); ctx.lineTo(w - padR, h - padB); ctx.stroke();
+
+    // Y-Labels (100%, 50%, 0%)
+    ctx.fillStyle = '#64748b';
+    ctx.font = '13px Plus Jakarta Sans';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('100%', padL - 10, getY(100));
+    ctx.fillText('50%', padL - 10, getY(50));
+    ctx.fillText('0%', padL - 10, getY(0));
+
+    ctx.save();
+    ctx.translate(20, h/2);
+    ctx.rotate(-Math.PI/2);
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 14px Plus Jakarta Sans';
+    ctx.fillStyle = '#1e293b';
+    ctx.fillText('Enzymatische Aufnahmefähigkeit', 0, 0);
+    ctx.restore();
+
+    // X-Labels (Time)
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillStyle = '#64748b';
+    timePoints.forEach(t => {
+        const px = getX(t);
+        // Tick
+        ctx.beginPath(); ctx.moveTo(px, h - padB); ctx.lineTo(px, h - padB + 5); ctx.stroke();
+        // Label
+        ctx.fillText(t + 'm', px, h - padB + 10);
+    });
+    ctx.fillStyle = '#1e293b';
+    ctx.font = 'bold 14px Plus Jakarta Sans';
+    ctx.fillText('Zeit nach Belastungsende (Minuten)', padL + graphW/2, h - padB + 35);
+
+    // 2. Highlight "Anaboles Fenster" (0 to 45 mins)
+    const x45 = getX(45);
+    const p45 = curveData.find(d => d.t === 45);
+    
+    // Create Path for the highlighted area
+    ctx.beginPath();
+    ctx.moveTo(getX(0), getY(0));
+    ctx.lineTo(getX(0), getY(100));
+    
+    // Draw curve up to 45 mins
+    for(let i=1; i<=2; i++) {
+        // Simple lines since points are close, or bezier
+        // For simplicity and matching, we use lines for the fill area
+        ctx.lineTo(getX(curveData[i].t), getY(curveData[i].y));
+    }
+    ctx.lineTo(x45, getY(0));
+    ctx.closePath();
+    
+    ctx.fillStyle = 'rgba(16, 185, 129, 0.2)'; // Anabolic green transparent
+    ctx.fill();
+
+    // Vertical dashed line at 45m
+    ctx.strokeStyle = '#10b981';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([5, 5]);
+    ctx.beginPath();
+    ctx.moveTo(x45, getY(p45.y));
+    ctx.lineTo(x45, h - padB);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Highlight Box & Text
+    ctx.fillStyle = '#10b981';
+    ctx.beginPath(); ctx.roundRect(getX(22.5) - 80, padT + 20, 160, 45, 6); ctx.fill();
+    
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 12px Plus Jakarta Sans';
+    ctx.fillText('Optimales Zeitfenster', getX(22.5), padT + 35);
+    ctx.fillText('schnelle KH & Proteine', getX(22.5), padT + 52);
+
+
+    // 3. Draw The Curve
+    ctx.strokeStyle = '#7c3aed'; // Purple line
+    ctx.lineWidth = 4;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    
+    ctx.beginPath();
+    ctx.moveTo(getX(curveData[0].t), getY(curveData[0].y));
+    
+    // Draw smooth curve using quadratic/bezier approximation or just lines with round joins
+    // Since points are dense enough, lines look okay, but let's smooth it slightly
+    for (let i = 1; i < curveData.length - 1; i++) {
+        let xc = (getX(curveData[i].t) + getX(curveData[i + 1].t)) / 2;
+        let yc = (getY(curveData[i].y) + getY(curveData[i + 1].y)) / 2;
+        ctx.quadraticCurveTo(getX(curveData[i].t), getY(curveData[i].y), xc, yc);
+    }
+    // curve through the last point
+    ctx.lineTo(getX(curveData[curveData.length-1].t), getY(curveData[curveData.length-1].y));
+    ctx.stroke();
+
+    // Data points (Dots)
+    ctx.fillStyle = '#ffffff';
+    ctx.strokeStyle = '#7c3aed';
+    ctx.lineWidth = 2;
+    curveData.forEach(d => {
+        ctx.beginPath();
+        ctx.arc(getX(d.t), getY(d.y), 4, 0, Math.PI*2);
+        ctx.fill();
+        ctx.stroke();
+    });
+
+</script>
+</body>
+</html>

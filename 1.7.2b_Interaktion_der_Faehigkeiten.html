@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Interaktion der Beweglichkeit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: 'Lexend' for network-like, technical headers, 'Inter' for clean readability -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Lexend', 'sans-serif'],
+                    },
+                    colors: {
+                        kinetic: {
+                            900: '#09090b', // Deepest zinc
+                            800: '#18181b', // Zinc 900
+                            700: '#27272a', // Zinc 800
+                            100: '#f4f4f5',
+                        },
+                        node: {
+                            center: '#06b6d4', // Cyan (Beweglichkeit)
+                            kraft: '#f97316',  // Orange
+                            speed: '#eab308',  // Yellow
+                            ausdauer: '#10b981',// Emerald
+                            technik: '#a855f7', // Purple
+                        },
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 4px 30px rgba(0, 0, 0, 0.5)',
+                        'node-center': '0 0 30px rgba(6, 182, 212, 0.4)',
+                        'node-kraft': '0 0 20px rgba(249, 115, 22, 0.3)',
+                        'node-speed': '0 0 20px rgba(234, 179, 8, 0.3)',
+                        'node-ausdauer': '0 0 20px rgba(16, 185, 129, 0.3)',
+                        'node-technik': '0 0 20px rgba(168, 85, 247, 0.3)',
+                        'abitur-glow': '0 0 40px rgba(245, 158, 11, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #09090b;
+            color: #e4e4e7;
+            -webkit-font-smoothing: antialiased;
+            /* Subtle grid to simulate a digital network */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* Glassmorphism Network Cards */
+        .network-card {
+            background: rgba(24, 24, 27, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .network-card:hover {
+            transform: translateY(-5px);
+            background: rgba(24, 24, 27, 0.8);
+        }
+
+        /* Color accents for the specific abilities */
+        .accent-kraft { border-left: 4px solid #f97316; }
+        .network-card.accent-kraft:hover { box-shadow: 0 15px 30px -10px rgba(249, 115, 22, 0.2); border-color: rgba(249, 115, 22, 0.3); border-left-color: #f97316; }
+        
+        .accent-speed { border-left: 4px solid #eab308; }
+        .network-card.accent-speed:hover { box-shadow: 0 15px 30px -10px rgba(234, 179, 8, 0.2); border-color: rgba(234, 179, 8, 0.3); border-left-color: #eab308; }
+        
+        .accent-ausdauer { border-left: 4px solid #10b981; }
+        .network-card.accent-ausdauer:hover { box-shadow: 0 15px 30px -10px rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.3); border-left-color: #10b981; }
+        
+        .accent-technik { border-left: 4px solid #a855f7; }
+        .network-card.accent-technik:hover { box-shadow: 0 15px 30px -10px rgba(168, 85, 247, 0.2); border-color: rgba(168, 85, 247, 0.3); border-left-color: #a855f7; }
+
+        /* Canvas Wrapper */
+        .hub-wrapper {
+            background: #000000;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 50px rgba(6, 182, 212, 0.05);
+        }
+
+        /* Ambient background glow */
+        .ambient-glow {
+            position: absolute;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -20vw;
+            left: -20vw;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09090b; }
+        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+
+        /* Abitur Synapse Box */
+        .abitur-synapse {
+            background: linear-gradient(135deg, #18181b 0%, #09090b 100%);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-top: 4px solid #f59e0b;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="leading-relaxed py-10 px-4 sm:px-6 relative overflow-x-hidden">
+
+    <div class="ambient-glow"></div>
+
+    <div class="max-w-6xl mx-auto space-y-16 relative z-10">
+        
+        <!-- Header -->
+        <header class="bg-kinetic-800/80 backdrop-blur-xl rounded-[2rem] p-8 md:p-14 shadow-glass border border-white/5 relative overflow-hidden">
+            <!-- Decorative Hub Grid in Background -->
+            <div class="absolute right-0 top-0 w-64 h-64 opacity-10 pointer-events-none transform translate-x-1/3 -translate-y-1/3">
+                <svg viewBox="0 0 100 100" fill="none" stroke="#06b6d4" stroke-width="1">
+                    <circle cx="50" cy="50" r="40" stroke-dasharray="4 4"/>
+                    <circle cx="50" cy="50" r="20"/>
+                    <line x1="10" y1="50" x2="90" y2="50"/>
+                    <line x1="50" y1="10" x2="50" y2="90"/>
+                </svg>
+            </div>
+
+            <div class="flex items-center gap-3 mb-6 relative z-10">
+                <span class="bg-node-center text-kinetic-900 font-bold px-3 py-1 text-sm tracking-widest font-display rounded shadow-node-center uppercase">1.7.2b</span>
+                <span class="text-node-center font-bold tracking-widest text-xs uppercase border border-node-center/30 px-3 py-1 rounded bg-node-center/10">Systems Interaction</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-display font-bold uppercase tracking-tight text-white mb-6 relative z-10">
+                Interaktion der <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-node-center to-node-technik">Fähigkeiten</span>
+            </h1>
+            
+            <div class="max-w-4xl relative z-10">
+                <p class="text-lg md:text-xl text-zinc-400 font-medium leading-relaxed mb-6">
+                    Die Beweglichkeit nimmt innerhalb der konditionellen Fähigkeiten oft die Rolle des <strong class="text-white">"Ermöglichers"</strong> ein. Sie existiert in der sportlichen Leistungspraxis niemals isoliert.
+                </p>
+                <div class="bg-kinetic-900/80 border-l-4 border-node-center p-5 rounded-r-xl">
+                    <p class="text-zinc-300 text-sm md:text-base">
+                        Sie ist die biomechanische Grundvoraussetzung, um Kraft, Schnelligkeit, Ausdauer und koordinative Techniken überhaupt erst mit maximaler Effizienz und minimalem Verletzungsrisiko umsetzen zu können. Das bayerische Abitur fordert hier ein tiefes Verständnis für diese komplexen, sich gegenseitig beeinflussenden Mechanismen.
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Interactions Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- 1. Kraft -->
+            <article class="network-card accent-kraft p-8">
+                <div class="flex items-center gap-4 mb-6 border-b border-white/10 pb-4">
+                    <div class="w-12 h-12 rounded-xl bg-node-kraft/10 flex items-center justify-center text-node-kraft shadow-node-kraft shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-display font-bold text-white leading-tight">Beweglichkeit & Kraft <br><span class="text-sm font-sans font-normal text-node-kraft uppercase tracking-widest block mt-1">Die funktionelle Einheit</span></h2>
+                </div>
+                
+                <p class="text-sm text-zinc-400 mb-6">Die Wechselbeziehung ist von zentraler Bedeutung, da sie stark von veralteten Mythen geprägt ist (z. B. <em>"Krafttraining macht steif"</em>).</p>
+                
+                <ul class="space-y-4 text-sm text-zinc-300">
+                    <li>
+                        <strong class="text-white block mb-1">Kraft als Voraussetzung für aktive Beweglichkeit</strong>
+                        Aktive Beweglichkeit erfordert zwingend die Kraft der Agonisten, um ein Gelenk in die Endstellung zu bringen und zu halten. Fehlt die Kraft, bleibt die Dehnfähigkeit sportlich ungenutzt (große Reserve).
+                    </li>
+                    <li>
+                        <strong class="text-white block mb-1">Auswirkungen von Krafttraining</strong>
+                        Physiologisch korrektes Krafttraining über die volle Bewegungsamplitude (Full ROM) <strong>verbessert</strong> Beweglichkeit! Exzentrisches Ablassen von Gewichten (z.B. Kniebeuge) ist ein hochwirksamer Dehnreiz.
+                    </li>
+                    <li>
+                        <strong class="text-node-kraft block mb-1">⚠️ Gefahr von Dysbalancen</strong>
+                        Einseitiges Training (Vernachlässigung des Antagonisten) oder unvollständige ROM führen zu adaptiven Verkürzungen.
+                    </li>
+                </ul>
+            </article>
+
+            <!-- 2. Schnelligkeit -->
+            <article class="network-card accent-speed p-8">
+                <div class="flex items-center gap-4 mb-6 border-b border-white/10 pb-4">
+                    <div class="w-12 h-12 rounded-xl bg-node-speed/10 flex items-center justify-center text-node-speed shadow-node-speed shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-display font-bold text-white leading-tight">Beweglichkeit & Schnelligkeit <br><span class="text-sm font-sans font-normal text-node-speed uppercase tracking-widest block mt-1">Schrittlänge & Widerstand</span></h2>
+                </div>
+                
+                <p class="text-sm text-zinc-400 mb-6">Für maximale Schnelligkeitsleistungen ist eine optimale Beweglichkeit eine unabdingbare Voraussetzung.</p>
+                
+                <ul class="space-y-4 text-sm text-zinc-300">
+                    <li>
+                        <strong class="text-white block mb-1">Biomechanischer Hebel (Amplitude)</strong>
+                        Laufgeschwindigkeit = Schrittfrequenz × Schrittlänge. Exzellente Beweglichkeit (Hüfte) ermöglicht größere Schrittlänge. Resultat: Höhere Endgeschwindigkeit bei konstanter Frequenz! (Gilt auch für den Beschleunigungsweg z.B. beim Speerwurf).
+                    </li>
+                    <li>
+                        <strong class="text-white block mb-1">Reduktion der inneren Reibung</strong>
+                        Bei explosiven Bewegungen wirken Antagonisten (gedehnte Muskeln) als innerer mechanischer Widerstand. Je dehnfähiger die Oberschenkelrückseite, desto weniger Widerstand muss der Quadrizeps überwinden &rarr; Höhere Kontraktionsgeschwindigkeit!
+                    </li>
+                </ul>
+            </article>
+
+            <!-- 3. Ausdauer -->
+            <article class="network-card accent-ausdauer p-8">
+                <div class="flex items-center gap-4 mb-6 border-b border-white/10 pb-4">
+                    <div class="w-12 h-12 rounded-xl bg-node-ausdauer/10 flex items-center justify-center text-node-ausdauer shadow-node-ausdauer shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-display font-bold text-white leading-tight">Beweglichkeit & Ausdauer <br><span class="text-sm font-sans font-normal text-node-ausdauer uppercase tracking-widest block mt-1">Bewegungsökonomie</span></h2>
+                </div>
+                
+                <p class="text-sm text-zinc-400 mb-6">Obwohl die Ausdauer primär stoffwechseldeterminiert ist, gibt es eine wichtige mechanische Wechselwirkung.</p>
+                
+                <div class="bg-kinetic-900/50 p-4 rounded-lg border border-white/5">
+                    <strong class="text-white block mb-2">Energieeinsparung</strong>
+                    <p class="text-sm text-zinc-300">Eine gute Beweglichkeit verbessert die Bewegungsökonomie. Muss ein Athlet (z.B. Langstreckenläufer) gegen unbewegliche Antagonisten anarbeiten, verbraucht er bei jedem Schritt unnötig Sauerstoff und ATP. Ein flexibler Apparat minimiert Reibungsverluste, senkt den Energieaufwand und <strong>zögert die periphere Ermüdung hinaus</strong>.</p>
+                </div>
+            </article>
+
+            <!-- 4. Technik/Koordination -->
+            <article class="network-card accent-technik p-8">
+                <div class="flex items-center gap-4 mb-6 border-b border-white/10 pb-4">
+                    <div class="w-12 h-12 rounded-xl bg-node-technik/10 flex items-center justify-center text-node-technik shadow-node-technik shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-display font-bold text-white leading-tight">Beweglichkeit & Technik <br><span class="text-sm font-sans font-normal text-node-technik uppercase tracking-widest block mt-1">Technikrealisation</span></h2>
+                </div>
+                
+                <p class="text-sm text-zinc-400 mb-6">Ein hohes Maß an Beweglichkeit beschleunigt den Erwerb neuer motorischer Fertigkeiten.</p>
+                
+                <div class="bg-kinetic-900/50 p-4 rounded-lg border border-white/5">
+                    <strong class="text-white block mb-2">Verhinderung von Ausweichbewegungen</strong>
+                    <p class="text-sm text-zinc-300">In vielen Sportarten (Hürdenlauf, Turnen) ist eine extreme Gelenkamplitude die Grundvoraussetzung für das ideale Technikbild. Fehlt diese, kompensiert der Athlet durch <strong>unphysiologische Ausweichbewegungen</strong> in angrenzenden Gelenken (z. B. Lendenwirbelsäule bei mangelnder Hüftbeweglichkeit). Dies mindert Leistung und provoziert Überlastungsschäden.</p>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Hub and Spoke Canvas Section (KI 2) -->
+        <section class="mt-16">
+            <div class="flex items-end justify-between mb-8 px-2 border-b border-white/10 pb-4">
+                <div>
+                    <h2 class="text-3xl font-display font-bold text-white tracking-tight">Die Zentrale Synergie</h2>
+                    <p class="text-zinc-500 font-medium mt-1">Interaktives Netzwerk-Diagramm (Hub & Spoke)</p>
+                </div>
+            </div>
+
+            <div class="hub-wrapper p-4 md:p-8 w-full">
+                <canvas id="hubCanvas" class="w-full h-[500px] md:h-[650px] block"></canvas>
+            </div>
+        </section>
+
+        <!-- Abitur Premium Transfer Box -->
+        <section class="abitur-synapse rounded-[2rem] p-8 md:p-14 shadow-abitur-glow mt-24">
+            <!-- Glowing Synapse Background -->
+            <div class="absolute right-0 top-0 opacity-10 pointer-events-none w-full h-full overflow-hidden">
+                <svg class="absolute right-[-10%] top-[-20%] w-[600px] h-[600px] text-abitur transform rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+            </div>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-12 border-b border-zinc-800 pb-8">
+                    <div class="bg-gradient-to-br from-yellow-400 to-yellow-600 text-kinetic-900 p-5 rounded-2xl shadow-lg">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-5xl font-display font-bold text-white tracking-tight mb-2">Der Abitur-Schlüssel</h2>
+                        <div class="inline-flex items-center gap-3">
+                            <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">eA-Niveau</span>
+                            <span class="text-abitur font-medium text-lg">Vernetztes Denken & Kausalketten</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-lg text-zinc-300 font-medium mb-10 leading-relaxed max-w-4xl">
+                    In materialgestützten Klausuren wird genau dieses vernetzte Denken anhand konkreter Sportarten gefordert. Isoliertes Wissen reicht hier nicht aus!
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    
+                    <!-- Transfer 1 -->
+                    <div class="bg-kinetic-900/60 p-8 rounded-2xl border border-zinc-800 hover:border-abitur/50 transition-colors">
+                        <h3 class="text-xl font-display font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-abitur/20 text-abitur flex items-center justify-center text-sm">1</span>
+                            Trainermythen entlarven
+                        </h3>
+                        <div class="bg-zinc-800/50 p-4 rounded text-sm text-zinc-400 mb-4 font-mono border-l-2 border-zinc-600">
+                            <strong>Textquelle Trainer:</strong> "Wir machen heute kein Krafttraining für die Beine, das macht unsere Leichtathleten nur steif und langsam."
+                        </div>
+                        <strong class="text-abitur block mb-2 uppercase tracking-wide text-sm">Deine Fundierte Bewertung:</strong>
+                        <p class="text-sm text-zinc-300 leading-relaxed">
+                            Argumentiere, dass Krafttraining über die <strong>volle ROM</strong> die Beweglichkeit nicht hemmt, sondern fördert (exzentrische Dehnung unter Last). Erkläre zudem die Interaktion: Gesteigerte Maximalkraft bei gleichzeitig optimaler Dehnfähigkeit der Antagonisten resultiert direkt in einer höheren <strong>Schnellkraft</strong> und einer verbesserten <strong>aktiven Beweglichkeit</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Transfer 2 -->
+                    <div class="bg-kinetic-900/60 p-8 rounded-2xl border border-zinc-800 hover:border-abitur/50 transition-colors">
+                        <h3 class="text-xl font-display font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-abitur/20 text-abitur flex items-center justify-center text-sm">2</span>
+                            Kausalketten (Hürdensprint)
+                        </h3>
+                        <div class="bg-zinc-800/50 p-4 rounded text-sm text-zinc-400 mb-4 font-mono border-l-2 border-zinc-600">
+                            <strong>Fallanalyse:</strong> Warum büßt ein Zehnkämpfer beim Hürdensprint an Leistung ein? (Nicht nur auf Reaktionsschnelligkeit fokussieren!)
+                        </div>
+                        <strong class="text-abitur block mb-2 uppercase tracking-wide text-sm">Deine Kausalkette der Interaktion:</strong>
+                        <div class="text-sm text-zinc-300 leading-relaxed space-y-2">
+                            <p>1. Mangelnde <strong>Beweglichkeit</strong> im Hüftgelenk des Nachziehbeins...</p>
+                            <p>2. ... erzwingt einen zu hohen Flugbogen (Zeitverlust) UND erfordert kompensatorische Ausweichbewegungen des Rumpfes (<strong>Technikverlust</strong>)...</p>
+                            <p>3. ... was die Schrittfrequenz nach der Landung massiv stört (<strong>Schnelligkeitsverlust</strong>).</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="mt-16 pt-8 pb-12 border-t border-zinc-800 text-center relative z-10">
+        <p class="font-display font-bold text-zinc-600 tracking-widest text-sm mb-1 uppercase">Abiturwissen Sport (G9, eA)</p>
+        <p class="text-zinc-500 font-sans text-sm">Lernbereich 1.7.2b Interaktion der Beweglichkeit</p>
+    </footer>
+
+    <!-- Interactive Canvas Logic: Hub & Spoke Network -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('hubCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let time = 0;
+
+            // Define Nodes
+            const cHub = '#06b6d4'; // Cyan
+            const nodes = [
+                { id: 'kraft', color: '#f97316', label: 'KRAFT', angle: Math.PI * 1.25, interaction: "Kraft ist Basis für\naktive Beweglichkeit" }, // NW
+                { id: 'speed', color: '#eab308', label: 'SCHNELLIGKEIT', angle: Math.PI * 1.75, interaction: "Erhöht Amplitude/Schrittlänge,\nsenkt inneren Widerstand" }, // NE
+                { id: 'ausdauer', color: '#10b981', label: 'AUSDAUER', angle: Math.PI * 0.75, interaction: "Verbessert Bewegungsökonomie,\nsenkt Energieaufwand" }, // SW
+                { id: 'technik', color: '#a855f7', label: 'TECHNIK /\nKOORDINATION', angle: Math.PI * 0.25, interaction: "Grundvoraussetzung für Technikerwerb,\nverhindert Ausweichbewegungen" } // SE
+            ];
+
+            class DataParticle {
+                constructor(angle, color, reverse) {
+                    this.angle = angle;
+                    this.color = color;
+                    this.progress = Math.random();
+                    this.speed = 0.005 + Math.random() * 0.005;
+                    this.reverse = reverse;
+                }
+                update() {
+                    this.progress += this.speed;
+                    if (this.progress > 1) this.progress = 0;
+                }
+                draw(ctx, cx, cy, dist) {
+                    // Current distance from center
+                    let currentDist = this.reverse ? dist * (1 - this.progress) : dist * this.progress;
+                    
+                    // Add slight sine wave perpendicular to the path for organic look
+                    const wave = Math.sin(this.progress * Math.PI * 10) * 8;
+                    const perpAngle = this.angle + Math.PI/2;
+
+                    const x = cx + Math.cos(this.angle) * currentDist + Math.cos(perpAngle) * wave;
+                    const y = cy + Math.sin(this.angle) * currentDist + Math.sin(perpAngle) * wave;
+
+                    ctx.shadowColor = this.color;
+                    ctx.shadowBlur = 10;
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 2.5, 0, Math.PI*2);
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            let particles = [];
+            let initialized = false;
+
+            function drawRoundedRectWithText(ctx, x, y, width, height, radius, bgColor, borderColor, textColor, textLines) {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width - radius, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+                ctx.lineTo(x + width, y + height - radius);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                ctx.lineTo(x + radius, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+                ctx.closePath();
+                
+                ctx.fillStyle = bgColor;
+                ctx.fill();
+                ctx.strokeStyle = borderColor;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                ctx.fillStyle = textColor;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                const lineHeight = 16;
+                const startY = y + height/2 - ((textLines.length - 1) * lineHeight) / 2;
+                textLines.forEach((line, i) => {
+                    ctx.fillText(line, x + width/2, startY + i * lineHeight);
+                });
+            }
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time += 0.02;
+
+                const cx = w / 2;
+                const cy = h / 2;
+                
+                const scale = Math.min(w, h) / 600;
+                const branchDist = 200 * scale;
+
+                // Init particles
+                if(!initialized) {
+                    nodes.forEach(node => {
+                        for(let i=0; i<15; i++) {
+                            particles.push(new DataParticle(node.angle, node.color, false)); // Hub to Spoke
+                            particles.push(new DataParticle(node.angle, cHub, true)); // Spoke to Hub
+                        }
+                    });
+                    initialized = true;
+                }
+
+                // 1. Draw Connections
+                nodes.forEach(node => {
+                    const nx = cx + Math.cos(node.angle) * branchDist;
+                    const ny = cy + Math.sin(node.angle) * branchDist;
+
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.lineTo(nx, ny);
+                    
+                    // Gradient line
+                    const grad = ctx.createLinearGradient(cx, cy, nx, ny);
+                    grad.addColorStop(0, cHub + '40'); // 25% opacity
+                    grad.addColorStop(1, node.color + '40');
+                    
+                    ctx.strokeStyle = grad;
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+                });
+
+                // 2. Draw Particles
+                particles.forEach(p => {
+                    p.update();
+                    p.draw(ctx, cx, cy, branchDist);
+                });
+
+                // 3. Draw Interaction Texts (On the lines)
+                nodes.forEach(node => {
+                    // Positioning the text box roughly in the middle of the line
+                    const midX = cx + Math.cos(node.angle) * (branchDist * 0.55);
+                    const midY = cy + Math.sin(node.angle) * (branchDist * 0.55);
+
+                    ctx.font = '11px "Inter"';
+                    const lines = node.interaction.split('\n');
+                    const textW = Math.max(ctx.measureText(lines[0]).width, lines.length > 1 ? ctx.measureText(lines[1]).width : 0) + 20;
+                    const textH = lines.length * 16 + 10;
+
+                    // Draw dark translucent box to make text readable over lines
+                    drawRoundedRectWithText(ctx, midX - textW/2, midY - textH/2, textW, textH, 6, 'rgba(9, 9, 11, 0.85)', node.color+'66', '#d4d4d8', lines);
+                });
+
+                // 4. Draw Outer Nodes
+                nodes.forEach(node => {
+                    // Slight float
+                    const offset = Math.sin(time + node.angle) * 5;
+                    const nx = cx + Math.cos(node.angle) * (branchDist + offset);
+                    const ny = cy + Math.sin(node.angle) * (branchDist + offset);
+
+                    ctx.font = 'bold 13px "Lexend"';
+                    const lines = node.label.split('\n');
+                    const textW = Math.max(ctx.measureText(lines[0]).width, lines.length > 1 ? ctx.measureText(lines[1]).width : 0) + 30;
+                    const textH = lines.length * 18 + 16;
+
+                    // Glow
+                    ctx.shadowColor = node.color;
+                    ctx.shadowBlur = 15;
+                    
+                    drawRoundedRectWithText(ctx, nx - textW/2, ny - textH/2, textW, textH, 8, '#18181b', node.color, '#ffffff', lines);
+                    
+                    ctx.shadowBlur = 0;
+                });
+
+                // 5. Draw Center Node (BEWEGLICHKEIT)
+                const pulse = Math.sin(time * 2) * 5;
+                
+                ctx.shadowColor = cHub;
+                ctx.shadowBlur = 30 + pulse;
+                
+                ctx.beginPath();
+                ctx.arc(cx, cy, 65 * scale, 0, Math.PI * 2);
+                ctx.fillStyle = '#09090b';
+                ctx.fill();
+                
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = cHub;
+                ctx.stroke();
+                
+                ctx.shadowBlur = 0;
+
+                ctx.fillStyle = '#ffffff';
+                ctx.font = `bold ${16 * scale}px "Lexend"`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText("BEWEGLICHKEIT", cx, cy - 8*scale);
+                
+                ctx.fillStyle = cHub;
+                ctx.font = `500 ${10 * scale}px "Inter"`;
+                ctx.fillText("DER ERMÖGLICHER", cx, cy + 12*scale);
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

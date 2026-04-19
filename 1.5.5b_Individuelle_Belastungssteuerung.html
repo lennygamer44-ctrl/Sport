@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Individuelle Belastungssteuerung</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=Roboto+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                        mono: ['Roboto Mono', 'monospace'],
+                    },
+                    colors: {
+                        pulse: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            500: '#f43f5e', // Rose/Red for heart rate
+                            600: '#e11d48',
+                            900: '#881337',
+                        },
+                        analytic: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            500: '#64748b',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                        'glow-red': '0 0 20px rgba(225, 29, 72, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .math-box {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-left: 4px solid #f43f5e;
+            box-shadow: inset 0 2px 15px rgba(0,0,0,0.5), 0 10px 30px -5px rgba(225, 29, 72, 0.2);
+        }
+
+        /* Canvas Analytics Container */
+        .analytics-wrapper {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Custom Webkit Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Borg Scale Gradients */
+        .borg-light { background-color: #dcfce7; color: #166534; }
+        .borg-moderate { background-color: #fef08a; color: #854d0e; }
+        .borg-hard { background-color: #ffedd5; color: #c2410c; }
+        .borg-very-hard { background-color: #fecaca; color: #991b1b; }
+        .borg-max { background-color: #991b1b; color: #fecaca; }
+
+        /* Abitur Premium Highlight */
+        .abitur-premium {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fde68a;
+            position: relative;
+        }
+        
+        .pulse-animation {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="font-sans leading-relaxed">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <span class="bg-analytic-800 text-white font-bold px-3 py-1 rounded-md text-sm tracking-wide">1.5.5b</span>
+                <h1 class="text-xl font-display font-bold text-slate-800 hidden sm:block">Steuerung der Belastung</h1>
+            </div>
+            <div class="text-sm font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-pulse-500 animate-pulse"></div>
+                Performance Analytics
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-12 space-y-20">
+
+        <!-- Intro -->
+        <section class="max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-display font-extrabold text-slate-900 mb-6 leading-tight">
+                Individuelle <span class="text-pulse-600">Belastungssteuerung</span>
+            </h2>
+            <p class="text-xl text-slate-600 leading-relaxed">
+                Die Überwachung und exakte Steuerung der Trainingsintensität ist die Grundvoraussetzung, um die im Trainingsplan definierten Ziele zu erreichen und ein Übertraining <em class="text-slate-500">(Overtraining Syndrome)</em> zu vermeiden. 
+            </p>
+            <div class="mt-6 bg-pulse-50 border-l-4 border-pulse-500 p-5 rounded-r-lg">
+                <p class="text-pulse-900 font-medium">
+                    Da absolute Herzfrequenzvorgaben (wie die veraltete Faustregel „220 minus Lebensalter“) individuelle physiologische Voraussetzungen ignorieren, fordert die moderne Trainingslehre eine <strong class="text-pulse-600">individualisierte Belastungssteuerung</strong>. Hierzu haben sich in der Sportpraxis sowohl objektive (Karvonen-Formel) als auch subjektive (Borg-Skala) Parameter etabliert.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 1: Karvonen-Formel & Canvas -->
+        <section class="space-y-10">
+            <div class="flex items-center gap-4 border-b border-slate-200 pb-4">
+                <div class="bg-analytic-100 text-analytic-800 p-3 rounded-xl relative">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="text-3xl font-display font-bold text-slate-900">1. Die objektive Steuerung: Karvonen-Formel</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="space-y-6">
+                    <p class="text-slate-600">
+                        Die Karvonen-Formel ist ein mathematisches Modell zur Ermittlung der individuellen Trainingsherzfrequenz (THF). Ihr entscheidender Vorteil gegenüber simplen Prozentrechnungen vom Maximalpuls liegt in der Einbeziehung der <strong class="text-pulse-600">Herzfrequenzreserve (HRR)</strong>.
+                    </p>
+                    <p class="text-slate-600">
+                        Die Herzfrequenzreserve beschreibt die tatsächliche Spanne, die dem Herzen für eine Leistungssteigerung zur Verfügung steht. Sie berechnet sich aus der Differenz zwischen der maximalen Herzfrequenz (HF<sub>max</sub>) und der Ruheherzfrequenz (HF<sub>Ruhe</sub>). Da ein gut trainierter Ausdauerathlet durch die Ausbildung eines Sportherzens eine deutlich niedrigere Ruheherzfrequenz aufweist als ein Untrainierter, verschieben sich die Trainingszonen bei ihm nach unten. 
+                    </p>
+
+                    <!-- Formel Box -->
+                    <div class="math-box p-6 rounded-xl mt-6">
+                        <div class="text-slate-400 text-sm uppercase tracking-widest mb-3 font-semibold">Berechnungsgleichung</div>
+                        <div class="font-mono text-xl md:text-2xl text-white font-bold tracking-tight">
+                            THF = HF<sub>Ruhe</sub> + (HF<sub>max</sub> - HF<sub>Ruhe</sub>) &times; Int.
+                        </div>
+                        <ul class="mt-5 space-y-2 text-sm font-mono text-slate-300 border-t border-slate-700 pt-4">
+                            <li><span class="text-pulse-500 font-bold">HF<sub>Ruhe</sub>:</span> Messung morgens direkt nach Aufwachen im Liegen.</li>
+                            <li><span class="text-pulse-500 font-bold">HF<sub>max</sub>:</span> Ermittlung durch Ausbelastung (z.B. Stufentest).</li>
+                            <li><span class="text-pulse-500 font-bold">Intensität (Int.):</span> %-Auslastung der Reserve (z.B. 0.6 oder 0.8).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Rechenbeispiel -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-glass h-full">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-pulse-100 text-pulse-600 p-2 rounded-lg">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800">Rechenbeispiel</h4>
+                    </div>
+                    
+                    <p class="text-slate-600 mb-6 text-sm md:text-base">
+                        Ein Athlet hat einen Ruhepuls von <strong>50 S/min</strong> und einen Maximalpuls von <strong>190 S/min</strong>. Er soll ein extensives Grundlagenausdauertraining bei <strong>70% seiner Reserve</strong> (Faktor 0,7) absolvieren.
+                    </p>
+
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-100 font-mono text-slate-700 space-y-3 text-sm md:text-base">
+                        <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+                            <span>Reserve ermitteln:</span>
+                            <span class="font-bold">190 - 50 = 140</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+                            <span>70% der Reserve:</span>
+                            <span class="font-bold">140 &times; 0,7 = 98</span>
+                        </div>
+                        <div class="flex justify-between items-center text-pulse-600 font-bold pt-1 text-lg">
+                            <span>THF (Ruhepuls + 98):</span>
+                            <span>50 + 98 = 148 S/min</span>
+                        </div>
+                    </div>
+                    <p class="mt-6 text-sm font-medium text-slate-500 border-l-2 border-pulse-500 pl-3">
+                        Der Sportler steuert die Belastung so, dass der Pulsmesser ca. 148 Schläge/Minute anzeigt.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Canvas Visualization -->
+            <div class="analytics-wrapper p-6 md:p-8 mt-10">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                    <div>
+                        <h4 class="text-2xl font-bold text-slate-800">Die Herzfrequenzreserve (HRR) visuell</h4>
+                        <p class="text-slate-500 text-sm mt-1">Vergleich der absoluten Trainingszone (THF) bei 70% Intensität. Gleiche HF<sub>max</sub>, unterschiedliche HF<sub>Ruhe</sub>.</p>
+                    </div>
+                    <div class="flex gap-4 text-xs font-bold text-slate-500 uppercase">
+                        <div class="flex items-center gap-1"><div class="w-3 h-3 bg-slate-200 rounded"></div> Ruhepuls</div>
+                        <div class="flex items-center gap-1"><div class="w-3 h-3 bg-gradient-to-t from-pulse-400 to-pulse-600 rounded"></div> HRR (Reserve)</div>
+                    </div>
+                </div>
+                
+                <div class="relative w-full h-[400px] md:h-[450px]">
+                    <canvas id="hrrCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Borg-Skala -->
+        <section class="space-y-10">
+            <div class="flex items-center gap-4 border-b border-slate-200 pb-4">
+                <div class="bg-indigo-100 text-indigo-600 p-3 rounded-xl relative">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="text-3xl font-display font-bold text-slate-900">2. Die subjektive Steuerung: Borg-Skala (RPE)</h3>
+                </div>
+            </div>
+
+            <p class="text-slate-600 text-lg max-w-4xl">
+                Die Herzfrequenz allein ist störanfällig. Faktoren wie Hitze, Dehydration, psychischer Stress oder ein herannahender Infekt können den Puls in die Höhe treiben, obwohl die muskuläre Belastung objektiv niedrig ist. Daher wird das objektive Monitoring zwingend durch das subjektive Belastungsempfinden <strong class="text-indigo-600">(RPE = Rating of Perceived Exertion)</strong> ergänzt.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+                    <h4 class="font-bold text-slate-800 text-xl mb-4">Warum 6 bis 20?</h4>
+                    <p class="text-slate-600 mb-4">
+                        Der schwedische Physiologe Gunnar Borg entwickelte die Skala so, dass die Zahlenwerte, multipliziert mit dem Faktor 10, grob mit der Herzfrequenz eines gesunden, jungen Erwachsenen korrelieren.
+                    </p>
+                    <div class="flex items-center justify-center gap-6 bg-slate-50 p-4 rounded-xl border border-slate-100 font-mono">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-indigo-600">6</div>
+                            <div class="text-xs text-slate-500 uppercase mt-1">RPE</div>
+                        </div>
+                        <div class="text-slate-400 font-bold">&times; 10 &asymp;</div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-pulse-600">60</div>
+                            <div class="text-xs text-slate-500 uppercase mt-1">S/min</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-slate-800 text-xl mb-3">Anwendung in der Praxis</h4>
+                    <p class="text-slate-600 mb-4">
+                        Während des Trainings schätzt der Athlet sein Empfinden ganzheitlich ein. Dies umfasst die Schwere der Beine, die Atemnot und die mentale Ermüdung.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="w-6 h-6 rounded bg-green-100 text-green-700 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">11</span>
+                            <span>Bis <strong>13</strong> ("recht leicht" bis "etwas anstrengend") für den extensiven Dauerlauf.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="w-6 h-6 rounded bg-orange-100 text-orange-700 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">15</span>
+                            <span>Überschreitet das Empfinden die <strong>15</strong> ("anstrengend"), nähert sich der Athlet der anaeroben Schwelle.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Beautiful Borg Table -->
+            <div class="mt-12 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-slate-800 text-white px-6 py-4">
+                    <h4 class="font-bold text-lg">Offizielle Borg-Skala (RPE)</h4>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 font-bold border-b border-slate-200">
+                                <th class="px-6 py-4 w-24 text-center">RPE</th>
+                                <th class="px-6 py-4">Subjektives Empfinden</th>
+                                <th class="px-6 py-4">Empfohlene Trainingsmethode</th>
+                                <th class="px-6 py-4 text-right">HF-Korrelation</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium">
+                            <tr class="border-b border-slate-100 transition-colors hover:bg-slate-50">
+                                <td class="px-6 py-3 text-center"><span class="inline-block w-10 py-1 rounded bg-slate-100 text-slate-500">6-7</span></td>
+                                <td class="px-6 py-3 text-slate-600">Sehr, sehr leicht</td>
+                                <td class="px-6 py-3 text-slate-500">Regenerationslauf / Gehen / Warm-up</td>
+                                <td class="px-6 py-3 text-right font-mono text-pulse-400">~ 60 - 70</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 transition-colors hover:bg-slate-50">
+                                <td class="px-6 py-3 text-center"><span class="inline-block w-10 py-1 rounded borg-light">8-11</span></td>
+                                <td class="px-6 py-3 text-green-700">Recht leicht</td>
+                                <td class="px-6 py-3 text-slate-600">Extensiver Dauerlauf (Fettstoffwechsel)</td>
+                                <td class="px-6 py-3 text-right font-mono text-pulse-400">~ 80 - 110</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 transition-colors hover:bg-slate-50">
+                                <td class="px-6 py-3 text-center"><span class="inline-block w-10 py-1 rounded borg-moderate">12-13</span></td>
+                                <td class="px-6 py-3 text-yellow-700">Etwas anstrengend</td>
+                                <td class="px-6 py-3 text-slate-600">Intensiver Dauerlauf</td>
+                                <td class="px-6 py-3 text-right font-mono text-pulse-500">~ 120 - 130</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 transition-colors hover:bg-slate-50">
+                                <td class="px-6 py-3 text-center"><span class="inline-block w-10 py-1 rounded borg-hard">14-15</span></td>
+                                <td class="px-6 py-3 text-orange-700 font-bold">Anstrengend (Schwellenbereich)</td>
+                                <td class="px-6 py-3 text-slate-700">Extensives Intervalltraining</td>
+                                <td class="px-6 py-3 text-right font-mono text-pulse-600">~ 140 - 150</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 transition-colors hover:bg-slate-50">
+                                <td class="px-6 py-3 text-center"><span class="inline-block w-10 py-1 rounded borg-very-hard">16-17</span></td>
+                                <td class="px-6 py-3 text-red-700 font-bold">Sehr anstrengend</td>
+                                <td class="px-6 py-3 text-slate-700">Intensives Intervalltraining</td>
+                                <td class="px-6 py-3 text-right font-mono text-pulse-700">~ 160 - 170</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 transition-colors hover:bg-slate-50">
+                                <td class="px-6 py-3 text-center"><span class="inline-block w-10 py-1 rounded borg-max">18-20</span></td>
+                                <td class="px-6 py-3 text-red-900 font-black">Sehr, sehr anstrengend / Maximal</td>
+                                <td class="px-6 py-3 text-slate-800">Wettkampf / Ausbelastung</td>
+                                <td class="px-6 py-3 text-right font-mono text-pulse-800">~ 180 - 200</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Abitur-Transfer Box -->
+        <section class="abitur-premium rounded-3xl p-8 md:p-12 shadow-lg mt-20 overflow-hidden">
+            <!-- decorative bg icon -->
+            <svg class="absolute right-0 bottom-0 w-64 h-64 text-abitur-dark opacity-5 transform translate-x-10 translate-y-10" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+
+            <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="bg-abitur-dark text-white p-4 rounded-2xl shadow-md">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-display font-extrabold text-abitur-dark tracking-tight">Abitur-Transfer & Praxis</h2>
+                </div>
+                
+                <p class="text-lg text-slate-800 font-medium mb-8 max-w-4xl leading-relaxed">
+                    Das Kultusministerium verknüpft die Methoden zur Belastungssteuerung in den materialgestützten Abiturklausuren auf erhöhtem Niveau (eA) oft direkt mit Phänomenen der Ermüdung und der Energiebereitstellung.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Tip 1 -->
+                    <div class="bg-white rounded-2xl p-6 border-2 border-white shadow-sm">
+                        <div class="flex items-center gap-3 mb-3 border-b border-slate-100 pb-3">
+                            <svg class="w-6 h-6 text-abitur" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                            <h4 class="font-bold text-slate-800">Subjektive Äußerungen übersetzen</h4>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Wirst du mit Blogauszügen konfrontiert, übersetze sie in die Theorie! Eine Aussage wie <em>„wir konnten uns nicht mehr unterhalten“</em> oder <em>„mir platzt gleich die Lunge“</em> ist ein direkter Hinweis auf einen drastischen Anstieg der Atemfrequenz zur Laktatpufferung. <strong>Argumentiere hier, dass die Athletin auf der Borg-Skala RPE 17 bis 19 ("sehr anstrengend") erreicht hat.</strong>
+                        </p>
+                    </div>
+
+                    <!-- Tip 2 -->
+                    <div class="bg-white rounded-2xl p-6 border-2 border-white shadow-sm">
+                        <div class="flex items-center gap-3 mb-3 border-b border-slate-100 pb-3">
+                            <svg class="w-6 h-6 text-abitur" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                            <h4 class="font-bold text-slate-800">Die Top-Note bei Planungsaufgaben</h4>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            In Rechenaufgaben mit Tabellenwerten musst du oft erkennen, ob die Intensität zu hoch angesetzt war (häufiger Praxisfehler). Verlangt die Aufgabe eine konkrete Trainingsplanung, zeigst du <strong>exzellentes Fachwissen</strong>, wenn du nicht nur "Puls 150" forderst, sondern die <strong class="text-slate-800">Karvonen-Formel</strong> anwendest und dies zur ganzheitlichen Absicherung mit einem <strong class="text-slate-800">Zielwert auf der Borg-Skala</strong> (z. B. "RPE 12-13") kombinierst!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-analytic-900 text-slate-400 py-10 text-center text-sm mt-16 border-t border-analytic-800">
+        <p class="font-bold text-white tracking-widest mb-2">Abiturwissen Sport (G9, eA)</p>
+        <p>Lernbereich 1.5.5b Steuerung der Belastung</p>
+    </footer>
+
+    <!-- Retina-Ready Canvas Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('hrrCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            // Data configuration
+            const maxHR = 190;
+            const intensity = 0.70;
+
+            const untrainiert = {
+                ruhe: 80,
+                max: maxHR,
+                reserve: maxHR - 80,
+                thf: 80 + (maxHR - 80) * intensity
+            };
+
+            const athlet = {
+                ruhe: 45,
+                max: maxHR,
+                reserve: maxHR - 45,
+                thf: 45 + (maxHR - 45) * intensity
+            };
+
+            let time = 0;
+
+            function drawRoundedRect(ctx, x, y, width, height, radius) {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width - radius, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+                ctx.lineTo(x + width, y + height - radius);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                ctx.lineTo(x + radius, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time += 0.05;
+
+                // Layout margins
+                const pL = 60, pR = 40, pT = 40, pB = 60;
+                const chartW = w - pL - pR;
+                const chartH = h - pT - pB;
+
+                // Max Y axis representation (200 bpm for headroom)
+                const yMax = 200;
+                
+                function getY(val) {
+                    return pT + chartH - (val / yMax) * chartH;
+                }
+
+                // 1. Draw Grid and Y-Axis
+                ctx.font = '12px "Roboto Mono", monospace';
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = '#94a3b8';
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 1;
+
+                [0, 50, 100, 150, 200].forEach(val => {
+                    const yPos = getY(val);
+                    ctx.fillText(val, pL - 10, yPos);
+                    ctx.beginPath();
+                    ctx.moveTo(pL, yPos);
+                    ctx.lineTo(w - pR, yPos);
+                    ctx.stroke();
+                });
+                
+                ctx.save();
+                ctx.translate(20, pT + chartH/2);
+                ctx.rotate(-Math.PI/2);
+                ctx.textAlign = 'center';
+                ctx.font = 'bold 12px "Inter", sans-serif';
+                ctx.fillText('Herzfrequenz (S/min)', 0, 0);
+                ctx.restore();
+
+                // 2. Draw Bars
+                const barWidth = Math.min(120, chartW * 0.3);
+                const gap = (chartW - (barWidth * 2)) / 3;
+                
+                const x1 = pL + gap;
+                const x2 = x1 + barWidth + gap;
+
+                function renderProfile(profile, x, label) {
+                    // Base Rest Area (Grey)
+                    const yRestTop = getY(profile.ruhe);
+                    const yBottom = getY(0);
+                    ctx.fillStyle = '#e2e8f0';
+                    drawRoundedRect(ctx, x, yRestTop, barWidth, yBottom - yRestTop, 4);
+
+                    // Rest label inside
+                    ctx.fillStyle = '#64748b';
+                    ctx.textAlign = 'center';
+                    ctx.font = 'bold 14px "Roboto Mono"';
+                    ctx.fillText(profile.ruhe, x + barWidth/2, yRestTop + (yBottom - yRestTop)/2);
+
+                    // Reserve Area (Gradient)
+                    const yMaxTop = getY(profile.max);
+                    const grad = ctx.createLinearGradient(0, yMaxTop, 0, yRestTop);
+                    grad.addColorStop(0, '#f43f5e'); // Rose-500
+                    grad.addColorStop(1, '#fda4af'); // Rose-300
+                    ctx.fillStyle = grad;
+                    
+                    // Slightly overlap to avoid gaps
+                    drawRoundedRect(ctx, x, yMaxTop, barWidth, yRestTop - yMaxTop + 2, 8);
+
+                    // 70% Target Line
+                    const yThf = getY(profile.thf);
+                    
+                    // Pulse glow on target line
+                    const pulseAlpha = 0.5 + Math.sin(time) * 0.5;
+                    ctx.shadowColor = '#e11d48';
+                    ctx.shadowBlur = 15 * pulseAlpha;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(x - 10, yThf);
+                    ctx.lineTo(x + barWidth + 10, yThf);
+                    ctx.strokeStyle = '#e11d48';
+                    ctx.lineWidth = 3;
+                    ctx.stroke();
+                    ctx.shadowBlur = 0; // reset
+
+                    // Target Label
+                    ctx.fillStyle = '#e11d48';
+                    ctx.font = 'bold 14px "Inter"';
+                    ctx.textAlign = 'left';
+                    ctx.fillText(`70% THF: ${Math.round(profile.thf)}`, x + barWidth + 15, yThf);
+                    
+                    // Max HR Label
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.font = '12px "Inter"';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`Max: ${profile.max}`, x + barWidth/2, yMaxTop - 10);
+
+                    // X-Axis Label
+                    ctx.fillStyle = '#1e293b';
+                    ctx.font = 'bold 15px "Outfit"';
+                    ctx.fillText(label, x + barWidth/2, yBottom + 30);
+                }
+
+                renderProfile(untrainiert, x1, 'Untrainierter');
+                renderProfile(athlet, x2, 'Ausdauerathlet');
+
+                // 3. Highlight Annotation Line between the two 70% marks to show the difference
+                const yThf1 = getY(untrainiert.thf);
+                const yThf2 = getY(athlet.thf);
+                
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.moveTo(x1 + barWidth + 10, yThf1);
+                ctx.lineTo(x2 - 10, yThf1);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Arrow pointing to difference
+                ctx.beginPath();
+                ctx.moveTo(x2 - 30, yThf1);
+                ctx.lineTo(x2 - 30, yThf2);
+                ctx.strokeStyle = '#f43f5e';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Draw arrowhead
+                ctx.beginPath();
+                ctx.moveTo(x2 - 30, yThf2);
+                ctx.lineTo(x2 - 35, yThf2 - 8);
+                ctx.lineTo(x2 - 25, yThf2 - 8);
+                ctx.fillStyle = '#f43f5e';
+                ctx.fill();
+
+                ctx.fillStyle = '#f43f5e';
+                ctx.font = 'bold 12px "Inter"';
+                ctx.textAlign = 'right';
+                ctx.fillText(`Diff: ~${Math.round(untrainiert.thf - athlet.thf)} S/min`, x2 - 40, yThf1 + (yThf2 - yThf1)/2);
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

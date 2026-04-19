@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.2.4c Praxistransfer: Methodische Übungsreihen und Taktiktraining - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;400;600;700;800&display=swap');
+
+        :root {
+            /* Playbook Palette */
+            --bg-body: #f8fafc;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            
+            --coach-blue: #2563eb;    /* Primary tactical blue */
+            --coach-orange: #ea580c;  /* Highlight orange */
+            --coach-green: #059669;   /* Success/Progression green */
+            --coach-dark: #0f172a;    /* Slate dark */
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Masterclass Box */
+            --abi-bg: #171717;        /* Almost black */
+            --abi-gold: #fbbf24;      /* Gold */
+            --abi-text: #f3f4f6;
+
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.65;
+            font-size: 1.05rem;
+            /* Subtle tactical board background */
+            background-image: 
+                linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Chakra Petch', sans-serif;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER SECTION --- */
+        .playbook-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-xl);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 4rem;
+            border-left: 10px solid var(--coach-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .playbook-header::after {
+            content: 'PLAYBOOK';
+            position: absolute;
+            top: -20px;
+            right: 10px;
+            font-size: 6rem;
+            color: rgba(37, 99, 235, 0.04);
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            pointer-events: none;
+        }
+
+        .playbook-header h1 {
+            font-size: 2.6rem;
+            color: var(--coach-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .playbook-header .lead {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- SECTION 1: METHODISCHE ÜBUNGSREIHE (MÜR) --- */
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--coach-dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '>>';
+            color: var(--coach-orange);
+            font-weight: 700;
+        }
+
+        .muer-intro {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 3rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .muer-principles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .principle-card {
+            background: #f8fafc;
+            border-top: 4px solid var(--coach-blue);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            transition: transform 0.2s ease;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-3px);
+            background: #eff6ff;
+        }
+
+        .principle-card h4 {
+            color: var(--coach-blue);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .principle-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* --- SECTION 2: PRAXISBEISPIEL VOLLEYBALL --- */
+        .volleyball-example {
+            margin-bottom: 4rem;
+        }
+
+        .vb-intro {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .vb-highlight {
+            background: rgba(234, 88, 12, 0.1);
+            color: var(--coach-orange);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .step-row {
+            display: flex;
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .step-number {
+            background: var(--coach-dark);
+            color: white;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .step-content h4 {
+            color: var(--coach-orange);
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* --- CANVAS SECTION --- */
+        .canvas-section {
+            background: var(--card-bg);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 4rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .canvas-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--coach-dark);
+        }
+
+        .canvas-section p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            background: #f1f5f9; /* matches canvas bg */
+        }
+
+        /* --- SECTION 3: TAKTIKTRAINING --- */
+        .taktik-section {
+            background: #ffffff;
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 4rem;
+        }
+
+        .taktik-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .taktik-card {
+            background: #f0fdf4; /* Light green */
+            border: 1px solid #6ee7b7;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-top: 4px solid var(--coach-green);
+        }
+
+        .taktik-card h3 {
+            color: var(--coach-green);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- ABITUR MASTERCLASS BOX --- */
+        .abitur-masterclass {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-xl);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            border-top: 8px solid var(--abi-gold);
+            position: relative;
+        }
+
+        .abitur-masterclass h2 {
+            color: var(--abi-gold);
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #9ca3af;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 1.5rem;
+        }
+
+        .exam-strategy {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--abi-gold);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .exam-strategy h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .exam-strategy p {
+            color: #d1d5db;
+        }
+
+        .exam-highlight {
+            color: var(--abi-gold);
+            font-weight: 700;
+        }
+
+        .mega-tip {
+            background: rgba(251, 191, 36, 0.1);
+            border: 2px dashed var(--abi-gold);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-top: 2.5rem;
+        }
+
+        .mega-tip h4 {
+            color: var(--abi-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .taktik-grid { grid-template-columns: 1fr; }
+            .playbook-header, .abitur-masterclass { padding: 2rem; }
+            .playbook-header h1 { font-size: 2.2rem; }
+            .step-number { width: 60px; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="playbook-header">
+        <h1>2.2.4c Praxistransfer: Methodische Übungsreihen und Taktiktraining</h1>
+        <p class="lead">
+            Die höchste Stufe des sporttheoretischen Verständnisses ist die Fähigkeit, das theoretische Wissen in die Praxis umzusetzen. Lehrkräfte und Trainer nutzen hierfür standardisierte Planungsverfahren, um komplexe Techniken systematisch zu vermitteln und taktisches Verhalten messbar zu machen.
+        </p>
+    </header>
+
+    <!-- 1. Methodische Übungsreihe (MÜR) -->
+    <section>
+        <h2 class="section-title">1. Die Methodische Übungsreihe (MÜR) im Techniktraining</h2>
+        
+        <div class="muer-intro">
+            <p>
+                Eine Methodische Übungsreihe (MÜR) ist eine planmäßig geordnete Folge von Übungen, die das Erlernen einer komplexen sportlichen Bewegungstechnik (Zielübung) ermöglichen soll. Sie basiert auf strengen pädagogisch-methodischen Grundsätzen:
+            </p>
+            
+            <div class="muer-principles">
+                <div class="principle-card">
+                    <h4>Vom Leichten zum Schweren</h4>
+                    <p>Die koordinative Beanspruchung wird schrittweise gesteigert.</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Vom Einfachen zum Komplexen</h4>
+                    <p>Erst werden isolierte Teilbewegungen geübt, dann werden sie zusammengesetzt (Sukzessivkopplung).</p>
+                </div>
+                <div class="principle-card">
+                    <h4>Vom Bekannten zum Unbekannten</h4>
+                    <p>Rückgriff auf bereits automatisierte Bewegungsmuster.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Praxisbeispiel Volleyball -->
+    <section class="volleyball-example">
+        <h2 class="section-title">2. Praxisbeispiel: Konstruktion einer MÜR</h2>
+        <p class="vb-intro">
+            Die Vermittlung des frontalen Angriffsschlags (Volleyball) ist hochkomplex und erfordert zwingend eine <span class="vb-highlight">Zergliederungsmethode gepaart mit Vereinfachungsstrategien</span>. Eine klassische MÜR könnte wie folgt aussehen:
+        </p>
+
+        <div class="steps-container">
+            <div class="step-row">
+                <div class="step-number">S 1</div>
+                <div class="step-content">
+                    <h4>Isolierung Beinarbeit</h4>
+                    <p>Isoliertes Einüben des dreischrittigen Anlaufrhythmus (Stemmschritt) ohne Ball.</p>
+                </div>
+            </div>
+
+            <div class="step-row">
+                <div class="step-number">S 2</div>
+                <div class="step-content">
+                    <h4>Isolierung Armzug</h4>
+                    <p>Isolierte Einübung der Schlagbewegung im Stand (z. B. gezielter Schlag eines in der anderen Hand gehaltenen Balls auf den Boden oder gegen eine Wand).</p>
+                </div>
+            </div>
+
+            <div class="step-row">
+                <div class="step-number">S 3</div>
+                <div class="step-content">
+                    <h4>Synthese unter starker Vereinfachung</h4>
+                    <p>Das koordinative Anforderungsniveau wird reduziert. Die Spielerin wirft sich den Ball selbst hoch an, führt den gelernten Anlauf durch und schlägt den Ball.</p>
+                </div>
+            </div>
+
+            <div class="step-row">
+                <div class="step-number">S 4</div>
+                <div class="step-content">
+                    <h4>Annäherung an die Zielübung</h4>
+                    <p>Der Ball wird nun von einer anderen Person (Trainer) von unten präzise angeworfen, der Athlet läuft an und schlägt.</p>
+                </div>
+            </div>
+
+            <div class="step-row">
+                <div class="step-number" style="background: var(--coach-orange);">S 5</div>
+                <div class="step-content">
+                    <h4 style="color: var(--coach-dark);">Wettkampfnahe Zielübung</h4>
+                    <p>Der Ball wird wettkampfnah aus der Spielsituation heraus über das Netz gestellt und geschlagen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Canvas Graphic (Stufendiagramm MÜR) -->
+    <section class="canvas-section">
+        <h3>Visualisierung der Methodischen Übungsreihe</h3>
+        <p>Der Anstieg der Komplexität bis zur Zielübung (Beispiel: Volleyball-Angriffsschlag)</p>
+        <canvas id="muerCanvas" width="950" height="450"></canvas>
+    </section>
+
+    <!-- 3. Taktiktraining -->
+    <section class="taktik-section">
+        <h2 class="section-title">3. Praxistransfer im Taktiktraining</h2>
+        <p>Neben der Technik muss auch die Taktik gezielt trainiert und analysiert werden. Dies geschieht selten durch physisches Üben allein, sondern primär durch kognitive Verfahren:</p>
+
+        <div class="taktik-grid">
+            <div class="taktik-card">
+                <h3>📋 Spielbeobachtung</h3>
+                <p>Die systematische Erfassung des Spielgeschehens. Hierbei werden Beobachtungsbögen eingesetzt, um z. B. Laufwege, bevorzugte Angriffsseiten des Gegners oder die Fehlerquote der eigenen Mannschaft (z. B. Aufschlagfehler im Volleyball) statistisch zu erfassen.</p>
+            </div>
+
+            <div class="taktik-card">
+                <h3>🔬 Spielanalyse</h3>
+                <p>Die Auswertung der gewonnenen Daten. Werden beim Gegner Schwächen identifiziert (z. B. "Der gegnerische Zuspieler nutzt fast nie die Mitte"), wird die eigene Mannschaftstaktik (z. B. Blockschwerpunkt nach außen verlagern) daraufhin optimiert.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abitur Masterclass Box -->
+    <section class="abitur-masterclass">
+        <h2><span style="font-size: 2.8rem;">🏆</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Dieser Punkt ist das <strong>absolute Herzstück der Anwendungsorientierung</strong> im neuen LehrplanPLUS. Die Erstellung einer MÜR ist eine eigene Transferleistung, die in den Abitur-Beispielaufgaben mit extrem hoher Punktzahl bewertet wird.
+        </p>
+
+        <div class="strat-block">
+            <h4>Der Freitext-Entwurf</h4>
+            <p>In der illustrierenden Abituraufgabe zum Zehnkampf lautet die konkrete Aufgabenstellung: <em>"Erstellen Sie zu einer selbst gewählten technischen Disziplin des Zehnkampfs eine methodische Übungsreihe!"</em></p>
+        </div>
+
+        <div class="strat-block">
+            <h4>Methoden terminologisch benennen</h4>
+            <p>Wenn du die MÜR aufschreibst, benenne in der Klausur zwingend die methodischen Fachbegriffe. Schreibe nicht nur "Zuerst übt man den Anlauf", sondern: <br><br><em>"Im Sinne der <span class="exam-highlight">Zergliederungsmethode</span> wird die Bewegung in Teilbewegungen zergliedert, indem zunächst isoliert der Anlaufrhythmus geübt wird."</em></p>
+        </div>
+
+        <div class="strat-block">
+            <h4>Begründung der Progression</h4>
+            <p>Die Korrektoren achten penibel darauf, ob dein Aufbau logisch ist. Nutze den Fachbegriff <span class="exam-highlight">Vereinfachungsstrategie</span> und erkläre, dass das koordinative Anforderungsniveau (z. B. Timing des Ballflugs) anfangs künstlich reduziert und dann stufenweise bis zur Zielübung erhöht wird.</p>
+        </div>
+
+        <div class="mega-tip">
+            <h4>💡 DER ULTIMATIVE ABITUR-TIPP</h4>
+            <p style="color: #fef3c7; margin: 0;">Du musst dir unbedingt im Vorfeld für deine persönlichen Schwerpunkt-Sportarten (z. B. Kugelstoßen, Speerwurf, Hochsprung oder Volleyball) <strong>eine auswendig gelernte, 100% logische MÜR in 4-5 Schritten zurechtlegen!</strong> So sparst du in der Klausur massiv Zeit.</p>
+        </div>
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('muerCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Background
+    ctx.fillStyle = '#f1f5f9';
+    ctx.fillRect(0, 0, w, h);
+
+    // Configuration for the 5 steps
+    const numSteps = 5;
+    const stepW = 150;
+    const stepH = 50;
+    
+    // Calculate layout parameters
+    const totalW = numSteps * stepW;
+    const startX = (w - totalW) / 2 + 20; // Center visually
+    const startY = h - 60; // Bottom position for step 1
+
+    // Colors
+    const colorStepBase = '#2563eb';
+    const colorStepHighlight = '#ea580c';
+    const colorTextDark = '#0f172a';
+    const colorTextLight = '#ffffff';
+
+    // Step Data
+    const steps = [
+        { label: "1. Isolierter", sub: "Anlauf" },
+        { label: "2. Isolierter", sub: "Schlag (Stand)" },
+        { label: "3. Schlag mit", sub: "Eigenanwurf" },
+        { label: "4. Schlag mit", sub: "Traineranwurf" },
+        { label: "5. Wettkampf:", sub: "Gestellter Ball", highlight: true }
+    ];
+
+    // Background Gradient Arrow (Complexity Increase)
+    ctx.beginPath();
+    ctx.moveTo(startX - 20, startY + stepH);
+    ctx.lineTo(startX + totalW + 20, startY - (numSteps * stepH) + stepH*2);
+    ctx.lineTo(startX + totalW + 20, startY + stepH);
+    const bgGrad = ctx.createLinearGradient(startX, 0, startX + totalW, 0);
+    bgGrad.addColorStop(0, 'rgba(37, 99, 235, 0.0)');
+    bgGrad.addColorStop(1, 'rgba(234, 88, 12, 0.15)');
+    ctx.fillStyle = bgGrad;
+    ctx.fill();
+
+    // Large background text
+    ctx.save();
+    ctx.translate(w/2 + 100, h/2 - 50);
+    ctx.rotate(-15 * Math.PI / 180);
+    ctx.font = '900 60px "Chakra Petch"';
+    ctx.fillStyle = 'rgba(234, 88, 12, 0.05)';
+    ctx.textAlign = 'center';
+    ctx.fillText("KOMPLEXITÄTSSTEIGERUNG", 0, 0);
+    ctx.restore();
+
+    // Drawing Functions for Pictograms
+    function drawHead(x, y, color) {
+        ctx.beginPath(); ctx.arc(x, y, 8, 0, Math.PI*2); ctx.fillStyle=color; ctx.fill();
+    }
+    
+    function drawBall(x, y, color='#facc15') {
+        ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI*2); ctx.fillStyle=color; ctx.fill();
+        ctx.strokeStyle='#ca8a04'; ctx.lineWidth=1; ctx.stroke();
+    }
+
+    // Step 1: Isolierter Anlauf (Footprints/Running stance)
+    const drawP1 = (x, y, c) => {
+        ctx.strokeStyle = c; ctx.lineWidth = 3; ctx.lineCap = 'round';
+        drawHead(x, y-25, c);
+        ctx.beginPath();
+        ctx.moveTo(x, y-15); ctx.lineTo(x, y); // torso
+        ctx.lineTo(x-10, y+10); ctx.lineTo(x-15, y+20); // back leg
+        ctx.moveTo(x, y); ctx.lineTo(x+10, y+10); ctx.lineTo(x+5, y+20); // front leg
+        ctx.moveTo(x, y-10); ctx.lineTo(x-15, y-5); // arm
+        ctx.moveTo(x, y-10); ctx.lineTo(x+15, y-15); // arm
+        ctx.stroke();
+        // Floor line
+        ctx.strokeStyle = '#94a3b8'; ctx.beginPath(); ctx.moveTo(x-20, y+25); ctx.lineTo(x+20, y+25); ctx.stroke();
+    };
+
+    // Step 2: Isolierter Schlag (Stand)
+    const drawP2 = (x, y, c) => {
+        ctx.strokeStyle = c; ctx.lineWidth = 3; ctx.lineCap = 'round';
+        drawHead(x, y-25, c);
+        ctx.beginPath();
+        ctx.moveTo(x, y-15); ctx.lineTo(x, y+5); // torso
+        ctx.lineTo(x-10, y+20); // leg 1
+        ctx.moveTo(x, y+5); ctx.lineTo(x+10, y+20); // leg 2
+        ctx.moveTo(x, y-10); ctx.lineTo(x-15, y-25); // hitting arm up
+        ctx.moveTo(x, y-10); ctx.lineTo(x+15, y-5); // holding arm
+        ctx.stroke();
+        drawBall(x+15, y-5); // ball in hand
+        // Action line
+        ctx.strokeStyle = '#ea580c'; ctx.beginPath(); ctx.moveTo(x-10, y-30); ctx.lineTo(x+5, y-15); ctx.stroke();
+    };
+
+    // Step 3: Eigenanwurf + Schlag
+    const drawP3 = (x, y, c) => {
+        ctx.strokeStyle = c; ctx.lineWidth = 3; ctx.lineCap = 'round';
+        drawHead(x-10, y-25, c);
+        ctx.beginPath();
+        ctx.moveTo(x-10, y-15); ctx.lineTo(x-5, y+5); // torso jumping
+        ctx.lineTo(x-15, y+20); // leg
+        ctx.moveTo(x-5, y+5); ctx.lineTo(x+5, y+15); // leg
+        ctx.moveTo(x-10, y-10); ctx.lineTo(x-20, y-25); // hitting arm
+        ctx.moveTo(x-10, y-10); ctx.lineTo(x+5, y-20); // tossing arm (just tossed)
+        ctx.stroke();
+        drawBall(x+10, y-35); // ball in air
+        // Toss trajectory
+        ctx.strokeStyle = '#94a3b8'; ctx.setLineDash([2,2]); ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(x+5, y-20); ctx.lineTo(x+10, y-30); ctx.stroke(); ctx.setLineDash([]);
+    };
+
+    // Step 4: Traineranwurf (Two people)
+    const drawP4 = (x, y, c) => {
+        // Player (jumping)
+        ctx.strokeStyle = c; ctx.lineWidth = 3; ctx.lineCap = 'round';
+        drawHead(x+15, y-25, c);
+        ctx.beginPath();
+        ctx.moveTo(x+15, y-15); ctx.lineTo(x+10, y+5); // torso
+        ctx.lineTo(x+20, y+20); ctx.moveTo(x+10, y+5); ctx.lineTo(x, y+20); // legs
+        ctx.moveTo(x+15, y-10); ctx.lineTo(x+25, y-25); // hitting arm
+        ctx.moveTo(x+15, y-10); ctx.lineTo(x+5, y-5); // other arm
+        ctx.stroke();
+
+        // Trainer (standing left)
+        ctx.strokeStyle = '#64748b'; // grey trainer
+        drawHead(x-25, y-5, '#64748b');
+        ctx.beginPath();
+        ctx.moveTo(x-25, y+5); ctx.lineTo(x-25, y+15);
+        ctx.lineTo(x-30, y+25); ctx.moveTo(x-25, y+15); ctx.lineTo(x-20, y+25); // legs
+        ctx.moveTo(x-25, y+5); ctx.lineTo(x-10, y+5); // throwing arm
+        ctx.stroke();
+
+        drawBall(x, y-20); // ball arriving
+        // Toss trajectory
+        ctx.strokeStyle = '#94a3b8'; ctx.setLineDash([2,2]); ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(x-10, y+5); ctx.quadraticCurveTo(x-5, y-20, x-2, y-20); ctx.stroke(); ctx.setLineDash([]);
+    };
+
+    // Step 5: Wettkampf (Net + Block)
+    const drawP5 = (x, y, c) => {
+        // Player (jumping)
+        ctx.strokeStyle = c; ctx.lineWidth = 3; ctx.lineCap = 'round';
+        drawHead(x-15, y-30, c);
+        ctx.beginPath();
+        ctx.moveTo(x-15, y-20); ctx.lineTo(x-10, y); // torso
+        ctx.lineTo(x-20, y+15); ctx.moveTo(x-10, y); ctx.lineTo(x, y+15); // legs
+        ctx.moveTo(x-15, y-15); ctx.lineTo(x-5, y-35); // hitting arm
+        ctx.stroke();
+
+        // Net
+        ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(x+10, y-35); ctx.lineTo(x+10, y+25); ctx.stroke();
+        ctx.setLineDash([2,2]); ctx.beginPath(); ctx.moveTo(x+5, y-35); ctx.lineTo(x+5, y-5); ctx.stroke(); ctx.setLineDash([]);
+
+        // Blocker (Opponent right)
+        ctx.strokeStyle = '#ef4444'; // Red opponent
+        drawHead(x+30, y-25, '#ef4444');
+        ctx.beginPath();
+        ctx.moveTo(x+30, y-15); ctx.lineTo(x+30, y+5);
+        ctx.lineTo(x+25, y+20); ctx.moveTo(x+30, y+5); ctx.lineTo(x+35, y+20);
+        ctx.moveTo(x+30, y-10); ctx.lineTo(x+15, y-30); // blocking arms
+        ctx.stroke();
+
+        drawBall(x+5, y-35); // ball at net
+    };
+
+    const drawingFuncs = [drawP1, drawP2, drawP3, drawP4, drawP5];
+
+    // Draw the Steps
+    for (let i = 0; i < numSteps; i++) {
+        const stepX = startX + i * stepW;
+        const stepY = startY - i * stepH;
+        const isHighlight = steps[i].highlight;
+        
+        const boxColor = isHighlight ? colorStepHighlight : colorStepBase;
+        const textColor = colorTextLight;
+
+        // Draw Box
+        ctx.fillStyle = boxColor;
+        ctx.shadowColor = 'rgba(0,0,0,0.2)';
+        ctx.shadowBlur = 8;
+        ctx.shadowOffsetY = 4;
+        // Draw step block
+        ctx.beginPath();
+        ctx.roundRect(stepX, stepY, stepW, stepH * (numSteps - i) + 20, 6);
+        ctx.fill();
+        ctx.shadowColor = 'transparent';
+
+        // Draw Top Highlight line
+        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        ctx.fillRect(stepX, stepY, stepW, 5);
+
+        // Separator line left (for 3D effect)
+        if (i > 0) {
+            ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(stepX, stepY);
+            ctx.lineTo(stepX, startY + 20);
+            ctx.stroke();
+        }
+
+        // Draw Texts
+        ctx.textAlign = 'center';
+        ctx.fillStyle = textColor;
+        
+        ctx.font = 'bold 14px Inter';
+        ctx.fillText(steps[i].label, stepX + stepW / 2, stepY + 25);
+        
+        ctx.font = '13px Inter';
+        ctx.fillText(steps[i].sub, stepX + stepW / 2, stepY + 45);
+
+        // Draw Icon exactly above the step
+        const iconY = stepY - 45;
+        const iconColor = isHighlight ? colorStepHighlight : colorStepBase;
+        
+        // Draw icon container (circle)
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath(); ctx.arc(stepX + stepW/2, iconY, 35, 0, Math.PI*2); ctx.fill();
+        ctx.lineWidth = 2; ctx.strokeStyle = iconColor; ctx.stroke();
+
+        // Call the specific drawing function
+        drawingFuncs[i](stepX + stepW/2, iconY, iconColor);
+    }
+
+</script>
+</body>
+</html>

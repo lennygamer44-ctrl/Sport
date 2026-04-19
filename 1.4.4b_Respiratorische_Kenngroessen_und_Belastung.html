@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Respiratorische Kenngrößen und Belastung</title>
+    <style>
+        /* High-Performance Diagnostics Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Inter:wght@300;400;600;700;800&family=Roboto+Mono:wght@500;700&display=swap');
+
+        :root {
+            /* Lab Palette: Crisp White, Navy, Racing Red, Tech Blue */
+            --bg-page: #f4f5f8;
+            --bg-card: #ffffff;
+            
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --text-dark: #0f172a;
+            
+            --lab-navy: #1e1b4b;
+            --lab-blue: #2563eb;
+            --lab-red: #e11d48;
+            --lab-cyan: #0891b2;
+            
+            --border-light: #e2e8f0;
+            --border-thick: 3px;
+            
+            --abi-gold: #f59e0b;
+            --abi-bg: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            background-image: 
+                linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .layout-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Diagnostic Header */
+        .header-panel {
+            background: var(--bg-card);
+            border: var(--border-thick) solid var(--lab-navy);
+            padding: 3rem;
+            position: relative;
+            margin-bottom: 3rem;
+            box-shadow: 8px 8px 0px rgba(30, 27, 75, 0.1);
+        }
+
+        .header-panel::before {
+            content: 'SPIROMETRIE / DIAGNOSTIK';
+            position: absolute;
+            top: -12px;
+            left: 2rem;
+            background: var(--lab-navy);
+            color: white;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            padding: 2px 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            color: var(--lab-navy);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .header-lead {
+            font-size: 1.15rem;
+            color: var(--text-main);
+            border-left: 4px solid var(--lab-blue);
+            padding-left: 1.5rem;
+        }
+
+        /* Section Titles */
+        h2 {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.5rem;
+            color: var(--lab-navy);
+            margin: 3rem 0 1.5rem 0;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2::after {
+            content: '';
+            flex-grow: 1;
+            height: 2px;
+            background: var(--border-light);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        /* Data Cards for Parameters */
+        .param-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .data-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 2rem;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .data-card:hover {
+            border-color: var(--lab-blue);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+        }
+
+        .data-card.azv::before { background: var(--lab-blue); }
+        .data-card.af::before { background: var(--lab-cyan); }
+        .data-card.amv::before { background: var(--lab-navy); }
+        .data-card.vk::before { background: var(--lab-red); }
+
+        .param-abbr {
+            font-family: 'Teko', sans-serif;
+            font-size: 3rem;
+            line-height: 1;
+            color: var(--text-light);
+            opacity: 0.2;
+            position: absolute;
+            top: 1rem; right: 1.5rem;
+        }
+
+        .data-card h3 {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .value-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed var(--border-light);
+        }
+
+        .val-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .val-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-light);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .val-number {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--lab-navy);
+        }
+
+        .val-number.highlight {
+            color: var(--lab-red);
+        }
+
+        /* VO2max Hero Block */
+        .vo2-hero {
+            background: linear-gradient(135deg, var(--lab-navy), #0f172a);
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .vo2-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+
+        .vo2-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 3rem;
+            color: white;
+            margin: 0;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .vo2-unit {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--lab-cyan);
+        }
+
+        .vo2-text {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        /* Canvas Wrap */
+        .canvas-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .canvas-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .canvas-header h4 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--lab-navy);
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            display: block;
+        }
+
+        /* Abitur Transfer Box - Tactical Rubric Style */
+        .exam-rubric {
+            background: var(--abi-bg);
+            color: white;
+            border-top: 6px solid var(--abi-gold);
+            padding: 4rem;
+            margin-top: 5rem;
+            position: relative;
+        }
+
+        .exam-rubric::before {
+            content: 'EXAM RUBRIC / eA-NIVEAU';
+            position: absolute;
+            top: 0; right: 2rem;
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            padding: 0.4rem 1.5rem;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .exam-rubric h2 {
+            color: white;
+            border: none;
+            margin-top: 0;
+        }
+
+        .exam-rubric h2::after { display: none; }
+
+        .source-quote {
+            background: #1e293b;
+            border-left: 4px solid var(--abi-gold);
+            padding: 2rem;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin: 2rem 0;
+        }
+
+        .source-quote strong {
+            display: block;
+            font-style: normal;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.5rem;
+            color: var(--abi-gold);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* Tactical 3-Step Argumentation */
+        .tactic-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .tactic-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .tactic-item { grid-template-columns: 1fr; gap: 1rem; }
+        }
+
+        .tactic-phrase {
+            font-family: 'Roboto Mono', monospace;
+            color: var(--lab-cyan);
+            font-size: 1rem;
+            white-space: nowrap;
+            background: rgba(8, 145, 178, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .tactic-content p {
+            margin-bottom: 0;
+            color: #f8fafc;
+        }
+
+        .tactic-content strong {
+            color: var(--abi-gold);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="layout-container">
+    
+    <div class="header-panel">
+        <h1>Kenngrößen und Belastung</h1>
+        <div class="header-lead">
+            Um die Lungenfunktion und die aerobe Leistungsfähigkeit eines Athleten objektiv beurteilen zu können, nutzt die Sportmedizin und Leistungsdiagnostik (Spirometrie) spezifische respiratorische Kenngrößen. Unter sportlicher Belastung verändern sich diese Parameter gravierend, um den massiv gesteigerten Sauerstoffbedarf der Arbeitsmuskulatur zu decken und das anfallende Kohlendioxid (CO<sub>2</sub>) abzuatmen.
+        </div>
+    </div>
+
+    <!-- Section 1 -->
+    <h2>1. Die respiratorischen Kenngrößen im Detail</h2>
+    <p>Das Atemzentrum steuert die Lungenventilation primär über zwei dynamische Stellschrauben: Wie tief geatmet wird und wie oft geatmet wird.</p>
+
+    <div class="param-grid">
+        <!-- AZV -->
+        <div class="data-card azv">
+            <span class="param-abbr">AZV</span>
+            <h3>Atemzugvolumen</h3>
+            <p style="font-size: 0.95rem;">Beschreibt die Menge an Luft, die pro einzelnem Atemzug ein- bzw. ausgeatmet wird. Bei Ausdauerbelastungen wird zunächst die Atemtiefe gesteigert, um die frische Luft tief in die Alveolen zu saugen und den anatomischen Totraum prozentual zu verkleinern.</p>
+            <div class="value-split">
+                <div class="val-box">
+                    <span class="val-label">Ruhewert</span>
+                    <span class="val-number">~ 0,5 L</span>
+                </div>
+                <div class="val-box">
+                    <span class="val-label">Max. Belastung</span>
+                    <span class="val-number highlight">> 3,0 L</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- AF -->
+        <div class="data-card af">
+            <span class="param-abbr">AF</span>
+            <h3>Atemfrequenz</h3>
+            <p style="font-size: 0.95rem;">Die Anzahl der vollendeten Atemzüge pro Minute. Reicht die Vertiefung der Atmung (AZV) nicht mehr aus, um den Gasaustausch zu sichern, steigt die Atemfrequenz drastisch an.</p>
+            <div class="value-split">
+                <div class="val-box">
+                    <span class="val-label">Ruhewert</span>
+                    <span class="val-number">12 - 16 /min</span>
+                </div>
+                <div class="val-box">
+                    <span class="val-label">Max. Belastung</span>
+                    <span class="val-number highlight">50 - 60 /min</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- AMV -->
+        <div class="data-card amv">
+            <span class="param-abbr">AMV</span>
+            <h3>Atemminutenvolumen</h3>
+            <p style="font-size: 0.95rem;">Das Produkt aus Atemfrequenz und Atemzugvolumen (<strong>AMV = AF × AZV</strong>). Es gibt an, wie viel Luft pro Minute ventiliert wird.</p>
+            <div class="value-split">
+                <div class="val-box">
+                    <span class="val-label">Ruhewert</span>
+                    <span class="val-number">6 - 8 L/min</span>
+                </div>
+                <div class="val-box">
+                    <span class="val-label">Max. Belastung</span>
+                    <span class="val-number highlight">> 150 L/min</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- VK -->
+        <div class="data-card vk">
+            <span class="param-abbr">VK</span>
+            <h3>Vitalkapazität</h3>
+            <p style="font-size: 0.95rem;">Das maximale Luftvolumen, das nach einer maximalen Einatmung maximal wieder ausgeatmet werden kann. Es ist ein statisches Maß für die Thoraxgröße und hängt stark von Alter/Körpergröße ab.</p>
+            <div class="value-split">
+                <div class="val-box">
+                    <span class="val-label">Normwert</span>
+                    <span class="val-number">3 - 5 L</span>
+                </div>
+                <div class="val-box">
+                    <span class="val-label">Hochleistung</span>
+                    <span class="val-number highlight">6 - 8 L</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: VO2max Hero -->
+    <h2>2. Das Bruttokriterium</h2>
+    <div class="vo2-hero">
+        <div class="vo2-header">
+            <h3 class="vo2-title">Maximale Sauerstoffaufnahme (VO<sub>2</sub>max)</h3>
+            <span class="vo2-unit">Einheit: ml/min/kg</span>
+        </div>
+        <p class="vo2-text">Die VO<sub>2</sub>max ist der <strong>absolut wichtigste Parameter</strong> zur Beurteilung der aerobe Ausdauerleistungsfähigkeit. Sie gibt an, wie viele Milliliter Sauerstoff der Körper unter maximaler Ausbelastung pro Minute aufnehmen (Lunge), transportieren (Herz-Kreislauf) und in den Mitochondrien der Arbeitsmuskulatur verwerten kann.</p>
+        <p class="vo2-text" style="margin-top: 10px;">Die VO<sub>2</sub>max ist durch Ausdauertraining stark trainierbar, jedoch auch genetisch limitiert.</p>
+    </div>
+
+    <!-- Canvas: Spirogram & VO2max Bar Chart -->
+    <div class="canvas-section">
+        <div class="canvas-header">
+            <h4>Diagnostische Visualisierung: Spirogramm & VO<sub>2</sub>max</h4>
+            <p style="font-size: 0.85rem; color: var(--text-light);">Volumen-Zeit-Kurve der Lungenvolumina und relativer VO<sub>2</sub>max-Vergleich</p>
+        </div>
+        <canvas id="diagnosticsCanvas" width="1000" height="400"></canvas>
+    </div>
+
+    <!-- Abitur Transfer -->
+    <div class="exam-rubric">
+        <h2>Abitur-Transfer & Praxis</h2>
+        <p>Dieser Unterpunkt ist einer der wichtigsten Transferbereiche in der eA-Abiturprüfung. Es wird ausdrücklich erwartet, dass du Zusammenhänge zwischen Atmung und sportlicher Belastung ausgehend von konkreten Fallbeispielen erklärst.</p>
+
+        <div class="source-quote">
+            <strong>FALLANALYSE: BLOGAUSZUG TEIL 3 (Mountainbike-Tour)</strong>
+            „Beim Anstieg haben wir immer mehr geschnauft - kurz vor der Gorialm habe ich gedacht, mir platzt gleich die Lunge. Und selbst danach war ich noch ganz schön lang außer Atem.“
+        </div>
+
+        <h3 style="color: white; font-family: 'Teko', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; letter-spacing: 1px;">DIE TRANSFER-ARGUMENTATION (3 Schritte zum Vollpunkt):</h3>
+        <p style="color: #cbd5e1; margin-bottom: 2rem;">Wenn du diese Aussage im Abitur bewerten musst, verlangt der Erwartungshorizont, dass du die Alltagssprache exakt in die respirativen Kenngrößen und ihre physiologischen Ursachen übersetzt.</p>
+
+        <div class="tactic-list">
+            <!-- Tactic 1 -->
+            <div class="tactic-item">
+                <div class="tactic-phrase">"Immer mehr geschnauft"</div>
+                <div class="tactic-content">
+                    <p>Durch die zunehmende Steigung steigt der muskuläre Sauerstoffbedarf drastisch. Der Körper reagiert mit einer <strong>linearen Steigerung von Atemfrequenz (AF) und Atemzugvolumen (AZV)</strong>, um das Atemminutenvolumen (AMV) zu erhöhen und die aerobe Energiebereitstellung zu sichern.</p>
+                </div>
+            </div>
+
+            <!-- Tactic 2 -->
+            <div class="tactic-item">
+                <div class="tactic-phrase">"Mir platzt gleich die Lunge"</div>
+                <div class="tactic-content">
+                    <p>Hier verknüpfst du die Atmung mit der Energiebereitstellung! Kurz vor der Alm wird die Belastung so hoch, dass die Fahrerin die anaerobe Schwelle überschreitet. Es kommt zur <strong>Laktat- und H<sup>+</sup>-Akkumulation</strong>.</p>
+                    <p style="margin-top: 10px;">Das Blut puffert diese Übersäuerung ab (Bikarbonatpuffer), wodurch massiv CO<sub>2</sub> entsteht. Das Atemzentrum registriert dieses CO<sub>2</sub> und zwingt die Athletin zu einer maximalen, unverhältnismäßigen Steigerung der Ventilation (<strong>Hyperventilation / respiratorische Kompensation</strong>), um das CO<sub>2</sub> abzuatmen. <strong>Die VO<sub>2</sub>max ist hier ausgereizt.</strong></p>
+                </div>
+            </div>
+
+            <!-- Tactic 3 -->
+            <div class="tactic-item">
+                <div class="tactic-phrase">"Danach noch lang außer Atem"</div>
+                <div class="tactic-content">
+                    <p>Dieses Phänomen beschreibt die sogenannte <strong>Sauerstoffschuld (EPOC)</strong>. Obwohl die Kuppe passiert ist und die Belastung sinkt, bleiben AF und AZV stark erhöht. Der Körper benötigt diesen "Extra-Sauerstoff", um in der Regenerationsphase das angesammelte Laktat aerob zu verbrennen und die entleerten ATP/KP-Speicher wieder aufzufüllen.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Canvas: Diagnostics (Spirogram + Bar Chart)
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('diagnosticsCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Display Scaling
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+
+        // Pane setup
+        const splitX = width * 0.65; // 65% left, 35% right
+        const padding = 40;
+
+        function drawSpirogram() {
+            const w = splitX - padding;
+            const h = height - padding * 2;
+            const baseY = padding + h / 2;
+            
+            // Grid
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            for(let i=0; i<=4; i++) {
+                let y = padding + (h/4)*i;
+                ctx.beginPath(); ctx.moveTo(padding, y); ctx.lineTo(padding+w, y); ctx.stroke();
+            }
+
+            // Title
+            ctx.fillStyle = '#1e293b';
+            ctx.font = 'bold 16px Inter';
+            ctx.textAlign = 'left';
+            ctx.fillText('Spirogramm (Volumen über Zeit)', padding, padding - 15);
+            ctx.font = '12px Inter';
+            ctx.fillStyle = '#64748b';
+            ctx.fillText('Normalatmung → Max. Inspiration → Max. Exspiration', padding, padding + 5);
+
+            // Draw Spirogram Curve
+            ctx.beginPath();
+            ctx.moveTo(padding, baseY);
+            
+            // Parameters for wave
+            let x = padding;
+            let y = baseY;
+            
+            // Phase 1: Normal breathing (Tidal Volume / AZV)
+            for(let i=0; i<150; i++) {
+                x++;
+                y = baseY - Math.sin(i * 0.05) * 20;
+                ctx.lineTo(x, y);
+            }
+            
+            // Phase 2: Maximum Inspiration
+            // Smooth curve up
+            let peakX = x + 60;
+            let peakY = padding + 40;
+            ctx.bezierCurveTo(x + 20, y, peakX - 20, peakY, peakX, peakY);
+            
+            // Phase 3: Maximum Expiration
+            x = peakX;
+            let valleyX = x + 80;
+            let valleyY = height - padding - 40;
+            ctx.bezierCurveTo(x + 30, peakY, valleyX - 30, valleyY, valleyX, valleyY);
+            
+            // Phase 4: Back to normal breathing
+            x = valleyX;
+            let recoveryX = x + 60;
+            ctx.bezierCurveTo(x + 20, valleyY, recoveryX - 20, baseY, recoveryX, baseY);
+            
+            for(let i=0; i<100; i++) {
+                recoveryX++;
+                y = baseY - Math.sin(i * 0.05) * 20;
+                ctx.lineTo(recoveryX, y);
+            }
+
+            ctx.strokeStyle = '#2563eb'; // Lab Blue
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            // Fill under curve slightly
+            ctx.lineTo(recoveryX, height - padding);
+            ctx.lineTo(padding, height - padding);
+            ctx.fillStyle = 'rgba(37, 99, 235, 0.05)';
+            ctx.fill();
+
+            // Annotations
+
+            // 1. AZV (Atemzugvolumen) arrow
+            let azvX = padding + 75;
+            ctx.beginPath();
+            ctx.moveTo(azvX, baseY - 20);
+            ctx.lineTo(azvX, baseY + 20);
+            ctx.strokeStyle = '#0f172a';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            // Arrow heads
+            ctx.beginPath(); ctx.moveTo(azvX-4, baseY-16); ctx.lineTo(azvX, baseY-20); ctx.lineTo(azvX+4, baseY-16); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(azvX-4, baseY+16); ctx.lineTo(azvX, baseY+20); ctx.lineTo(azvX+4, baseY+16); ctx.stroke();
+            
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 12px Inter';
+            ctx.fillText('AZV', azvX + 10, baseY + 4);
+
+            // 2. VK (Vitalkapazität) arrow
+            let vkX = peakX + 40;
+            ctx.beginPath();
+            ctx.moveTo(vkX, peakY);
+            ctx.lineTo(vkX, valleyY);
+            ctx.strokeStyle = '#e11d48'; // Red
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            // Arrow heads
+            ctx.beginPath(); ctx.moveTo(vkX-5, peakY+5); ctx.lineTo(vkX, peakY); ctx.lineTo(vkX+5, peakY+5); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(vkX-5, valleyY-5); ctx.lineTo(vkX, valleyY); ctx.lineTo(vkX+5, valleyY-5); ctx.stroke();
+            
+            // Dashed reference lines for VK
+            ctx.beginPath(); ctx.setLineDash([4, 4]); ctx.moveTo(peakX, peakY); ctx.lineTo(vkX, peakY); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(valleyX, valleyY); ctx.lineTo(vkX, valleyY); ctx.stroke();
+            ctx.setLineDash([]); // reset
+
+            ctx.fillStyle = '#e11d48';
+            ctx.textAlign = 'left';
+            ctx.fillText('Vitalkapazität', vkX + 10, baseY);
+            ctx.fillText('(VK)', vkX + 10, baseY + 15);
+            
+            // X/Y Axis Lines
+            ctx.beginPath(); ctx.moveTo(padding, padding); ctx.lineTo(padding, height-padding); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(padding, height-padding); ctx.lineTo(padding+w, height-padding); ctx.stroke();
+            
+            // Axis Labels
+            ctx.fillStyle = '#64748b';
+            ctx.textAlign = 'center';
+            ctx.fillText('Zeit (t)', padding + w/2, height - padding + 25);
+            ctx.save();
+            ctx.translate(padding - 15, baseY);
+            ctx.rotate(-Math.PI/2);
+            ctx.fillText('Lungenvolumen (L)', 0, 0);
+            ctx.restore();
+        }
+
+        function drawVO2BarChart() {
+            const startX = splitX + padding;
+            const w = width - startX - padding;
+            const h = height - padding * 2;
+            const yBase = height - padding;
+
+            // Divider Line
+            ctx.beginPath();
+            ctx.moveTo(splitX, padding);
+            ctx.lineTo(splitX, height - padding);
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Title
+            ctx.fillStyle = '#1e293b';
+            ctx.font = 'bold 16px Inter';
+            ctx.textAlign = 'left';
+            ctx.fillText('Relative VO₂max', startX, padding - 15);
+            ctx.font = '12px Inter';
+            ctx.fillStyle = '#64748b';
+            ctx.fillText('(ml/min/kg)', startX, padding + 5);
+
+            // Data
+            const valUntrained = 40;
+            const valElite = 85;
+            const maxScale = 100;
+            
+            const barW = w / 3.5;
+            const gap = barW;
+            const x1 = startX + barW/2;
+            const x2 = x1 + barW + gap;
+
+            const h1 = (valUntrained / maxScale) * h;
+            const h2 = (valElite / maxScale) * h;
+
+            // Draw Y-Axis lines
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            for(let i=0; i<=5; i++) {
+                let y = padding + (h/5)*i;
+                ctx.beginPath(); ctx.moveTo(startX, y); ctx.lineTo(startX+w, y); ctx.stroke();
+            }
+
+            // Function to draw bar with gradient
+            function drawBar(x, y, width, bHeight, colorStart, colorEnd, value, label) {
+                const grad = ctx.createLinearGradient(0, y, 0, yBase);
+                grad.addColorStop(0, colorStart);
+                grad.addColorStop(1, colorEnd);
+                
+                ctx.fillStyle = grad;
+                // Rounded top corners
+                ctx.beginPath();
+                ctx.roundRect(x, y, width, bHeight, [6, 6, 0, 0]);
+                ctx.fill();
+
+                // Value Text inside/above bar
+                ctx.fillStyle = '#1e293b';
+                ctx.font = 'bold 20px Roboto Mono';
+                ctx.textAlign = 'center';
+                ctx.fillText(value, x + width/2, y - 10);
+
+                // Label Text below bar
+                ctx.fillStyle = '#64748b';
+                ctx.font = 'bold 12px Inter';
+                ctx.fillText(label, x + width/2, yBase + 20);
+            }
+
+            // Draw Bar 1
+            drawBar(x1, yBase - h1, barW, h1, '#94a3b8', '#e2e8f0', valUntrained, 'Untrainiert');
+            
+            // Draw Bar 2
+            drawBar(x2, yBase - h2, barW, h2, '#0891b2', '#0284c7', valElite, 'Elite');
+
+            // X-Axis base line
+            ctx.beginPath();
+            ctx.moveTo(startX, yBase);
+            ctx.lineTo(startX + w, yBase);
+            ctx.strokeStyle = '#64748b';
+            ctx.stroke();
+        }
+
+        function drawAll() {
+            ctx.clearRect(0, 0, width, height);
+            drawSpirogram();
+            drawVO2BarChart();
+        }
+
+        drawAll();
+
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawAll();
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.1.1 Der Gesundheitsbegriff und Risikofaktoren - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+
+        :root {
+            /* Holistic Palette */
+            --bg-page: #f8fafc;
+            --text-main: #334155;
+            --text-light: #64748b;
+            
+            --dim-phys: #10b981; /* Emerald Green */
+            --dim-phys-bg: #ecfdf5;
+            
+            --dim-psych: #f59e0b; /* Amber/Orange */
+            --dim-psych-bg: #fffbeb;
+            
+            --dim-social: #6366f1; /* Indigo/Blue */
+            --dim-social-bg: #eef2ff;
+            
+            /* Premium Exam */
+            --abi-bg: #0f172a;
+            --abi-gold: #fbbf24;
+            --abi-text: #f8fafc;
+            
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            color: #0f172a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER & WHO QUOTE --- */
+        .doc-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .doc-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .doc-header p {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .who-quote {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem 4rem;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            border-top: 6px solid #38bdf8;
+        }
+
+        .who-quote::before {
+            content: '“';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-family: 'Merriweather', serif;
+            font-size: 8rem;
+            color: #e0f2fe;
+            line-height: 1;
+        }
+
+        .who-quote blockquote {
+            font-family: 'Merriweather', serif;
+            font-size: 1.6rem;
+            color: #0f172a;
+            font-weight: 700;
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+            line-height: 1.5;
+        }
+
+        .who-quote span {
+            display: block;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* --- THE 3 DIMENSIONS GRID --- */
+        .dimensions-intro {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: var(--text-main);
+        }
+
+        .dimensions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .dim-card {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dim-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .dim-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 8px;
+        }
+
+        .card-phys::before { background: var(--dim-phys); }
+        .card-psych::before { background: var(--dim-psych); }
+        .card-social::before { background: var(--dim-social); }
+
+        .dim-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-phys h2 { color: var(--dim-phys); }
+        .card-psych h2 { color: var(--dim-psych); }
+        .card-social h2 { color: var(--dim-social); }
+
+        .dim-meaning {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .impact-box {
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .impact-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .impact-box p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Positive Impacts */
+        .pos-impact { background: #f0fdf4; border-left: 3px solid #22c55e; }
+        .pos-impact h4 { color: #15803d; }
+        .pos-impact p { color: #166534; }
+
+        /* Negative Impacts (Risks) */
+        .neg-impact { background: #fef2f2; border-left: 3px solid #ef4444; margin-bottom: 0; }
+        .neg-impact h4 { color: #b91c1c; }
+        .neg-impact p { color: #991b1b; }
+
+        /* --- CANVAS SECTION --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 4rem 2rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .canvas-section h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p {
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- ABITUR TRANSFER MATRIX --- */
+        .abitur-transfer {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-top: 6px solid var(--abi-gold);
+            position: relative;
+        }
+
+        .abitur-transfer::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; width: 300px;
+            background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.05));
+            pointer-events: none;
+        }
+
+        .abitur-transfer h2 {
+            color: var(--abi-gold);
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .abi-block {
+            margin-bottom: 2.5rem;
+        }
+
+        .abi-block h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            background: rgba(251, 191, 36, 0.1);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-left: 4px solid var(--abi-gold);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .abi-block p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .matrix-method {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .matrix-row {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .matrix-row span.dim {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .dim-p { color: var(--dim-phys); }
+        .dim-m { color: var(--dim-psych); }
+        .dim-s { color: var(--dim-social); }
+
+        .fazit-box {
+            background: rgba(251, 191, 36, 0.15);
+            border: 1px dashed var(--abi-gold);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-top: 3rem;
+        }
+
+        .fazit-box h4 {
+            color: var(--abi-gold);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .fazit-box p {
+            color: #f8fafc;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .dimensions-grid { grid-template-columns: 1fr; }
+            .who-quote { padding: 2rem; }
+            .who-quote blockquote { font-size: 1.3rem; }
+            .abitur-transfer { padding: 2rem; }
+            .abitur-transfer h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header & WHO Definition -->
+    <header class="doc-header">
+        <h1>3.1.1 Der Gesundheitsbegriff und Risikofaktoren</h1>
+        <p>
+            Gesundheit wird in der modernen Sportwissenschaft und Medizin nicht mehr nur als das bloße „Fehlen von Krankheit“ (pathogenetischer Ansatz) definiert. Maßgeblich ist die Definition der Weltgesundheitsorganisation (WHO), die einen ganzheitlichen (multidimensionalen) Gesundheitsbegriff prägt.
+        </p>
+
+        <div class="who-quote">
+            <blockquote>
+                „Gesundheit ist ein Zustand des vollständigen körperlichen, geistigen und sozialen Wohlergehens.“
+            </blockquote>
+            <span>— Verfassung der Weltgesundheitsorganisation (WHO)</span>
+        </div>
+    </header>
+
+    <p class="dimensions-intro">
+        Um gesundheitliche Fragestellungen im Sport fundiert bewerten zu können, muss dieser Begriff in <strong>drei gleichwertige Dimensionen</strong> unterteilt werden:
+    </p>
+
+    <!-- The 3 Dimensions Grid -->
+    <section class="dimensions-grid">
+        
+        <!-- Dimension 1: Physisch -->
+        <article class="dim-card card-phys">
+            <h2>1. Die physische Dimension</h2>
+            <p class="dim-meaning">
+                <strong>Bedeutung:</strong> Das reibungslose physiologische Funktionieren des Organismus, die anatomische Unversehrtheit sowie die Ausprägung der motorischen Hauptbeanspruchungsformen (Kraft, Ausdauer, Beweglichkeit, Schnelligkeit).
+            </p>
+            
+            <div class="impact-box pos-impact">
+                <h4>📈 Positive Einflüsse durch Sport</h4>
+                <p>Nutzung der gesundheitsfördernden Wirkung von Bewegung (Stärkung von Herz-Kreislauf-System, Immunsystem, Knochendichte).</p>
+            </div>
+            
+            <div class="impact-box neg-impact">
+                <h4>⚠️ Risiken & negative Folgen</h4>
+                <p>Bewegungsmangel, Übergewicht, Fehlernährung. <strong>Im sportlichen Kontext:</strong> Akute Sportverletzungen, chronische Sportschäden durch Fehlbelastungen oder Doping.</p>
+            </div>
+        </article>
+
+        <!-- Dimension 2: Psychisch -->
+        <article class="dim-card card-psych">
+            <h2>2. Die psychische Dimension</h2>
+            <p class="dim-meaning">
+                <strong>Bedeutung:</strong> Das innere emotionale Gleichgewicht, die Fähigkeit zur Stressbewältigung, kognitive Leistungsfähigkeit und ein gesundes Selbstwertgefühl.
+            </p>
+            
+            <div class="impact-box pos-impact">
+                <h4>📈 Positive Einflüsse durch Sport</h4>
+                <p>Sport als aktiver Ausgleich zum Schul- und Alltagsstress. Erleben von intrinsischer Motivation, Flow-Effekten und vor allem <strong>Selbstwirksamkeitserfahrungen</strong> (das Bewusstsein, durch eigenes Handeln Ziele erreichen zu können).</p>
+            </div>
+            
+            <div class="impact-box neg-impact">
+                <h4>⚠️ Risiken & negative Folgen</h4>
+                <p>Chronischer Stress, Leistungsdruck. <strong>Im sportlichen Kontext:</strong> Gefahr des Auftretens von Angsterlebnissen und psychischer Überforderung (z. B. Burnout) bei einer zu starken Leistungsorientierung im Vereins- oder Leistungssport.</p>
+            </div>
+        </article>
+
+        <!-- Dimension 3: Sozial -->
+        <article class="dim-card card-social">
+            <h2>3. Die soziale Dimension</h2>
+            <p class="dim-meaning">
+                <strong>Bedeutung:</strong> Das Eingebundensein in ein soziales Netzwerk, intakte zwischenmenschliche Beziehungen, Rollenverständnis und die Fähigkeit zur Interaktion.
+            </p>
+            
+            <div class="impact-box pos-impact">
+                <h4>📈 Positive Einflüsse durch Sport</h4>
+                <p>Gemeinschaftsgefühl im Vereinsleben, erleichterte Integration im sportlichen Miteinander sowie die Vermittlung von gesellschaftlichen Normen und Werten (Fairplay, Toleranz, Respekt).</p>
+            </div>
+            
+            <div class="impact-box neg-impact">
+                <h4>⚠️ Risiken & negative Folgen</h4>
+                <p>Isolation, Ausgrenzung. <strong>Im sportlichen Kontext:</strong> Gefahr sozialer Zwänge (Gruppenzwang), negative Integration (z. B. Hooliganismus, toxische Fankulturen) oder eine fragliche Vorbildfunktion im Umgang mit Regeln (absichtliche Fouls, unfaires Verhalten).</p>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- Canvas Venn Diagram -->
+    <section class="canvas-section">
+        <h3>Das ganzheitliche Gesundheitsmodell</h3>
+        <p>Die drei untrennbaren Säulen der Gesundheit nach Vorgabe der WHO</p>
+        <canvas id="vennCanvas" width="900" height="550"></canvas>
+    </section>
+
+    <!-- Abitur Transfer Box -->
+    <section class="abitur-transfer">
+        <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Dieser Themenbereich ist ein absoluter Klassiker für materialgestützte Bewertungsaufgaben. Das reine Aufzählen der drei Dimensionen reicht nicht; <strong>du musst Argumente gegeneinander abwägen.</strong>
+        </p>
+
+        <div class="abi-block">
+            <h3>Die mehrdimensionale Bewertung</h3>
+            <p style="font-style: italic; color: #cbd5e1;">In den illustrierenden Abituraufgaben (Aufgabe I, Teil 4) lautet ein typischer Operator: <strong>"Bewerten Sie die Aussage: 'Der Sportverein trägt zur gesunden physischen, psychischen und sozialen Entwicklung von Kindern und Jugendlichen bei.'"</strong></p>
+        </div>
+
+        <div class="abi-block">
+            <h3>Die Matrix-Methode anwenden</h3>
+            <p>Wenn du so eine Aufgabe bearbeitest, erwarte keine simple "Ja, Sport ist toll"-Antwort. Du musst zwingend eine differenzierte Argumentationsstruktur aufbauen. Gehe alle drei Dimensionen systematisch durch und nenne pro Dimension einen positiven und einen negativen Aspekt:</p>
+            
+            <div class="matrix-method">
+                <div class="matrix-row">
+                    <span class="dim dim-p">1. Physisch (Körperlich)</span>
+                    <p><strong>Ja</strong>, Sport fördert das Herz-Kreislauf-System, <strong>aber</strong> Leistungssport im Verein birgt das Risiko von chronischen Sportschäden (Knorpelverschleiß).</p>
+                </div>
+                <div class="matrix-row">
+                    <span class="dim dim-m">2. Psychisch (Geistig-seelisch)</span>
+                    <p><strong>Ja</strong>, er schafft Selbstwirksamkeit und Stressabbau, <strong>aber</strong> hoher Wettkampfdruck kann zu Angsterlebnissen und Versagensängsten führen.</p>
+                </div>
+                <div class="matrix-row">
+                    <span class="dim dim-s">3. Sozial (Gesellschaftlich)</span>
+                    <p><strong>Ja</strong>, er fördert Integration, <strong>aber</strong> er kann auch negative Integration (toxische Gruppenbildung) oder elitäre Ausgrenzung befeuern.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="fazit-box">
+            <h4>💡 Das ultimative Klausur-Fazit</h4>
+            <p>Am Ende einer solchen Aufgabe ziehst du ein Fazit, das die Ganzheitlichkeit betont: "Sport im Verein ist nicht automatisch gesund; er ist nur dann gesundheitsfördernd, wenn das Training und das Umfeld alle drei WHO-Dimensionen positiv ansprechen."</p>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('vennCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Center of the canvas
+    const cx = w / 2;
+    const cy = h / 2 + 20;
+
+    // Circle radius and offset
+    const r = 160;
+    const offset = 85;
+
+    // Circle centers
+    const c1 = { x: cx - offset, y: cy - offset + 20 }; // Top Left (Phys)
+    const c2 = { x: cx + offset, y: cy - offset + 20 }; // Top Right (Psych)
+    const c3 = { x: cx, y: cy + offset };          // Bottom Center (Social)
+
+    // Colors (RGB for transparency)
+    const colPhys = 'rgba(16, 185, 129, 0.6)';  // Emerald
+    const colPsych = 'rgba(245, 158, 11, 0.6)'; // Amber
+    const colSocial = 'rgba(99, 102, 241, 0.6)';// Indigo
+    const strokeCol = '#ffffff';
+
+    // Enable multiply blend mode for nice overlap colors (works well on white background)
+    ctx.globalCompositeOperation = 'multiply';
+
+    // Draw Circle 1 (Physical)
+    ctx.beginPath();
+    ctx.arc(c1.x, c1.y, r, 0, Math.PI * 2);
+    ctx.fillStyle = colPhys;
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = strokeCol;
+    ctx.stroke();
+
+    // Draw Circle 2 (Psychological)
+    ctx.beginPath();
+    ctx.arc(c2.x, c2.y, r, 0, Math.PI * 2);
+    ctx.fillStyle = colPsych;
+    ctx.fill();
+    ctx.stroke();
+
+    // Draw Circle 3 (Social)
+    ctx.beginPath();
+    ctx.arc(c3.x, c3.y, r, 0, Math.PI * 2);
+    ctx.fillStyle = colSocial;
+    ctx.fill();
+    ctx.stroke();
+
+    // Reset blend mode for text and icons
+    ctx.globalCompositeOperation = 'source-over';
+
+    // --- TEXT LABELS ---
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // Label 1 (Physical)
+    ctx.fillStyle = '#064e3b'; // Dark green
+    ctx.font = 'bold 20px Lexend';
+    ctx.fillText("Physische", c1.x - 45, c1.y - 20);
+    ctx.fillText("Gesundheit", c1.x - 45, c1.y + 5);
+
+    // Label 2 (Psychological)
+    ctx.fillStyle = '#78350f'; // Dark amber
+    ctx.font = 'bold 20px Lexend';
+    ctx.fillText("Psychische", c2.x + 45, c2.y - 20);
+    ctx.fillText("Gesundheit", c2.x + 45, c2.y + 5);
+
+    // Label 3 (Social)
+    ctx.fillStyle = '#312e81'; // Dark indigo
+    ctx.font = 'bold 20px Lexend';
+    ctx.fillText("Soziale", c3.x, c3.y + 60);
+    ctx.fillText("Gesundheit", c3.x, c3.y + 85);
+
+    // Center Text (WHO)
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 18px Lexend';
+    // Draw text with a slight shadow for better readability in the center mix
+    ctx.shadowColor = 'rgba(0,0,0,0.5)';
+    ctx.shadowBlur = 4;
+    ctx.fillText("Ganzheitliche", cx, cy);
+    ctx.fillText("Gesundheit (WHO)", cx, cy + 25);
+    ctx.shadowColor = 'transparent'; // reset shadow
+
+    // --- ICONS (Emoji based for sharp rendering) ---
+    ctx.font = '45px Arial'; // Large font for emojis
+    
+    // Icon Phys (Heart/Muscle) -> Outer top left
+    ctx.fillText("💪💖", c1.x - 120, c1.y - 100);
+
+    // Icon Psych (Brain/Smiley) -> Outer top right
+    ctx.fillText("🧠😊", c2.x + 120, c2.y - 100);
+
+    // Icon Social (Handshake) -> Outer bottom
+    ctx.fillText("🤝💬", c3.x, c3.y + 160);
+
+</script>
+</body>
+</html>

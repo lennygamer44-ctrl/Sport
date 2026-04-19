@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Determinanten der Beweglichkeit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: 'Bricolage Grotesque' for modern academic headers, 'Plus Jakarta Sans' for clean text -->
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,400;10..48,600;10..48,700;10..48,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Bricolage Grotesque', 'sans-serif'],
+                    },
+                    colors: {
+                        bone: {
+                            50: '#fdfbf7',
+                            100: '#f4f1ea',
+                            800: '#3e3a35',
+                            900: '#23211e',
+                        },
+                        anatomy: {
+                            structural: '#0284c7', // Cartilage/Joint Blue
+                            neuro: '#9333ea',      // Neural Purple
+                            tissue: '#e11d48',     // Muscle/Fascia Red
+                            env: '#ea580c',        // Temperature/Exo Orange
+                        },
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                            vault: '#0f172a',
+                        }
+                    },
+                    boxShadow: {
+                        'kinesio': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                        'node-structural': '0 0 20px rgba(2, 132, 199, 0.3)',
+                        'node-neuro': '0 0 20px rgba(147, 51, 234, 0.3)',
+                        'node-tissue': '0 0 20px rgba(225, 29, 72, 0.3)',
+                        'node-env': '0 0 20px rgba(234, 88, 12, 0.3)',
+                        'vault': '0 25px 50px -12px rgba(15, 23, 42, 0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fdfbf7;
+            color: #23211e;
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                radial-gradient(rgba(35, 33, 30, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Anatomical Cards */
+        .kinesio-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid #f4f1ea;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .kinesio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Category Accents */
+        .accent-structural { border-top: 6px solid #0284c7; }
+        .accent-neuro { border-top: 6px solid #9333ea; }
+        .accent-tissue { border-top: 6px solid #e11d48; }
+        .accent-env { border-top: 6px solid #ea580c; }
+
+        /* Mindmap Canvas Wrapper */
+        .mindmap-wrapper {
+            background: #23211e;
+            border-radius: 2rem;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 20px 40px -10px rgba(35, 33, 30, 0.3);
+            border: 1px solid #3e3a35;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fdfbf7; }
+        ::-webkit-scrollbar-thumb { background: #d6d3cd; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a29e; }
+
+        /* Abitur Vault Box */
+        .abitur-vault {
+            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+            border-top: 4px solid #f59e0b;
+            color: #f8fafc;
+            position: relative;
+        }
+
+        /* Backbone Layout elements */
+        .backbone-line {
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #f4f1ea;
+            z-index: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .backbone-line {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body class="leading-relaxed py-10 px-4 sm:px-6 relative overflow-x-hidden">
+
+    <div class="max-w-6xl mx-auto relative z-10">
+        
+        <!-- Hero Header -->
+        <header class="bg-white rounded-[2rem] p-8 md:p-14 shadow-kinesio mb-16 relative overflow-hidden border border-bone-100">
+            <!-- Decorative BG Elements -->
+            <div class="absolute -right-20 -top-20 w-96 h-96 bg-bone-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+            
+            <div class="flex items-center gap-3 mb-6 relative z-10">
+                <span class="bg-bone-900 text-white font-bold px-4 py-1.5 rounded-full text-sm font-display tracking-widest uppercase">1.7.2a</span>
+                <span class="text-bone-800 font-bold tracking-widest text-xs uppercase border border-bone-800 px-3 py-1.5 rounded-full">Kinesiologie / Biomechanik</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-display font-extrabold tracking-tight text-bone-900 mb-6 leading-[1.05] relative z-10">
+                Determinanten der <br>
+                <span class="text-anatomy-tissue">Beweglichkeit</span>
+            </h1>
+            
+            <div class="max-w-4xl relative z-10">
+                <p class="text-xl text-slate-700 font-medium leading-relaxed mb-6">
+                    Die Beweglichkeit eines Athleten ist keine homogene Eigenschaft, sondern das Resultat eines hochkomplexen Zusammenspiels verschiedener biologischer, anatomischer und physikalischer Parameter. 
+                </p>
+                <div class="bg-bone-50 border-l-4 border-bone-900 p-5 rounded-r-xl">
+                    <p class="text-bone-900 text-sm md:text-base font-semibold">
+                        Um die leistungsbestimmenden Faktoren präzise zu systematisieren, muss in der Sportbiologie zwingend zwischen der anatomisch vorgegebenen <strong class="text-anatomy-structural">Gelenkigkeit</strong> und der trainierbaren <strong class="text-anatomy-tissue">Dehnfähigkeit</strong> differenziert werden.
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <!-- The Backbone Layout for Factors -->
+        <div class="relative py-10">
+            <div class="backbone-line hidden md:block"></div>
+
+            <div class="space-y-12 md:space-y-24">
+                
+                <!-- 1. Anatomisch & Strukturell -->
+                <section class="relative flex flex-col md:flex-row items-center w-full">
+                    <div class="w-full md:w-1/2 md:pr-12 md:text-right relative z-10">
+                        <div class="kinesio-card accent-structural p-8">
+                            <div class="flex md:flex-row-reverse items-center gap-4 mb-6">
+                                <div class="w-12 h-12 rounded-full bg-sky-50 flex items-center justify-center text-anatomy-structural shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                </div>
+                                <h2 class="text-2xl font-display font-bold text-bone-900">1. Anatomische & strukturelle Faktoren <br><span class="text-sm font-sans font-normal text-anatomy-structural uppercase tracking-widest">(Gelenkigkeit)</span></h2>
+                            </div>
+                            <p class="text-sm text-slate-600 mb-6 font-medium">Diese Faktoren bilden das absolute mechanische Limit der Bewegungsamplitude. Sie sind genetisch vorgegeben und durch Training nicht (oder nur minimal) veränderbar.</p>
+                            
+                            <ul class="space-y-4 text-left">
+                                <li class="bg-bone-50 p-4 rounded-lg">
+                                    <strong class="block text-bone-900 text-sm mb-1">Gelenkstruktur und Gelenktyp</strong>
+                                    <p class="text-xs text-slate-600">Die knöcherne Führung bestimmt den Freiheitsgrad. Kugelgelenk (Schulter) = 3 Hauptachsen. Scharniergelenk (Ellenbogen) = durch Knochenhemmung auf 1 Achse (Beugung/Streckung) limitiert.</p>
+                                </li>
+                                <li class="bg-bone-50 p-4 rounded-lg">
+                                    <strong class="block text-bone-900 text-sm mb-1">Kapsel-Band-Apparat</strong>
+                                    <p class="text-xs text-slate-600">Verhindern Luxationen und schränken Umfang passiv ein. Verkürzte/verhärtete Kapseln (nach Verletzungen) sind massive Barrieren.</p>
+                                </li>
+                                <li class="bg-bone-50 p-4 rounded-lg">
+                                    <strong class="block text-bone-900 text-sm mb-1">Muskelmasse (Weichteilhemmung)</strong>
+                                    <p class="text-xs text-slate-600">Extreme Hypertrophie blockiert physikalisch. Bodybuilder-Bizeps: Muskelbäuche stoßen aneinander, Unterarm kann nicht voll gebeugt werden.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-anatomy-structural rounded-full border-4 border-white shadow-node-structural z-20 items-center justify-center text-white font-bold text-xs">1</div>
+                    <div class="w-full md:w-1/2 md:pl-12"></div>
+                </section>
+
+                <!-- 2. Neurophysiologisch -->
+                <section class="relative flex flex-col md:flex-row-reverse items-center w-full">
+                    <div class="w-full md:w-1/2 md:pl-12 relative z-10">
+                        <div class="kinesio-card accent-neuro p-8">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-anatomy-neuro shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                </div>
+                                <h2 class="text-2xl font-display font-bold text-bone-900">2. Neurophysiologische Faktoren <br><span class="text-sm font-sans font-normal text-anatomy-neuro uppercase tracking-widest">(Tonus und Reflexe)</span></h2>
+                            </div>
+                            <p class="text-sm text-slate-600 mb-6 font-medium">Das Zentralnervensystem (ZNS) kontrolliert die Muskelspannung (Tonus) und schützt den Muskel vor Rissen.</p>
+                            
+                            <ul class="space-y-4">
+                                <li class="bg-bone-50 p-4 rounded-lg">
+                                    <strong class="block text-bone-900 text-sm mb-1">Der Ruhetonus</strong>
+                                    <p class="text-xs text-slate-600">Chronisch erhöhter Muskeltonus (Stress, Übertraining) = hoher innerer Widerstand. Der Antagonist gibt nicht optimal nach.</p>
+                                </li>
+                                <li class="bg-bone-50 p-4 rounded-lg border-l-2 border-anatomy-neuro">
+                                    <strong class="block text-bone-900 text-sm mb-1">Dehnungsreflex (Muskelspindeln)</strong>
+                                    <p class="text-xs text-slate-600">Längenrezeptoren im Muskelbauch. Ruckartige Dehnung &rarr; afferente Signale ans ZNS &rarr; reflektorische Kontraktion (Anspannung) des gedehnten Muskels, um Riss zu verhindern. Primärer Widerstand beim Dehnen!</p>
+                                </li>
+                                <li class="bg-bone-50 p-4 rounded-lg">
+                                    <strong class="block text-bone-900 text-sm mb-1">Autogene Hemmung (Golgi-Sehnenorgane)</strong>
+                                    <p class="text-xs text-slate-600">Sitzen am Übergang Muskel/Sehne, messen Spannung. Hohe Spannung (beim statischen Halten) &rarr; lösen reflektorische Entspannung (Hemmung) aus. Wird im PNF-Stretching genutzt.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-anatomy-neuro rounded-full border-4 border-white shadow-node-neuro z-20 items-center justify-center text-white font-bold text-xs">2</div>
+                    <div class="w-full md:w-1/2 md:pr-12"></div>
+                </section>
+
+                <!-- 3. Gewebespezifisch -->
+                <section class="relative flex flex-col md:flex-row items-center w-full">
+                    <div class="w-full md:w-1/2 md:pr-12 md:text-right relative z-10">
+                        <div class="kinesio-card accent-tissue p-8">
+                            <div class="flex md:flex-row-reverse items-center gap-4 mb-6">
+                                <div class="w-12 h-12 rounded-full bg-rose-50 flex items-center justify-center text-anatomy-tissue shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                                </div>
+                                <h2 class="text-2xl font-display font-bold text-bone-900">3. Gewebe & Biomechanik <br><span class="text-sm font-sans font-normal text-anatomy-tissue uppercase tracking-widest">(Dehnfähigkeit)</span></h2>
+                            </div>
+                            <p class="text-sm text-slate-600 mb-6 font-medium">Das Muskel- und Bindegewebe (Faszien) besitzt elastische und visköse Eigenschaften (Viskoelastizität).</p>
+                            
+                            <ul class="space-y-4 text-left">
+                                <li class="bg-bone-50 p-4 rounded-lg">
+                                    <strong class="block text-bone-900 text-sm mb-1">Elastizität</strong>
+                                    <p class="text-xs text-slate-600">Fähigkeit des Bindegewebes (Kollagen/Elastin), in Ursprungslänge zurückzukehren. Hoher Anteil an zähen Kollagenfasern (durch mangelnde Beanspruchung) verringert Dehnfähigkeit.</p>
+                                </li>
+                                <li class="bg-bone-50 p-4 rounded-lg">
+                                    <strong class="block text-bone-900 text-sm mb-1">Viskosität (Innere Reibung)</strong>
+                                    <p class="text-xs text-slate-600">Muskulatur ist flüssigkeitsbasiert ("wie Honig"). Bei Kälte ist die Viskosität hoch (Gewebe ist zäh und schwer verformbar).</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-anatomy-tissue rounded-full border-4 border-white shadow-node-tissue z-20 items-center justify-center text-white font-bold text-xs">3</div>
+                    <div class="w-full md:w-1/2 md:pl-12"></div>
+                </section>
+
+                <!-- 4. Endogen/Exogen -->
+                <section class="relative flex flex-col md:flex-row-reverse items-center w-full">
+                    <div class="w-full md:w-1/2 md:pl-12 relative z-10">
+                        <div class="kinesio-card accent-env p-8">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-anatomy-env shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                                </div>
+                                <h2 class="text-2xl font-display font-bold text-bone-900">4. Endo- & exogene Größen <br><span class="text-sm font-sans font-normal text-anatomy-env uppercase tracking-widest">(Umwelteinflüsse)</span></h2>
+                            </div>
+                            
+                            <ul class="space-y-4">
+                                <li class="bg-bone-50 p-4 rounded-lg border-l-2 border-anatomy-env">
+                                    <strong class="block text-bone-900 text-sm mb-1">Temperatur (Körperkern & Außen)</strong>
+                                    <p class="text-xs text-slate-600">Aufgewärmter Muskel (39°C) = signifikant geringere Viskosität. Elastische Eigenschaften verbessern sich um bis zu 20%! Elementar wichtig.</p>
+                                </li>
+                                <li class="bg-bone-50 p-4 rounded-lg">
+                                    <strong class="block text-bone-900 text-sm mb-1">Tageszeit</strong>
+                                    <p class="text-xs text-slate-600">Morgens am geringsten (Bandscheiben flüssigkeitsgefüllt, Gelenkschmiere zäh). Optimum am späten Nachmittag.</p>
+                                </li>
+                                <li class="bg-bone-50 p-4 rounded-lg">
+                                    <strong class="block text-bone-900 text-sm mb-1">Alter und Geschlecht</strong>
+                                    <p class="text-xs text-slate-600">Alter: Wassergehalt sinkt, Faszien verkleben. Frauen: hormonell bedingt (Östrogen, Relaxin) generell elastischerer Band/Kapselapparat (Vorteile z. B. im Turnen).</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-anatomy-env rounded-full border-4 border-white shadow-node-env z-20 items-center justify-center text-white font-bold text-xs">4</div>
+                    <div class="w-full md:w-1/2 md:pr-12"></div>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Mindmap Canvas Section (KI 2) -->
+        <section class="mt-16">
+            <div class="flex items-end justify-between mb-8 px-2 border-b-2 border-bone-100 pb-4">
+                <div>
+                    <h2 class="text-3xl font-display font-bold text-bone-900 tracking-tight">System-Architektur</h2>
+                    <p class="text-slate-500 font-medium mt-1">Die leistungsbestimmenden Faktoren als interaktive Mindmap</p>
+                </div>
+            </div>
+
+            <div class="mindmap-wrapper p-4 md:p-8 w-full">
+                <canvas id="mobilityMindmap" class="w-full h-[500px] md:h-[650px] block"></canvas>
+            </div>
+        </section>
+
+        <!-- Abitur Transfer Vault Box -->
+        <section class="abitur-vault rounded-3xl p-8 md:p-12 shadow-vault mt-24">
+            <div class="absolute right-0 top-0 opacity-10 pointer-events-none">
+                <svg width="400" height="400" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13h-13L12 6.5zM11 10v5h2v-5h-2zm0 7v2h2v-2h-2z"/>
+                </svg>
+            </div>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b border-slate-700 pb-8">
+                    <div class="bg-gradient-to-br from-yellow-400 to-yellow-600 text-slate-900 p-5 rounded-2xl shadow-lg">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-5xl font-display font-bold text-white tracking-tight mb-2">Der Abitur-Schlüssel</h2>
+                        <div class="inline-flex items-center gap-3">
+                            <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">eA-Niveau</span>
+                            <span class="text-abitur font-medium text-lg">Sportbiologische Vernetzung & Fallstudien</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-lg text-slate-300 font-medium mb-10 leading-relaxed max-w-4xl">
+                    In Klausuren auf erhöhtem Anforderungsniveau wird nicht das bloße Aufzählen dieser Faktoren verlangt, sondern deren <strong class="text-white">sportbiologische Vernetzung</strong> und konkrete Anwendung!
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    
+                    <!-- Transfer 1 -->
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800">
+                        <h3 class="text-xl font-display font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-abitur/20 text-abitur flex items-center justify-center text-sm">1</span>
+                            Aufwärmen & Physiologie
+                        </h3>
+                        <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+                            <strong>Szenario:</strong> Das Aufwärmprogramm eines Hürdensprinters kritisch bewerten. Du musst zwingend die exogenen Faktoren mit der Gewebephysiologie verknüpfen!
+                        </p>
+                        <div class="bg-slate-800 p-5 rounded-xl border-l-2 border-abitur text-sm text-slate-300 space-y-3">
+                            <p><strong class="text-white">Die Argumentationskette:</strong></p>
+                            <p>Aufwärmen erhöht Temperatur &rarr; <strong>senkt Viskosität</strong> &rarr; verringert inneren Gewebewiderstand (Antagonist lässt sich leichter dehnen).</p>
+                            <p>Gleichzeitig: Wärme <strong>setzt Sensibilität der Muskelspindeln herab</strong> &rarr; hemmender Dehnungsreflex löst später aus &rarr; Athlet wird in der Schwungphase über der Hürde <em>nicht</em> durch eigene reflektorische Spannung blockiert!</p>
+                        </div>
+                    </div>
+
+                    <!-- Transfer 2 -->
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800">
+                        <h3 class="text-xl font-display font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-abitur/20 text-abitur flex items-center justify-center text-sm">2</span>
+                            Grenzen des Trainings
+                        </h3>
+                        <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+                            <strong>Szenario:</strong> Ein Sportler kann trotz intensiven Dehntrainings seine Beweglichkeit in einem Gelenk nicht mehr steigern. Warum?
+                        </p>
+                        <div class="bg-slate-800 p-5 rounded-xl border-l-2 border-anatomy-structural text-sm text-slate-300 space-y-3">
+                            <p><strong class="text-white">Die Argumentationskette:</strong></p>
+                            <p>Wende anatomische Faktoren an! Ist die <strong class="text-anatomy-structural">Gelenkigkeit</strong> (z.B. knöcherner Anschlag oder vernarbte, straffe Gelenkkapsel durch Vorverletzungen) ausgereizt, bringt auch das beste Faszien-/Muskeltraining nichts mehr.</p>
+                            <p class="text-abitur font-semibold mt-2">Die klare Klausur-Differenzierung:</p>
+                            <p>Dehnfähigkeit ist trainierbar, <em>Gelenkigkeit ist die genetische und strukturelle Endstation.</em></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="mt-16 pt-8 pb-12 border-t border-bone-100 text-center">
+        <p class="font-display font-bold text-bone-900 tracking-widest text-sm mb-1 uppercase">Abiturwissen Sport (G9, eA)</p>
+        <p class="text-slate-500 font-sans text-sm">Lernbereich 1.7.2a Leistungsbestimmende Faktoren der Beweglichkeit</p>
+    </footer>
+
+    <!-- Interactive Canvas Logic: The Mindmap -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('mobilityMindmap');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let time = 0;
+
+            // Palette
+            const colors = {
+                struct: '#0ea5e9', // lighter blue
+                neuro: '#a855f7',  // lighter purple
+                biomech: '#fb7185',// rose
+                env: '#fb923c'     // orange
+            };
+
+            // Data Structure
+            const centerNode = { label: "Determinanten\nder Beweglichkeit", color: "#f8fafc", r: 75 };
+            
+            // Positioning angles for 4 quadrants (NW, NE, SW, SE)
+            const branches = [
+                { angle: Math.PI * 1.25, color: colors.struct, title: "Strukturell\n(Gelenkigkeit)", subs: ["Gelenktyp", "Kapsel-Band", "Muskelmasse"] },
+                { angle: Math.PI * 1.75, color: colors.neuro, title: "Neurophysio-\nlogisch", subs: ["Ruhetonus", "Muskelspindeln", "Golgi-Sehnen"] },
+                { angle: Math.PI * 0.75, color: colors.biomech, title: "Gewebe &\nBiomechanik", subs: ["Elastizität", "Viskosität"] },
+                { angle: Math.PI * 0.25, color: colors.env, title: "Endogene/\nExogene", subs: ["Temperatur", "Tageszeit", "Alter/Geschlecht"] }
+            ];
+
+            function drawRoundedRect(ctx, x, y, width, height, radius, fill, stroke, textColor, textLines, glowColor) {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width - radius, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+                ctx.lineTo(x + width, y + height - radius);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                ctx.lineTo(x + radius, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+                ctx.closePath();
+                
+                if (glowColor) {
+                    ctx.shadowColor = glowColor;
+                    ctx.shadowBlur = 15;
+                }
+
+                if (fill) {
+                    ctx.fillStyle = fill;
+                    ctx.fill();
+                }
+                
+                ctx.shadowBlur = 0;
+
+                if (stroke) {
+                    ctx.strokeStyle = stroke;
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                }
+
+                if (textLines && textLines.length > 0) {
+                    ctx.fillStyle = textColor;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    const lineHeight = 16;
+                    const startY = y + height/2 - ((textLines.length - 1) * lineHeight) / 2;
+                    textLines.forEach((line, i) => {
+                        ctx.fillText(line, x + width/2, startY + i * lineHeight);
+                    });
+                }
+            }
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time += 0.015;
+
+                const cx = w / 2;
+                const cy = h / 2;
+                
+                // Scale based on screen size
+                const scale = Math.min(w, h) / 600;
+                const branchDist = 150 * scale;
+                const subDist = 110 * scale;
+
+                // 1. Draw Connections (Lines)
+                branches.forEach((branch, i) => {
+                    const bTime = time + i;
+                    const bOffset = Math.sin(bTime * 1.5) * 8; // gentle float
+                    
+                    const bx = cx + Math.cos(branch.angle) * (branchDist + bOffset);
+                    const by = cy + Math.sin(branch.angle) * (branchDist + bOffset);
+
+                    // Main connection
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    // Use a slightly curved line
+                    const cpX = cx + (bx - cx) * 0.5;
+                    const cpY = cy + (by - cy) * 0.2;
+                    ctx.quadraticCurveTo(cpX, cpY, bx, by);
+                    ctx.strokeStyle = branch.color + '66'; // Opacity hex
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+
+                    // Sub connections
+                    const numSubs = branch.subs.length;
+                    const spread = 0.9; // Radians spread for sub-nodes
+                    const startAngle = branch.angle - (spread/2) + (spread / (numSubs*2));
+                    
+                    branch.subs.forEach((sub, j) => {
+                        const sAngle = startAngle + (j * (spread / numSubs));
+                        // Additional offset for subs
+                        const sx = bx + Math.cos(sAngle) * subDist;
+                        const sy = by + Math.sin(sAngle) * subDist;
+
+                        ctx.beginPath();
+                        ctx.moveTo(bx, by);
+                        ctx.lineTo(sx, sy);
+                        ctx.strokeStyle = branch.color + '40';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+                    });
+                });
+
+                // 2. Draw Nodes
+                branches.forEach((branch, i) => {
+                    const bTime = time + i;
+                    const bOffset = Math.sin(bTime * 1.5) * 8;
+                    const bx = cx + Math.cos(branch.angle) * (branchDist + bOffset);
+                    const by = cy + Math.sin(branch.angle) * (branchDist + bOffset);
+
+                    // Sub Nodes
+                    const numSubs = branch.subs.length;
+                    const spread = 0.9;
+                    const startAngle = branch.angle - (spread/2) + (spread / (numSubs*2));
+                    
+                    branch.subs.forEach((sub, j) => {
+                        const sAngle = startAngle + (j * (spread / numSubs));
+                        const sx = bx + Math.cos(sAngle) * subDist;
+                        const sy = by + Math.sin(sAngle) * subDist;
+
+                        ctx.font = '500 11px "Plus Jakarta Sans"';
+                        const tWidth = ctx.measureText(sub).width + 24;
+                        drawRoundedRect(ctx, sx - tWidth/2, sy - 14, tWidth, 28, 14, '#1e293b', branch.color, '#cbd5e1', [sub], null);
+                    });
+
+                    // Main Branch Nodes
+                    ctx.font = 'bold 12px "Bricolage Grotesque"';
+                    const lines = branch.title.split('\n');
+                    const w1 = ctx.measureText(lines[0]).width;
+                    const w2 = lines.length > 1 ? ctx.measureText(lines[1]).width : 0;
+                    const tWidth = Math.max(w1, w2) + 40;
+                    
+                    drawRoundedRect(ctx, bx - tWidth/2, by - 22, tWidth, 44, 8, '#0f172a', branch.color, '#ffffff', lines, branch.color);
+                });
+
+                // 3. Draw Center Node
+                const pulse = Math.sin(time * 2) * 5;
+                
+                ctx.shadowColor = '#ffffff';
+                ctx.shadowBlur = 20 + pulse;
+                
+                ctx.beginPath();
+                ctx.arc(cx, cy, centerNode.r * scale, 0, Math.PI * 2);
+                ctx.fillStyle = '#0f172a';
+                ctx.fill();
+                
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = '#f4f1ea';
+                ctx.stroke();
+                
+                ctx.shadowBlur = 0; // reset
+
+                // Center Text
+                ctx.fillStyle = centerNode.color;
+                ctx.font = `800 ${15 * scale}px "Bricolage Grotesque"`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                const cLines = centerNode.label.split('\n');
+                ctx.fillText(cLines[0], cx, cy - 10 * scale);
+                ctx.fillStyle = '#a8a29e';
+                ctx.font = `600 ${14 * scale}px "Plus Jakarta Sans"`;
+                ctx.fillText(cLines[1], cx, cy + 12 * scale);
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Praktische Umsetzung und Schnelligkeitstests</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: 'Manrope' for modern geometric headers, 'JetBrains Mono' for technical data -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        lab: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                            950: '#082f49',
+                        },
+                        tech: {
+                            blue: '#0284c7',   // Diagnostic Blue
+                            orange: '#ea580c', // Alert/Focus Orange
+                            gray: '#64748b',   // Tech Gray
+                        },
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                        }
+                    },
+                    boxShadow: {
+                        'blueprint': '0 10px 30px -10px rgba(2, 132, 199, 0.15)',
+                        'hard-tech': '4px 4px 0px 0px rgba(12, 74, 110, 1)',
+                        'hard-alert': '4px 4px 0px 0px rgba(234, 88, 12, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            -webkit-font-smoothing: antialiased;
+            /* Blueprint Grid Background */
+            background-image: 
+                linear-gradient(rgba(2, 132, 199, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(2, 132, 199, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Tech Diagnostic Cards */
+        .tech-card {
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .tech-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px 0px rgba(12, 74, 110, 1);
+            border-color: #0c4a6e;
+        }
+
+        /* Tech Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Manrope', sans-serif;
+            background: white;
+            border: 2px solid #0c4a6e;
+        }
+        .data-table th {
+            background: #0c4a6e;
+            color: #f0f9ff;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            padding: 1rem;
+            text-align: left;
+            border-right: 1px solid rgba(255,255,255,0.2);
+        }
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            border-right: 1px dashed #cbd5e1;
+            vertical-align: top;
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:hover td { background-color: #f0f9ff; }
+
+        /* Canvas Wrapper */
+        .simulator-wrapper {
+            background: #082f49; /* Deep lab blue */
+            border: 2px solid #0284c7;
+            border-radius: 0.5rem;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Custom UI Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        /* Crosshair Corner Markers */
+        .crosshair-tl { position: absolute; top: -1px; left: -1px; width: 10px; height: 10px; border-top: 2px solid #ea580c; border-left: 2px solid #ea580c; }
+        .crosshair-br { position: absolute; bottom: -1px; right: -1px; width: 10px; height: 10px; border-bottom: 2px solid #ea580c; border-right: 2px solid #ea580c; }
+
+        /* Abitur Box */
+        .abitur-dossier {
+            background: #ffffff;
+            border-top: 6px solid #f59e0b;
+            border-left: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 20px 25px -5px rgba(245, 158, 11, 0.1), 0 8px 10px -6px rgba(245, 158, 11, 0.1);
+        }
+    </style>
+</head>
+<body class="leading-relaxed py-10 px-4 sm:px-6">
+
+    <div class="max-w-6xl mx-auto">
+        
+        <!-- Header -->
+        <header class="bg-white border-2 border-lab-900 p-8 md:p-12 mb-12 relative shadow-hard-tech">
+            <div class="crosshair-tl"></div><div class="crosshair-br"></div>
+            
+            <!-- Tech UI Elements -->
+            <div class="absolute top-4 right-6 font-mono text-xs text-tech-gray hidden sm:block">
+                SYS.CHK: <span class="text-green-600">OK</span> | PROTOCOL: <span class="text-tech-blue">1.6.4a</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-6 relative z-10">
+                <span class="bg-tech-blue text-white font-mono font-bold px-3 py-1 text-sm tracking-widest uppercase">ID: 1.6.4a</span>
+                <span class="text-lab-800 font-bold tracking-widest text-xs uppercase bg-lab-100 px-3 py-1 rounded">Performance Diagnostics</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold uppercase tracking-tight text-lab-950 mb-6">
+                Praktische Umsetzung <br>& <span class="text-tech-orange">Tests</span>
+            </h1>
+            
+            <p class="text-lg text-slate-700 font-medium max-w-4xl border-l-4 border-tech-blue pl-5">
+                Die sportbiologischen Gesetzmäßigkeiten der Schnelligkeit fordern in der Trainingspraxis höchste Präzision. Da die Schnelligkeit massiv von der optimalen Erregbarkeit des Zentralnervensystems (ZNS) und den eng begrenzten alaktaziden Energiespeichern abhängt, müssen bei der Planung von Trainingseinheiten sowie bei der Durchführung leistungsdiagnostischer Tests strenge methodische Richtlinien eingehalten werden.
+            </p>
+        </header>
+
+        <main class="space-y-16">
+
+            <!-- Section 1: Planung & Erprobung -->
+            <section>
+                <div class="flex items-center gap-4 mb-8 border-b-2 border-slate-200 pb-2">
+                    <div class="bg-lab-900 text-white font-mono text-xl w-10 h-10 flex items-center justify-center font-bold">01</div>
+                    <h2 class="text-3xl font-bold text-lab-950 uppercase tracking-tight">Planung und Erprobung</h2>
+                </div>
+                
+                <p class="text-slate-600 mb-8 max-w-4xl text-lg">
+                    Die praktische Umsetzung eines Schnelligkeitstrainings toleriert im Gegensatz zum Ausdauertraining keine Abweichungen in der Belastungssteuerung. Folgende Phasen sind zwingend:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Card 1 -->
+                    <div class="tech-card p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-bold text-lg text-lab-900">1. Placement <br><span class="text-sm font-mono text-tech-orange">ZNS-Frische</span></h3>
+                            <svg class="w-6 h-6 text-tech-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <p class="text-sm text-slate-600">
+                            Ausschließlich im vollkommen ermüdungsfreien Zustand durchführen. Im Mikrozyklus oder innerhalb einer Einheit steht Schnelligkeitstraining <strong>immer an erster Stelle nach dem Aufwärmen</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="tech-card p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-bold text-lg text-lab-900">2. Warm-up <br><span class="text-sm font-mono text-tech-orange">Neuro-Physis</span></h3>
+                            <svg class="w-6 h-6 text-tech-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <p class="text-sm text-slate-600">
+                            Körperkerntemperatur (ca. 39°C) senkt Viskosität. Erhöht Enzymaktivität und <strong>Nervenleitgeschwindigkeit</strong>. Lauf-ABC "weckt" das ZNS für maximale Frequenzierungen.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="tech-card p-6 border-l-4 border-l-tech-orange">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-bold text-lg text-lab-900">3. Abbruch <br><span class="text-sm font-mono text-tech-orange">Geschwindigkeitsverlust</span></h3>
+                            <svg class="w-6 h-6 text-tech-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        </div>
+                        <p class="text-sm text-slate-600">
+                            <strong>Konsequenter Abbruch</strong>, sobald die Zielzeit (z.B. 30-m-Sprint) aufgrund Ermüdung verfehlt wird. Weitertrainieren schult ungewollt die Schnelligkeitsausdauer.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Section 2: Die Tests & KI 2 Table -->
+            <section>
+                <div class="flex items-center gap-4 mb-6 border-b-2 border-slate-200 pb-2">
+                    <div class="bg-lab-900 text-white font-mono text-xl w-10 h-10 flex items-center justify-center font-bold">02</div>
+                    <h2 class="text-3xl font-bold text-lab-950 uppercase tracking-tight">Leistungsdiagnostik: Schnelligkeitstests</h2>
+                </div>
+                
+                <p class="text-slate-600 mb-8 max-w-4xl text-lg">
+                    Um den Trainingsfortschritt zu quantifizieren oder Schwächen im Athletenprofil aufzudecken, werden isolierte Tests eingesetzt. Da diese oft im Millisekundenbereich entschieden werden, sind <strong class="text-lab-900">Testgütekriterien</strong> von herausragender Bedeutung.
+                </p>
+
+                <!-- Data Table (Auftrag KI 2) -->
+                <div class="mb-12 shadow-hard-tech bg-white border border-lab-900 overflow-hidden">
+                    <div class="bg-lab-950 px-6 py-4 flex items-center justify-between border-b-2 border-tech-blue">
+                        <div class="flex items-center gap-3 text-white">
+                            <svg class="w-5 h-5 text-tech-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            <h3 class="font-mono text-lg font-bold tracking-wider">DIAGNOSTIK DER SCHNELLIGKEIT: TESTVERFAHREN</h3>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th class="w-1/4">Testname</th>
+                                    <th class="w-1/3">Gemessene Schnelligkeitsart</th>
+                                    <th>Einflussfaktoren / Limitationen</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr>
+                                    <td><strong class="text-lab-900 text-base">30-m-Linear-Sprint</strong><br><span class="font-mono text-xs text-tech-gray">Aus dem Block / Hochstart</span></td>
+                                    <td class="font-medium">
+                                        <span class="inline-block bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-xs mb-1">Zyklische Frequenzschnelligkeit</span><br>
+                                        <span class="inline-block bg-orange-100 text-orange-800 px-2 py-0.5 rounded text-xs">Kraftschnelligkeit (Beschleunigung)</span>
+                                    </td>
+                                    <td class="text-slate-600">
+                                        Stark abhängig von <strong>Maximalkraft</strong> (beim initialen Antritt) sowie der <strong>Reaktionszeit</strong> auf das Startsignal. Misst die kombinierte Leistung.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong class="text-lab-900 text-base">30-m-Sprint fliegend</strong><br><span class="font-mono text-xs text-tech-gray">20-30m Anlaufzone vorher</span></td>
+                                    <td class="font-medium">
+                                        <span class="inline-block bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-xs">Reine zyklische Frequenzschnelligkeit</span>
+                                    </td>
+                                    <td class="text-slate-600">
+                                        Abhängig primär von der <strong>Wechselinnervation</strong> des ZNS. Eliminiert gezielt den Einfluss des Startkraft-Faktors (Kraftschnelligkeit).
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong class="text-lab-900 text-base">Nelson-Lineal-Test</strong><br><span class="font-mono text-xs text-tech-gray">Fallenlassen & Greifen</span></td>
+                                    <td class="font-medium">
+                                        <span class="inline-block bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-xs">Reaktionsschnelligkeit</span><br>
+                                        <span class="text-xs text-slate-500">(Kognitive Latenz)</span>
+                                    </td>
+                                    <td class="text-slate-600">
+                                        Abhängig von <strong>ZNS-Leitungsgeschwindigkeit</strong> und Aufmerksamkeit. Fallstrecke (cm) wird physikalisch in ms umgerechnet.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong class="text-lab-900 text-base">Tapping-Board</strong><br><span class="font-mono text-xs text-tech-gray">Digitale Kontaktmatten</span></td>
+                                    <td class="font-medium">
+                                        <span class="inline-block bg-teal-100 text-teal-800 px-2 py-0.5 rounded text-xs">Frequenz- & Reaktionsschnelligkeit</span>
+                                    </td>
+                                    <td class="text-slate-600">
+                                        Abhängig von Technik (Fuß-/Handarbeit) und Anfälligkeit für schnelle neuromuskuläre Ermüdung. Hochgradig objektiv durch digitale Messung.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Canvas: The Diagnostic Reaction Tool -->
+                <div class="simulator-wrapper p-6 md:p-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <div>
+                            <h4 class="text-2xl font-bold text-white tracking-wide">Error-Simulator: Handstoppung vs. Lichtschranke</h4>
+                            <p class="text-tech-blue font-mono text-xs mt-1">TESTPROTOKOLL: 30-M-SPRINT | VALIDIERUNG DER OBJEKTIVITÄT</p>
+                        </div>
+                        <div class="flex items-center gap-4 mt-4 md:mt-0 font-mono text-xs text-white">
+                            <span class="bg-green-500/20 border border-green-500 px-2 py-1 text-green-400">Digital: 0% Fehler</span>
+                            <span class="bg-tech-orange/20 border border-tech-orange px-2 py-1 text-tech-orange">Mensch: ~150ms Delay</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Canvas Canvas -->
+                    <canvas id="reactionSimulator" class="w-full h-[250px] bg-lab-950 rounded border border-lab-800"></canvas>
+                    
+                    <div class="mt-4 text-center text-sm font-mono text-tech-gray bg-lab-900 py-2 rounded">
+                        Fazit der Simulation: Menschliche Reaktionszeit erzeugt massive Messfehler bei Kurzzeittests.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Abitur-Transfer (Dossier Box) -->
+            <section class="abitur-dossier p-8 md:p-12 mt-16 rounded-lg relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+                    <svg class="w-64 h-64 text-abitur-dark" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                </div>
+
+                <div class="relative z-10">
+                    <div class="flex items-center gap-4 mb-8 border-b-2 border-abitur pb-6">
+                        <div class="bg-abitur text-white p-3 rounded-lg shadow-md">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl md:text-4xl font-extrabold text-lab-950 uppercase tracking-tight">Abitur-Transfer & Praxis</h2>
+                            <div class="text-abitur font-bold tracking-wider text-sm mt-1 uppercase">Gütekriterien in der Klausur (eA)</div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-slate-700 font-medium mb-8 leading-relaxed max-w-4xl">
+                        Das Kultusministerium prüft in diesem Bereich sehr praxisnah und anwendungsorientiert. Du musst nicht nur wissen, wie ein Test funktioniert, sondern ihn messtheoretisch <strong class="text-lab-950">kritisch hinterfragen</strong> können!
+                    </p>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        
+                        <!-- Transfer 1: Objektivität -->
+                        <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                            <h3 class="text-xl font-bold text-lab-900 mb-3 flex items-center gap-2">
+                                <span class="bg-lab-900 text-white w-6 h-6 flex items-center justify-center rounded-full text-xs font-mono">1</span>
+                                Der Objektivitäts-Angriff
+                            </h3>
+                            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                                <strong>Standardaufgabe:</strong> Bewerte einen 30-m-Sprint im Schulsport mit Handstoppuhr.
+                            </p>
+                            <div class="bg-white border-l-4 border-tech-orange p-4 text-sm font-medium text-slate-700 shadow-sm">
+                                <strong class="text-tech-orange block mb-1">Deine Argumentation:</strong>
+                                Die menschliche Reaktionszeit auf ein optisches Signal beträgt ca. <strong>150 bis 200 ms</strong>. Bei einem Sprint von nur ~4,5 Sekunden verfälscht diese Reaktionszeit des Lehrers (beim Starten UND Stoppen) das Ergebnis prozentual massiv. Der Test ist unobjektiv. Ein elektronisches Lichtschrankensystem ist zwingend erforderlich!
+                            </div>
+                        </div>
+
+                        <!-- Transfer 2: Validität -->
+                        <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                            <h3 class="text-xl font-bold text-lab-900 mb-3 flex items-center gap-2">
+                                <span class="bg-lab-900 text-white w-6 h-6 flex items-center justify-center rounded-full text-xs font-mono">2</span>
+                                Die Test-Validität (Gültigkeit)
+                            </h3>
+                            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                                <strong>Fallstudie:</strong> Ein Volleyballer weist Schwächen im Block (am Netz) auf. Du sollst ein geeignetes Testverfahren planen und begründen.
+                            </p>
+                            <div class="bg-white border-l-4 border-tech-blue p-4 text-sm font-medium text-slate-700 shadow-sm">
+                                <strong class="text-tech-blue block mb-1">Deine Argumentation:</strong>
+                                Ein 30-m-Linear-Sprint wäre hier <strong>invalide</strong>, da ein Volleyballer zyklische Schnelligkeit über diese Distanz nie benötigt. Du wählst und begründest stattdessen einen komplexen Reaktionstest (Tapping/Kontaktmatten), da dieser die sportartspezifische Anforderung (Reaktion & azyklische Kraftschnelligkeit beim Absprung) <strong>valide</strong> abbildet.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="mt-16 pt-8 pb-10 border-t-2 border-slate-200 text-center">
+            <p class="font-mono font-bold text-lab-900 tracking-widest text-sm mb-1 uppercase">Abiturwissen Sport (G9, eA)</p>
+            <p class="text-slate-500 font-sans text-sm">Lernbereich 1.6.4a Praktische Umsetzung und Tests</p>
+        </footer>
+    </div>
+
+    <!-- Interactive Canvas Logic: Reaction Error Simulator -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('reactionSimulator');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            // Simulation Config
+            const realSprintTime = 4.20; // 4.20 seconds true time
+            const totalSimTime = 5.0;    // Timeline length
+            
+            let frameCount = 0;
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                frameCount++;
+
+                // Slow down time for visual effect (1 sim second = 100 frames)
+                let t = (frameCount / 80) % (totalSimTime + 1); // loops every ~6 seconds
+                if (t > totalSimTime) t = totalSimTime; // pause at end before loop
+
+                // Dynamic human error generation for this loop
+                // (Using a seeded pseudo-random based on loop count so it stays stable during a run)
+                const loopNum = Math.floor(frameCount / (80 * (totalSimTime + 1)));
+                const humanStartDelay = 0.15 + (Math.sin(loopNum*123) * 0.05); // 0.10s to 0.20s
+                const humanStopDelay = 0.12 + (Math.cos(loopNum*321) * 0.06);  // 0.06s to 0.18s
+
+                // Layout
+                const pL = 120; // Padding Left (for Labels)
+                const pR = 40;
+                const trackW = w - pL - pR;
+                
+                // Draw Timeline Grid
+                ctx.strokeStyle = '#0f172a'; // Very dark
+                ctx.lineWidth = 1;
+                ctx.font = '10px "JetBrains Mono"';
+                ctx.fillStyle = '#64748b';
+                ctx.textAlign = 'center';
+                
+                for(let i=0; i<=5; i++) {
+                    const x = pL + (i/totalSimTime) * trackW;
+                    ctx.beginPath(); ctx.moveTo(x, 20); ctx.lineTo(x, h-20); ctx.stroke();
+                    ctx.fillText(i.toFixed(1) + 's', x, h - 5);
+                }
+
+                // Function to draw a progress bar
+                function drawBar(y, label, startTime, endTime, color, isHuman) {
+                    // Current progress logic
+                    let currentStart = Math.min(t, startTime);
+                    let currentEnd = Math.max(currentStart, Math.min(t, endTime));
+                    
+                    const startX = pL + (startTime / totalSimTime) * trackW;
+                    const endX = pL + (endTime / totalSimTime) * trackW;
+                    const currentDrawX = pL + (currentEnd / totalSimTime) * trackW;
+
+                    // Label
+                    ctx.textAlign = 'right';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = '#e2e8f0';
+                    ctx.font = '12px "Manrope"';
+                    ctx.fillText(label, pL - 15, y);
+
+                    // Background Track
+                    ctx.fillStyle = '#0f172a';
+                    ctx.beginPath(); ctx.roundRect(pL, y - 8, trackW, 16, 4); ctx.fill();
+
+                    // Fill Bar
+                    if (currentEnd > currentStart) {
+                        ctx.fillStyle = color;
+                        ctx.shadowColor = color;
+                        ctx.shadowBlur = 10;
+                        const drawW = currentDrawX - (pL + (currentStart/totalSimTime)*trackW);
+                        if(drawW > 0) {
+                            ctx.beginPath(); 
+                            ctx.roundRect(pL + (currentStart/totalSimTime)*trackW, y - 8, drawW, 16, 4); 
+                            ctx.fill();
+                        }
+                        ctx.shadowBlur = 0;
+                    }
+
+                    // Draw Time Counter
+                    let displayTime = 0.00;
+                    if (t > startTime) {
+                        displayTime = Math.min(t - startTime, endTime - startTime);
+                    }
+                    
+                    ctx.textAlign = 'left';
+                    ctx.font = 'bold 12px "JetBrains Mono"';
+                    ctx.fillStyle = (t >= endTime) ? color : '#94a3b8';
+                    ctx.fillText(displayTime.toFixed(2) + 's', currentDrawX + 10, y);
+
+                    // Show visual error gaps if human
+                    if (isHuman && t >= endTime) {
+                        // Error Start
+                        ctx.fillStyle = 'rgba(234, 88, 12, 0.3)';
+                        const realStartX = pL;
+                        ctx.fillRect(realStartX, y - 8, startX - realStartX, 16);
+                        
+                        // Error End
+                        const realEndX = pL + (realSprintTime / totalSimTime) * trackW;
+                        ctx.fillRect(realEndX, y - 8, endX - realEndX, 16);
+
+                        // Delta Text
+                        const delta = (endTime - startTime) - realSprintTime;
+                        ctx.fillStyle = '#ea580c';
+                        ctx.textAlign = 'right';
+                        ctx.fillText(`Δ +${delta.toFixed(2)}s`, w - 10, y - 20);
+                    }
+                }
+
+                // 1. Digital Time (Lichtschranke) - Perfect
+                drawBar(h * 0.35, "Lichtschranke", 0.0, realSprintTime, '#22c55e', false); // Green
+
+                // 2. Human Time (Handstoppung) - Flawed
+                const humanStart = humanStartDelay;
+                const humanStop = realSprintTime + humanStopDelay; // Reaction delays accumulation
+                drawBar(h * 0.70, "Handstoppung", humanStart, humanStop, '#ea580c', true); // Orange
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

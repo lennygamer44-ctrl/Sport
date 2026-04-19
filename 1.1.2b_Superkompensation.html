@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.2b Superkompensation - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Deep Navy & Energetic Orange/Green */
+            --bg-body: #f4f7fb;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --primary-dark: #0f172a; /* Deep Navy */
+            --primary-light: #1e293b;
+            --accent-orange: #f97316; /* Energetic Orange */
+            --accent-green: #10b981; /* Superkompensation Green */
+            --accent-red: #ef4444; /* Ermüdung Red */
+            
+            --abi-bg: #111827;
+            --abi-border: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.1rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            background-image: radial-gradient(circle at 15% 50%, rgba(249, 115, 22, 0.15), transparent 25%),
+                              radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.15), transparent 25%);
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Intro Block --- */
+        .intro-block {
+            background: white;
+            padding: 2.5rem 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin: -3rem auto 4rem;
+            position: relative;
+            z-index: 10;
+            border-top: 6px solid var(--accent-orange);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            text-align: center;
+        }
+
+        /* --- Section 1: AAS (Cards) --- */
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .aas-intro {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+        }
+
+        .aas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        @media(max-width: 900px) {
+            .aas-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .aas-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .aas-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        .aas-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+        }
+
+        .aas-card:nth-child(1)::before { background: var(--accent-red); }
+        .aas-card:nth-child(2)::before { background: var(--accent-orange); }
+        .aas-card:nth-child(3)::before { background: var(--primary-light); }
+
+        .aas-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        /* --- Section 2: Superkompensation & Canvas --- */
+        .model-section {
+            background: white;
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.04);
+            margin-bottom: 6rem;
+        }
+
+        .model-intro {
+            margin-bottom: 3rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Canvas Container */
+        .chart-wrapper {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            padding: 2rem;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+            position: relative;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            display: block;
+        }
+
+        .chart-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* Timeline for the 4 Phases */
+        .phases-timeline {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .phase-item {
+            display: flex;
+            background: var(--bg-body);
+            border-radius: 16px;
+            padding: 2rem;
+            gap: 2rem;
+            align-items: flex-start;
+            border-left: 8px solid;
+        }
+
+        @media(max-width: 768px) {
+            .phase-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .phase-item:nth-child(1) { border-left-color: var(--accent-red); }
+        .phase-item:nth-child(2) { border-left-color: #3b82f6; }
+        .phase-item:nth-child(3) { border-left-color: var(--accent-green); }
+        .phase-item:nth-child(4) { border-left-color: #94a3b8; }
+
+        .phase-number {
+            background: white;
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .phase-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+
+        .phase-content p {
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        /* --- Abitur Premium Box --- */
+        .abitur-box {
+            background-color: var(--abi-bg);
+            color: white;
+            border-radius: 20px;
+            padding: 4rem 3rem;
+            margin-bottom: 6rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-top: 2px solid var(--abi-border);
+            border-bottom: 2px solid var(--abi-border);
+        }
+
+        .abitur-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .abitur-badge {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--abi-border);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .abitur-box h2 {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #d1d5db;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        @media(max-width: 850px) {
+            .abi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .abi-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .abi-card.full-width {
+            grid-column: 1 / -1;
+            background: linear-gradient(to right, rgba(255,255,255,0.03), rgba(245, 158, 11, 0.05));
+            border-left: 4px solid var(--abi-border);
+        }
+
+        .abi-card h4 {
+            color: var(--abi-border);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .abi-card p {
+            color: #9ca3af;
+        }
+
+        .highlight-word {
+            color: white;
+            font-weight: bold;
+            border-bottom: 2px solid var(--abi-border);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <h1>1.1.2b Modell der Anpassung</h1>
+            <p class="subtitle">Superkompensation und allgemeine Adaptation</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-block">
+            Das Prinzip der Adaptation (Anpassung) ist die physiologische Antwort des Körpers auf sportliche Belastungen. Um Trainingsprozesse gezielt steuern zu können, bedient sich die Sporttheorie primär des Modells der Superkompensation, welches die zeitliche Abfolge von Ermüdung, Wiederherstellung und Überkompensation beschreibt.
+        </div>
+
+        <section>
+            <h2 class="section-title">1. Das Allgemeine Adaptationssyndrom (AAS)</h2>
+            <p class="aas-intro">
+                Die theoretische Grundlage der Superkompensation bildet das von Hans Selye entwickelte Allgemeine Adaptationssyndrom. Es beschreibt die Reaktion des biologischen Systems auf Stressoren (hier: den Trainingsreiz). Der Körper reagiert in drei Phasen:
+            </p>
+
+            <div class="aas-grid">
+                <div class="aas-card">
+                    <h3>1. Alarmreaktion</h3>
+                    <p>(Schock und Gegenschock)<br>Initiale Reaktion des Körpers auf den massiven Trainingsreiz.</p>
+                </div>
+                <div class="aas-card">
+                    <h3>2. Widerstandsstadium</h3>
+                    <p>(Anpassung an den Stressor)<br>Der Körper rüstet sich gegen den Stress und beginnt sich anzupassen.</p>
+                </div>
+                <div class="aas-card">
+                    <h3>3. Erschöpfungsstadium</h3>
+                    <p>(bei zu langanhaltendem Stress)<br>Tritt auf, wenn keine Erholung gewährt wird. Die Reserven sind am Ende.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="model-section">
+            <h2 class="section-title">2. Das Modell der Superkompensation</h2>
+            <p class="model-intro">
+                Das Modell der Superkompensation überträgt dieses Stressmodell auf die sportliche Leistungsfähigkeit und den Energiestoffwechsel. Es beschreibt den Prozess der Leistungsentwicklung in vier aufeinanderfolgenden Phasen:
+            </p>
+
+            <!-- INTERACTIVE CANVAS -->
+            <div class="chart-wrapper">
+                <canvas id="supercompCanvas" width="900" height="400"></canvas>
+                <p class="chart-caption">Abb. 1: Das Modell der Superkompensation (Animierte Visualisierung)</p>
+            </div>
+
+            <div class="phases-timeline">
+                <div class="phase-item">
+                    <div class="phase-number">1</div>
+                    <div class="phase-content">
+                        <h3>Belastung und Ermüdung (Störung der Homöostase)</h3>
+                        <p>Durch einen überschwellig starken Trainingsreiz wird das biologische Gleichgewicht (Homöostase) gestört. Energievorräte (z. B. Glykogen in der Muskulatur) werden entleert, Strukturproteine erfahren Mikrotraumata und das zentrale Nervensystem ermüdet. In der Folge sinkt die sportliche Leistungsfähigkeit ab.</p>
+                    </div>
+                </div>
+
+                <div class="phase-item">
+                    <div class="phase-number">2</div>
+                    <div class="phase-content">
+                        <h3>Wiederherstellung (Regeneration)</h3>
+                        <p>Unmittelbar nach der Belastung beginnt der Körper mit Reparaturprozessen und der Wiederauffüllung der Energiespeicher. Die Leistungsfähigkeit steigt langsam wieder auf das ursprüngliche Ausgangsniveau an.</p>
+                    </div>
+                </div>
+
+                <div class="phase-item">
+                    <div class="phase-number">3</div>
+                    <div class="phase-content">
+                        <h3>Superkompensation (Überkompensation)</h3>
+                        <p>Der Organismus stellt nicht nur das Ausgangsniveau wieder her, sondern "überkompensiert". Er füllt die Energiespeicher über das ursprüngliche Maß hinaus auf und verstärkt muskuläre sowie neuronale Strukturen, um für zukünftige, ähnliche Belastungen besser gewappnet zu sein. In dieser Phase ist die sportliche Leistungsfähigkeit am höchsten.</p>
+                    </div>
+                </div>
+
+                <div class="phase-item">
+                    <div class="phase-number">4</div>
+                    <div class="phase-content">
+                        <h3>Involution (Rückkehr zum Ausgangsniveau)</h3>
+                        <p>Bleibt in der Phase der Superkompensation ein erneuter adäquater Trainingsreiz aus, bildet der Körper die energetischen und strukturellen Mehrausstattungen wieder zurück ("Use it or lose it"). Das Leistungsniveau sinkt wieder auf das ursprüngliche Ausgangsniveau.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABITUR TRANSFER -->
+        <section class="abitur-box">
+            <div class="abitur-header">
+                <span class="abitur-badge">Klausur-Fokus</span>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+
+            <p class="abi-intro">
+                In der Abiturprüfung (eA) ist dieses Modell ein <strong style="color: white;">absolutes Kernthema</strong> und wird als Basiskonzept für fast alle trainingswissenschaftlichen Aufgaben vorausgesetzt. Du musst die Superkompensation nicht nur theoretisch erklären, sondern vor allem auf verschiedene Trainingsszenarien anwenden und gegebenenfalls sogar selbst zeichnen können.
+            </p>
+
+            <div class="abi-grid">
+                <div class="abi-card">
+                    <h4>⏱️ Das richtige Timing von Reizen</h4>
+                    <p>In Fallanalysen wird oft das Timing von Trainingseinheiten thematisiert. Setzt ein Athlet (z. B. ein Zehnkämpfer in der Vorbereitung) den nächsten Trainingsreiz exakt <span class="highlight-word">auf dem Hochpunkt</span> der Superkompensation, kommt es zu einer kontinuierlichen Leistungssteigerung (positive Adaptation).</p>
+                </div>
+
+                <div class="abi-card">
+                    <h4>⚠️ Übertraining & Stagnation</h4>
+                    <p>Du musst argumentieren können, was bei falschem Timing passiert. Setzt der Sportler den nächsten Reiz <span class="highlight-word">zu früh</span> (in der Phase der unvollständigen Wiederherstellung), sinkt die Leistungskurve sukzessive ab – es droht das Übertraining (Überlastungssyndrom). Setzt er den Reiz <span class="highlight-word">zu spät</span> (in der Phase der Involution), verpufft der Effekt und das Leistungsniveau stagnierend, da sich die einzelnen Reize nicht summieren.</p>
+                </div>
+
+                <div class="abi-card full-width">
+                    <h4>🔗 Verknüpfung mit Trainingsprinzipien</h4>
+                    <p>Das Modell der Superkompensation ist die biologische Begründung für Prinzipien wie das <em>Prinzip der optimalen Relation von Belastung und Erholung</em> oder das <em>Prinzip der kontinuierlichen Belastung</em>. Wenn in einer Aufgabe nach der Begründung von Pausenzeiten (z. B. im Kraft- vs. Ausdauertraining) gefragt wird, ist die <span class="highlight-word">Superkompensation dein primäres Argumentationswerkzeug!</span></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('supercompCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            let animationProgress = 0;
+            let reqId;
+
+            // Responsive Handling
+            function resizeCanvas() {
+                const container = canvas.parentElement;
+                canvas.width = container.clientWidth - 64; // Adjust for padding
+                canvas.height = canvas.width < 600 ? 300 : 400;
+                
+                // Restart animation on resize to redraw correctly
+                animationProgress = 0;
+                cancelAnimationFrame(reqId);
+                animateChart();
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+
+            // Chart Drawing Logic
+            function drawChart(progress) {
+                const w = canvas.width;
+                const h = canvas.height;
+                
+                ctx.clearRect(0, 0, w, h);
+
+                const paddingLeft = 60;
+                const paddingBottom = 40;
+                const paddingTop = 40;
+                const paddingRight = 40;
+                
+                const plotW = w - paddingLeft - paddingRight;
+                const plotH = h - paddingTop - paddingBottom;
+                const baselineY = paddingTop + (plotH * 0.6); // Baseline is 60% down
+
+                // Draw Grid & Axes
+                ctx.beginPath();
+                ctx.moveTo(paddingLeft, paddingTop);
+                ctx.lineTo(paddingLeft, h - paddingBottom + 10);
+                ctx.moveTo(paddingLeft - 10, h - paddingBottom);
+                ctx.lineTo(w - paddingRight + 20, h - paddingBottom);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([]);
+                ctx.stroke();
+
+                // Axis Labels
+                ctx.fillStyle = '#64748b';
+                ctx.font = '600 13px Plus Jakarta Sans';
+                ctx.textAlign = 'center';
+                ctx.fillText('Zeit', w - paddingRight + 10, h - paddingBottom + 20);
+                
+                ctx.save();
+                ctx.translate(paddingLeft - 20, paddingTop + plotH/2);
+                ctx.rotate(-Math.PI/2);
+                ctx.textAlign = 'center';
+                ctx.fillText('Leistungsniveau', 0, 0);
+                ctx.restore();
+
+                // Draw Baseline (Ausgangsniveau)
+                ctx.beginPath();
+                ctx.moveTo(paddingLeft, baselineY);
+                ctx.lineTo(paddingLeft + plotW, baselineY);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                ctx.textAlign = 'left';
+                ctx.fillStyle = '#64748b';
+                ctx.fillText('Ausgangsniveau', paddingLeft + 10, baselineY - 10);
+
+                // Define the Curve Points
+                // P0: Start
+                // P1: Bottom of fatigue (Ermüdung)
+                // P2: Back to baseline (Regeneration)
+                // P3: Peak (Superkompensation)
+                // P4: End (Involution)
+                
+                const p0 = { x: paddingLeft, y: baselineY };
+                const p1 = { x: paddingLeft + plotW * 0.2, y: baselineY + (plotH * 0.35) }; 
+                const p2 = { x: paddingLeft + plotW * 0.45, y: baselineY };
+                const p3 = { x: paddingLeft + plotW * 0.7, y: paddingTop };
+                const p4 = { x: paddingLeft + plotW, y: baselineY };
+
+                // Create full path for the line
+                // We use quadratic and cubic bezier curves to make it smooth
+                const path = new Path2D();
+                path.moveTo(p0.x, p0.y);
+                
+                // Curve 1: Drop (Ermüdung)
+                path.quadraticCurveTo(paddingLeft + plotW * 0.1, p1.y, p1.x, p1.y);
+                
+                // Curve 2: Rise (Regeneration)
+                path.quadraticCurveTo(paddingLeft + plotW * 0.35, p1.y, p2.x, p2.y);
+                
+                // Curve 3: Peak (Superkompensation)
+                path.quadraticCurveTo(paddingLeft + plotW * 0.55, p3.y, p3.x, p3.y);
+                
+                // Curve 4: Fall (Involution)
+                path.quadraticCurveTo(paddingLeft + plotW * 0.9, p3.y, p4.x, p4.y);
+
+                // Draw Background Fills (Only up to 'progress' width)
+                ctx.save();
+                ctx.beginPath();
+                ctx.rect(paddingLeft, 0, plotW * progress, h);
+                ctx.clip(); // Clip everything to the current animation progress
+
+                // Fill Ermüdung (Red)
+                const pathErm = new Path2D();
+                pathErm.moveTo(p0.x, p0.y);
+                pathErm.quadraticCurveTo(paddingLeft + plotW * 0.1, p1.y, p1.x, p1.y);
+                pathErm.quadraticCurveTo(paddingLeft + plotW * 0.35, p1.y, p2.x, p2.y);
+                pathErm.lineTo(p2.x, baselineY);
+                pathErm.lineTo(p0.x, baselineY);
+                ctx.fillStyle = 'rgba(239, 68, 68, 0.15)'; // Red tinted
+                ctx.fill(pathErm);
+
+                // Fill Superkompensation (Green)
+                const pathSuper = new Path2D();
+                pathSuper.moveTo(p2.x, p2.y);
+                pathSuper.quadraticCurveTo(paddingLeft + plotW * 0.55, p3.y, p3.x, p3.y);
+                pathSuper.quadraticCurveTo(paddingLeft + plotW * 0.9, p3.y, p4.x, p4.y);
+                pathSuper.lineTo(p2.x, baselineY);
+                ctx.fillStyle = 'rgba(16, 185, 129, 0.15)'; // Green tinted
+                ctx.fill(pathSuper);
+
+                // Draw the actual main Line
+                ctx.strokeStyle = '#0f172a'; // Dark Navy curve
+                ctx.lineWidth = 4;
+                ctx.stroke(path);
+
+                // Draw Phase Labels if progress has reached them
+                ctx.font = 'bold 13px Outfit';
+                ctx.textAlign = 'center';
+                
+                if (progress > 0.15) {
+                    ctx.fillStyle = '#ef4444';
+                    ctx.fillText('1. Ermüdung', p1.x, p1.y + 25);
+                }
+                if (progress > 0.35) {
+                    ctx.fillStyle = '#3b82f6';
+                    ctx.fillText('2. Regeneration', p1.x + (p2.x-p1.x)/2 + 20, p1.y - 15);
+                }
+                if (progress > 0.65) {
+                    ctx.fillStyle = '#10b981';
+                    ctx.fillText('3. Superkompensation', p3.x, p3.y - 15);
+                }
+                if (progress > 0.9) {
+                    ctx.fillStyle = '#64748b';
+                    ctx.fillText('4. Involution', p3.x + (p4.x-p3.x)/2, baselineY - 20);
+                }
+
+                ctx.restore(); // Remove clipping mask
+            }
+
+            // Animation Loop
+            function animateChart() {
+                if (animationProgress < 1) {
+                    animationProgress += 0.008; // Speed
+                    if(animationProgress > 1) animationProgress = 1;
+                    drawChart(animationProgress);
+                    reqId = requestAnimationFrame(animateChart);
+                }
+            }
+
+            // Init
+            resizeCanvas();
+
+            // Setup Intersection Observer to start animation when visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        animationProgress = 0; // reset
+                        animateChart();
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(canvas);
+        });
+    </script>
+</body>
+</html>

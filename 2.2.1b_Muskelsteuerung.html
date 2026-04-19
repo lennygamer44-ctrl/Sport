@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.2.1b Muskelsteuerung: Abstufung von Kontraktionskraft, intra- und intermuskuläre Koordination, motorische Einheit - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            --bg-color: #f0f4f8;
+            --text-main: #2d3748;
+            --text-light: #718096;
+            
+            /* Theme Colors: Anatomy & Nerves */
+            --muscle-red: #dc2626;      /* Vibrant Red */
+            --muscle-dark: #991b1b;     /* Deep Red */
+            --nerve-cyan: #06b6d4;      /* Electric Cyan */
+            --nerve-blue: #2563eb;      /* Royal Blue */
+            
+            --card-bg: #ffffff;
+            
+            /* Premium Box */
+            --abi-bg: #111827;          /* Very Dark Gray */
+            --abi-accent: #fbbf24;      /* Amber/Gold */
+            --abi-text: #f3f4f6;
+
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER --- */
+        .page-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 3rem;
+            border-top: 8px solid var(--muscle-red);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 150px; height: 150px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            color: var(--muscle-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .page-header .lead {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        /* --- CONTENT SECTIONS --- */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 35px;
+            background: var(--nerve-cyan);
+            border-radius: 4px;
+        }
+
+        /* Focus Box (Definitions) */
+        .focus-box {
+            background: #fff5f5;
+            border-left: 5px solid var(--muscle-red);
+            padding: 2rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .focus-box h3 {
+            color: var(--muscle-dark);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .focus-box ul {
+            list-style-type: none;
+            margin-left: 0.5rem;
+        }
+
+        .focus-box ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .focus-box ul li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 0.9rem;
+        }
+
+        .alert-rule {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        /* Cards Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid var(--nerve-blue);
+            transition: transform 0.2s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .info-card h4 {
+            font-size: 1.5rem;
+            color: var(--nerve-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Canvas Containers */
+        .canvas-wrapper {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-top: 2rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            background: #fafafa;
+            border: 1px solid #f1f5f9;
+        }
+
+        .canvas-caption {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* --- ABITUR TRANSFER --- */
+        .abitur-matrix {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-top: 8px solid var(--abi-accent);
+            position: relative;
+        }
+
+        .abitur-matrix::before {
+            content: 'EXAM BLUEPRINT';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-family: 'Oswald', sans-serif;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .abitur-matrix h2 {
+            color: var(--abi-accent);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abitur-matrix .abi-intro {
+            font-size: 1.15rem;
+            color: #9ca3af;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 1.5rem;
+        }
+
+        .abi-scenario {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--abi-accent);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .abi-scenario h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .abi-scenario p {
+            color: #d1d5db;
+        }
+
+        .abi-highlight {
+            color: var(--abi-accent);
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .page-header, .abitur-matrix { padding: 2rem; }
+            .page-header h1 { font-size: 2.2rem; }
+            .section-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="page-header">
+        <h1>2.2.1b Muskelsteuerung</h1>
+        <p class="lead">
+            Wenn ein elektrischer Impuls über die efferente Leitungsbahn den Muskel erreicht, muss die daraus resultierende Bewegung exakt gesteuert werden. Die neuronalen Grundzüge dieser Steuerung basieren auf dem brillanten Zusammenspiel von Nerv und Muskulatur.
+        </p>
+    </header>
+
+    <!-- Section 1: Motorische Einheit -->
+    <section>
+        <h2 class="section-title">1. Die motorische Einheit (ME)</h2>
+        <p>Die motorische Einheit ist die kleinste funktionelle Einheit der neuromuskulären Steuerung.</p>
+        
+        <div class="focus-box">
+            <h3>Bestandteile einer motorischen Einheit:</h3>
+            <ul>
+                <li>Einer Nervenzelle im Rückenmark (<strong>Alpha-Motoneuron</strong>)</li>
+                <li>Dessen wegführendem Nervenfortsatz (<strong>Axon</strong>)</li>
+                <li><strong>Allen Muskelfasern</strong>, die von diesem einen Axon innerviert (versorgt) werden.</li>
+            </ul>
+            
+            <div class="alert-rule">
+                <span>⚠️</span> Das Alles-oder-Nichts-Gesetz: Erreicht ein Reiz den Schwellenwert, kontrahieren alle Muskelfasern dieser speziellen motorischen Einheit maximal. Eine teilweise Kontraktion einer einzelnen Einheit gibt es nicht.
+            </div>
+        </div>
+
+        <p>
+            <strong>Die Größe der motorischen Einheiten variiert stark:</strong> In Muskeln für die Feinmotorik (z. B. Augenmuskeln) versorgt ein Nerv nur ca. 5-10 Fasern. In Muskeln für die Grobmotorik (z. B. Oberschenkel) versorgt ein einziger Nerv bis zu 2000 Fasern gleichzeitig.
+        </p>
+
+        <!-- Canvas 1: Motorische Einheit -->
+        <div class="canvas-wrapper">
+            <canvas id="motorUnitCanvas" width="900" height="350"></canvas>
+            <div class="canvas-caption">Abb. 1: Anatomischer Aufbau einer motorischen Einheit. Ein Motoneuron innerviert selektiv bestimmte Muskelfasern, während Nachbarfasern inaktiv bleiben (oder zu anderen MEs gehören).</div>
+        </div>
+    </section>
+
+    <!-- Section 2: Abstufung von Kraft -->
+    <section>
+        <h2 class="section-title">2. Abstufung von Kontraktionskraft</h2>
+        <p>Da eine einzelne motorische Einheit immer nur voll oder gar nicht kontrahieren kann, muss das zentrale Nervensystem andere Wege finden, um Kraft exakt zu dosieren (z. B. den Unterschied zwischen dem Heben einer Feder und einer 20kg-Hantel). Dies geschieht über zwei Mechanismen:</p>
+
+        <div class="card-grid">
+            <article class="info-card">
+                <h4>Rekrutierung</h4>
+                <p>Die Kraft wird über die <strong>Anzahl</strong> der aktivierten motorischen Einheiten gesteuert. Für leichte Aufgaben werden wenige, für schwere Aufgaben viele Einheiten hinzugeschaltet.</p>
+            </article>
+
+            <article class="info-card">
+                <h4>Frequenzierung</h4>
+                <p>Die Kraft wird über die <strong>Reizhäufigkeit</strong> (Frequenz der Aktionspotenziale) gesteuert. Je schneller die Reize hintereinander am Muskel eintreffen, desto stärker summieren sich die Einzelzuckungen zu einer glatten, kraftvollen Dauerkontraktion (Tetanus).</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Section 3: Koordination -->
+    <section>
+        <h2 class="section-title">3. Inter- und intramuskuläre Koordination</h2>
+        <p>Die Qualität und Kraftausbeute einer Bewegung hängt maßgeblich von der muskulären Koordination ab:</p>
+
+        <div class="card-grid">
+            <article class="info-card" style="border-top-color: var(--muscle-dark);">
+                <h4 style="color: var(--muscle-dark);">Intermuskuläre Koordination</h4>
+                <p>Dies beschreibt das optimale Zusammenspiel <strong>verschiedener Muskeln</strong> während eines Bewegungsablaufs. Es ist das harmonische Zusammenwirken von Agonisten (Spielern), Antagonisten (Gegenspielern) und Synergisten (Mitspielern). Ein Anfänger spannt oft den Antagonisten ungewollt mit an (Gegenkoordination), was die Bewegung eckig und unökonomisch macht.</p>
+            </article>
+
+            <article class="info-card" style="border-top-color: var(--muscle-dark);">
+                <h4 style="color: var(--muscle-dark);">Intramuskuläre Koordination</h4>
+                <p>Dies beschreibt das Nerv-Muskel-Zusammenspiel <strong>innerhalb eines einzigen Muskels</strong>. Selbst bei maximaler willkürlicher Anspannung kann ein untrainierter Mensch nur ca. 60-70 % seiner motorischen Einheiten gleichzeitig (synchron) rekrutieren. Durch spezielles Training kann diese synchrone Rekrutierungsfähigkeit auf bis zu 90 % gesteigert werden (Ausschöpfung der autonomen Reserve).</p>
+            </article>
+        </div>
+
+        <!-- Canvas 2: Inter vs Intra -->
+        <div class="canvas-wrapper">
+            <canvas id="coordCanvas" width="900" height="400"></canvas>
+            <div class="canvas-caption">Abb. 2: Gegenüberstellung. Links: Das Zusammenspiel verschiedener Muskeln (Inter). Rechts: Die synchrone Faser-Aktivierung innerhalb eines Muskelbauchs (Intra).</div>
+        </div>
+    </section>
+
+    <!-- Section 4: Abitur Transfer -->
+    <section class="abitur-matrix">
+        <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die Begriffe der inter- und intramuskulären Koordination sind absolute Schlüsselwörter für Klausuren im Bereich Krafttraining und motorisches Lernen.
+        </p>
+
+        <div class="abi-scenario">
+            <h4>Argumentation beim Krafttraining</h4>
+            <p>Wenn du das sogenannte Intramuskuläre Koordinationstraining (IK-Training / Methode der maximalen Krafteinsätze) erklären sollst, verlangt der Erwartungshorizont genau dieses biologische Detailwissen. Du musst begründen, warum Gewichtheber enorm viel Kraft haben, ohne riesige Muskelberge (Hypertrophie) aufzubauen. <br><br><strong>Deine Antwort:</strong> Das Training zielt auf die neuronale Anpassung ab. Die Athleten lernen, deutlich mehr motorische Einheiten <span class="abi-highlight">synchron zu rekrutieren (verbesserte intramuskuläre Koordination)</span>, wodurch die Maximalkraft steigt, ohne dass der Muskelquerschnitt zunimmt.</p>
+        </div>
+
+        <div class="abi-scenario">
+            <h4>Verknüpfung mit motorischem Lernen</h4>
+            <p>Bei der Phasenstruktur des Lernens (Grob- zur Feinkoordination) musst du begründen, warum die Bewegung in der Feinkoordination plötzlich so flüssig aussieht und weniger Energie verbraucht. Der Grund ist die <span class="abi-highlight">verbesserte intermuskuläre Koordination</span>. Der Anfänger baut unbewusste Mitspannungen des Antagonisten ab (die Bremsen werden gelöst), wodurch die Bewegung effizienter wird.</p>
+        </div>
+
+        <div class="abi-scenario">
+            <h4>Bedeutung im Schnelligkeitstraining</h4>
+            <p>Bei sportpraktischen Beispielen zur Schnelligkeit musst du erwähnen, dass ein exzellentes <span class="abi-highlight">"Nerv-Muskel-Zusammenspiel" (intramuskulär)</span> die absolute Basis für das schnellstmögliche Überwinden von Widerständen ist.</p>
+        </div>
+    </section>
+
+</main>
+
+<script>
+    // Utilities
+    function drawLabel(ctx, text, x, y, color, align='center') {
+        ctx.font = '600 14px Source Sans Pro';
+        ctx.fillStyle = color;
+        ctx.textAlign = align;
+        ctx.fillText(text, x, y);
+    }
+
+    // ==========================================
+    // CANVAS 1: Motorische Einheit
+    // ==========================================
+    const c1 = document.getElementById('motorUnitCanvas');
+    const ctx1 = c1.getContext('2d');
+    const w1 = c1.width;
+    const h1 = c1.height;
+
+    // 1. Rückenmark (Spinal Cord) - Left side
+    ctx1.fillStyle = '#e2e8f0';
+    ctx1.beginPath();
+    ctx1.ellipse(100, h1/2, 60, 120, 0, 0, Math.PI*2);
+    ctx1.fill();
+    ctx1.strokeStyle = '#cbd5e1';
+    ctx1.lineWidth = 3;
+    ctx1.stroke();
+    
+    // Grey Matter (Butterfly shape inside)
+    ctx1.fillStyle = '#94a3b8';
+    ctx1.beginPath();
+    ctx1.moveTo(100, h1/2 - 50);
+    ctx1.quadraticCurveTo(70, h1/2 - 80, 80, h1/2 - 30);
+    ctx1.lineTo(90, h1/2 - 10);
+    ctx1.lineTo(70, h1/2 + 20);
+    ctx1.quadraticCurveTo(60, h1/2 + 70, 100, h1/2 + 40);
+    ctx1.quadraticCurveTo(140, h1/2 + 70, 130, h1/2 + 20);
+    ctx1.lineTo(110, h1/2 - 10);
+    ctx1.lineTo(120, h1/2 - 30);
+    ctx1.quadraticCurveTo(130, h1/2 - 80, 100, h1/2 - 50);
+    ctx1.fill();
+
+    drawLabel(ctx1, 'Rückenmark', 100, 30, '#475569');
+
+    // 2. Motoneuron & Axon
+    const neuronX = 120;
+    const neuronY = h1/2 + 20;
+    
+    // Cell body
+    ctx1.fillStyle = '#06b6d4';
+    ctx1.beginPath(); ctx1.arc(neuronX, neuronY, 8, 0, Math.PI*2); ctx1.fill();
+
+    // Axon main trunk
+    ctx1.strokeStyle = '#06b6d4';
+    ctx1.lineWidth = 4;
+    ctx1.beginPath();
+    ctx1.moveTo(neuronX, neuronY);
+    ctx1.lineTo(400, neuronY);
+    ctx1.stroke();
+
+    drawLabel(ctx1, 'Alpha-Motoneuron', 250, neuronY - 15, '#0891b2');
+    drawLabel(ctx1, '(Axon)', 250, neuronY + 20, '#0891b2');
+
+    // 3. Muscle Fibers (Right side)
+    const fiberStartX = 550;
+    const fiberW = 280;
+    const fiberH = 30;
+    const fiberGap = 10;
+    const numFibers = 6;
+    const startY = 50;
+
+    // Which fibers are innervated by THIS unit? (0-indexed: 1, 3, 5)
+    const innervated = [1, 3, 5];
+
+    for(let i=0; i<numFibers; i++) {
+        let fY = startY + i * (fiberH + fiberGap);
+        let isActive = innervated.includes(i);
+        
+        // Fiber body
+        ctx1.fillStyle = isActive ? '#ef4444' : '#e2e8f0'; // Red if active, grey if inactive
+        ctx1.strokeStyle = isActive ? '#991b1b' : '#cbd5e1';
+        ctx1.lineWidth = 2;
+        ctx1.beginPath();
+        ctx1.roundRect(fiberStartX, fY, fiberW, fiberH, 4);
+        ctx1.fill();
+        ctx1.stroke();
+
+        // Draw striations
+        ctx1.strokeStyle = isActive ? 'rgba(153, 27, 27, 0.3)' : 'rgba(203, 213, 225, 0.5)';
+        ctx1.lineWidth = 1;
+        for(let s = fiberStartX + 10; s < fiberStartX + fiberW; s += 15) {
+            ctx1.beginPath(); ctx1.moveTo(s, fY); ctx1.lineTo(s, fY + fiberH); ctx1.stroke();
+        }
+
+        // Branching Axon and Motor Endplate
+        if(isActive) {
+            ctx1.strokeStyle = '#06b6d4';
+            ctx1.lineWidth = 3;
+            ctx1.beginPath();
+            ctx1.moveTo(400, neuronY); // from main trunk
+            ctx1.lineTo(450, fY + fiberH/2); // angle down/up
+            ctx1.lineTo(fiberStartX + 40, fY + fiberH/2); // to fiber
+            ctx1.stroke();
+
+            // Endplate (little yellow bulb)
+            ctx1.fillStyle = '#facc15';
+            ctx1.beginPath();
+            ctx1.ellipse(fiberStartX + 40, fY + fiberH/2, 6, 10, 0, 0, Math.PI*2);
+            ctx1.fill();
+        }
+    }
+
+    // Legend / Labels right side
+    drawLabel(ctx1, 'Innervierte Fasern', fiberStartX + fiberW + 10, startY + 65, '#dc2626', 'left');
+    drawLabel(ctx1, '(Kontraktion)', fiberStartX + fiberW + 10, startY + 85, '#dc2626', 'left');
+    
+    drawLabel(ctx1, 'Nicht-innervierte', fiberStartX + fiberW + 10, startY + 25, '#64748b', 'left');
+    drawLabel(ctx1, 'Nachbarfasern', fiberStartX + fiberW + 10, startY + 45, '#64748b', 'left');
+    
+    drawLabel(ctx1, 'Motorische Endplatten', 470, 310, '#ca8a04');
+
+
+    // ==========================================
+    // CANVAS 2: Inter vs Intra Koordination
+    // ==========================================
+    const c2 = document.getElementById('coordCanvas');
+    const ctx2 = c2.getContext('2d');
+    const w2 = c2.width;
+    const h2 = c2.height;
+
+    // Divider
+    ctx2.strokeStyle = '#e2e8f0';
+    ctx2.lineWidth = 2;
+    ctx2.beginPath(); ctx2.moveTo(w2/2, 20); ctx2.lineTo(w2/2, h2-20); ctx2.stroke();
+
+    // Titles
+    ctx2.font = 'bold 20px Oswald';
+    ctx2.fillStyle = '#1e293b';
+    ctx2.textAlign = 'center';
+    ctx2.fillText('INTERMUSKULÄR', w2/4, 40);
+    ctx2.fillText('INTRAMUSKULÄR', w2*0.75, 40);
+
+    // --- LEFT SIDE: Intermuskulär (Arm) ---
+    const armX = 120;
+    const armY = 280;
+
+    // Draw simple bone structure
+    ctx2.strokeStyle = '#cbd5e1';
+    ctx2.lineWidth = 15;
+    ctx2.lineCap = 'round';
+    ctx2.lineJoin = 'round';
+    // Humerus
+    ctx2.beginPath(); ctx2.moveTo(armX, armY); ctx2.lineTo(armX, armY - 120); ctx2.stroke();
+    // Forearm (bent up)
+    ctx2.beginPath(); ctx2.moveTo(armX, armY); ctx2.lineTo(armX + 100, armY - 80); ctx2.stroke();
+
+    // Agonist (Biceps) - Red, thick, contracted
+    ctx2.fillStyle = '#dc2626';
+    ctx2.beginPath();
+    ctx2.ellipse(armX + 25, armY - 70, 35, 18, Math.PI/3, 0, Math.PI*2);
+    ctx2.fill();
+    // Force arrow Biceps
+    ctx2.strokeStyle = '#1e293b'; ctx2.lineWidth = 2;
+    ctx2.beginPath(); ctx2.moveTo(armX + 45, armY - 60); ctx2.lineTo(armX + 70, armY - 40); ctx2.stroke();
+    ctx2.fillStyle = '#1e293b'; ctx2.beginPath(); ctx2.moveTo(armX+75, armY-35); ctx2.lineTo(armX+65, armY-45); ctx2.lineTo(armX+60, armY-35); ctx2.fill();
+
+    // Antagonist (Triceps) - Grey, thin, relaxed
+    ctx2.fillStyle = '#94a3b8';
+    ctx2.beginPath();
+    ctx2.ellipse(armX - 20, armY - 60, 25, 12, Math.PI/3, 0, Math.PI*2);
+    ctx2.fill();
+
+    // Labels
+    drawLabel(ctx2, 'Agonist (Bizeps)', armX + 90, armY - 100, '#dc2626');
+    drawLabel(ctx2, 'Kontrahiert', armX + 90, armY - 85, '#dc2626');
+
+    drawLabel(ctx2, 'Antagonist (Trizeps)', armX - 70, armY - 90, '#64748b');
+    drawLabel(ctx2, 'Entspannt (Dehnung)', armX - 70, armY - 75, '#64748b');
+    
+    drawLabel(ctx2, 'Zusammenspiel verschiedener Muskeln', w2/4, 360, '#475569');
+
+
+    // --- RIGHT SIDE: Intramuskulär (Cross-section) ---
+    const cx = w2 * 0.75;
+    const cy = 200;
+    const radius = 90;
+
+    // Muscle belly outer circle
+    ctx2.fillStyle = '#fef2f2';
+    ctx2.strokeStyle = '#dc2626';
+    ctx2.lineWidth = 4;
+    ctx2.beginPath(); ctx2.arc(cx, cy, radius, 0, Math.PI*2); ctx2.fill(); ctx2.stroke();
+
+    // Draw many small fibers (circles) inside
+    // We will activate (lightning bolt) about 85% of them to show "synchrone Rekrutierung"
+    let fiberCount = 0;
+    for(let r = 15; r < radius - 10; r += 20) {
+        let circ = 2 * Math.PI * r;
+        let numInRing = Math.floor(circ / 20);
+        for(let i=0; i<numInRing; i++) {
+            let angle = (i / numInRing) * Math.PI * 2;
+            let fx = cx + r * Math.cos(angle);
+            let fy = cy + r * Math.sin(angle);
+            
+            // Activate ~85%
+            let isActive = Math.random() < 0.85;
+
+            ctx2.fillStyle = isActive ? '#ef4444' : '#e2e8f0';
+            ctx2.beginPath(); ctx2.arc(fx, fy, 7, 0, Math.PI*2); ctx2.fill();
+
+            // Draw tiny lightning bolt for active ones
+            if(isActive) {
+                ctx2.strokeStyle = '#facc15'; // yellow
+                ctx2.lineWidth = 1.5;
+                ctx2.beginPath();
+                ctx2.moveTo(fx, fy - 6);
+                ctx2.lineTo(fx - 3, fy);
+                ctx2.lineTo(fx + 2, fy);
+                ctx2.lineTo(fx - 2, fy + 6);
+                ctx2.stroke();
+            }
+            fiberCount++;
+        }
+    }
+
+    // Label Right
+    drawLabel(ctx2, 'Synchrone Rekrutierung', cx, 340, '#ca8a04');
+    drawLabel(ctx2, '(Nervenimpulse erreichen ~85% der Fasern gleichzeitig)', cx, 360, '#475569');
+
+</script>
+</body>
+</html>

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.3a Prinzipien der Belastung - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors: Vibrant Purple & Amber */
+            --bg-page: #f8fafc;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --primary: #7c3aed; /* Violet */
+            --primary-light: #ede9fe;
+            --primary-dark: #5b21b6;
+            --accent: #f59e0b; /* Amber */
+            --accent-light: #fef3c7;
+            
+            --abi-dark: #1e1b4b;
+            --abi-gold: #fbbf24;
+            --abi-text: #e2e8f0;
+            
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif; /* Textbook feel for reading */
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.8;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .ui-font {
+            font-family: 'Rubik', sans-serif; /* Modern UI feel for structure */
+        }
+
+        /* --- Header / Hero --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 5rem 2rem;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.2);
+            border-bottom: 8px solid var(--accent);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--accent);
+            color: #78350f;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            font-family: 'Rubik', sans-serif;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+        }
+
+        /* --- Intro --- */
+        .intro-text {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+            font-size: 1.25rem;
+            border-left: 6px solid var(--primary);
+        }
+
+        /* --- Content Layout --- */
+        .content-section {
+            margin: 5rem 0;
+        }
+
+        .principle-block {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .principle-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--primary);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        .principle-block:nth-child(2)::before {
+            background: var(--accent);
+        }
+
+        .principle-block h2 {
+            font-size: 2.2rem;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .principle-number {
+            background: var(--primary-light);
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+
+        .principle-block:nth-child(2) .principle-number {
+            background: var(--accent-light);
+            color: #b45309;
+        }
+
+        .principle-intro {
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+        }
+
+        .sub-point {
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid #cbd5e1;
+        }
+
+        .sub-point h3 {
+            font-size: 1.2rem;
+            color: var(--text-heading);
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Canvas Section (Dual Graph) --- */
+        .canvas-section {
+            background: white;
+            padding: 4rem 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.05);
+            margin-bottom: 5rem;
+        }
+
+        .canvas-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 3rem;
+        }
+
+        .dual-canvas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        @media(max-width: 850px) {
+            .dual-canvas-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .canvas-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .canvas-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            border: 1px solid #f1f5f9;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            font-family: 'Rubik', sans-serif;
+            color: var(--text-main);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .color-box {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        /* --- Abitur Transfer Box --- */
+        .abitur-prep {
+            background: var(--abi-dark);
+            color: var(--abi-text);
+            padding: 4rem;
+            border-radius: 20px;
+            margin-bottom: 5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-prep::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1.5rem;
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: var(--abi-gold);
+            margin: 0;
+        }
+
+        .abi-badge {
+            background: var(--abi-gold);
+            color: var(--abi-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: 'Rubik', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .abi-intro {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .abi-points {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .abi-point {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .abi-point h3 {
+            color: var(--abi-gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .abi-highlight {
+            color: white;
+            font-weight: 600;
+            background: rgba(251, 191, 36, 0.2);
+            padding: 0 5px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="tag">Lernbereich 1.1.3a</span>
+            <h1>Prinzipien der Belastung</h1>
+            <p style="font-size: 1.4rem; font-family: 'Lora', serif; opacity: 0.9;">Prinzip der ansteigenden und kontinuierlichen Belastung</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-text">
+            Trainingsprinzipien sind praktisch orientierte Handlungsorientierungen, die auf den biologischen Gesetzmäßigkeiten der Anpassung (Adaptation) basieren. Sie geben dem Trainingsprozess eine klare Struktur und gewährleisten, dass die gesetzten Trainingsziele effektiv und gesundheitsschonend erreicht werden. Innerhalb der Belastungsprinzipien sind für den langfristigen Leistungsaufbau zwei Konzepte von absolut zentraler Bedeutung.
+        </div>
+
+        <section class="content-section">
+            <!-- Prinzip 1 -->
+            <div class="principle-block">
+                <h2>
+                    <span class="principle-number">1</span>
+                    Prinzip der ansteigenden Belastung
+                </h2>
+                <p class="principle-intro">(Progressive Overload)<br>Dieses Prinzip basiert direkt auf der Funktionszustandsregel und ergibt sich aus der wechselseitigen Beziehung zwischen sportlicher Belastung, der darauf folgenden biologischen Anpassung und der resultierenden Leistungssteigerung.</p>
+
+                <div class="sub-point">
+                    <h3>Die Problematik konstanter Reize</h3>
+                    <p>Bleiben Trainingsbelastungen über einen längeren Zeitraum exakt konstant, verlieren sie durch die fortlaufende Adaptation des Körpers ihre Wirksamkeit für die Leistungssteigerung. Gleichbleibende Belastungen wirken irgendwann nur noch als überschwellig schwache Reize; sie tragen demnach maximal zum Erhalt, nicht aber zur Steigerung der Leistungsfähigkeit bei.</p>
+                </div>
+
+                <div class="sub-point">
+                    <h3>Die methodische Konsequenz</h3>
+                    <p>Um weitere Anpassungen zu erzwingen, müssen die Anforderungen bezüglich der konditionellen, koordinativen, technisch-taktischen oder auch intellektuellen und willensmäßigen Vorbereitung systematisch gesteigert werden.</p>
+                </div>
+
+                <div class="sub-point">
+                    <h3>Parameter der Steigerung</h3>
+                    <p>In der Trainingspraxis erfolgt die Steigerung der Belastung primär über eine Erhöhung des Belastungsumfangs (z. B. mehr Kilometer oder Sätze) und der Belastungsintensität (z. B. höheres Tempo oder mehr Gewicht). Alternativ oder ergänzend kann auch ein Anheben der Anforderungen an die Bewegungskoordination als progressionssteigernder Reiz genutzt werden.</p>
+                </div>
+            </div>
+
+            <!-- Prinzip 2 -->
+            <div class="principle-block">
+                <h2>
+                    <span class="principle-number">2</span>
+                    Prinzip der kontinuierlichen Belastung
+                </h2>
+                <p class="principle-intro">(Reversibilität)<br>Die biologische Adaptation ist kein dauerhafter Zustand. Kontinuierliche Belastungen im Sinne einer regelmäßigen Trainingsfolge stellen die unabdingbare Grundvoraussetzung für einen stetigen Anstieg der sportlichen Leistungsfähigkeit dar.</p>
+
+                <div class="sub-point" style="border-left-color: var(--accent);">
+                    <h3>Das Phänomen der De-Adaptation (Involution)</h3>
+                    <p>Wird die Kontinuität des Trainings unterbrochen (beispielsweise durch Verletzungen, Krankheit oder schlichtweg unregelmäßiges Training), kommt es zwangsläufig zu einem Abfall der Leistungsfähigkeit.</p>
+                </div>
+
+                <div class="sub-point" style="border-left-color: var(--accent);">
+                    <h3>Geschwindigkeit des Leistungsabfalls</h3>
+                    <p>Es gilt der physiologische Grundsatz, dass die Geschwindigkeit des Leistungsabfalls in etwa der Geschwindigkeit des vorherigen Anstiegs entspricht. Das bedeutet konkret: Schnell erworbene Leistungszuwächse (z. B. durch ein kurzes Crash-Training) gehen bei einer Trainingspause sehr schnell wieder verloren, während langfristig und kontinuierlich erworbene Zuwächse deutlich langsamer zurückgehen.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Canvas Doppel-Grafik -->
+        <section class="canvas-section">
+            <h2 class="ui-font">Grafische Analyse der Belastungsprinzipien</h2>
+            
+            <div class="dual-canvas-grid">
+                <!-- Links: Ansteigende Belastung (Treppen) -->
+                <div class="canvas-card">
+                    <h3 class="ui-font">1. Prinzip der ansteigenden Belastung</h3>
+                    <canvas id="canvasStairs" width="500" height="350"></canvas>
+                    <p style="font-size: 0.9rem; color: #64748b; margin-top: 1rem;">Visuelles Stufenmodell: Systematische Erhöhung von Umfang oder Intensität über die Zeit.</p>
+                </div>
+
+                <!-- Rechts: Kontinuierliche Belastung (Kurven) -->
+                <div class="canvas-card">
+                    <h3 class="ui-font">2. Prinzip der kontinuierlichen Belastung</h3>
+                    <canvas id="canvasCurves" width="500" height="350"></canvas>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="color-box" style="background: #3b82f6;"></div> Langjähriges Training
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background: #ef4444;"></div> Crash-Training
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABITUR TRANSFER -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <span class="abi-badge">eA</span>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                In den neuen Abiturprüfungen auf erhöhtem Anforderungsniveau (eA) wird reines Definitionswissen zu den Trainingsprinzipien kaum noch isoliert abgefragt. Der LehrplanPLUS fordert eine strikte Anwendungsorientierung!
+            </p>
+
+            <div class="abi-points">
+                <div class="abi-point">
+                    <h3 class="ui-font">🎯 Szenario-Analyse</h3>
+                    <p>Du musst in der Lage sein, diese Prinzipien auf konkrete sportliche Vorhaben anzuwenden und zu bewerten. Ein Paradebeispiel aus den illustrierenden Abituraufgaben ist die <em>Vorbereitung zweier Freundinnen auf eine mehrtägige Alpenüberquerung mit dem Mountainbike</em>.</p>
+                </div>
+
+                <div class="abi-point">
+                    <h3 class="ui-font">🗣️ Argumentation im Abitur</h3>
+                    <p>Wenn nach Trainingsprinzipien für eine solche Vorbereitung gefragt wird, greifst du exakt auf dieses Wissen zurück: Du argumentierst mit dem <span class="abi-highlight">Prinzip der ansteigenden Belastung</span>, dass die beiden Schülerinnen nicht monatelang nur flache 10-km-Runden fahren dürfen, sondern Distanz (Umfang) und Höhenmeter (Intensität) sukzessive steigern müssen, da die Reize sonst ihre Wirksamkeit verlieren.</p>
+                    <p style="margin-top: 1rem;">Gleichzeitig nutzt du das <span class="abi-highlight">Prinzip der kontinuierlichen Belastung</span>, um zu erklären, dass die Vorbereitung über Monate hinweg regelmäßig erfolgen muss und längere Pausen (z. B. im Winter) unweigerlich zum Leistungsabfall führen, der das Projekt "Alpencross" gefährden würde.</p>
+                </div>
+
+                <div class="abi-point">
+                    <h3 class="ui-font">🔗 Die perfekte Vernetzung</h3>
+                    <p>Denke in Klausuren immer daran, das Prinzip der ansteigenden Belastung mit der <span class="abi-highlight">Reizstufenregel</span> und der <span class="abi-highlight">Funktionszustandsregel</span> (siehe 1.1.2a) zu verknüpfen. Das liefert dir die perfekten biologischen Begründungen für deine Antworten!</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Canvas 1: Treppenmodell (Ansteigende Belastung) ---
+            const canvas1 = document.getElementById('canvasStairs');
+            const ctx1 = canvas1.getContext('2d');
+            
+            function drawStairs() {
+                const w = canvas1.width;
+                const h = canvas1.height;
+                const padding = 40;
+                
+                ctx1.clearRect(0, 0, w, h);
+
+                // Axes
+                ctx1.beginPath();
+                ctx1.moveTo(padding, padding);
+                ctx1.lineTo(padding, h - padding);
+                ctx1.lineTo(w - padding, h - padding);
+                ctx1.strokeStyle = '#94a3b8';
+                ctx1.lineWidth = 2;
+                ctx1.stroke();
+
+                // Labels
+                ctx1.fillStyle = '#64748b';
+                ctx1.font = 'bold 12px Rubik';
+                ctx1.textAlign = 'center';
+                ctx1.fillText('Zeit', w / 2, h - 10);
+                
+                ctx1.save();
+                ctx1.translate(15, h / 2);
+                ctx1.rotate(-Math.PI/2);
+                ctx1.fillText('Belastung (Umfang/Intensität)', 0, 0);
+                ctx1.restore();
+
+                // Draw Stairs
+                const steps = 4;
+                const stepWidth = (w - padding * 2.5) / steps;
+                const stepHeight = (h - padding * 2.5) / steps;
+                
+                let currentX = padding;
+                let currentY = h - padding;
+
+                ctx1.beginPath();
+                ctx1.moveTo(currentX, currentY);
+
+                for (let i = 0; i < steps; i++) {
+                    // Go UP (Steigerung)
+                    currentY -= stepHeight;
+                    ctx1.lineTo(currentX, currentY);
+                    
+                    // Go RIGHT (Anpassungsphase)
+                    currentX += stepWidth;
+                    ctx1.lineTo(currentX, currentY);
+                }
+
+                ctx1.strokeStyle = '#7c3aed'; // Violet
+                ctx1.lineWidth = 4;
+                ctx1.lineJoin = 'round';
+                ctx1.stroke();
+
+                // Draw Trend Arrow
+                ctx1.beginPath();
+                ctx1.moveTo(padding, h - padding);
+                ctx1.lineTo(w - padding - 20, padding + 20);
+                ctx1.strokeStyle = 'rgba(245, 158, 11, 0.4)'; // Amber dashed
+                ctx1.lineWidth = 2;
+                ctx1.setLineDash([5, 5]);
+                ctx1.stroke();
+                ctx1.setLineDash([]);
+                
+                // Arrow head
+                ctx1.beginPath();
+                ctx1.moveTo(w - padding - 20, padding + 20);
+                ctx1.lineTo(w - padding - 35, padding + 25);
+                ctx1.lineTo(w - padding - 25, padding + 35);
+                ctx1.fillStyle = 'rgba(245, 158, 11, 0.6)';
+                ctx1.fill();
+            }
+
+
+            // --- Canvas 2: Kurvenmodell (Kontinuierliche Belastung) ---
+            const canvas2 = document.getElementById('canvasCurves');
+            const ctx2 = canvas2.getContext('2d');
+
+            function drawCurves() {
+                const w = canvas2.width;
+                const h = canvas2.height;
+                const padding = 40;
+                
+                ctx2.clearRect(0, 0, w, h);
+
+                // Axes
+                ctx2.beginPath();
+                ctx2.moveTo(padding, padding);
+                ctx2.lineTo(padding, h - padding);
+                ctx2.lineTo(w - padding, h - padding);
+                ctx2.strokeStyle = '#94a3b8';
+                ctx2.lineWidth = 2;
+                ctx2.stroke();
+
+                // Labels
+                ctx2.fillStyle = '#64748b';
+                ctx2.font = 'bold 12px Rubik';
+                ctx2.textAlign = 'center';
+                ctx2.fillText('Zeit', w / 2, h - 10);
+                
+                ctx2.save();
+                ctx2.translate(15, h / 2);
+                ctx2.rotate(-Math.PI/2);
+                ctx2.fillText('Leistungsniveau', 0, 0);
+                ctx2.restore();
+
+                // Trainingspause Marker (Vertical Line)
+                const pauseX = w * 0.6;
+                ctx2.beginPath();
+                ctx2.moveTo(pauseX, padding);
+                ctx2.lineTo(pauseX, h - padding);
+                ctx2.strokeStyle = '#cbd5e1';
+                ctx2.lineWidth = 2;
+                ctx2.setLineDash([4, 4]);
+                ctx2.stroke();
+                ctx2.setLineDash([]);
+                
+                ctx2.fillStyle = '#334155';
+                ctx2.fillText('Trainingspause', pauseX, padding - 10);
+
+                // Curve 1: Langjähriges Training (Slow rise, slow fall)
+                ctx2.beginPath();
+                ctx2.moveTo(padding, h - padding);
+                // Rise
+                ctx2.quadraticCurveTo(padding + (pauseX - padding) / 2, padding + 50, pauseX, padding + 20);
+                // Fall (Involution)
+                ctx2.quadraticCurveTo(pauseX + (w - pauseX) / 2, padding + 20, w - padding, h - padding - 60);
+                
+                ctx2.strokeStyle = '#3b82f6'; // Blue
+                ctx2.lineWidth = 4;
+                ctx2.stroke();
+
+                // Curve 2: Crash-Training (Steep rise, steep fall)
+                const crashStartX = padding + (pauseX - padding) * 0.7; // Starts later
+                
+                ctx2.beginPath();
+                ctx2.moveTo(crashStartX, h - padding);
+                // Steep Rise
+                ctx2.quadraticCurveTo(crashStartX + (pauseX - crashStartX) / 2, padding + 20, pauseX, padding + 20);
+                // Steep Fall
+                ctx2.quadraticCurveTo(pauseX + 20, h - padding - 10, w - padding, h - padding - 10);
+                
+                ctx2.strokeStyle = '#ef4444'; // Red
+                ctx2.lineWidth = 3;
+                ctx2.stroke();
+            }
+
+            // Animate on scroll (Simple trigger)
+            let drawn = false;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting && !drawn) {
+                        drawn = true;
+                        // For a real smooth effect we could use requestAnimationFrame, 
+                        // but drawing directly is fine for this illustrative task.
+                        drawStairs();
+                        drawCurves();
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            observer.observe(document.querySelector('.canvas-section'));
+
+            // Initial render fallback
+            setTimeout(() => {
+                if(!drawn) {
+                    drawStairs();
+                    drawCurves();
+                    drawn = true;
+                }
+            }, 1000);
+            
+            // Handle Resize
+            window.addEventListener('resize', () => {
+                drawStairs();
+                drawCurves();
+            });
+        });
+    </script>
+</body>
+</html>

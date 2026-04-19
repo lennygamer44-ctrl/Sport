@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.3a Morphologische Bewegungsanalyse: Einteilung azyklischer Bewegungen in Vorbereitungs-, Haupt- und Endphase - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Montserrat:wght@700;800;900&display=swap');
+
+        :root {
+            --bg-color: #f8fafc;
+            --text-main: #334155;
+            --text-light: #64748b;
+            
+            /* Phase Colors */
+            --color-prep: #3b82f6; /* Blue */
+            --color-prep-light: #eff6ff;
+            --color-main: #ef4444; /* Red */
+            --color-main-light: #fef2f2;
+            --color-end: #10b981;  /* Emerald */
+            --color-end-light: #ecfdf5;
+
+            /* Abitur Premium Colors */
+            --abi-bg: #1e1b4b; /* Deep Indigo */
+            --abi-accent: #fbbf24; /* Amber/Gold */
+            --abi-text: #e0e7ff;
+
+            --radius: 16px;
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-lg: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Hero / Header Section */
+        .header-section {
+            background: #ffffff;
+            border-radius: var(--radius);
+            padding: 3.5rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 6px;
+            background: linear-gradient(90deg, var(--color-prep), var(--color-main), var(--color-end));
+        }
+
+        .header-section h1 {
+            font-size: 2.2rem;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+        }
+
+        .header-section .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            max-width: 900px;
+            margin-bottom: 2rem;
+        }
+
+        .info-box {
+            background: #f1f5f9;
+            border-left: 4px solid #94a3b8;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box h3 {
+            color: #475569;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 3-Phasen Grid */
+        .phase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .phase-card {
+            background: #ffffff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .phase-header {
+            padding: 2rem 1.5rem 1.5rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .phase-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .card-prep .phase-header { background: var(--color-prep); }
+        .card-prep .phase-number { color: var(--color-prep); }
+        .card-main .phase-header { background: var(--color-main); }
+        .card-main .phase-number { color: var(--color-main); }
+        .card-end .phase-header { background: var(--color-end); }
+        .card-end .phase-number { color: var(--color-end); }
+
+        .phase-body {
+            padding: 2rem 1.5rem;
+            flex-grow: 1;
+        }
+
+        .phase-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .card-prep .phase-label { color: var(--color-prep); }
+        .card-main .phase-label { color: var(--color-main); }
+        .card-end .phase-label { color: var(--color-end); }
+
+        .phase-function {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .phase-features {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .phase-features strong {
+            color: #334155;
+        }
+
+        /* Canvas Wrapper */
+        .canvas-section {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            background-color: #fafafa;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Abitur Transfer Box */
+        .abitur-box {
+            background: var(--abi-bg);
+            border-radius: var(--radius);
+            padding: 3.5rem;
+            color: var(--abi-text);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-box::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 200px; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.05));
+            pointer-events: none;
+        }
+
+        .abitur-box h2 {
+            color: var(--abi-accent);
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .abitur-intro {
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1.5rem;
+            color: #cbd5e1;
+        }
+
+        .strategy-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .strategy-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--abi-accent);
+            padding: 1.5rem 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .strategy-item h4 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .strategy-item p {
+            font-size: 1rem;
+            color: #94a3b8;
+        }
+
+        .strategy-item .highlight {
+            color: var(--abi-accent);
+            font-weight: bold;
+        }
+
+        @media (max-width: 992px) {
+            .phase-grid { grid-template-columns: 1fr; }
+            .header-section { padding: 2rem; }
+            .abitur-box { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Intro Section -->
+    <header class="header-section">
+        <h1>2.1.3a Morphologische Bewegungsanalyse: Einteilung azyklischer Bewegungen in Vorbereitungs-, Haupt- und Endphase</h1>
+        <p class="subtitle">
+            Die morphologische Bewegungsanalyse (von griech. <em>morphé</em> = Gestalt, Form) beschäftigt sich mit der sichtbaren, äußeren Form sportlicher Bewegungsabläufe. Anstatt (wie die Biomechanik) primär nach physikalischen Kräften zu suchen, wird die Bewegung in zeitliche Abschnitte – die sogenannte <strong>Phasenstruktur</strong> – zerlegt. Der Schwerpunkt im Lehrplan (eA) liegt hier auf den azyklischen Bewegungen.
+        </p>
+
+        <div class="info-box">
+            <h3>Grundlagen: Azyklische Bewegungen</h3>
+            <p>
+                Azyklische Bewegungen zeichnen sich durch ein einmaliges Bewegungsmuster aus, das einen klar definierten Anfang und ein klares Ende besitzt (z. B. ein Sprung, ein Wurf oder ein Schlag). Das Bewegungsziel wird durch eine einzige, in sich geschlossene Aktion erreicht. Im Gegensatz zu zyklischen Bewegungen (Laufen, Radfahren, Schwimmen), bei denen sich Haupt- und Zwischenphasen ständig wiederholen, besitzen azyklische Bewegungen stets eine <strong>strenge dreiphasige Struktur</strong>.
+            </p>
+        </div>
+    </header>
+
+    <!-- The 3 Phases Grid -->
+    <main class="phase-grid">
+        
+        <!-- Phase 1: Vorbereitung -->
+        <article class="phase-card card-prep">
+            <div class="phase-header">
+                <div class="phase-number">1</div>
+                <h2>Vorbereitungsphase</h2>
+            </div>
+            <div class="phase-body">
+                <span class="phase-label">Funktion</span>
+                <p class="phase-function">Die Schaffung optimaler Voraussetzungen für die Hauptphase.</p>
+                
+                <span class="phase-label">Merkmale</span>
+                <p class="phase-features">
+                    Bewegungen in dieser Phase verlaufen häufig <strong>entgegengesetzt zur eigentlichen Bewegungsrichtung</strong> (z. B. das Ausholen des Arms beim Werfen oder das dynamische Absenken des Körperschwerpunkts beim Volleyball-Block). Es werden günstige Gelenkwinkel, Arbeitswege und Muskelvorspannungen für die anschließende Kraftentfaltung generiert.
+                </p>
+            </div>
+        </article>
+
+        <!-- Phase 2: Hauptphase -->
+        <article class="phase-card card-main">
+            <div class="phase-header">
+                <div class="phase-number">2</div>
+                <h2>Hauptphase</h2>
+            </div>
+            <div class="phase-body">
+                <span class="phase-label">Funktion</span>
+                <p class="phase-function">Die Realisierung des eigentlichen Bewegungsziels (Lösung der Bewegungsaufgabe).</p>
+                
+                <span class="phase-label">Merkmale</span>
+                <p class="phase-features">
+                    Hier findet die wesentliche Leistungsentfaltung statt. Die in der Vorbereitung geschaffenen Voraussetzungen werden genutzt, um durch <strong>explosive Streckungen</strong>, <strong>Sukzessivkopplungen</strong> oder <strong>peitschenartige Bewegungen</strong> den Körper oder das Sportgerät maximal zu beschleunigen.
+                </p>
+            </div>
+        </article>
+
+        <!-- Phase 3: Endphase -->
+        <article class="phase-card card-end">
+            <div class="phase-header">
+                <div class="phase-number">3</div>
+                <h2>Endphase</h2>
+            </div>
+            <div class="phase-body">
+                <span class="phase-label">Funktion</span>
+                <p class="phase-function">Das Erreichen eines sicheren Gleichgewichtszustandes und Wiedererlangen einer handlungsbereiten Position.</p>
+                
+                <span class="phase-label">Merkmale</span>
+                <p class="phase-features">
+                    Die hohen kinetischen Energien aus der Hauptphase müssen abgefangen und abgebremst werden. Dies geschieht z. B. durch <strong>Beugung der Gelenke bei einer Landung</strong> oder durch einen Stemmschritt bzw. ein Abfangen nach einem Wurf, um ein Übertreten zu vermeiden.
+                </p>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Visual Timeline (Canvas) -->
+    <section class="canvas-section">
+        <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Die Zeitleiste der Phasenstruktur</h2>
+        <p style="color: var(--text-light); margin-bottom: 2rem;">Beispiel: Der Volleyball-Einerblock</p>
+        
+        <canvas id="timelineCanvas" width="1000" height="350"></canvas>
+    </section>
+
+    <!-- Premium Abitur Transfer -->
+    <section class="abitur-box">
+        <h2><span style="font-size: 2.5rem;">🎯</span> Abitur-Transfer & Praxis</h2>
+        <p class="abitur-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die Einteilung in diese drei Phasen ist das absolute Grundgerüst für fast jede Bildreihen-Analyse in der schriftlichen Abiturprüfung. Das Kultusministerium erwartet hier ein absolut systematisches Vorgehen.
+        </p>
+
+        <div class="strategy-list">
+            
+            <div class="strategy-item">
+                <h4>1. Bilder zuordnen & strukturieren</h4>
+                <p>
+                    Du wirst typischerweise eine nummerierte Bildreihe erhalten (wie z. B. in den Musteraufgaben beim Speer- und Diskuswurf oder beim Einerblock). Deine erste Aufgabe ist es dann, exakt anzugeben, welche Bilder (z.B. Bilder 1-4) zur Vorbereitungsphase, welche zur Hauptphase und welche zur Endphase gehören.
+                </p>
+            </div>
+
+            <div class="strategy-item">
+                <h4>2. Bewegungsverwandtschaften erkennen</h4>
+                <p>
+                    In der Klausur wird oft verlangt, zwei auf den ersten Blick unterschiedliche Disziplinen zu vergleichen. Beim Vergleich von Diskus- und Speerwurf musst du als allererste Gemeinsamkeit feststellen, dass beides <span class="highlight">dreiphasige, azyklische Bewegungen</span> sind, die das gleiche Ziel (maximale Abfluggeschwindigkeit) in der Hauptphase verfolgen.
+                </p>
+            </div>
+
+            <div class="strategy-item">
+                <h4>3. Zweck-Mittel-Relation aufzeigen (WICHTIG!)</h4>
+                <p>
+                    Du musst in der Klausur immer erklären, dass die Phasen nicht isoliert stehen. Die Vorbereitungsphase ist das "Mittel" zum "Zweck" der Hauptphase. Ein Fehler in der Vorbereitungsphase (z. B. keine ausreichende Oberkörperrücklage beim Speerwurf) führt <span class="highlight">zwangsläufig zu einem Defizit in der Hauptphase</span> (zu kurzer Beschleunigungsweg). Betone in deinen Antworten diese zwingende funktionale Abhängigkeit der Phasen voneinander!
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<script>
+    // Canvas Timeline Animation/Drawing
+    const canvas = document.getElementById('timelineCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Colors matching the UI theme
+    const colors = {
+        prep: '#3b82f6',
+        main: '#ef4444',
+        end: '#10b981',
+        textDark: '#1e293b',
+        textLight: '#64748b'
+    };
+
+    function drawTimelineBase() {
+        // Timeline Line
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(50, 250);
+        ctx.lineTo(w - 50, 250);
+        ctx.stroke();
+
+        // Arrowhead
+        ctx.beginPath();
+        ctx.moveTo(w - 50, 250);
+        ctx.lineTo(w - 65, 240);
+        ctx.lineTo(w - 65, 260);
+        ctx.fillStyle = '#cbd5e1';
+        ctx.fill();
+
+        // Net visualization (Subtle in background for context)
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 5]);
+        ctx.beginPath();
+        ctx.moveTo(w/2 + 20, 50);
+        ctx.lineTo(w/2 + 20, 300);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        
+        ctx.font = '12px Inter';
+        ctx.fillStyle = '#94a3b8';
+        ctx.textAlign = 'left';
+        ctx.fillText('Netz', w/2 + 30, 60);
+    }
+
+    function drawDynamicSilhouette(x, y, pose, color) {
+        ctx.fillStyle = color;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 8;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        if (pose === 'prep') {
+            // In-die-Knie-Gehen
+            ctx.beginPath(); ctx.arc(x + 10, y - 90, 16, 0, Math.PI*2); ctx.fill(); // Head
+            ctx.beginPath(); ctx.moveTo(x + 10, y - 70); ctx.lineTo(x + 25, y - 20); ctx.stroke(); // Torso
+            ctx.beginPath(); ctx.moveTo(x + 25, y - 20); ctx.lineTo(x - 5, y + 10); ctx.lineTo(x + 15, y + 50); ctx.stroke(); // Legs
+            ctx.beginPath(); ctx.moveTo(x + 15, y - 60); ctx.lineTo(x - 15, y - 20); ctx.lineTo(x, y + 10); ctx.stroke(); // Arms backwards
+        } 
+        else if (pose === 'main') {
+            // Absprung (Arms up)
+            ctx.beginPath(); ctx.arc(x, y - 160, 16, 0, Math.PI*2); ctx.fill(); // Head
+            ctx.beginPath(); ctx.moveTo(x, y - 140); ctx.lineTo(x - 10, y - 60); ctx.stroke(); // Torso straight up
+            ctx.beginPath(); ctx.moveTo(x - 10, y - 60); ctx.lineTo(x + 10, y - 10); ctx.lineTo(x + 30, y + 40); ctx.stroke(); // Legs (C-Pose)
+            ctx.beginPath(); ctx.moveTo(x, y - 130); ctx.lineTo(x + 30, y - 170); ctx.lineTo(x + 40, y - 200); ctx.stroke(); // Arms stretching over net
+        } 
+        else if (pose === 'end') {
+            // Landung
+            ctx.beginPath(); ctx.arc(x, y - 70, 16, 0, Math.PI*2); ctx.fill(); // Head
+            ctx.beginPath(); ctx.moveTo(x, y - 50); ctx.lineTo(x + 15, y); ctx.stroke(); // Torso
+            ctx.beginPath(); ctx.moveTo(x + 15, y); ctx.lineTo(x - 10, y + 30); ctx.lineTo(x, y + 50); ctx.stroke(); // Legs absorbing impact
+            ctx.beginPath(); ctx.moveTo(x + 5, y - 40); ctx.lineTo(x - 20, y - 10); ctx.lineTo(x - 10, y + 20); ctx.stroke(); // Arms returning
+        }
+    }
+
+    function addLabel(x, title, subtitle, color) {
+        // Node dot
+        ctx.fillStyle = '#fff';
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.arc(x, 250, 8, 0, Math.PI*2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Text
+        ctx.textAlign = 'center';
+        
+        ctx.font = 'bold 16px Montserrat';
+        ctx.fillStyle = color;
+        ctx.fillText(title, x, 285);
+
+        ctx.font = 'italic 13px Inter';
+        ctx.fillStyle = colors.textLight;
+        ctx.fillText(subtitle, x, 310);
+    }
+
+    // Execution
+    drawTimelineBase();
+
+    // 1. Vorbereitung
+    drawDynamicSilhouette(200, 200, 'prep', colors.prep);
+    addLabel(200, 'VORBEREITUNGSPHASE', 'Schaffung optimaler Voraussetzungen', colors.prep);
+
+    // 2. Hauptphase
+    drawDynamicSilhouette(500, 200, 'main', colors.main);
+    addLabel(500, 'HAUPTPHASE', 'Realisierung des Bewegungsziels', colors.main);
+
+    // 3. Endphase
+    drawDynamicSilhouette(800, 200, 'end', colors.end);
+    addLabel(800, 'ENDPHASE', 'Erreichen eines Gleichgewichtszustandes', colors.end);
+
+</script>
+</body>
+</html>

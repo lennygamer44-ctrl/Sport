@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Reine Schnelligkeitsformen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Rajdhani', 'sans-serif'],
+                    },
+                    colors: {
+                        neuro: {
+                            900: '#0a0f1d',
+                            800: '#111827',
+                            700: '#1e293b',
+                        },
+                        zap: {
+                            DEFAULT: '#eab308', // Neon Yellow
+                            light: '#fef08a',
+                            glow: '#ca8a04',
+                        },
+                        electric: {
+                            DEFAULT: '#0ea5e9', // Electric Blue
+                            light: '#7dd3fc',
+                        },
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(234, 179, 8, 0.3)',
+                        'neon-blue': '0 0 20px rgba(14, 165, 233, 0.3)',
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0f1d;
+            color: #e2e8f0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Glassmorphism Cards */
+        .neuro-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .neuro-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.2);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        /* Table Styling */
+        .speed-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+        }
+        .speed-table th {
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 2px solid #eab308;
+            padding: 1.25rem 1rem;
+        }
+        .speed-table td {
+            background: rgba(30, 41, 59, 0.4);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 1.25rem 1rem;
+            transition: background 0.2s;
+        }
+        .speed-table tr:hover td {
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        /* Canvas Wrapper */
+        .simulation-wrapper {
+            background: radial-gradient(circle at center, #1e293b 0%, #0a0f1d 100%);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(234, 179, 8, 0.2);
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5), 0 0 30px rgba(234, 179, 8, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0f1d; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #eab308; }
+
+        /* Abitur Premium Highlight */
+        .abitur-gold-box {
+            background: linear-gradient(135deg, #1f2937 0%, #000000 100%);
+            border: 1px solid #f59e0b;
+            box-shadow: 0 0 40px rgba(245, 158, 11, 0.15);
+            position: relative;
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 15px rgba(234, 179, 8, 0.5);
+        }
+    </style>
+</head>
+<body class="font-sans leading-relaxed selection:bg-zap selection:text-neuro-900">
+
+    <!-- Header -->
+    <header class="bg-neuro-800/80 backdrop-blur-md border-b border-white/5 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <span class="bg-zap text-neuro-900 font-bold px-3 py-1 rounded text-sm tracking-widest font-display">1.6.1a</span>
+                <h1 class="text-xl font-display font-bold text-white hidden sm:block tracking-wide uppercase">Reine Schnelligkeitsformen</h1>
+            </div>
+            <div class="text-sm font-semibold text-electric uppercase tracking-widest flex items-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path></svg>
+                ZNS & Speed
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 space-y-20">
+
+        <!-- Intro -->
+        <section class="max-w-4xl relative">
+            <div class="absolute -left-10 top-0 w-20 h-20 bg-zap rounded-full blur-[80px] opacity-30 pointer-events-none"></div>
+            
+            <h2 class="text-4xl md:text-6xl font-display font-black text-white mb-6 uppercase tracking-tight leading-none">
+                Reine <span class="text-zap text-glow">Schnelligkeitsformen</span>
+            </h2>
+            <p class="text-xl text-slate-300 leading-relaxed font-light mb-6">
+                Die Schnelligkeit nimmt im System der motorischen Hauptbeanspruchungsformen eine Sonderstellung ein, da sie keine rein energetisch determinierte Fähigkeit (wie die Ausdauer) ist, sondern extrem stark von informationsorientierten, steuernden Prozessen des <strong class="text-electric">Zentralnervensystems (ZNS)</strong> abhängt. 
+            </p>
+            <div class="bg-neuro-800 border-l-4 border-electric p-6 rounded-r-lg shadow-glass">
+                <p class="text-slate-200">
+                    Man definiert sie als die psychophysische Leistungsvoraussetzung, motorische Aktionen in kürzester Zeit zu vollziehen. Um die Schnelligkeit trainingsmethodisch greifen zu können, wird sie zunächst in ihre "reinen" Erscheinungsformen untergliedert, die unbelastet von großen Widerständen oder Ermüdung auftreten.
+                </p>
+            </div>
+        </section>
+
+        <!-- The 3 Speed Types -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Type 1: Reaction -->
+            <article class="neuro-card rounded-2xl p-8 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <svg class="w-24 h-24 text-electric" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path></svg>
+                </div>
+                <div class="flex items-center gap-3 mb-6 relative z-10">
+                    <div class="bg-electric/20 text-electric p-2 rounded-lg">
+                        <span class="font-display font-bold text-xl">1</span>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-white uppercase">Reaktionsschnelligkeit</h3>
+                </div>
+                <div class="space-y-4 relative z-10 text-sm">
+                    <p class="text-slate-300 font-medium border-b border-white/10 pb-4">
+                        Die Fähigkeit, auf einen Reiz (optisch, akustisch oder taktil) in kürzester Zeit mit einer adäquaten, zielgerichteten motorischen Aktion zu reagieren.
+                    </p>
+                    <div>
+                        <strong class="text-electric block mb-2 uppercase tracking-wider text-xs">Physiologische Grundlagen</strong>
+                        <p class="text-slate-400 mb-2">Primär eine informationsorientierte Fähigkeit. Die Reaktionszeit setzt sich aus fünf Teilphasen zusammen:</p>
+                        <ol class="list-decimal list-inside text-slate-400 space-y-1 ml-1">
+                            <li>Reizaufnahme (Rezeptor/Analysator)</li>
+                            <li>Afferente Reizleitung zum ZNS</li>
+                            <li>Zentrale Reizverarbeitung (kognitiv)</li>
+                            <li>Efferente Reizleitung zur Muskulatur</li>
+                            <li>Latenzzeit des Muskels</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <strong class="text-zap block mb-1 uppercase tracking-wider text-xs mt-4">Sportpraxis</strong>
+                        <p class="text-slate-400">Leistungsbestimmend bei Sprintdisziplinen mit Startsignal (100-m, 110-m-Hürden) sowie Rückschlagspielen (Tennisaufschlag).</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Type 2: Acyclic -->
+            <article class="neuro-card rounded-2xl p-8 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <svg class="w-24 h-24 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div class="flex items-center gap-3 mb-6 relative z-10">
+                    <div class="bg-rose-500/20 text-rose-400 p-2 rounded-lg">
+                        <span class="font-display font-bold text-xl">2</span>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-white uppercase leading-tight">Aktionsschnelligkeit <br><span class="text-sm text-slate-400 normal-case">(Azyklische Schnelligkeit)</span></h3>
+                </div>
+                <div class="space-y-4 relative z-10 text-sm">
+                    <p class="text-slate-300 font-medium border-b border-white/10 pb-4">
+                        Fähigkeit, ein <strong>einmaliges, in sich abgeschlossenes Bewegungsmuster</strong> (ohne Wiederholung) mit maximaler Geschwindigkeit gegen geringe Widerstände auszuführen.
+                    </p>
+                    <div>
+                        <strong class="text-rose-400 block mb-2 uppercase tracking-wider text-xs">Physiologie & Biomechanik</strong>
+                        <p class="text-slate-400">Da das Bewegungsmuster azyklisch ist, wird die Dauer primär bestimmt durch:</p>
+                        <ul class="list-disc list-inside text-slate-400 space-y-1 ml-1">
+                            <li>Anteil schnellzuckender FT-Fasern</li>
+                            <li>Qualität der intramuskulären Koordination</li>
+                            <li>Initiale Muskelkontraktionsgeschwindigkeit</li>
+                            <li>Vordehnung (Dehnungs-Verkürzungs-Zyklus)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="text-zap block mb-1 uppercase tracking-wider text-xs mt-4">Sportpraxis</strong>
+                        <p class="text-slate-400">Leichtathletische Würfe/Stöße (Speer, Kugel, Diskus), isolierter Angriffsschlag im Volleyball, Karateschlag.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Type 3: Cyclic -->
+            <article class="neuro-card rounded-2xl p-8 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <svg class="w-24 h-24 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </div>
+                <div class="flex items-center gap-3 mb-6 relative z-10">
+                    <div class="bg-emerald-500/20 text-emerald-400 p-2 rounded-lg">
+                        <span class="font-display font-bold text-xl">3</span>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-white uppercase leading-tight">Frequenzschnelligkeit <br><span class="text-sm text-slate-400 normal-case">(Zyklische Schnelligkeit)</span></h3>
+                </div>
+                <div class="space-y-4 relative z-10 text-sm">
+                    <p class="text-slate-300 font-medium border-b border-white/10 pb-4">
+                        Fähigkeit, sich wiederholende (zyklische) Bewegungsformen in einer Zeiteinheit mit maximaler Geschwindigkeit, also <strong>höchster Frequenz</strong>, auszuführen.
+                    </p>
+                    <div>
+                        <strong class="text-emerald-400 block mb-2 uppercase tracking-wider text-xs">Physiologische Grundlagen</strong>
+                        <p class="text-slate-400">Limitierender Faktor: Die neuronale Wechselinnervation. Das ZNS muss Agonist und Antagonist in extrem kurzen Zeitabständen im ständigen Wechsel aktivieren und inhibieren (intermuskuläre Koordination). Je schneller das Gehirn umschaltet, desto höher die Frequenz.</p>
+                    </div>
+                    <div>
+                        <strong class="text-zap block mb-1 uppercase tracking-wider text-xs mt-4">Sportpraxis</strong>
+                        <p class="text-slate-400">Sprintdisziplinen (Beschleunigungs- & Erhaltungsphase), Tapping, maximale Trittfrequenz beim Bahnradsprint.</p>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Visual Canvas Model & Table Wrapper -->
+        <section class="space-y-12">
+            
+            <div class="flex items-center gap-4 border-b border-white/10 pb-4">
+                <h3 class="text-3xl font-display font-bold text-white">Systematischer Vergleich & Visualisierung</h3>
+            </div>
+
+            <!-- Dashboard Canvas for Speed Types -->
+            <div class="simulation-wrapper p-6 md:p-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-1">Echtzeit-Simulation: ZNS & Motorik</h4>
+                        <p class="text-sm text-slate-400">Visuelle Repräsentation der drei Schnelligkeitsformen</p>
+                    </div>
+                    <div class="flex gap-4 text-xs font-bold font-display uppercase tracking-widest mt-4 md:mt-0">
+                        <div class="flex items-center gap-2"><div class="w-3 h-3 bg-electric shadow-neon-blue rounded-full"></div> Reaktion</div>
+                        <div class="flex items-center gap-2"><div class="w-3 h-3 bg-rose-500 rounded-full"></div> Azyklisch</div>
+                        <div class="flex items-center gap-2"><div class="w-3 h-3 bg-emerald-500 rounded-full"></div> Zyklisch</div>
+                    </div>
+                </div>
+                
+                <div class="relative w-full h-[300px] md:h-[350px] bg-black/40 rounded-xl border border-white/5 overflow-hidden">
+                    <canvas id="speedSimulationCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                </div>
+            </div>
+
+            <!-- Structured Comparison Table -->
+            <div class="bg-neuro-800 rounded-2xl border border-white/10 overflow-hidden shadow-glass">
+                <div class="overflow-x-auto">
+                    <table class="speed-table text-left">
+                        <thead>
+                            <tr>
+                                <th class="text-zap font-display text-lg uppercase tracking-wider w-1/4">Merkmal</th>
+                                <th class="text-white font-display text-lg uppercase tracking-wider w-1/4">1. Reaktionsschnelligkeit</th>
+                                <th class="text-white font-display text-lg uppercase tracking-wider w-1/4">2. Aktionsschnelligkeit <span class="block text-xs text-slate-400 normal-case">(Azyklisch)</span></th>
+                                <th class="text-white font-display text-lg uppercase tracking-wider w-1/4">3. Frequenzschnelligkeit <span class="block text-xs text-slate-400 normal-case">(Zyklisch)</span></th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm text-slate-300">
+                            <tr>
+                                <td class="font-bold text-white bg-neuro-900/50">Definition</td>
+                                <td>Schnellstmögliche, motorische Antwort auf einen Reiz.</td>
+                                <td>Maximal schnelle Ausführung einer <em>einmaligen</em>, abgeschlossenen Bewegung.</td>
+                                <td>Maximal schnelle Ausführung <em>wiederkehrender</em> (zyklischer) Bewegungen.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-white bg-neuro-900/50">Physiologischer Hauptfaktor<br><span class="text-xs font-normal text-slate-500">(ZNS vs. Muskelstruktur)</span></td>
+                                <td class="text-electric font-medium">Primär ZNS<br><span class="text-xs text-slate-400 block mt-1">Reizverarbeitung (5 Phasen: Rezeptor bis Latenzzeit)</span></td>
+                                <td class="text-rose-400 font-medium">Primär Muskelstruktur<br><span class="text-xs text-slate-400 block mt-1">FT-Fasern, intramuskuläre Koordination, DVZ</span></td>
+                                <td class="text-emerald-400 font-medium">ZNS & Muskel<br><span class="text-xs text-slate-400 block mt-1">Neuronale Wechselinnervation (intermuskuläre Koordination)</span></td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-white border-b-0 bg-neuro-900/50">Typische LA-Disziplin</td>
+                                <td class="border-b-0">Startschuss beim 100-m / 110-m-Hürdenlauf</td>
+                                <td class="border-b-0">Kugelstoßen, Speerwurf, Diskuswurf</td>
+                                <td class="border-b-0">Schrittfrequenz im 100-m-Sprint</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Section 4: Abitur-Transfer (Premium Highlight) -->
+        <section class="abitur-gold-box rounded-3xl p-8 md:p-12 mt-20 overflow-hidden">
+            <!-- Decorative Hexagons -->
+            <div class="absolute right-0 top-0 opacity-10 pointer-events-none transform translate-x-1/3 -translate-y-1/4">
+                <svg width="400" height="400" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="0.5">
+                    <polygon points="12 2 22 8 22 16 12 22 2 16 2 8"></polygon>
+                    <polygon points="12 6 18 9.5 18 14.5 12 18 6 14.5 6 9.5"></polygon>
+                </svg>
+            </div>
+
+            <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="bg-gradient-to-br from-yellow-400 to-yellow-600 text-black p-4 rounded-xl shadow-neon">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-600 tracking-tight">Abitur-Transfer & Praxis</h2>
+                </div>
+                
+                <p class="text-lg text-slate-300 font-medium mb-8 max-w-4xl leading-relaxed">
+                    Im G9-Abitur (erhöhtes Anforderungsniveau) wird reines Definitionswissen zur Schnelligkeit häufig mit konkreten Wettkampfszenarien, wie dem leichtathletischen <strong class="text-zap">Zehnkampf</strong>, verknüpft.
+                </p>
+
+                <div class="bg-black/40 backdrop-blur border border-yellow-500/30 rounded-2xl p-6 md:p-8 shadow-inner">
+                    <h4 class="text-2xl font-bold text-white mb-6 flex items-center gap-3 border-b border-white/10 pb-4">
+                        Der Abitur-Schlüssel: Präzises Filetieren
+                    </h4>
+                    
+                    <p class="text-slate-300 mb-6">
+                        Eine typische Prüfungsaufgabe (siehe Illustrierende Prüfungsaufgaben) verlangt, dass du die verschiedenen Arten der motorischen Schnelligkeit beschreibst und diese begründet den passenden Disziplinen zuordnest. Es reicht hier nicht, "Sprint" und "Schnelligkeit" gleichzusetzen. Du musst präzise differenzieren:
+                    </p>
+
+                    <!-- Breakdown Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-neuro-900 p-5 rounded-xl border border-electric/30">
+                            <div class="text-electric font-bold uppercase text-xs tracking-wider mb-2">Phase 1: Der Start</div>
+                            <div class="text-white font-bold mb-1">Startschuss (110m Hürden)</div>
+                            <div class="text-slate-400 text-sm">Erfordert die <strong class="text-electric">Reaktionsschnelligkeit</strong>.</div>
+                            <div class="mt-4 pt-3 border-t border-white/10 text-xs text-slate-500">
+                                <strong>Training:</strong> Starttraining auf verschiedene optische/akustische Signale.
+                            </div>
+                        </div>
+
+                        <div class="bg-neuro-900 p-5 rounded-xl border border-emerald-500/30">
+                            <div class="text-emerald-400 font-bold uppercase text-xs tracking-wider mb-2">Phase 2: Der Lauf</div>
+                            <div class="text-white font-bold mb-1">Beschleunigung zw. Hürden</div>
+                            <div class="text-slate-400 text-sm">Stützt sich auf die <strong class="text-emerald-400">zyklische Frequenzschnelligkeit</strong>.</div>
+                            <div class="mt-4 pt-3 border-t border-white/10 text-xs text-slate-500">
+                                <strong>Training:</strong> Supramaximale Frequenzläufe (z. B. Bergabläufe).
+                            </div>
+                        </div>
+
+                        <div class="bg-neuro-900 p-5 rounded-xl border border-rose-500/30">
+                            <div class="text-rose-400 font-bold uppercase text-xs tracking-wider mb-2">Andere Disziplin</div>
+                            <div class="text-white font-bold mb-1">Kugelstoß / Wurf</div>
+                            <div class="text-slate-400 text-sm">Paradebeispiel für azyklische <strong class="text-rose-400">Aktionsschnelligkeit</strong> (einmaliges Bewegungsmuster maximal schnell).</div>
+                            <div class="mt-4 pt-3 border-t border-white/10 text-xs text-slate-500">
+                                <strong>Training:</strong> Medizinballwürfe zur Optimierung der explosiven Aktionsschnelligkeit.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-500/10 border-l-4 border-yellow-500 p-4 rounded-r-lg text-yellow-100 text-sm">
+                        <strong class="text-yellow-400 block mb-1">Prüfungs-Hack: Konsequenzen ableiten</strong>
+                        Zudem wird von dir erwartet, dass du aus dieser Zuordnung direkte Konsequenzen für das Training ableiten kannst. Ein Zehnkämpfer kann nicht einfach "schnell laufen" üben; er benötigt differenzierte Trainingsinhalte für jede der drei Unterkategorien!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-black text-slate-500 py-10 text-center text-sm mt-16 border-t border-white/5">
+        <p class="font-bold text-slate-400 tracking-widest mb-2 font-display uppercase">Abiturwissen Sport (G9, eA)</p>
+        <p>Lernbereich 1.6 Schnelligkeitstraining</p>
+    </footer>
+
+    <!-- Retina-Ready Canvas Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('speedSimulationCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let time = 0;
+
+            // State for Reaction Animation
+            let reactionState = 0; // 0: waiting, 1: reacting
+            let reactionTimer = 0;
+            let reactionDotX = 0;
+
+            // State for Acyclic Animation
+            let acyclicState = 0; // 0: loading, 1: exploding
+            let acyclicTimer = 0;
+            let explosionParticles = [];
+
+            function drawRoundedRect(ctx, x, y, width, height, radius) {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width - radius, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+                ctx.lineTo(x + width, y + height - radius);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                ctx.lineTo(x + radius, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+                ctx.closePath();
+            }
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time++;
+
+                // Divide canvas into 3 horizontal lanes
+                const laneHeight = h / 3;
+
+                // --- LANE 1: REACTION SPEED (Electric Blue) ---
+                const lane1Y = laneHeight / 2;
+                
+                // Track
+                ctx.fillStyle = 'rgba(14, 165, 233, 0.1)';
+                drawRoundedRect(ctx, 50, lane1Y - 20, w - 100, 40, 20);
+                ctx.fill();
+
+                // Logic: Signal appears randomly, then dot shoots across
+                reactionTimer++;
+                if (reactionState === 0 && reactionTimer > 100) { // Wait 100 frames
+                    if (Math.random() > 0.95) { // Random trigger
+                        reactionState = 1;
+                        reactionTimer = 0;
+                        reactionDotX = 60;
+                    }
+                }
+
+                if (reactionState === 0) {
+                    // Waiting for signal - draw generic receptor icon
+                    ctx.fillStyle = '#1e293b';
+                    ctx.beginPath(); ctx.arc(70, lane1Y, 15, 0, Math.PI*2); ctx.fill();
+                    ctx.strokeStyle = '#0ea5e9'; ctx.lineWidth=2; ctx.stroke();
+                } else if (reactionState === 1) {
+                    // Signal active! Move dot fast
+                    reactionDotX += 15; // Fast speed
+                    
+                    // Draw trail
+                    ctx.beginPath();
+                    ctx.moveTo(60, lane1Y);
+                    ctx.lineTo(reactionDotX, lane1Y);
+                    ctx.strokeStyle = 'rgba(14, 165, 233, 0.5)';
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+
+                    // Draw moving dot
+                    ctx.shadowColor = '#0ea5e9';
+                    ctx.shadowBlur = 15;
+                    ctx.fillStyle = '#0ea5e9';
+                    ctx.beginPath(); ctx.arc(reactionDotX, lane1Y, 8, 0, Math.PI*2); ctx.fill();
+                    ctx.shadowBlur = 0;
+
+                    if (reactionDotX > w - 60) {
+                        reactionState = 0; // reset
+                        reactionTimer = 0;
+                    }
+                }
+
+                ctx.fillStyle = '#7dd3fc';
+                ctx.font = 'bold 12px "Rajdhani"';
+                ctx.textAlign = 'left';
+                ctx.fillText('1. REAKTION', 60, lane1Y - 30);
+
+
+                // --- LANE 2: ACYCLIC SPEED (Rose/Red) ---
+                const lane2Y = laneHeight + (laneHeight / 2);
+                
+                ctx.fillStyle = '#fca5a5';
+                ctx.fillText('2. AZYKLISCH (Einmalig)', 60, lane2Y - 30);
+
+                // Logic: Load up energy (Vordehnung) then explode once
+                acyclicTimer++;
+                if (acyclicState === 0) {
+                    // Loading phase
+                    const scale = 10 + (acyclicTimer % 60) * 0.2; // pulse up
+                    ctx.fillStyle = `rgba(244, 63, 94, ${scale/25})`;
+                    ctx.beginPath(); ctx.arc(w/2, lane2Y, scale, 0, Math.PI*2); ctx.fill();
+                    
+                    if (acyclicTimer > 120) {
+                        acyclicState = 1;
+                        acyclicTimer = 0;
+                        explosionParticles = [];
+                        for(let i=0; i<20; i++) {
+                            explosionParticles.push({
+                                x: w/2, y: lane2Y,
+                                vx: (Math.random() - 0.5) * 20, // Explosive velocity
+                                vy: (Math.random() - 0.5) * 20,
+                                alpha: 1
+                            });
+                        }
+                    }
+                } else {
+                    // Exploding phase
+                    let alive = false;
+                    explosionParticles.forEach(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.alpha -= 0.05; // fade fast
+                        if (p.alpha > 0) {
+                            alive = true;
+                            ctx.shadowColor = '#f43f5e';
+                            ctx.shadowBlur = 10;
+                            ctx.fillStyle = `rgba(244, 63, 94, ${p.alpha})`;
+                            ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI*2); ctx.fill();
+                            ctx.shadowBlur = 0;
+                        }
+                    });
+                    if (!alive) {
+                        acyclicState = 0;
+                        acyclicTimer = 0;
+                    }
+                }
+
+
+                // --- LANE 3: CYCLIC SPEED (Emerald/Green) ---
+                const lane3Y = (laneHeight * 2) + (laneHeight / 2);
+                
+                ctx.fillStyle = '#6ee7b7';
+                ctx.fillText('3. ZYKLISCH (Frequenz)', 60, lane3Y - 30);
+
+                // Logic: Continuous sine wave / infinite loop of particles
+                // Agonist / Antagonist switching
+                const cycleSpeed = 0.2; // High frequency
+                
+                // Draw path
+                ctx.beginPath();
+                for (let x = 60; x < w - 60; x += 5) {
+                    const y = lane3Y + Math.sin(x * 0.05) * 20;
+                    if (x === 60) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = 'rgba(16, 185, 129, 0.2)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Draw moving dots on wave
+                ctx.shadowColor = '#10b981';
+                ctx.shadowBlur = 10;
+                ctx.fillStyle = '#10b981';
+                for (let i = 0; i < 5; i++) { // 5 dots looping
+                    const offset = i * ((w - 120) / 5);
+                    let dotX = 60 + ((time * 5 + offset) % (w - 120));
+                    let dotY = lane3Y + Math.sin(dotX * 0.05) * 20;
+                    
+                    ctx.beginPath();
+                    ctx.arc(dotX, dotY, 6, 0, Math.PI*2);
+                    ctx.fill();
+                }
+                ctx.shadowBlur = 0;
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

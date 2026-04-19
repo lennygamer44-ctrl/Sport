@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.1.2 Gesundheitsmodelle: Das Salutogenese-Modell nach Antonovsky und seine Anwendung im Sport - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Organic Flow Palette */
+            --bg-body: #f0fdfa; /* Light mint/teal background */
+            --text-main: #334155;
+            --text-muted: #64748b;
+            
+            --ocean-deep: #0f766e;
+            --ocean-light: #ccfbf1;
+            --wave-blue: #0284c7;
+            
+            --disease-red: #ef4444;
+            --health-green: #10b981;
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Exam Box */
+            --abi-bg: #064e3b; /* Very dark green/teal */
+            --abi-gold: #fde047;
+            --abi-text: #f8fafc;
+
+            --radius-soft: 24px;
+            --radius-asym: 30px 5px 30px 5px; /* Organic asymmetry */
+            
+            --shadow-float: 0 10px 40px -10px rgba(15, 118, 110, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.1rem;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(204, 251, 241, 0.5) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(224, 242, 254, 0.6) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.2;
+            color: var(--ocean-deep);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER SECTION --- */
+        .doc-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-soft);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-float);
+            margin-bottom: 4rem;
+            position: relative;
+            border-top: 6px solid var(--ocean-deep);
+        }
+
+        .doc-header::before {
+            content: '🌊';
+            position: absolute;
+            top: 20px; right: 30px;
+            font-size: 4rem;
+            opacity: 0.1;
+        }
+
+        .doc-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .doc-header .intro-lead {
+            font-size: 1.15rem;
+            color: var(--text-main);
+        }
+
+        .highlight-bold {
+            color: var(--wave-blue);
+            font-weight: 700;
+        }
+
+        /* --- CONTENT SECTIONS --- */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--ocean-deep);
+        }
+
+        .content-box {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: var(--radius-asym);
+            box-shadow: var(--shadow-float);
+            border-left: 4px solid var(--ocean-light);
+            margin-bottom: 2rem;
+        }
+
+        .content-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--wave-blue);
+        }
+
+        /* Lists */
+        .resource-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .resource-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .resource-list li::before {
+            content: '🛡️';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 1rem;
+        }
+
+        /* --- SOC CARDS (Kohärenzgefühl) --- */
+        .soc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .soc-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-soft);
+            padding: 2rem;
+            box-shadow: var(--shadow-float);
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .soc-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-verstehen { border-color: #3b82f6; }
+        .card-handhaben { border-color: #10b981; }
+        .card-sinn { border-color: #f59e0b; }
+
+        .soc-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .soc-card .eng {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .soc-card .example {
+            margin-top: 1.5rem;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            font-style: italic;
+            font-size: 0.95rem;
+            border-left: 3px solid #cbd5e1;
+        }
+
+        /* --- CANVAS SECTION --- */
+        .canvas-wrapper {
+            background: #ffffff;
+            border-radius: var(--radius-soft);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-float);
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .canvas-wrapper h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-wrapper p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+
+        /* --- ABITUR TRANSFER --- */
+        .abitur-board {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-soft);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-top: 8px solid var(--abi-gold);
+            position: relative;
+        }
+
+        .abitur-board h2 {
+            color: var(--abi-gold);
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #a7f3d0;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #047857;
+            padding-bottom: 1.5rem;
+        }
+
+        .tactic-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--abi-gold);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .tactic-block h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .tactic-block p {
+            color: #d1fae5;
+            margin-bottom: 1rem;
+        }
+        
+        .tactic-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .quote-box {
+            background: rgba(253, 224, 71, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px dashed var(--abi-gold);
+            margin-bottom: 1rem;
+        }
+
+        .exam-highlight {
+            color: var(--abi-gold);
+            font-weight: 700;
+        }
+
+        .pro-tip {
+            background: #065f46;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+            border: 1px solid #10b981;
+        }
+
+        .pro-tip h4 {
+            color: #6ee7b7;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 900px) {
+            .doc-header, .abitur-board { padding: 2rem; }
+            .doc-header h1 { font-size: 2.2rem; }
+            .section-title { font-size: 1.8rem; }
+            .soc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>3.1.2 Gesundheitsmodelle: Das Salutogenese-Modell nach Antonovsky und seine Anwendung im Sport</h1>
+        <p class="intro-lead">
+            In der traditionellen westlichen Medizin dominiert die <span class="highlight-bold">Pathogenese</span>. Sie fragt: <em>„Was macht den Menschen krank?“</em> und betrachtet Gesundheit als einen binären Zustand (entweder man ist 100 % gesund oder man ist krank). 
+        </p>
+        <p class="intro-lead" style="margin-top: 1rem;">
+            Der Medizinsoziologe Aaron Antonovsky entwarf in den 1970er Jahren ein gegensätzliches Konzept: Die <span class="highlight-bold">Salutogenese</span> (von lat. salus = Gesundheit, Heil und griech. genesis = Entstehung). Sie fragt: <strong>„Was hält den Menschen trotz extremster Belastungen und Stressoren gesund?“</strong>
+        </p>
+    </header>
+
+    <!-- 1. HED-Kontinuum -->
+    <section>
+        <h2 class="section-title">1. Das Gesundheits-Krankheits-Kontinuum (HED-Kontinuum)</h2>
+        <div class="content-box">
+            <p>Nach Antonovsky gibt es keine absolute Gesundheit oder Krankheit. Jeder Mensch bewegt sich zeitlebens auf einem Kontinuum zwischen den beiden theoretischen, nie ganz erreichbaren Extremen <strong>völliger Gesundheit (Health-ease)</strong> und <strong>völliger Krankheit (Dis-ease)</strong>.</p>
+            <p style="margin-top: 1rem;">
+                Durch Stressoren (Krankheitserreger, Leistungsdruck, Schicksalsschläge) werden wir ständig in Richtung "Krankheit" gedrückt. Ob wir dem standhalten und uns in Richtung "Gesundheit" bewegen, hängt von unseren Ressourcen ab.
+            </p>
+        </div>
+    </section>
+
+    <!-- Canvas Graphic -->
+    <section class="canvas-wrapper">
+        <h3>Der Schwimmer im Fluss des Lebens</h3>
+        <p>Visuelle Darstellung des Salutogenese-Modells: Kampf gegen Stressoren durch SOC-Ressourcen.</p>
+        <canvas id="salutogenesisCanvas" width="950" height="350"></canvas>
+    </section>
+
+    <!-- 2. Widerstandsressourcen -->
+    <section>
+        <h2 class="section-title">2. Allgemeine Widerstandsressourcen</h2>
+        <p style="margin-bottom: 1rem;">Widerstandsressourcen sind Faktoren, die einer Person helfen, Stressoren und Spannungszustände erfolgreich zu bewältigen, anstatt durch sie krank zu werden. Man unterscheidet:</p>
+        
+        <ul class="resource-list">
+            <li><strong>Körperliche (physische) Ressourcen:</strong> Ein starkes Immunsystem, physische Konstitution, genetische Anlagen.</li>
+            <li><strong>Psychosoziale und materielle Ressourcen:</strong> Soziales Netzwerk (Familie/Freunde), Intelligenz, Coping-Strategien (Stressbewältigung), finanzielle Stabilität, Bildung.</li>
+        </ul>
+    </section>
+
+    <!-- 3. Kohärenzgefühl (SOC) -->
+    <section>
+        <h2 class="section-title">3. Das Kohärenzgefühl (Sense of Coherence - SOC)</h2>
+        <p>Das Herzstück des Salutogenese-Modells ist das Kohärenzgefühl. Es ist eine tief verankerte, individuelle Grundhaltung zur Welt, die darüber entscheidet, wie gut ein Mensch seine Widerstandsressourcen nutzen kann. Ein starkes SOC setzt sich aus drei Komponenten zusammen:</p>
+
+        <div class="soc-grid">
+            <article class="soc-card card-verstehen">
+                <h4>1. Verstehbarkeit</h4>
+                <span class="eng">Comprehensibility</span>
+                <p>Die kognitive Fähigkeit, Reize und Ereignisse (auch Rückschläge) als strukturiert, vorhersehbar und erklärbar zu verarbeiten.</p>
+                <div class="example">Beispiel: "Ich verstehe, warum ich diese Verletzung habe."</div>
+            </article>
+
+            <article class="soc-card card-handhaben">
+                <h4>2. Handhabbarkeit</h4>
+                <span class="eng">Manageability</span>
+                <p>Die Überzeugung, dass man über geeignete Ressourcen verfügt, preisen, um den auftretenden Anforderungen begegnen zu können.</p>
+                <div class="example">Beispiel: "Ich weiß, dass ich durch gezielte Reha wieder fit werden kann."</div>
+            </article>
+
+            <article class="soc-card card-sinn">
+                <h4>3. Sinnhaftigkeit</h4>
+                <span class="eng">Meaningfulness</span>
+                <p>Die motivationale Komponente. Der Glaube daran, dass Herausforderungen es wert sind, dass man sich anstrengt und sich ihnen stellt.</p>
+                <div class="example">Beispiel: "Ich kämpfe mich zurück, weil mir mein Sportverein alles bedeutet."</div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 4. Anwendung & 5. Weitere Modelle -->
+    <section>
+        <h2 class="section-title">4. Anwendung: Sport als gesundheitsfördernde Ressource</h2>
+        <div class="content-box" style="border-left-color: var(--wave-blue);">
+            <p>Der Sport nimmt in der Salutogenese eine herausragende Doppelrolle ein:</p>
+            <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                <li style="margin-bottom: 1rem;"><strong>Sport stärkt Widerstandsressourcen:</strong> Auf physischer Ebene baut regelmäßiges Training (z.B. Ausdauertraining) das Herz-Kreislauf-System und das Immunsystem auf. Auf psychosozialer Ebene baut der Vereinssport ein soziales Unterstützungsnetzwerk auf.</li>
+                <li>
+                    <strong>Sport stärkt das Kohärenzgefühl (SOC):</strong>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem; list-style-type: circle;">
+                        <li><em>Verstehbarkeit:</em> Der Sport ist durch klare Regeln (Regelwerke im Wettkampf) und Ursache-Wirkungs-Prinzipien (Training = Adaptation) hochgradig strukturiert.</li>
+                        <li><em>Handhabbarkeit:</em> Im Training lernt man, Hindernisse durch eigenen Einsatz (Selbstwirksamkeit) zu überwinden. Man erfährt, dass der Körper formbar ist.</li>
+                        <li><em>Sinnhaftigkeit:</em> Flow-Erlebnisse, der Spaß an der Bewegung und gemeinsame Siege stiften einen massiven Lebenssinn.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <h3 style="font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1rem; color: var(--text-muted);">5. Weitere Modelle (Ergänzung)</h3>
+        <p>Neben der Salutogenese wird in der Sportwissenschaft das <strong>Transtheoretische Modell (TTM)</strong> herangezogen, um zu erklären, wie Menschen ihr Gesundheitsverhalten ändern. Es unterteilt den Prozess vom „Nicht-Sportler“ zum „Dauer-Sportler“ in verschiedene Phasen (Sorglosigkeit, Bewusstwerdung, Vorbereitung, Handlung, Aufrechterhaltung) und hilft Trainern, Athleten phasengerecht zu motivieren.</p>
+    </section>
+
+    <!-- Abitur Transfer Box -->
+    <section class="abitur-board">
+        <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die Anwendung des Salutogenese-Modells auf den Sport ist mit dem Prädikat "Hoch" versehen und somit ein <strong>garantierter Klausurschwerpunkt</strong>. Das Modell wird fast immer über textbasierte Transferaufgaben geprüft.
+        </p>
+
+        <div class="tactic-block">
+            <h4>Text-Analyse (Die Drei Säulen identifizieren)</h4>
+            <p>Du bekommst in der Klausur häufig das Interview eines Sportlers, der eine schwere Krise (z. B. einen Kreuzbandriss oder starken Leistungsdruck) überstanden hat. Der Operator lautet dann: <em>"Analysieren Sie das Interview vor dem Hintergrund des Kohärenzgefühls nach Antonovsky."</em></p>
+            <p style="color: #fde047; font-weight: bold; margin-top: 10px;">Die Lösungstechnik: Nenne nicht nur die drei Säulen, sondern belege sie zwingend mit direkten Textzitaten!</p>
+        </div>
+
+        <div class="tactic-block">
+            <h4>Beispiel: Verstehbarkeit</h4>
+            <div class="quote-box">"Ich habe mir die Videos meiner Fehlhaltung angesehen und erkannt, wo das Problem liegt"</div>
+            <p>Du argumentierst: "Das Ereignis wird für den Athleten strukturiert und kognitiv erklärbar <span class="exam-highlight">(Verstehbarkeit)</span>."</p>
+        </div>
+
+        <div class="tactic-block">
+            <h4>Beispiel: Handhabbarkeit</h4>
+            <div class="quote-box">"Mein Physiotherapeut und mein eiserner Wille haben mich gerettet"</div>
+            <p>Du zeigst auf, dass er auf seine psychosozialen und inneren Ressourcen zurückgegriffen hat, um die Aufgabe lösbar zu machen <span class="exam-highlight">(Handhabbarkeit)</span>.</p>
+        </div>
+
+        <div class="tactic-block">
+            <h4>Beispiel: Sinnhaftigkeit</h4>
+            <div class="quote-box">"Ich wollte unbedingt bei Olympia starten, dafür lohnte sich der Schmerz"</div>
+            <p>Du identifizierst dies als die tiefere motivationale Triebfeder <span class="exam-highlight">(Sinnhaftigkeit)</span>.</p>
+        </div>
+
+        <div class="pro-tip">
+            <h4>💡 Begriffsabgrenzung (Der Weg zur Bestnote)</h4>
+            <p style="color: #d1fae5; margin-bottom: 0;">Das Kultusministerium liebt es, wenn Abiturienten im eA-Niveau differenzieren können. Leite deine Antwort zu solchen Fragen am besten immer mit einem brillanten Einleitungssatz ein:<br><br>
+            <em style="color: white;">"Während der medizinische Ansatz in diesem Fall pathogenetisch nach der Art der Verletzung fragt, betrachtet das Salutogenese-Modell nach Antonovsky die gesundheitsfördernden Ressourcen des Athleten..."</em><br><br>Das gibt direkt eine hervorragende fachliche Note.</p>
+        </div>
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('salutogenesisCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // --- 1. The River/Continuum (HED) ---
+    // Gradient from Red (Dis-ease) to Green (Health-ease)
+    const riverGradient = ctx.createLinearGradient(0, 0, w, 0);
+    riverGradient.addColorStop(0, '#fca5a5'); // Light Red
+    riverGradient.addColorStop(0.5, '#e2e8f0'); // Neutral River center
+    riverGradient.addColorStop(1, '#6ee7b7'); // Light Green
+
+    // Draw flowing river body
+    ctx.beginPath();
+    ctx.moveTo(0, h/2 - 60);
+    // Top wave
+    ctx.bezierCurveTo(w*0.3, h/2 - 90, w*0.7, h/2 - 30, w, h/2 - 60);
+    ctx.lineTo(w, h/2 + 60);
+    // Bottom wave
+    ctx.bezierCurveTo(w*0.7, h/2 + 30, w*0.3, h/2 + 90, 0, h/2 + 60);
+    ctx.closePath();
+    ctx.fillStyle = riverGradient;
+    ctx.fill();
+
+    // Continuum Labels
+    ctx.font = 'bold 18px Outfit';
+    ctx.fillStyle = '#ef4444';
+    ctx.textAlign = 'left';
+    ctx.fillText('DIS-EASE', 20, 40);
+    ctx.font = '14px Nunito';
+    ctx.fillText('(Krankheit)', 20, 60);
+
+    ctx.font = 'bold 18px Outfit';
+    ctx.fillStyle = '#10b981';
+    ctx.textAlign = 'right';
+    ctx.fillText('HEALTH-EASE', w - 20, 40);
+    ctx.font = '14px Nunito';
+    ctx.fillText('(Gesundheit)', w - 20, 60);
+
+    // --- 2. Stressors (Current pushing Left) ---
+    function drawWave(startX, startY, color) {
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.quadraticCurveTo(startX - 20, startY - 15, startX - 40, startY);
+        ctx.quadraticCurveTo(startX - 60, startY + 15, startX - 80, startY);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        
+        // Arrow head pointing left
+        ctx.beginPath();
+        ctx.moveTo(startX - 80, startY);
+        ctx.lineTo(startX - 70, startY - 8);
+        ctx.lineTo(startX - 70, startY + 8);
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+
+    drawWave(400, h/2 - 30, 'rgba(239, 68, 68, 0.7)');
+    drawWave(350, h/2 + 20, 'rgba(239, 68, 68, 0.7)');
+    drawWave(250, h/2 - 10, 'rgba(239, 68, 68, 0.7)');
+    
+    ctx.fillStyle = '#ef4444';
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 14px Nunito';
+    ctx.fillText('Strömung der Stressoren', 250, h/2 + 80);
+
+    // --- 3. The Swimmer ---
+    const swX = w/2 + 50;
+    const swY = h/2;
+
+    // Draw stylized swimmer (facing right)
+    ctx.fillStyle = '#0f172a';
+    ctx.strokeStyle = '#0f172a';
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    
+    // Head
+    ctx.beginPath(); ctx.arc(swX + 40, swY, 12, 0, Math.PI*2); ctx.fill();
+    // Torso (horizontal)
+    ctx.beginPath(); ctx.moveTo(swX - 10, swY); ctx.lineTo(swX + 30, swY); ctx.stroke();
+    // Arm swimming forward
+    ctx.beginPath(); ctx.moveTo(swX + 20, swY); ctx.quadraticCurveTo(swX + 40, swY - 25, swX + 60, swY + 5); ctx.stroke();
+    // Legs kicking
+    ctx.beginPath(); ctx.moveTo(swX - 10, swY); ctx.lineTo(swX - 30, swY - 10); ctx.lineTo(swX - 50, swY + 5); ctx.stroke(); // leg up
+    ctx.beginPath(); ctx.moveTo(swX - 10, swY); ctx.lineTo(swX - 25, swY + 15); ctx.lineTo(swX - 45, swY + 5); ctx.stroke(); // leg down
+    
+    // Splash effects
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(swX + 60, swY + 5, 8, Math.PI, 0); ctx.stroke(); // hand splash
+    ctx.beginPath(); ctx.arc(swX - 50, swY + 5, 8, Math.PI, 0); ctx.stroke(); // feet splash
+
+    // --- 4. The SOC Arrows (Propelling Swimmer Right) ---
+    function drawSOCArrow(startX, startY, endX, endY, label, color) {
+        // Arrow line
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 6;
+        ctx.stroke();
+        
+        // Arrow head
+        const angle = Math.atan2(endY - startY, endX - startX);
+        ctx.beginPath();
+        ctx.moveTo(endX, endY);
+        ctx.lineTo(endX - 15 * Math.cos(angle - Math.PI/6), endY - 15 * Math.sin(angle - Math.PI/6));
+        ctx.lineTo(endX - 15 * Math.cos(angle + Math.PI/6), endY - 15 * Math.sin(angle + Math.PI/6));
+        ctx.fillStyle = color;
+        ctx.fill();
+
+        // Label
+        ctx.fillStyle = color;
+        ctx.font = 'bold 14px Nunito';
+        ctx.textAlign = 'right';
+        ctx.fillText(label, startX - 10, startY + 5);
+    }
+
+    // Three arrows pushing the swimmer forward
+    const aX = swX - 80;
+    drawSOCArrow(aX, swY - 40, swX - 20, swY - 20, 'Verstehbarkeit', '#3b82f6');
+    drawSOCArrow(aX - 20, swY, swX - 30, swY, 'Handhabbarkeit', '#10b981');
+    drawSOCArrow(aX, swY + 40, swX - 20, swY + 20, 'Sinnhaftigkeit', '#f59e0b');
+
+    // Bracket/Label for SOC
+    ctx.fillStyle = '#0f766e';
+    ctx.font = 'bold 16px Outfit';
+    ctx.textAlign = 'right';
+    ctx.fillText('Widerstandsressourcen / SOC', aX - 30, swY - 70);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.2.3b Trainingsmethoden und Praxis: Methoden des Koordinationstrainings und Testverfahren - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,600;0,800;1,400&family=Open+Sans:wght@400;500;700&display=swap');
+
+        :root {
+            /* Playbook Theme Colors */
+            --bg-body: #f1f5f9;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            
+            --coach-slate: #0f172a;    /* Deep Dark Blue */
+            --coach-orange: #f97316;   /* Energetic Orange */
+            --coach-green: #10b981;    /* Diagnostic Green */
+            --coach-blue: #3b82f6;     /* Tactics Blue */
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Box */
+            --abi-bg: #1e1b4b;         /* Deep Indigo */
+            --abi-gold: #facc15;       /* Golden Yellow */
+            
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.65;
+            font-size: 1.05rem;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 30px 30px; /* Tactical board dot pattern */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Kanit', sans-serif;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .document-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.9); /* slight transparency over dots */
+            box-shadow: 0 0 40px rgba(0,0,0,0.05);
+            min-height: 100vh;
+        }
+
+        /* --- HEADER --- */
+        .playbook-header {
+            background: var(--coach-slate);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 3rem;
+            position: relative;
+            border-bottom: 8px solid var(--coach-orange);
+            overflow: hidden;
+        }
+
+        .playbook-header::after {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 200px; height: 200px;
+            border: 30px solid rgba(249, 115, 22, 0.1);
+            border-radius: 50%;
+        }
+
+        .playbook-header h1 {
+            font-size: 2.6rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .playbook-header .lead-text {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            max-width: 800px;
+            font-weight: 400;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- SECTION 1: METHODISCHE MABNAHMEN (MATRIX) --- */
+        .matrix-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--coach-slate);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--coach-orange);
+            transform: rotate(45deg);
+        }
+
+        .section-intro {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--coach-blue);
+            padding-left: 1.5rem;
+            background: #eff6ff;
+            padding: 1.5rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        /* Complex Matrix Grid */
+        .pressure-matrix {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .matrix-row {
+            display: grid;
+            grid-template-columns: 120px 250px 1fr;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .matrix-row:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .matrix-icon {
+            background: var(--coach-slate);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .matrix-icon canvas {
+            width: 80px;
+            height: 80px;
+        }
+
+        .matrix-title {
+            padding: 2rem 1.5rem;
+            background: #f8fafc;
+            border-right: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+        }
+
+        .matrix-title h3 {
+            color: var(--coach-orange);
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .matrix-content {
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .matrix-content .def {
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .matrix-content .example {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .matrix-content .example strong {
+            color: var(--coach-blue);
+            font-style: normal;
+        }
+
+        .matrix-footer {
+            background: #e2e8f0;
+            color: #475569;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* --- SECTION 2: GRUNDSÄTZE --- */
+        .rules-section {
+            margin-bottom: 4rem;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .rule-card {
+            background: var(--card-bg);
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .rule-card h3 {
+            font-size: 1.5rem;
+            color: var(--coach-slate);
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--coach-orange);
+        }
+
+        .rule-card p {
+            color: var(--text-muted);
+        }
+
+        .rule-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--coach-orange);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-family: 'Kanit', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* --- SECTION 3: PRAXIS & DIAGNOSTIK --- */
+        .diagnostics-section {
+            margin-bottom: 4rem;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            border-left: 8px solid var(--coach-green);
+        }
+
+        .diag-box {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-top: 1.5rem;
+        }
+
+        .diag-box h3 {
+            color: #047857;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .diag-list {
+            margin-left: 1.5rem;
+            color: #065f46;
+        }
+
+        .diag-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- ABITUR TRANSFER --- */
+        .abitur-tactics {
+            background: var(--abi-bg);
+            color: white;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            position: relative;
+            border-top: 6px solid var(--abi-gold);
+        }
+
+        .abitur-tactics h2 {
+            color: var(--abi-gold);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .abitur-tactics > p {
+            font-size: 1.15rem;
+            color: #a5b4fc;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #312e81;
+            padding-bottom: 1.5rem;
+        }
+
+        .tactic-block {
+            margin-bottom: 2.5rem;
+        }
+
+        .tactic-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .tactic-block h4 {
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(250, 204, 21, 0.1);
+            padding: 0.3rem 1rem;
+            border-left: 4px solid var(--abi-gold);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tactic-content {
+            padding-left: 1.5rem;
+        }
+
+        .tactic-content p {
+            color: #e0e7ff;
+            margin-bottom: 1rem;
+        }
+
+        .tactic-solution {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid #4338ca;
+        }
+
+        .highlight-exam {
+            color: var(--abi-gold);
+            font-weight: bold;
+        }
+
+        @media (max-width: 900px) {
+            .matrix-row {
+                grid-template-columns: 100px 1fr;
+            }
+            .matrix-icon { grid-row: span 2; }
+            .matrix-title { border-right: none; border-bottom: 1px solid #e2e8f0; padding: 1.5rem; }
+            
+            .rules-grid { grid-template-columns: 1fr; }
+            .document-wrapper { padding: 2rem 1rem; }
+            .playbook-header, .abitur-tactics { padding: 2rem; }
+            .playbook-header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="document-wrapper">
+
+    <!-- Header -->
+    <header class="playbook-header">
+        <h1>2.2.3b Trainingsmethoden und Praxis</h1>
+        <p class="lead-text">
+            Koordinationstraining ist im Wesentlichen ein <strong>Training des zentralen Nervensystems</strong> (Informationsaufnahme, -verarbeitung und -umsetzung). Da koordinative Fähigkeiten nicht durch bloße Wiederholung bekannter Muster wachsen, muss das Gehirn durch methodische Maßnahmen im Training permanent vor neue, ungewohnte Herausforderungen gestellt werden.
+        </p>
+    </header>
+
+    <!-- 1. Methodische Maßnahmen: Das Modell der Druckbedingungen -->
+    <section class="matrix-section">
+        <h2 class="section-title">1. Methodische Maßnahmen</h2>
+        <div class="section-intro">
+            <strong>Das Modell der Druckbedingungen (nach Neumaier):</strong><br>
+            Um die Koordination systematisch zu verbessern, arbeitet im modernen Training nicht mehr mit starren Übungsreihen, sondern verändert gezielt die situativen Anforderungen. Dies geschieht durch das Üben unter verschiedenen sogenannten "Druckbedingungen".
+        </div>
+
+        <!-- The Matrix -->
+        <div class="pressure-matrix">
+            
+            <!-- Row 1: Zeitdruck -->
+            <article class="matrix-row">
+                <div class="matrix-icon">
+                    <canvas id="iconZeit" width="80" height="80"></canvas>
+                </div>
+                <div class="matrix-title">
+                    <h3>Zeitdruck</h3>
+                </div>
+                <div class="matrix-content">
+                    <p class="def">Die Anforderung, eine Bewegung oder Entscheidung in minimaler Zeit auszuführen.</p>
+                    <p class="example"><strong>Trainingsbeispiel:</strong> Ein Basketballer muss auf ein akustisches Signal hin sofort die Dribbelrichtung ändern, oder die Durchführung eines Dribble-Parcours auf Zeit.</p>
+                </div>
+            </article>
+
+            <!-- Row 2: Präzisionsdruck -->
+            <article class="matrix-row">
+                <div class="matrix-icon">
+                    <canvas id="iconPraezision" width="80" height="80"></canvas>
+                </div>
+                <div class="matrix-title">
+                    <h3 style="color: var(--coach-green);">Präzisionsdruck</h3>
+                </div>
+                <div class="matrix-content">
+                    <p class="def">Die Anforderung, eine Bewegung mit höchster Genauigkeit (räumlich oder zeitlich) auszuführen.</p>
+                    <p class="example"><strong style="color: var(--coach-green);">Trainingsbeispiel:</strong> Zielwürfe auf einen verkleinerten Korb, das Balancieren auf einer extrem schmalen Turnbank oder das exakte Treffen des Absprungbalkens beim Weitsprung.</p>
+                </div>
+            </article>
+
+            <!-- Row 3: Komplexitätsdruck -->
+            <article class="matrix-row">
+                <div class="matrix-icon">
+                    <canvas id="iconKomplex" width="80" height="80"></canvas>
+                </div>
+                <div class="matrix-title">
+                    <h3 style="color: var(--coach-blue);">Komplexitätsdruck</h3>
+                </div>
+                <div class="matrix-content">
+                    <p class="def">Die Anforderung, viele verschiedene Teilbewegungen gleichzeitig (simultan) oder sehr schnell hintereinander (sukzessiv) auszuführen.</p>
+                    <p class="example"><strong style="color: var(--coach-blue);">Trainingsbeispiel:</strong> Eine Volleyballspielerin muss während eines seitlichen Nachstellschritts einen zugeworfenen Tennisball fangen und zeitgleich einen Volleyball zurückpritschen.</p>
+                </div>
+            </article>
+
+        </div>
+        
+        <div class="matrix-footer">
+            (Ergänzend: Organisationsdruck, Variabilitäts-/Bedingungsdruck und Belastungsdruck – z. B. Koordinationstraining unter physischer Ermüdung).
+        </div>
+    </section>
+
+    <!-- 2. Grundsätze für die Planung -->
+    <section class="rules-section">
+        <h2 class="section-title">2. Grundsätze für die Trainingsplanung</h2>
+        <p style="color: var(--text-muted); font-size: 1.1rem;">Bei der Planung und Erprobung eines Koordinationstrainings müssen sportbiologische Gesetzmäßigkeiten beachtet werden:</p>
+
+        <div class="rules-grid">
+            <article class="rule-card">
+                <span class="rule-badge">Regel 1</span>
+                <h3>Ermüdungsfreier Zustand</h3>
+                <p>Da das ZNS sehr stressempfindlich ist, muss anspruchsvolles Koordinationstraining immer am Anfang einer Trainingseinheit (nach dem Aufwärmen) stattfinden. <br><br><strong style="color: var(--coach-slate);">Merksatz: "Koordination vor Kondition".</strong></p>
+            </article>
+
+            <article class="rule-card">
+                <span class="rule-badge" style="background: var(--coach-blue);">Regel 2</span>
+                <h3>Prinzip der Variation</h3>
+                <p>Sobald eine Übung automatisiert ist (variable Verfügbarkeit), verliert sie ihren koordinativen Trainingsreiz. Es muss ständig variiert werden (z. B. optische Reize ausschalten durch geschlossene Augen, labiler Untergrund).</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- 3. Praxis und Diagnostik -->
+    <section class="diagnostics-section">
+        <h2 class="section-title" style="color: var(--coach-green);">3. Praxis und Diagnostik: Einfache Koordinationstests</h2>
+        <p>Um den Trainingsfortschritt messbar zu machen, nutzt die Sportpraxis standardisierte Testverfahren.</p>
+
+        <div class="diag-box">
+            <h3>⚖️ Der Gleichgewichtstest</h3>
+            <p style="margin-bottom: 1rem; color: #065f46;">(z. B. modifizierter Romberg-Test / Einbeinstand)</p>
+            
+            <p style="margin-bottom: 1rem;">Der Athlet steht barfuß auf einem Bein. Die Zeit wird bis zum Verlust des Gleichgewichts (Bodenkontakt des Schwungbeins) gemessen.</p>
+            
+            <ul class="diag-list">
+                <li><strong>Erhöhung des Präzisionsdrucks:</strong> Standfläche wird verkleinert oder labil gemacht (Kippbrett, Weichbodenmatte).</li>
+                <li><strong>Wechsel des Analysators:</strong> Um das optische System auszuschalten, müssen die Augen geschlossen werden.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Premium Abitur Transfer -->
+    <section class="abitur-tactics">
+        <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+        <p>
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Dieser Teilbereich verlangt in der Klausur <strong>höchste Transferleistung</strong>. Die reine Theorie (das Nennen der Druckbedingungen) reicht nicht aus. Du musst fiktives Training planen und bewerten können.
+        </p>
+
+        <div class="tactic-block">
+            <h4>1. Trainingseinheiten modifizieren</h4>
+            <div class="tactic-content">
+                <p style="font-style: italic; color: #94a3b8;">Eine typische Aufgabenstellung lautet: "Entwickeln Sie ausgehend von einem einfachen Slalomdribbling im Fußball drei methodische Maßnahmen, um das Koordinationstraining zu intensivieren, und begründen Sie diese."</p>
+                
+                <div class="tactic-solution">
+                    <p style="font-weight: bold; margin-bottom: 1rem; color: white;">Dein Lösungsweg (Nutze die Druckbedingungen als Schablone!):</p>
+                    <ul style="color: #e0e7ff; margin-left: 1.5rem; line-height: 1.8;">
+                        <li><strong>1. Maßnahme:</strong> <span class="highlight-exam">Zeitdruck</span> (Dribbling auf Zeit gegen einen Partner).</li>
+                        <li><strong>2. Maßnahme:</strong> <span class="highlight-exam">Präzisionsdruck</span> (Die Hütchen werden extrem eng zusammengestellt).</li>
+                        <li><strong>3. Maßnahme:</strong> <span class="highlight-exam">Komplexitätsdruck</span> (Der Spieler muss während des Dribblings Rechenaufgaben lösen oder einen zugeworfenen Ball fangen).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tactic-block">
+            <h4>2. Testverfahren beurteilen</h4>
+            <div class="tactic-content">
+                <p>Wenn du einen einfachen Test (wie den Gleichgewichtstest) erklären sollst, <strong>nutze dein Wissen aus Kapitel 2.2.1a (Analysatoren)</strong>.</p>
+                <p>Erkläre, <em>warum</em> der Test mit geschlossenen Augen so viel schwerer ist: Der dominante <span class="highlight-exam">optische Analysator</span> fällt weg, und das ZNS muss sich nun isoliert auf den <span class="highlight-exam">kinästhetischen und vestibulären Analysator</span> verlassen, um die Balance zu halten. Dies zeigt dem Korrektor ein tiefes, vernetztes biologisches Verständnis!</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Canvas Scripts for the Icons -->
+<script>
+    // --- Utils ---
+    function setupCanvas(id) {
+        const canvas = document.getElementById(id);
+        const ctx = canvas.getContext('2d');
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        return { ctx, cx, cy };
+    }
+
+    const strokeColor = '#ffffff';
+
+    // --- 1. Zeitdruck (Stoppuhr) ---
+    const { ctx: ctx1, cx: cx1, cy: cy1 } = setupCanvas('iconZeit');
+    
+    ctx1.strokeStyle = strokeColor;
+    ctx1.lineWidth = 4;
+    ctx1.lineCap = 'round';
+    ctx1.lineJoin = 'round';
+    
+    // Watch body
+    ctx1.beginPath(); ctx1.arc(cx1, cy1 + 5, 25, 0, Math.PI*2); ctx1.stroke();
+    // Top button
+    ctx1.beginPath(); ctx1.moveTo(cx1 - 6, cy1 - 25); ctx1.lineTo(cx1 + 6, cy1 - 25); ctx1.stroke();
+    ctx1.beginPath(); ctx1.moveTo(cx1, cy1 - 25); ctx1.lineTo(cx1, cy1 - 20); ctx1.stroke();
+    // Side button
+    ctx1.beginPath(); ctx1.moveTo(cx1 + 18, cy1 - 13); ctx1.lineTo(cx1 + 23, cy1 - 18); ctx1.stroke();
+    // Hands
+    ctx1.beginPath(); ctx1.moveTo(cx1, cy1 + 5); ctx1.lineTo(cx1 + 10, cy1 - 5); ctx1.stroke(); // minute
+    ctx1.beginPath(); ctx1.moveTo(cx1, cy1 + 5); ctx1.lineTo(cx1, cy1 - 10); ctx1.stroke(); // second
+    // Center dot
+    ctx1.fillStyle = strokeColor;
+    ctx1.beginPath(); ctx1.arc(cx1, cy1 + 5, 3, 0, Math.PI*2); ctx1.fill();
+
+    // --- 2. Präzisionsdruck (Zielscheibe mit Pfeil) ---
+    const { ctx: ctx2, cx: cx2, cy: cy2 } = setupCanvas('iconPraezision');
+    
+    ctx2.strokeStyle = strokeColor;
+    ctx2.lineWidth = 4;
+    
+    // Concentric circles
+    ctx2.beginPath(); ctx2.arc(cx2, cy2 + 5, 26, 0, Math.PI*2); ctx2.stroke();
+    ctx2.beginPath(); ctx2.arc(cx2, cy2 + 5, 14, 0, Math.PI*2); ctx2.stroke();
+    // Bullseye
+    ctx2.fillStyle = strokeColor;
+    ctx2.beginPath(); ctx2.arc(cx2, cy2 + 5, 4, 0, Math.PI*2); ctx2.fill();
+
+    // Arrow hitting bullseye
+    ctx2.beginPath(); ctx2.moveTo(cx2 + 2, cy2 + 3); ctx2.lineTo(cx2 + 25, cy2 - 20); ctx2.stroke();
+    // Arrow fletching
+    ctx2.lineWidth = 3;
+    ctx2.beginPath(); ctx2.moveTo(cx2 + 18, cy2 - 20); ctx2.lineTo(cx2 + 25, cy2 - 27); ctx2.stroke();
+    ctx2.beginPath(); ctx2.moveTo(cx2 + 25, cy2 - 13); ctx2.lineTo(cx2 + 32, cy2 - 20); ctx2.stroke();
+
+    // --- 3. Komplexitätsdruck (Jonglierbälle/Multitasking) ---
+    const { ctx: ctx3, cx: cx3, cy: cy3 } = setupCanvas('iconKomplex');
+    
+    ctx3.strokeStyle = strokeColor;
+    ctx3.lineWidth = 3;
+    
+    // Infinity/Juggling path (figure 8)
+    ctx3.setLineDash([4, 4]);
+    ctx3.beginPath();
+    // left loop
+    ctx3.arc(cx3 - 15, cy3 + 5, 15, 0, Math.PI*2);
+    ctx3.stroke();
+    // right loop
+    ctx3.beginPath();
+    ctx3.arc(cx3 + 15, cy3 + 5, 15, 0, Math.PI*2);
+    ctx3.stroke();
+    ctx3.setLineDash([]);
+
+    // 3 Solid Balls representing complexity tasks
+    ctx3.fillStyle = '#facc15'; // Accent ball
+    ctx3.beginPath(); ctx3.arc(cx3, cy3 - 5, 6, 0, Math.PI*2); ctx3.fill();
+    
+    ctx3.fillStyle = strokeColor;
+    ctx3.beginPath(); ctx3.arc(cx3 - 25, cy3 + 15, 6, 0, Math.PI*2); ctx3.fill();
+    ctx3.beginPath(); ctx3.arc(cx3 + 25, cy3 + 15, 6, 0, Math.PI*2); ctx3.fill();
+
+    // Small connection lines (network effect)
+    ctx3.lineWidth = 2;
+    ctx3.strokeStyle = 'rgba(255,255,255,0.4)';
+    ctx3.beginPath(); ctx3.moveTo(cx3, cy3 - 5); ctx3.lineTo(cx3 - 25, cy3 + 15); ctx3.stroke();
+    ctx3.beginPath(); ctx3.moveTo(cx3, cy3 - 5); ctx3.lineTo(cx3 + 25, cy3 + 15); ctx3.stroke();
+    ctx3.beginPath(); ctx3.moveTo(cx3 - 25, cy3 + 15); ctx3.lineTo(cx3 + 25, cy3 + 15); ctx3.stroke();
+
+</script>
+</body>
+</html>

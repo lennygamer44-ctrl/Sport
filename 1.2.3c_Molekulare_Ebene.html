@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.2.3c Molekulare Ebene - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Quantum Biology / Molecular Optics */
+            --bg-void: #050508;
+            --bg-cell: #0b0c13;
+            --bg-membrane: #141622;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            /* Molecular Colors */
+            --actin-cyan: #00f0ff;      /* Actin */
+            --myosin-magenta: #ff007f;  /* Myosin */
+            --titin-purple: #9d00ff;    /* Titin */
+            --calcium-yellow: #fffb00;  /* Ca2+ / ATP */
+            
+            --abi-bg: #2a0a18;
+            --abi-red: #ff3366;
+            --abi-gold: #ffaa00;
+            
+            --radius-md: 12px;
+            --radius-lg: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-void);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 127, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4, .quantum-font {
+            font-family: 'Chakra Petch', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Microscopic Hero --- */
+        .hero {
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--actin-cyan) 0%, var(--myosin-magenta) 50%, var(--calcium-yellow) 100%);
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+        }
+
+        .hero-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--calcium-yellow);
+            padding: 0.4rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 20px rgba(255, 251, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.1;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 850px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* --- Intro Block --- */
+        .intro-box {
+            background: var(--bg-cell);
+            padding: 3rem;
+            border-radius: var(--radius-md);
+            margin: 4rem auto;
+            border-left: 4px solid var(--actin-cyan);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .sliding-theory {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .sliding-theory strong {
+            color: var(--actin-cyan);
+        }
+
+        /* --- 1. Die molekularen Akteure --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 6rem 0 3rem;
+        }
+
+        .section-num {
+            color: var(--bg-void);
+            background: var(--text-main);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-weight: 700;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: white;
+            margin: 0;
+        }
+
+        .actors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        @media (max-width: 900px) {
+            .actors-grid { grid-template-columns: 1fr; }
+        }
+
+        .actor-card {
+            background: var(--bg-membrane);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .actor-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .actor-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+        }
+
+        .card-actin::before { background: var(--actin-cyan); box-shadow: 0 0 15px var(--actin-cyan); }
+        .card-actin h3 { color: var(--actin-cyan); }
+
+        .card-myosin::before { background: var(--myosin-magenta); box-shadow: 0 0 15px var(--myosin-magenta); }
+        .card-myosin h3 { color: var(--myosin-magenta); }
+
+        .card-titin::before { background: var(--titin-purple); box-shadow: 0 0 15px var(--titin-purple); }
+        .card-titin h3 { color: #d880ff; }
+
+        .actor-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .actor-type {
+            font-family: 'Chakra Petch', sans-serif;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .actor-card p {
+            color: #cbd5e1;
+        }
+
+        /* --- 2. Der Greif-Loslass-Zyklus --- */
+        .cycle-wrapper {
+            background: var(--bg-cell);
+            border: 1px solid var(--bg-membrane);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .cycle-intro {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .phase-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .phase-item {
+            background: var(--bg-membrane);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--calcium-yellow);
+        }
+
+        .phase-item h3 {
+            color: var(--calcium-yellow);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .phase-item p {
+            color: #e2e8f0;
+        }
+
+        .phase-item .highlight {
+            color: var(--calcium-yellow);
+            font-weight: bold;
+        }
+
+        /* --- Canvas Interactive Section --- */
+        .canvas-section {
+            background: #000;
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid #1f2937;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        .canvas-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            background: var(--bg-void);
+        }
+
+        /* --- Premium Abitur Transfer Box --- */
+        .abitur-prep {
+            background: linear-gradient(135deg, var(--abi-bg), var(--bg-void));
+            color: #e2e8f0;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid rgba(255, 51, 102, 0.3);
+            box-shadow: 0 0 40px rgba(255, 51, 102, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-prep::before {
+            content: 'EXAM';
+            position: absolute;
+            font-size: 8rem;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            color: rgba(255, 51, 102, 0.03);
+            top: -20px;
+            right: 0;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-red);
+            color: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 900;
+            box-shadow: 0 0 20px rgba(255, 51, 102, 0.4);
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #ff99b3;
+            margin-bottom: 3rem;
+            font-weight: 400;
+            border-bottom: 1px solid rgba(255, 51, 102, 0.2);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .abi-card {
+            background: rgba(0,0,0,0.3);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-red);
+            position: relative;
+        }
+
+        .abi-card.rigor {
+            border-left-color: var(--abi-gold);
+            background: rgba(255, 170, 0, 0.05);
+        }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card.rigor h3 { color: var(--abi-gold); }
+
+        .abi-card p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .hl-red { color: var(--abi-red); font-weight: 700; }
+        .hl-gold { color: var(--abi-gold); font-weight: 700; }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="hero-tag">Lernbereich 1.2.3c</span>
+            <h1>Molekulare Ebene</h1>
+            <p>Die Ultrastruktur des Muskels: Der Greif-Loslass-Zyklus und die Gleitfilamenttheorie auf zellulärem Niveau.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-box">
+            Um die Prinzipien der Muskelkontraktion, der Ermüdung und des Muskelkaters auf Abiturniveau (eA) vollständig zu verstehen, muss der Blick auf die molekulare Ebene (die Ultrastruktur des Muskels) gerichtet werden. Die funktionelle Grundeinheit der Myofibrille ist das Sarkomer, welches durch zwei Z-Scheiben (Z-Streifen) begrenzt wird.
+            
+            <div class="sliding-theory">
+                Die moderne Sportbiologie erklärt die aktive Verkürzung des Muskels mit der <strong>Gleitfilamenttheorie</strong> (Sliding Filament Theory nach A. F. Huxley). Der Kerngedanke dieser Theorie ist, dass sich die Proteinfilamente bei einer Kontraktion nicht selbst in ihrer Struktur verkürzen, sondern <strong>teleskopartig ineinandergleiten</strong>.
+            </div>
+        </div>
+
+        <!-- Section 1: Akteure -->
+        <div class="section-header">
+            <div class="section-num">1</div>
+            <h2>Die molekularen Akteure im Sarkomer</h2>
+        </div>
+
+        <div class="actors-grid">
+            <!-- Aktin -->
+            <div class="actor-card card-actin">
+                <h3 class="quantum-font">Aktin</h3>
+                <span class="actor-type">Das dünne Filament</span>
+                <p>Es ist an den Z-Scheiben verankert und ragt in die Mitte des Sarkomers. Um das Aktinfilament winden sich zwei regulatorische Proteine: das blockierende <strong>Tropomyosin</strong> und das calciumempfindliche <strong>Troponin</strong>.</p>
+            </div>
+
+            <!-- Myosin -->
+            <div class="actor-card card-myosin">
+                <h3 class="quantum-font">Myosin</h3>
+                <span class="actor-type">Das dicke Filament</span>
+                <p>Es liegt zwischen den Aktinfilamenten. Myosinmoleküle besitzen bewegliche <strong>"Köpfchen"</strong>, die als molekulare Motoren fungieren. Sie binden ATP und haben eine extrem hohe Affinität zu den Aktinfilamenten.</p>
+            </div>
+
+            <!-- Titin -->
+            <div class="actor-card card-titin">
+                <h3 class="quantum-font">Titin</h3>
+                <span class="actor-type">Das elastische Filament</span>
+                <p>Das größte bekannte Protein des menschlichen Körpers. Es verbindet das Myosin mit der Z-Scheibe, wirkt wie eine molekulare <strong>Sprungfeder (Bogenspannung)</strong> und zentriert das Myosin im Sarkomer.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Zyklus -->
+        <div class="section-header">
+            <div class="section-num">2</div>
+            <h2>Der Greif-Loslass-Zyklus (Querbrückenzyklus)</h2>
+        </div>
+
+        <div class="cycle-wrapper">
+            <p class="cycle-intro">Die eigentliche Muskelkontraktion ist eine millionenfach synchrone Abfolge von molekularen Ruderschlägen der Myosinköpfchen. Dieser Zyklus lässt sich in präzise Phasen unterteilen:</p>
+            
+            <div class="phase-list">
+                <div class="phase-item">
+                    <h3 class="quantum-font">Phase 1: Ruhezustand (Erschlaffung)</h3>
+                    <p>Im Ruhezustand blockiert das Tropomyosin die Bindungsstellen am Aktin. Das Myosinköpfchen hat ATP gebunden, ist energetisch aufgeladen und steht in einem <span class="highlight">90-Grad-Winkel (vorgespannt)</span>, kann aber aufgrund der Blockade nicht an das Aktin andocken.</p>
+                </div>
+
+                <div class="phase-item">
+                    <h3 class="quantum-font">Phase 2: Aktivierung und "Greifen"</h3>
+                    <p>Ein Nervenimpuls führt zur massiven Ausschüttung von Calcium-Ionen (Ca²⁺). Das Calcium bindet an das Troponin, welches das Tropomyosin beiseiteschiebt. Die Bindungsstellen am Aktin liegen nun frei. <span class="highlight">Das Myosinköpfchen dockt sofort an das Aktin andocken</span> – die "Querbrücke" ist geschlossen.</p>
+                </div>
+
+                <div class="phase-item" style="border-color: var(--myosin-magenta);">
+                    <h3 class="quantum-font" style="color: var(--myosin-magenta);">Phase 3: Der Kraftschlag (Das "Ziehen")</h3>
+                    <p>Durch die Bindung spaltet das Myosin das gebundene ATP in ADP und einen Phosphatrest (P) und setzt diese frei. Diese Freisetzung löst eine <span style="color: var(--myosin-magenta); font-weight: bold;">mechanische Kippbewegung des Myosinköpfchens von 90 Grad auf 45 Grad aus (molekularer Ruderschlag)</span>. Da das Köpfchen am Aktin festhängt, zieht es das Aktin zur Sarkomermitte. Das Sarkomer verkürzt sich.</p>
+                </div>
+
+                <div class="phase-item">
+                    <h3 class="quantum-font">Phase 4 & 5: Loslassen & erneutes Spannen</h3>
+                    <p>Das Myosinköpfchen hängt nun fest im 45-Grad-Winkel. Um die Bindung zu lösen, <span class="highlight">muss ein neues Molekül ATP an das Myosin binden</span> (Weichmacherwirkung). Das Köpfchen löst sich, hydrolysiert das neue ATP und nutzt die Energie, um sich wieder auf 90 Grad "vorzuspannen". Der Zyklus beginnt von vorn.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Canvas Infographic -->
+        <section class="canvas-section">
+            <h2 class="quantum-font">Visualisierung: Der 4-Schritt-Zyklus</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Der molekulare Ruderschlag in Echtzeit-Simulation. Beobachte die Phasenwechsel.</p>
+            
+            <div class="canvas-container">
+                <canvas id="cycleCanvas" width="1000" height="550"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2 class="quantum-font">Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                Dieser Punkt ist ein absoluter <strong>Theorie-Klassiker im Abitur</strong>. Du musst diese Kaskade – inklusive der Fachbegriffe – perfekt reproduzieren können. Darüber hinaus werden aber auch starke Transferleistungen gefordert:
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card rigor">
+                    <h3 class="quantum-font">💀 Erkläre die Totenstarre (Rigor mortis)</h3>
+                    <p>Dies ist die beliebteste Transferfrage zur Gleitfilamenttheorie. Warum wird ein Muskel nach dem Tod steif?</p>
+                    <p><strong>Du argumentierst:</strong> Nach dem Tod stoppt die zelluläre Atmung, es wird <span class="hl-gold">kein neues ATP mehr produziert</span>. Ohne neues ATP können sich die Myosinköpfchen in Phase 4 ("Loslassen") <span class="hl-gold">nicht mehr vom Aktin lösen</span>. Die Querbrücken bleiben irreversibel geschlossen, der Muskel erstarrt in der Kontraktion.</p>
+                </div>
+
+                <div class="abi-card">
+                    <h3 class="quantum-font">🔋 Transfer zur Energiebereitstellung</h3>
+                    <p>Wenn du den extremen ATP-Verbrauch bei einem 100-m-Sprint (Lernbereich 1.4) erklären sollst, verweist du zwingend auf diesen Zyklus:</p>
+                    <p>Jeder einzelne molekulare Ruderschlag jedes der Milliarden Myosinköpfchen in der Arbeitsmuskulatur <span class="hl-red">verbraucht exakt ein Molekül ATP</span>. Dies verdeutlicht, warum die alaktaziden Phosphatspeicher innerhalb von Sekunden komplett leergepumpt sind.</p>
+                </div>
+
+                <div class="abi-card">
+                    <h3 class="quantum-font">🔬 Die Ursache des Muskelkaters biomechanisch erklären</h3>
+                    <p>Nutze die Architektur des Sarkomers, um das Thema Muskelkater (1.2.3b) aufzuwerten: Erkläre, dass bei extremer exzentrischer Belastung die <strong>Z-Scheiben</strong> – an denen die Aktinfilamente und das Titin aufgehängt sind – den enormen mechanischen Zugkräften der "ziehend festhaltenden" Myosinköpfchen nicht mehr standhalten und <span class="hl-red">mikroskopisch einreißen</span>.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('cycleCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 1000;
+            const logicalH = 550;
+            
+            let time = 0;
+            let animationId;
+
+            // Global Phase Management (1 to 4)
+            // 1: Ruhezustand
+            // 2: Bindung
+            // 3: Kraftschlag
+            // 4: Loslassen/Reset
+            let currentPhase = 1;
+            let phaseProgress = 0; // 0 to 1 within a phase
+            const phaseDuration = 120; // frames per phase
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayW = Math.min(rect.width, logicalW);
+                const scale = displayW / logicalW;
+                const displayH = logicalH * scale;
+                
+                canvas.width = displayW * dpr;
+                canvas.height = displayH * dpr;
+                canvas.style.width = `${displayW}px`;
+                canvas.style.height = `${displayH}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // --- Microscopic Drawing Functions ---
+            function drawActin(cx, cy, tropomyosinOffset) {
+                // Actin is a double helix of beads
+                ctx.fillStyle = '#00f0ff';
+                ctx.shadowColor = 'rgba(0, 240, 255, 0.5)';
+                ctx.shadowBlur = 10;
+
+                for(let i= -200; i<= 200; i+=25) {
+                    // Helix 1
+                    let y1 = cy + Math.sin(i * 0.05) * 8;
+                    ctx.beginPath(); ctx.arc(cx + i, y1, 10, 0, Math.PI*2); ctx.fill();
+                    // Helix 2
+                    let y2 = cy + Math.sin((i * 0.05) + Math.PI) * 8;
+                    ctx.beginPath(); ctx.arc(cx + i, y2, 10, 0, Math.PI*2); ctx.fill();
+                    
+                    // Binding sites (dark spots)
+                    if (i % 50 === 0) {
+                        ctx.fillStyle = '#0f172a';
+                        ctx.shadowBlur = 0;
+                        ctx.beginPath(); ctx.arc(cx + i, cy + 8, 4, 0, Math.PI*2); ctx.fill();
+                        ctx.fillStyle = '#00f0ff';
+                        ctx.shadowColor = 'rgba(0, 240, 255, 0.5)';
+                        ctx.shadowBlur = 10;
+                    }
+                }
+
+                // Tropomyosin (Thin line blocking binding sites)
+                ctx.strokeStyle = '#f8fafc';
+                ctx.lineWidth = 3;
+                ctx.shadowBlur = 0;
+                ctx.beginPath();
+                ctx.moveTo(cx - 200, cy + 8 + tropomyosinOffset);
+                ctx.lineTo(cx + 200, cy + 8 + tropomyosinOffset);
+                ctx.stroke();
+
+                // Troponin (Small clusters)
+                ctx.fillStyle = '#8b5cf6'; // Purple
+                for(let i= -150; i<= 150; i+=100) {
+                    ctx.beginPath(); ctx.arc(cx + i, cy + 8 + tropomyosinOffset, 6, 0, Math.PI*2); ctx.fill();
+                    ctx.beginPath(); ctx.arc(cx + i+5, cy + 12 + tropomyosinOffset, 5, 0, Math.PI*2); ctx.fill();
+                }
+            }
+
+            function drawMyosin(cx, cy, headAngle, bindX) {
+                // Thick filament body
+                ctx.fillStyle = '#ff007f';
+                ctx.shadowColor = 'rgba(255, 0, 127, 0.5)';
+                ctx.shadowBlur = 15;
+                ctx.fillRect(cx - 200, cy + 60, 400, 25);
+
+                // Myosin Head (Hinged at cy + 60)
+                ctx.save();
+                ctx.translate(bindX, cy + 60);
+                
+                // Draw neck
+                ctx.rotate(headAngle);
+                ctx.strokeStyle = '#ff007f';
+                ctx.lineWidth = 8;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(0, -45); // Neck points UP towards actin
+                ctx.stroke();
+                
+                // Draw Head (Bean shape)
+                ctx.translate(0, -45);
+                ctx.fillStyle = '#ff4da6';
+                ctx.beginPath();
+                ctx.ellipse(5, -10, 18, 10, -Math.PI/6, 0, Math.PI*2);
+                ctx.fill();
+                
+                ctx.restore();
+                ctx.shadowBlur = 0;
+            }
+
+            function drawMolecule(type, x, y, alpha=1) {
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                if (type === 'ATP') {
+                    ctx.fillStyle = '#fffb00';
+                    ctx.shadowColor = '#fffb00';
+                    ctx.shadowBlur = 10;
+                    ctx.beginPath(); ctx.arc(x, y, 8, 0, Math.PI*2); ctx.fill();
+                    ctx.fillStyle = '#000'; ctx.font = '9px Arial'; ctx.textAlign = 'center'; ctx.fillText('ATP', x, y+3);
+                } else if (type === 'ADP') {
+                    ctx.fillStyle = '#f59e0b';
+                    ctx.beginPath(); ctx.arc(x-5, y, 7, 0, Math.PI*2); ctx.fill();
+                    ctx.fillStyle = '#000'; ctx.font = '8px Arial'; ctx.fillText('ADP', x-5, y+3);
+                } else if (type === 'P') {
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.beginPath(); ctx.arc(x+8, y, 5, 0, Math.PI*2); ctx.fill();
+                    ctx.fillStyle = '#000'; ctx.font = '8px Arial'; ctx.fillText('P', x+8, y+3);
+                } else if (type === 'Ca') {
+                    ctx.fillStyle = '#06b6d4'; // Cyan for calcium
+                    ctx.shadowColor = '#06b6d4';
+                    ctx.shadowBlur = 15;
+                    ctx.beginPath(); ctx.arc(x, y, 6, 0, Math.PI*2); ctx.fill();
+                }
+                ctx.restore();
+            }
+
+            function drawCycleCircle() {
+                const cx = logicalW / 2;
+                const cy = logicalH / 2;
+                const r = 200;
+
+                // Subtle ring
+                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.stroke();
+
+                // Current Phase Arc
+                const startAngle = -Math.PI/2 + ((currentPhase - 1) * Math.PI/2);
+                const sweepAngle = (phaseProgress * Math.PI/2);
+                
+                ctx.strokeStyle = '#00f0ff';
+                ctx.lineWidth = 6;
+                ctx.shadowColor = '#00f0ff';
+                ctx.shadowBlur = 15;
+                ctx.beginPath();
+                ctx.arc(cx, cy, r, startAngle, startAngle + sweepAngle);
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                // Phase Labels
+                const labels = ["1. Ruhe", "2. Bindung", "3. Kraftschlag", "4. Loslassen"];
+                for(let i=0; i<4; i++) {
+                    let angle = -Math.PI/2 + (i * Math.PI/2);
+                    let lx = cx + Math.cos(angle) * (r + 40);
+                    let ly = cy + Math.sin(angle) * (r + 40);
+                    
+                    ctx.fillStyle = (currentPhase === i+1) ? '#ff007f' : '#64748b';
+                    ctx.font = (currentPhase === i+1) ? 'bold 16px Chakra Petch' : '14px Chakra Petch';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(labels[i], lx, ly);
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, logicalW, logicalH);
+                time++;
+
+                // Phase Logic
+                phaseProgress += 1 / phaseDuration;
+                if (phaseProgress >= 1) {
+                    phaseProgress = 0;
+                    currentPhase++;
+                    if (currentPhase > 4) currentPhase = 1;
+                }
+
+                // Animation variables based on phase
+                let tropomyosinOffset = 0; // 0 = blocking, -8 = open
+                let headAngle = 0; // 0 = 90 deg up, Math.PI/4 = 45 deg tilted right
+                let actinSlide = 0;
+                let atpAlpha = 0, adpAlpha = 0, caAlpha = 0;
+                let atpPos = {x: 0, y: 0}, adpPos = {x: 0, y: 0}, caPos = {x: 0, y: 0};
+
+                const center_X = logicalW / 2;
+                const center_Y = logicalH / 2;
+
+                // STATE MACHINE
+                if (currentPhase === 1) {
+                    // RESTING: Tropo blocks, Head 90 deg, ATP bound
+                    tropomyosinOffset = 0;
+                    headAngle = 0;
+                    atpAlpha = 1;
+                    atpPos = {x: center_X - 15, y: center_Y + 15}; // on head
+                } 
+                else if (currentPhase === 2) {
+                    // BINDING: Ca comes, Tropo moves, Head attaches
+                    caAlpha = 1;
+                    // Ca animates down to Troponin
+                    caPos = {x: center_X - 50, y: center_Y - 40 + (phaseProgress * 48)};
+                    
+                    if (phaseProgress > 0.5) {
+                        tropomyosinOffset = -8 * ((phaseProgress - 0.5) * 2); // move up
+                    }
+                    headAngle = 0;
+                    // ATP -> ADP+P (Hydrolysis happened to cock head)
+                    adpAlpha = 1;
+                    adpPos = {x: center_X - 15, y: center_Y + 15};
+                }
+                else if (currentPhase === 3) {
+                    // POWER STROKE: Tropo open, Head tilts to 45, Actin slides left
+                    tropomyosinOffset = -8;
+                    // Smooth tilt
+                    headAngle = (Math.PI/4) * phaseProgress; 
+                    actinSlide = -30 * phaseProgress; // Slide actin left
+                    
+                    // ADP+P fly away
+                    adpAlpha = 1 - phaseProgress;
+                    adpPos = {x: center_X - 15 - (phaseProgress*50), y: center_Y + 15 + (phaseProgress*50)};
+                    
+                    caAlpha = 1;
+                    caPos = {x: center_X - 50, y: center_Y + 8}; // stay on troponin
+                }
+                else if (currentPhase === 4) {
+                    // RELEASE & RESET: New ATP binds, head detaches and cocks back
+                    tropomyosinOffset = -8 + (8 * phaseProgress); // Tropo closes
+                    actinSlide = -30; // Actin stays shifted for this demo loop
+                    
+                    // New ATP flies in
+                    atpAlpha = 1;
+                    atpPos = {x: center_X - 60 + (phaseProgress*45), y: center_Y + 60 - (phaseProgress*45)};
+                    
+                    if (phaseProgress > 0.5) {
+                        // Detach and cock back
+                        headAngle = (Math.PI/4) * (1 - ((phaseProgress - 0.5) * 2));
+                    } else {
+                        headAngle = Math.PI/4;
+                    }
+
+                    // Ca leaves
+                    caAlpha = 1 - phaseProgress;
+                    caPos = {x: center_X - 50, y: center_Y + 8 - (phaseProgress*30)};
+                }
+
+                // DRAWING
+                drawCycleCircle();
+
+                // Draw central microscope view
+                ctx.save();
+                // Clip circle for microscope lens effect
+                ctx.beginPath();
+                ctx.arc(center_X, center_Y, 150, 0, Math.PI*2);
+                ctx.clip();
+                
+                // Dark background
+                ctx.fillStyle = '#0b0c13';
+                ctx.fill();
+
+                // Draw elements
+                drawActin(center_X + actinSlide, center_Y - 20, tropomyosinOffset);
+                drawMyosin(center_X, center_Y, headAngle, center_X);
+                
+                // Draw Molecules
+                if (atpAlpha > 0) drawMolecule('ATP', atpPos.x, atpPos.y, atpAlpha);
+                if (adpAlpha > 0) drawMolecule('ADP', adpPos.x, adpPos.y, adpAlpha);
+                if (adpAlpha > 0) drawMolecule('P', adpPos.x, adpPos.y, adpAlpha);
+                if (caAlpha > 0) drawMolecule('Ca', caPos.x, caPos.y, caAlpha);
+
+                // Microscope inner shadow / rim
+                ctx.restore();
+                ctx.beginPath();
+                ctx.arc(center_X, center_Y, 150, 0, Math.PI*2);
+                ctx.strokeStyle = '#1f2937';
+                ctx.lineWidth = 8;
+                ctx.stroke();
+                
+                // Flash "RUDER-EFFEKT" during phase 3
+                if (currentPhase === 3) {
+                    ctx.fillStyle = `rgba(255, 0, 127, ${Math.sin(time*0.5)*0.5 + 0.5})`;
+                    ctx.font = 'bold 20px Chakra Petch';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('RUDERSCHLAG', center_X, center_Y + 110);
+                }
+                
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

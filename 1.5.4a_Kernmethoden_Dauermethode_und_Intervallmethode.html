@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.5.4a Kernmethoden: Dauermethode und Intervallmethode</title>
+    <style>
+        /* Pro-Coach / Playbook Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+
+        :root {
+            /* Playbook Palette */
+            --bg-page: #f0f4f8;
+            --bg-card: #ffffff;
+            
+            --text-dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            
+            /* Method Colors */
+            --color-dauer: #0891b2; /* Cyan/Teal for continuous */
+            --color-dauer-light: #cffafe;
+            
+            --color-intervall: #e11d48; /* Red/Rose for intervals */
+            --color-intervall-light: #ffe4e6;
+            
+            --color-pause: #fbbf24; /* Amber for Lohnende Pause */
+            
+            --abi-navy: #1e1b4b;
+            --abi-gold: #f59e0b;
+            --abi-white: #f8fafc;
+            
+            --radius-soft: 16px;
+            --shadow-float: 0 12px 30px -10px rgba(0,0,0,0.08);
+            --shadow-inner: inset 0 2px 4px 0 rgba(0,0,0,0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            /* Subtle diagonal stripes for a "coach's clipboard" feel */
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.02) 10px, rgba(0,0,0,0.02) 11px);
+        }
+
+        .workbook-container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        /* Playbook Header */
+        .playbook-header {
+            background: var(--bg-card);
+            border-radius: var(--radius-soft);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-float);
+            margin-bottom: 3rem;
+            position: relative;
+            border-top: 6px solid var(--text-dark);
+        }
+
+        .badge-id {
+            background: var(--text-dark);
+            color: white;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--text-dark);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-lead {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            border-left: 4px solid var(--text-dark);
+            padding-left: 1.5rem;
+            font-weight: 400;
+        }
+
+        /* Section Styling */
+        .method-section {
+            background: var(--bg-card);
+            border-radius: var(--radius-soft);
+            padding: 3rem;
+            box-shadow: var(--shadow-float);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .method-section.dauer { border-top: 5px solid var(--color-dauer); }
+        .method-section.intervall { border-top: 5px solid var(--color-intervall); }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .dauer h2 { color: var(--color-dauer); }
+        .intervall h2 { color: var(--color-intervall); }
+
+        .method-section > p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Cards inside sections */
+        .variant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .variant-grid { grid-template-columns: 1fr; }
+        }
+
+        .variant-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .variant-card h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #cbd5e1;
+        }
+
+        .prop-list {
+            list-style: none;
+        }
+
+        .prop-list li {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .prop-list li::before {
+            content: '▪';
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.2rem;
+        }
+
+        .dauer .prop-list li::before { color: var(--color-dauer); }
+        .intervall .prop-list li::before { color: var(--color-intervall); }
+
+        .prop-list strong {
+            color: var(--text-dark);
+            font-weight: 800;
+        }
+
+        /* Highlight Boxes */
+        .effect-box {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #ffffff;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .pause-highlight {
+            background: #fffbeb;
+            border-left: 5px solid var(--color-pause);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .pause-highlight h4 {
+            color: #b45309;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Comparative Table Matrix */
+        .table-wrapper {
+            background: var(--bg-card);
+            border-radius: var(--radius-soft);
+            padding: 3rem;
+            box-shadow: var(--shadow-float);
+            margin-bottom: 3rem;
+            overflow-x: auto;
+        }
+
+        .table-wrapper h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            min-width: 800px;
+        }
+
+        th, td {
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: #f1f5f9;
+            font-weight: 800;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        th:first-child { border-top-left-radius: 8px; }
+        th:last-child { border-top-right-radius: 8px; }
+
+        td:first-child {
+            font-weight: 800;
+            color: var(--text-dark);
+            background: #f8fafc;
+        }
+
+        /* Specific Highlight for "Pause" Column */
+        col.col-pause {
+            background-color: #fef3c7; /* Light amber */
+            border: 2px solid var(--color-pause);
+        }
+        
+        th.th-pause {
+            background: var(--color-pause);
+            color: white;
+        }
+
+        td.td-pause {
+            font-weight: 800;
+            color: #b45309;
+        }
+
+        /* Canvas Wrapper */
+        .canvas-container {
+            margin: 2rem 0;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow-inner);
+        }
+
+        /* Massive Abitur Transfer Box */
+        .abitur-blueprint {
+            background: var(--abi-navy);
+            color: var(--abi-white);
+            padding: 4rem;
+            border-radius: var(--radius-soft);
+            margin-top: 5rem;
+            box-shadow: 0 25px 50px -12px rgba(30, 27, 75, 0.5);
+            position: relative;
+        }
+
+        .abi-tag {
+            position: absolute;
+            top: -20px;
+            left: 3rem;
+            background: var(--abi-gold);
+            color: var(--abi-navy);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.6rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+
+        .abitur-blueprint h2 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+
+        .task-box {
+            background: rgba(0,0,0,0.3);
+            border-left: 4px solid #38bdf8;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            color: #bae6fd;
+        }
+
+        .strategy-steps {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .step-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .step-card h4 {
+            color: var(--abi-gold);
+            font-size: 1.15rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-card p {
+            margin-bottom: 0;
+            color: #cbd5e1;
+        }
+
+        .quote-style {
+            background: #000;
+            padding: 0.8rem;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #34d399;
+            display: block;
+            margin-top: 0.8rem;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .killer-argument {
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.15), transparent);
+            border-left: 4px solid var(--abi-gold);
+            padding: 2rem;
+            margin-top: 3rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .killer-argument h4 {
+            color: var(--abi-gold);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="workbook-container">
+
+    <!-- Header -->
+    <header class="playbook-header">
+        <div class="badge-id">Lernbereich 1.5.4a</div>
+        <h1>Kernmethoden: Dauermethode und Intervallmethode</h1>
+        <p class="intro-lead">Um die Ausdauerleistungsfähigkeit zielgerichtet zu verbessern, bedient sich die Trainingslehre spezifischer Trainingsmethoden. Diese Methoden unterscheiden sich fundamental in ihrer planmäßigen Gestaltung der Belastungskomponenten (Reizintensität, Reizdauer, Reizdichte und Reizumfang).</p>
+    </header>
+
+    <!-- Dauermethode -->
+    <section class="method-section dauer">
+        <h2><span style="font-size: 2.5rem; line-height: 1;">🌊</span> 1. Die Dauermethode</h2>
+        <p>Die Dauermethode ist durch eine ununterbrochene Belastung ohne Pausen über einen längeren Zeitraum gekennzeichnet. Das primäre Ziel ist die Verbesserung der aeroben Kapazität, der Grundlagenausdauer sowie die Optimierung des Fettstoffwechsels.</p>
+
+        <div class="variant-grid">
+            <div class="variant-card">
+                <h3>Die kontinuierliche Dauermethode</h3>
+                <ul class="prop-list">
+                    <li><strong>Trainingsinhalt:</strong> Gleichmäßiger Dauerlauf, Radfahren, Schwimmen bei konstanter Geschwindigkeit.</li>
+                    <li><strong>Reizintensität:</strong> Gering bis mittel (im Bereich der aeroben Schwelle, Laktat-Steady-State, ca. 60–80 % der HFmax).</li>
+                    <li><strong>Reizdauer:</strong> Sehr lang (30 Minuten bis zu mehreren Stunden).</li>
+                    <li><strong>Reizdichte:</strong> Keine Pausen (Pausenverhältnis = 0).</li>
+                    <li><strong>Reizumfang:</strong> Sehr hoch (viele Kilometer / lange Gesamtzeit).</li>
+                </ul>
+            </div>
+
+            <div class="variant-card">
+                <h3>Die variable Dauermethode</h3>
+                <ul class="prop-list">
+                    <li><strong>Trainingsinhalt:</strong> Dauerlauf mit planmäßigen Tempowechseln (Tempowechselläufe).</li>
+                    <li><strong>Reizintensität:</strong> Wechselnd. Die Intensität pendelt gezielt zwischen der aeroben und der anaeroben Schwelle.</li>
+                    <li><strong>Reizdauer:</strong> Lang.</li>
+                    <li><strong>Reizdichte:</strong> Keine Pausen (0).</li>
+                    <li><strong>Reizumfang:</strong> Hoch.</li>
+                </ul>
+                <div class="effect-box">
+                    <strong>Ziel:</strong> Neben der Grundlagenausdauer wird hierdurch die Laktatkompensation (schneller Laktatabbau während der langsameren Phasen) trainiert.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intervallmethode -->
+    <section class="method-section intervall">
+        <h2><span style="font-size: 2.5rem; line-height: 1;">⚡</span> 2. Die Intervallmethode</h2>
+        <p>Das absolute Kernmerkmal der Intervallmethode ist der planmäßige Wechsel von Belastungs- und Erholungsphasen. Die Pausen werden dabei zwingend als "lohnende Pausen" gestaltet.</p>
+
+        <div class="pause-highlight">
+            <h4>Das Prinzip der lohnenden Pause</h4>
+            Die Pause ist lang genug, um eine spürbare Erholung (z. B. Herzfrequenzabfall auf ca. 120 Schläge/min) zu gewährleisten, aber <strong>bewusst zu kurz, um sich vollständig zu regenerieren</strong> (unvollständige Erholung). Der nächste Belastungsreiz trifft den Organismus also in einem Zustand leichter Vorermüdung.
+        </div>
+
+        <p style="margin-bottom: 1.5rem; font-weight: 600;">Man unterscheidet je nach Intensität in zwei Hauptformen:</p>
+
+        <div class="variant-grid">
+            <div class="variant-card">
+                <h3>Die extensive Intervallmethode</h3>
+                <ul class="prop-list">
+                    <li><strong>Trainingsinhalt:</strong> Wiederholte, längere Belastungsphasen (z. B. 6 x 1000m Lauf).</li>
+                    <li><strong>Reizintensität:</strong> Mittel (ca. 70–80 % der Maximalleistung, knapp unter oder an der anaeroben Schwelle).</li>
+                    <li><strong>Reizdauer:</strong> Mittel bis lang (z. B. 2 bis 8 Minuten pro Intervall).</li>
+                    <li><strong>Reizdichte:</strong> Relativ kurz (lohnende Pause von ca. 1 bis 3 Minuten).</li>
+                    <li><strong>Reizumfang:</strong> Mittel bis hoch.</li>
+                </ul>
+                <div class="effect-box" style="background: #fff1f2; border-color: #fecdd3;">
+                    <strong>Wirkung:</strong> Verbesserung der aeroben Ausdauer, Herzkreislauf-Anpassung (Sportherz-Entwicklung), Verbesserung der Laktattoleranz.
+                </div>
+            </div>
+
+            <div class="variant-card">
+                <h3>Die intensive Intervallmethode</h3>
+                <ul class="prop-list">
+                    <li><strong>Trainingsinhalt:</strong> Kürzere, sehr schnelle Belastungsphasen (z. B. 10 x 200m Sprint).</li>
+                    <li><strong>Reizintensität:</strong> Hoch bis submaximal (80–90 % der Maximalleistung, massiv über der anaeroben Schwelle).</li>
+                    <li><strong>Reizdauer:</strong> Kurz bis mittel (z. B. 30 bis 60 Sekunden).</li>
+                    <li><strong>Reizdichte:</strong> Längere lohnende Pausen (ca. 2 bis 5 Minuten), da die Sauerstoffschuld durch die hohe Laktatproduktion massiv ist.</li>
+                    <li><strong>Reizumfang:</strong> Gering bis mittel.</li>
+                </ul>
+                <div class="effect-box" style="background: #fff1f2; border-color: #fecdd3;">
+                    <strong>Wirkung:</strong> Verbesserung der anaerob-laktaziden Energiebereitstellung, Steigerung der max. Sauerstoffaufnahme (VO<sub>2</sub>max), Säuretoleranz.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualisierung & Matrix -->
+    <div class="table-wrapper">
+        
+        <div class="canvas-container">
+            <h4 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 5px;">Kardiologische Belastungskurven im Vergleich</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">Dauermethode (Steady-State) vs. Intervallmethode (Lohnende Pause)</p>
+            <canvas id="hrChart" width="800" height="250"></canvas>
+        </div>
+
+        <h3>Vergleichende Matrix der Trainingsmethoden</h3>
+        <table>
+            <colgroup>
+                <col style="width: 20%;">
+                <col style="width: 20%;">
+                <col style="width: 20%;">
+                <col class="col-pause" style="width: 20%;">
+                <col style="width: 20%;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>Trainingsmethode</th>
+                    <th>Intensität</th>
+                    <th>Dauer (eines Reizes)</th>
+                    <th class="th-pause">Pause (Dichte)</th>
+                    <th>Umfang</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Kontinuierliche Dauermethode</td>
+                    <td>Gering bis mittel<br>(60-80% HFmax)</td>
+                    <td>Sehr lang<br>(30m bis Stunden)</td>
+                    <td class="td-pause">Keine (0)</td>
+                    <td>Sehr hoch</td>
+                </tr>
+                <tr>
+                    <td>Variable Dauermethode</td>
+                    <td>Wechselnd<br>(Pendelt AS-ANS)</td>
+                    <td>Lang</td>
+                    <td class="td-pause">Keine (0)</td>
+                    <td>Hoch</td>
+                </tr>
+                <tr>
+                    <td>Extensive Intervallmethode</td>
+                    <td>Mittel<br>(70-80% Max)</td>
+                    <td>Mittel bis lang<br>(2-8 min)</td>
+                    <td class="td-pause">Lohnende Pause (unvollständig)</td>
+                    <td>Mittel bis hoch</td>
+                </tr>
+                <tr>
+                    <td>Intensive Intervallmethode</td>
+                    <td>Hoch bis submax<br>(80-90% Max)</td>
+                    <td>Kurz bis mittel<br>(30-60 sek)</td>
+                    <td class="td-pause">Lohnende Pause (unvollständig)</td>
+                    <td>Gering bis mittel</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Abitur Transfer Blueprint -->
+    <div class="abitur-blueprint">
+        <div class="abi-tag">Abitur-Transfer & Praxis (eA)</div>
+        <h2>Der Konstruktions-Blueprint</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem;">In der G9-Abiturprüfung (eA) gehört die strukturierte Darstellung von Trainingsmethoden zum absoluten Pflichtprogramm und ist eine klassische Transferaufgabe, die sehr viele Bewertungseinheiten bringt. Das reine Herunterbeten von Definitionen reicht nicht – du musst die Methoden konstruieren und begründen.</p>
+
+        <div class="task-box">
+            <strong>Die Konstruktions-Aufgabe (Beispiel aus illustrierenden Aufgaben):</strong><br>
+            "Erläutern Sie zwei Methoden zur Verbesserung der aeroben Ausdauer anhand geeigneter Trainingsinhalte! Geben Sie dabei die jeweiligen Belastungskomponenten an..."
+        </div>
+
+        <h3 style="color: var(--abi-gold); margin-bottom: 1rem; font-family: 'Playfair Display', serif; font-size: 1.5rem;">Die Klausur-Lösungsstrategie (Schablone):</h3>
+        
+        <div class="strategy-steps">
+            <div class="step-card">
+                <h4>1. Methode exakt benennen</h4>
+                <p>Nenne den vollständigen Fachbegriff, z. B. <em>"Die extensive Intervallmethode"</em>.</p>
+            </div>
+            <div class="step-card">
+                <h4>2. Konkreten, sportartspezifischen Trainingsinhalt wählen</h4>
+                <p>Passe den Inhalt an den geforderten Sportler an. Z. B. für einen Volleyballer in der Saisonvorbereitung:<br>
+                <span class="quote-style">"Tempowechselläufe oder Linienläufe über das Volleyballfeld."</span></p>
+            </div>
+            <div class="step-card">
+                <h4>3. Die Belastungskomponenten quantifizieren</h4>
+                <p>Du MUSST die vier Komponenten in Textform ausschreiben und mit Werten füllen:<br>
+                <span class="quote-style">"Die Intensität ist mittel (ca. 70-80%). Die Dauer eines Linienlaufs beträgt ca. 2 Minuten. Die Dichte wird durch die lohnende Pause (z.B. 90 Sekunden aktives Gehen) charakterisiert. Der Gesamt-Umfang liegt bei 8 Wiederholungen."</span></p>
+            </div>
+        </div>
+
+        <div class="killer-argument">
+            <h4>🔥 Die "Lohnende Pause" als Argument</h4>
+            <p style="color: #cbd5e1; line-height: 1.7;">Wenn nach dem physiologischen Wirkungsmechanismus der Intervallmethode gefragt wird, musst du die lohnende Pause erklären. Der Trainingseffekt für das Herz-Kreislauf-System entsteht maßgeblich in der <strong>ersten Phase der Erholung</strong>, da hier das Herzminutenvolumen noch sehr hoch ist, der periphere Widerstand der Muskulatur aber absinkt.</p>
+            <p style="margin-top: 10px; color: white; font-weight: bold;">Dies löst einen massiven Volumenreiz auf das Sportherz aus. Wer den Begriff "lohnende Pause" in der Klausur vergisst oder physiologisch nicht erklären kann, verliert entscheidende Punkte.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Canvas Heart Rate Curves
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('hrChart');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Display Setup
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+
+        function drawCurves() {
+            ctx.clearRect(0, 0, width, height);
+
+            const padX = 50;
+            const padY = 30;
+            const chartW = width - padX * 2;
+            const chartH = height - padY * 2;
+
+            // Base Grid
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 1;
+            for(let i=0; i<=3; i++) {
+                let y = padY + (chartH/3)*i;
+                ctx.beginPath(); ctx.moveTo(padX, y); ctx.lineTo(width-padX, y); ctx.stroke();
+            }
+
+            ctx.fillStyle = '#64748b';
+            ctx.font = '11px Manrope';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('180 HF', padX - 10, padY);
+            ctx.fillText('120 HF', padX - 10, padY + chartH*0.5);
+            ctx.fillText('Ruhe', padX - 10, height - padY);
+
+            // X-Axis (Zeit)
+            ctx.beginPath(); ctx.moveTo(padX, height-padY); ctx.lineTo(width-padX, height-padY); ctx.stroke();
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            ctx.fillText('Belastungsdauer (Zeit)', padX + chartW/2, height - padY + 10);
+
+            // 1. Dauermethode Curve (Cyan)
+            ctx.beginPath();
+            ctx.moveTo(padX, height - padY); // Start
+            // Ramp up
+            ctx.quadraticCurveTo(padX + 30, height - padY, padX + 60, padY + chartH*0.4);
+            // Steady state
+            ctx.lineTo(width - padX - 40, padY + chartH*0.4);
+            // Ramp down
+            ctx.quadraticCurveTo(width - padX - 10, padY + chartH*0.4, width - padX, height - padY);
+            
+            ctx.strokeStyle = '#0891b2';
+            ctx.lineWidth = 4;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            // Label
+            ctx.fillStyle = '#0891b2';
+            ctx.font = 'bold 13px Manrope';
+            ctx.textAlign = 'left';
+            ctx.fillText('Dauermethode (Steady-State)', padX + 80, padY + chartH*0.4 - 10);
+
+            // 2. Intervallmethode Curve (Red/Rose)
+            ctx.beginPath();
+            ctx.moveTo(padX, height - padY); // Start
+            
+            let x = padX;
+            const numIntervals = 5;
+            const intWidth = chartW / (numIntervals + 1);
+
+            // Warm up
+            x += intWidth/2;
+            ctx.lineTo(x, height - padY);
+
+            for(let i=0; i<numIntervals; i++) {
+                // Spike (Belastung)
+                let nextX = x + intWidth * 0.4;
+                ctx.quadraticCurveTo(x + 10, padY + 10, nextX, padY + 10);
+                x = nextX;
+                
+                // Drop (Lohnende Pause - doesn't go to baseline)
+                nextX = x + intWidth * 0.6;
+                ctx.quadraticCurveTo(x + 10, padY + chartH*0.6, nextX, padY + chartH*0.5);
+                x = nextX;
+            }
+
+            // Cool down
+            ctx.lineTo(width - padX, height - padY);
+
+            ctx.strokeStyle = '#e11d48';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Label Intervall
+            ctx.fillStyle = '#e11d48';
+            ctx.fillText('Intervallmethode', width - padX - 150, padY + 15);
+
+            // Highlight one "Lohnende Pause"
+            const highlightX = padX + intWidth/2 + intWidth * 1.5;
+            const highlightY = padY + chartH*0.5;
+            
+            ctx.beginPath();
+            ctx.arc(highlightX, highlightY, 6, 0, Math.PI*2);
+            ctx.fillStyle = '#fbbf24';
+            ctx.fill();
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            ctx.fillStyle = '#d97706';
+            ctx.font = 'bold 12px Manrope';
+            ctx.textAlign = 'center';
+            ctx.fillText('Lohnende Pause', highlightX, highlightY + 20);
+        }
+
+        drawCurves();
+
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawCurves();
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.5.1a Klassifizierung nach Dauer und Energie</title>
+    <style>
+        /* Fluid & Endurance Flow Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Lexend:wght@300;400;500;700&display=swap');
+
+        :root {
+            /* Fluid Theme Colors */
+            --bg-main: #f8fafc;
+            --text-dark: #0f172a;
+            --text-main: #334155;
+            --text-light: #64748b;
+            
+            /* Energy Gradients */
+            --anaerobic-color: #f43f5e; /* Explosive Red/Pink */
+            --transition-color: #a855f7; /* Mixed Purple */
+            --aerobic-color: #06b6d4; /* Calm Cyan/Blue */
+            
+            --card-bg: #ffffff;
+            --radius-soft: 16px;
+            --radius-pill: 50px;
+            
+            /* Abitur Colors */
+            --abi-dark: #171717;
+            --abi-gold: #fbbf24;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            position: relative;
+        }
+
+        /* Subtle Background Flow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.03), rgba(168, 85, 247, 0.03), rgba(6, 182, 212, 0.03));
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--card-bg);
+            padding: 4rem;
+            border-radius: var(--radius-soft);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 6px solid transparent;
+            border-image: linear-gradient(to right, var(--anaerobic-color), var(--transition-color), var(--aerobic-color)) 1;
+        }
+
+        .sys-badge {
+            display: inline-block;
+            background: #f1f5f9;
+            color: var(--text-light);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.5rem 1.2rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--text-dark);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .lead {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        /* Content Sections */
+        .section-block {
+            background: var(--card-bg);
+            padding: 3.5rem;
+            border-radius: var(--radius-soft);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .h2-number {
+            background: linear-gradient(135deg, var(--text-dark), var(--text-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            font-weight: 900;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        /* Energy Cards (Aerob vs Anaerob) */
+        .energy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .energy-grid { grid-template-columns: 1fr; }
+        }
+
+        .energy-card {
+            padding: 2rem;
+            border-radius: var(--radius-soft);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .energy-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .energy-card.aerob {
+            background: linear-gradient(135deg, var(--aerobic-color), #0369a1);
+            box-shadow: 0 15px 30px rgba(6, 182, 212, 0.2);
+        }
+
+        .energy-card.anaerob {
+            background: linear-gradient(135deg, var(--anaerobic-color), #be123c);
+            box-shadow: 0 15px 30px rgba(244, 63, 94, 0.2);
+        }
+
+        .energy-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        .energy-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .energy-card strong {
+            color: white;
+            font-weight: 700;
+        }
+
+        /* Timeline / Duration List */
+        .duration-list {
+            margin-top: 2rem;
+        }
+
+        .duration-item {
+            background: var(--bg-main);
+            border: 1px solid #e2e8f0;
+            padding: 2rem;
+            border-radius: var(--radius-soft);
+            margin-bottom: 1.5rem;
+            position: relative;
+            border-left: 6px solid;
+        }
+
+        .duration-item.kza { border-left-color: var(--anaerobic-color); }
+        .duration-item.mza { border-left-color: var(--transition-color); }
+        .duration-item.lza { border-left-color: var(--aerobic-color); }
+
+        .duration-item h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .time-badge {
+            background: white;
+            padding: 0.3rem 1rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-weight: 700;
+        }
+
+        .duration-item p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Canvas Wrapper */
+        .canvas-container {
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: var(--radius-soft);
+            padding: 2rem;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+            border: 1px dashed #cbd5e1;
+            margin: 3rem 0;
+        }
+
+        .canvas-container h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            display: block;
+        }
+
+        /* Massive Abitur Transfer Block */
+        .abitur-focus {
+            background: var(--abi-dark);
+            color: #e5e5e5;
+            padding: 4rem;
+            border-radius: var(--radius-soft);
+            margin-top: 5rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        .abitur-focus::before {
+            content: 'EXAM FOCUS: eA-NIVEAU';
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+            color: var(--abi-dark);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            padding: 0.5rem 2.5rem;
+            border-radius: var(--radius-pill);
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2);
+            white-space: nowrap;
+        }
+
+        .abitur-focus h3 {
+            color: var(--abi-gold);
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+
+        .abitur-intro {
+            font-size: 1.15rem;
+            color: #a3a3a3;
+            margin-bottom: 2rem;
+        }
+
+        .argument-box {
+            background: rgba(255,255,255,0.03);
+            border-left: 4px solid var(--abi-gold);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .argument-box h4 {
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .argument-quote {
+            background: rgba(0,0,0,0.5);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-style: italic;
+            color: #fde68a;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <header class="hero">
+        <div class="sys-badge">Lernbereich 1.5.1a</div>
+        <h1>Klassifizierung nach Dauer und Energie</h1>
+        <p class="lead">Die Ausdauer ist die physische und psychische Widerstandsfähigkeit gegen Ermüdung bei relativ lang andauernden Belastungen und die rasche Erholungsfähigkeit nach der Belastung. Da die sportlichen Anforderungen extrem vielfältig sind, muss der allgemeine Ausdauerbegriff ausdifferenziert werden.</p>
+    </header>
+
+    <!-- Section 1 -->
+    <div class="section-block">
+        <h2><span class="h2-number">1.</span> Klassifizierung nach der Art der Energiebereitstellung</h2>
+        <p>Dieses Kriterium richtet sich danach, ob die arbeitende Muskulatur ausreichend mit Sauerstoff versorgt wird oder nicht.</p>
+
+        <div class="energy-grid">
+            <!-- Aerob -->
+            <div class="energy-card aerob">
+                <h3>💨 Aerobe Ausdauer</h3>
+                <span class="card-tag">Definition</span>
+                <p>Liegt vor, wenn die benötigte Energie für die Aufrechterhaltung der Belastungsintensität vollständig durch die Oxidation von Nährstoffen (Kohlenhydrate und Fette) mit Sauerstoff abgedeckt werden kann.</p>
+                <span class="card-tag" style="margin-top: 10px;">Physiologie</span>
+                <p>Es liegt ein sogenanntes <strong>Sauerstoff-Steady-State</strong> vor (Sauerstoffaufnahme = Sauerstoffbedarf). Es kommt zu keiner nennenswerten Laktatanhäufung.</p>
+                <span class="card-tag" style="margin-top: 10px;">Anwendung</span>
+                <p>Typisch für ausgedehnte, eher moderate Belastungen (z. B. ein Marathonlauf oder eine mehrstündige Mountainbike-Etappe im flachen Gelände).</p>
+            </div>
+
+            <!-- Anaerob -->
+            <div class="energy-card anaerob">
+                <h3>🔥 Anaerobe Ausdauer</h3>
+                <span class="card-tag">Definition</span>
+                <p>Fähigkeit, eine hochintensive Belastung möglichst lange aufrechtzuerhalten, bei der die Sauerstoffaufnahme <strong>nicht ausreicht</strong>, um den Energiebedarf zu decken.</p>
+                <span class="card-tag" style="margin-top: 10px;">Physiologie</span>
+                <p>Die Energie wird primär unter dem Eingehen einer Sauerstoffschuld und der massiven Anhäufung von Laktat (anaerobe Glykolyse) bereitgestellt. Widerstandsfähigkeit gegen Übersäuerung (Azidose) und der Umgang mit peripherer Ermüdung sind leistungsbestimmend.</p>
+                <span class="card-tag" style="margin-top: 10px;">Anwendung</span>
+                <p>Typisch für intensive, kürzere Belastungen (z. B. 400-m-Lauf oder kurze, extreme Zwischensprints am Berg).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section-block">
+        <h2><span class="h2-number">2.</span> Klassifizierung nach der Belastungsdauer</h2>
+        <p>Da die Belastungsdauer in einem direkten, untrennbaren Kausalzusammenhang mit der Energiebereitstellung steht, teilt man die Ausdauer in drei primäre Zeitfenster ein. <strong>Wichtig:</strong> Diese Einteilung gilt nur, wenn die für diese Zeitdauer jeweils höchstmögliche (maximale) Intensität gewählt wird!</p>
+
+        <div class="duration-list">
+            <!-- KZA -->
+            <div class="duration-item kza">
+                <h3>Kurzzeitausdauer (KZA) <span class="time-badge">35s – 2 Min</span></h3>
+                <p><strong>Energetik:</strong> Die Energiebereitstellung erfolgt überwiegend <strong>anaerob-laktazid</strong>. Zum Ende hin nimmt der aerobe Anteil leicht zu.</p>
+                <p style="color: var(--text-light); font-size: 0.95rem;"><em>Beispiel: 400-m-Lauf, 800-m-Lauf (Leichtathletik).</em></p>
+            </div>
+
+            <!-- MZA -->
+            <div class="duration-item mza">
+                <h3>Mittelzeitausdauer (MZA) <span class="time-badge">2 Min – 10 Min</span></h3>
+                <p><strong>Energetik:</strong> Hier findet der Übergang statt. Beide Systeme arbeiten auf Hochtouren. Die Energiebereitstellung ist zunehmend <strong>aerob</strong>, wobei der <strong>anaerobe Anteil (Laktattoleranz)</strong> vor allem bei Tempoverschärfungen und im Endspurt noch extrem wichtig ist.</p>
+                <p style="color: var(--text-light); font-size: 0.95rem;"><em>Beispiel: 1500-m-Lauf im Zehnkampf, 3000-m-Lauf.</em></p>
+            </div>
+
+            <!-- LZA -->
+            <div class="duration-item lza">
+                <h3>Langzeitausdauer (LZA) <span class="time-badge">> 10 Min</span></h3>
+                <p><strong>Energetik:</strong> Die Energiebereitstellung erfolgt fast ausschließlich <strong>aerob</strong>.</p>
+                <p style="margin-top: 10px; font-size: 0.95rem;"><strong>Spezifizierung:</strong> In der tieferen Sporttheorie wird die LZA aufgrund des Wechselspiels zwischen Kohlenhydrat- und Fettstoffwechsel nochmals unterteilt in <strong>LZA I</strong> (bis 35 min, reiner Glykogenstoffwechsel), <strong>LZA II</strong> (bis 90 min) und <strong>LZA III / IV</strong> (über 90 min, zunehmend dominanter Fettstoffwechsel).</p>
+                <p style="color: var(--text-light); font-size: 0.95rem; margin-top: 5px;"><em>Beispiel: 10.000-m-Lauf, Marathon, mehrstündige Radtouren.</em></p>
+            </div>
+        </div>
+
+        <!-- Canvas Matrix -->
+        <div class="canvas-container">
+            <h4>Matrix: Fließender Übergang der Ausdauerarten</h4>
+            <canvas id="ausdauerMatrixCanvas" width="900" height="400"></canvas>
+            <p style="text-align: center; font-size: 0.85rem; color: var(--text-light); margin-top: 15px;">Visuelle Darstellung der Energiestoffwechsel-Gewichtung in Abhängigkeit von Zeit und Disziplin.</p>
+        </div>
+    </div>
+
+    <!-- Abitur Transfer Box -->
+    <div class="abitur-focus">
+        <p class="abitur-intro">In den Abiturprüfungen (eA) wird reines Definitionswissen kaum abgefragt. Du musst die Unterscheidung der Ausdauerarten als Werkzeug nutzen, um sportartspezifische Anforderungsprofile zu analysieren.</p>
+
+        <h3>Anforderungsprofile entschlüsseln</h3>
+        <p style="margin-bottom: 1.5rem;">Bekommst du im Abitur eine Disziplin vorgegeben (z. B. den 1500-m-Lauf aus dem Zehnkampf oder das Mountainbiken), musst du diese exakt in dieses System einordnen.</p>
+
+        <div class="argument-box">
+            <h4>🏃 Beispiel-Argumentation: 1500-m-Lauf</h4>
+            <div class="argument-quote">
+                "Der 1500-m-Lauf im Zehnkampf dauert bei Profis knapp unter 5 Minuten. Damit fällt er exakt in den Bereich der <strong>Mittelzeitausdauer (MZA)</strong>. Energetisch bedeutet dies, dass der Athlet eine hohe aerobe Kapazität (VO<sub>2</sub>max) benötigt, aber gleichzeitig eine stark ausgeprägte anaerobe Ausdauer (Laktattoleranz) besitzen muss, um das hohe Tempo über die Distanz zu halten und am Ende noch sprinten zu können."
+            </div>
+        </div>
+
+        <div class="argument-box" style="border-left-color: #38bdf8;">
+            <h4 style="color: #38bdf8;">🚵 Begründung der Energiebereitstellung durch die Zeitdauer</h4>
+            <p style="margin-bottom: 10px;">Das Zeitkriterium ist dein <strong>bestes Argumentationswerkzeug!</strong></p>
+            <p>Wenn eine Fallstudie zeigt, dass eine Mountainbike-Tour über zwei Stunden geht (vgl. Beispiel der Alpenüberquerung), musst du argumentieren, dass es sich um <strong>Langzeitausdauer (LZA)</strong> handelt. Das zwingt den Körper biologisch dazu, fast ausschließlich auf die aerobe Ausdauer (und ab ca. 90 Minuten zwingend auf die Lipolyse/Fettverbrennung) zurückzugreifen.</p>
+            <p style="margin-top: 10px; color: #bae6fd; font-weight: 700;">Wer im Abitur diese Brücke zwischen Belastungsdauer, Ausdauerart und Nährstoffverbrennung logisch aufbaut, argumentiert auf sicherem eA-Niveau.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Canvas Table/Matrix for Ausdauerarten
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('ausdauerMatrixCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Support
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+
+        function drawMatrix() {
+            ctx.clearRect(0, 0, width, height);
+
+            const padding = 20;
+            const tableX = padding;
+            const tableY = padding;
+            const tableW = width - padding * 2;
+            const tableH = height - padding * 3 - 40; // Leave room for gradient bar at bottom
+            
+            const rowH = tableH / 4; // 1 Header + 3 Data rows
+            const colWs = [tableW * 0.25, tableW * 0.20, tableW * 0.35, tableW * 0.20];
+
+            // Colors
+            const headerBg = '#f1f5f9';
+            const headerText = '#0f172a';
+            const gridColor = '#e2e8f0';
+
+            // Draw Backgrounds for rows
+            for(let i=1; i<=3; i++) {
+                ctx.fillStyle = (i%2 === 0) ? '#f8fafc' : '#ffffff';
+                ctx.fillRect(tableX, tableY + i*rowH, tableW, rowH);
+            }
+
+            // Draw Grid Lines
+            ctx.strokeStyle = gridColor;
+            ctx.lineWidth = 1;
+            
+            // Horizontal lines
+            for (let i = 0; i <= 4; i++) {
+                ctx.beginPath();
+                ctx.moveTo(tableX, tableY + i * rowH);
+                ctx.lineTo(tableX + tableW, tableY + i * rowH);
+                ctx.stroke();
+            }
+
+            // Vertical lines (for header and data)
+            let currentX = tableX;
+            for (let i = 0; i <= 4; i++) {
+                ctx.beginPath();
+                ctx.moveTo(currentX, tableY);
+                ctx.lineTo(currentX, tableY + tableH);
+                ctx.stroke();
+                if(i < 4) currentX += colWs[i];
+            }
+
+            // Draw Header Background
+            ctx.fillStyle = headerBg;
+            ctx.fillRect(tableX, tableY, tableW, rowH);
+            ctx.strokeRect(tableX, tableY, tableW, rowH);
+
+            // Text configuration
+            const drawCellText = (text, x, y, w, h, isHeader = false) => {
+                ctx.fillStyle = isHeader ? headerText : '#334155';
+                ctx.font = isHeader ? 'bold 15px Lexend' : '14px Lexend';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                // Handle multi-line if needed (simple split by \n)
+                const lines = text.split('\n');
+                const lineHeight = 18;
+                let startY = y + h/2 - ((lines.length - 1) * lineHeight) / 2;
+                
+                lines.forEach(line => {
+                    ctx.fillText(line, x + w/2, startY);
+                    startY += lineHeight;
+                });
+            };
+
+            // Headers
+            const headers = ["Ausdauerart\nnach Dauer", "Zeitfenster", "Dominante\nEnergiebereitstellung", "Beispiel-Sportart"];
+            let cx = tableX;
+            headers.forEach((h, i) => {
+                drawCellText(h, cx, tableY, colWs[i], rowH, true);
+                cx += colWs[i];
+            });
+
+            // Data
+            const data = [
+                ["Kurzzeitausdauer\n(KZA)", "35 s – 2 min", "Anaerob-laktazid\n(zunehmend aerob)", "400m-Lauf\n800m-Lauf"],
+                ["Mittelzeitausdauer\n(MZA)", "2 min – 10 min", "Aerob & Anaerob\n(Übergangsbereich)", "1500m-Lauf\n3000m-Lauf"],
+                ["Langzeitausdauer\n(LZA)", "ab 10 min\n(bis Stunden)", "Aerob\n(Kohlenhydrate & Fette)", "Marathon\nMTB-Tour"]
+            ];
+
+            // Fill Data
+            data.forEach((row, rowIndex) => {
+                let cellX = tableX;
+                row.forEach((cell, colIndex) => {
+                    // Special styling for energy column to show transition
+                    if(colIndex === 2) {
+                        if(rowIndex === 0) ctx.fillStyle = '#f43f5e'; // Anaerob
+                        else if(rowIndex === 1) ctx.fillStyle = '#a855f7'; // Mixed
+                        else ctx.fillStyle = '#06b6d4'; // Aerob
+                        
+                        ctx.font = 'bold 14px Lexend';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        const lines = cell.split('\n');
+                        let startY = tableY + (rowIndex+1)*rowH + rowH/2 - 10;
+                        lines.forEach((line, i) => {
+                            if(i > 0) { ctx.font = '13px Lexend'; ctx.fillStyle = '#64748b'; }
+                            ctx.fillText(line, cellX + colWs[colIndex]/2, startY);
+                            startY += 20;
+                        });
+                    } else {
+                        drawCellText(cell, cellX, tableY + (rowIndex+1)*rowH, colWs[colIndex], rowH, false);
+                    }
+                    cellX += colWs[colIndex];
+                });
+            });
+
+            // Draw Fluid Gradient Bar at the bottom
+            const barY = tableY + tableH + 30;
+            const barH = 15;
+            
+            // Create Gradient
+            const gradient = ctx.createLinearGradient(tableX, 0, tableX + tableW, 0);
+            gradient.addColorStop(0, '#f43f5e'); // Anaerob (Red)
+            gradient.addColorStop(0.5, '#a855f7'); // Transition (Purple)
+            gradient.addColorStop(1, '#06b6d4'); // Aerob (Cyan)
+
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.roundRect(tableX, barY, tableW, barH, barH/2);
+            ctx.fill();
+
+            // Gradient Labels
+            ctx.fillStyle = '#f43f5e';
+            ctx.font = 'bold 14px Lexend';
+            ctx.textAlign = 'left';
+            ctx.fillText('◀ Anaerobe Dominanz (Intensität hoch)', tableX, barY - 10);
+
+            ctx.fillStyle = '#06b6d4';
+            ctx.textAlign = 'right';
+            ctx.fillText('Aerobe Dominanz (Dauer lang) ▶', tableX + tableW, barY - 10);
+        }
+
+        drawMatrix();
+
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawMatrix();
+        });
+    });
+</script>
+
+</body>
+</html>

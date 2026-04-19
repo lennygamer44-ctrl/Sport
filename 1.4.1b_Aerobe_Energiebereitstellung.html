@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Aerobe Energiebereitstellung</title>
+    <style>
+        /* Magazin-Style Typografie */
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;1,300&family=Roboto:wght@300;400;500;700;900&display=swap');
+
+        :root {
+            /* Frisches Thema: Sauerstoff & Ausdauer (Emerald / Teal) */
+            --bg-color: #f0fdfa; /* Light mint */
+            --text-dark: #0f172a;
+            --text-body: #334155;
+            --emerald-main: #10b981;
+            --emerald-dark: #047857;
+            --teal-light: #ccfbf1;
+            --teal-accent: #0d9488;
+            --gold-highlight: #f59e0b;
+            --abi-red: #dc2626;
+            --abi-bg: #fef2f2;
+            --white: #ffffff;
+            --radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-body);
+            line-height: 1.8;
+            padding: 2rem 1rem;
+        }
+
+        /* Container & Layout */
+        .document-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--white);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        /* Header (Asymmetrisch, Magazin-Look) */
+        header {
+            display: flex;
+            flex-direction: column;
+            background: var(--emerald-dark);
+            color: var(--white);
+            position: relative;
+        }
+
+        .header-content {
+            padding: 4rem 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: var(--teal-light);
+            color: var(--teal-accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        /* Dekorative Form im Header */
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to top left, rgba(16, 185, 129, 0.4), transparent);
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+            z-index: 1;
+        }
+
+        /* Hauptinhalt */
+        .content-body {
+            padding: 3rem;
+        }
+
+        .intro-text {
+            font-family: 'Merriweather', serif;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            border-left: 4px solid var(--emerald-main);
+            padding-left: 1.5rem;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        /* CSS Grid für Abschnitte */
+        .split-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .split-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        h2 {
+            font-family: 'Merriweather', serif;
+            color: var(--emerald-dark);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        h2 .number {
+            background: var(--emerald-main);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin: 1.5rem 0 0.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        /* Formel / Chemie-Box */
+        .chem-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--teal-accent);
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chem-box::before {
+            content: '🧪 REAKTIONSGLEICHUNG';
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--teal-accent);
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.7rem;
+            padding: 2px 10px;
+            border-bottom-right-radius: var(--radius);
+        }
+
+        /* Marginalien / Info-Boxen in der rechten Spalte */
+        .marginal-box {
+            background: var(--teal-light);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            height: fit-content;
+            border-top: 4px solid var(--teal-accent);
+        }
+
+        .marginal-box h4 {
+            color: var(--teal-accent);
+            margin-bottom: 0.5rem;
+            font-family: 'Merriweather', serif;
+        }
+
+        /* Laktat Warnbox */
+        .highlight-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-left: 5px solid var(--gold-highlight);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 2rem 0;
+        }
+
+        /* Moderne Tabelle */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 3rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: var(--radius);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 1.2rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: var(--emerald-dark);
+            color: white;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        th:first-child {
+            width: 30%;
+        }
+
+        tbody tr:hover {
+            background-color: #f8fafc;
+            transition: background-color 0.2s ease;
+        }
+
+        td:first-child {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .carb-col {
+            border-right: 1px solid #f1f5f9;
+        }
+
+        /* Canvas Bereich */
+        .canvas-section {
+            background: #0f172a;
+            padding: 3rem;
+            border-radius: var(--radius);
+            margin: 3rem 0;
+            color: white;
+            text-align: center;
+        }
+
+        .canvas-section h3 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            background: #1e293b;
+            border-radius: var(--radius);
+            border: 1px solid #334155;
+        }
+
+        /* Abitur-Transfer Box (Premium) */
+        .abi-transfer {
+            background: linear-gradient(145deg, #ffffff, var(--abi-bg));
+            border: 2px solid var(--abi-red);
+            border-radius: var(--radius);
+            padding: 3rem;
+            position: relative;
+            margin-top: 4rem;
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.1);
+        }
+
+        .abi-badge {
+            position: absolute;
+            top: -20px;
+            left: 3rem;
+            background: var(--abi-red);
+            color: white;
+            padding: 0.5rem 2rem;
+            font-weight: 900;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .abi-transfer h3 {
+            color: var(--abi-red);
+            font-family: 'Merriweather', serif;
+            margin-top: 2rem;
+            border-bottom: 1px solid #fca5a5;
+            padding-bottom: 0.5rem;
+        }
+
+        .abi-transfer p {
+            font-size: 1.05rem;
+        }
+
+        .abi-insight {
+            background: white;
+            padding: 1.5rem;
+            border-left: 4px solid var(--gold-highlight);
+            margin-top: 1.5rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .subscript {
+            font-size: 0.75em;
+            vertical-align: sub;
+        }
+    </style>
+</head>
+<body>
+
+<div class="document-wrapper">
+    <header>
+        <div class="header-content">
+            <span class="header-badge">Lernbereich 1.4.1b</span>
+            <h1>Aerobe Prozesse</h1>
+            <p>Die aerobe Energiebereitstellung: Kohlenhydrate und Fette als Brennstoffe im Sauerstoff-Steady-State.</p>
+        </div>
+    </header>
+
+    <div class="content-body">
+        <!-- Einleitung -->
+        <div class="intro-text">
+            <p>Wenn eine sportliche Belastung über einen längeren Zeitraum (ab ca. 1 bis 2 Minuten) aufrechterhalten wird und die Belastungsintensität so moderat ist, dass die Sauerstoffaufnahme den Sauerstoffbedarf der Arbeitsmuskulatur decken kann (Sauerstoff-Steady-State), erfolgt die Resynthese von ATP auf aerobem Weg. Diese Prozesse finden intramuskulär in den Mitochondrien („Kraftwerken der Zelle“) statt.</p>
+            <p>Dabei werden energiereiche Nährstoffe unter Verbrauch von Sauerstoff (O<span class="subscript">2</span>) vollständig zu Kohlendioxid (CO<span class="subscript">2</span>) und Wasser (H<span class="subscript">2</span>O) abgebaut. Man unterscheidet hierbei zwei Hauptsubstrate: Kohlenhydrate und Fette.</p>
+        </div>
+
+        <!-- Abschnitt 1: Glykolyse -->
+        <div class="split-section">
+            <div class="main-content">
+                <h2><span class="number">1</span> Aerobe Glykolyse <br><span style="font-size: 1.2rem; font-family: 'Roboto', sans-serif; font-weight: 300; color: var(--text-body);">(Kohlenhydratverbrennung)</span></h2>
+                <p>Bei der aeroben Glykolyse wird Glukose (bzw. das in der Muskulatur und Leber gespeicherte Glykogen) unter Sauerstoffbeteiligung vollständig verstoffwechselt. Dieser Prozess durchläuft nach der Glykolyse den Zitratzyklus und die Atmungskette.</p>
+                
+                <h3>Der chemische Prozess</h3>
+                <div class="chem-box">
+                    Glukose + O<span class="subscript">2</span> + ADP + P &rarr; CO<span class="subscript">2</span> + H<span class="subscript">2</span>O + ATP
+                </div>
+
+                <h3>Charakteristik</h3>
+                <p>Dieser Stoffwechselweg liefert im Vergleich zur anaeroben Energiebereitstellung eine deutlich höhere ATP-Ausbeute (38 Mol ATP pro Mol Glukose im Vergleich zu nur 2 Mol ATP bei der anaeroben Glykolyse). Die Reaktionsgeschwindigkeit ist zwar langsamer als bei den anaeroben Wegen, aber schnell genug, um mittlere bis submaximale Intensitäten aufrechtzuerhalten.</p>
+            </div>
+            <div class="sidebar">
+                <div class="marginal-box">
+                    <h4>🏃‍♂️ Praxis-Beispiel</h4>
+                    <p>Ein <strong>1500-m-Lauf</strong> im Zehnkampf, der etwa 4 bis 5 Minuten dauert, wird maßgeblich durch die aerobe Glykolyse energetisch abgesichert.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Abschnitt 2: Lipolyse -->
+        <div class="split-section">
+            <div class="main-content">
+                <h2><span class="number">2</span> Lipolyse / Beta-Oxidation <br><span style="font-size: 1.2rem; font-family: 'Roboto', sans-serif; font-weight: 300; color: var(--text-body);">(Fettverbrennung)</span></h2>
+                <p>Bei sehr langen Belastungen mit eher geringer Intensität greift der Körper zunehmend auf freie Fettsäuren zurück, um ATP zu resynthetisieren.</p>
+                
+                <h3>Der chemische Prozess</h3>
+                <div class="chem-box" style="border-color: #fde68a;">
+                    Freie Fettsäuren + O<span class="subscript">2</span> + ADP + P &rarr; CO<span class="subscript">2</span> + H<span class="subscript">2</span>O + ATP
+                </div>
+
+                <h3>Charakteristik</h3>
+                <p>Fette haben den mit Abstand größten Energiegehalt und die körpereigenen Speicher sind nahezu unerschöpflich. Allerdings benötigt die Oxidation von Fetten im Vergleich zur Glukoseverbrennung etwa <strong>16 % mehr Sauerstoff</strong> für die gleiche Menge an resynthetisiertem ATP. Daher kann die Fettverbrennung nur bei geringen Intensitäten (z. B. lockerer Dauerlauf) die Hauptenergiequelle sein.</p>
+
+                <div class="highlight-box">
+                    <h4 style="color: var(--gold-highlight); font-family: 'Merriweather', serif; margin-bottom: 5px;">🔄 Laktatabbau</h4>
+                    <p style="margin:0;">Ein weiterer wichtiger Aspekt des aeroben Stoffwechsels ist, dass anfallendes Laktat aus anaeroben Phasen (z. B. nach einem Zwischensprint) in der Herz- und Skelettmuskulatur unter Sauerstoffzufuhr aerob verbrannt und somit eliminiert werden kann.</p>
+                </div>
+            </div>
+            <div class="sidebar">
+                <div class="marginal-box" style="background: #fef3c7; border-top-color: var(--gold-highlight);">
+                    <h4 style="color: #b45309;">💡 Merke</h4>
+                    <p>Fettverbrennung benötigt mehr O<span class="subscript">2</span>. Sobald die Intensität steigt und Sauerstoff knapper wird, schaltet der Körper primär auf Kohlenhydrate um!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vergleichstabelle (KI 2 Auftrag) -->
+        <h2 style="margin-top: 2rem;">Gegenüberstellung der aeroben Stoffwechselwege</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Vergleichskriterium</th>
+                        <th class="carb-col">🌾 Aerobe Kohlenhydratverbrennung</th>
+                        <th>🥑 Aerobe Fettverbrennung</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Benötigte Sauerstoffmenge</td>
+                        <td class="carb-col">Geringer (effizientere O<span class="subscript">2</span>-Nutzung)</td>
+                        <td>Ca. 16% mehr Sauerstoff pro Mol ATP benötigt</td>
+                    </tr>
+                    <tr>
+                        <td>ATP-Ausbeute (Energieflussrate)</td>
+                        <td class="carb-col">Hoch (schnellere Energiebereitstellung)</td>
+                        <td>Sehr hoch (absolut), aber langsamer Energiefluss</td>
+                    </tr>
+                    <tr>
+                        <td>Speicherkapazität im Körper</td>
+                        <td class="carb-col">Begrenzt (Glykogen in Muskel/Leber, ca. 400-600g)</td>
+                        <td>Nahezu unerschöpflich (mehrere Kilogramm Depotfett)</td>
+                    </tr>
+                    <tr>
+                        <td>Typische Belastungsintensität</td>
+                        <td class="carb-col">Moderat bis submaximal</td>
+                        <td>Gering (z. B. lockerer Dauerlauf)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Canvas Visualisierung -->
+        <div class="canvas-section">
+            <h3>Visualisierung: ATP-Ausbeute pro Molekül</h3>
+            <canvas id="yieldChart" width="800" height="300"></canvas>
+            <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 15px;">*Vergleich der absoluten ATP-Gewinnung (Glukose vs. Palmitinsäure/Fett) aus einem Molekül Substrat.</p>
+        </div>
+
+        <!-- Abitur Transfer Box -->
+        <div class="abi-transfer">
+            <div class="abi-badge">🎯 ABITUR-TRANSFER & PRAXIS (eA)</div>
+            
+            <p>Für die materialgestützten Aufgaben im Abitur (eA) wird vorausgesetzt, dass du Streckenprofile oder Wettkampfberichte analysierst und den dominierenden aeroben Stoffwechselweg <strong>absolut präzise benennst und physiologisch begründest</strong>.</p>
+
+            <h3>1. Ableitung aus Indikatoren (Atmung & Kommunikation)</h3>
+            <p>Du musst Textquellen auf physiologische Parameter untersuchen. Das Kultusministerium legt hier großen Wert auf Alltagstransfer:</p>
+            <div class="abi-insight">
+                <p style="margin:0;">Wenn in einem Material (z. B. einem Blogauszug zum Mountainbiken) steht, dass sich die Athleten auf einem flachen Streckenabschnitt <em>problemlos unterhalten</em> konnten, ist das dein Indikator für eine geringe Belastungsintensität. Deine Schlussfolgerung für die Klausur muss lauten: <strong>Die Energiebereitstellung erfolgt vorherrschend aerob durch die Verbrennung von Kohlenhydraten und Fettsäuren.</strong></p>
+            </div>
+
+            <h3>2. Regenerationsphasen im Wettkampf</h3>
+            <p>Die aerobe Energiebereitstellung dient nicht nur dem reinen Vortrieb, sondern der <strong>Erholung</strong>. Geht ein Streckenprofil in ein starkes Gefälle über (z. B. nach dem höchsten Punkt einer Tour), sinkt die Intensität rapide.</p>
+            <div class="abi-insight">
+                <p style="margin:0;">Du musst argumentieren, dass in dieser Phase nicht nur Kohlenhydrate und Fettsäuren aerob verbrannt werden, sondern <strong>vor allem das in vorherigen Steigungen (durch anaerobe Prozesse) gebildete Laktat nun aerob in der Muskulatur verstoffwechselt wird</strong>. Dies ist entscheidend, um den sogenannten aerob-anaeroben Übergangsbereich und die "Laktat-Clearance" zu erklären.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Canvas: Bar Chart für ATP-Ausbeute (Glukose vs. Fett)
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('yieldChart');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Display Anpassung
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+        const padding = 40;
+        
+        // Daten
+        const labels = ['Anaerobe Glykolyse (2 ATP)', 'Aerobe Glykolyse (38 ATP)', 'Beta-Oxidation / Fett (ca. 130 ATP)'];
+        const values = [2, 38, 130];
+        const colors = ['#f43f5e', '#10b981', '#f59e0b']; // Red, Emerald, Amber
+        
+        const maxVal = 140; // max Y value for scaling
+        const chartHeight = height - (padding * 2) - 20;
+        const barWidth = (width - (padding * 2)) / values.length * 0.6;
+        const spacing = (width - (padding * 2)) / values.length;
+        
+        function drawChart() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // X-Achse
+            ctx.beginPath();
+            ctx.moveTo(padding, height - padding);
+            ctx.lineTo(width - padding, height - padding);
+            ctx.strokeStyle = '#475569';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Balken zeichnen
+            for (let i = 0; i < values.length; i++) {
+                const x = padding + (i * spacing) + (spacing / 2) - (barWidth / 2);
+                const barHeight = (values[i] / maxVal) * chartHeight;
+                const y = height - padding - barHeight;
+                
+                // Draw bar with gradient
+                const gradient = ctx.createLinearGradient(0, y, 0, height - padding);
+                gradient.addColorStop(0, colors[i]);
+                gradient.addColorStop(1, '#0f172a'); // blend into background
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.roundRect(x, y, barWidth, barHeight, [6, 6, 0, 0]);
+                ctx.fill();
+                
+                // Draw Value Label
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 16px Roboto';
+                ctx.textAlign = 'center';
+                ctx.fillText(values[i] + ' ATP', x + (barWidth / 2), y - 10);
+                
+                // Draw X-Axis Label
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '13px Roboto';
+                ctx.fillText(labels[i], x + (barWidth / 2), height - padding + 20);
+            }
+        }
+        
+        // Initial drawing
+        drawChart();
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawChart();
+        });
+    });
+</script>
+
+</body>
+</html>

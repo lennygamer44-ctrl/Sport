@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.3.1a Makro- und Mikronährstoffe - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Roboto+Flex:wght@300;400;600;700&display=swap');
+
+        :root {
+            /* General Theme */
+            --bg-body: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            
+            /* Nutrition Palette */
+            --col-carbs: #eab308;     /* Yellow/Wheat */
+            --bg-carbs: #fefce8;
+            
+            --col-fats: #f59e0b;      /* Amber/Gold */
+            --bg-fats: #fffbeb;
+            
+            --col-protein: #e11d48;   /* Rose/Meat */
+            --bg-protein: #fff1f2;
+            
+            --col-micro: #06b6d4;     /* Cyan/Water */
+            --bg-micro: #ecfeff;
+
+            /* Abitur Exam Box */
+            --abi-bg: #1e1b4b;        /* Deep Indigo */
+            --abi-accent: #38bdf8;    /* Light Blue */
+            --abi-text: #f8fafc;
+
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto Flex', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            background-image: radial-gradient(rgba(15, 23, 42, 0.03) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER SECTION --- */
+        .doc-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 8px solid var(--col-carbs);
+        }
+
+        .doc-header::after {
+            content: '🍎';
+            position: absolute;
+            top: -10px; right: 20px;
+            font-size: 8rem;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .doc-header h1 {
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            font-weight: 900;
+        }
+
+        .doc-header .intro {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 900px;
+        }
+
+        .highlight-bold {
+            color: var(--text-dark);
+            font-weight: 700;
+            background: #f1f5f9;
+            padding: 0 6px;
+            border-radius: 4px;
+        }
+
+        /* --- 1. MAKRONÄHRSTOFFE --- */
+        .macro-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--col-carbs);
+            border-radius: 4px;
+            transform: rotate(45deg);
+        }
+
+        .macro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .macro-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .macro-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .macro-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .energy-tag {
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid;
+            flex-grow: 1;
+        }
+
+        .info-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .info-box p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Specific Macro Styles */
+        .card-carbs { border-top: 5px solid var(--col-carbs); }
+        .card-carbs h3 { color: var(--col-carbs); }
+        .card-carbs .energy-tag { background: var(--bg-carbs); color: #a16207; }
+        .card-carbs .info-box { border-left-color: var(--col-carbs); }
+
+        .card-fats { border-top: 5px solid var(--col-fats); }
+        .card-fats h3 { color: var(--col-fats); }
+        .card-fats .energy-tag { background: var(--bg-fats); color: #b45309; }
+        .card-fats .info-box { border-left-color: var(--col-fats); }
+
+        .card-protein { border-top: 5px solid var(--col-protein); }
+        .card-protein h3 { color: var(--col-protein); }
+        .card-protein .energy-tag { background: var(--bg-protein); color: #be123c; }
+        .card-protein .info-box { border-left-color: var(--col-protein); }
+
+        /* --- CANVAS TABLE SECTION --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .canvas-section h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .canvas-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .canvas-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- 2. MIKRONÄHRSTOFFE & WASSER --- */
+        .micro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .micro-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-soft);
+            border-left: 8px solid var(--col-micro);
+        }
+
+        .micro-card h3 {
+            font-size: 1.8rem;
+            color: var(--col-micro);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .micro-content h4 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .micro-content p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .micro-highlight {
+            background: var(--bg-micro);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--col-micro);
+            font-style: italic;
+            color: #0891b2;
+            font-size: 0.95rem;
+        }
+
+        /* --- ABITUR TRANSFER BOX --- */
+        .abitur-matrix {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            border-top: 6px solid var(--abi-accent);
+        }
+
+        .abitur-matrix h2 {
+            color: var(--abi-accent);
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .case-study {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+        }
+
+        .case-study h4 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .case-study p {
+            color: #e0f2fe;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .solution-path {
+            margin-bottom: 2.5rem;
+        }
+
+        .solution-step {
+            display: flex;
+            background: rgba(15, 23, 42, 0.5);
+            border-left: 3px solid var(--abi-accent);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            background: var(--abi-accent);
+            color: #0f172a;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-family: 'Outfit';
+            flex-shrink: 0;
+        }
+
+        .step-content p {
+            margin: 0;
+            color: #cbd5e1;
+        }
+
+        .step-content strong {
+            color: white;
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: rgba(225, 29, 72, 0.1);
+            border: 1px dashed #e11d48;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-top: 2rem;
+        }
+
+        .warning-box h4 {
+            color: #fb7185;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .micro-grid { grid-template-columns: 1fr; }
+            .doc-header, .abitur-matrix { padding: 2.5rem; }
+            .doc-header h1 { font-size: 2.2rem; }
+            .solution-step { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>3.3.1a Makro- und Mikronährstoffe</h1>
+        <p class="intro">
+            Die Sporternährung ist ein zentraler leistungsbestimmender Faktor im modernen Training. Ohne eine adäquate, auf die jeweilige Belastung abgestimmte Zufuhr von Nährstoffen können weder konditionelle Höchstleistungen erbracht noch physiologische Adaptationsprozesse (wie z. B. die Superkompensation) vollzogen werden. Man unterscheidet hierbei zwischen den energieliefernden <span class="highlight-bold">Makronährstoffen</span> und den regulierenden <span class="highlight-bold">Mikronährstoffen</span>.
+        </p>
+    </header>
+
+    <!-- 1. Makronährstoffe -->
+    <section class="macro-section">
+        <h2 class="section-title">1. Die Makronährstoffe (Energieträger & Baustoffe)</h2>
+        <p style="margin-bottom: 2rem; color: var(--text-muted); font-size: 1.1rem;">Makronährstoffe bilden das Fundament der menschlichen Ernährung. Sie liefern die chemische Energie zur Resynthese von ATP (Adenosintriphosphat) und dienen als strukturelle Bausteine.</p>
+
+        <div class="macro-grid">
+            
+            <!-- Kohlenhydrate -->
+            <article class="macro-card card-carbs">
+                <h3>🌾 Kohlenhydrate</h3>
+                <span class="energy-tag">Energiegehalt: ~ 4,1 kcal/g (17 kJ/g)</span>
+                
+                <div class="info-box">
+                    <h4>Zusammensetzung</h4>
+                    <p>Monosaccharide (Traubenzucker), Disaccharide (Haushaltszucker) und Polysaccharide (Stärke).</p>
+                </div>
+                <div class="info-box">
+                    <h4>Bedeutung im Sport</h4>
+                    <p>Limitierender Faktor bei intensiven Ausdauer- und Kurzzeitbelastungen. Werden aerob als auch <strong>anaerob-laktazid</strong> verstoffwechselt. Gespeichert als <strong>Glykogen</strong> in Leber (100g) und Muskeln (300-400g). Entleerung führt zum massiven Leistungseinbruch ("Mann mit dem Hammer").</p>
+                </div>
+            </article>
+
+            <!-- Fette -->
+            <article class="macro-card card-fats">
+                <h3>🥑 Fette (Lipide)</h3>
+                <span class="energy-tag">Energiegehalt: ~ 9,3 kcal/g (39 kJ/g)</span>
+                
+                <div class="info-box">
+                    <h4>Zusammensetzung</h4>
+                    <p>Triglyceride, bestehend aus Glycerin und Fettsäuren (gesättigt, einfach/mehrfach ungesättigt).</p>
+                </div>
+                <div class="info-box">
+                    <h4>Bedeutung im Sport</h4>
+                    <p>Das absolut größte Energiereservoir des Körpers. Sie können <strong>ausschließlich aerob</strong> (unter Sauerstoffverbrauch via Beta-Oxidation) verstoffwechselt werden. Da relativ viel Sauerstoff benötigt wird, dominiert dieser Weg bei langen Belastungen mit niedriger/mittlerer Intensität.</p>
+                </div>
+            </article>
+
+            <!-- Proteine -->
+            <article class="macro-card card-protein">
+                <h3>🥩 Proteine (Eiweiße)</h3>
+                <span class="energy-tag">Energiegehalt: ~ 4,1 kcal/g (17 kJ/g)</span>
+                
+                <div class="info-box">
+                    <h4>Zusammensetzung</h4>
+                    <p>Ketten aus Aminosäuren (davon 9 essenziell, d.h., sie müssen über die Nahrung zugeführt werden).</p>
+                </div>
+                <div class="info-box">
+                    <h4>Bedeutung im Sport</h4>
+                    <p>Dienen primär als <strong>Baustoffe (Plastizität)</strong> für Muskelgewebe, Enzyme und Hormone. Zur Energiegewinnung (Glukoneogenese) werden sie vom Körper nur in extremen Notsituationen herangezogen, was mit ungewolltem Muskelabbau einhergeht.</p>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Canvas Table -->
+    <section class="canvas-section">
+        <h3>Die Makronährstoffe im Sport</h3>
+        <p>Strukturierte Übersicht der energetischen und funktionellen Eigenschaften</p>
+        <div class="canvas-wrapper">
+            <canvas id="macroTableCanvas" width="1000" height="400"></canvas>
+        </div>
+    </section>
+
+    <!-- 2. & 3. Mikro & Wasser -->
+    <section class="micro-grid">
+        <article class="micro-card">
+            <h3>🔬 2. Mikronährstoffe (Regulatoren)</h3>
+            <div class="micro-content">
+                <p>Mikronährstoffe liefern selbst keine Energie (0 kcal/g), sind aber für den reibungslosen Ablauf des gesamten Stoffwechsels und die Reizweiterleitung essenziell.</p>
+                
+                <h4>Vitamine</h4>
+                <p>Organische Verbindungen (fettlöslich: E, D, K, A; wasserlöslich: B, C). Wirken primär als <strong>Coenzyme</strong> im Energiestoffwechsel. Ein Mangel an B-Vitaminen drosselt z. B. direkt die ATP-Resyntheserate.</p>
+
+                <h4>Mineralstoffe & Spurenelemente</h4>
+                <p>Anorganisch. Im Sport sind besonders die <strong>Elektrolyte</strong> (Natrium, Kalium, Magnesium, Calcium) von herausragender Bedeutung.</p>
+
+                <div class="micro-highlight">
+                    <strong>Bedeutung:</strong> Elektrolyte regeln die Osmose und sind für Aktionspotenziale und neuromuskuläre Steuerung verantwortlich. Verlust durch Schwitzen führt zu einer gestörten intramuskulären Koordination (schmerzhafte Muskelkrämpfe).
+                </div>
+            </div>
+        </article>
+
+        <article class="micro-card" style="border-left-color: #3b82f6;">
+            <h3 style="color: #3b82f6;">💧 3. Wasser (Transportmedium)</h3>
+            <div class="micro-content">
+                <p>Obwohl oft separat betrachtet, ist die Hydratation der <strong>wichtigste akute Faktor</strong> für die sportliche Leistungsfähigkeit.</p>
+                
+                <h4>Funktionen im Körper</h4>
+                <p>Wasser dient als Lösungsmittel, Transportmedium für Nährstoffe/Sauerstoff und vor allem der <strong>Thermoregulation</strong>.</p>
+
+                <div class="micro-highlight" style="background: #eff6ff; border-left-color: #3b82f6; color: #1d4ed8;">
+                    <strong>Die Dehydrations-Falle:</strong> Ein Flüssigkeitsverlust von nur 2 % des Körpergewichts führt bereits zu einer messbaren Reduktion der aeroben Ausdauerleistungsfähigkeit! Das Blut dickt an (die Viskosität steigt) und das Herz-Kreislauf-System muss massiv mehr Arbeit verrichten, um die Durchblutung aufrechtzuerhalten.
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- Abitur Transfer Box -->
+    <section class="abitur-matrix">
+        <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: In Klausuren auf erhöhtem Anforderungsniveau wird dieses biologische Faktenwissen in der Regel mit der <strong>Energiebereitstellung (Lernbereich 1.4)</strong> oder der <strong>Trainingsplanung (1.5 Ausdauer)</strong> verknüpft.
+        </p>
+
+        <div class="case-study">
+            <h4>Die Beurteilung der Leistungsfähigkeit (Fallbeispiel)</h4>
+            <p>„Ein Radrennfahrer nimmt bei einer vierstündigen Alpenetappe ausschließlich Wasser zu sich. Im letzten Anstieg erleidet er einen massiven Leistungseinbruch. Beurteilen Sie die Ursache aus ernährungsphysiologischer Sicht.“</p>
+        </div>
+
+        <div class="solution-path">
+            <h3 style="color: white; margin-bottom: 1.5rem; font-family: 'Outfit';">Der eA-Lösungsweg (Logisch verknüpfen!)</h3>
+            
+            <div class="solution-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <strong>Identifiziere die Belastung</strong>
+                    <p>4 Stunden Bergfahrt bedeuten eine hohe aerobe (und teils anaerobe) Belastung. Der primäre Energieträger für diese hohe Intensität sind die Kohlenhydrate.</p>
+                </div>
+            </div>
+
+            <div class="solution-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <strong>Benenne das Limit</strong>
+                    <p>Da die intramuskulären Glykogenspeicher nur ca. 300-400g fassen, sind sie nach 60-90 Minuten intensiver Belastung vollständig entleert.</p>
+                </div>
+            </div>
+
+            <div class="solution-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <strong>Erkläre die physiologische Folge</strong>
+                    <p>Wenn keine Kohlenhydrate extern zugeführt werden, muss der Körper die Energie rein aus der Fettverbrennung (Beta-Oxidation) beziehen. Diese liefert zwar viel Energie, läuft aber deutlich langsamer ab (geringere Flussrate der ATP-Resynthese). Der Athlet kann die hohe mechanische Leistung nicht mehr aufrechterhalten und bricht ein.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h4>💡 Argumentation zur Ernährung & Elektrolyten</h4>
+            <p style="color: #fda4af; margin: 0;">Wenn du nach der Bedeutung der Mikronährstoffe gefragt wirst, verweise immer auf das Schwitzen. Argumentiere, dass ein reiner Wasserausgleich (ohne Elektrolyte wie Natrium oder Magnesium) den <strong>osmotischen Druck im Zellgewebe stört</strong>, was die Erregungsleitung der motorischen Einheiten negativ beeinflusst (Krampfgefahr).</p>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('macroTableCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Layout configuration
+    const headerH = 60;
+    const rowH = (h - headerH) / 3;
+    
+    // Columns: Icon+Nährstoffgruppe (0-250), Energiegehalt (250-450), Hauptfunktion (450-700), Speicher (700-1000)
+    const cols = [
+        { x: 0, w: 250, title: "Nährstoffgruppe" },
+        { x: 250, w: 200, title: "Energiegehalt" },
+        { x: 450, w: 300, title: "Hauptfunktion im Sport" },
+        { x: 750, w: 250, title: "Speicherform / -ort" }
+    ];
+
+    const rowsData = [
+        {
+            name: "Kohlenhydrate",
+            color: '#eab308',
+            kcal: "~ 4,1 kcal/g",
+            funcLine1: "Schnelle Energie",
+            funcLine2: "(aerob / anaerob-laktazid)",
+            storeLine1: "Glykogen",
+            storeLine2: "in Muskel & Leber"
+        },
+        {
+            name: "Fette (Lipide)",
+            color: '#f59e0b',
+            kcal: "~ 9,3 kcal/g",
+            funcLine1: "Langzeitenergie",
+            funcLine2: "(nur aerob via Beta-Oxidation)",
+            storeLine1: "Triglyceride",
+            storeLine2: "Unterhaut & intramuskulär"
+        },
+        {
+            name: "Proteine",
+            color: '#e11d48',
+            kcal: "~ 4,1 kcal/g",
+            funcLine1: "Baustoff & Regeneration",
+            funcLine2: "(Erhalt der Plastizität)",
+            storeLine1: "Strukturproteine",
+            storeLine2: "in der Muskulatur"
+        }
+    ];
+
+    // Helper for multiline text centered
+    function drawMultilineText(text1, text2, x, y, width, align='center', isBold1=false) {
+        ctx.textAlign = align;
+        const tx = align === 'center' ? x + width/2 : x + 20;
+        
+        ctx.fillStyle = '#1e293b';
+        ctx.font = (isBold1 ? 'bold ' : '') + '15px "Roboto Flex"';
+        
+        if (text2) {
+            ctx.fillText(text1, tx, y - 8);
+            ctx.fillStyle = '#64748b';
+            ctx.font = '14px "Roboto Flex"';
+            ctx.fillText(text2, tx, y + 12);
+        } else {
+            ctx.fillText(text1, tx, y + 2);
+        }
+    }
+
+    // Draw Icons
+    function drawWheat(x, y, color) {
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        // Stem
+        ctx.beginPath(); ctx.moveTo(x, y+15); ctx.lineTo(x, y-15); ctx.stroke();
+        // Seeds
+        for(let i=0; i<3; i++) {
+            const sy = y - 10 + i*8;
+            ctx.beginPath(); ctx.ellipse(x - 5, sy, 4, 2, Math.PI/4, 0, Math.PI*2); ctx.fill();
+            ctx.beginPath(); ctx.ellipse(x + 5, sy, 4, 2, -Math.PI/4, 0, Math.PI*2); ctx.fill();
+        }
+        ctx.beginPath(); ctx.ellipse(x, y-16, 4, 2, Math.PI/2, 0, Math.PI*2); ctx.fill();
+    }
+
+    function drawOilDrop(x, y, color) {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(x, y - 15);
+        ctx.bezierCurveTo(x + 15, y, x + 15, y + 15, x, y + 15);
+        ctx.bezierCurveTo(x - 15, y + 15, x - 15, y, x, y - 15);
+        ctx.fill();
+        // highlight
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.beginPath(); ctx.arc(x - 4, y + 5, 3, 0, Math.PI*2); ctx.fill();
+    }
+
+    function drawSteak(x, y, color) {
+        ctx.fillStyle = color;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        // Outline block
+        ctx.beginPath();
+        ctx.roundRect(x - 15, y - 10, 30, 20, 4);
+        ctx.fill();
+        // Grill marks
+        ctx.strokeStyle = '#fff';
+        ctx.beginPath(); ctx.moveTo(x - 10, y - 10); ctx.lineTo(x - 5, y + 10); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x, y - 10); ctx.lineTo(x + 5, y + 10); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x + 10, y - 10); ctx.lineTo(x + 15, y + 10); ctx.stroke();
+    }
+
+    const iconDrawers = [drawWheat, drawOilDrop, drawSteak];
+
+    // 1. Draw Header Background
+    ctx.fillStyle = '#0f172a';
+    ctx.fillRect(0, 0, w, headerH);
+
+    // 2. Draw Header Text
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 16px "Outfit"';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    cols.forEach(col => {
+        ctx.fillText(col.title.toUpperCase(), col.x + col.w/2, headerH/2);
+    });
+
+    // 3. Draw Rows
+    rowsData.forEach((row, i) => {
+        const rY = headerH + i * rowH;
+        
+        // Row background alternating
+        ctx.fillStyle = i % 2 === 0 ? '#ffffff' : '#f8fafc';
+        ctx.fillRect(0, rY, w, rowH);
+
+        const cyRow = rY + rowH/2;
+
+        // Draw Icon & Name (Col 1)
+        const iconX = 40;
+        ctx.fillStyle = '#f1f5f9';
+        ctx.beginPath(); ctx.arc(iconX, cyRow, 22, 0, Math.PI*2); ctx.fill();
+        iconDrawers[i](iconX, cyRow, row.color);
+        
+        ctx.textAlign = 'left';
+        ctx.fillStyle = row.color;
+        ctx.font = 'bold 18px "Outfit"';
+        ctx.fillText(row.name, iconX + 35, cyRow);
+
+        // Col 2: Kcal
+        drawMultilineText(row.kcal, null, cols[1].x, cyRow, cols[1].w, 'center', true);
+        
+        // Col 3: Function
+        drawMultilineText(row.funcLine1, row.funcLine2, cols[2].x, cyRow, cols[2].w, 'center', true);
+        
+        // Col 4: Store
+        drawMultilineText(row.storeLine1, row.storeLine2, cols[3].x, cyRow, cols[3].w, 'center', true);
+
+        // Bottom border
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(0, rY + rowH); ctx.lineTo(w, rY + rowH); ctx.stroke();
+    });
+
+    // Draw Vertical Dividers
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.lineWidth = 1;
+    cols.forEach((col, i) => {
+        if(i > 0) {
+            ctx.beginPath(); ctx.moveTo(col.x, headerH); ctx.lineTo(col.x, h); ctx.stroke();
+        }
+    });
+
+</script>
+</body>
+</html>

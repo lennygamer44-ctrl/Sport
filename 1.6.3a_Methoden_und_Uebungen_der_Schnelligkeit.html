@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Methoden und Übungen der Schnelligkeit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: 'Teko' for aggressive, fast headers. 'Inter' for highly readable body -->
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Teko', 'sans-serif'],
+                    },
+                    colors: {
+                        track: {
+                            red: '#dc2626',      // Tartan Red
+                            dark: '#991b1b',
+                            light: '#fef2f2',
+                        },
+                        asphalt: {
+                            900: '#111827',      // Asphalt Black
+                            800: '#1f2937',
+                            700: '#374151',
+                        },
+                        gold: {
+                            DEFAULT: '#f59e0b',  // Sprint Gold
+                            light: '#fef3c7',
+                        }
+                    },
+                    boxShadow: {
+                        'playbook': '0 10px 40px -10px rgba(220, 38, 38, 0.15)',
+                        'hard': '8px 8px 0px 0px rgba(17, 24, 39, 1)', // Brutalist shadow
+                        'hard-gold': '8px 8px 0px 0px rgba(245, 158, 11, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f3f4f6;
+            color: #111827;
+            -webkit-font-smoothing: antialiased;
+            /* Subtle track texture background */
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(0,0,0,0.03) 19px, rgba(0,0,0,0.03) 20px),
+                              repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(0,0,0,0.03) 19px, rgba(0,0,0,0.03) 20px);
+        }
+
+        /* Playbook Cards */
+        .drill-card {
+            background: #ffffff;
+            border: 3px solid #111827;
+            border-radius: 0.5rem;
+            box-shadow: 6px 6px 0px 0px rgba(17, 24, 39, 0.1);
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .drill-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px 0px rgba(220, 38, 38, 0.8);
+            border-color: #dc2626;
+        }
+
+        /* Tape effect for headers */
+        .tape-header {
+            display: inline-block;
+            background: #111827;
+            color: white;
+            padding: 0.25rem 1rem;
+            transform: rotate(-1deg);
+            box-shadow: 2px 2px 0 rgba(220, 38, 38, 1);
+        }
+
+        /* Table Styling (Requested by KI 2) */
+        .gold-standard-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border: 3px solid #111827;
+        }
+        .gold-standard-table th {
+            background: #111827;
+            color: white;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #374151;
+        }
+        .gold-standard-table td {
+            padding: 1.25rem 1rem;
+            border: 1px solid #d1d5db;
+            vertical-align: top;
+        }
+        .gold-standard-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        .gold-standard-table tr:hover {
+            background-color: #fef2f2;
+        }
+
+        /* Canvas Wrapper */
+        .canvas-playbook {
+            background: #111827;
+            border: 4px solid #374151;
+            border-radius: 0.5rem;
+            position: relative;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+        }
+
+        /* Abitur Premium Box - Brutalist Gold */
+        .abitur-gold {
+            background: #ffffff;
+            border: 4px solid #f59e0b;
+            box-shadow: 10px 10px 0px 0px rgba(245, 158, 11, 1);
+            position: relative;
+        }
+
+        .marker-highlight {
+            background: linear-gradient(104deg, rgba(254,240,138,0) 0.9%, rgba(254,240,138,1) 2.4%, rgba(254,240,138,0.5) 5.8%, rgba(254,240,138,0.1) 93%, rgba(254,240,138,0.7) 96%, rgba(254,240,138,0) 98%), linear-gradient(183deg, rgba(254,240,138,0) 0%, rgba(254,240,138,0.3) 7.9%, rgba(254,240,138,0) 15%);
+            padding: 0 0.2em;
+        }
+    </style>
+</head>
+<body class="font-sans leading-relaxed pt-8 pb-20">
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        
+        <!-- Header -->
+        <header class="bg-white border-4 border-asphalt-900 shadow-hard p-6 md:p-10 mb-12 relative overflow-hidden">
+            <!-- Decorative Track Lines -->
+            <div class="absolute right-0 top-0 bottom-0 w-32 flex justify-end opacity-10 transform skew-x-12">
+                <div class="w-2 bg-asphalt-900 h-full mx-1"></div>
+                <div class="w-2 bg-asphalt-900 h-full mx-1"></div>
+                <div class="w-2 bg-asphalt-900 h-full mx-1"></div>
+                <div class="w-2 bg-asphalt-900 h-full mx-1"></div>
+            </div>
+
+            <div class="flex items-center gap-3 mb-4 relative z-10">
+                <span class="bg-track-red text-white font-bold px-3 py-1 text-sm tracking-widest font-display text-xl leading-none pt-2">1.6.3a</span>
+                <span class="text-asphalt-700 font-bold tracking-widest text-sm uppercase">Trainingslehre Sport</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-display font-bold uppercase tracking-tight text-asphalt-900 leading-none mb-4 relative z-10">
+                Methoden & <span class="text-track-red">Übungen</span>
+            </h1>
+            <p class="text-lg text-asphalt-700 font-medium max-w-3xl border-l-4 border-track-red pl-4 relative z-10">
+                Das Schnelligkeitstraining ist das sensibelste und anspruchsvollste Training der konditionellen Fähigkeiten. 
+            </p>
+            <div class="mt-6 bg-track-light border border-track-red/30 p-4 rounded text-track-dark font-semibold text-sm md:text-base relative z-10">
+                ⚡ <strong class="uppercase tracking-wider">Das oberste Prinzip:</strong> Da die Schnelligkeit massiv von der optimalen Erregbarkeit des Zentralnervensystems (ZNS) sowie den eng begrenzten alaktaziden Energiespeichern abhängt, kann sie <strong>nur im ermüdungsfreien Zustand durch maximale Bewegungsgeschwindigkeiten</strong> trainiert werden.
+            </div>
+        </header>
+
+        <main class="space-y-16">
+
+            <!-- Section 1: Wiederholungsmethode & KI-2 Table -->
+            <section>
+                <div class="mb-8">
+                    <h2 class="text-4xl font-display font-bold text-asphalt-900 uppercase tape-header mb-4">1. Die Wiederholungsmethode</h2>
+                    <p class="text-lg text-asphalt-800 font-medium max-w-4xl mt-4">
+                        Die primäre Trainingsmethode zur Steigerung der reinen Schnelligkeit (Aktions- und Frequenzschnelligkeit) ist die Wiederholungsmethode. Sie zielt darauf ab, die <span class="marker-highlight">alaktazide Energiefreisetzung</span> sowie die <span class="marker-highlight">neuronale Ansteuerung</span> (Rekrutierung, Frequenzierung, Wechselinnervation) zu maximieren.
+                    </p>
+                </div>
+
+                <!-- Das Herzstück: Die Detaillierte Tabelle (Auftrag KI 2) -->
+                <div class="overflow-x-auto shadow-hard border-4 border-asphalt-900 mb-10 bg-white">
+                    <div class="bg-asphalt-900 text-white p-4 flex justify-between items-center">
+                        <h3 class="font-display text-3xl tracking-wide uppercase text-gold">Der Goldstandard im Speed-Training</h3>
+                        <svg class="w-8 h-8 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <table class="gold-standard-table">
+                        <thead>
+                            <tr>
+                                <th class="w-1/4">Parameter</th>
+                                <th class="w-1/3">Ausprägung / Wert</th>
+                                <th>Physiologische Begründung</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm md:text-base text-asphalt-800">
+                            <tr>
+                                <td class="font-bold text-lg text-asphalt-900">Intensität</td>
+                                <td>
+                                    <span class="inline-block bg-track-red text-white px-2 py-1 rounded text-xs font-bold uppercase mb-2">95–105 % ("All-out")</span><br>
+                                    Maximal bis supramaximal. Jeder Lauf/Wurf muss mit höchstem willentlichen Einsatz erfolgen.
+                                </td>
+                                <td>Zwingend erforderlich, um eine maximale <strong>Rekrutierung und Frequenzierung</strong> der motorischen Einheiten (insbesondere der FT-Fasern) im ZNS auszulösen.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-lg text-asphalt-900">Reizdauer</td>
+                                <td>
+                                    <span class="inline-block bg-asphalt-800 text-white px-2 py-1 rounded text-xs font-bold uppercase mb-2">Extrem kurz (< 7 Sekunden)</span><br>
+                                    Abbruch der Belastung zwingend vor Einsetzen einer Laktatakkumulation.
+                                </td>
+                                <td>Belastung darf ausschließlich im <strong>alaktaziden Bereich</strong> (ATP/KP-Speicher) stattfinden. Übersäuerung würde die Enzymaktivität drosseln, die Kontraktionsgeschwindigkeit senken und das Technikbild zerstören.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-lg text-asphalt-900">Reizdichte <br><span class="text-sm font-normal text-asphalt-500">(Pause)</span></td>
+                                <td>
+                                    <span class="inline-block bg-green-600 text-white px-2 py-1 rounded text-xs font-bold uppercase mb-2">Vollständige Erholung</span><br>
+                                    Faustregel Sprint: ca. <strong>1 Minute Pause pro 10m</strong> gelaufener Strecke (meist 3-10 min).
+                                </td>
+                                <td>Im Gegensatz zum Ausdauertraining muss das <strong>ZNS komplett regenerieren</strong> und die intramuskulären <strong>ATP/KP-Speicher müssen vollständig resynthetisiert</strong> sein.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-lg text-asphalt-900">Umfang</td>
+                                <td>
+                                    <span class="inline-block bg-asphalt-800 text-white px-2 py-1 rounded text-xs font-bold uppercase mb-2">Sehr gering (ca. 3-6 Wdh.)</span><br>
+                                    Sofortiger Abbruch, wenn die Zielgeschwindigkeit nicht mehr gehalten werden kann.
+                                </td>
+                                <td>Vermeidung von <strong>ZNS-Ermüdung</strong>. Qualität geht absolut vor Quantität. Ein ermüdetes Nervensystem kann keine maximalen Impulse (Schnelligkeit) mehr trainieren.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Canvas Visualization -->
+                <div class="canvas-playbook p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-asphalt-700 pb-4">
+                        <div>
+                            <h4 class="text-2xl font-display font-bold text-white uppercase tracking-wider text-track-red">Warum < 7 Sekunden?</h4>
+                            <p class="text-sm text-gray-400 font-sans">Live-Simulation der Energiesysteme beim All-Out Sprint</p>
+                        </div>
+                        <div class="flex gap-4 mt-4 md:mt-0 text-xs font-bold uppercase tracking-wider font-sans">
+                            <div class="flex items-center gap-2"><span class="w-3 h-3 bg-white"></span> Speed</div>
+                            <div class="flex items-center gap-2"><span class="w-3 h-3 bg-gold"></span> ATP/KP</div>
+                            <div class="flex items-center gap-2"><span class="w-3 h-3 bg-track-red"></span> Laktat</div>
+                        </div>
+                    </div>
+                    <canvas id="speedMetabolismCanvas" class="w-full h-[300px] block"></canvas>
+                    <div class="text-center mt-4 text-xs text-gray-400 italic">Ab ca. Sekunde 7 steuert der Körper massiv laktazid gegen den ATP-Abfall an &rarr; Die Kontraktionsgeschwindigkeit fällt.</div>
+                </div>
+            </section>
+
+            <!-- Section 2-4: Drill Cards Grid -->
+            <section>
+                <div class="mb-8">
+                    <h2 class="text-4xl font-display font-bold text-asphalt-900 uppercase tape-header mb-4">Praxis: Die Übungsformen</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- 2. Frequenzschnelligkeit -->
+                    <article class="drill-card p-6 flex flex-col h-full">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-asphalt-900 text-white rounded flex items-center justify-center font-display text-2xl font-bold pt-1">2</div>
+                            <h3 class="font-display text-2xl uppercase font-bold text-asphalt-900 leading-tight">Frequenzschnelligkeit <br><span class="text-sm font-sans font-normal text-asphalt-600">(Zyklisch)</span></h3>
+                        </div>
+                        <p class="text-sm text-asphalt-700 mb-4 font-medium border-b border-gray-200 pb-4">Ziel: Steigerung der Schrittfrequenz (Wechselinnervation des ZNS). Nervensystem zu supramaximalen Reizen zwingen.</p>
+                        
+                        <div class="space-y-4 flex-grow">
+                            <div>
+                                <strong class="block text-track-red uppercase text-xs tracking-wider mb-1">Bergabläufe (Overspeed)</strong>
+                                <p class="text-sm text-asphalt-800">Leichtes Gefälle (max 3-5%, um Bremskräfte zu meiden). Athlet wird schneller als aus eigener Kraft. ZNS adaptiert an die extrem hohe Frequenz. Alternativ: Zugwiderstandsläufe (Gummiseil).</p>
+                            </div>
+                            <div>
+                                <strong class="block text-track-red uppercase text-xs tracking-wider mb-1">Lauf-ABC (Koordination)</strong>
+                                <p class="text-sm text-asphalt-800">Skippings, Anfersen. Optimiert intermuskuläre Koordination. Beseitigt bremsende Mitbewegungen der Antagonisten & minimiert Bodenkontaktzeit.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 3. Aktionsschnelligkeit -->
+                    <article class="drill-card p-6 flex flex-col h-full">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-asphalt-900 text-white rounded flex items-center justify-center font-display text-2xl font-bold pt-1">3</div>
+                            <h3 class="font-display text-2xl uppercase font-bold text-asphalt-900 leading-tight">Aktionsschnelligkeit <br><span class="text-sm font-sans font-normal text-asphalt-600">(Azyklisch)</span></h3>
+                        </div>
+                        <p class="text-sm text-asphalt-700 mb-4 font-medium border-b border-gray-200 pb-4">Ziel: Explosive Kraftentwicklung (Kraftschnelligkeit) bei einmaligen, abgeschlossenen Bewegungsmustern.</p>
+                        
+                        <div class="space-y-4 flex-grow">
+                            <div>
+                                <strong class="block text-track-red uppercase text-xs tracking-wider mb-1">Medizinballwürfe</strong>
+                                <p class="text-sm text-asphalt-800">Simulation von Wurfdisziplinen. Trainiert den Dehnungs-Verkürzungs-Zyklus (DVZ) der Rumpf- und Armmuskulatur für maximale Anfangskraft.</p>
+                            </div>
+                            <div>
+                                <strong class="block text-track-red uppercase text-xs tracking-wider mb-1">Plyometrie (Sprungfolgen)</strong>
+                                <p class="text-sm text-asphalt-800">Horizontale/vertikale reaktive Sprungformen (Hürdensprünge, Tiefsprünge). Trainiert die Reaktivkraft und Explosivität des Bein-Streck-Apparates.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 4. Reaktion / Handlung -->
+                    <article class="drill-card p-6 flex flex-col h-full">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 bg-asphalt-900 text-white rounded flex items-center justify-center font-display text-2xl font-bold pt-1">4</div>
+                            <h3 class="font-display text-2xl uppercase font-bold text-asphalt-900 leading-tight">Reaktions- &<br>Handlungsschnelligkeit</h3>
+                        </div>
+                        <p class="text-sm text-asphalt-700 mb-4 font-medium border-b border-gray-200 pb-4">Ziel: Informationsverarbeitung beschleunigen. Entscheidend für den Sprintstart und alle Spielsportarten.</p>
+                        
+                        <div class="space-y-4 flex-grow">
+                            <div>
+                                <strong class="block text-track-red uppercase text-xs tracking-wider mb-1">Reaktionstraining</strong>
+                                <p class="text-sm text-asphalt-800">Starttraining aus ungewohnten Ausgangspositionen (Bauchlage, Schneidersitz) auf unterschiedliche Signale (optisch, akustisch). Verkürzt kognitive Latenz.</p>
+                            </div>
+                            <div>
+                                <strong class="block text-track-red uppercase text-xs tracking-wider mb-1">Kognitive Übungen</strong>
+                                <p class="text-sm text-asphalt-800">Handlungsschnelligkeit: Reaktionsspiele unter Zeitdruck. Bsp: <em>"Auf Pfiff rote Hütchen berühren, auf Klatschen blaue."</em> Verknüpft Motorik mit kognitiver Antizipation.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- Section 5: Abitur Premium Box -->
+            <section class="abitur-gold p-8 md:p-12 mt-16 rounded-lg">
+                <!-- Watermark -->
+                <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-10 translate-y-10">
+                    <svg width="300" height="300" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2v-2zm0-6h2v4h-2v-4z"/>
+                    </svg>
+                </div>
+
+                <div class="relative z-10">
+                    <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8 border-b-2 border-gold pb-6">
+                        <div class="bg-asphalt-900 text-gold p-4 rounded-lg shadow-hard-gold">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-4xl md:text-5xl font-display font-bold text-asphalt-900 tracking-tight mb-1 uppercase">Abitur-Transfer & Praxis</h2>
+                            <div class="inline-flex items-center gap-2">
+                                <span class="bg-track-red text-white text-xs font-bold px-2 py-0.5 rounded uppercase">eA-Niveau</span>
+                                <span class="text-asphalt-700 font-bold">Theoretisches Methodenwissen exakt zuschneiden</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-8">
+                        
+                        <div>
+                            <h3 class="text-xl font-bold text-asphalt-900 mb-3 border-l-4 border-asphalt-900 pl-3">Szenario Zehnkämpfer: Hochspezifisch differenzieren!</h3>
+                            <p class="text-asphalt-800 mb-4">
+                                Das Kultusministerium prüft die Transferleistung am Beispiel komplexer Profile (siehe Illustrierende Prüfungsaufgaben). Du darfst für Trainingsinhalte nicht pauschal "Sprints" nennen. Ordne exakt zu:
+                            </p>
+                            <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm mt-4">
+                                <li class="bg-white p-4 border border-gold shadow-sm rounded">
+                                    <span class="block font-bold text-track-red mb-1">Zyklische Schnelligkeit</span>
+                                    Zur Verbesserung der Sprintdisziplinen verordnest du <strong>Frequenzläufe und Bergabläufe (Overspeed)</strong>.
+                                </li>
+                                <li class="bg-white p-4 border border-gold shadow-sm rounded">
+                                    <span class="block font-bold text-track-red mb-1">Azyklische Schnelligkeit</span>
+                                    Für Stoß-/Wurfdisziplinen empfiehlst du <strong>Medizinballstöße & reaktive Sprungfolgen</strong> (Maximierung der Anfangskraft).
+                                </li>
+                                <li class="bg-white p-4 border border-gold shadow-sm rounded">
+                                    <span class="block font-bold text-track-red mb-1">Reaktionsschnelligkeit</span>
+                                    Für den Startschuss (Hürden) begründest du den Einsatz von <strong>Starttraining auf unterschiedliche Signale</strong>.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Die Falle -->
+                        <div class="bg-track-light border-l-8 border-track-red p-6 rounded-r">
+                            <h3 class="text-xl font-bold text-track-dark mb-2 flex items-center gap-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                Die absolute Argumentationsfalle
+                            </h3>
+                            <p class="text-asphalt-900 font-medium">
+                                Begründe zwingend, warum die Pausen <strong>vollständig</strong> sein müssen! Ein häufiger Fehler ist die Nennung der <span class="line-through text-track-red opacity-70">"lohnenden Pause"</span>. 
+                            </p>
+                            <p class="text-sm text-asphalt-700 mt-2">
+                                Die lohnende Pause gehört zum Ausdauertraining (Intervallmethode). Beim Schnelligkeitstraining führt eine unvollständige Pause zur Übersäuerung, wodurch die Schnelligkeit nicht mehr trainiert werden kann, sondern ungewollt die Schnelligkeitsausdauer. Dieser feine terminologische Unterschied bringt die Punkte!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="mt-16 border-t-4 border-asphalt-900 pt-6 text-center">
+            <p class="font-display font-bold text-2xl uppercase tracking-widest text-asphalt-900">Abiturwissen Sport (G9, eA)</p>
+            <p class="text-asphalt-600 font-medium">Lernbereich 1.6.3a Methoden und Übungsformen</p>
+        </footer>
+    </div>
+
+    <!-- Canvas Animation Logic: Speed Metabolism Chart -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('speedMetabolismCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let time = 0;
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                
+                // Animation loop over 15 seconds (simulated)
+                time += 0.05;
+                const simTime = time % 15; // 0 to 15 seconds loop
+
+                // Layout
+                const pL = 40, pR = 20, pT = 20, pB = 30;
+                const chartW = w - pL - pR;
+                const chartH = h - pT - pB;
+
+                // Draw Axes & Grid
+                ctx.strokeStyle = '#374151'; // asphalt-700
+                ctx.lineWidth = 1;
+                
+                // Y-Axis (100%)
+                ctx.beginPath();
+                ctx.moveTo(pL, pT);
+                ctx.lineTo(pL, h - pB);
+                ctx.stroke();
+
+                // X-Axis (Time 0-15s)
+                ctx.beginPath();
+                ctx.moveTo(pL, h - pB);
+                ctx.lineTo(w - pR, h - pB);
+                ctx.stroke();
+
+                // Time markers
+                ctx.fillStyle = '#9ca3af';
+                ctx.font = '10px "Inter"';
+                ctx.textAlign = 'center';
+                for(let i=0; i<=15; i+=5) {
+                    let x = pL + (i/15) * chartW;
+                    ctx.fillText(i + 's', x, h - pB + 15);
+                    ctx.beginPath(); ctx.moveTo(x, h-pB); ctx.lineTo(x, h-pB+4); ctx.stroke();
+                }
+                
+                // Highlight the critical "7 Second" zone
+                const sec7X = pL + (7/15) * chartW;
+                ctx.fillStyle = 'rgba(220, 38, 38, 0.1)'; // faint red zone after 7s
+                ctx.fillRect(sec7X, pT, chartW - (7/15)*chartW, chartH);
+                
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                ctx.moveTo(sec7X, pT);
+                ctx.lineTo(sec7X, h - pB);
+                ctx.strokeStyle = '#dc2626'; // red dash
+                ctx.stroke();
+                ctx.setLineDash([]);
+                
+                ctx.fillStyle = '#dc2626';
+                ctx.fillText('Abbruch-Schwelle (7s)', sec7X, pT - 5);
+
+                // --- Draw Current Time Indicator Line ---
+                const currentX = pL + (simTime/15) * chartW;
+                ctx.beginPath();
+                ctx.moveTo(currentX, pT);
+                ctx.lineTo(currentX, h - pB);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Helper function to get Y coordinate (0-100 to pixels)
+                function getY(val) { return pT + chartH - (val/100) * chartH; }
+
+                // Define Data Functions
+                // Speed: Stays high till 6s, then drops
+                function getSpeed(t) { return t < 6 ? 100 : Math.max(30, 100 - (t-6)*10); }
+                // ATP/KP: Depletes rapidly
+                function getATP(t) { return Math.max(10, 100 - t*12); }
+                // Laktat: Starts rising sharply after 6-7s
+                function getLaktat(t) { return t < 5 ? 10 : Math.min(100, 10 + (t-5)*12); }
+
+                // Helper to draw a line up to current simTime
+                function drawLine(func, color, width) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = width;
+                    for(let t=0; t<=simTime; t+=0.2) {
+                        let x = pL + (t/15) * chartW;
+                        let y = getY(func(t));
+                        if(t===0) ctx.moveTo(x,y);
+                        else ctx.lineTo(x,y);
+                    }
+                    ctx.stroke();
+                    
+                    // Draw dot at current end
+                    if (simTime > 0) {
+                        let endX = pL + (simTime/15) * chartW;
+                        let endY = getY(func(simTime));
+                        ctx.fillStyle = color;
+                        ctx.beginPath(); ctx.arc(endX, endY, 4, 0, Math.PI*2); ctx.fill();
+                    }
+                }
+
+                // Draw Lines
+                ctx.shadowBlur = 10;
+                
+                ctx.shadowColor = '#f59e0b';
+                drawLine(getATP, '#f59e0b', 3); // Gold ATP
+                
+                ctx.shadowColor = '#dc2626';
+                drawLine(getLaktat, '#dc2626', 3); // Red Laktat
+                
+                ctx.shadowColor = '#ffffff';
+                drawLine(getSpeed, '#ffffff', 4); // White Speed
+                
+                ctx.shadowBlur = 0; // reset
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

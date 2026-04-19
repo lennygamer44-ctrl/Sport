@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.6b Abwärmen (Cool-down) - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Quicksand:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Zen & Recovery Flow */
+            --bg-base: #f0fdfa; /* Light mint/cyan */
+            --text-main: #334155;
+            --text-light: #64748b;
+            
+            --color-active: #8b5cf6; /* Active Purple */
+            --color-active-light: #ede9fe;
+            --color-passive: #0ea5e9; /* Calming Aqua */
+            --color-passive-light: #e0f2fe;
+            --color-relax: #10b981; /* Mint Green */
+            
+            --abi-bg: #0f172a;
+            --abi-gold: #fbbf24;
+            --abi-cyan: #22d3ee;
+            
+            --shadow-glass: 0 8px 32px 0 rgba(14, 165, 233, 0.1);
+            --radius-soft: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Quicksand', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Zen Hero Section --- */
+        .hero {
+            background: linear-gradient(135deg, var(--color-active) 0%, var(--color-passive) 70%, var(--color-relax) 100%);
+            color: white;
+            padding: 6rem 2rem 5rem;
+            position: relative;
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.2);
+            text-align: center;
+            margin-bottom: 4rem;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: breathe 8s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes breathe {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            font-size: 1.35rem;
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- Intro Glass Card --- */
+        .intro-glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: var(--radius-soft);
+            box-shadow: var(--shadow-glass);
+            border: 1px solid rgba(255,255,255,1);
+            margin-top: -6rem;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 10;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .highlight-bold {
+            color: var(--color-passive);
+            font-weight: 700;
+        }
+
+        .intro-subtitle {
+            margin-bottom: 3rem;
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+        }
+
+        /* --- Active vs Passive Grid --- */
+        .cooldown-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 6rem;
+        }
+
+        @media (max-width: 900px) {
+            .cooldown-grid { grid-template-columns: 1fr; }
+        }
+
+        .cd-card {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-radius: var(--radius-soft);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .cd-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Card 1: Active */
+        .cd-card.active-cd {
+            border-top: 6px solid var(--color-active);
+        }
+        .cd-card.active-cd .cd-icon { background: var(--color-active-light); color: var(--color-active); }
+        
+        /* Card 2: Passive */
+        .cd-card.passive-cd {
+            border-top: 6px solid var(--color-passive);
+        }
+        .cd-card.passive-cd .cd-icon { background: var(--color-passive-light); color: var(--color-passive); }
+
+        .cd-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cd-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .cd-card h2 {
+            font-size: 1.8rem;
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .cd-card > p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .effect-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #cbd5e1;
+        }
+
+        .active-cd .effect-box:nth-of-type(1) { border-left-color: var(--color-active); }
+        .active-cd .effect-box:nth-of-type(2) { border-left-color: #a78bfa; }
+        
+        .passive-cd .effect-box:nth-of-type(1) { border-left-color: var(--color-passive); }
+        .passive-cd .effect-box:nth-of-type(2) { border-left-color: var(--color-relax); }
+
+        .effect-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .warning-text {
+            display: block;
+            margin-top: 1rem;
+            background: #fffbeb;
+            color: #b45309;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            border: 1px dashed #fcd34d;
+        }
+
+        /* --- Canvas Infographic --- */
+        .infographic-wrapper {
+            background: white;
+            padding: 4rem 2rem;
+            border-radius: var(--radius-soft);
+            box-shadow: var(--shadow-glass);
+            margin-bottom: 6rem;
+            text-align: center;
+        }
+
+        .infographic-wrapper h2 {
+            color: var(--color-passive);
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .infographic-wrapper p {
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            display: block;
+        }
+
+        /* --- Abitur Transfer Box --- */
+        .abitur-prep {
+            background: var(--abi-bg);
+            color: #e2e8f0;
+            padding: 4rem;
+            border-radius: 30px;
+            margin-bottom: 6rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.5);
+            border-top: 5px solid var(--abi-cyan);
+            border-bottom: 5px solid var(--abi-gold);
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .abi-badge {
+            background: rgba(34, 211, 238, 0.1);
+            color: var(--abi-cyan);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            font-size: 2rem;
+            font-weight: 900;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .abitur-prep h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .abi-point {
+            background: rgba(255,255,255,0.03);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--abi-cyan);
+            transition: background 0.3s ease;
+        }
+
+        .abi-point:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .abi-point:nth-child(2) { border-left-color: var(--color-active); }
+        .abi-point:nth-child(3) { border-left-color: var(--abi-gold); }
+
+        .abi-point h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .abi-point p {
+            line-height: 1.8;
+        }
+
+        .hl-cyan { color: var(--abi-cyan); font-weight: 700; }
+        .hl-gold { color: var(--abi-gold); font-weight: 700; }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="tag">Lernbereich 1.1.6b</span>
+            <h1>Abwärmen (Cool-down)</h1>
+            <p>Maßnahmen und Durchführung des Abwärmens zur aktiven Einleitung von Erholung und Regeneration.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-glass">
+            Das Abwärmen (Cool-down) bildet den <span class="highlight-bold">zwingenden methodischen Abschluss</span> einer jeden Trainingseinheit oder sportlichen Wettkampfbelastung. Während das Aufwärmen den Körper in einen optimalen Leistungszustand versetzt, hat das Abwärmen das Ziel, den Organismus physisch und psychisch aus dem Belastungszustand (Sympathikotonie) wieder in Richtung des Ruhezustands (Parasympathikotonie) zu überführen und die Erholungsprozesse aktiv einzuleiten.
+        </div>
+
+        <p class="intro-subtitle">Die Durchführung des Abwärmens wird in zwei grundlegende Maßnahmenkomplexe unterteilt, die sich in ihrer physiologischen Zielsetzung ergänzen:</p>
+
+        <!-- Active / Passive Grid -->
+        <div class="cooldown-grid">
+            
+            <!-- Aktives Abwärmen -->
+            <div class="cd-card active-cd">
+                <div class="cd-header">
+                    <div class="cd-icon">1</div>
+                    <h2>Aktives Abwärmen</h2>
+                </div>
+                <p>Herzkreislauf-orientiert. Besteht aus leichten, dynamischen und zyklischen Bewegungsformen mit sehr geringer Intensität (z. B. lockeres Auslaufen / Cool-down-Jogging, Ausradeln, leichtes Schwimmen).</p>
+                
+                <div class="effect-box">
+                    <h3 style="color: var(--color-active);">Aufrechterhaltung der Muskelpumpe</h3>
+                    <p>Durch die rhythmische Kontraktion der Beinmuskulatur wird der venöse Rückstrom des Blutes zum Herzen unterstützt. Dies verhindert ein "Versacken" des Blutes in den Extremitäten (Blood Pooling) und schützt vor Schwindel oder orthostatischen Synkopen nach hochintensiven Belastungen.</p>
+                </div>
+                
+                <div class="effect-box">
+                    <h3 style="color: #8b5cf6;">Beschleunigter Laktatabbau</h3>
+                    <p>Eine leichte aerobe Belastung hält das Herzminutenvolumen und die periphere Durchblutung auf einem leicht erhöhten Niveau. Dies beschleunigt den Abtransport und die Verstoffwechselung von anfallenden Stoffwechselzwischenprodukten, primär die <em>Oxidation von Laktat</em> in der Herz- und langsam-zuckenden Skelettmuskulatur (ST-Fasern), signifikant im Vergleich zu einer rein passiven Erholung.</p>
+                </div>
+            </div>
+
+            <!-- Passives Abwärmen -->
+            <div class="cd-card passive-cd">
+                <div class="cd-header">
+                    <div class="cd-icon">2</div>
+                    <h2>Passives Abwärmen</h2>
+                </div>
+                <p>Muskulär- und entspannungsorientiert. Im Anschluss an das aktive Auslaufen folgen passive oder semi-passive Maßnahmen, die primär auf die Regulation der muskulären Spannung und die psychische Entspannung abzielen.</p>
+
+                <div class="effect-box">
+                    <h3 style="color: var(--color-passive);">Regulation des Muskeltonus</h3>
+                    <p>Durch leichtes, statisches Stretching (Dehnen) oder lockeres Ausschütteln der stark beanspruchten Muskelpartien wird der belastungsbedingt stark erhöhte Muskeltonus (Grundspannung) gesenkt.</p>
+                    <span class="warning-text"><strong>Wichtiger Hinweis:</strong> Nach extremen exzentrischen Belastungen (z.B. intensives Maximalkraft-/Sprungkrafttraining mit zellulären Mikrotraumata) ist auf intensives Dehnen zu verzichten, da dies mechanische Gewebeschäden vergrößern würde.</span>
+                </div>
+
+                <div class="effect-box">
+                    <h3 style="color: var(--color-relax);">Aktivierung des Parasympathikus</h3>
+                    <p>Entspannungstechniken (z. B. progressive Muskelrelaxation, Atemübungen) oder Wärmeanwendungen (Duschen, Sauna) senken die Aktivität des sympathischen Nervensystems. Die Ausschüttung von Stresshormonen wird gebremst, der Körper geht in einen anabolen Stoffwechsel über und die zentrale Ermüdung wird gelindert.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Canvas: Infographic Comparison -->
+        <section class="infographic-wrapper">
+            <h2 class="font-heading">Visualisierung: Physiologische Effekte</h2>
+            <p>Die Zweiteilung des Cool-downs und ihre distinkten biologischen Zielsetzungen.</p>
+            
+            <div class="canvas-container">
+                <canvas id="cooldownCanvas" width="900" height="400"></canvas>
+            </div>
+        </section>
+
+        <!-- Abitur Transfer Premium Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-badge">eA</div>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                In der neuen G9-Abiturprüfung (eA) wird das Abwärmen nicht als optionales "Nice-to-have" betrachtet, sondern als <strong>absolut essenzieller Bestandteil</strong> der Trainingssteuerung und Verletzungsprophylaxe gewertet.
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-point">
+                    <h3 class="font-heading">📝 Trainingspläne komplettieren</h3>
+                    <p>Wie schon beim Aufwärmen gilt: Wenn du in einer Transferaufgabe eine methodische Übungsreihe erstellen sollst (z. B. für eine Disziplin des Zehnkampfs) oder einen spezifischen Trainingsplan entwirfst, <span class="hl-cyan">musst du die Einheit zwingend mit einem Cool-down abschließen!</span> Ein Trainingsplan, der nach dem Hauptteil abrupt endet, ist methodisch falsch. Du musst explizit ein sportartspezifisches Abwärmen in deine Planung aufnehmen.</p>
+                </div>
+
+                <div class="abi-point">
+                    <h3 class="font-heading">🌉 Schnittstelle zur Regeneration</h3>
+                    <p>Nutze das Abwärmen als argumentative Brücke zum Thema Regeneration. Wenn in einem Fallbeispiel ein Athlet über eine verlängerte Regenerationszeit oder schwere Beine am Folgetag klagt, kannst du ein <span class="hl-cyan">fehlendes aktives Abwärmen als Fehlerquelle identifizieren</span>: Ohne das lockere Auslaufen verzögert sich der Laktatabbau erheblich (Verknüpfung mit dem Heterochronismus der Erholung), wodurch die Wiederherstellungsphase (Phase 2 der Superkompensation) künstlich verlängert wird.</p>
+                </div>
+
+                <div class="abi-point">
+                    <h3 class="font-heading">❤️ Gesundheitsorientierter Sport</h3>
+                    <p>Im Lernbereich 3 (Sport und Gesundheit) fordert der Lehrplan die Gestaltung eines Auf- und Abwärmens bzw. die Anwendung einer Entspannungstechnik explizit als praktische Konsequenz aus einem ganzheitlichen Gesundheitsbegriff. Wenn du einen Trainingsplan für den Freizeitsport bewertest, ist das Abwärmen ein <span class="hl-gold">zentrales Kriterium für gesundheitsorientiertes Training</span>.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('cooldownCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Adjust for high-DPI displays for crisp text
+            let dpr = window.devicePixelRatio || 1;
+            let time = 0;
+            let animationId;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                
+                // Set actual size in memory (scaled to account for extra pixel density)
+                canvas.width = rect.width * dpr;
+                canvas.height = 400 * dpr;
+                
+                // Normalize coordinate system to use css pixels
+                ctx.scale(dpr, dpr);
+                
+                // CSS visual size
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `400px`;
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // Helper for rounded rects
+            function roundRect(x, y, w, h, r) {
+                ctx.beginPath();
+                ctx.moveTo(x + r, y);
+                ctx.lineTo(x + w - r, y);
+                ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+                ctx.lineTo(x + w, y + h - r);
+                ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+                ctx.lineTo(x + r, y + h);
+                ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+                ctx.lineTo(x, y + r);
+                ctx.quadraticCurveTo(x, y, x + r, y);
+                ctx.closePath();
+            }
+
+            function drawInfographic() {
+                const w = canvas.width / dpr;
+                const h = canvas.height / dpr;
+                const isMobile = w < 600;
+                
+                ctx.clearRect(0, 0, w, h);
+
+                // Split layout
+                const leftW = w / 2;
+                const rightW = w / 2;
+
+                // --- LEFT: ACTIVE COOL-DOWN ---
+                // Background Left
+                ctx.fillStyle = '#faf5ff'; // Light purple bg
+                ctx.fillRect(0, 0, leftW, h);
+                
+                // Animation Left (Pulsing / Moving Particles for Blood/Lactate)
+                for(let i=0; i<8; i++) {
+                    const py = (time * 50 + i * (h/8)) % h;
+                    const px = leftW/2 + Math.sin(time*2 + i) * 30;
+                    const alpha = Math.max(0, 1 - (py/h));
+                    
+                    ctx.beginPath();
+                    ctx.arc(px, h - py, 6, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(139, 92, 246, ${alpha})`; // Purple dots (Lactate transport)
+                    ctx.fill();
+                }
+
+                // Title Left
+                ctx.fillStyle = '#8b5cf6';
+                ctx.font = 'bold 20px Quicksand';
+                ctx.textAlign = 'center';
+                ctx.fillText('AKTIVES ABWÄRMEN', leftW/2, 50);
+
+                // Icon Left (Simple Jogging/Biking symbol - represented by dynamic curves)
+                ctx.beginPath();
+                ctx.arc(leftW/2, 110, 25, 0, Math.PI*2);
+                ctx.strokeStyle = '#8b5cf6';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                
+                // Animated pulse line inside circle
+                ctx.beginPath();
+                ctx.moveTo(leftW/2 - 15, 110);
+                ctx.lineTo(leftW/2 - 5, 110);
+                ctx.lineTo(leftW/2, 110 - Math.sin(time*5)*15);
+                ctx.lineTo(leftW/2 + 5, 110 + Math.sin(time*5)*15);
+                ctx.lineTo(leftW/2 + 10, 110);
+                ctx.lineTo(leftW/2 + 15, 110);
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Boxes Left
+                const boxW = Math.min(leftW * 0.8, 300);
+                const boxX = leftW/2 - boxW/2;
+                
+                // Box 1
+                ctx.fillStyle = 'white';
+                ctx.shadowColor = 'rgba(139, 92, 246, 0.1)';
+                ctx.shadowBlur = 15;
+                ctx.shadowOffsetY = 5;
+                roundRect(boxX, 170, boxW, 80, 12);
+                ctx.fill();
+                ctx.shadowColor = 'transparent'; // reset
+                
+                ctx.fillStyle = '#4c1d95';
+                ctx.font = 'bold 16px Nunito';
+                ctx.fillText('Blutrückfluss (Muskelpumpe)', leftW/2, 205);
+                ctx.fillStyle = '#64748b';
+                ctx.font = '13px Nunito';
+                ctx.fillText('Verhindert Blood Pooling', leftW/2, 225);
+
+                // Box 2
+                ctx.fillStyle = 'white';
+                ctx.shadowColor = 'rgba(139, 92, 246, 0.1)';
+                ctx.shadowBlur = 15;
+                ctx.shadowOffsetY = 5;
+                roundRect(boxX, 270, boxW, 80, 12);
+                ctx.fill();
+                ctx.shadowColor = 'transparent';
+                
+                ctx.fillStyle = '#4c1d95';
+                ctx.font = 'bold 16px Nunito';
+                ctx.fillText('Laktatoxidation', leftW/2, 305);
+                ctx.fillStyle = '#64748b';
+                ctx.font = '13px Nunito';
+                ctx.fillText('Beschleunigter Abbau', leftW/2, 325);
+
+
+                // --- RIGHT: PASSIVE COOL-DOWN ---
+                // Background Right
+                ctx.fillStyle = '#f0fdfa'; // Light mint bg
+                ctx.fillRect(leftW, 0, rightW, h);
+
+                // Animation Right (Slow expanding/contracting circles for breathing)
+                const breatheScale = 1 + Math.sin(time * 1.5) * 0.15;
+                ctx.beginPath();
+                ctx.arc(leftW + rightW/2, 110, 30 * breatheScale, 0, Math.PI*2);
+                ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(leftW + rightW/2, 110, 45 * breatheScale, 0, Math.PI*2);
+                ctx.fillStyle = 'rgba(16, 185, 129, 0.05)';
+                ctx.fill();
+
+                // Title Right
+                ctx.fillStyle = '#0ea5e9';
+                ctx.font = 'bold 20px Quicksand';
+                ctx.fillText('PASSIVES ABWÄRMEN', leftW + rightW/2, 50);
+
+                // Icon Right (Stretching/Lotus - simple geometric representation)
+                ctx.beginPath();
+                ctx.arc(leftW + rightW/2, 100, 8, 0, Math.PI*2); // Head
+                ctx.fillStyle = '#0ea5e9';
+                ctx.fill();
+                // Arms/Body
+                ctx.beginPath();
+                ctx.moveTo(leftW + rightW/2, 110);
+                ctx.lineTo(leftW + rightW/2, 125); // Spine
+                ctx.moveTo(leftW + rightW/2 - 15, 115);
+                ctx.quadraticCurveTo(leftW + rightW/2, 125, leftW + rightW/2 + 15, 115); // Arms
+                // Legs
+                ctx.moveTo(leftW + rightW/2, 125);
+                ctx.lineTo(leftW + rightW/2 - 12, 135);
+                ctx.lineTo(leftW + rightW/2 - 5, 135);
+                ctx.moveTo(leftW + rightW/2, 125);
+                ctx.lineTo(leftW + rightW/2 + 12, 135);
+                ctx.lineTo(leftW + rightW/2 + 5, 135);
+                ctx.strokeStyle = '#0ea5e9';
+                ctx.lineWidth = 3;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+
+                // Boxes Right
+                const boxXR = leftW + rightW/2 - boxW/2;
+                
+                // Box 3
+                ctx.fillStyle = 'white';
+                ctx.shadowColor = 'rgba(14, 165, 233, 0.1)';
+                ctx.shadowBlur = 15;
+                ctx.shadowOffsetY = 5;
+                roundRect(boxXR, 170, boxW, 80, 12);
+                ctx.fill();
+                ctx.shadowColor = 'transparent';
+                
+                ctx.fillStyle = '#0369a1';
+                ctx.font = 'bold 16px Nunito';
+                ctx.fillText('Tonussenkung', leftW + rightW/2, 205);
+                ctx.fillStyle = '#64748b';
+                ctx.font = '13px Nunito';
+                ctx.fillText('Entspannung der Muskulatur', leftW + rightW/2, 225);
+
+                // Box 4
+                ctx.fillStyle = 'white';
+                ctx.shadowColor = 'rgba(14, 165, 233, 0.1)';
+                ctx.shadowBlur = 15;
+                ctx.shadowOffsetY = 5;
+                roundRect(boxXR, 270, boxW, 80, 12);
+                ctx.fill();
+                ctx.shadowColor = 'transparent';
+                
+                ctx.fillStyle = '#0369a1';
+                ctx.font = 'bold 16px Nunito';
+                ctx.fillText('Parasympathikus-Aktivierung', leftW + rightW/2, 305);
+                ctx.fillStyle = '#64748b';
+                ctx.font = '13px Nunito';
+                ctx.fillText('Übergang in Anabolismus', leftW + rightW/2, 325);
+
+                // Divider Line
+                ctx.beginPath();
+                ctx.moveTo(leftW, 20);
+                ctx.lineTo(leftW, h - 20);
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+
+            function animate() {
+                time += 0.02;
+                drawInfographic();
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

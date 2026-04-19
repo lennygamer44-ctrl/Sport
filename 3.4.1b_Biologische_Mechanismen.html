@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.4.1b Biologische Mechanismen von Doping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-main: #2d3748;
+            --text-light: #718096;
+            --primary: #1a365d;
+            --secondary: #3182ce;
+            --danger: #e53e3e;
+            --danger-light: #fed7d7;
+            --warning: #dd6b20;
+            --success: #38a169;
+            --gold: #d69e2e;
+            --gold-light: #fefcbf;
+            --white: #ffffff;
+            --radius: 12px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin: 3rem 0 1.5rem 0;
+            border-bottom: 3px solid var(--secondary);
+            display: inline-block;
+            padding-bottom: 0.3rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            font-weight: 300;
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border-left: 5px solid var(--primary);
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        /* Grid Layout for Wirkungsweisen */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--secondary);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Danger Boxes for Risks */
+        .danger-box {
+            background-color: var(--danger-light);
+            border-left: 5px solid var(--danger);
+            padding: 1.5rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .danger-box h3 {
+            color: var(--danger);
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Canvas Container */
+        .canvas-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            margin: 3rem 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .canvas-title {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+
+        /* Modern Table */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 3rem 0;
+            box-shadow: var(--shadow);
+            border-radius: var(--radius);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: var(--white);
+            font-family: 'Poppins', sans-serif;
+            padding: 1.2rem;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1.2rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+
+        tr:hover td {
+            background-color: #edf2f7;
+        }
+
+        td:first-child {
+            font-weight: 600;
+            color: var(--secondary);
+            width: 25%;
+        }
+
+        /* Premium Abitur Box */
+        .premium-box {
+            background: linear-gradient(to right, #fff, var(--gold-light));
+            border: 2px solid var(--gold);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            margin-top: 4rem;
+            box-shadow: 0 10px 25px rgba(214, 158, 46, 0.2);
+            position: relative;
+        }
+
+        .premium-box::before {
+            content: '★ ABITUR-TRANSFER ★';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--white);
+            padding: 0.3rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow);
+        }
+
+        .premium-box h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .premium-list {
+            list-style: none;
+        }
+
+        .premium-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .premium-list li::before {
+            content: '➔';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.5rem; }
+            .premium-box { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main>
+    <header>
+        <h1>3.4.1b Biologische Mechanismen</h1>
+        <p style="margin:0; font-size: 1.2rem; opacity: 0.9;">Allgemeine Wirkungsweisen und Risiken im Sport</p>
+    </header>
+
+    <section class="intro-text">
+        <p>
+            <strong>Doping stellt einen massiven, unphysiologischen Eingriff in die homöostatischen Regulationsmechanismen des menschlichen Organismus dar.</strong> Die Zufuhr exogener Substanzen oder die Anwendung verbotener Methoden zielt darauf ab, die sportliche Leistungsfähigkeit künstlich zu steigern, indem physiologische Leistungsgrenzen verschoben oder biologische Anpassungsprozesse (Adaptationen) unnatürlich beschleunigt werden.
+        </p>
+        <p>
+            Da hierfür ein detailliertes medizinisches und biologisches Wissen über diesen unfairen Eingriff in den Körper gefordert ist, müssen die grundlegenden Kaskaden auf zellulärer und systemischer Ebene betrachtet werden.
+        </p>
+    </section>
+
+    <h2>Allgemeine biologische Wirkungsweisen</h2>
+    <p>Unabhängig von der spezifischen Substanzklasse lassen sich die Wirkungsmechanismen von Dopingmitteln und -methoden auf wenige zentrale physiologische Eingriffe reduzieren:</p>
+
+    <div class="grid-container">
+        <article class="card">
+            <h3>Rezeptor-Interaktion und zelluläre Signaltransduktion</h3>
+            <p>Viele Dopingwirkstoffe binden als Agonisten an spezifische Rezeptoren (z. B. Androgenrezeptoren in der Skelettmuskulatur oder adrenerge Rezeptoren). Dadurch werden intrazelluläre Kaskaden initiiert, die die Proteinbiosynthese massiv hochregulieren (anabole Wirkung) oder den Energiestoffwechsel (z. B. gesteigerte Lipolyse) verändern.</p>
+        </article>
+
+        <article class="card">
+            <h3>Eingriff in endokrine Regelkreise</h3>
+            <p>Das menschliche Hormonsystem reguliert sich primär über negative Rückkopplung (Feedback-Inhibition). Die exogene Zufuhr von Hormonen suggeriert dem Hypothalamus und der Hypophyse permanent einen ausreichend hohen Blutspiegel. Dies führt zu einer drastischen Herabregulation (Suppression) der körpereigenen Produktion.</p>
+        </article>
+
+        <article class="card">
+            <h3>Modifikation von Transportkapazitäten</h3>
+            <p>Bestimmte Methoden zielen auf die Optimierung passiver oder aktiver Transportsysteme ab, wie etwa die medikamentöse oder mechanische Erhöhung der Sauerstofftransportkapazität des Blutes, was unmittelbar die Hämodynamik (Blutströmungslehre) beeinflusst.</p>
+        </article>
+
+        <article class="card">
+            <h3>ZNS-Manipulation & Autonome Schutzreserve</h3>
+            <p>Substanzen greifen in den Neurotransmitterstoffwechsel des zentralen Nervensystems (ZNS) ein. Dadurch wird das subjektive Ermüdungsempfinden unterdrückt oder die Schmerztoleranz erhöht, wodurch der Athlet auf Leistungsreserven zugreifen kann, die physiologisch autonom geschützt sind.</p>
+        </article>
+    </div>
+
+    <!-- KI 2: Diagramm Hormoneller Regelkreis -->
+    <div class="canvas-container">
+        <h3 class="canvas-title">Systemische Blockade: Doping im hormonellen Regelkreis</h3>
+        <p style="font-size: 0.9rem; color: #718096; margin-bottom: 1rem;">Visualisierung der negativen Rückkopplung und der Suppression der endogenen Hormonproduktion durch exogene Zufuhr.</p>
+        <canvas id="feedbackCanvas" width="800" height="500"></canvas>
+    </div>
+
+    <h2>Allgemeine gesundheitliche Risiken</h2>
+    <p>Der tiefgreifende Eingriff in die menschliche Biologie fordert einen immensen gesundheitlichen Tribut, da die künstlich erzwungene Leistungssteigerung die natürliche Homöostase und Belastungstoleranz der Organsysteme weit übersteigt.</p>
+
+    <div class="danger-box">
+        <h3>Kardiovaskuläre und hämodynamische Risiken</h3>
+        <p>Der Eingriff in Transport- und Aufbausysteme überlastet das Herz-Kreislauf-System. Risiken umfassen pathologisches Herzwachstum (Hypertrophie ohne adäquate Kapillarisierung), lebensbedrohliche Blutdruckentgleisungen und eine erhöhte Blutviskosität (Thrombose-, Herzinfarkt- und Schlaganfallgefahr).</p>
+    </div>
+
+    <div class="danger-box">
+        <h3>Hepatotoxizität und Organversagen</h3>
+        <p>Da viele exogene Substanzen – insbesondere oral eingenommene Präparate – über die Leber verstoffwechselt werden müssen (First-Pass-Effekt), kommt es häufig zu toxischen Leberschäden, Leberzysten oder gar Leberkarzinomen. Auch die Nieren werden durch den massiv erhöhten Filtrationsdruck und Abbauprodukte stark geschädigt.</p>
+    </div>
+
+    <div class="danger-box">
+        <h3>Risiken durch ZNS-Manipulation und psychotrope Effekte</h3>
+        <p>Das Überwinden der autonomen Schutzreserven bei maximaler Belastung kann zum akuten Herztod oder zu völliger Erschöpfung (Kollaps) führen, da dem Körper keine Restenergie zur Aufrechterhaltung vitaler Funktionen bleibt. Zudem drohen massive psychische Entgleisungen wie extreme Aggressivität, schwerste Depressionen (besonders beim Absetzen) und Suchtentwicklung.</p>
+    </div>
+
+    <!-- KI 2: Tabelle Wirkungsweisen vs. Risiken -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Biologische Wirkungsweise</th>
+                    <th>Akute Gesundheitsrisiken</th>
+                    <th>Chronische Gesundheitsrisiken</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ZNS-Stimulation (z.B. Stimulanzien)</td>
+                    <td>Kollaps durch Ausschöpfen der autonomen Schutzreserve, akute Rhythmusstörungen, Dehydration.</td>
+                    <td>Suchtentwicklung, schwerste Depressionen nach Absetzen, chronische Erschöpfungssyndrome.</td>
+                </tr>
+                <tr>
+                    <td>Rezeptor-Interaktion (z.B. Anabolika)</td>
+                    <td>Blutdruckkrisen, Lebertoxizität, akute Aggressivität ("Roid Rage").</td>
+                    <td>Pathologisches Herzwachstum, Leberkarzinome, Hodenatrophie (durch Suppression), Arteriosklerose.</td>
+                </tr>
+                <tr>
+                    <td>Blutbildveränderung (z.B. EPO, Blutdoping)</td>
+                    <td>Akute Thrombosen, Lungenembolie, Infektionsgefahr (bei Transfusionen).</td>
+                    <td>Dauerhafter Bluthochdruck, chronische Herzinsuffizienz, erhöhtes Schlaganfallrisiko durch hohe Viskosität.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <section class="premium-box">
+        <ul class="premium-list">
+            <li>
+                <h3>Physiologische Herleitung</h3>
+                <p>Du musst bei Fallbeispielen erklären können, warum ein bestimmtes Symptom auftritt. Wenn eine Aufgabe beispielsweise die Hodenatrophie bei anabolem Steroidmissbrauch thematisiert, wird als Transferleistung erwartet, dass du dies mit der Unterbrechung der endokrinen Regelkreise (Feedback-Mechanismen der Hypothalamus-Hypophysen-Achse) biologisch exakt begründest.</p>
+            </li>
+            <li>
+                <h3>Materialgestützte Analyse</h3>
+                <p>Oft erhältst du in der Prüfung medizinische Befunde, Laborwerte oder Blogeinträge von (ehemaligen) Athleten. Deine Aufgabe ist es dann, ausgehend von den allgemeinen Wirkungsweisen (z. B. der Manipulation des ZNS zur Unterdrückung der Ermüdungsgrenze) die akute Lebensgefahr durch den Wegfall der autonomen Schutzreserve abzuleiten und fundiert zu bewerten.</p>
+            </li>
+        </ul>
+    </section>
+
+</main>
+
+<script>
+    // Canvas Drawing Logic for Hormonal Feedback Loop
+    function drawFeedbackDiagram() {
+        const canvas = document.getElementById('feedbackCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Setup for High DPI (Retina) displays
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const w = rect.width;
+        const h = rect.height;
+
+        // Clear canvas
+        ctx.clearRect(0, 0, w, h);
+
+        // Styling presets
+        const colorPrimary = '#1a365d';
+        const colorSecondary = '#3182ce';
+        const colorDanger = '#e53e3e';
+        const colorText = '#2d3748';
+        const fontNormal = '14px Inter, sans-serif';
+        const fontBold = 'bold 15px Inter, sans-serif';
+
+        // Helper to draw boxes
+        function drawBox(x, y, width, height, text, bgColor, textColor) {
+            ctx.fillStyle = bgColor;
+            ctx.shadowColor = 'rgba(0,0,0,0.1)';
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetY = 4;
+            ctx.beginPath();
+            ctx.roundRect(x - width/2, y - height/2, width, height, 8);
+            ctx.fill();
+            
+            ctx.shadowColor = 'transparent';
+            ctx.fillStyle = textColor;
+            ctx.font = fontBold;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(text, x, y);
+        }
+
+        // Helper to draw arrows
+        function drawArrow(fromX, fromY, toX, toY, color, label, isDashed = false) {
+            ctx.beginPath();
+            ctx.moveTo(fromX, fromY);
+            ctx.lineTo(toX, toY);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            if (isDashed) {
+                ctx.setLineDash([8, 6]);
+            } else {
+                ctx.setLineDash([]);
+            }
+            ctx.stroke();
+
+            // Arrow head
+            const angle = Math.atan2(toY - fromY, toX - fromX);
+            ctx.beginPath();
+            ctx.moveTo(toX, toY);
+            ctx.lineTo(toX - 15 * Math.cos(angle - Math.PI / 6), toY - 15 * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(toX - 15 * Math.cos(angle + Math.PI / 6), toY - 15 * Math.sin(angle + Math.PI / 6));
+            ctx.fillStyle = color;
+            ctx.fill();
+
+            // Label
+            if (label) {
+                ctx.fillStyle = color;
+                ctx.font = fontNormal;
+                ctx.textAlign = 'center';
+                
+                // Offset label position slightly
+                const midX = (fromX + toX) / 2;
+                const midY = (fromY + toY) / 2;
+                
+                // White background for text readability
+                const textWidth = ctx.measureText(label).width;
+                ctx.fillStyle = 'rgba(255,255,255,0.8)';
+                ctx.fillRect(midX - textWidth/2 - 4, midY - 10, textWidth + 8, 20);
+                
+                ctx.fillStyle = colorText;
+                ctx.fillText(label, midX, midY);
+            }
+        }
+
+        // Draw cross over line
+        function drawCross(x, y) {
+            ctx.beginPath();
+            ctx.strokeStyle = colorDanger;
+            ctx.lineWidth = 4;
+            ctx.setLineDash([]);
+            ctx.moveTo(x - 15, y - 15);
+            ctx.lineTo(x + 15, y + 15);
+            ctx.moveTo(x + 15, y - 15);
+            ctx.lineTo(x - 15, y + 15);
+            ctx.stroke();
+        }
+
+        // Coordinates
+        const centerX = w / 3;
+        const startY = 60;
+        const gapY = 120;
+
+        // 1. Boxes (Normal Pathway)
+        drawBox(centerX, startY, 180, 50, "Hypothalamus", colorPrimary, "white");
+        drawBox(centerX, startY + gapY, 180, 50, "Hypophyse", colorPrimary, "white");
+        drawBox(centerX, startY + 2*gapY, 180, 50, "Zielorgan (z.B. Hoden)", colorSecondary, "white");
+
+        // Normal Arrows (Faded / Crossed out to show suppression)
+        ctx.globalAlpha = 0.4; // Fade out normal path
+        drawArrow(centerX, startY + 25, centerX, startY + gapY - 25, colorSecondary, "GnRH");
+        drawArrow(centerX, startY + gapY + 25, centerX, startY + 2*gapY - 25, colorSecondary, "LH / FSH");
+        ctx.globalAlpha = 1.0;
+
+        // Crosses to show suppression
+        drawCross(centerX, startY + gapY/2);
+        drawCross(centerX, startY + 1.5*gapY);
+
+        // 2. Doping Box (Exogenous)
+        const dopingX = w * 0.75;
+        const dopingY = startY + 2*gapY;
+        drawBox(dopingX, dopingY, 200, 60, "Exogene Zufuhr (Doping)", colorDanger, "white");
+
+        // 3. Blood Pool (Visual Representation)
+        ctx.beginPath();
+        ctx.fillStyle = '#fed7d7'; // light red
+        ctx.roundRect(centerX + 110, dopingY - 20, dopingX - centerX - 230, 40, 10);
+        ctx.fill();
+        ctx.fillStyle = colorDanger;
+        ctx.font = fontNormal;
+        ctx.textAlign = 'center';
+        ctx.fillText("Hoher Blutspiegel", (centerX + dopingX)/2, dopingY);
+
+        // 4. Feedback Arrows (Negative Rückkopplung)
+        // From Doping to Hypophyse
+        drawArrow(dopingX - 100, dopingY - 30, centerX + 100, startY + gapY, colorDanger, "Negative Rückkopplung (Inhibition)", true);
+        // From Doping to Hypothalamus
+        drawArrow(dopingX - 50, dopingY - 30, centerX + 100, startY, colorDanger, "Massive Suppression", true);
+
+        // 5. Result text
+        ctx.fillStyle = colorDanger;
+        ctx.font = 'bold 16px Inter, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText("ERGEBNIS: Endogene Produktion stoppt", 30, h - 30);
+        ctx.font = '14px Inter, sans-serif';
+        ctx.fillStyle = colorText;
+        ctx.fillText("➔ Atrophie des Organs (z.B. Hodenatrophie)", 30, h - 10);
+    }
+
+    // Initial draw and redraw on resize
+    window.addEventListener('load', drawFeedbackDiagram);
+    window.addEventListener('resize', drawFeedbackDiagram);
+</script>
+
+</body>
+</html>

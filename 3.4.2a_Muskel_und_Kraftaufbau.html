@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.4.2a Muskel- und Kraftaufbau: Anabolika & Peptidhormone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f1f5f9;
+            --text-dark: #0f172a;
+            --text-body: #334155;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --danger-red: #ef4444;
+            --danger-dark: #7f1d1d;
+            --gold-gradient: linear-gradient(135deg, #f59e0b, #d97706);
+            --dark-card: #1e293b;
+            --radius-lg: 16px;
+            --radius-md: 8px;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-hard: 8px 8px 0px rgba(15, 23, 42, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-body);
+            line-height: 1.7;
+            padding: 0;
+        }
+
+        /* Asymmetric Header */
+        header {
+            background-color: var(--text-dark);
+            color: white;
+            padding: 4rem 2rem 6rem;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .header-tag {
+            display: inline-block;
+            background: var(--accent-cyan);
+            color: var(--text-dark);
+            font-weight: 700;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .intro-lead {
+            font-size: 1.25rem;
+            font-weight: 300;
+            max-width: 800px;
+            opacity: 0.9;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        /* Split Layout Container */
+        .split-section {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            align-items: stretch;
+        }
+
+        @media (max-width: 850px) {
+            .split-section {
+                flex-direction: column;
+            }
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            flex: 1;
+            position: relative;
+            border-top: 6px solid var(--accent-cyan);
+        }
+
+        .info-card.hgh-card {
+            border-top-color: var(--accent-blue);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .mechanism-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .hgh-card .mechanism-box {
+            border-left-color: var(--accent-blue);
+        }
+
+        /* Accordion for Risks */
+        .risk-header {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--danger-red);
+            margin: 2rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .accordion {
+            background-color: white;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            margin-bottom: 0.8rem;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .accordion:hover {
+            border-color: var(--danger-red);
+        }
+
+        .acc-btn {
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            padding: 1rem 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .acc-btn::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--danger-red);
+            transition: transform 0.3s;
+        }
+
+        .acc-btn.active::after {
+            transform: rotate(45deg);
+        }
+
+        .acc-content {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background-color: #fff1f2;
+        }
+
+        .acc-content p {
+            margin: 1rem 0;
+            color: var(--danger-dark);
+        }
+
+        /* Canvas Container */
+        .canvas-wrapper {
+            background: var(--dark-card);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            color: white;
+            box-shadow: var(--shadow-hard);
+        }
+
+        .canvas-wrapper h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        canvas {
+            width: 100%;
+            background: #0f172a;
+            border-radius: var(--radius-md);
+            border: 1px solid #334155;
+            margin-top: 1.5rem;
+        }
+
+        /* Modern Comparison Table */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 4rem;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th {
+            background: var(--text-dark);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-align: left;
+            padding: 1.2rem 1.5rem;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        td:first-child {
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            background-color: #f1f5f9;
+            width: 25%;
+        }
+
+        .badge-aas { color: var(--accent-cyan); font-weight: bold; }
+        .badge-hgh { color: var(--accent-blue); font-weight: bold; }
+
+        /* Premium Abitur Box */
+        .abitur-box {
+            background: #111827;
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            color: white;
+        }
+
+        .abitur-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: var(--gold-gradient);
+        }
+
+        .abitur-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .abitur-icon {
+            background: var(--gold-gradient);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+        }
+
+        .abitur-box h2 {
+            color: white;
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .abitur-intro {
+            font-size: 1.1rem;
+            color: #9ca3af;
+            margin-bottom: 2rem;
+        }
+
+        .transfer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .transfer-item {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border-left: 3px solid #f59e0b;
+        }
+
+        .transfer-item h4 {
+            color: #fcd34d;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="header-tag">Abitur-Wissen eA: Sportbiologie</div>
+            <h1>Muskel- & Kraftaufbau</h1>
+            <p class="intro-lead">
+                Die Steigerung von Muskelmasse (Hypertrophie) und Muskelkraft ist nicht nur im reinen Kraftsport (wie Gewichtheben oder Bodybuilding) leistungsbestimmend, sondern auch in Sportarten, die eine hohe Maximal- oder Schnellkraft erfordern (z. B. Kugelstoßen, Sprint, Zehnkampf). Um die biologischen Grenzen des Muskelaufbaus zu überwinden, werden primär Substanzen eingesetzt, die in die Proteinbiosynthese und das Zellwachstum eingreifen. Zu den relevantesten Gruppen gehören die anabolen Substanzen sowie Wachstums- und Peptidhormone.
+            </p>
+        </div>
+    </header>
+
+    <main>
+        
+        <div class="split-section">
+            <!-- AAS Card -->
+            <article class="info-card">
+                <h2>Anabole Substanzen <br><span style="font-size: 1rem; font-weight: 400; color: #64748b;">(Anabol-androgene Steroide - AAS)</span></h2>
+                <p>Anabole Steroide sind synthetisch hergestellte Derivate des männlichen Sexualhormons Testosteron. Sie weisen sowohl eine anabole (muskelaufbauende) als auch eine androgene (vermännlichende) Wirkung auf.</p>
+                
+                <div class="mechanism-box">
+                    <strong>Wirkungsweise:</strong> Die fettlöslichen Steroidmoleküle diffundieren durch die Zellmembran der Muskelfasern und binden an <em>intrazelluläre Androgenrezeptoren</em>. Dieser Rezeptor-Hormon-Komplex wandert in den Zellkern und stimuliert dort direkt die Transkription spezifischer Gene. 
+                    <br><br>
+                    <strong>Folge:</strong> Massiv gesteigerte Proteinbiosynthese (Strukturproteine wie Aktin und Myosin). Gleichzeitig wirken sie <em>antikatabol</em>, indem sie die Rezeptoren für das muskelabbauende Hormon Cortisol blockieren.
+                </div>
+
+                <div class="risk-header">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    Spezifische gesundheitliche Risiken
+                </div>
+
+                <div class="accordion">
+                    <button class="acc-btn">Endokrines System</button>
+                    <div class="acc-content">
+                        <p>Durch das Prinzip der negativen Rückkopplung (Feedback-Inhibition) signalisieren die exogenen Hormone dem Hypothalamus einen Testosteronüberschuss. Die Produktion von Gonadotropinen (LH und FSH) wird gestoppt, was beim Mann unweigerlich zu Hodenatrophie (Schrumpfhoden) und Infertilität führt.</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <button class="acc-btn">Veränderung der Geschlechtsmerkmale</button>
+                    <div class="acc-content">
+                        <p>Bei Frauen kommt es zur Virilisierung (tiefe Stimme, Hirsutismus, Klitorishypertrophie). Bei Männern kann überschüssiges Testosteron durch das Enzym Aromatase in Östrogen umgewandelt werden, was zur Gynäkomastie (Brustdrüsenwachstum) führt.</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <button class="acc-btn">Skelettsystem (Jugendliche)</button>
+                    <div class="acc-content">
+                        <p>Bei Jugendlichen kann die Einnahme zu einem vorzeitigen Schluss der Epiphysenfugen in den Röhrenknochen führen, wodurch das Längenwachstum irreversibel gestoppt wird.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- HGH Card -->
+            <article class="info-card hgh-card">
+                <h2>Wachstums- und Peptidhormone <br><span style="font-size: 1rem; font-weight: 400; color: #64748b;">(hGH - human Growth Hormone)</span></h2>
+                <p>Peptidhormone wie das menschliche Wachstumshormon (Somatotropin) bestehen aus Aminosäureketten und binden im Gegensatz zu Steroidhormonen an Membranrezeptoren an der Zelloberfläche.</p>
+                
+                <div class="mechanism-box">
+                    <strong>Wirkungsweise:</strong> Somatotropin wirkt stark anabol auf nahezu alle Gewebe des Körpers (Muskeln, Knochen, Knorpel, Sehnen). Ein wesentlicher Teil der muskelaufbauenden Wirkung entsteht indirekt: hGH stimuliert in der Leber die Freisetzung von IGF-1 (Insulin-like Growth Factor 1), welches wiederum Zellteilung und Zellwachstum fördert. 
+                    <br><br>
+                    <strong>Zusatznutzen:</strong> hGH besitzt eine stark <em>lipolytische</em> (fettabbauende) Wirkung, weshalb es im Kraftsport oft eingesetzt wird, um Muskelmasse bei gleichzeitig minimalem Körperfettanteil aufzubauen.
+                </div>
+
+                <div class="risk-header">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    Spezifische gesundheitliche Risiken
+                </div>
+
+                <div class="accordion">
+                    <button class="acc-btn">Strukturelles Gewebewachstum</button>
+                    <div class="acc-content">
+                        <p>Nach Abschluss des Längenwachstums führt hGH zur <strong>Akromegalie</strong>. Dies äußert sich in einem unproportionalen Wachstum der Akren (Kinn, Nase, Ohren, Hände, Füße).</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <button class="acc-btn">Organwachstum (Splanchnomegalie)</button>
+                    <div class="acc-content">
+                        <p>Besonders gefährlich ist das Wachstum innerer Organe. Ein pathologisches Herzwachstum (Kardiomegalie) bei gleichzeitiger Minderversorgung des vergrößerten Gewebes kann zu schwerer Herzinsuffizienz und zum Tod führen.</p>
+                    </div>
+                </div>
+
+                <div class="accordion">
+                    <button class="acc-btn">Stoffwechsel (Diabetogenität)</button>
+                    <div class="acc-content">
+                        <p>hGH wirkt als Gegenspieler zum Insulin, was langfristig eine Insulinresistenz und somit einen Diabetes mellitus Typ 2 auslösen kann.</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Canvas Diagram: Biologische Mechanismen -->
+        <div class="canvas-wrapper">
+            <h3>Visualisierung: Intrazelluläre vs. Membran-Rezeptoren</h3>
+            <p style="font-size: 0.95rem; color: #cbd5e1;">AAS (fettlöslich) diffundieren durch die Zellmembran in den Kern. hGH (Peptide) binden außen an Membranrezeptoren.</p>
+            <canvas id="receptorCanvas" height="350"></canvas>
+        </div>
+
+        <!-- HTML Table for Text Comparison -->
+        <h2 style="margin-top: 2rem;">Vergleich: Steroide vs. Peptidhormone</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kategorie</th>
+                        <th>Anabole Steroide (AAS)</th>
+                        <th>Wachstumshormone (hGH)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Zielstruktur / Rezeptor</td>
+                        <td><span class="badge-aas">Intrazellulär:</span> Diffundieren durch die Zellmembran und binden an Androgenrezeptoren im Zellplasma/Zellkern.</td>
+                        <td><span class="badge-hgh">Extrazellulär:</span> Binden an Membranrezeptoren an der Zelloberfläche (können als Peptidketten Membran nicht passieren).</td>
+                    </tr>
+                    <tr>
+                        <td>Wirkungsmechanismus auf die Muskulatur</td>
+                        <td>Direkte Stimulation der Transkription spezifischer Gene im Zellkern für Proteinbiosynthese (Aktin/Myosin) + antikatabole Blockade von Cortisol.</td>
+                        <td>Stark anabol, großteils indirekt über die Leber induzierte Freisetzung von IGF-1, welches Zellteilung und Zellwachstum (Hyperplasie/Hypertrophie) fördert.</td>
+                    </tr>
+                    <tr>
+                        <td>Wirkung auf den Fettstoffwechsel</td>
+                        <td>Sekundär. Hauptfokus liegt auf dem reinen Muskelmasseaufbau und Erhalt (Antikatabolismus).</td>
+                        <td>Stark lipolytisch (fettabbauend). Direkte Förderung des Abbaus von Depotfett zur Energiegewinnung.</td>
+                    </tr>
+                    <tr>
+                        <td>Spezifische, irreversible Risiken</td>
+                        <td>Vorzeitiger Epiphysenfugenschluss (Wachstumsstopp), Hodenatrophie, Virilisierung bei Frauen, Gynäkomastie durch Aromatase.</td>
+                        <td>Akromegalie (Wachstum von Kinn, Nase, Akren), Splanchnomegalie (Kardiomegalie/Herzwachstum), Diabetes mellitus Typ 2.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Abitur Transfer Premium Box -->
+        <section class="abitur-box">
+            <div class="abitur-header">
+                <div class="abitur-icon">🏆</div>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+            <p class="abitur-intro">
+                In Abiturklausuren auf erhöhtem Anforderungsniveau (eA) wird zu diesem Themenblock häufig fundiertes medizinisches Transferwissen anhand von Fallbeispielen verlangt. Pures Aufzählen reicht nicht aus!
+            </p>
+
+            <div class="transfer-grid">
+                <div class="transfer-item">
+                    <h4>1. Symptombasierte Zuordnung & Begründung</h4>
+                    <p>Du erhältst beispielsweise den medizinischen Bericht eines jungen Kraftdreikämpfers (Gynäkomastie, schwere Akne, Leberbelastung).<br><br>
+                    <strong>Erwartet:</strong> Präzise Zuordnung zu anabolen Steroiden (AAS). Du musst erklären, <em>warum</em> diese auftreten (z. B. Aromatisierung von Testosteron zu Östrogen als Ursache der Gynäkomastie; Lebertoxizität durch den oralen First-Pass-Effekt).</p>
+                </div>
+
+                <div class="transfer-item">
+                    <h4>2. Analyse der Homöostase</h4>
+                    <p>Eine typische Anforderungsaufgabe ist die Erklärung der Hodenatrophie.<br><br>
+                    <strong>Erwartet:</strong> Den endokrinen Regelkreis (Hypothalamus - Hypophyse - Gonaden) detailliert beschreiben und erläutern, wie die exogene Zufuhr durch <em>negative Rückkopplung</em> die körpereigene Produktion von LH und FSH und damit die endogene Testosteronproduktion supprimiert.</p>
+                </div>
+
+                <div class="transfer-item">
+                    <h4>3. Biologische Grenzen (Peptidhormone)</h4>
+                    <p>Wenn eine Textquelle die Verwendung von Peptidhormonen thematisiert, wird oft verlangt, die Gefährlichkeit von hGH zu bewerten.<br><br>
+                    <strong>Erwartet:</strong> Den Unterschied zum Muskelaufbau herausstellen. Während Muskeln durch Training wachsen können, wachsen bei hGH-Missbrauch Knorpel, Knochen und das Herz unphysiologisch mit (Akromegalie, Kardiomegalie), was ein irreversibles, lebensbedrohliches Risiko darstellt.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Accordion Logic
+        const accordions = document.querySelectorAll('.acc-btn');
+        accordions.forEach(acc => {
+            acc.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.paddingTop = "0";
+                    panel.style.paddingBottom = "0";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + 30 + "px";
+                    panel.style.paddingTop = "1rem";
+                    panel.style.paddingBottom = "1rem";
+                } 
+            });
+        });
+
+        // Canvas Drawing Logic
+        window.addEventListener('load', drawCellDiagram);
+        window.addEventListener('resize', drawCellDiagram);
+
+        function drawCellDiagram() {
+            const canvas = document.getElementById('receptorCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // High DPI adjustment
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            // Leave some padding
+            canvas.width = (rect.width - 64) * dpr; 
+            canvas.height = 350 * dpr;
+            ctx.scale(dpr, dpr);
+            
+            const w = rect.width - 64;
+            const h = 350;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Fonts & Colors
+            ctx.font = '14px Roboto, sans-serif';
+            const colorAAS = '#06b6d4';
+            const colorHGH = '#3b82f6';
+            const cellMembrane = '#475569';
+            const cytoplasm = '#1e293b';
+            const nucleusBg = '#0f172a';
+            const nucleusBorder = '#64748b';
+
+            // 1. Draw Cell Membrane
+            ctx.beginPath();
+            ctx.moveTo(0, h * 0.3);
+            ctx.bezierCurveTo(w * 0.3, h * 0.25, w * 0.7, h * 0.35, w, h * 0.3);
+            ctx.lineWidth = 12;
+            ctx.strokeStyle = cellMembrane;
+            ctx.stroke();
+
+            // Label Membrane
+            ctx.fillStyle = '#94a3b8';
+            ctx.fillText("Extrazellulärer Raum (Blutbahn)", 20, 25);
+            ctx.fillText("Zellmembran", 20, h * 0.3 - 15);
+            ctx.fillText("Intrazellulärer Raum (Zytoplasma)", 20, h * 0.3 + 30);
+
+            // 2. Draw Nucleus
+            const nucX = w * 0.75;
+            const nucY = h * 0.75;
+            const nucR = 70;
+            
+            ctx.beginPath();
+            ctx.arc(nucX, nucY, nucR, 0, Math.PI * 2);
+            ctx.fillStyle = nucleusBg;
+            ctx.fill();
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = nucleusBorder;
+            ctx.setLineDash([8, 4]); // Pores in nucleus
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#cbd5e1';
+            ctx.textAlign = 'center';
+            ctx.fillText("Zellkern (DNA)", nucX, nucY + 5);
+            
+            // DNA helix symbol
+            ctx.beginPath();
+            ctx.moveTo(nucX - 20, nucY - 20);
+            ctx.bezierCurveTo(nucX, nucY - 40, nucX, nucY, nucX + 20, nucY - 20);
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // 3. AAS Pathway (Left/Middle)
+            const aasStartX = w * 0.3;
+            const aasStartY = 50;
+            
+            // AAS Molecule
+            drawMolecule(ctx, aasStartX, aasStartY, colorAAS, "AAS");
+            
+            // Pathway line
+            ctx.beginPath();
+            ctx.moveTo(aasStartX, aasStartY + 20);
+            ctx.lineTo(aasStartX, h * 0.6);
+            ctx.lineTo(nucX - nucR - 10, h * 0.6);
+            ctx.strokeStyle = colorAAS;
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            drawArrowHead(ctx, nucX - nucR - 10, h * 0.6, 0, colorAAS);
+
+            // Intracellular Receptor
+            ctx.fillStyle = colorAAS;
+            ctx.globalAlpha = 0.3;
+            ctx.fillRect(aasStartX - 15, h * 0.55, 30, 30);
+            ctx.globalAlpha = 1.0;
+            ctx.strokeRect(aasStartX - 15, h * 0.55, 30, 30);
+            ctx.textAlign = 'left';
+            ctx.fillStyle = colorAAS;
+            ctx.fillText("Intrazellulärer Rezeptor", aasStartX + 20, h * 0.58);
+            
+            ctx.textAlign = 'center';
+            ctx.fillText("Diffundiert frei durch Membran", aasStartX, h * 0.3 - 20);
+            ctx.fillText("Gen-Transkription", nucX, nucY + nucR + 25);
+
+
+            // 4. hGH Pathway (Right)
+            const hghStartX = w * 0.8;
+            const hghStartY = 50;
+            const memY = h * 0.31; // Roughly at the membrane curve
+
+            // Membrane Receptor
+            ctx.beginPath();
+            ctx.moveTo(hghStartX - 20, memY - 10);
+            ctx.lineTo(hghStartX - 10, memY + 20);
+            ctx.lineTo(hghStartX + 10, memY + 20);
+            ctx.lineTo(hghStartX + 20, memY - 10);
+            ctx.lineTo(hghStartX, memY);
+            ctx.closePath();
+            ctx.fillStyle = colorHGH;
+            ctx.fill();
+
+            // hGH Molecule
+            drawMolecule(ctx, hghStartX, hghStartY, colorHGH, "hGH");
+
+            // Pathway Line to receptor
+            ctx.beginPath();
+            ctx.moveTo(hghStartX, hghStartY + 20);
+            ctx.lineTo(hghStartX, memY - 15);
+            ctx.strokeStyle = colorHGH;
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            drawArrowHead(ctx, hghStartX, memY - 15, Math.PI / 2, colorHGH);
+
+            // Signal Transduction Line
+            ctx.beginPath();
+            ctx.moveTo(hghStartX, memY + 25);
+            ctx.lineTo(hghStartX, nucY - nucR - 10);
+            ctx.strokeStyle = colorHGH;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            drawArrowHead(ctx, hghStartX, nucY - nucR - 10, Math.PI / 2, colorHGH);
+
+            ctx.textAlign = 'right';
+            ctx.fillStyle = colorHGH;
+            ctx.fillText("Membranrezeptor", hghStartX - 25, memY);
+            ctx.fillText("Signaltransduktion", hghStartX - 10, (memY + nucY - nucR)/2 );
+        }
+
+        function drawMolecule(ctx, x, y, color, text) {
+            ctx.beginPath();
+            ctx.arc(x, y, 18, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 12px Roboto';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(text, x, y);
+            ctx.textBaseline = 'alphabetic'; // reset
+        }
+
+        function drawArrowHead(ctx, x, y, angle, color) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(-10, -6);
+            ctx.lineTo(-10, 6);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.restore();
+        }
+    </script>
+</body>
+</html>

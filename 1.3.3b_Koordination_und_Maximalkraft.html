@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.3.3b Koordination & Maximalkraft - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Neural Overdrive / High Voltage */
+            --bg-deep: #070b14;
+            --bg-card: #111827;
+            --bg-surface: #1f2937;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            --neon-cyan: #00f0ff;      /* Neural Impulses */
+            --neon-blue: #3b82f6;      /* CNS Base */
+            --muscle-red: #f43f5e;     /* Contrast: Hypertrophy */
+            
+            --abi-bg: #1e1b4b;
+            --abi-gold: #fbbf24;
+            --abi-accent: #a855f7;
+            
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-cyan: 0 0 20px rgba(0, 240, 255, 0.2);
+            --shadow-red: 0 0 20px rgba(244, 63, 94, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        h1, h2, h3, h4, .hud-font {
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            border-bottom: 2px solid var(--neon-blue);
+            position: relative;
+            background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--neon-cyan);
+            box-shadow: var(--shadow-cyan);
+        }
+
+        .hero-tag {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.1;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 850px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* --- Intro Block --- */
+        .intro-box {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: var(--radius-md);
+            margin: 4rem auto;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Section Header --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 6rem 0 3rem;
+        }
+
+        .section-num {
+            background: var(--neon-cyan);
+            color: var(--bg-deep);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-weight: 700;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            box-shadow: var(--shadow-cyan);
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+        }
+
+        /* --- 1. Belastungsgefüge Grid --- */
+        .param-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        @media (max-width: 800px) {
+            .param-grid { grid-template-columns: 1fr; }
+        }
+
+        .param-card {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-surface);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .param-card:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.05);
+        }
+
+        .param-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; width: 4px; height: 100%;
+            background: var(--neon-cyan);
+        }
+
+        .param-card h3 {
+            color: var(--neon-cyan);
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .param-val {
+            display: block;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .param-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* --- 2. Physiologische Begründung --- */
+        .physio-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .physio-item {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+            border-left: 4px solid var(--neon-blue);
+            padding: 2.5rem;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .physio-item h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .physio-item p {
+            color: #cbd5e1;
+        }
+
+        .highlight-blue { color: var(--neon-cyan); font-weight: 700; }
+
+        /* --- Canvas Section --- */
+        .canvas-section {
+            background: #030712;
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid #1f2937;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        .canvas-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .canvas-section p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            background: var(--bg-deep);
+            border: 1px solid #374151;
+        }
+
+        /* --- Premium Abitur Transfer Box --- */
+        .abitur-prep {
+            background: linear-gradient(135deg, var(--abi-bg), #0f0a1f);
+            color: #e2e8f0;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-prep::before {
+            content: 'EXAM';
+            position: absolute;
+            font-size: 8rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            color: rgba(168, 85, 247, 0.03);
+            top: -20px;
+            right: 0;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-accent);
+            color: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 900;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #d8b4fe;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .abi-card {
+            background: rgba(0,0,0,0.3);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-accent);
+        }
+
+        .abi-card.warn { border-left-color: var(--abi-gold); }
+        .abi-card.warn h3 { color: var(--abi-gold); }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+        .abi-card p:last-child { margin-bottom: 0; }
+
+        .hl-purple { color: #d8b4fe; font-weight: 700; }
+        .hl-gold { color: var(--abi-gold); font-weight: 700; }
+        .hl-white { color: white; font-weight: 700; }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="hero-tag">Lernbereich 1.3.3b</span>
+            <h1>Koordination & Maximalkraft</h1>
+            <p>Intramuskuläres Koordinationstraining und die Methode der maximalen Krafteinsätze – Neuronale Ansteuerung am absoluten Limit.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-box">
+            Während das Muskelaufbautraining (1.3.3a) primär morphologische Veränderungen (Hypertrophie) anstrebt, zielt das <strong>intramuskuläre Koordinationstraining (IK-Training)</strong> ausschließlich auf neuronale Anpassungen ab. 
+            <br><br>
+            <span style="color: var(--text-muted);">Das Ziel ist es, die vorhandene Muskelmasse durch das zentrale Nervensystem (ZNS) maximal effizient anzusteuern. Dies führt zu einer drastischen Steigerung der Maximalkraft und Explosivkraft, ohne dass das Körpergewicht durch neue Muskelmasse zunimmt. Um das ZNS derart zu belasten, bedient sich die Sportwissenschaft primär der <strong>Methode der maximalen (und supramaximalen) Krafteinsätze</strong>.</span>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="section-header">
+            <div class="section-num">1</div>
+            <h2 class="hud-font">Das Belastungsgefüge (Die Parametrisierung)</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Da das ZNS erst bei extremen Widerständen gezwungen wird, alle verfügbaren motorischen Einheiten simultan zu aktivieren, liegen die Belastungskomponenten dieser Methode am absoluten anatomischen Limit:</p>
+
+        <div class="param-grid">
+            <div class="param-card">
+                <h3 class="hud-font">Intensität</h3>
+                <span class="param-val">90% - 100% 1RM</span>
+                <p>Maximal. Bei supramaximalen Methoden (nur exzentrisch abbremsend) sogar bis zu 120 % der individuellen Maximalkraft.</p>
+            </div>
+            
+            <div class="param-card">
+                <h3 class="hud-font">Umfang</h3>
+                <span class="param-val">1 - 3 Wdh.</span>
+                <p>Sehr gering. Maximal 3 (selten 5) Wiederholungen pro Satz. Die Gesamtzahl der Sätze liegt meist bei 3 bis 5 pro Übung.</p>
+            </div>
+            
+            <div class="param-card">
+                <h3 class="hud-font">Dauer (Ausführung)</h3>
+                <span class="param-val">Max. Explosiv</span>
+                <p>Die Ausführung erfolgt mit <strong>maximal explosiver Intention</strong>. Da das Gewicht extrem schwer ist, sieht die Bewegung von außen oft langsam aus ("Grinding"). Entscheidend ist jedoch der neuronale Befehl, explosiv zu arbeiten!</p>
+            </div>
+            
+            <div class="param-card">
+                <h3 class="hud-font">Dichte (Pause)</h3>
+                <span class="param-val">3 - 5+ Min.</span>
+                <p>Vollständige Pause von mindestens 3 bis 5 Minuten (oder länger) zwischen den Sätzen zur kompletten neuronalen und alaktaziden Erholung.</p>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section-header">
+            <div class="section-num">2</div>
+            <h2 class="hud-font">Physiologische Begründung der Methode</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Die extremen Parameter sind biologisch zwingend erforderlich, um das gewünschte Trainingsziel zu erreichen:</p>
+
+        <div class="physio-list">
+            <div class="physio-item">
+                <h3 class="hud-font">⚡ Warum 90-100 % Intensität? (Rekrutierung & Synchronisation)</h3>
+                <p>Nach dem <strong>Henneman'schen Größenprinzip</strong> schaltet der Körper die starken, schnell zuckenden FT-Fasern (Typ IIx) erst dann zu, wenn die Last nahe dem Maximum liegt. <span class="highlight-blue">Nur bei diesen extremen Gewichten lernt das ZNS die Synchronisation</span> – das absolut gleichzeitige Abfeuern aller motorischen Einheiten, was die Basis für jede Schnellkraftleistung (z. B. einen Absprung) ist.</p>
+            </div>
+            
+            <div class="physio-item">
+                <h3 class="hud-font">🔋 Warum so wenig Wiederholungen? (Ermüdungsvermeidung)</h3>
+                <p>Das IK-Training darf keine morphologische Ermüdung (wie beim Muskelaufbau) hervorrufen. Sobald der Muskel übersäuert (Laktatbildung), leidet die neuronale Ansteuerung und die Kontraktionsgeschwindigkeit sinkt. <span class="highlight-blue">IK-Training muss strikt im anaerob-alaktaziden Stoffwechselbereich bleiben.</span></p>
+            </div>
+
+            <div class="physio-item">
+                <h3 class="hud-font">⏱️ Warum 3-5 Minuten Pause? (Heterochronismus)</h3>
+                <p>Die Pause dient nicht dem Ausruhen des Atems, sondern zwei unsichtbaren Vorgängen: Erstens müssen die intrazellulären ATP- und Kreatinphosphatspeicher (KP) zu 100 % resynthetisiert werden. <span class="highlight-blue">Zweitens benötigt die motorische Hirnrinde (ZNS) diese lange Zeit, um sich von der extremen neuronalen Entladung zu erholen.</span> Eine zu kurze Pause führt sofort zu einem Einbruch der Maximalleistung.</p>
+            </div>
+        </div>
+
+        <!-- Interactive Canvas: The Comparison Table -->
+        <section class="canvas-section">
+            <h2 class="hud-font">System-Vergleich: Hypertrophie vs. Neuronale Ansteuerung</h2>
+            <p class="subtitle">Kontrastierende Gegenüberstellung der Parameter und physiologischen Ziele.</p>
+            
+            <div class="canvas-container">
+                <canvas id="comparisonCanvas" width="1000" height="500"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Transfer Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2 class="hud-font">Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                Dieser Unterpunkt ist in der schriftlichen Abiturprüfung (eA) das wichtigste Werkzeug, um Leistungssteigerungen in leichtathletischen oder spielspezifischen Disziplinen zu planen und zu begründen.
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card">
+                    <h3 class="hud-font">⚖️ Die "Relative Kraft" als Argumentationsbasis</h3>
+                    <p>Warum macht ein Hochspringer oder ein Volleyballer (der seine Sprungkraft für den Block verbessern will) IK-Training und kein Hypertrophietraining? <span class="hl-white">Hier wird Transferwissen gefordert! Du musst argumentieren:</span></p>
+                    <p>Für Sprünge ist die <strong>Relative Kraft</strong> (Maximalkraft im Verhältnis zum Körpergewicht) entscheidend. Ein Hypertrophietraining würde die Beine zwar stärker, aber auch schwerer machen (Muskelmasse wiegt viel). Das IK-Training über die Methode der maximalen Krafteinsätze erhöht die Explosiv- und Maximalkraft enorm, <span class="hl-purple">ohne dass der Athlet auch nur ein Gramm zunimmt.</span></p>
+                </div>
+
+                <div class="abi-card">
+                    <h3 class="hud-font">📝 Trainingspläne skizzieren (Operator)</h3>
+                    <p>Im Erwartungshorizont der offiziellen Prüfungsaufgaben wird oft gefordert, eine Trainingsmethode zur Verbesserung der Sprungkraft zu beschreiben. <span class="hl-white">Es gibt null Punkte, wenn du nur "IK-Training" schreibst.</span></p>
+                    <p>Du musst die <strong>Methode der maximalen Krafteinsätze</strong> nennen und zwingend die vier Belastungskomponenten (Intensität 90-100%, 1-3 Wdh., explosive Ausführung, 5 Min. vollständige Pause) exakt dazu schreiben!</p>
+                </div>
+
+                <div class="abi-card warn">
+                    <h3 class="hud-font" style="color: var(--abi-gold);">🛑 Fehlerdiagnose bei Pausenzeiten</h3>
+                    <p>Wenn in einer Fallstudie ein Athlet beschrieben wird, der IK-Training mit 95 % seiner Maximalkraft macht, aber nach jedem Satz nur 60 Sekunden Pause einlegen und dann kläglich versagt, musst du als Sportexperte eingreifen:</p>
+                    <p>Du begründest das Versagen mit der <span class="hl-gold">unzureichenden alaktaziden Erholung und der massiven Ermüdung des Zentralnervensystems</span> und korrigierst den Plan methodisch auf eine vollständige Pause von > 3 Minuten.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('comparisonCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 1000;
+            const logicalH = 500;
+            
+            let time = 0;
+            let animationId;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayW = Math.min(rect.width, logicalW);
+                const scale = displayW / logicalW;
+                const displayH = logicalH * scale;
+                
+                canvas.width = displayW * dpr;
+                canvas.height = displayH * dpr;
+                canvas.style.width = `${displayW}px`;
+                canvas.style.height = `${displayH}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // Layout Parameters
+            const leftColor = '#f43f5e';  // Muscle Red
+            const rightColor = '#00f0ff'; // Neon Cyan
+            const colW = logicalW / 2;
+            
+            const rows = [
+                { label: 'INTENSITÄT', valL: '70 - 80%', valR: '90 - 100%', pctL: 0.75, pctR: 0.95 },
+                { label: 'UMFANG (WDH)', valL: '8 - 12', valR: '1 - 3', pctL: 0.8, pctR: 0.2 },
+                { label: 'PAUSE (DICHTE)', valL: '1,5 Min', valR: '3 - 5 Min', pctL: 0.3, pctR: 0.9 }
+            ];
+
+            function drawHUD() {
+                ctx.clearRect(0, 0, logicalW, logicalH);
+
+                // Split Background
+                ctx.fillStyle = '#0f131a'; // Left Dark Reddish hue
+                ctx.fillRect(0, 0, colW, logicalH);
+                ctx.fillStyle = '#050a14'; // Right Dark Blue hue
+                ctx.fillRect(colW, 0, colW, logicalH);
+
+                // Center Divider
+                ctx.beginPath();
+                ctx.moveTo(colW, 0); ctx.lineTo(colW, logicalH);
+                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // 1. Headers
+                ctx.textAlign = 'center';
+                
+                // Left Header
+                ctx.shadowColor = leftColor;
+                ctx.shadowBlur = 20;
+                ctx.fillStyle = leftColor;
+                ctx.font = 'bold 32px Rajdhani';
+                ctx.fillText('MUSKELAUFBAU', colW/2, 60);
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = '#f8fafc';
+                ctx.font = '14px Inter';
+                ctx.fillText('(Hypertrophietraining)', colW/2, 85);
+
+                // Right Header
+                ctx.shadowColor = rightColor;
+                ctx.shadowBlur = 20;
+                ctx.fillStyle = rightColor;
+                ctx.font = 'bold 32px Rajdhani';
+                ctx.fillText('IK-TRAINING', colW + colW/2, 60);
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = '#f8fafc';
+                ctx.font = '14px Inter';
+                ctx.fillText('(Max. Krafteinsätze)', colW + colW/2, 85);
+
+                // Draw Data Rows
+                const startY = 150;
+                const rowH = 80;
+
+                rows.forEach((row, i) => {
+                    const y = startY + i * rowH;
+
+                    // Row Label (Center)
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.font = 'bold 16px Rajdhani';
+                    ctx.textAlign = 'center';
+                    
+                    // Background for center label
+                    ctx.fillStyle = '#1f2937';
+                    ctx.fillRect(colW - 60, y - 15, 120, 30);
+                    ctx.fillStyle = 'white';
+                    ctx.fillText(row.label, colW, y + 5);
+
+                    // --- Left Side (Hypertrophy) ---
+                    // Text
+                    ctx.textAlign = 'right';
+                    ctx.fillStyle = leftColor;
+                    ctx.font = 'bold 24px Rajdhani';
+                    ctx.fillText(row.valL, colW - 80, y + 8);
+                    
+                    // Bar
+                    const barW = 200;
+                    const barX = colW - 140 - barW;
+                    ctx.fillStyle = 'rgba(244, 63, 94, 0.1)';
+                    ctx.fillRect(barX, y - 5, barW, 10);
+                    ctx.fillStyle = leftColor;
+                    ctx.shadowColor = leftColor;
+                    ctx.shadowBlur = 10;
+                    ctx.fillRect(barX + barW - (barW * row.pctL), y - 5, barW * row.pctL, 10);
+                    ctx.shadowBlur = 0;
+
+                    // --- Right Side (IK) ---
+                    // Text
+                    ctx.textAlign = 'left';
+                    ctx.fillStyle = rightColor;
+                    ctx.font = 'bold 24px Rajdhani';
+                    ctx.fillText(row.valR, colW + 80, y + 8);
+                    
+                    // Bar
+                    const barXR = colW + 140;
+                    ctx.fillStyle = 'rgba(0, 240, 255, 0.1)';
+                    ctx.fillRect(barXR, y - 5, barW, 10);
+                    ctx.fillStyle = rightColor;
+                    ctx.shadowColor = rightColor;
+                    ctx.shadowBlur = 10;
+                    
+                    // Add pulsing effect to IK bars to show "tension/neural activity"
+                    let pulse = 1;
+                    if (row.label === 'INTENSITÄT' || row.label === 'PAUSE (DICHTE)') {
+                        pulse = 0.95 + Math.sin(time * 5) * 0.05;
+                    }
+                    ctx.fillRect(barXR, y - 5, barW * row.pctR * pulse, 10);
+                    ctx.shadowBlur = 0;
+                });
+
+                // 3. Primary Goal (Bottom Section)
+                const goalY = 420;
+                
+                ctx.beginPath();
+                ctx.moveTo(50, goalY - 40); ctx.lineTo(logicalW - 50, goalY - 40);
+                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                ctx.stroke();
+
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = 'bold 16px Rajdhani';
+                ctx.textAlign = 'center';
+                ctx.fillText('PRIMÄRES ZIEL', colW, goalY - 45);
+
+                // Goal Left
+                ctx.fillStyle = leftColor;
+                ctx.font = 'bold 20px Inter';
+                ctx.fillText('Muskelquerschnitt', colW/2, goalY);
+                ctx.fillStyle = '#cbd5e1';
+                ctx.font = '14px Inter';
+                ctx.fillText('Morphologische Hypertrophie', colW/2, goalY + 25);
+
+                // Goal Right
+                ctx.fillStyle = rightColor;
+                ctx.font = 'bold 20px Inter';
+                ctx.fillText('Neuronale Ansteuerung', colW + colW/2, goalY);
+                ctx.fillStyle = '#cbd5e1';
+                ctx.font = '14px Inter';
+                ctx.fillText('Intramuskuläre Koordination (ZNS)', colW + colW/2, goalY + 25);
+
+                // Add some neural data particles on the right side
+                for(let i=0; i<5; i++) {
+                    const py = (time * 50 + i * (logicalH/5)) % logicalH;
+                    ctx.fillStyle = `rgba(0, 240, 255, ${1 - py/logicalH})`;
+                    ctx.beginPath();
+                    ctx.arc(logicalW - 50 + Math.sin(time*3+i)*20, py, 2, 0, Math.PI*2);
+                    ctx.fill();
+                }
+            }
+
+            function animate() {
+                time += 0.03;
+                drawHUD();
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.5.3a Determinanten der Ausdauer</title>
+    <style>
+        /* Elite Athletics & Performance Matrix Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            /* High-Octane Dark Theme */
+            --bg-base: #0b1120;       /* Deep Slate */
+            --bg-surface: #151e32;    /* Slightly lighter card */
+            --bg-surface-alt: #1e293b;
+            
+            --text-main: #cbd5e1;
+            --text-bright: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            /* Determinant Colors */
+            --color-cardio: #ef4444;    /* Crimson Red */
+            --color-metabolic: #10b981; /* Emerald Green */
+            --color-biomech: #3b82f6;   /* Azure Blue */
+            --color-psycho: #f59e0b;    /* Amber Gold */
+            
+            /* Abitur Transfer */
+            --abi-bg: #000000;
+            --abi-gold: #fbbf24;
+            --abi-alert: #f43f5e;
+            
+            --radius-box: 16px;
+            --radius-pill: 50px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            background-image: radial-gradient(circle at 50% 0%, rgba(30, 41, 59, 1) 0%, transparent 70%);
+        }
+
+        .matrix-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .hero-header {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, rgba(21, 30, 50, 0.8) 0%, var(--bg-base) 100%);
+            border-radius: var(--radius-box);
+            border-top: 4px solid #475569;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .sys-badge {
+            display: inline-block;
+            background: #1e293b;
+            color: #94a3b8;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #334155;
+        }
+
+        h1 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--text-bright);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .lead-text {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 900px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Canvas Wrapper (Mindmap placed early for overview) */
+        .canvas-section {
+            background: var(--bg-surface);
+            border-radius: var(--radius-box);
+            padding: 2rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid #1e293b;
+        }
+
+        .canvas-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .canvas-header h2 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 2rem;
+            color: var(--text-bright);
+            margin-bottom: 0.5rem;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+            display: block;
+            border-radius: 8px;
+            background: #0b1120;
+        }
+
+        /* Factors Grid Layout */
+        .factors-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 900px) {
+            .factors-grid { grid-template-columns: 1fr; }
+        }
+
+        .factor-card {
+            background: var(--bg-surface);
+            border-radius: var(--radius-box);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .factor-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Color coding per factor */
+        .factor-card.cardio { border-top: 5px solid var(--color-cardio); }
+        .factor-card.metabolic { border-top: 5px solid var(--color-metabolic); }
+        .factor-card.biomech { border-top: 5px solid var(--color-biomech); }
+        .factor-card.psycho { border-top: 5px solid var(--color-psycho); }
+
+        .factor-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 150px;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        .factor-card.cardio::before { background: linear-gradient(to bottom, var(--color-cardio), transparent); }
+        .factor-card.metabolic::before { background: linear-gradient(to bottom, var(--color-metabolic), transparent); }
+        .factor-card.biomech::before { background: linear-gradient(to bottom, var(--color-biomech), transparent); }
+        .factor-card.psycho::before { background: linear-gradient(to bottom, var(--color-psycho), transparent); }
+
+        .factor-title {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-bright);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .factor-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            display: block;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 1rem;
+        }
+
+        /* Detail Items */
+        .detail-list {
+            list-style: none;
+        }
+
+        .detail-item {
+            margin-bottom: 1.5rem;
+            background: rgba(255,255,255,0.02);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid;
+        }
+
+        .cardio .detail-item { border-left-color: var(--color-cardio); }
+        .metabolic .detail-item { border-left-color: var(--color-metabolic); }
+        .biomech .detail-item { border-left-color: var(--color-biomech); }
+        .psycho .detail-item { border-left-color: var(--color-psycho); }
+
+        .detail-item h4 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-bright);
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-item p {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 0;
+        }
+
+        /* Massive Abitur Box: The Bottleneck */
+        .tactical-analysis {
+            background: var(--abi-bg);
+            color: var(--text-bright);
+            padding: 4rem;
+            border-radius: var(--radius-box);
+            margin-top: 4rem;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            border: 1px solid #333;
+            overflow: hidden;
+        }
+
+        .tactical-tag {
+            position: absolute;
+            top: 0; left: 0;
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            padding: 0.8rem 2.5rem;
+            border-radius: 0 0 16px 0;
+            letter-spacing: 2px;
+        }
+
+        .tactical-analysis > h2 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 2.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .tactical-analysis > p {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+        }
+
+        /* Bottleneck Concept Layout */
+        .bottleneck-concept {
+            background: linear-gradient(90deg, rgba(244, 63, 94, 0.1), transparent);
+            border-left: 5px solid var(--abi-alert);
+            padding: 2.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 3rem;
+        }
+
+        .bottleneck-concept h3 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.8rem;
+            color: var(--abi-alert);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bottleneck-concept p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        /* Cases Grid */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .cases-grid { grid-template-columns: 1fr; }
+        }
+
+        .case-card {
+            background: #111827;
+            border: 1px solid #334155;
+            padding: 2.5rem;
+            border-radius: 12px;
+        }
+
+        .case-card h4 {
+            color: var(--abi-gold);
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 0.5rem;
+        }
+
+        .case-card p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .case-card strong {
+            color: #38bdf8;
+        }
+
+        .training-implication {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #1e293b;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px dashed #475569;
+        }
+
+        .training-implication strong {
+            color: #a78bfa;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="matrix-container">
+
+    <header class="hero-header">
+        <div class="sys-badge">Lernbereich 1.5.3a</div>
+        <h1>Determinanten der Ausdauer</h1>
+        <p class="lead-text">Die Ausdauerleistungsfähigkeit eines Athleten ist niemals von einem einzigen isolierten Parameter abhängig, sondern das Resultat eines komplexen, multifaktoriellen Wirkungsgefüges. Diese leistungsbestimmenden Faktoren werden in anatomisch-physiologische, biomechanische und psychologische Determinanten aufgeschlüsselt.</p>
+    </header>
+
+    <!-- Canvas Mindmap (Placed up top as the structural overview) -->
+    <div class="canvas-section">
+        <div class="canvas-header">
+            <h2>Wirkungsgefüge Ausdauer</h2>
+            <p style="color: var(--text-muted);">Multifaktorielle Übersicht der leistungsbestimmenden Determinanten.</p>
+        </div>
+        <canvas id="determinantsMap" width="1100" height="650"></canvas>
+    </div>
+
+    <!-- The 4 Factors Grid -->
+    <div class="factors-grid">
+        
+        <!-- 1. Kardiopulmonal -->
+        <div class="factor-card cardio">
+            <h2 class="factor-title">🫀 Kardiopulmonal</h2>
+            <span class="factor-subtitle">Das zentrale Transportsystem</span>
+            <p style="margin-bottom: 1.5rem;">Diese Faktoren determinieren, wie viel Sauerstoff (O<sub>2</sub>) aus der Umgebung aufgenommen und über das Blut zur Arbeitsmuskulatur transportiert werden kann. (Grundlage der aeroben Ausdauer).</p>
+            
+            <ul class="detail-list">
+                <li class="detail-item">
+                    <h4>Maximale Sauerstoffaufnahme (VO<sub>2</sub>max)</h4>
+                    <p>Das absolute Bruttokriterium der aeroben Leistungsfähigkeit. Limitiert die Menge an O<sub>2</sub>, die pro Minute verwertet werden kann.</p>
+                </li>
+                <li class="detail-item">
+                    <h4>Herzminutenvolumen (HMV)</h4>
+                    <p>Die Förderleistung des Herzens (insb. max. Schlagvolumen) ist der <strong>größte physiologische Engpass</strong>. Ein Sportherz ist Grundvoraussetzung.</p>
+                </li>
+                <li class="detail-item">
+                    <h4>Blutbeschaffenheit & Lungenfunktion</h4>
+                    <p>Blutmenge, Erythrozyten und Hämoglobin bestimmen die O<sub>2</sub>-Transportkapazität. Die Lunge (AMV, Diffusion) limitiert bei Gesunden meist nicht primär.</p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 2. Metabolisch / Muskulär -->
+        <div class="factor-card metabolic">
+            <h2 class="factor-title">🔬 Metabolisch & Muskulär</h2>
+            <span class="factor-subtitle">Das lokale Verwertungssystem</span>
+            <p style="margin-bottom: 1.5rem;">Diese Parameter entscheiden, wie gut und lange die Muskulatur den angelieferten Sauerstoff und die Nährstoffe vor Ort in Bewegungsenergie (ATP) umsetzen kann.</p>
+            
+            <ul class="detail-list">
+                <li class="detail-item">
+                    <h4>Muskelfaserspektrum (ST-Fasern)</h4>
+                    <p>Slow-Twitch-Fasern kontrahieren langsamer, sind aber extrem ermüdungsresistent (viele Mitochondrien & Myoglobin). Ausdauersportler haben einen sehr hohen ST-Anteil.</p>
+                </li>
+                <li class="detail-item">
+                    <h4>Kapillarisierung</h4>
+                    <p>Die Dichte des Haargefäßnetzes. Mehr Kapillaren = größere Austauschfläche für O<sub>2</sub> und kürzere Diffusionswege in die Zelle.</p>
+                </li>
+                <li class="detail-item">
+                    <h4>Mitochondrien, Enzyme & Speicher</h4>
+                    <p>Größe/Anzahl der Mitochondrien sowie Enzymaktivität definieren die aerobe Stoffwechselrate. Glykogenspeicher in Muskel/Leber bestimmen die Laufzeit der Kohlenhydratverbrennung.</p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 3. Biomechanik -->
+        <div class="factor-card biomech">
+            <h2 class="factor-title">⚙️ Biomechanik</h2>
+            <span class="factor-subtitle">Bewegungsökonomie</span>
+            <p style="margin-bottom: 1.5rem;">Ausdauer ist nicht nur eine Frage der "Puste", sondern auch der technischen Effizienz.</p>
+            
+            <ul class="detail-list">
+                <li class="detail-item">
+                    <h4>Inter- & intramuskuläre Koordination</h4>
+                    <p>Je besser die Bewegungsabläufe koordiniert sind (z. B. runder Tritt beim Radfahren, perfekte Wasserlage), desto weniger muskuläre "Gegenarbeit" wird verrichtet.</p>
+                </li>
+                <li class="detail-item" style="background: rgba(59, 130, 246, 0.1);">
+                    <h4 style="color: #60a5fa;">Physiologische Wirkung</h4>
+                    <p>Eine hohe Ökonomie führt dazu, dass für selbe Geschwindigkeit deutlich weniger O<sub>2</sub> verbraucht wird. Dies <strong>verschiebt die Laktatkurve nach rechts</strong>, da die Schwelle erst später erreicht wird.</p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 4. Psychologie -->
+        <div class="factor-card psycho">
+            <h2 class="factor-title">🧠 Psychologie</h2>
+            <span class="factor-subtitle">Volition & Motivation</span>
+            <p style="margin-bottom: 1.5rem;">Die mentale Komponente wird in der Leistungsdiagnostik oft unterschätzt, ist aber in Wettkämpfen hochgradig limitierend.</p>
+            
+            <ul class="detail-list">
+                <li class="detail-item">
+                    <h4>Willensspannkraft (Volition) & Schmerztoleranz</h4>
+                    <p>Die Fähigkeit, die Belastung auch dann aufrechtzuerhalten, wenn Warnsignale des Körpers (zentrale Ermüdung, periphere Azidose, Atemnot) den Athleten zum Abbruch drängen.</p>
+                </li>
+                <li class="detail-item">
+                    <h4>Motivation</h4>
+                    <p>Die innere Antriebskraft (z. B. Leistungsmotiv), um monatelanges, hartes und monotones Ausdauertraining überhaupt konsequent zu absolvieren.</p>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Massive Abitur Transfer: The Bottleneck -->
+    <div class="tactical-analysis">
+        <div class="tactical-tag">Abitur-Transfer & Praxis (eA)</div>
+        <h2>Fehleranalyse & Determinanten</h2>
+        <p>In der eA-Abiturprüfung wird dieses Wissen genutzt, um Leistungsunterschiede oder limitierende Faktoren in spezifischen Situationen zu begründen. Du musst weg von pauschalen Aussagen wie "Er hat weniger Ausdauer" hin zu präzisen Fehleranalysen.</p>
+
+        <div class="bottleneck-concept">
+            <h3>⚠️ Die "Flaschenhals"-Argumentation</h3>
+            <p>Das Kultusministerium liebt Aufgaben, bei denen du den exakten "Flaschenhals" (den limitierenden Faktor) einer Leistung in einem spezifischen Fallbeispiel identifizieren musst. Die Kette ist nur so stark wie ihr schwächstes Glied.</p>
+        </div>
+
+        <div class="cases-grid">
+            <!-- Case 1 -->
+            <div class="case-card">
+                <h4>Beispiel 1: Mountainbike-Anstieg</h4>
+                <p style="font-style: italic; color: #94a3b8; margin-bottom: 15px;">Zwei Athletinnen fahren denselben steilen Berg hinauf. Eine muss absteigen.</p>
+                <p>Du kannst argumentieren, dass die limitierende Determinante hier <em>nicht</em> primär die Willenskraft ist, sondern ein <strong>metabolischer Faktor</strong>:</p>
+                <p>Eine unzureichende Mitochondriendichte und geringere Kapillarisierung der Beinmuskulatur führen zu einem verfrühten Überschreiten des Laktat-Steady-States und damit zur peripheren Ermüdung. Die Beine brennen, bevor Herz/Lunge am absoluten Limit sind.</p>
+            </div>
+
+            <!-- Case 2 -->
+            <div class="case-card">
+                <h4>Beispiel 2: Technik vs. Kondition</h4>
+                <p style="font-style: italic; color: #94a3b8; margin-bottom: 15px;">Ein untrainierter, aber technisch brillanter Schwimmer schwimmt einem muskelbepackten Kraftsportler im Wasser davon.</p>
+                <p>Das liegt hier nicht zwingend am Herzminutenvolumen, sondern an der <strong>Bewegungsökonomie (Biomechanik)</strong>.</p>
+                <p>Der Kraftsportler vergeudet extrem viel Energie durch schlechte Wasserlage und unkoordinierte Bewegungen (mangelnde intermuskuläre Koordination), wodurch sein O<sub>2</sub>-Bedarf für den reinen Vortrieb massiv ansteigt und er extrem schnell übersäuert.</p>
+            </div>
+        </div>
+
+        <div class="training-implication">
+            <strong>Ableitung für die Trainingssteuerung</strong>
+            Wenn in einer Aufgabe nach der Sinnhaftigkeit von bestimmten Trainingsmethoden gefragt wird, musst du diese an den Determinanten spiegeln. Ein Training ist nur dann zielführend, wenn es <strong>die für die Sportart spezifisch limitierende Determinante verbessert</strong> (z. B. Grundlagentraining vergrößert Mitochondrien/Schlagvolumen; Techniktraining verbessert Bewegungsökonomie).
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Canvas: Radial Mindmap "Determinanten der Ausdauer"
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('determinantsMap');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Display Setup
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+        const cx = width / 2;
+        const cy = height / 2;
+
+        // Theme Colors
+        const colCenter = '#f8fafc';
+        const colCardio = '#ef4444';    // Red
+        const colMetab = '#10b981';     // Green
+        const colBiomech = '#3b82f6';   // Blue
+        const colPsycho = '#f59e0b';    // Amber
+        const colText = '#cbd5e1';
+        const colLine = '#334155';
+
+        function drawMindmap() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Connect lines from center to 4 nodes
+            const radius = Math.min(width, height) * 0.35;
+            
+            // Define positions for the 4 main branches (Corners)
+            const nodes = [
+                { id: 'cardio', x: cx - radius, y: cy - radius * 0.6, color: colCardio, icon: '🫀', title: '1. Kardiopulmonal', items: ['VO₂max', 'Herzminutenvolumen', 'Blut (O₂-Kapazität)', 'Lungenfunktion'] },
+                { id: 'psycho', x: cx + radius, y: cy - radius * 0.6, color: colPsycho, icon: '🧠', title: '4. Psychologie', items: ['Volition (Wille)', 'Schmerztoleranz', 'Leistungsmotivation'] },
+                { id: 'metab',  x: cx - radius, y: cy + radius * 0.6, color: colMetab, icon: '🔬', title: '2. Metabolisch / Muskulär', items: ['ST-Fasern (Slow-Twitch)', 'Kapillarisierung', 'Mitochondrien & Enzyme', 'Glykogenspeicher'] },
+                { id: 'biomech',x: cx + radius, y: cy + radius * 0.6, color: colBiomech, icon: '⚙️', title: '3. Biomechanik', items: ['Bewegungsökonomie', 'Intermuskuläre Koord.', 'Intramuskuläre Koord.'] }
+            ];
+
+            // 1. Draw connecting lines
+            nodes.forEach(node => {
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                // Bezier curve for organic look
+                ctx.bezierCurveTo(cx, node.y, node.x, cy, node.x, node.y);
+                ctx.strokeStyle = colLine;
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                
+                // Add color glow near the node
+                const grad = ctx.createLinearGradient(cx, cy, node.x, node.y);
+                grad.addColorStop(0, 'transparent');
+                grad.addColorStop(1, node.color + '80'); // 50% opacity
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 5;
+                ctx.stroke();
+            });
+
+            // 2. Draw Center Node
+            ctx.shadowColor = 'rgba(0,0,0,0.5)';
+            ctx.shadowBlur = 20;
+            ctx.beginPath();
+            ctx.roundRect(cx - 120, cy - 40, 240, 80, 12);
+            ctx.fillStyle = '#1e293b';
+            ctx.fill();
+            ctx.strokeStyle = '#475569';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.shadowBlur = 0; // reset
+
+            ctx.fillStyle = colCenter;
+            ctx.font = '900 18px "Exo 2"';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('DETERMINANTEN', cx, cy - 10);
+            ctx.font = '600 14px "Exo 2"';
+            ctx.fillStyle = '#94a3b8';
+            ctx.fillText('DER AUSDAUER', cx, cy + 15);
+
+            // 3. Draw the 4 Main Nodes & Text
+            nodes.forEach(node => {
+                // Main Icon Circle
+                ctx.shadowColor = node.color + '60';
+                ctx.shadowBlur = 15;
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, 35, 0, Math.PI * 2);
+                ctx.fillStyle = '#0b1120';
+                ctx.fill();
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = node.color;
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                // Emoji Icon
+                ctx.font = '30px Arial';
+                ctx.fillText(node.icon, node.x, node.y + 2); // slight tweak for vertical center
+
+                // Align text based on left/right position
+                const isLeft = node.x < cx;
+                const textX = isLeft ? node.x - 50 : node.x + 50;
+                ctx.textAlign = isLeft ? 'right' : 'left';
+
+                // Title
+                ctx.fillStyle = node.color;
+                ctx.font = '800 18px "Exo 2"';
+                ctx.fillText(node.title, textX, node.y - 25);
+
+                // Sub-items
+                ctx.fillStyle = colText;
+                ctx.font = '400 14px Inter';
+                node.items.forEach((item, index) => {
+                    const itemY = node.y + 5 + (index * 22);
+                    ctx.fillText(item, textX, itemY);
+                    
+                    // Draw tiny bullet point
+                    const bulletX = isLeft ? textX + 15 : textX - 15;
+                    ctx.beginPath();
+                    ctx.arc(bulletX, itemY, 3, 0, Math.PI*2);
+                    ctx.fillStyle = node.color;
+                    ctx.fill();
+                });
+            });
+        }
+
+        drawMindmap();
+
+        // Responsive redrawing
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawMindmap();
+        });
+    });
+</script>
+
+</body>
+</html>

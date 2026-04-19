@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.2.3a Praktische Umsetzung: Gestaltung von Auf- und Abwärmen sowie Entspannungstechniken - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=Oswald:wght@400;500;700&display=swap');
+
+        :root {
+            /* Thermal Theme Colors */
+            --bg-main: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            
+            --phase-warm: #ea580c;    /* Orange */
+            --bg-warm: #fff7ed;
+            
+            --phase-cool: #0284c7;    /* Light Blue */
+            --bg-cool: #f0f9ff;
+            
+            --phase-relax: #7c3aed;   /* Violet */
+            --bg-relax: #f5f3ff;
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Theme */
+            --abi-bg: #111827;
+            --abi-gold: #facc15;
+            --abi-text: #f8fafc;
+
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER SECTION --- */
+        .doc-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Gradient top bar representing the thermal shift */
+        .doc-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 8px;
+            background: linear-gradient(90deg, var(--phase-warm) 0%, #ef4444 30%, var(--phase-cool) 70%, var(--phase-relax) 100%);
+        }
+
+        .doc-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .doc-header .intro {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 950px;
+        }
+
+        /* --- SECTION 1: WARM-UP --- */
+        .thermal-section {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .title-warm { color: var(--phase-warm); }
+        .title-cool { color: var(--phase-cool); }
+        .title-relax { color: var(--phase-relax); }
+
+        .split-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-warm { border-top: 5px solid var(--phase-warm); }
+        .card-cool { border-top: 5px solid var(--phase-cool); }
+        .card-relax { border-top: 5px solid var(--phase-relax); }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .info-card > p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .physio-box {
+            margin-top: auto;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+        }
+
+        .physio-box h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .physio-warm { background: var(--bg-warm); color: #9a3412; }
+        .physio-warm h4 { color: var(--phase-warm); }
+
+        .physio-cool { background: var(--bg-cool); color: #075985; }
+        .physio-cool h4 { color: var(--phase-cool); }
+
+        .physio-relax { background: var(--bg-relax); color: #4c1d95; }
+        .physio-relax h4 { color: var(--phase-relax); }
+
+        .intro-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+
+        /* --- CANVAS SECTION --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .canvas-section h3 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .canvas-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- ABITUR EXAM BOX --- */
+        .abitur-board {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-top: 6px solid var(--abi-gold);
+            position: relative;
+        }
+
+        .abitur-board h2 {
+            color: var(--abi-gold);
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .task-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--abi-gold);
+            padding: 2rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin-bottom: 2rem;
+        }
+
+        .task-block h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(250, 204, 21, 0.1);
+            padding: 0.2rem 1rem;
+            border-radius: 4px;
+        }
+
+        .task-block p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .task-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .exam-quote {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px dashed #10b981;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            color: #ecfdf5;
+            font-style: italic;
+        }
+
+        .exam-quote strong {
+            color: #34d399;
+            font-style: normal;
+        }
+
+        @media (max-width: 900px) {
+            .split-grid { grid-template-columns: 1fr; }
+            .doc-header, .abitur-board { padding: 2rem; }
+            .doc-header h1 { font-size: 2.2rem; }
+            .section-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>3.2.3a Praktische Umsetzung: Gestaltung von Auf- und Abwärmen sowie Entspannungstechniken</h1>
+        <p class="intro">
+            Die sportbiologische Theorie muss im gesundheitsorientierten Sport zwingend in eine systematische Trainingspraxis übersetzt werden. Die korrekte Rahmung einer Trainingseinheit durch <strong>Aufwärmen (Warm-up)</strong>, <strong>Abwärmen (Cool-down)</strong> und gezielte <strong>Entspannungstechniken</strong> ist essenziell für die Leistungsbereitschaft, die Verletzungsprophylaxe und eine beschleunigte Regeneration.
+        </p>
+    </header>
+
+    <!-- 1. Warm-Up -->
+    <section class="thermal-section">
+        <h2 class="section-title title-warm">🔥 1. Das Aufwärmen (Warm-up)</h2>
+        <p class="intro-text">Das Aufwärmen dient der Herstellung eines optimalen psychophysischen Zustandes vor der eigentlichen sportlichen Belastung. Man unterscheidet:</p>
+
+        <div class="split-grid">
+            <article class="info-card card-warm">
+                <h3>Allgemeines Aufwärmen</h3>
+                <p>Erwärmung der großen Muskelgruppen (z. B. durch lockeres Einlaufen oder Seilspringen).</p>
+                <div class="physio-box physio-warm">
+                    <h4>🌡️ Physiologische Wirkung</h4>
+                    Die Körperkerntemperatur steigt auf das funktionelle Optimum von ca. 38,5 bis 39 °C. Dies führt zu einer <strong>Abnahme der inneren Reibung</strong> in Muskeln, Sehnen und Bändern (Viskositätsabnahme), wodurch die Rissgefahr sinkt. Der Stoffwechsel wird hochgefahren, die kapillare Durchblutung steigt und die <strong>Nervenleitgeschwindigkeit nimmt zu</strong> (verbesserte inter- und intramuskuläre Koordination).
+                </div>
+            </article>
+
+            <article class="info-card card-warm">
+                <h3>Spezielles Aufwärmen</h3>
+                <p>Sportartspezifische Bewegungen (z. B. Einspielen beim Volleyball, Lauf-ABC beim Sprint).</p>
+                <div class="physio-box physio-warm">
+                    <h4>🎯 Physiologische Wirkung</h4>
+                    Aktivierung der spezifischen Arbeitsmuskulatur, vermehrte <strong>Produktion von Gelenkschmiere (Synovia)</strong> in den stark beanspruchten Gelenken zur Knorpelpufferung sowie das "Einschleifen" der sportspezifischen neuronalen Bewegungsmuster (Aktivierung des motorischen Gedächtnisses).
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 2. Cool-down -->
+    <section class="thermal-section">
+        <h2 class="section-title title-cool">❄️ 2. Das Abwärmen (Cool-down)</h2>
+        <p class="intro-text">Das Abwärmen leitet unmittelbar nach der Belastung die Erholungsphase (Regeneration) ein.</p>
+
+        <div class="split-grid">
+            <article class="info-card card-cool">
+                <h3>Aktives Abwärmen</h3>
+                <p>Bewegung mit geringer Intensität (z. B. lockeres Auslaufen).</p>
+                <div class="physio-box physio-cool">
+                    <h4>🌊 Physiologische Wirkung</h4>
+                    Die <strong>Muskelpumpe bleibt aktiv</strong>, was den venösen Blutrückfluss zum Herzen unterstützt und einen plötzlichen Blutdruckabfall (Orthostase-Syndrom) verhindert. Metaboliten (Stoffwechselendprodukte wie <strong>Laktat</strong>) werden durch die aufrechterhaltene Durchblutung (erhöhtes Herzminutenvolumen) deutlich schneller über die Leber abgebaut als bei einer passiven Pause. Zudem wird die sympathikotone Erregung gedämpft.
+                </div>
+            </article>
+
+            <article class="info-card card-cool">
+                <h3>Passives Abwärmen</h3>
+                <p>Maßnahmen ohne eigene Bewegung (z. B. Saunabesuch, Massage, Faszienrollen).</p>
+                <div class="physio-box physio-cool">
+                    <h4>🧘 Physiologische Wirkung</h4>
+                    Dienen der muskulären Entspannung und der psychischen Erholung, haben jedoch auf den aktiven Laktatabbau (Stoffwechsel) nur sehr geringen Einfluss.
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 3. Entspannung -->
+    <section class="thermal-section">
+        <h2 class="section-title title-relax">🌙 3. Entspannungstechniken</h2>
+        <p class="intro-text">Entspannungstechniken dienen der aktiven Steuerung des vegetativen Nervensystems. Sie zielen darauf ab, den leistungsorientierten <strong>Sympathikus</strong> (Flucht-und-Kampf-Nerv) zu hemmen und den erholungsorientierten <strong>Parasympathikus</strong> (Ruhe-Nerv) zu aktivieren.</p>
+
+        <div class="split-grid">
+            <article class="info-card card-relax">
+                <h3>Progressive Muskelrelaxation (PMR)</h3>
+                <p>Nach Jacobson. Hierbei werden nacheinander verschiedene Muskelgruppen stark angespannt und anschließend bewusst entspannt.</p>
+                <div class="physio-box physio-relax">
+                    <h4>🧠 Wirkung</h4>
+                    Der starke Kontrast macht die muskuläre Entspannung für das zentrale Nervensystem kinästhetisch erfahrbar und führt reflektorisch zu einer generalisierten mentalen und physischen Beruhigung.
+                </div>
+            </article>
+
+            <article class="info-card card-relax">
+                <h3>Autogenes Training</h3>
+                <p>Eine auf Autosuggestion (Selbstbeeinflussung) basierende Methode ("Mein rechter Arm ist ganz schwer und warm").</p>
+                <div class="physio-box physio-relax">
+                    <h4>🩸 Wirkung</h4>
+                    Durch die Konzentration auf die Formeln weiten sich die peripheren Blutgefäße (Vasodilatation), Herzschlag und Atmung beruhigen sich massiv.
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Canvas Graphic -->
+    <section class="canvas-section">
+        <h3>Leistungskurve einer Trainingseinheit</h3>
+        <p>Der zeitliche Verlauf des physiologischen Aktivierungsniveaus (Herzfrequenz)</p>
+        <div class="canvas-wrapper">
+            <canvas id="trainingCurveCanvas" width="900" height="400"></canvas>
+        </div>
+    </section>
+
+    <!-- Abitur Transfer -->
+    <section class="abitur-board">
+        <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die <strong>Erstellung oder Beurteilung von Auf- und Abwärmprogrammen</strong> ist eine typische, praxisnahe Transferaufgabe.
+        </p>
+
+        <div class="task-block">
+            <h4>Aufwärmprogramme konstruieren</h4>
+            <p>Wenn du in der Klausur ein Aufwärmprogramm für eine spezifische Sportart (z. B. Hochsprung) entwerfen sollst, reicht es nicht, "10 Minuten Einlaufen und ein paar Sprünge" zu schreiben. Du musst methodisch trennen (allgemein vs. speziell) und die Auswahl biologisch begründen:</p>
+            <div class="exam-quote">
+                <strong>Beispielformulierung:</strong> "Im speziellen Teil müssen Steigerungsläufe und dynamische Dehnübungen der Waden- und Oberschenkelmuskulatur erfolgen, um die Viskosität in diesen extrem belasteten Strukturen zu senken und die neuromuskuläre Aktivierung für den explosiven Absprung zu optimieren."
+            </div>
+        </div>
+
+        <div class="task-block">
+            <h4>Die Laktat-Falle beim Abwärmen</h4>
+            <p>Wenn in einer Fallstudie ein Athlet nach einem 400-Meter-Lauf (hochgradig anaerob-laktazide Belastung) völlig erschöpft auf den Boden fällt und dort 20 Minuten liegen bleibt, musst du als Experte eingreifen.</p>
+            <p><strong>Die eA-Lösung:</strong> Erkläre, dass eine <em>passive</em> Erholung hier falsch ist. Der Athlet muss sich <em>aktiv</em> abwärmen (leichtes Gehen), damit die Muskelpumpe aktiv und die Muskulatur durchblutet bleibt. Nur so kann das massiv angehäufte Laktat aus dem Gewebe abtransportiert und über die Leber metabolisiert werden.</p>
+        </div>
+
+        <div class="task-block">
+            <h4>Psychische Gesundheit im Leistungssport</h4>
+            <p>Verbinde Entspannungstechniken zwingend mit dem <span style="color: var(--abi-gold); font-weight: bold;">multidimensionalen Gesundheitsbegriff</span>. Bei Fragen zu Stress und Burnout im Leistungssport führst du an, dass Techniken wie die PMR als direkte, handhabbare Bewältigungsstrategie (Coping) dienen, um die psychische Dimension der Gesundheit zu stabilisieren und den Sympathikus aktiv zu dämpfen.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('trainingCurveCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Margins and Axes
+    const padL = 60;
+    const padR = 40;
+    const padT = 40;
+    const padB = 60;
+    const graphW = w - padL - padR;
+    const graphH = h - padT - padB;
+
+    // Y-Levels (Lower Y is higher on screen)
+    const yBase = padT + graphH * 0.75; // Resting Level (75% down)
+    const yMin = padT + 20;             // Max HR
+    const yMax = padT + graphH - 20;    // Deep Relaxation (below resting)
+
+    // X-Phases
+    const xStart = padL;
+    const xEndWarm = padL + graphW * 0.25;
+    const xEndMain = padL + graphW * 0.65;
+    const xEndCool = padL + graphW * 0.85;
+    const xEndRelax = w - padR;
+
+    // Colors
+    const colWarm = '#facc15'; // Yellow
+    const colMain = '#ef4444'; // Red
+    const colCool = '#3b82f6'; // Blue
+    const colRelax = '#10b981'; // Green
+
+    // 1. Draw Grid and Axes
+    ctx.strokeStyle = '#cbd5e1';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(padL, padT); ctx.lineTo(padL, h - padB); // Y-Axis
+    ctx.moveTo(padL, h - padB); ctx.lineTo(w - padR + 20, h - padB); // X-Axis
+    ctx.stroke();
+
+    // Baseline (Resting HR)
+    ctx.strokeStyle = '#94a3b8';
+    ctx.setLineDash([5, 5]);
+    ctx.beginPath();
+    ctx.moveTo(padL, yBase); ctx.lineTo(w - padR, yBase);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Labels for Axes
+    ctx.fillStyle = '#475569';
+    ctx.font = '600 14px Manrope';
+    ctx.textAlign = 'right';
+    ctx.fillText('Aktivierung', padL - 10, padT + 10);
+    ctx.fillText('Ruhepuls', padL - 10, yBase + 4);
+    ctx.textAlign = 'left';
+    ctx.fillText('Zeit (t)', w - padR, h - padB + 20);
+
+    // 2. Draw the Curve and Colored Areas
+    // We will draw it path by path to fill areas differently
+    
+    // --- WARM-UP (Yellow) ---
+    ctx.beginPath();
+    ctx.moveTo(xStart, yBase);
+    ctx.bezierCurveTo(xStart + (xEndWarm-xStart)/2, yBase, xEndWarm - 20, yBase - 120, xEndWarm, yBase - 150);
+    const warmPath = new Path2D();
+    warmPath.moveTo(xStart, h - padB);
+    warmPath.lineTo(xStart, yBase);
+    warmPath.bezierCurveTo(xStart + (xEndWarm-xStart)/2, yBase, xEndWarm - 20, yBase - 120, xEndWarm, yBase - 150);
+    warmPath.lineTo(xEndWarm, h - padB);
+    warmPath.closePath();
+    ctx.fillStyle = 'rgba(250, 204, 21, 0.2)'; ctx.fill(warmPath);
+    ctx.strokeStyle = colWarm; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(xStart, yBase); ctx.bezierCurveTo(xStart + (xEndWarm-xStart)/2, yBase, xEndWarm - 20, yBase - 120, xEndWarm, yBase - 150); ctx.stroke();
+
+    // --- MAIN PART (Red, Jagged) ---
+    const mainPath = new Path2D();
+    mainPath.moveTo(xEndWarm, h - padB);
+    mainPath.lineTo(xEndWarm, yBase - 150);
+    
+    ctx.beginPath();
+    ctx.moveTo(xEndWarm, yBase - 150);
+    
+    let currentX = xEndWarm;
+    let currentY = yBase - 150;
+    
+    // Generate jagged points
+    const points = [];
+    while (currentX < xEndMain) {
+        currentX += 15 + Math.random() * 20;
+        if (currentX > xEndMain) currentX = xEndMain;
+        // Random Y between yMin and yBase-100
+        currentY = yMin + Math.random() * (yBase - 100 - yMin);
+        points.push({x: currentX, y: currentY});
+    }
+    
+    points.forEach(p => {
+        ctx.lineTo(p.x, p.y);
+        mainPath.lineTo(p.x, p.y);
+    });
+    
+    const lastMainY = points[points.length-1].y;
+    
+    mainPath.lineTo(xEndMain, h - padB);
+    mainPath.closePath();
+    ctx.fillStyle = 'rgba(239, 68, 68, 0.2)'; ctx.fill(mainPath);
+    
+    ctx.strokeStyle = colMain; ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(xEndWarm, yBase - 150);
+    points.forEach(p => ctx.lineTo(p.x, p.y));
+    ctx.stroke();
+
+    // --- COOL-DOWN (Blue) ---
+    const coolPath = new Path2D();
+    coolPath.moveTo(xEndMain, h - padB);
+    coolPath.lineTo(xEndMain, lastMainY);
+    coolPath.bezierCurveTo(xEndMain + 40, lastMainY + 20, xEndCool - 40, yBase - 20, xEndCool, yBase - 10);
+    coolPath.lineTo(xEndCool, h - padB);
+    coolPath.closePath();
+    ctx.fillStyle = 'rgba(59, 130, 246, 0.2)'; ctx.fill(coolPath);
+
+    ctx.strokeStyle = colCool; ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(xEndMain, lastMainY);
+    ctx.bezierCurveTo(xEndMain + 40, lastMainY + 20, xEndCool - 40, yBase - 20, xEndCool, yBase - 10);
+    ctx.stroke();
+
+    // --- RELAXATION (Green) - Dips below baseline ---
+    const relaxPath = new Path2D();
+    relaxPath.moveTo(xEndCool, h - padB);
+    relaxPath.lineTo(xEndCool, yBase - 10);
+    relaxPath.bezierCurveTo(xEndCool + 30, yBase + 10, xEndRelax - 40, yMax, xEndRelax, yMax);
+    relaxPath.lineTo(xEndRelax, h - padB);
+    relaxPath.closePath();
+    ctx.fillStyle = 'rgba(16, 185, 129, 0.2)'; ctx.fill(relaxPath);
+
+    ctx.strokeStyle = colRelax; ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(xEndCool, yBase - 10);
+    ctx.bezierCurveTo(xEndCool + 30, yBase + 10, xEndRelax - 40, yMax, xEndRelax, yMax);
+    ctx.stroke();
+
+    // 3. Labels for Regions
+    function drawRegionLabel(text, xCenter, color) {
+        ctx.fillStyle = color;
+        ctx.font = 'bold 16px Oswald';
+        ctx.textAlign = 'center';
+        ctx.fillText(text, xCenter, h - padB + 25);
+    }
+
+    drawRegionLabel('AUFWÄRMEN', xStart + (xEndWarm-xStart)/2, '#ca8a04');
+    drawRegionLabel('HAUPTTEIL', xEndWarm + (xEndMain-xEndWarm)/2, '#dc2626');
+    drawRegionLabel('ABWÄRMEN', xEndMain + (xEndCool-xEndMain)/2, '#2563eb');
+    drawRegionLabel('ENTSPANNUNG', xEndCool + (xEndRelax-xEndCool)/2, '#059669');
+
+    // Vertical dividers
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([4,4]);
+    [xEndWarm, xEndMain, xEndCool].forEach(x => {
+        ctx.beginPath();
+        ctx.moveTo(x, padT);
+        ctx.lineTo(x, h - padB);
+        ctx.stroke();
+    });
+
+</script>
+</body>
+</html>

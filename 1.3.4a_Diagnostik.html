@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.3.4a Diagnostik - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600;700;900&family=Roboto+Mono:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Diagnostic Measurement Grid / Lab-UI */
+            --bg-deep: #0f172a;        /* Deep Slate */
+            --bg-panel: #1e293b;       /* Panel Slate */
+            --bg-grid: #020617;        /* Grid Base */
+            
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            
+            --measure-green: #10b981;  /* Valid/Diagnostic Green */
+            --measure-blue: #3b82f6;   /* Tech Blue */
+            --measure-cyan: #06b6d4;   /* Laser Cyan */
+            
+            --abi-bg: #171717;
+            --abi-gold: #f59e0b;
+            --abi-red: #ef4444;
+            
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-grid);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            /* Technical Calibration Grid */
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center top;
+        }
+
+        h1, h2, h3, h4, .tech-font {
+            font-family: 'Fira Sans', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .mono-font {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 6rem 2rem 5rem;
+            position: relative;
+            background: linear-gradient(180deg, var(--bg-deep) 0%, transparent 100%);
+            border-bottom: 2px solid var(--measure-blue);
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            left: 0; bottom: -2px; width: 30%; height: 2px;
+            background: var(--measure-green);
+            box-shadow: 0 0 10px var(--measure-green);
+            animation: scanline 4s linear infinite alternate;
+        }
+
+        @keyframes scanline {
+            0% { left: 0; }
+            100% { left: 70%; }
+        }
+
+        .hero-tag {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--measure-cyan);
+            padding: 0.4rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 4.2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: white;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- Intro Box --- */
+        .intro-box {
+            background: var(--bg-panel);
+            padding: 2.5rem 3rem;
+            border-radius: var(--radius-md);
+            margin: 4rem auto;
+            border-left: 4px solid var(--measure-green);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .intro-box strong {
+            color: var(--measure-green);
+        }
+
+        /* --- Section Titles --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 6rem 0 3rem;
+        }
+
+        .section-num {
+            background: var(--measure-blue);
+            color: white;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-weight: 700;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.5rem;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .section-header h2 {
+            font-size: 2.4rem;
+            color: white;
+            margin: 0;
+        }
+
+        /* --- 1. Kraft-Winkel-Relation --- */
+        .relation-intro {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+        }
+
+        .mech-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 850px) {
+            .mech-grid { grid-template-columns: 1fr; }
+        }
+
+        .mech-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-top: 4px solid var(--measure-cyan);
+            transition: transform 0.3s ease;
+        }
+
+        .mech-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.04);
+        }
+
+        .mech-card h3 {
+            color: var(--measure-cyan);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .mech-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .diag-consequence {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px dashed var(--measure-green);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 5rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .diag-consequence { flex-direction: column; text-align: center; }
+        }
+
+        .diag-consequence .icon {
+            font-size: 2rem;
+        }
+
+        .diag-consequence strong {
+            color: var(--measure-green);
+            font-family: 'Roboto Mono', monospace;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Canvas Section --- */
+        .canvas-section {
+            background: var(--bg-panel);
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            text-align: center;
+        }
+
+        .canvas-section h2 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            background: var(--bg-grid);
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid #334155;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- 3. Krafttests --- */
+        .test-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        @media (max-width: 800px) {
+            .test-grid { grid-template-columns: 1fr; }
+        }
+
+        .test-card {
+            background: linear-gradient(145deg, var(--bg-panel), var(--bg-deep));
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--measure-blue);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .test-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .test-label {
+            color: var(--measure-blue);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .test-card p {
+            color: var(--text-muted);
+        }
+
+        /* --- Premium Abitur Transfer Box --- */
+        .abitur-prep {
+            background: linear-gradient(135deg, var(--abi-bg), #2a0a0a);
+            color: #e2e8f0;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            box-shadow: 0 0 50px rgba(245, 158, 11, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-prep::before {
+            content: 'EXAM';
+            position: absolute;
+            font-size: 8rem;
+            font-family: 'Fira Sans', sans-serif;
+            font-weight: 900;
+            color: rgba(245, 158, 11, 0.03);
+            top: -20px;
+            right: 0;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2.5rem;
+            font-weight: 900;
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: var(--abi-gold);
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #fde68a;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+            padding-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .abi-card {
+            background: rgba(0,0,0,0.3);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .abi-card.warn {
+            border-left-color: var(--abi-red);
+        }
+        .abi-card.warn h3 { color: var(--abi-red); }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+        .abi-card p:last-child { margin-bottom: 0; }
+
+        ul.abi-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        ul.abi-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.8rem;
+            color: #cbd5e1;
+        }
+
+        ul.abi-list li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--abi-gold);
+            font-family: 'Roboto Mono', monospace;
+            font-weight: bold;
+        }
+
+        .hl-gold { color: var(--abi-gold); font-weight: 700; }
+        .hl-red { color: var(--abi-red); font-weight: 700; }
+        .hl-white { color: white; font-weight: 700; }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="hero-tag">Lernbereich 1.3.4a</span>
+            <h1>Diagnostik im Krafttraining</h1>
+            <p>Einfache Krafttests, Geschwindigkeits-Masse-Relation und Kraft-Winkel-Relation – Die biomechanischen Grundlagen der Leistungsdiagnostik.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-box">
+            Die Leistungsdiagnostik bildet als Ist-Wert-Bestimmung den <strong>zwingenden ersten Schritt im kybernetischen Regelkreis</strong> der Trainingssteuerung (siehe 1.1.4a). Im Krafttraining dient sie dazu, das aktuelle Kraftniveau objektiv zu erfassen, muskuläre Dysbalancen aufzudecken und die Intensität für das anschließende Training (z. B. in Prozent des 1RM) individuell exakt zu berechnen. 
+            <br><br>
+            <span style="color: var(--text-muted);">Um einfache Krafttests wissenschaftlich fundiert auswerten zu können, müssen zwei biomechanische und physiologische Grundrelationen verstanden werden.</span>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="section-header">
+            <div class="section-num">1</div>
+            <h2 class="tech-font">Die Kraft-Winkel-Relation</h2>
+        </div>
+        <p class="relation-intro">Die willkürlich erzeugbare Kraft eines Muskels ist nicht in jeder Gelenkposition gleich hoch, sondern hochgradig abhängig vom aktuellen Gelenkwinkel. Diese Relation hat zwei Ursachen:</p>
+
+        <div class="mech-grid">
+            <div class="mech-card">
+                <h3 class="tech-font">Biomechanische Hebelverhältnisse</h3>
+                <p>Nach dem Hebelgesetz verändert sich während einer Bewegung (z. B. bei einer Kniebeuge) permanent die Länge des Lastarms. Je länger der Lastarm in einem bestimmten Gelenkwinkel ist, desto mehr Muskelkraft muss aufgebracht werden, um denselben äußeren Widerstand zu halten.</p>
+            </div>
+            
+            <div class="mech-card">
+                <h3 class="tech-font">Physiologische Muskellänge</h3>
+                <p>Die Kraftentwicklung hängt direkt von der Überlappung der Aktin- und Myosinfilamente im Sarkomer (1.2.3c) ab. Ist der Muskel stark verkürzt, überlappen die Filamente zu stark und behindern sich. Ist er maximal gedehnt, berühren sich zu wenige Myosinköpfchen und Aktinfilamente. <strong>Das absolute Kraftmaximum wird daher immer in einer mittleren Gelenkwinkelstellung erreicht.</strong></p>
+            </div>
+        </div>
+
+        <div class="diag-consequence">
+            <div class="icon">🔬</div>
+            <div>
+                <strong>Diagnostische Konsequenz</strong>
+                <p style="margin: 0; color: #f1f5f9;">Krafttests (z. B. isometrische Maximalkrafttests) müssen <em>zwingend in exakt definierten und reproduzierbaren Gelenkwinkeln</em> durchgeführt werden, da die Messwerte sonst nicht vergleichbar sind.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Canvas Integration -->
+        <div class="section-header" style="margin-top: 0;">
+            <div class="section-num">2</div>
+            <h2 class="tech-font">Die Kraft-Geschwindigkeits-Relation</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Die berühmte Hill'sche Kurve beschreibt den umgekehrt proportionalen Zusammenhang zwischen der Kontraktionsgeschwindigkeit eines Muskels und der überwindbaren äußeren Last (Masse).</p>
+        
+        <p style="margin-bottom: 3rem; background: rgba(255,255,255,0.02); padding: 1.5rem; border-left: 3px solid var(--measure-blue);">
+            <strong>Das Prinzip:</strong> Je größer der äußere Widerstand (die Masse) ist, desto langsamer kann sich der Muskel konzentrisch verkürzen.<br><br>
+            <strong>Physiologische Ursache:</strong> Bei einer extrem schnellen Kontraktion haben die Myosinköpfchen schlichtweg weniger Zeit, stabile Querbrücken an den Aktinfilamenten zu bilden. Die absolute Kraftausbeute sinkt.
+        </p>
+
+        <!-- Interactive Canvas -->
+        <section class="canvas-section">
+            <h2 class="tech-font">Mess-Diagnostik: Die Hill'sche Kurve</h2>
+            <p class="subtitle">Das Kraft-Geschwindigkeits-Profil (F-v-Relation) und die resultierende mechanische Leistung (P).</p>
+            
+            <div class="canvas-container">
+                <canvas id="hillCanvas" width="900" height="450"></canvas>
+            </div>
+        </section>
+
+        <div class="diag-consequence" style="margin-bottom: 6rem; background: rgba(59, 130, 246, 0.1); border-color: var(--measure-blue);">
+            <div class="icon">⚙️</div>
+            <div>
+                <strong style="color: var(--measure-blue);">Diagnostische Konsequenz der Kurve</strong>
+                <p style="margin: 0; color: #f1f5f9;">Ein Test zur Ermittlung der Maximalkraft (hohe Masse) wird zwangsläufig immer mit einer sehr geringen Bewegungsgeschwindigkeit einhergehen, während Tests zur Ermittlung der Schnelligkeit (z. B. ein Sprint) nur gegen sehr geringe Widerstände (niedrige Masse) durchgeführt werden können.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Krafttests -->
+        <div class="section-header" style="margin-top: 0;">
+            <div class="section-num">3</div>
+            <h2 class="tech-font">Einfache sportmotorische Krafttests</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Der Lehrplan (eA) fordert keine hochkomplexen biomechanischen Laboruntersuchungen, sondern das Verständnis alltagstauglicher, standardisierter Feldtests:</p>
+
+        <div class="test-grid">
+            <div class="test-card">
+                <h3 class="tech-font">Bestimmung des 1RM</h3>
+                <span class="test-label">One Repetition Maximum (Maximalkraft)</span>
+                <p>Der direkte Test der Maximalkraft. Gesucht wird das Gewicht, das bei einer Übung (z. B. Bankdrücken) exakt einmal technisch sauber konzentrisch überwunden werden kann. Aus diesem Wert (100 %) werden anschließend die Trainingsgewichte für Muskelaufbau- oder IK-Training berechnet.</p>
+            </div>
+            
+            <div class="test-card">
+                <h3 class="tech-font">Jump-and-Reach-Test</h3>
+                <span class="test-label">Sargent Jump (Sprung-/Explosivkraft)</span>
+                <p>Ein klassischer Feldtest zur Ermittlung der Relativen Sprungkraft (Reaktiv- und Explosivkraft der Beinstrecker). Aus dem Stand wird nach einem kurzen Auftakt (Ausholbewegung) vertikal so hoch wie möglich gesprungen und eine Wandtafel berührt. Die Differenz aus Greifhöhe im Stand und Sprunghöhe liefert den Kraftwert.</p>
+            </div>
+        </div>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2 class="tech-font">Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                In der neuen bayerischen Abiturprüfung ist reines Faktenwissen zu Krafttests zu wenig. Der Kompetenzerwerb zielt auf die kritische Reflexion dieser diagnostischen Verfahren und deren Schwächen im Sportalltag.
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card">
+                    <h3 class="tech-font">📏 Die Anwendung der Hauptgütekriterien</h3>
+                    <p>Wenn du in einer Klausur beurteilen sollst, wie tauglich ein selbstgebauter Sprungkrafttest im Sportunterricht ist, <span class="hl-gold">musst du deine Kritik zwingend an den sportwissenschaftlichen Gütekriterien ausrichten:</span></p>
+                    <ul class="abi-list">
+                        <li><span class="hl-white">Objektivität:</span> Ist das Testergebnis unabhängig vom Testleiter? (Ein Jump-and-Reach-Test, bei dem ein Mitschüler "nach Augenmaß" die Höhe an der Wand abliest, ist völlig unobjektiv. Erfordert wäre Kreide an den Fingern oder eine digitale Messplatte).</li>
+                        <li><span class="hl-white">Validität:</span> Misst der Test wirklich, was er messen soll? (Misst der Jump-and-Reach wirklich nur die Beinkraft, oder wird das Ergebnis massiv durch die koordinative Ausholbewegung der Arme verfälscht?)</li>
+                        <li><span class="hl-white">Reliabilität:</span> Ist der Test zuverlässig und bei Wiederholung exakt reproduzierbar? (Nur gewährleistet, wenn die Aufwärmphase und die Pausenzeiten zwischen den Versuchen exakt standardisiert sind).</li>
+                    </ul>
+                </div>
+
+                <div class="abi-card warn">
+                    <h3 class="tech-font">📐 Kraft-Winkel-Relation im Praxis-Transfer</h3>
+                    <p>In Bewegungsanalysen (Lernbereich 2.1) erklärst du das "in die Knie gehen" (Vorbereitungsphase) beim Kugelstoßen damit, dass der Athlet durch die Beugung überhaupt erst <span class="hl-red">den optimalen Gelenkwinkel (die optimale Aktin-Myosin-Überlappung) herstellt</span>, um den größtmöglichen Kraftstoß für die Hauptphase zu generieren.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('hillCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 900;
+            const logicalH = 450;
+            
+            let time = 0;
+            let animationId;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayW = Math.min(rect.width, logicalW);
+                const scale = displayW / logicalW;
+                const displayH = logicalH * scale;
+                
+                canvas.width = displayW * dpr;
+                canvas.height = displayH * dpr;
+                canvas.style.width = `${displayW}px`;
+                canvas.style.height = `${displayH}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // Hill Equation Constants
+            // (F + a)(v + b) = (F0 + a)b  => F = [(F0 + a)b / (v + b)] - a
+            const F0 = 100; // Max Force
+            const V0 = 100; // Max Velocity
+            const a = 25;   // Constant a
+            const b = 25;   // Constant b
+            
+            // Scaled for canvas drawing
+            function calcHillForce(v) {
+                // v goes from 0 to 100
+                const force = (((F0 + a) * b) / (v + b)) - a;
+                return Math.max(0, force);
+            }
+
+            function calcPower(v) {
+                // P = F * v
+                return calcHillForce(v) * v;
+            }
+
+            function drawGrid(padL, padR, padT, padB, plotW, plotH) {
+                ctx.strokeStyle = '#1e293b';
+                ctx.lineWidth = 1;
+                
+                // Vertical lines (Velocity)
+                for(let i=1; i<=10; i++) {
+                    let x = padL + (i/10)*plotW;
+                    ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, logicalH - padB); ctx.stroke();
+                }
+                // Horizontal lines (Force)
+                for(let i=1; i<=10; i++) {
+                    let y = padT + (i/10)*plotH;
+                    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(logicalW - padR, y); ctx.stroke();
+                }
+
+                // Axes
+                ctx.strokeStyle = '#64748b';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                // Y-Axis
+                ctx.moveTo(padL, padT); ctx.lineTo(padL, logicalH - padB);
+                // X-Axis
+                ctx.lineTo(logicalW - padR, logicalH - padB);
+                ctx.stroke();
+
+                // Arrows
+                ctx.beginPath(); ctx.moveTo(padL-6, padT+12); ctx.lineTo(padL, padT); ctx.lineTo(padL+6, padT+12); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(logicalW-padR-12, logicalH-padB-6); ctx.lineTo(logicalW-padR, logicalH-padB); ctx.lineTo(logicalW-padR-12, logicalH-padB+6); ctx.stroke();
+
+                // Labels
+                ctx.fillStyle = '#f1f5f9';
+                ctx.font = 'bold 14px Roboto Mono';
+                ctx.textAlign = 'right';
+                ctx.fillText('Kraft F (Masse)', padL - 10, padT + 10);
+                
+                ctx.textAlign = 'center';
+                ctx.fillText('Kontraktionsgeschwindigkeit (v)', logicalW/2, logicalH - 15);
+            }
+
+            function drawGraph() {
+                ctx.clearRect(0, 0, logicalW, logicalH);
+
+                const padL = 70;
+                const padR = 40;
+                const padT = 40;
+                const padB = 50;
+                const plotW = logicalW - padL - padR;
+                const plotH = logicalH - padT - padB;
+
+                drawGrid(padL, padR, padT, padB, plotW, plotH);
+
+                // --- Draw Power Curve (Background) ---
+                // P max is around v = 30-40
+                let maxP = 0;
+                for(let v=0; v<=100; v++) {
+                    let p = calcPower(v);
+                    if(p > maxP) maxP = p;
+                }
+
+                ctx.beginPath();
+                ctx.moveTo(padL, logicalH - padB);
+                for(let v=0; v<=100; v+=1) {
+                    let x = padL + (v/100) * plotW;
+                    let pNorm = calcPower(v) / maxP; // 0 to 1
+                    // Scale P to half plot height for visual balance
+                    let y = (logicalH - padB) - (pNorm * plotH * 0.7);
+                    ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = 'rgba(59, 130, 246, 0.4)'; // Faded Blue
+                ctx.lineWidth = 3;
+                ctx.setLineDash([5, 5]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                
+                // Label Power Curve
+                ctx.fillStyle = 'rgba(59, 130, 246, 0.6)';
+                ctx.font = '12px Inter';
+                ctx.textAlign = 'left';
+                // Find peak of power
+                const pPeakX = padL + (33/100)*plotW;
+                const pPeakY = (logicalH - padB) - (calcPower(33)/maxP * plotH * 0.7);
+                ctx.fillText('Leistungskurve (P = F × v)', pPeakX - 50, pPeakY - 15);
+
+                // --- Draw Hill Curve (Force-Velocity) ---
+                ctx.beginPath();
+                ctx.moveTo(padL, (logicalH - padB) - (calcHillForce(0)/100)*plotH);
+                for(let v=0; v<=100; v+=1) {
+                    let x = padL + (v/100) * plotW;
+                    let y = (logicalH - padB) - (calcHillForce(v)/100)*plotH;
+                    ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = '#10b981'; // Measure Green
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+                // --- Highlight Areas ---
+                const areas = [
+                    { id: 1, vStart: 0, vEnd: 15, title: "Maximalkraft", color: "#ef4444", align: "left", oy: 0 },
+                    { id: 2, vStart: 25, vEnd: 45, title: "Schnellkraft", subtitle: "(Leistungsoptimum)", color: "#f59e0b", align: "center", oy: -30 },
+                    { id: 3, vStart: 80, vEnd: 100, title: "Reine Schnelligkeit", color: "#06b6d4", align: "right", oy: -20 }
+                ];
+
+                // Determine active area based on animation time
+                const cycleTime = (time % 300) / 300; // 0 to 1
+                let activeV = cycleTime * 100; // sweeps across the curve
+
+                areas.forEach(area => {
+                    const midV = area.vStart + (area.vEnd - area.vStart)/2;
+                    const mx = padL + (midV/100) * plotW;
+                    const my = (logicalH - padB) - (calcHillForce(midV)/100)*plotH;
+
+                    // Check if scanner is within area
+                    const isActive = (activeV >= area.vStart && activeV <= area.vEnd);
+
+                    if (isActive) {
+                        // Highlight zone on X axis
+                        ctx.fillStyle = area.color;
+                        ctx.globalAlpha = 0.1;
+                        const zx1 = padL + (area.vStart/100) * plotW;
+                        const zWidth = ((area.vEnd - area.vStart)/100) * plotW;
+                        ctx.fillRect(zx1, padT, zWidth, plotH);
+                        ctx.globalAlpha = 1.0;
+
+                        // Draw pulsing point
+                        ctx.beginPath();
+                        ctx.arc(mx, my, 8 + Math.sin(time*0.5)*3, 0, Math.PI*2);
+                        ctx.fillStyle = area.color;
+                        ctx.shadowColor = area.color;
+                        ctx.shadowBlur = 15;
+                        ctx.fill();
+                        ctx.shadowBlur = 0;
+                        
+                        // Connecting line to label
+                        ctx.beginPath();
+                        ctx.moveTo(mx, my);
+                        ctx.lineTo(mx, my + area.oy - 20);
+                        ctx.strokeStyle = area.color;
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        // Label Box
+                        ctx.fillStyle = '#1e293b';
+                        ctx.strokeStyle = area.color;
+                        ctx.lineWidth = 1;
+                        
+                        let tw = ctx.measureText(area.title).width + 30;
+                        if(area.subtitle) tw = Math.max(tw, ctx.measureText(area.subtitle).width + 30);
+                        
+                        ctx.beginPath();
+                        ctx.roundRect(mx - tw/2, my + area.oy - 60, tw, area.subtitle ? 45 : 30, 4);
+                        ctx.fill(); ctx.stroke();
+
+                        ctx.fillStyle = '#fff';
+                        ctx.font = 'bold 14px Fira Sans';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(area.title, mx, my + area.oy - 40);
+                        if (area.subtitle) {
+                            ctx.fillStyle = '#94a3b8';
+                            ctx.font = '12px Inter';
+                            ctx.fillText(area.subtitle, mx, my + area.oy - 25);
+                        }
+                    } else {
+                        // Static small point
+                        ctx.beginPath();
+                        ctx.arc(mx, my, 4, 0, Math.PI*2);
+                        ctx.fillStyle = '#64748b';
+                        ctx.fill();
+                    }
+                });
+
+                // --- Draw Scanning Line ---
+                const scanX = padL + (activeV/100) * plotW;
+                const scanY = (logicalH - padB) - (calcHillForce(activeV)/100)*plotH;
+                
+                ctx.beginPath();
+                ctx.moveTo(scanX, padT);
+                ctx.lineTo(scanX, logicalH - padB);
+                ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.arc(scanX, scanY, 4, 0, Math.PI*2);
+                ctx.fillStyle = '#fff';
+                ctx.fill();
+            }
+
+            function animate() {
+                time += 1;
+                drawGraph();
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

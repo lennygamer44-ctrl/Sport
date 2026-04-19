@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.5a Erholungsprozesse - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700;900&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Clinical Physiology Theme */
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --text-main: #374151;
+            --text-muted: #6b7280;
+            
+            --crimson-dark: #7f1d1d;
+            --crimson-main: #dc2626;
+            --crimson-light: #fef2f2;
+            
+            --bio-blue: #0284c7;
+            --bio-green: #059669;
+            --bio-purple: #7c3aed;
+            
+            --abi-dark: #111827;
+            --abi-accent: #f87171;
+            
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow-float: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+            --shadow-glow: 0 0 20px rgba(220, 38, 38, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .heading-font {
+            font-family: 'Jost', sans-serif;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Medical Hero Header --- */
+        .hero {
+            background-color: var(--crimson-dark);
+            background-image: 
+                radial-gradient(circle at 80% 0%, rgba(220, 38, 38, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 20% 100%, rgba(153, 27, 27, 0.6) 0%, transparent 50%);
+            color: white;
+            padding: 6rem 2rem 5rem;
+            position: relative;
+            border-bottom: 5px solid var(--crimson-main);
+        }
+
+        /* Heartbeat decorative line */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 15px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 15" preserveAspectRatio="none"><path d="M0,7 L20,7 L25,2 L35,13 L40,7 L100,7" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="none"/></svg>') repeat-x;
+            background-size: 100px 15px;
+        }
+
+        .hero-tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--crimson-light);
+            padding: 0.4rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(254, 242, 242, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #fca5a5;
+            max-width: 800px;
+            font-weight: 400;
+        }
+
+        /* --- Intro Block --- */
+        .intro-block {
+            background: var(--bg-card);
+            padding: 2.5rem 3rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-float);
+            margin-top: -3rem;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 10;
+            border-left: 6px solid var(--crimson-main);
+            font-size: 1.25rem;
+        }
+
+        /* --- Section Header --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .section-number {
+            background: var(--crimson-light);
+            color: var(--crimson-main);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 900;
+            font-family: 'Jost', sans-serif;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        /* --- Fatigue Grid (4 Cards) --- */
+        .fatigue-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        @media (max-width: 850px) {
+            .fatigue-grid { grid-template-columns: 1fr; }
+        }
+
+        .fatigue-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f3f4f6;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fatigue-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-float);
+            border-color: var(--crimson-main);
+        }
+
+        .fatigue-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--crimson-main);
+        }
+
+        .fatigue-card:nth-child(1)::before { background: var(--crimson-main); }
+        .fatigue-card:nth-child(2)::before { background: var(--bio-blue); }
+        .fatigue-card:nth-child(3)::before { background: var(--bio-purple); }
+        .fatigue-card:nth-child(4)::before { background: var(--bio-green); }
+
+        .fatigue-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .fatigue-card h3 {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .fatigue-card p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* --- Recovery List --- */
+        .recovery-content {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-float);
+            margin-bottom: 4rem;
+        }
+
+        .recovery-intro {
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+        }
+
+        .recovery-list {
+            list-style: none;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .recovery-list li {
+            background: var(--bg-page);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--text-muted);
+        }
+
+        .recovery-list li:nth-child(1) { border-left-color: var(--crimson-main); }
+        .recovery-list li:nth-child(2) { border-left-color: var(--bio-blue); }
+        .recovery-list li:nth-child(3) { border-left-color: var(--bio-green); }
+
+        .recovery-list h4 {
+            font-size: 1.3rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .time-badge {
+            font-size: 0.9rem;
+            background: #e5e7eb;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-family: 'Jost', sans-serif;
+            font-weight: 600;
+        }
+
+        /* --- Canvas Section --- */
+        .chart-container {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-glow);
+            margin-bottom: 6rem;
+            border: 1px solid var(--crimson-light);
+        }
+
+        .chart-container h3 {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--crimson-dark);
+            margin-bottom: 1rem;
+        }
+
+        .chart-desc {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .canvas-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'Jost', sans-serif;
+        }
+
+        .color-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+
+        /* --- Abitur Transfer Premium Box --- */
+        .abitur-transfer {
+            background-color: var(--abi-dark);
+            color: #d1d5db;
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            margin-bottom: 5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid var(--abi-accent);
+        }
+
+        .abitur-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .abi-icon {
+            background: rgba(248, 113, 113, 0.1);
+            color: var(--abi-accent);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            border: 1px solid rgba(248, 113, 113, 0.3);
+        }
+
+        .abitur-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+        }
+
+        .abitur-transfer > p {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 2rem;
+            color: #f3f4f6;
+        }
+
+        .abi-scenarios {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .scenario-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--abi-accent);
+        }
+
+        .scenario-card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .scenario-card p {
+            line-height: 1.8;
+        }
+
+        .highlight {
+            color: var(--abi-accent);
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="hero-tag">Lernbereich 1.1.5a</span>
+            <h1>Erholungsprozesse</h1>
+            <p>Die physiologischen Grundlagen von Ermüdung, Regeneration und der zeitlichen Verschiebung biologischer Anpassungen.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-block">
+            Training ist physiologisch betrachtet das gezielte Setzen von Ermüdungsreizen. Um die anschließenden Erholungsprozesse im Sinne der Leistungssteigerung (Adaptation) optimal steuern zu können, muss die Ermüdung differenziert betrachtet werden. <strong>Ermüdung ist eine reversible, durch Belastung ausgelöste temporäre Minderung der sportlichen Leistungsfähigkeit.</strong>
+        </div>
+
+        <!-- Section 1: Ermüdung -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2>Formen & Ursachen der physiologischen Ermüdung</h2>
+            </div>
+            <p style="margin-bottom: 2rem;">Ermüdung ist multikausal und äußert sich auf verschiedenen Ebenen des Organismus:</p>
+
+            <div class="fatigue-grid">
+                <!-- Energetisch -->
+                <div class="fatigue-card">
+                    <div class="fatigue-icon">⚡</div>
+                    <h3>Energetische Ermüdung</h3>
+                    <p>Die Leerung der intrazellulären Energiespeicher. Bei hochintensiven, kurzen Belastungen betrifft dies die energiereichen Phosphate (ATP und Kreatinphosphat). Bei andauernden Belastungen erschöpfen die muskulären und hepatischen (in der Leber gespeicherten) Glykogenspeicher.</p>
+                </div>
+                
+                <!-- Metabolisch -->
+                <div class="fatigue-card">
+                    <div class="fatigue-icon">🧪</div>
+                    <h3>Metabolische (periphere) Ermüdung</h3>
+                    <p>Die Akkumulation von Stoffwechselzwischenprodukten. Das prominenteste Beispiel ist der Anstieg der Laktatkonzentration im Blut und in der Muskulatur bei intensiven Belastungen im anaerob-laktaziden Bereich. Dies führt zu einer <strong>Übersäuerung (Azidose)</strong> des Muskelmilieus, was den pH-Wert senkt und essenzielle Enzyme für die weitere Muskelkontraktion und Energiefreisetzung massiv hemmt.</p>
+                </div>
+
+                <!-- Zentralnervös -->
+                <div class="fatigue-card">
+                    <div class="fatigue-icon">🧠</div>
+                    <h3>Zentralnervöse Ermüdung (ZNS)</h3>
+                    <p>Die Erschöpfung der neuronalen Steuerungsebene. Die Reizweiterleitung über die afferenten und efferenten Bahnen sowie die synaptische Übertragung an der motorischen Endplatte verlangsamen sich. Die intra- und intermuskuläre Koordination wird zunehmend fehlerhaft.</p>
+                </div>
+
+                <!-- Strukturell -->
+                <div class="fatigue-card">
+                    <div class="fatigue-icon">🔬</div>
+                    <h3>Strukturelle Ermüdung</h3>
+                    <p>Mechanische Zerstörungen auf zellulärer Ebene. Exzentrische Belastungen (wie Bergablaufen) verursachen Mikrotraumata (kleinste Risse) in den Z-Scheiben der Muskelfibrillen, was physiologisch zum Phänomen des <strong>Muskelkaters</strong> führt.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Erholung -->
+        <section>
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2>Der Prozess der Erholung (Regeneration)</h2>
+            </div>
+            
+            <div class="recovery-content">
+                <p class="recovery-intro">Erholung ist der Prozess der Wiederherstellung der zellulären Homöostase nach einer trainingsbedingten Störung. Ein zentrales sportbiologisches Konzept hierbei ist der <strong>Heterochronismus der Erholung</strong>. Dieses Prinzip besagt, dass sich die verschiedenen beanspruchten Teilsysteme des Körpers nicht zeitgleich, sondern in völlig unterschiedlichen Geschwindigkeiten regenerieren:</p>
+                
+                <ul class="recovery-list">
+                    <li>
+                        <h4>Kurzfristig <span class="time-badge">Minuten</span></h4>
+                        <p>Die Resynthese der energiereichen Phosphate (ATP und Kreatinphosphat) erfolgt sehr schnell, meist innerhalb von 3 bis 5 Minuten. Ebenso wird in dieser Zeit das alaktazide Sauerstoffdefizit ausgeglichen.</p>
+                    </li>
+                    <li>
+                        <h4>Mittelfristig <span class="time-badge">Stunden bis 1-2 Tage</span></h4>
+                        <p>Die Eliminierung und Verstoffwechselung von Laktat (z. B. in der Herz- und Skelettmuskulatur) dauert bei aktiver Erholung etwa 30 bis 60 Minuten. Die vollständige Resynthese der Glykogenspeicher, unterstützt durch eine kohlenhydratreiche Ernährung mit hohem glykämischen Index, erfordert hingegen 24 bis 48 Stunden.</p>
+                    </li>
+                    <li>
+                        <h4>Langfristig <span class="time-badge">Tage bis Wochen</span></h4>
+                        <p>Die Reparatur struktureller Mikrotraumata (Synthese neuer Strukturproteine) sowie tiefgreifende zelluläre Anpassungen (z. B. Mitochondrienneubildung) benötigen mehrere Tage bis Wochen.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Interactive Canvas: Heterochronismus -->
+        <section class="chart-container">
+            <h3 class="heading-font">Heterochronismus der Erholung</h3>
+            <p class="chart-desc">Zeitlicher Verlauf der Wiederherstellungsprozesse nach einer Belastung (Logarithmische Skalierung der Zeitachse).</p>
+            
+            <div class="canvas-wrapper">
+                <canvas id="heteroCanvas" width="900" height="400"></canvas>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item"><div class="color-dot" style="background: #dc2626;"></div> ATP/KP (Phosphate)</div>
+                <div class="legend-item"><div class="color-dot" style="background: #0284c7;"></div> Laktatabbau</div>
+                <div class="legend-item"><div class="color-dot" style="background: #f59e0b;"></div> Glykogenauffüllung</div>
+                <div class="legend-item"><div class="color-dot" style="background: #059669;"></div> Strukturproteine (Mikrotraumata)</div>
+            </div>
+        </section>
+
+        <!-- Abitur Transfer Box -->
+        <section class="abitur-transfer">
+            <div class="abitur-header">
+                <div class="abi-icon">!</div>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p>Im Fachlehrplan (eA) wird die Kenntnis von Ermüdungs- und Erholungsmechanismen genutzt, um methodische Entscheidungen in der Trainingsplanung biologisch stichhaltig zu begründen.</p>
+
+            <div class="abi-scenarios">
+                
+                <div class="scenario-card">
+                    <h3>⏱️ Pausengestaltung begründen</h3>
+                    <p>In Transferaufgaben wird häufig verlangt, die Pausenlänge (Reizdichte) bei bestimmten Trainingsmethoden zu rechtfertigen. Wenn du beispielsweise ein Schnelligkeitstraining oder Maximalkrafttraining planst, musst du erklären, warum die Pausen <strong>vollständig</strong> (oft > 5 Minuten) sein müssen:</p>
+                    <p style="margin-top: 0.5rem;">Du argumentierst exakt mit der <span class="highlight">zentralnervösen Ermüdung</span> und der notwendigen kompletten <span class="highlight">Resynthese der energiereichen Phosphate (ATP/KP)</span>, da das System sonst nicht in der Lage ist, maximale Kontraktionen zu erzeugen.</p>
+                </div>
+
+                <div class="scenario-card">
+                    <h3>🏃♂️ Intervallmethoden</h3>
+                    <p>Bei Methoden zur Verbesserung der Ausdauer (z. B. extensive Intervallmethode) rechtfertigst du die <strong>lohnende Pause</strong> damit, dass sie gerade lang genug ist, um eine <span class="highlight">teilweise metabolische Erholung (Laktatabbau)</span> zu ermöglichen, aber kurz genug, um den Herz-Kreislauf-Apparat auf einem erhöhten Leistungsniveau zu halten.</p>
+                </div>
+
+                <div class="scenario-card">
+                    <h3>🔋 Zusammenhang zur Energiebereitstellung</h3>
+                    <p>Wenn du in einer Klausur den Leistungseinbruch eines Sportlers erklären sollst (wie bei der Mountainbikerin in der offiziellen Musteraufgabe, die erschöpft absteigen muss), nutzt du das Konzept der <strong>peripheren Ermüdung</strong>.</p>
+                    <p style="margin-top: 0.5rem;">Du leitest her: Die Belastung im steilen Gelände war so intensiv, dass mehr Laktat anfiel, als abgepuffert werden konnte; die resultierende <span class="highlight">Azidose (Übersäuerung)</span> behinderte die Energiefreisetzung im Muskel so stark, dass die Arbeit abgebrochen werden musste.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('heteroCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            let progress = 0;
+            let animationId;
+
+            function resize() {
+                const container = canvas.parentElement;
+                canvas.width = Math.min(container.clientWidth, 900);
+                canvas.height = canvas.width < 600 ? 300 : 400;
+                progress = 0; // reset for redraw
+                cancelAnimationFrame(animationId);
+                animate();
+            }
+
+            window.addEventListener('resize', resize);
+
+            function draw(animProgress) {
+                const w = canvas.width;
+                const h = canvas.height;
+                
+                ctx.clearRect(0, 0, w, h);
+
+                const paddingL = 60;
+                const paddingR = 40;
+                const paddingT = 40;
+                const paddingB = 50;
+                
+                const plotW = w - paddingL - paddingR;
+                const plotH = h - paddingT - paddingB;
+
+                // Axes
+                ctx.beginPath();
+                ctx.moveTo(paddingL, paddingT);
+                ctx.lineTo(paddingL, h - paddingB);
+                ctx.lineTo(w - paddingR + 10, h - paddingB);
+                ctx.strokeStyle = '#9ca3af';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Y-Axis Labels (Wiederherstellung %)
+                ctx.fillStyle = '#6b7280';
+                ctx.font = '500 12px Jost';
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                
+                ctx.fillText('100%', paddingL - 10, paddingT);
+                ctx.fillText('50%', paddingL - 10, paddingT + plotH/2);
+                ctx.fillText('0%', paddingL - 10, h - paddingB);
+                
+                // Horizontal grid lines
+                ctx.beginPath();
+                ctx.moveTo(paddingL, paddingT); ctx.lineTo(w - paddingR, paddingT);
+                ctx.moveTo(paddingL, paddingT + plotH/2); ctx.lineTo(w - paddingR, paddingT + plotH/2);
+                ctx.strokeStyle = '#f3f4f6';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // Y-Axis Title
+                ctx.save();
+                ctx.translate(15, h/2);
+                ctx.rotate(-Math.PI/2);
+                ctx.textAlign = 'center';
+                ctx.fillStyle = '#374151';
+                ctx.font = '600 14px Jost';
+                ctx.fillText('Wiederherstellung', 0, 0);
+                ctx.restore();
+
+                // X-Axis Logarithmic Milestones Mapping
+                // We fake a log scale by defining equal visual segments for different time units
+                const segments = 4;
+                const segW = plotW / segments;
+                
+                const milestones = [
+                    { label: '0', x: paddingL },
+                    { label: 'Minuten', x: paddingL + segW },
+                    { label: 'Stunden', x: paddingL + segW*2 },
+                    { label: 'Tage', x: paddingL + segW*3 },
+                    { label: 'Wochen', x: paddingL + plotW }
+                ];
+
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                ctx.fillStyle = '#6b7280';
+                
+                milestones.forEach(m => {
+                    // Tick
+                    ctx.beginPath();
+                    ctx.moveTo(m.x, h - paddingB);
+                    ctx.lineTo(m.x, h - paddingB + 5);
+                    ctx.strokeStyle = '#9ca3af';
+                    ctx.stroke();
+                    // Label
+                    ctx.fillText(m.label, m.x, h - paddingB + 10);
+                });
+
+                // X-Axis Title
+                ctx.fillStyle = '#374151';
+                ctx.font = '600 14px Jost';
+                ctx.fillText('Zeit (logarithmische Phasen)', paddingL + plotW/2, h - 20);
+
+                // Draw Curves based on animProgress (0 to 1)
+                const currentDrawWidth = paddingL + (plotW * animProgress);
+
+                // Helper to draw a curve
+                function drawCurve(points, color, width) {
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.rect(paddingL, 0, currentDrawWidth - paddingL, h);
+                    ctx.clip(); // Mask to animation progress
+
+                    ctx.beginPath();
+                    ctx.moveTo(points[0].x, points[0].y);
+                    
+                    for(let i=1; i<points.length; i++) {
+                        // Simple curve logic: use quadratic bezier for smoothness between points
+                        // Since we have specific milestones, we can hardcode the control points or use lines.
+                        // We'll use lines with slight tension or just straight lines for this scientific diagram.
+                        // To make it smooth, we use bezier curve through points.
+                        // For simplicity in Canvas without a library, we use lines but many points.
+                        ctx.lineTo(points[i].x, points[i].y);
+                    }
+                    
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = width;
+                    ctx.lineJoin = 'round';
+                    ctx.stroke();
+                    ctx.restore();
+                }
+
+                // Base Y is h-paddingB, Top Y is paddingT
+                function getY(percent) {
+                    return (h - paddingB) - (plotH * (percent/100));
+                }
+
+                // Data Points mapped to Milestones [0, Min, Std, Tage, Wo]
+                // ATP/KP (steep in Minutes)
+                const atpPoints = [
+                    {x: milestones[0].x, y: getY(0)},
+                    {x: milestones[1].x, y: getY(95)},
+                    {x: milestones[2].x, y: getY(100)},
+                    {x: milestones[4].x, y: getY(100)}
+                ];
+
+                // Laktat (steep in Hours)
+                const laktatPoints = [
+                    {x: milestones[0].x, y: getY(0)},
+                    {x: milestones[1].x, y: getY(30)},
+                    {x: milestones[2].x, y: getY(95)},
+                    {x: milestones[3].x, y: getY(100)},
+                    {x: milestones[4].x, y: getY(100)}
+                ];
+
+                // Glykogen (steep in Days)
+                const glykoPoints = [
+                    {x: milestones[0].x, y: getY(0)},
+                    {x: milestones[1].x, y: getY(5)},
+                    {x: milestones[2].x, y: getY(30)},
+                    {x: milestones[3].x, y: getY(95)},
+                    {x: milestones[4].x, y: getY(100)}
+                ];
+
+                // Strukturproteine (steep in Weeks)
+                const strukturPoints = [
+                    {x: milestones[0].x, y: getY(0)},
+                    {x: milestones[1].x, y: getY(0)},
+                    {x: milestones[2].x, y: getY(5)},
+                    {x: milestones[3].x, y: getY(40)},
+                    {x: milestones[4].x, y: getY(95)}
+                ];
+
+                // Make smooth curves by adding intermediate points
+                function makeSmooth(points) {
+                    let smooth = [];
+                    smooth.push(points[0]);
+                    for(let i=0; i<points.length-1; i++) {
+                        let p0 = points[i];
+                        let p1 = points[i+1];
+                        // add 10 intermediate points
+                        for(let j=1; j<=10; j++) {
+                            let t = j/10;
+                            // Simple linear interpolation
+                            // For a more logarithmic/exponential look between points:
+                            let ease = t * t * (3 - 2 * t); // Smoothstep
+                            let x = p0.x + (p1.x - p0.x) * t;
+                            let y = p0.y + (p1.y - p0.y) * ease;
+                            smooth.push({x: x, y: y});
+                        }
+                    }
+                    return smooth;
+                }
+
+                drawCurve(makeSmooth(atpPoints), '#dc2626', 4);     // Red
+                drawCurve(makeSmooth(laktatPoints), '#0284c7', 4);  // Blue
+                drawCurve(makeSmooth(glykoPoints), '#f59e0b', 4);   // Amber
+                drawCurve(makeSmooth(strukturPoints), '#059669', 4);// Green
+            }
+
+            function animate() {
+                if(progress < 1) {
+                    progress += 0.01; // Speed
+                    if(progress > 1) progress = 1;
+                    draw(progress);
+                    animationId = requestAnimationFrame(animate);
+                }
+            }
+
+            // Trigger animation on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        progress = 0;
+                        animate();
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(canvas);
+            resize();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Ausdauertraining & Tests</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito Sans', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        track: {
+                            50: '#f4f6f8',
+                            100: '#e1e6ed',
+                            500: '#3f51b5', // Athletic Indigo
+                            600: '#303f9f',
+                            900: '#1a237e',
+                        },
+                        neon: {
+                            DEFAULT: '#00e676', // Energetic Green
+                            dark: '#00c853',
+                        },
+                        warn: '#ff3d00',
+                        abitur: {
+                            light: '#fff8e1',
+                            DEFAULT: '#ffb300',
+                            dark: '#ff8f00',
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 10px 30px -10px rgba(0,0,0,0.08)',
+                        'floating': '0 20px 40px -15px rgba(63, 81, 181, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f0f4f8; /* Leichtes, sportliches Grau-Blau */
+            color: #2d3748;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .athletic-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        
+        .athletic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(63, 81, 181, 0.15);
+        }
+
+        .canvas-dashboard {
+            background: #111827;
+            border-radius: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid #1f2937;
+        }
+
+        /* Diagonal Stripe Pattern for Athletic Feel */
+        .bg-stripes {
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(255,255,255,0.03) 0px,
+                rgba(255,255,255,0.03) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        /* Abitur Premium Box */
+        .abitur-gold-box {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            border-top: 6px solid #ffb300;
+            position: relative;
+            color: #f7fafc;
+        }
+        .abitur-badge {
+            background: linear-gradient(to right, #ffb300, #ff8f00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans text-lg">
+
+    <!-- Header / Navigation Line -->
+    <header class="bg-track-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="bg-neon text-track-900 font-black px-3 py-1 rounded-md text-sm uppercase tracking-widest">1.5.5a</div>
+                <h1 class="font-display font-bold text-lg md:text-xl tracking-wide hidden sm:block">Praktische Umsetzung</h1>
+            </div>
+            <div class="font-display font-semibold text-track-100 text-sm tracking-wider uppercase opacity-80">
+                Ausdauertraining & Tests
+            </div>
+        </div>
+        <!-- Progress Bar (Visual only) -->
+        <div class="h-1 w-full bg-track-600"><div class="h-full bg-neon w-1/3"></div></div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- Intro Text -->
+        <section class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-6xl font-display font-black text-track-900 mb-6 uppercase tracking-tight">
+                Planung & <span class="text-track-500">Erprobung</span>
+            </h2>
+            <p class="text-xl text-slate-600 leading-relaxed">
+                Die Überführung sportbiologischer und trainingsmethodischer Gesetzmäßigkeiten in die Trainingspraxis erfordert eine systematische und zielgerichtete Planung. Um die Wirksamkeit eines absolvierten Trainingsblocks zu evaluieren und den aktuellen Leistungsstand eines Athleten objektiv zu bestimmen, ist die regelmäßige Durchführung und Auswertung sportmotorischer Tests unerlässlich.
+            </p>
+        </section>
+
+        <!-- Section 1: Planung -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            <div class="col-span-1 lg:col-span-2">
+                <h3 class="text-3xl font-display font-bold text-track-900 mb-2 flex items-center gap-3">
+                    <span class="bg-track-100 text-track-600 w-10 h-10 rounded-full flex items-center justify-center text-xl">1</span>
+                    Planung eines Ausdauertrainings
+                </h3>
+                <p class="text-slate-600 mb-6 pl-12 border-l-4 border-transparent">
+                    Die Konzeption einer Ausdauertrainingseinheit (Mikrozyklus) muss zwingend aus den übergeordneten Zielen des Meso- und Makrozyklus abgeleitet werden.
+                </p>
+            </div>
+
+            <!-- Card: Methodenauswahl -->
+            <article class="athletic-card p-8 border-t-4 border-t-track-500">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="p-3 bg-track-50 rounded-lg text-track-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    </div>
+                    <h4 class="text-2xl font-display font-bold text-slate-800">Zielgerichtete Methodenauswahl</h4>
+                </div>
+                <p class="text-slate-600 leading-relaxed mb-4">
+                    Vor der Praxis steht die Entscheidung, welche Art der Ausdauer trainiert werden soll:
+                </p>
+                <ul class="space-y-3 text-slate-700">
+                    <li class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-neon-dark shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span><strong>Grundlagenausdauer:</strong> (z. B. für einen Mountainbiker) $\rightarrow$ Primäre Wahl: <em>extensive Dauermethode</em>.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-neon-dark shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span><strong>Wettkampfspezifische Ausdauer:</strong> (z. B. Tempohärte für einen 1500-m-Läufer) $\rightarrow$ <em>Intervall- oder Wiederholungsmethoden</em>.</span>
+                    </li>
+                </ul>
+            </article>
+
+            <!-- Card: Belastungsnormative -->
+            <article class="athletic-card p-8 border-t-4 border-t-warn">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="p-3 bg-red-50 rounded-lg text-warn">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h4 class="text-2xl font-display font-bold text-slate-800">Belastungsnormative abstimmen</h4>
+                </div>
+                <p class="text-slate-600 leading-relaxed mb-4">
+                    Die Parameter <strong class="text-slate-800">Intensität, Umfang, Dauer und Dichte</strong> müssen exakt aufeinander abgestimmt werden.
+                </p>
+                <div class="bg-red-50 border-l-4 border-warn p-4 rounded-r-lg text-sm text-slate-800">
+                    <strong class="text-warn block mb-1">Typischer Anfängerfehler:</strong> 
+                    Zu hohe Intensität bei einer geplanten regenerativen oder extensiven Dauereinheit. Folge: Ungewollte Laktatakkumulation und Verfehlung des Trainingsziels (z. B. Optimierung des Fettstoffwechsels).
+                </div>
+            </article>
+        </section>
+
+        <!-- Section 2: Shuttle-Run-Test & Canvas -->
+        <section class="space-y-8">
+            <div class="flex items-center gap-3">
+                <span class="bg-track-100 text-track-600 w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold font-display">2</span>
+                <h3 class="text-3xl font-display font-bold text-track-900">Einfache Ausdauertests: Shuttle-Run-Test</h3>
+            </div>
+            
+            <p class="text-slate-600 max-w-4xl text-lg">
+                Zur praxisnahen Überprüfung der Ausdauerleistungsfähigkeit im Schulsport und im ambitionierten Breitensport ist der Shuttle-Run-Test (20-Meter-Pendellauf) ein etablierter <strong>Goldstandard</strong>.
+            </p>
+
+            <!-- Test Details Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-track-900 mb-2 uppercase text-sm tracking-wider">Aufbau & Durchführung</h4>
+                    <p class="text-slate-600 text-sm">Der Test erfordert lediglich eine exakt abgemessene <strong>20-Meter-Strecke</strong>. Die Athleten laufen zwischen zwei Linien hin und her. Das Lauftempo wird durch normierte akustische Signale (Pieptöne) exakt vorgegeben.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-track-900 mb-2 uppercase text-sm tracking-wider">Belastungssteigerung</h4>
+                    <p class="text-slate-600 text-sm">Ein progressiver Stufentest: Start auf moderatem Niveau (ca. 8,0 - 8,5 km/h, aerober Bereich). Erhöhung pro Level (meist jede Minute) stufenweise um ca. <strong>0,5 km/h</strong>. Ziellinie muss exakt beim Signalton erreicht werden.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-track-900 mb-2 uppercase text-sm tracking-wider">Abbruch & Physiologie</h4>
+                    <p class="text-slate-600 text-sm">Testende: Ziellinie bei zwei aufeinanderfolgenden Signalen nicht rechtzeitig erreicht. Physiologisch durchläuft der Sportler alle Zonen: Aerob $\rightarrow$ aerob-anaerober Übergang $\rightarrow$ maximale Laktatausschöpfung. Korreliert hochgradig mit <strong>VO₂max</strong>.</p>
+                </div>
+            </div>
+
+            <!-- CANVAS DASHBOARD -->
+            <div class="canvas-dashboard shadow-2xl mt-8">
+                <!-- Dashboard Header -->
+                <div class="bg-slate-800 px-6 py-4 flex justify-between items-center border-b border-slate-700">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="text-slate-300 font-mono text-sm ml-4 uppercase tracking-widest">Shuttle-Run Monitor</span>
+                    </div>
+                    <div class="text-neon font-mono text-sm animate-pulse">LIVE DATA</div>
+                </div>
+                
+                <!-- Canvas Area -->
+                <div class="p-6 bg-stripes">
+                    <div class="relative w-full h-[400px]">
+                        <!-- Canvas Element for dynamic rendering -->
+                        <canvas id="shuttleRunCanvas" class="w-full h-full"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Gütekriterien -->
+        <section>
+            <div class="flex items-center gap-3 mb-8">
+                <span class="bg-track-100 text-track-600 w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold font-display">3</span>
+                <h3 class="text-3xl font-display font-bold text-track-900">Testtheoretische Einordnung (Gütekriterien)</h3>
+            </div>
+            
+            <p class="text-slate-600 mb-8 max-w-3xl">Ein Test ist nur dann aussagekräftig, wenn er wissenschaftlichen Gütekriterien entspricht:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                <!-- Objektivität -->
+                <div class="athletic-card p-6 h-full flex flex-col">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-2">Objektivität</h4>
+                    <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">Unabhängigkeit vom Testleiter</p>
+                    <p class="text-slate-600 flex-grow">Beim Shuttle-Run-Test <strong>sehr hoch</strong>, da das Tempo durch ein standardisiertes akustisches Signal diktiert wird. Ablesefehler oder subjektive Tempovorgaben entfallen völlig.</p>
+                </div>
+
+                <!-- Reliabilität -->
+                <div class="athletic-card p-6 h-full flex flex-col">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-2">Reliabilität</h4>
+                    <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">Wiederholgenauigkeit</p>
+                    <p class="text-slate-600 flex-grow"><strong>Hoch</strong>, sofern standardisierte Rahmenbedingungen herrschen (z.B. gleicher Bodenbelag, gleiche Hallenschuhe, identisches Aufwärmprogramm vor dem Test).</p>
+                </div>
+
+                <!-- Validität -->
+                <div class="athletic-card p-6 h-full flex flex-col border-2 border-slate-200 bg-slate-50">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-800 mb-2">Validität</h4>
+                    <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">Gültigkeit der Messung</p>
+                    <p class="text-slate-600 mb-4">Misst <strong>hochvalide</strong> die kardiopulmonale Ausdauerleistungsfähigkeit.</p>
+                    <div class="bg-white p-3 rounded border-l-4 border-purple-500 text-xs text-slate-700 mt-auto shadow-sm">
+                        <strong class="text-purple-700 block mb-1">Einschränkung / Kritik:</strong>
+                        Da an den 20m-Marken abgebremst und angetreten wird, fließen anaerob-alaktazide (Schnellkraft) und koordinative (Wendegeschicklichkeit) Komponenten ein. Zudem abhängig von psychischer Willensspannkraft.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Abitur-Transfer (Premium Highlight) -->
+        <section class="abitur-gold-box rounded-3xl p-8 md:p-12 shadow-floating mt-20 overflow-hidden">
+            <!-- Background Graphic -->
+            <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-1/4 translate-y-1/4">
+                <svg width="400" height="400" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2v-2zm0-6h2v4h-2v-4z"/>
+                </svg>
+            </div>
+
+            <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="bg-abitur p-4 rounded-xl shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-display font-black abitur-badge tracking-tight">Abitur-Transfer & Praxis</h2>
+                </div>
+                
+                <p class="text-xl text-slate-300 font-medium mb-8 max-w-4xl leading-relaxed">
+                    In materialgestützten Abiturklausuren auf erhöhtem Anforderungsniveau wird häufig eine <strong class="text-white">vergleichende Analyse von Testverfahren</strong> gefordert. 
+                </p>
+
+                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-2xl p-8 shadow-inner">
+                    <h4 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="text-abitur">Die Analyse:</span> Shuttle-Run vs. Cooper-Test
+                    </h4>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <!-- Cooper -->
+                        <div class="bg-slate-900/50 p-6 rounded-xl border border-slate-700 flex flex-col">
+                            <div class="text-slate-400 font-bold uppercase tracking-wider text-sm mb-2 text-center">Cooper-Test (12 Min)</div>
+                            <div class="flex justify-center my-4">
+                                <svg class="w-12 h-12 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <ul class="text-slate-300 text-sm space-y-2 flex-grow">
+                                <li>• Zyklisches Geradeauslaufen</li>
+                                <li>• Gleichmäßiges Tempo</li>
+                                <li>• Wenig koordinativer Anspruch</li>
+                            </ul>
+                        </div>
+
+                        <!-- VS -->
+                        <div class="hidden md:flex items-center justify-center -mx-4 z-10 absolute left-1/2 transform -translate-x-1/2 mt-16">
+                            <div class="bg-abitur text-slate-900 font-black rounded-full w-10 h-10 flex items-center justify-center border-4 border-slate-800">VS</div>
+                        </div>
+
+                        <!-- Shuttle Run -->
+                        <div class="bg-slate-800 p-6 rounded-xl border border-abitur/50 flex flex-col shadow-[0_0_15px_rgba(255,179,0,0.15)] relative">
+                            <div class="absolute -top-3 -right-3">
+                                <span class="bg-abitur text-slate-900 text-xs font-bold px-2 py-1 rounded-full shadow-lg">Besser für Spielsport</span>
+                            </div>
+                            <div class="text-abitur font-bold uppercase tracking-wider text-sm mb-2 text-center">Shuttle-Run-Test</div>
+                            <div class="flex justify-center gap-4 my-4">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <!-- Basketball/Volleyball abstract representation -->
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path></svg>
+                            </div>
+                            <ul class="text-slate-100 text-sm space-y-2 flex-grow">
+                                <li>• Azyklische Intervallbelastung</li>
+                                <li>• Ständige Richtungswechsel</li>
+                                <li>• Abstoppen & Antreten</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-700 pt-6">
+                        <strong class="text-abitur block mb-2 text-lg">Deine Argumentation im Abitur:</strong>
+                        <p class="text-slate-300 leading-relaxed mb-4">
+                            Argumentiere <strong class="text-white">biomechanisch und sportbiologisch</strong>. Sportarten wie Volleyball oder Basketball zeichnen sich durch azyklische, hochintensive Intervallbelastungen mit ständigen Richtungswechseln aus. Du musst schlussfolgern, dass der Shuttle-Run-Test durch die ständigen Abstopp- und Antrittsbewegungen das Anforderungsprofil (<strong>Strukturähnlichkeit</strong>) dieser Spielsportarten deutlich valider und sportartspezifischer abbildet.
+                        </p>
+                        <p class="text-sm text-slate-400 bg-slate-900/50 p-4 rounded-lg border-l-2 border-slate-600">
+                            <em>Zusatzpunkt:</em> Wird nach Maßnahmen für aussagekräftige Testergebnisse gefragt, begründe immer mit Gütekriterien (z.B. "Standardisierte Abnahmebedingungen durch Hallennutzung sichern die <strong>Reliabilität</strong>").
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-track-900 text-slate-400 py-10 text-center text-sm mt-16 border-t border-slate-800">
+        <p class="font-bold text-white uppercase tracking-widest mb-2">Abiturwissen Sport (G9, eA)</p>
+        <p>Lernbereich 1.5.5a Praktische Umsetzung</p>
+    </footer>
+
+    <!-- Canvas Animation Script (Retina Ready) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('shuttleRunCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Handle Retina/High-DPI displays
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            // Data for the Bar Chart
+            const levels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            const speeds = [8.5, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0, 12.5, 13.0];
+            
+            // Animation State
+            let time = 0;
+            let currentLevel = 0; // Starts at index 0 (Level 1)
+            let runnerX = 0;
+            let runnerDirection = 1; // 1 = right, -1 = left
+            let beepActive = 0; // Frames for visual beep
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time++;
+
+                // Split screen layout
+                const trackWidth = w * 0.45;
+                const chartStartX = w * 0.55;
+                const chartWidth = w * 0.4;
+                
+                // -----------------------------------------------------
+                // LEFT SIDE: SHUTTLE RUN TRACK (TOP-DOWN)
+                // -----------------------------------------------------
+                const trackY = h / 2;
+                const lineLeft = 40;
+                const lineRight = lineLeft + trackWidth - 40;
+
+                // Title
+                ctx.fillStyle = '#9ca3af'; // slate-400
+                ctx.font = 'bold 12px "Montserrat", sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText('20-METER-STRECKE', lineLeft, 40);
+
+                // Draw Track Area
+                ctx.fillStyle = '#1e293b'; // slate-800
+                ctx.fillRect(lineLeft - 20, trackY - 60, (lineRight - lineLeft) + 40, 120);
+
+                // Draw Lines
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = '#f8fafc'; // white
+                
+                // Left Line
+                ctx.beginPath();
+                ctx.moveTo(lineLeft, trackY - 60);
+                ctx.lineTo(lineLeft, trackY + 60);
+                ctx.stroke();
+                
+                // Right Line
+                ctx.beginPath();
+                ctx.moveTo(lineRight, trackY - 60);
+                ctx.lineTo(lineRight, trackY + 60);
+                ctx.stroke();
+
+                // 20m Label
+                ctx.fillStyle = '#475569';
+                ctx.font = '14px "Nunito Sans", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('20 Meter', lineLeft + (lineRight - lineLeft)/2, trackY + 80);
+
+                // Runner Logic
+                // Speed depends on current level (simulation scale)
+                const currentSpeedKmH = speeds[currentLevel];
+                const pixelSpeed = (currentSpeedKmH / 8.5) * 2.5; // Base speed scaling
+
+                runnerX += pixelSpeed * runnerDirection;
+                
+                if (runnerX >= (lineRight - lineLeft) && runnerDirection === 1) {
+                    runnerDirection = -1;
+                    beepActive = 20; // Trigger beep visual
+                    // advance level slowly for demo purposes
+                    if(Math.random() > 0.5 && currentLevel < 9) currentLevel++; 
+                } else if (runnerX <= 0 && runnerDirection === -1) {
+                    runnerDirection = 1;
+                    beepActive = 20;
+                    if(Math.random() > 0.5 && currentLevel < 9) currentLevel++;
+                }
+
+                // Draw Beep Indicator
+                if (beepActive > 0) {
+                    ctx.fillStyle = `rgba(0, 230, 118, ${beepActive/20})`; // Neon green glow
+                    const xBeep = runnerDirection === -1 ? lineRight : lineLeft;
+                    ctx.beginPath();
+                    ctx.arc(xBeep, trackY, 40, 0, Math.PI*2);
+                    ctx.fill();
+                    beepActive--;
+                    
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = 'bold 16px "Montserrat", sans-serif';
+                    ctx.fillText('BEEP', xBeep, trackY - 70);
+                }
+
+                // Draw Runner
+                const actualRunnerX = lineLeft + runnerX;
+                ctx.shadowColor = '#00e676';
+                ctx.shadowBlur = 10;
+                ctx.fillStyle = '#00e676';
+                ctx.beginPath();
+                ctx.arc(actualRunnerX, trackY, 10, 0, Math.PI*2);
+                ctx.fill();
+                ctx.shadowBlur = 0; // reset
+
+                // Draw "Ghost" trail
+                ctx.fillStyle = 'rgba(0, 230, 118, 0.2)';
+                ctx.beginPath();
+                ctx.arc(actualRunnerX - (15 * runnerDirection), trackY, 6, 0, Math.PI*2);
+                ctx.fill();
+                
+
+                // -----------------------------------------------------
+                // RIGHT SIDE: PROGRESSIVE BAR CHART
+                // -----------------------------------------------------
+                const chartH = h - 100;
+                const chartY = h - 50;
+                
+                // Chart Title
+                ctx.fillStyle = '#9ca3af';
+                ctx.textAlign = 'left';
+                ctx.fillText('GESCHWINDIGKEITS-PROGRESSION (KM/H)', chartStartX, 40);
+
+                const barWidth = (chartWidth / levels.length) - 5;
+                const maxSpeed = 14; // Chart max Y scale
+
+                for (let i = 0; i < levels.length; i++) {
+                    const x = chartStartX + i * (chartWidth / levels.length);
+                    const barHeight = (speeds[i] / maxSpeed) * chartH;
+                    const y = chartY - barHeight;
+                    
+                    // Draw Bar
+                    if (i === currentLevel) {
+                        ctx.fillStyle = '#00e676'; // Highlight active level
+                        // Pulsing effect on active bar
+                        ctx.shadowColor = '#00e676';
+                        ctx.shadowBlur = 10 + Math.sin(time*0.1)*5;
+                    } else if (i < currentLevel) {
+                        ctx.fillStyle = '#3f51b5'; // Passed levels
+                        ctx.shadowBlur = 0;
+                    } else {
+                        ctx.fillStyle = '#334155'; // Upcoming levels
+                        ctx.shadowBlur = 0;
+                    }
+                    
+                    // Rounded top for bars
+                    ctx.beginPath();
+                    ctx.moveTo(x, chartY);
+                    ctx.lineTo(x, y + 4);
+                    ctx.quadraticCurveTo(x, y, x + 4, y);
+                    ctx.lineTo(x + barWidth - 4, y);
+                    ctx.quadraticCurveTo(x + barWidth, y, x + barWidth, y + 4);
+                    ctx.lineTo(x + barWidth, chartY);
+                    ctx.fill();
+                    ctx.shadowBlur = 0; // reset
+
+                    // Speed Label (Top)
+                    if (i <= currentLevel || i === levels.length-1 || i===0) {
+                        ctx.fillStyle = i === currentLevel ? '#ffffff' : '#64748b';
+                        ctx.font = i === currentLevel ? 'bold 12px sans-serif' : '10px sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(speeds[i].toFixed(1), x + barWidth/2, y - 8);
+                    }
+
+                    // Level Label (Bottom)
+                    ctx.fillStyle = '#64748b';
+                    ctx.font = '10px sans-serif';
+                    ctx.fillText('Lvl ' + levels[i], x + barWidth/2, chartY + 15);
+                }
+                
+                // Baseline
+                ctx.strokeStyle = '#475569';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(chartStartX, chartY);
+                ctx.lineTo(chartStartX + chartWidth, chartY);
+                ctx.stroke();
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

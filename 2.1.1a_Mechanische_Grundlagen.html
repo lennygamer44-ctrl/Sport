@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanische Grundlagen - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@500;700;800&display=swap');
+
+        :root {
+            --bg-color: #f4f7f6;
+            --text-main: #2d3748;
+            --text-light: #4a5568;
+            --primary: #2b6cb0;
+            --primary-light: #ebf8ff;
+            --secondary: #38b2ac;
+            --accent-warm: #ed8936;
+            --transfer-bg: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            --transfer-gold: #ecc94b;
+            --white: #ffffff;
+            --border-rad: 12px;
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+            padding-bottom: 0.3rem;
+            margin-top: 2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: var(--bg-color);
+        }
+
+        section {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--border-rad);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        section:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Special Content Elements */
+        .intro-text {
+            font-size: 1.15rem;
+            font-weight: 300;
+            color: var(--text-light);
+            border-left: 4px solid var(--secondary);
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+            background: #f0fdfa;
+            padding: 1.5rem;
+            border-radius: 0 var(--border-rad) var(--border-rad) 0;
+        }
+
+        .def-box {
+            background: var(--primary-light);
+            border: 1px solid #bee3f8;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .def-box::before {
+            content: "Definition";
+            position: absolute;
+            top: -12px;
+            left: 15px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 10px;
+            border-radius: 10px;
+            text-transform: uppercase;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+
+        ul li {
+            position: relative;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        strong {
+            color: var(--primary);
+        }
+
+        /* Canvas Container */
+        .canvas-wrapper {
+            width: 100%;
+            background: #edf2f7;
+            border-radius: var(--border-rad);
+            padding: 1rem;
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+        }
+
+        .canvas-wrapper canvas {
+            max-width: 100%;
+            height: auto;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .canvas-caption {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Grid Cards */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background: #fffaf0;
+            border: 1px solid #feebc8;
+            padding: 1.5rem;
+            border-radius: var(--border-rad);
+            border-top: 4px solid var(--accent-warm);
+        }
+
+        .card h4 {
+            color: var(--accent-warm);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Accordion for Gleichgewicht */
+        details {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        summary {
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            background: #edf2f7;
+            color: var(--text-main);
+            outline: none;
+            transition: background 0.3s ease;
+        }
+
+        summary:hover {
+            background: #e2e8f0;
+        }
+
+        details[open] summary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .details-content {
+            padding: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* Premium Transfer Box */
+        .premium-box {
+            background: var(--transfer-bg);
+            color: var(--white);
+            padding: 3rem;
+            border-radius: var(--border-rad);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border: 2px solid var(--transfer-gold);
+        }
+
+        .premium-box h2 {
+            color: var(--transfer-gold);
+            border-bottom: none;
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .premium-box p, .premium-box li {
+            color: #cbd5e0;
+        }
+
+        .premium-box strong {
+            color: var(--white);
+            background: rgba(255,255,255,0.1);
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        .premium-box .highlight {
+            color: var(--transfer-gold);
+            font-weight: bold;
+        }
+
+        .icon-star {
+            font-size: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            section { padding: 1.5rem; }
+            h1 { font-size: 2rem; }
+            .premium-box { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>2.1.1a Mechanische Grundlagen</h1>
+        <div class="subtitle">Körperschwerpunkt, Körperachsen, Gleichgewicht, Trägheit, Reibung</div>
+        
+        <div class="intro-text">
+            Die Biomechanik nutzt physikalische (insbesondere mechanische) Gesetzmäßigkeiten, um sportliche Bewegungen zu analysieren und zu optimieren. Das Verständnis der grundlegenden mechanischen Größen ist die zwingende Voraussetzung für jede morphologische und funktionale Bewegungsanalyse.
+        </div>
+    </header>
+
+    <main>
+        <!-- Abschnitt 1: KSP -->
+        <section>
+            <h2>1. Der Körperschwerpunkt (KSP)</h2>
+            <div class="def-box">
+                <p>Der Körperschwerpunkt ist der fiktive Angriffspunkt der Schwerkraft an einem Körper. Da der menschliche Körper keine starre Masse ist, sondern aus gegeneinander beweglichen Segmenten (Extremitäten, Rumpf, Kopf) besteht, verändert sich die Lage des KSP mit jeder Haltungsänderung.</p>
+            </div>
+            
+            <p><strong>Lage:</strong> Beim aufrechten Stand mit hängenden Armen liegt der KSP etwa auf Höhe des Bauchnabels (sakral).</p>
+            <p><strong>Sportliche Bedeutung:</strong> Durch gezielte Segmentverlagerungen kann der KSP sogar außerhalb des Körpers liegen (klassisches Beispiel: Fosbury-Flop beim Hochsprung, bei dem der KSP unterhalb der Latte hindurchgeführt wird, während der Körper sie überquert).</p>
+
+            <div class="canvas-wrapper">
+                <canvas id="kspCanvas" width="800" height="350"></canvas>
+                <div class="canvas-caption">Abb. 1: Lage des Körperschwerpunkts (Roter Punkt) bei aufrechtem Stand, tiefer Hocke und beim Fosbury-Flop.</div>
+            </div>
+        </section>
+
+        <!-- Abschnitt 2: Körperachsen -->
+        <section>
+            <h2>2. Die Körperachsen</h2>
+            <p>Zur biomechanischen Beschreibung von Bewegungen, insbesondere von Rotationen, wird der menschliche Körper in ein dreidimensionales Koordinatensystem mit drei senkrecht aufeinander stehenden Hauptachsen eingeteilt:</p>
+            
+            <div class="canvas-wrapper">
+                <canvas id="achsenCanvas" width="600" height="400"></canvas>
+                <div class="canvas-caption">Abb. 2: Dreidimensionales Modell der Körperachsen (Schnittpunkt im KSP).</div>
+            </div>
+
+            <ul>
+                <li><strong>Längsachse (Longitudinalachse):</strong> Verläuft vertikal von Kopf bis Fuß. Bewegungen um diese Achse sind Drehungen (z. B. Pirouette beim Eiskunstlauf, Schraube beim Turmspringen).</li>
+                <li><strong>Breitenachse (Transversalachse):</strong> Verläuft horizontal von links nach rechts. Bewegungen um diese Achse erfolgen vorwärts oder rückwärts (z. B. Salto vorwärts, Rolle beim Turnen).</li>
+                <li><strong>Tiefenachse (Sagittalachse):</strong> Verläuft horizontal von hinten nach vorne. Bewegungen um diese Achse sind Seitwärtsneigungen (z. B. Radschlag beim Turnen).</li>
+            </ul>
+        </section>
+
+        <!-- Abschnitt 3: Gleichgewicht -->
+        <section>
+            <h2>3. Das Gleichgewicht</h2>
+            <p>Ein Körper befindet sich im mechanischen Gleichgewicht, wenn die Summe aller an ihm angreifenden Kräfte und Drehmomente null ist. Man unterscheidet:</p>
+            
+            <details>
+                <summary>Stabiles Gleichgewicht</summary>
+                <div class="details-content">
+                    Nach einer Auslenkung kehrt der Körper in seine Ausgangslage zurück (z. B. Turner im Hang an den Ringen). <strong>Regel:</strong> Der KSP liegt unter der Drehachse.
+                </div>
+            </details>
+            
+            <details>
+                <summary>Labiles Gleichgewicht</summary>
+                <div class="details-content">
+                    Bei der kleinsten Auslenkung entfernt sich der Körper weiter aus der Ausgangslage (z. B. Handstand). <strong>Regel:</strong> Der KSP liegt über der Unterstützungsfläche.
+                </div>
+            </details>
+
+            <details>
+                <summary>Dynamisches Gleichgewicht</summary>
+                <div class="details-content">
+                    Die Aufrechterhaltung des Gleichgewichts während einer fortschreitenden Bewegung (z. B. Laufen, Radfahren).
+                </div>
+            </details>
+
+            <div class="def-box" style="margin-top: 2rem; background: #fffaf0; border-color: #feebc8;">
+                <p><strong>Unterstützungsfläche:</strong> Die Stabilität eines labilen Gleichgewichts hängt maßgeblich von der Größe der Unterstützungsfläche und der Höhe des KSP ab (je tiefer der KSP und je größer die Fläche, desto stabiler).</p>
+            </div>
+        </section>
+
+        <!-- Abschnitt 4 & 5: Trägheit und Reibung -->
+        <section style="background: transparent; padding: 0; box-shadow: none; display: flex; flex-wrap: wrap; gap: 2rem;">
+            
+            <div style="flex: 1; min-width: 300px; background: white; padding: 2.5rem; border-radius: var(--border-rad); box-shadow: var(--shadow-sm);">
+                <h2>4. Trägheit (Inertia)</h2>
+                <p>Jeder Körper hat das Bestreben, in seinem aktuellen Bewegungszustand (Ruhe oder geradlinig gleichförmige Bewegung) zu verharren, solange keine äußeren Kräfte auf ihn einwirken (<strong>1. Newtonsche Axiom</strong>).</p>
+                <div class="intro-text" style="background: #ebf8ff; border-left-color: #3182ce; padding: 1rem; margin-top: 1rem;">
+                    <strong>Masse und Trägheit:</strong> Je größer die Masse eines Athleten oder Sportgeräts, desto größer ist seine Trägheit. Das bedeutet, es bedarf eines größeren Kraftstoßes, um diese Masse zu beschleunigen oder abzubremsen.
+                </div>
+            </div>
+
+            <div style="flex: 1; min-width: 300px; background: white; padding: 2.5rem; border-radius: var(--border-rad); box-shadow: var(--shadow-sm);">
+                <h2>5. Reibung</h2>
+                <p>Reibungskräfte wirken immer der Bewegungsrichtung entgegen. Im Sport unterscheidet man primär:</p>
+                <div class="grid-cards">
+                    <div class="card">
+                        <h4>Haftreibung</h4>
+                        <p>Ermöglicht den Abdruck vom Boden. Im Sport wird sie oft <strong>künstlich maximiert</strong> (z. B. Spikes beim Sprint, Magnesia beim Turnen, Stollen bei Fußballschuhen).</p>
+                    </div>
+                    <div class="card" style="border-top-color: var(--secondary);">
+                        <h4 style="color: var(--secondary);">Gleitreibung</h4>
+                        <p>Entsteht, wenn zwei Körper aufeinander gleiten. Wird oft <strong>minimiert</strong> (z. B. Wachsen von Skiern für den Schnee, Eis beim Eisschnelllauf).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Abschnitt 6: Premium Transfer Box -->
+        <article class="premium-box">
+            <h2><span class="icon-star">🏆</span> Abitur-Transfer & Praxis</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 1rem;">
+                Wie dieses Wissen in der eA-Prüfung verlangt wird: In den materialgestützten Abituraufgaben wird reine Reproduktion kaum mit vielen Bewertungseinheiten (BE) belohnt. <strong>Es geht um die funktionale Bewegungsanalyse anhand von Bildreihen.</strong>
+            </p>
+
+            <h3 style="color: var(--white); border-left: 3px solid var(--transfer-gold); padding-left: 1rem;">Beispiel KSP & Gleichgewicht</h3>
+            <p style="margin-bottom: 1.5rem;">
+                Wenn du die Phasenstruktur eines Volleyball-Blocks (wie in der offiziellen Beispielaufgabe) analysierst, reicht es nicht zu erwähnen, dass der Spieler in die Knie geht. Du musst biomechanisch argumentieren: Der Spieler vollzieht ein <span class="highlight">"dynamisches Absenken des Körperschwerpunkts, um den Beschleunigungsweg für die Absprungbewegung und damit die Sprunghöhe zu vergrößern"</span>. Bei der Landung wiederum dient das Abfangen durch Beugung der Gelenke dem <span class="highlight">"Erreichen eines sicheren Gleichgewichtszustandes"</span>.
+            </p>
+
+            <h3 style="color: var(--white); border-left: 3px solid var(--transfer-gold); padding-left: 1rem;">Beispiel Trägheit & Gleichgewicht in Wurfdisziplinen</h3>
+            <p style="margin-bottom: 1.5rem;">
+                In der Endphase von Würfen (Speer, Diskus) musst du erklären können, warum der Athlet so abbremst: Die hohe <span class="highlight">Bewegungsträgheit</span> des Körpers muss nach dem Abwurf vernichtet werden, um ein stabiles Gleichgewicht wiederzuerlangen und ein Übertreten zu verhindern.
+            </p>
+
+            <div style="background: rgba(236, 201, 75, 0.1); padding: 1.5rem; border-radius: 8px; margin-top: 2rem; border: 1px dashed var(--transfer-gold);">
+                <strong style="color: var(--transfer-gold); display: block; margin-bottom: 0.5rem; background: none; padding: 0;">Fazit:</strong> 
+                Nutze die mechanischen Größen (KSP, Trägheit, Gleichgewicht) stets als Begründung für den Zweck einer Bewegung (z.B. <em>"Warum sind die Beine bei einer Pirouette angelegt?"</em> &rarr; Manipulation des Trägheitsmoments um die Längsachse).
+            </div>
+        </article>
+
+    </main>
+</div>
+
+<script>
+    // Canvas 1: Körperschwerpunkt (KSP) Darstellungen
+    const canvasKsp = document.getElementById('kspCanvas');
+    const ctx1 = canvasKsp.getContext('2d');
+
+    function drawStickman(ctx, x, y, pose) {
+        ctx.strokeStyle = '#2d3748';
+        ctx.lineWidth = 6;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        // Head
+        ctx.beginPath();
+        let headY = (pose === 'squat' ? y - 40 : (pose === 'flop' ? y + 20 : y - 90));
+        let headX = (pose === 'flop' ? x - 40 : x);
+        ctx.arc(headX, headY, 15, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        let kspX, kspY;
+
+        if (pose === 'stand') {
+            // Torso
+            ctx.moveTo(x, y - 75);
+            ctx.lineTo(x, y);
+            // Arms
+            ctx.moveTo(x, y - 60);
+            ctx.lineTo(x - 20, y - 10);
+            ctx.moveTo(x, y - 60);
+            ctx.lineTo(x + 20, y - 10);
+            // Legs
+            ctx.moveTo(x, y);
+            ctx.lineTo(x - 15, y + 70);
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + 15, y + 70);
+            
+            kspX = x; kspY = y - 10; // Belly
+        } 
+        else if (pose === 'squat') {
+            // Torso
+            ctx.moveTo(x, y - 25);
+            ctx.lineTo(x, y + 20);
+            // Arms
+            ctx.moveTo(x, y - 10);
+            ctx.lineTo(x - 30, y + 20);
+            ctx.moveTo(x, y - 10);
+            ctx.lineTo(x + 30, y + 20);
+            // Legs
+            ctx.moveTo(x, y + 20);
+            ctx.lineTo(x - 25, y + 20);
+            ctx.lineTo(x - 25, y + 70);
+            ctx.moveTo(x, y + 20);
+            ctx.lineTo(x + 25, y + 20);
+            ctx.lineTo(x + 25, y + 70);
+            
+            kspX = x; kspY = y + 25; // Lowered, between legs
+        }
+        else if (pose === 'flop') {
+            // Bar
+            ctx.strokeStyle = '#cbd5e0';
+            ctx.lineWidth = 8;
+            ctx.moveTo(x - 80, y - 10);
+            ctx.lineTo(x + 80, y - 10);
+            ctx.stroke();
+            
+            ctx.strokeStyle = '#2d3748';
+            ctx.lineWidth = 6;
+            // Torso arching
+            ctx.beginPath();
+            ctx.moveTo(x - 25, y + 15);
+            ctx.quadraticCurveTo(x, y - 40, x + 35, y + 5);
+            ctx.stroke();
+            
+            // Arms
+            ctx.beginPath();
+            ctx.moveTo(x - 10, y - 10);
+            ctx.lineTo(x - 20, y + 40);
+            ctx.stroke();
+            
+            // Legs
+            ctx.beginPath();
+            ctx.moveTo(x + 35, y + 5);
+            ctx.lineTo(x + 60, y - 30);
+            ctx.lineTo(x + 70, y + 10);
+            ctx.stroke();
+
+            kspX = x + 5; kspY = y + 15; // Below the arch/bar
+        }
+        
+        ctx.stroke();
+
+        // Draw KSP Point
+        ctx.fillStyle = '#e53e3e';
+        ctx.shadowColor = 'rgba(229, 62, 62, 0.6)';
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(kspX, kspY, 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0; // reset
+
+        // Label
+        ctx.fillStyle = '#4a5568';
+        ctx.font = '14px Inter';
+        ctx.textAlign = 'center';
+        let label = pose === 'stand' ? 'Aufrechter Stand' : (pose === 'squat' ? 'Tiefe Hocke' : 'Fosbury-Flop');
+        ctx.fillText(label, x, y + 110);
+    }
+
+    // Render Canvas 1
+    drawStickman(ctx1, 150, 150, 'stand');
+    drawStickman(ctx1, 400, 150, 'squat');
+    drawStickman(ctx1, 650, 150, 'flop');
+
+
+    // Canvas 2: Körperachsen (3D Abstrakt)
+    const canvasAchsen = document.getElementById('achsenCanvas');
+    const ctx2 = canvasAchsen.getContext('2d');
+    
+    const centerX = 300;
+    const centerY = 200;
+
+    // Draw abstract body cylinder
+    ctx2.fillStyle = '#edf2f7';
+    ctx2.strokeStyle = '#cbd5e0';
+    ctx2.lineWidth = 2;
+    
+    // Head
+    ctx2.beginPath();
+    ctx2.arc(centerX, centerY - 100, 25, 0, Math.PI*2);
+    ctx2.fill();
+    ctx2.stroke();
+
+    // Torso
+    ctx2.beginPath();
+    ctx2.roundRect(centerX - 40, centerY - 60, 80, 140, 20);
+    ctx2.fill();
+    ctx2.stroke();
+
+    // Arms & Legs abstract
+    ctx2.beginPath();
+    ctx2.roundRect(centerX - 70, centerY - 50, 20, 100, 10);
+    ctx2.roundRect(centerX + 50, centerY - 50, 20, 100, 10);
+    ctx2.roundRect(centerX - 35, centerY + 90, 25, 110, 10);
+    ctx2.roundRect(centerX + 10, centerY + 90, 25, 110, 10);
+    ctx2.fill();
+    ctx2.stroke();
+
+    // Center of Mass Dot
+    ctx2.fillStyle = '#2d3748';
+    ctx2.beginPath();
+    ctx2.arc(centerX, centerY, 5, 0, Math.PI*2);
+    ctx2.fill();
+
+    function drawArrow(ctx, fromx, fromy, tox, toy, color, text) {
+        const headlen = 10; 
+        const dx = tox - fromx;
+        const dy = toy - fromy;
+        const angle = Math.atan2(dy, dx);
+        
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(fromx, fromy);
+        ctx.lineTo(tox, toy);
+        ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+        ctx.moveTo(tox, toy);
+        ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+        ctx.stroke();
+
+        ctx.fillStyle = color;
+        ctx.font = 'bold 14px Inter';
+        if(tox > fromx && dy === 0) { ctx.textAlign = 'left'; ctx.fillText(text, tox + 10, toy + 5); } // X
+        else if (toy < fromy) { ctx.textAlign = 'center'; ctx.fillText(text, tox, toy - 10); } // Z
+        else { ctx.textAlign = 'left'; ctx.fillText(text, tox + 10, toy + 10); } // Y
+    }
+
+    // Draw Axes
+    // Z-Axis (Longitudinal) - Blue
+    drawArrow(ctx2, centerX, centerY + 120, centerX, centerY - 150, '#3182ce', 'Längsachse (Z)');
+    
+    // X-Axis (Transversal) - Red
+    drawArrow(ctx2, centerX - 120, centerY, centerX + 140, centerY, '#e53e3e', 'Breitenachse (X)');
+    
+    // Y-Axis (Sagittal) - Green (drawn with perspective)
+    drawArrow(ctx2, centerX + 60, centerY - 60, centerX - 100, centerY + 100, '#38a169', 'Tiefenachse (Y)');
+
+</script>
+</body>
+</html>

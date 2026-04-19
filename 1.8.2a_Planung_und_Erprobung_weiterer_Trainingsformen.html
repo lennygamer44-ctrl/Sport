@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Planung und Erprobung weiterer Trainingsformen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: 'Chakra Petch' for tactical/dashboard headers, 'Inter' for precision reading -->
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Chakra Petch', 'sans-serif'],
+                    },
+                    colors: {
+                        tactical: {
+                            900: '#0b0f19', // Deep dark blue/slate
+                            800: '#111827',
+                            700: '#1f2937',
+                            600: '#374151',
+                        },
+                        psy: {
+                            400: '#a78bfa', // Violet for mental
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                        },
+                        warmup: {
+                            400: '#fb923c', // Orange for Tonisierung
+                            500: '#f97316',
+                        },
+                        cooldown: {
+                            400: '#38bdf8', // Cyan for Detonisierung
+                            500: '#0ea5e9',
+                        },
+                        alert: '#ef4444', // Red for DOMS warning
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                        }
+                    },
+                    boxShadow: {
+                        'dash': '0 4px 20px -2px rgba(0, 0, 0, 0.5)',
+                        'glow-psy': '0 0 20px rgba(139, 92, 246, 0.3)',
+                        'glow-warmup': '0 0 20px rgba(249, 115, 22, 0.3)',
+                        'glow-cooldown': '0 0 20px rgba(14, 165, 233, 0.3)',
+                        'glow-abitur': '0 0 40px rgba(245, 158, 11, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #e5e7eb;
+            -webkit-font-smoothing: antialiased;
+            /* Tactical grid background */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center center;
+        }
+
+        /* Dashboard Cards */
+        .dash-card {
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .dash-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Tactical Accents */
+        .border-t-psy { border-top: 3px solid #8b5cf6; }
+        .border-l-warmup { border-left: 3px solid #f97316; }
+        .border-l-cooldown { border-left: 3px solid #0ea5e9; }
+        .border-t-alert { border-top: 3px solid #ef4444; }
+
+        /* Data Table (KI 2) */
+        .data-grid {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #111827;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid #374151;
+        }
+        .data-grid th {
+            background: #1f2937;
+            color: #f3f4f6;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 2px solid #4b5563;
+        }
+        .data-grid td {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+            font-size: 0.95rem;
+        }
+        .data-grid tr:last-child td { border-bottom: none; }
+        .data-grid tr:hover td { background: rgba(255,255,255,0.02); }
+
+        /* Canvas Wrapper */
+        .monitor-wrapper {
+            background: #000000;
+            border-radius: 1rem;
+            border: 1px solid #374151;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Scanline effect for monitor */
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+            position: absolute;
+            pointer-events: none;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(139, 92, 246, 0.1) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.5;
+            animation: scanline 6s linear infinite;
+        }
+        @keyframes scanline {
+            0% { top: -100px; }
+            100% { top: 100%; }
+        }
+
+        /* Abitur Dossier */
+        .abitur-dossier {
+            background: linear-gradient(145deg, #18181b 0%, #000000 100%);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-top: 4px solid #f59e0b;
+            position: relative;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0f19; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+    </style>
+</head>
+<body class="leading-relaxed py-10 px-4 sm:px-6">
+
+    <div class="max-w-6xl mx-auto space-y-12">
+        
+        <!-- Header -->
+        <header class="dash-card p-8 md:p-12 relative shadow-dash border-t-2 border-t-slate-500">
+            <!-- Decorative Tech Elements -->
+            <div class="absolute top-4 right-6 flex gap-2">
+                <div class="w-3 h-3 rounded-full bg-psy-500 animate-pulse"></div>
+                <div class="w-3 h-3 rounded-full bg-warmup-500 animate-pulse" style="animation-delay: 0.3s"></div>
+                <div class="w-3 h-3 rounded-full bg-cooldown-500 animate-pulse" style="animation-delay: 0.6s"></div>
+            </div>
+
+            <div class="flex items-center gap-3 mb-6 relative z-10">
+                <span class="bg-slate-800 text-white font-bold px-3 py-1 text-sm tracking-widest font-display rounded border border-slate-600">ID: 1.8.2a</span>
+                <span class="text-slate-400 font-bold tracking-widest text-xs uppercase">Tactical Planning & Implementation</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold uppercase tracking-tight text-white mb-6 leading-tight">
+                Planung & Erprobung <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-psy-400 to-cooldown-400">erweiterter Trainingsformen</span>
+            </h1>
+            
+            <div class="max-w-4xl border-l-4 border-slate-600 pl-6">
+                <p class="text-lg text-slate-300 font-medium leading-relaxed mb-4">
+                    Obwohl Methoden wie das fFaszientraining oder das Mentale Training als "Erweiterungen" der klassischen Trainingslehre gelten, erfordert ihre Integration in den Trainingsalltag (Makro- und Mikrozyklus) eine <strong class="text-white">ebenso präzise sportbiologische und methodische Planung</strong> wie ein Maximalkrafttraining.
+                </p>
+                <div class="inline-block bg-alert/10 text-alert px-4 py-2 rounded text-sm font-bold border border-alert/20">
+                    ⚠️ Werden diese Trainingsformen isoliert und ohne physiologischen Kontext erprobt, verfehlen sie ihre Wirkung oder wirken leistungsmindernd.
+                </div>
+            </div>
+        </header>
+
+        <!-- Section 1: Mentales Training -->
+        <section>
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-psy-500/20 text-psy-400 w-12 h-12 flex items-center justify-center rounded-lg border border-psy-500/30 shadow-glow-psy">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-display font-bold text-white uppercase tracking-wide">1. Mentales Training <span class="text-sm text-slate-500 tracking-normal normal-case block md:inline md:ml-2">Neurophysiologische Planung</span></h2>
+            </div>
+            
+            <p class="text-slate-400 mb-8 text-base">
+                Die praktische Umsetzung des ideomotorischen Trainings erfordert spezifische Rahmenbedingungen. Das Gehirn kann den <em>Carpenter-Effekt</em> nur optimal einspeichern, wenn Störreize minimiert werden und das ZNS eine optimale Erregungslage aufweist.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Phase 1 -->
+                <div class="dash-card p-6 border-t-psy">
+                    <h3 class="font-display font-bold text-white text-lg mb-2 flex items-center gap-2">
+                        <span class="text-psy-400">01.</span> Vorbereitung
+                    </h3>
+                    <div class="text-xs text-psy-400 uppercase tracking-widest mb-3">Psychoregulation</div>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        Vorab muss der Sympathikustonus (Stressachse) gesenkt werden (z.B. durch PMR). Ziel: Das Gehirn in den <strong>Alpha-Zustand</strong> versetzen (verlangsamte Hirnströme, tiefe Entspannung + Wachheit). Hier ist die Aufnahmefähigkeit für kinästhetische Vorstellungen am höchsten.
+                    </p>
+                </div>
+                <!-- Phase 2 -->
+                <div class="dash-card p-6 border-t-psy">
+                    <h3 class="font-display font-bold text-white text-lg mb-2 flex items-center gap-2">
+                        <span class="text-psy-400">02.</span> Hauptphase
+                    </h3>
+                    <div class="text-xs text-psy-400 uppercase tracking-widest mb-3">Knotenpunkte</div>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        Keine minutenlangen Abläufe (kognitive Überlastung)! Fokus auf <strong>biomechanische Knotenpunkte</strong> (z.B. Fußaufsatz beim Weitsprung). Erprobung muss zwingend aus der <em>Innenperspektive</em> erfolgen, um motorische Leitungsbahnen zu aktivieren.
+                    </p>
+                </div>
+                <!-- Phase 3 -->
+                <div class="dash-card p-6 border-t-psy">
+                    <h3 class="font-display font-bold text-white text-lg mb-2 flex items-center gap-2">
+                        <span class="text-psy-400">03.</span> Integration
+                    </h3>
+                    <div class="text-xs text-psy-400 uppercase tracking-widest mb-3">Timing im Zyklus</div>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        Primärer Einsatz in der <strong>Tapering-Phase</strong> (vor dem Wettkampf), wenn physisches Training zur Schonung reduziert wird. Ebenfalls Methode der Wahl in der <strong>Rehabilitation</strong>, um Technikabbau (Engramm-Verlust) zu verhindern.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Monitor Canvas -->
+            <div class="monitor-wrapper p-6">
+                <div class="scanline"></div>
+                <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3 relative z-20">
+                    <h4 class="text-lg font-display font-bold text-white">Neuro-State Tracker</h4>
+                    <span class="text-xs font-mono text-psy-400 bg-psy-900/30 px-2 py-1 rounded border border-psy-500/30">EEG SIMULATION</span>
+                </div>
+                <canvas id="neuroCanvas" class="w-full h-[250px] relative z-20"></canvas>
+                <div class="mt-3 text-center text-xs text-slate-500 font-mono">Visualisierung: Absenkung in den Alpha-Zustand & isolierter Ausschlag bei Visualisierung eines Knotenpunkts.</div>
+            </div>
+        </section>
+
+        <!-- Section 2: Faszientraining (SMR) -->
+        <section class="mt-16">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-slate-800 text-slate-300 w-12 h-12 flex items-center justify-center rounded-lg border border-slate-600 shadow-dash">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-display font-bold text-white uppercase tracking-wide">2. Faszientraining (SMR) <span class="text-sm text-slate-500 tracking-normal normal-case block md:inline md:ml-2">Biomechanische Vorgaben</span></h2>
+            </div>
+            
+            <p class="text-slate-400 mb-8 text-base max-w-4xl">
+                Die Anwendung der Faszienrolle (Self-Myofascial Release) unterliegt strengen biomechanischen und neurophysiologischen Vorgaben, die sich je nach Trainingsziel <strong class="text-white">diametral unterscheiden</strong>.
+            </p>
+
+            <!-- KI 2 Data Table Task -->
+            <div class="shadow-dash mb-12">
+                <div class="bg-slate-800 px-6 py-4 flex items-center justify-between border-b border-slate-600 rounded-t-xl">
+                    <h3 class="font-display text-lg tracking-wider text-white">Einsatzprotokoll: Faszienrolle</h3>
+                </div>
+                <div class="overflow-x-auto rounded-b-xl">
+                    <table class="data-grid">
+                        <thead>
+                            <tr>
+                                <th class="w-1/4">Trainingsphase</th>
+                                <th class="w-1/4">Roll-Geschwindigkeit</th>
+                                <th class="w-1/4">Roll-Richtung</th>
+                                <th class="w-1/4">Neurophysiologischer Effekt</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <!-- Warm-up -->
+                            <tr>
+                                <td class="border-l-warmup bg-slate-900/50">
+                                    <strong class="text-warmup-400 block text-lg font-display mb-1">Warm-up</strong>
+                                    <span class="text-xs text-slate-500 uppercase tracking-wide">Tonisierung</span>
+                                </td>
+                                <td>
+                                    <span class="bg-white/10 text-white px-2 py-1 rounded text-xs font-bold mb-2 inline-block">Schnell & zügig</span><br>
+                                    Erzeugt schnelle mechanische Reibung im Gewebe.
+                                </td>
+                                <td>
+                                    <span class="bg-white/10 text-white px-2 py-1 rounded text-xs font-bold mb-2 inline-block">Multidirektional</span><br>
+                                    Flüssigkeit wird in alle Richtungen aus Faszien gepresst und gesaugt (Viskosität sinkt).
+                                </td>
+                                <td>
+                                    <strong class="text-warmup-400 block mb-1">Sympathikusaktivierung</strong>
+                                    Stimuliert <em>Pacini-Körperchen</em>. Der Muskeltonus wird für die Belastung erhöht.
+                                </td>
+                            </tr>
+                            <!-- Cool-down -->
+                            <tr>
+                                <td class="border-l-cooldown bg-slate-900/30">
+                                    <strong class="text-cooldown-400 block text-lg font-display mb-1">Cool-down</strong>
+                                    <span class="text-xs text-slate-500 uppercase tracking-wide">Detonisierung / Reha</span>
+                                </td>
+                                <td>
+                                    <span class="bg-white/10 text-white px-2 py-1 rounded text-xs font-bold mb-2 inline-block">Sehr langsam</span><br>
+                                    Extrem langsames, "schmelzendes" Ausrollen mit hohem mechanischen Druck.
+                                </td>
+                                <td>
+                                    <span class="bg-white/10 text-white px-2 py-1 rounded text-xs font-bold mb-2 inline-block border border-cooldown-500/50">Zwingend herzwärts!</span><br>
+                                    Richtung Körpermitte. Unterstützt venösen Rückstrom/Lymphe, schützt Venenklappen.
+                                </td>
+                                <td>
+                                    <strong class="text-cooldown-400 block mb-1">Parasympathikusaktivierung</strong>
+                                    Stimuliert <em>Ruffini-Endigungen</em>. Muskelruhetonus sinkt massiv, Regeneration startet.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Evaluation & Grenzen -->
+        <section class="mt-16">
+            <div class="dash-card border-t-alert p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <svg class="w-8 h-8 text-alert" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    <h3 class="text-2xl font-display font-bold text-white">3. Evaluation & Grenzen (DOMS)</h3>
+                </div>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Bei der Erprobung muss eine stetige kritische Evaluation stattfinden. Faszientraining ersetzt <strong>kein Abwärmen</strong> (aktive Erholung durch leichtes Laufen).
+                </p>
+                <div class="bg-alert/10 border border-alert/30 p-4 rounded-lg">
+                    <strong class="text-alert block mb-1">Kontraindikation: Schwerer Muskelkater (DOMS) & Zerrungen</strong>
+                    <p class="text-sm text-slate-200">
+                        Bei bestehendem Muskelkater liegen Mikrotraumata (feinste Risse in den Z-Scheiben der Sarkomere) vor. Der Einsatz der harten Faszienrolle mit starkem mechanischem Druck ist hier <strong>strengstens kontraindiziert</strong>! Es würde die bestehenden Risse weiter aufreißen und Entzündungsprozesse massiv verschlimmern.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Abitur Premium Transfer Box -->
+        <section class="abitur-dossier rounded-2xl p-8 md:p-12 shadow-glow-abitur mt-20 relative overflow-hidden z-10">
+            <!-- Background Graphic -->
+            <svg class="absolute right-[-5%] top-[-10%] w-[400px] h-[400px] opacity-10 text-abitur transform -rotate-12 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b border-slate-700 pb-8">
+                    <div class="bg-gradient-to-br from-yellow-500 to-red-600 text-tactical-900 p-4 rounded-xl shadow-lg">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-display font-bold text-white tracking-tight mb-2">Abitur-Transfer & Praxis</h2>
+                        <div class="inline-flex items-center gap-3">
+                            <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider font-mono">eA-Niveau</span>
+                            <span class="text-abitur font-medium text-lg">Fehleranalysen im Mikrozyklus</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-lg text-slate-300 font-medium mb-10 leading-relaxed max-w-4xl">
+                    Obwohl der Lehrplan den reinen Wissensumfang hier als "gering" einstuft, wird die Thematik in den eA-Klausuren extrem gerne als <strong class="text-white">"Stolperfalle" in Fehleranalysen</strong> eingebaut.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- Fallstudie 1 -->
+                    <div class="bg-tactical-900/80 p-6 md:p-8 rounded-xl border border-slate-700 hover:border-abitur/50 transition-colors">
+                        <h3 class="text-xl font-display font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-abitur text-2xl">A</span> Tagebuch-Demontage
+                        </h3>
+                        <div class="bg-slate-800 p-4 rounded text-sm text-slate-400 mb-4 font-mono border-l-2 border-alert">
+                            <strong>Eintrag Athlet:</strong> "Nach dem extremen Maximalkrafttraining am Mittwoch habe ich meine schmerzenden Oberschenkel 20 Min. mit maximalem Druck & sehr schnell mit der Faszienrolle massiert, um Muskelkater vorzubeugen."
+                        </div>
+                        <strong class="text-abitur block mb-2 uppercase tracking-wide text-sm">Deine Sportbiologische Analyse:</strong>
+                        <ul class="text-sm text-slate-300 leading-relaxed space-y-2 list-disc pl-4">
+                            <li>Nach Maximalkraft liegen Mikrotraumata vor &rarr; <strong>Starker Druck kontraindiziert!</strong></li>
+                            <li>"Schnelles Rollen" ist methodisch falsch. Es stimuliert den Sympathikus und <strong>erhöht den Muskeltonus</strong>.</li>
+                            <li>Gewünscht zur Einleitung der Regeneration (Parasympathikus) wäre extrem langsames, detonisierendes Rollen gewesen.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Fallstudie 2 -->
+                    <div class="bg-tactical-900/80 p-6 md:p-8 rounded-xl border border-slate-700 hover:border-abitur/50 transition-colors">
+                        <h3 class="text-xl font-display font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-abitur text-2xl">B</span> Mentales Training evaluieren
+                        </h3>
+                        <div class="bg-slate-800 p-4 rounded text-sm text-slate-400 mb-4 font-mono border-l-2 border-psy-500">
+                            <strong>Fallstudie:</strong> Eine Turnerin steht vor ihrem Sprung sekundenlang mit geschlossenen Augen da und weist minimale Muskelzuckungen auf.
+                        </div>
+                        <strong class="text-abitur block mb-2 uppercase tracking-wide text-sm">Deine Wissenschaftliche Einordnung:</strong>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-2">
+                            Identifiziere dies klar als <strong>ideomotorisches Training</strong> (nicht als "Meditation").
+                        </p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Begründe, dass sie hier den <strong>Carpenter-Effekt</strong> (ideomotorisches Prinzip) nutzt, um die komplexen intermuskulären Koordinationsmuster durch subliminale Aktionspotenziale unmittelbar vor der Ausführung neuronal freizuschalten.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="mt-16 pt-8 pb-12 border-t border-slate-800 text-center relative z-10">
+        <p class="font-display font-bold text-slate-500 tracking-widest text-sm mb-1 uppercase">Abiturwissen Sport (G9, eA)</p>
+        <p class="text-slate-600 font-sans text-sm">Lernbereich 1.8.2a Planung und Erprobung weiterer Trainingsformen</p>
+    </footer>
+
+    <!-- Interactive Canvas Logic: Neuro-State Tracker -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('neuroCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let time = 0;
+            const points = new Array(200).fill(0); // Store Y values
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time += 1;
+
+                // Cycle logic: 
+                // 0-300: Beta (Stress, chaotic)
+                // 300-600: Alpha (PMR, smooth, calm)
+                // 600-900: Visualization (Alpha with sharp, isolated node spikes)
+                
+                const cycle = time % 900;
+                let phase = '';
+                let color = '';
+                let amp = 0;
+                let freq = 0;
+                let addSpike = false;
+
+                if (cycle < 300) {
+                    phase = 'BETA-WELLEN (Alltag/Stress)';
+                    color = '#ef4444'; // Red
+                    amp = 30 + Math.random() * 20;
+                    freq = 0.5;
+                } else if (cycle < 600) {
+                    phase = 'ALPHA-ZUSTAND (PMR Entspannung)';
+                    color = '#38bdf8'; // Cyan
+                    amp = 15;
+                    freq = 0.1;
+                } else {
+                    phase = 'IDEOMOTORIK (Knotenpunkt visualisiert)';
+                    color = '#a855f7'; // Purple
+                    amp = 10;
+                    freq = 0.05;
+                    // Trigger sharp spike every ~60 frames
+                    if (cycle % 60 > 55) {
+                        addSpike = true;
+                    }
+                }
+
+                // Generate new point
+                let yVal = Math.sin(time * freq) * amp;
+                if (cycle < 300) yVal += (Math.random() - 0.5) * 30; // Add noise to Beta
+                if (addSpike) yVal -= 80; // Sharp spike up
+
+                points.push(yVal);
+                points.shift();
+
+                // Draw Grid
+                ctx.strokeStyle = '#1f2937';
+                ctx.lineWidth = 1;
+                for(let i=0; i<w; i+=40) {
+                    ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, h); ctx.stroke();
+                }
+                for(let i=0; i<h; i+=40) {
+                    ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(w, i); ctx.stroke();
+                }
+
+                // Draw Line
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 3;
+                ctx.shadowColor = color;
+                ctx.shadowBlur = 10;
+
+                const sliceW = w / (points.length - 1);
+                const midY = h / 2 + 20;
+
+                for (let i = 0; i < points.length; i++) {
+                    const px = i * sliceW;
+                    const py = midY + points[i];
+                    if (i === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                // Draw leading dot
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(w - sliceW, midY + points[points.length-1], 4, 0, Math.PI*2);
+                ctx.fill();
+
+                // Draw Status HUD
+                ctx.fillStyle = 'rgba(0,0,0,0.5)';
+                ctx.fillRect(10, 10, 300, 40);
+                
+                ctx.fillStyle = color;
+                ctx.font = 'bold 14px "Chakra Petch"';
+                ctx.textAlign = 'left';
+                ctx.fillText("ZNS STATUS: " + phase, 20, 35);
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

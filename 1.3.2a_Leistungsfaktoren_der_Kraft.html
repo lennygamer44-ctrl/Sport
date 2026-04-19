@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.3.2a Leistungsfaktoren der Kraft - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Neural Network / Cybernetics */
+            --bg-deep: #05050a;        /* Pitch black background */
+            --bg-card: #11111a;        /* Dark slate card */
+            --bg-surface: #1a1a24;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            /* Category Colors */
+            --color-morph: #ff3366;    /* Hypertrophy Red/Pink */
+            --color-neuro: #00f0ff;    /* Electric Cyan */
+            --color-psycho: #eab308;   /* Biomech/Psycho Yellow */
+            
+            --abi-bg: #1e1b4b;
+            --abi-accent: #a855f7;     /* Purple for Exam Transfer */
+            
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            
+            --glow-morph: 0 0 20px rgba(255, 51, 102, 0.15);
+            --glow-neuro: 0 0 20px rgba(0, 240, 255, 0.15);
+            --glow-psycho: 0 0 20px rgba(234, 179, 8, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            /* Cyber grid background */
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        h1, h2, h3, h4, .cyber-font {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            background: radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--color-morph) 0%, var(--color-neuro) 50%, var(--color-psycho) 100%);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        .hero-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-neuro);
+            padding: 0.4rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--glow-neuro);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 850px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* --- Intro Block --- */
+        .intro-box {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: var(--radius-md);
+            margin: 4rem auto;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Section Titles --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 6rem 0 3rem;
+        }
+
+        .section-num {
+            color: var(--bg-deep);
+            background: var(--text-main);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: white;
+            margin: 0;
+        }
+
+        /* --- 1. Morphologische Faktoren --- */
+        .morph-section {
+            border-left: 4px solid var(--color-morph);
+            padding-left: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .morph-section .section-num { background: var(--color-morph); box-shadow: var(--glow-morph); }
+        .morph-section h2 { color: var(--color-morph); }
+
+        .factor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 800px) {
+            .factor-grid { grid-template-columns: 1fr; }
+        }
+
+        .factor-card {
+            background: var(--bg-surface);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: transform 0.3s ease;
+        }
+
+        .factor-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .factor-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .factor-card p {
+            color: var(--text-muted);
+        }
+
+        .highlight-morph { color: var(--color-morph); font-weight: bold; }
+        .highlight-neuro { color: var(--color-neuro); font-weight: bold; }
+
+        /* --- 2. Neuronale Faktoren --- */
+        .neuro-section {
+            border-left: 4px solid var(--color-neuro);
+            padding-left: 2rem;
+            margin-bottom: 5rem;
+            background: radial-gradient(circle at 0% 50%, rgba(0, 240, 255, 0.05), transparent 50%);
+        }
+
+        .neuro-section .section-num { background: var(--color-neuro); box-shadow: var(--glow-neuro); }
+        .neuro-section h2 { color: var(--color-neuro); }
+        
+        .neuro-intro {
+            font-size: 1.3rem;
+            font-family: 'Space Grotesk', sans-serif;
+            color: white;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(0, 240, 255, 0.05);
+            border-radius: 8px;
+            border-left: 2px solid var(--color-neuro);
+        }
+
+        .ik-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .ik-item {
+            background: var(--bg-card);
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+
+        @media (min-width: 768px) {
+            .ik-item { flex-direction: row; align-items: center; gap: 2rem; }
+            .ik-item h4 { flex: 0 0 200px; margin-bottom: 0; }
+        }
+
+        .ik-item h4 {
+            color: var(--color-neuro);
+            font-size: 1.2rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .ik-item p { color: var(--text-muted); }
+
+        .inter-card {
+            background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-card) 100%);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            margin-top: 2.5rem;
+            border-left: 4px solid #818cf8;
+        }
+
+        /* --- 3. Psychologische & Biomech --- */
+        .psycho-section {
+            border-left: 4px solid var(--color-psycho);
+            padding-left: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .psycho-section .section-num { background: var(--color-psycho); box-shadow: var(--glow-psycho); color: var(--bg-deep); }
+        .psycho-section h2 { color: var(--color-psycho); }
+
+        /* --- Canvas Mindmap --- */
+        .canvas-section {
+            background: #000;
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid #1f2937;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        .canvas-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            background: var(--bg-deep);
+        }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-prep {
+            background: linear-gradient(135deg, var(--abi-bg), #0f0a1f);
+            color: #e2e8f0;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-prep::before {
+            content: 'TRANSFER';
+            position: absolute;
+            font-size: 8rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: rgba(168, 85, 247, 0.03);
+            top: -20px;
+            right: 0;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-accent);
+            color: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 900;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #d8b4fe;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .abi-card {
+            background: rgba(0,0,0,0.3);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-accent);
+        }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+        .abi-card p:last-child { margin-bottom: 0; }
+
+        .hl-purple { color: #d8b4fe; font-weight: 700; }
+        .hl-white { color: white; font-weight: 700; }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="hero-tag">Lernbereich 1.3.2a</span>
+            <h1>Leistungsfaktoren der Kraft</h1>
+            <p>Die determinierenden Bausteine der Muskelkraft: Morphologie, neuronale Steuerung, Psychologie und Biomechanik.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-box">
+            Die willkürliche Muskelkraft eines Athleten ist keine isolierte, einfache Eigenschaft, sondern das komplexe Endprodukt aus dem Zusammenspiel von Morphologie (Körperbau), dem zentralen Nervensystem und biomechanischen Hebelverhältnissen. Um Kraftleistungen (wie die Maximalkraft oder Schnellkraft) zu analysieren und gezielt zu trainieren, unterteilt die Sportbiologie die determinierenden (leistungsbestimmenden) Faktoren in drei Hauptkategorien.
+        </div>
+
+        <!-- Section 1: Morphologie -->
+        <div class="morph-section">
+            <div class="section-header" style="margin-top: 0;">
+                <div class="section-num">1</div>
+                <h2 class="cyber-font">Morphologische (strukturelle) Faktoren</h2>
+            </div>
+            <p style="margin-bottom: 2rem; color: var(--text-muted);">Diese Faktoren betreffen den physischen, mikroskopischen Aufbau der Muskulatur:</p>
+
+            <div class="factor-grid">
+                <div class="factor-card">
+                    <h3 class="cyber-font" style="color: var(--color-morph);">Muskelquerschnitt (Hypertrophie)</h3>
+                    <p>Dies ist der offensichtlichste Faktor. Je größer der physiologische Querschnitt eines Muskels ist, desto mehr Myofibrillen und Sarkomere (mit Aktin- und Myosinfilamenten) liegen parallel nebeneinander.</p>
+                    <p style="margin-top: 0.5rem;"><span class="highlight-morph">Mehr parallel geschaltete kontraktile Elemente</span> bedeuten zwingend, dass simultan mehr Querbrückenzyklen stattfinden können, was die generierbare Maximalkraft direkt proportional erhöht.</p>
+                </div>
+                <div class="factor-card">
+                    <h3 class="cyber-font" style="color: var(--color-morph);">Muskelfaserspektrum</h3>
+                    <p>Die genetisch determinierte Verteilung der Muskelfasertypen bestimmt das Kraftpotenzial massiv. Eine hohe Maximalkraft und extrem hohe Schnellkraft (z. B. 100-m-Sprint) erfordern einen dominierenden <span class="highlight-morph">Anteil an FT-Fasern</span> (Fast-Twitch), da diese einen dickeren Querschnitt besitzen und deutlich schneller und kräftiger kontrahieren können als ST-Fasern.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Neuronale Faktoren -->
+        <div class="neuro-section">
+            <div class="section-header" style="margin-top: 0;">
+                <div class="section-num">2</div>
+                <h2 class="cyber-font">Neuronale Faktoren</h2>
+            </div>
+            
+            <div class="neuro-intro">
+                ⚡ Kraft entsteht im Gehirn! Selbst der dickste Muskel ist wertlos, wenn das zentrale Nervensystem (ZNS) ihn nicht optimal ansteuern kann.
+            </div>
+
+            <h3 class="cyber-font" style="color: white; font-size: 1.6rem; margin-bottom: 0.5rem;">Intramuskuläre Koordination (IK)</h3>
+            <p style="color: var(--text-muted);">Das Nerven-Muskel-Zusammenspiel innerhalb eines <em>einzigen</em> Muskels. Sie definiert, wie viele motorische Einheiten der Muskel gleichzeitig aktivieren kann. Sie wird durch drei Prozesse gesteuert:</p>
+
+            <div class="ik-grid">
+                <div class="ik-item">
+                    <h4>Rekrutierung</h4>
+                    <p>Die Fähigkeit, möglichst viele motorische Einheiten (insbesondere die schwerschwelligen, starken FT-Fasern nach dem Henneman'schen Größenprinzip) überhaupt in den Kontraktionsprozess einzubeziehen. Untrainierte rekrutieren ca. 60–70%, Leistungssportler bis zu 90%.</p>
+                </div>
+                <div class="ik-item">
+                    <h4>Frequenzierung</h4>
+                    <p>Die Erhöhung der Entladungsfrequenz (Aktionspotenziale pro Sekunde) der Motoneurone. Je höher die Frequenz, desto mehr Calcium wird ausgeschüttet, was eine maximale, lückenlose Querbrückenbildung (Tetanus) erzwingt.</p>
+                </div>
+                <div class="ik-item">
+                    <h4>Synchronisation</h4>
+                    <p>Das exakt gleichzeitige "Abfeuern" der motorischen Einheiten. Dies ist der <span class="highlight-neuro">absolut limitierende Faktor für die Explosivkraft</span> (die maximale Kraftanstiegsgeschwindigkeit).</p>
+                </div>
+            </div>
+
+            <div class="inter-card">
+                <h3 class="cyber-font" style="color: #818cf8; margin-bottom: 0.5rem; font-size: 1.6rem;">Intermuskuläre Koordination</h3>
+                <p style="color: var(--text-muted);">Das harmonische Zusammenspiel <em>verschiedener</em> Muskeln bei einem Bewegungsablauf. Ein optimaler Krafteinsatz erfordert, dass der arbeitende Muskel (Agonist) und seine Unterstützer (Synergisten) perfekt kontrahieren, während der Gegenspieler (Antagonist) im exakt richtigen Moment entspannt (reziproke Hemmung), um die Bewegung nicht durch innere Reibung zu bremsen.</p>
+            </div>
+        </div>
+
+        <!-- Section 3: Weitere Faktoren -->
+        <div class="psycho-section">
+            <div class="section-header" style="margin-top: 0;">
+                <div class="section-num">3</div>
+                <h2 class="cyber-font">Psychologische & Biomechanische Faktoren</h2>
+            </div>
+            
+            <div class="factor-grid">
+                <div class="factor-card" style="border-left: 4px solid var(--color-psycho);">
+                    <h3 class="cyber-font" style="color: var(--color-psycho);">Volition (Willenskraft) & Motivation</h3>
+                    <p>Die <em>absolute Maximalkraft</em> kann willkürlich meist nicht erreicht werden, da autonome Schutzreflexe (z. B. Golgi-Sehnenorgane) den Muskel vor dem Reißen bewahren. Nur unter extremer psychischer Anspannung, Todesangst (oder Doping) kann die autonom geschützte Reserve mobilisiert werden.</p>
+                </div>
+                <div class="factor-card" style="border-left: 4px solid var(--color-psycho);">
+                    <h3 class="cyber-font" style="color: var(--color-psycho);">Biomechanik (Hebel & Vordehnung)</h3>
+                    <p>Die Kraftausbeute hängt immer vom aktuellen Gelenkwinkel ab (Kraft-Winkel-Kurve) sowie von einer optimalen exzentrischen Vordehnung, die im <strong>Dehnungs-Verkürzungs-Zyklus (DVZ)</strong> zusätzliche gespeicherte elastische Energie für die Schnellkraft bereitstellt.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Canvas Mindmap -->
+        <section class="canvas-section">
+            <h2 class="cyber-font">Strukturbaum: Die Leistungsdeterminanten</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Interaktive Mindmap. Beobachte den Fluss der neuronalen Impulse durch die Hauptkategorien.</p>
+            
+            <div class="canvas-container">
+                <canvas id="mindmapCanvas" width="1200" height="550"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2 class="cyber-font">Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                In Klausuren auf erhöhtem Anforderungsniveau (eA) sind diese Faktoren der Schlüssel, um Krafttrainingsmethoden und deren Sinnhaftigkeit für spezifische Sportarten biologisch zu evaluieren. <strong>Pures Aufzählen gibt keine Punkte, du musst sie in Kausalzusammenhänge setzen!</strong>
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card">
+                    <h3 class="cyber-font">🏋️♂️ vs 🦘 Das "Bodybuilder vs. Hochspringer"-Paradoxon</h3>
+                    <p>Eine klassische Transferaufgabe fragt, warum ein Hochspringer nicht einfach wie ein Bodybuilder trainiert, um seine Sprungkraft zu maximieren. <strong>Hier musst du die Leistungsfaktoren trennen!</strong></p>
+                    <p style="margin-top:1rem;">Du argumentierst: Ein Bodybuilder trainiert primär den <span class="hl-purple">morphologischen Faktor (Muskelquerschnitt/Hypertrophie)</span>. Das bringt zwar absolute Kraft, erhöht aber auch massiv das eigene Körpergewicht. Für einen Hochspringer (oder Kugelstoßer) ist dies kontraproduktiv. Er muss seine Relative Kraft maximieren.</p>
+                    <p style="margin-top:1rem;">Daher fokussiert er sich auf die <span class="hl-white">neuronalen Faktoren (intramuskuläre Koordination)</span>: Er trainiert darauf, seine vorhandenen Myofibrillen durch maximale <strong>Rekrutierung, Frequenzierung und Synchronisation</strong> der FT-Fasern explosiv anzusteuern, ohne dabei an schwerer Muskelmasse zuzunehmen.</p>
+                </div>
+
+                <div class="abi-card" style="border-left-color: #38bdf8;">
+                    <h3 class="cyber-font" style="color: #38bdf8;">📉 Plateau-Diagnostik</h3>
+                    <p>Wenn dir in einer materialgestützten Aufgabe ein Athlet präsentiert wird, der seit Monaten Hypertrophietraining betreibt, dicker wird, aber sich bei der Kniebeuge im Maximalgewicht nicht mehr steigert, <span class="hl-white">musst du die Stagnation diagnostizieren.</span></p>
+                    <p style="margin-top:1rem;"><strong>Die Lösung:</strong> Sein morphologischer Faktor ist ausgereizt, aber sein ZNS kann die neu gebaute Muskelmasse nicht ansteuern. <br><strong>Deine methodische Konsequenz:</strong> Er muss den Trainingsplan auf ein Intramuskuläres Koordinationstraining (IK-Training mit 90-100 % Intensität) umstellen, um die neuronale Rekrutierung zu verbessern.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('mindmapCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 1200;
+            const logicalH = 550;
+            
+            let time = 0;
+            let animationId;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayW = Math.min(rect.width, logicalW);
+                const scale = displayW / logicalW;
+                const displayH = logicalH * scale;
+                
+                canvas.width = displayW * dpr;
+                canvas.height = displayH * dpr;
+                canvas.style.width = `${displayW}px`;
+                canvas.style.height = `${displayH}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // Nodes definition (Hierarchical Top-Down)
+            const nodes = [
+                // Root
+                { id: 'root', x: 600, y: 50, w: 350, h: 50, label: "Leistungsbestimmende Faktoren", color: "#f8fafc", bg: "#1e293b", level: 0 },
+                
+                // L1: Main Branches
+                { id: 'morph', parent: 'root', x: 250, y: 180, w: 220, h: 40, label: "1. Morphologisch", color: "#ff3366", bg: "rgba(255, 51, 102, 0.1)", level: 1 },
+                { id: 'neuro', parent: 'root', x: 600, y: 180, w: 220, h: 40, label: "2. Neuronal", color: "#00f0ff", bg: "rgba(0, 240, 255, 0.1)", level: 1 },
+                { id: 'other', parent: 'root', x: 950, y: 180, w: 220, h: 40, label: "3. Weitere Faktoren", color: "#eab308", bg: "rgba(234, 179, 8, 0.1)", level: 1 },
+                
+                // L2: Morph
+                { id: 'm1', parent: 'morph', x: 150, y: 300, w: 180, h: 36, label: "Muskelquerschnitt", color: "#fca5a5", bg: "#111", level: 2 },
+                { id: 'm2', parent: 'morph', x: 350, y: 300, w: 180, h: 36, label: "FT-Faser-Anteil", color: "#fca5a5", bg: "#111", level: 2 },
+
+                // L2: Neuro
+                { id: 'n1', parent: 'neuro', x: 500, y: 300, w: 180, h: 36, label: "Intermuskuläre Koord.", color: "#67e8f9", bg: "#111", level: 2 },
+                { id: 'n2', parent: 'neuro', x: 750, y: 300, w: 180, h: 36, label: "Intramuskuläre Koord.", color: "#67e8f9", bg: "#111", level: 2 },
+                
+                // L3: Intra-Neuro (Leaves)
+                { id: 'n2a', parent: 'n2', x: 600, y: 420, w: 140, h: 32, label: "Rekrutierung", color: "#cffafe", bg: "#000", level: 3 },
+                { id: 'n2b', parent: 'n2', x: 750, y: 420, w: 140, h: 32, label: "Frequenzierung", color: "#cffafe", bg: "#000", level: 3 },
+                { id: 'n2c', parent: 'n2', x: 900, y: 420, w: 140, h: 32, label: "Synchronisation", color: "#cffafe", bg: "#000", level: 3 },
+
+                // L2: Other
+                { id: 'o1', parent: 'other', x: 950, y: 300, w: 200, h: 36, label: "Volition / Motivation", color: "#fde047", bg: "#111", level: 2 },
+                { id: 'o2', parent: 'other', x: 950, y: 380, w: 200, h: 36, label: "Biomechanik / Hebel", color: "#fde047", bg: "#111", level: 2 }
+            ];
+
+            // Animated particles logic
+            const particles = [];
+            function spawnParticle(sourceNode, targetNode, color) {
+                particles.push({
+                    sx: sourceNode.x, sy: sourceNode.y + sourceNode.h/2,
+                    tx: targetNode.x, ty: targetNode.y - targetNode.h/2,
+                    color: color,
+                    progress: 0,
+                    speed: 0.005 + Math.random() * 0.005
+                });
+            }
+
+            function drawRoundedRect(ctx, x, y, width, height, radius, fill, stroke, strokeWidth=2) {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width - radius, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+                ctx.lineTo(x + width, y + height - radius);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                ctx.lineTo(x + radius, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+                ctx.closePath();
+                
+                ctx.fillStyle = fill;
+                ctx.fill();
+                if(stroke) {
+                    ctx.strokeStyle = stroke;
+                    ctx.lineWidth = strokeWidth;
+                    ctx.stroke();
+                }
+            }
+
+            // Function to draw connecting lines (circuit board style / orthogonal)
+            function drawConnection(p1, p2, color) {
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y + p1.h/2);
+                
+                // If it's a direct vertical drop (like o1 to o2)
+                if (Math.abs(p1.x - p2.x) < 10) {
+                    ctx.lineTo(p2.x, p2.y - p2.h/2);
+                } else {
+                    // Orthogonal routing
+                    const midY = p1.y + p1.h/2 + 30; // drop down 30px
+                    ctx.lineTo(p1.x, midY);
+                    ctx.lineTo(p2.x, midY);
+                    ctx.lineTo(p2.x, p2.y - p2.h/2);
+                }
+                
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+
+            function drawMindmap() {
+                ctx.clearRect(0, 0, logicalW, logicalH);
+
+                // 1. Draw Connections
+                nodes.forEach(node => {
+                    if (node.parent) {
+                        const parent = nodes.find(n => n.id === node.parent);
+                        // Determine line color based on parent branch
+                        let lineColor = 'rgba(255,255,255,0.2)';
+                        if (node.id.startsWith('m')) lineColor = 'rgba(255, 51, 102, 0.4)';
+                        if (node.id.startsWith('n')) lineColor = 'rgba(0, 240, 255, 0.4)';
+                        if (node.id.startsWith('o')) lineColor = 'rgba(234, 179, 8, 0.4)';
+                        if (node.level === 1) lineColor = 'rgba(255,255,255,0.2)'; // From root
+
+                        drawConnection(parent, node, lineColor);
+                    }
+                });
+
+                // 2. Spawn and Update Particles (Data flow)
+                if (Math.random() < 0.05) {
+                    // Pick a random leaf or level 1
+                    const targets = nodes.filter(n => n.level === 1);
+                    const target = targets[Math.floor(Math.random() * targets.length)];
+                    const root = nodes[0];
+                    spawnParticle(root, target, target.color);
+                }
+                
+                if (Math.random() < 0.05) {
+                    // Level 1 to Level 2
+                    const parents = nodes.filter(n => n.level === 1);
+                    const p = parents[Math.floor(Math.random() * parents.length)];
+                    const children = nodes.filter(n => n.parent === p.id);
+                    if (children.length > 0) {
+                        const child = children[Math.floor(Math.random() * children.length)];
+                        spawnParticle(p, child, p.color);
+                    }
+                }
+
+                if (Math.random() < 0.05) {
+                    // Level 2 to Level 3 (Neuro)
+                    const p = nodes.find(n => n.id === 'n2');
+                    const children = nodes.filter(n => n.parent === 'n2');
+                    const child = children[Math.floor(Math.random() * children.length)];
+                    spawnParticle(p, child, p.color);
+                }
+
+                // Draw Particles
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    let p = particles[i];
+                    p.progress += p.speed;
+                    
+                    if (p.progress >= 1) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+
+                    // Orthogonal interpolation
+                    let px, py;
+                    const midY = p.sy + 30;
+
+                    if (Math.abs(p.sx - p.tx) < 10) {
+                        // Straight down
+                        px = p.sx;
+                        py = p.sy + (p.ty - p.sy) * p.progress;
+                    } else {
+                        // 3 segments: down, across, down
+                        const totalDist = 30 + Math.abs(p.tx - p.sx) + (p.ty - midY);
+                        const currDist = p.progress * totalDist;
+                        
+                        if (currDist <= 30) {
+                            px = p.sx;
+                            py = p.sy + currDist;
+                        } else if (currDist <= 30 + Math.abs(p.tx - p.sx)) {
+                            const acrossProg = (currDist - 30) / Math.abs(p.tx - p.sx);
+                            px = p.sx + (p.tx - p.sx) * acrossProg;
+                            py = midY;
+                        } else {
+                            const downProg = (currDist - 30 - Math.abs(p.tx - p.sx)) / (p.ty - midY);
+                            px = p.tx;
+                            py = midY + (p.ty - midY) * downProg;
+                        }
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(px, py, 3, 0, Math.PI*2);
+                    ctx.fillStyle = p.color;
+                    ctx.shadowColor = p.color;
+                    ctx.shadowBlur = 10;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+
+
+                // 3. Draw Nodes
+                nodes.forEach(node => {
+                    const x = node.x - node.w/2;
+                    const y = node.y - node.h/2;
+                    
+                    let glow = 0;
+                    if (node.level === 0) glow = 15;
+                    if (node.level === 1) glow = 10;
+
+                    ctx.shadowColor = node.color;
+                    ctx.shadowBlur = glow;
+                    
+                    drawRoundedRect(ctx, x, y, node.w, node.h, 6, node.bg, node.color, node.level === 0 ? 3 : 1);
+                    
+                    ctx.shadowBlur = 0; // reset
+
+                    ctx.fillStyle = node.color;
+                    ctx.font = node.level <= 1 ? 'bold 15px Space Grotesk' : '14px Inter';
+                    if (node.level === 3) ctx.font = '13px Inter'; // smaller for leaves
+                    
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(node.label, node.x, node.y);
+                });
+            }
+
+            function animate() {
+                time++;
+                drawMindmap();
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.2.2a Verletzungen und Soforthilfe - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
+
+        :root {
+            /* Medical/Emergency Theme */
+            --bg-page: #f1f5f9;
+            --text-dark: #1e293b;
+            --text-mut: #475569;
+            
+            --med-red: #dc2626;        /* Emergency Red */
+            --med-red-light: #fee2e2;
+            
+            --med-blue: #0ea5e9;       /* Cooling/Ice Blue */
+            --med-blue-light: #e0f2fe;
+            
+            --med-green: #10b981;      /* Recovery Green */
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Exam Box */
+            --abi-bg: #0f172a;         /* Dark Slate */
+            --abi-red: #ef4444;        /* Alert Red */
+            --abi-gold: #f59e0b;       /* Exam Gold */
+
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            
+            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 15px 25px -5px rgba(220, 38, 38, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER --- */
+        .doc-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 3rem;
+            border-top: 8px solid var(--med-red);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-header::after {
+            content: '+';
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 12rem;
+            color: var(--med-red-light);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            opacity: 0.3;
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .doc-header h1 {
+            font-size: 2.4rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .doc-header .intro {
+            font-size: 1.15rem;
+            color: var(--text-mut);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- SECTION 1: MAKROTRAUMATA --- */
+        .injury-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 30px;
+            background: var(--med-red);
+            border-radius: 4px;
+        }
+
+        .injury-intro {
+            color: var(--text-mut);
+            margin-bottom: 2rem;
+        }
+
+        .injury-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .injury-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 5px solid var(--med-red);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .injury-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .injury-card h3 {
+            font-size: 1.3rem;
+            color: var(--med-red);
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .injury-card p {
+            margin-bottom: 1rem;
+        }
+
+        .injury-example {
+            background: var(--med-red-light);
+            color: #991b1b;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        .injury-example strong {
+            font-style: normal;
+        }
+
+        /* --- SECTION 2: PECH-REGEL --- */
+        .pech-section {
+            margin-bottom: 4rem;
+        }
+
+        .inflammation-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            color: #334155;
+        }
+
+        .inflammation-box strong {
+            color: var(--med-red);
+        }
+
+        /* Canvas */
+        .canvas-wrapper {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .canvas-wrapper h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .canvas-wrapper p {
+            color: var(--text-mut);
+            margin-bottom: 2rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Detailed PECH Texts */
+        .pech-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .pech-item {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            box-shadow: var(--shadow-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pech-item h4 {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Specific PECH Colors */
+        .pech-p h4 { color: var(--med-red); }
+        .pech-e h4 { color: var(--med-blue); }
+        .pech-c h4 { color: #64748b; }
+        .pech-h h4 { color: var(--med-green); }
+
+        .pech-item .phys-box {
+            background: #f8fafc;
+            border-left: 4px solid #cbd5e1;
+            padding: 1rem 1.5rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+        }
+
+        .pech-p .phys-box { border-left-color: var(--med-red); background: var(--med-red-light); color: #991b1b; }
+        .pech-e .phys-box { border-left-color: var(--med-blue); background: var(--med-blue-light); color: #075985; }
+        .pech-c .phys-box { border-left-color: #64748b; background: #f1f5f9; color: #334155; }
+        .pech-h .phys-box { border-left-color: var(--med-green); background: #ecfdf5; color: #065f46; }
+
+        /* --- ABITUR TRANSFER --- */
+        .abitur-diagnostics {
+            background: var(--abi-bg);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            border-top: 8px solid var(--abi-red);
+            position: relative;
+        }
+
+        .abitur-diagnostics h2 {
+            color: var(--abi-red);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .case-block {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+        }
+
+        .case-block h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.2);
+            padding: 0.3rem 1rem;
+            border-left: 4px solid var(--abi-red);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .case-block p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .solution-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px dashed var(--abi-gold);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .solution-box strong {
+            color: var(--abi-gold);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .injury-grid { grid-template-columns: 1fr; }
+            .doc-header, .abitur-diagnostics { padding: 2rem; }
+            .doc-header h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>3.2.2a Verletzungen und Soforthilfe</h1>
+        <p class="intro">
+            Selbst im gesundheitsorientierten Sport, vor allem aber im leistungsorientierten Wettkampfsport, besteht ein immanentes Risiko für <strong>akute Sportverletzungen (Makrotraumata)</strong>. Ein fundiertes sportbiologisches Wissen über die häufigsten Verletzungsmuster und die physiologisch korrekten Sofortmaßnahmen ist entscheidend, um Folgeschäden zu minimieren und die Rehabilitationszeit zu verkürzen.
+        </p>
+    </header>
+
+    <!-- 1. Makrotraumata -->
+    <section class="injury-section">
+        <h2 class="section-title">1. Typische akute Sportverletzungen (Makrotraumata)</h2>
+        <p class="injury-intro">
+            Akute Verletzungen entstehen durch ein plötzliches, von außen oder innen einwirkendes Ereignis, das die physiologische Belastungsgrenze des Gewebes (Knochen, Knorpel, Bänder, Muskeln) überschreitet. Zu den klausurrelevanten Verletzungen des passiven und aktiven Bewegungsapparates zählen:
+        </p>
+
+        <div class="injury-grid">
+            <article class="injury-card">
+                <h3>Distorsion (Verstauchung)</h3>
+                <p>Eine geschlossene Gelenkverletzung, bei der die Gelenkflächen durch plötzliche Gewalteinwirkung kurzzeitig aus ihrer normalen Position verschoben werden. Die Gelenkkapsel und der Bandapparat werden überdehnt (Mikrorisse), die Gelenkflächen kehren jedoch von selbst in die Ausgangslage zurück.</p>
+                <div class="injury-example">
+                    <strong>Klassisches Beispiel:</strong> Das Supinationstrauma (Umknicken nach außen) im Sprunggelenk beim Volleyball oder Basketball, oft verbunden mit einer Läsion des Außenbandes (Ligamentum talofibulare anterius).
+                </div>
+            </article>
+
+            <article class="injury-card">
+                <h3>Luxation (Verrenkung/Auskugeln)</h3>
+                <p>Ein vollständiger, dauerhafter Kontaktverlust der Gelenkflächen. Der Gelenkkopf springt aus der Gelenkpfanne und bleibt in dieser abnormen Position. Dies geht fast immer mit schweren Rissen der Gelenkkapsel und der Bänder einher.</p>
+                <div class="injury-example" style="margin-top: 2rem;">
+                    <strong>Klassisches Beispiel:</strong> Die Schulterluxation beim Handballwurf oder Judo.
+                </div>
+            </article>
+
+            <article class="injury-card">
+                <h3>Ruptur (Riss)</h3>
+                <p>Ein vollständiger oder partieller Riss von Bändern, Sehnen oder Muskeln durch extreme Zugbelastung.</p>
+                <div class="injury-example">
+                    <strong>Klassisches Beispiel:</strong> Die Ruptur des vorderen Kreuzbandes (Ligamentum cruciatum anterius) beim Fußball oder Skifahren durch eine abrupte Rotations- und Valgusbelastung (X-Bein-Stellung) im Kniegelenk.
+                </div>
+            </article>
+
+            <article class="injury-card">
+                <h3>Muskelverletzungen</h3>
+                <p>Eine Abstufung von muskulären Läsionen, beginnend bei der <strong>Muskelzerrung</strong> (Überdehnung des Sarkomers ohne strukturellen Riss), über den <strong>Muskelfaserriss</strong> (Riss einzelner Fasern, Einblutung in das Gewebe) bis hin zum kompletten <strong>Muskelbündel- oder Muskelriss</strong> (kompletter Funktionsverlust).</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- 2. PECH-Regel -->
+    <section class="pech-section">
+        <h2 class="section-title">2. Physiologische Mechanismen der Soforthilfe: Die PECH-Regel</h2>
+        
+        <div class="inflammation-box">
+            Bei akuten, unblutigen Weichteil- und Gelenkverletzungen (Distorsionen, Rupturen, Muskelverletzungen) reagiert der Körper mit einer <strong>Entzündungsreaktion</strong>: Blutgefäße reißen (Hämatombildung), Blutplasma tritt in das umliegende Gewebe aus (Ödembildung) und Schmerzrezeptoren (Nozizeptoren) werden gereizt. Die PECH-Regel zielt darauf ab, diese Prozesse mechanisch und thermisch zu unterbrechen.
+        </div>
+
+        <!-- Canvas Infographic -->
+        <div class="canvas-wrapper">
+            <h3>Die PECH-Regel bei akuten Sportverletzungen</h3>
+            <p>Die 4 Säulen der Erstversorgung und ihre physiologische Kernfunktion</p>
+            <canvas id="pechCanvas" width="800" height="500"></canvas>
+        </div>
+
+        <!-- Detailed Explanations -->
+        <div class="pech-details">
+            <article class="pech-item pech-p">
+                <h4>P - Pause</h4>
+                <p>Sofortiger Abbruch der sportlichen Belastung und Ruhigstellung der betroffenen Körperregion.</p>
+                <div class="phys-box">
+                    <strong>Physiologische Begründung:</strong> Verhindert weitere mechanische Gewebeschäden (z. B. das vollständige Durchreißen einer bereits angerissenen Struktur) und unterbindet eine belastungsbedingte Steigerung der Durchblutung.
+                </div>
+            </article>
+
+            <article class="pech-item pech-e">
+                <h4>E - Eis (Kühlung)</h4>
+                <p>Kühlung der Verletzung mit Eiswasser, Coolpacks oder Eisspray (nie direkt auf die Haut, Gefahr der Erfrierung!).</p>
+                <div class="phys-box">
+                    <strong>Physiologische Begründung:</strong> Die Kälte führt reflektorisch zu einer massiven <em>Vasokonstriktion</em> (Verengung der Blutgefäße). Dadurch wird die Einblutung in das Gewebe (Hämatom) gestoppt und die Ödembildung (Schwellung) minimiert. Zudem wird die Nervenleitgeschwindigkeit herabgesetzt, was eine schmerzlindernde (analgetische) Wirkung hat. Weiterhin sinkt die Stoffwechselrate im betroffenen Areal, was gesundes Nachbargewebe vor dem Zelltod durch Sauerstoffmangel (Hypoxie) schützt.
+                </div>
+            </article>
+
+            <article class="pech-item pech-c">
+                <h4>C - Compression (Druckverband)</h4>
+                <p>Anlage eines mäßig festen, elastischen Druckverbandes um die verletzte Stelle (idealerweise in Kombination mit der Kühlung).</p>
+                <div class="phys-box">
+                    <strong>Physiologische Begründung:</strong> Der mechanische Druck von außen erhöht den <em>hydrostatischen Druck</em> im Gewebe (Interstitium). Dies wirkt dem Austritt von Blutplasma aus den verletzten Kapillaren mechanisch entgegen und bremst die Schwellung stark ein.
+                </div>
+            </article>
+
+            <article class="pech-item pech-h">
+                <h4>H - Hochlagern</h4>
+                <p>Die verletzte Extremität wird möglichst über Herzhöhe gelagert.</p>
+                <div class="phys-box">
+                    <strong>Physiologische Begründung:</strong> Durch die Schwerkraft wird der venöse Blutrückfluss sowie der Abfluss von Lymphflüssigkeit zum Herzen hin massiv erleichtert, während der arterielle Zufluss zum Verletzungsgebiet erschwert wird. Dies reduziert den hydrostatischen Druck in den Kapillaren des verletzten Gebiets und unterstützt den raschen Abbau der Schwellung.
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Abitur Transfer Box -->
+    <section class="abitur-diagnostics">
+        <h2><span style="font-size: 2.8rem;">🚨</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die PECH-Regel scheint auf den ersten Blick simpel, wird im erhöhten Anforderungsniveau (eA) jedoch oft zur <strong>Fehleranalyse in materialgestützten Fallbeispielen</strong> herangezogen.
+        </p>
+
+        <div class="case-block">
+            <h4>Falsches Trainerhandeln bewerten</h4>
+            <p>Du erhältst einen Text, in dem ein Fußballer umknickt und der Trainer sofort ein Wärmekissen auf das dicke Sprunggelenk legt, damit sich der Muskel "entspannt". Der Operator lautet: <em>"Beurteilen Sie das Handeln des Trainers aus physiologischer Sicht."</em></p>
+            
+            <div class="solution-box">
+                <strong>Die eA-Lösung (Den Fehler biologisch vernichten!):</strong>
+                <p style="color: #fef3c7;">
+                    Du musst den Fehler nicht nur benennen, sondern biologisch erklären! Wärme führt zu einer <span style="color: var(--abi-red); font-weight: bold;">Vasodilatation</span> (Weitstellung der Blutgefäße). Die Durchblutung wird extrem gesteigert, wodurch noch mehr Blut und Plasma aus den gerissenen Kapillaren in das Gelenk schießen. Das Hämatom und das Ödem werden künstlich vergrößert, der Heilungsprozess wird massiv verzögert und der Druckschmerz steigt extrem an. Die Anwendung von Wärme bei akuten Traumata ist ein <strong>absoluter Kunstfehler</strong>.
+                </p>
+            </div>
+        </div>
+
+        <div class="case-block">
+            <h4>Diagnose aus Verletzungshergang</h4>
+            <p>Oft wird ein Verletzungshergang genau beschrieben (z. B. <em>"Der Spieler blockt den Ball, landet auf dem Fuß des Gegners und knickt über den äußeren Fußrand ab"</em>). Du musst hier die Verletzung anatomisch korrekt als <strong>"Distorsion / Supinationstrauma im oberen Sprunggelenk"</strong> diagnostizieren und dann exakt begründen, warum als erste physiologische Maßnahme nach der Pause zwingend die Eis-Applikation (Vasokonstriktion) folgen muss.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('pechCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Clear background
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, w, h);
+
+    const rowH = h / 4; // 4 Rows for P-E-C-H
+    const padding = 20;
+
+    // Data for the 4 rows
+    const pechData = [
+        { letter: 'P', title: 'Pause', desc: 'Verhindert weitere mechanische Gewebeschäden.', color: '#dc2626' },
+        { letter: 'E', title: 'Eis (Kühlung)', desc: 'Vasokonstriktion zur Hämatom- & Ödem-Minimierung.', color: '#0ea5e9' },
+        { letter: 'C', title: 'Compression', desc: 'Erhöht hydrostatischen Druck gegen Schwellung.', color: '#64748b' },
+        { letter: 'H', title: 'Hochlagern', desc: 'Erleichtert venösen/lymphatischen Abfluss.', color: '#10b981' }
+    ];
+
+    // --- DRAWING FUNCTIONS FOR ICONS ---
+    
+    function drawStopSign(x, y, size, color) {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        const numSides = 8;
+        for (let i = 0; i < numSides; i++) {
+            const angle = (i * 2 * Math.PI) / numSides - Math.PI / 8;
+            const px = x + size * Math.cos(angle);
+            const py = y + size * Math.sin(angle);
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.fill();
+        
+        // Inner white border
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for (let i = 0; i < numSides; i++) {
+            const angle = (i * 2 * Math.PI) / numSides - Math.PI / 8;
+            const px = x + (size - 4) * Math.cos(angle);
+            const py = y + (size - 4) * Math.sin(angle);
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.stroke();
+
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 12px Montserrat';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('STOP', x, y);
+    }
+
+    function drawSnowflake(x, y, size, color) {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.lineCap = 'round';
+        const lines = 6;
+        for (let i = 0; i < lines; i++) {
+            const angle = (i * 2 * Math.PI) / lines;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            const endX = x + size * Math.cos(angle);
+            const endY = y + size * Math.sin(angle);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+            
+            // Little branches
+            const branchDist = size * 0.6;
+            const bx = x + branchDist * Math.cos(angle);
+            const by = y + branchDist * Math.sin(angle);
+            ctx.beginPath();
+            ctx.moveTo(bx, by);
+            ctx.lineTo(bx + (size*0.3) * Math.cos(angle - Math.PI/4), by + (size*0.3) * Math.sin(angle - Math.PI/4));
+            ctx.moveTo(bx, by);
+            ctx.lineTo(bx + (size*0.3) * Math.cos(angle + Math.PI/4), by + (size*0.3) * Math.sin(angle + Math.PI/4));
+            ctx.stroke();
+        }
+        ctx.fillStyle = '#fff';
+        ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI*2); ctx.fill();
+    }
+
+    function drawBandage(x, y, size, color) {
+        ctx.fillStyle = '#f8fafc';
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        
+        // Roll
+        ctx.beginPath();
+        ctx.ellipse(x - size*0.2, y, size*0.6, size*0.8, 0, 0, Math.PI*2);
+        ctx.fill();
+        ctx.stroke();
+        
+        // Inner spirals
+        ctx.beginPath();
+        ctx.ellipse(x - size*0.2, y, size*0.4, size*0.6, 0, 0, Math.PI*2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.ellipse(x - size*0.2, y, size*0.2, size*0.4, 0, 0, Math.PI*2);
+        ctx.stroke();
+
+        // Unrolled part
+        ctx.beginPath();
+        ctx.moveTo(x - size*0.2, y + size*0.8);
+        ctx.quadraticCurveTo(x + size*0.5, y + size*0.8, x + size, y + size*0.2);
+        ctx.lineTo(x + size, y - size*0.1);
+        ctx.quadraticCurveTo(x + size*0.5, y + size*0.5, x - size*0.2, y + size*0.5);
+        ctx.fillStyle = '#f1f5f9';
+        ctx.fill();
+        ctx.stroke();
+    }
+
+    function drawElevatedLeg(x, y, size, color) {
+        // Pillow
+        ctx.fillStyle = '#e0f2fe';
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(x + size*0.2, y, size*1.2, size*0.6, 8);
+        ctx.fill();
+        ctx.stroke();
+
+        // Leg
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 6;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.beginPath();
+        // start low left
+        ctx.moveTo(x - size, y + size*0.8);
+        // up to knee
+        ctx.lineTo(x - size*0.2, y - size*0.2);
+        // down to foot resting on pillow
+        ctx.lineTo(x + size*0.8, y - size*0.4);
+        // foot
+        ctx.lineTo(x + size, y - size*0.8);
+        ctx.stroke();
+        
+        // Arrow pointing UP
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x + size*1.5, y + size*0.5);
+        ctx.lineTo(x + size*1.5, y - size*0.5);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x + size*1.3, y - size*0.3);
+        ctx.lineTo(x + size*1.5, y - size*0.5);
+        ctx.lineTo(x + size*1.7, y - size*0.3);
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+
+    const iconDrawers = [drawStopSign, drawSnowflake, drawBandage, drawElevatedLeg];
+
+    // --- RENDER ROWS ---
+    for(let i=0; i<4; i++) {
+        const rowY = i * rowH;
+        const d = pechData[i];
+
+        // Background alternate
+        if(i % 2 === 0) {
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillRect(0, rowY, w, rowH);
+        }
+
+        // Letter Box
+        const letterBoxSize = 70;
+        const lx = padding;
+        const ly = rowY + (rowH - letterBoxSize) / 2;
+        ctx.fillStyle = d.color;
+        ctx.beginPath();
+        ctx.roundRect(lx, ly, letterBoxSize, letterBoxSize, 12);
+        ctx.fill();
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 40px Montserrat';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(d.letter, lx + letterBoxSize/2, ly + letterBoxSize/2 + 2);
+
+        // Icon Area
+        const iconCx = lx + letterBoxSize + 60;
+        const iconCy = rowY + rowH / 2;
+        iconDrawers[i](iconCx, iconCy, 25, d.color);
+
+        // Vertical divider
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(iconCx + 60, rowY + 20);
+        ctx.lineTo(iconCx + 60, rowY + rowH - 20);
+        ctx.stroke();
+
+        // Texts
+        const textX = iconCx + 90;
+        ctx.textAlign = 'left';
+        
+        ctx.fillStyle = d.color;
+        ctx.font = 'bold 22px Montserrat';
+        ctx.fillText(d.title, textX, rowY + rowH/2 - 12);
+
+        ctx.fillStyle = '#475569';
+        ctx.font = 'italic 16px Roboto';
+        ctx.fillText(d.desc, textX, rowY + rowH/2 + 15);
+    }
+
+    // Border around whole canvas
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.lineWidth = 4;
+    ctx.strokeRect(0, 0, w, h);
+
+</script>
+</body>
+</html>

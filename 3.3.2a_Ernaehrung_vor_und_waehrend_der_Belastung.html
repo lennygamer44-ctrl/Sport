@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.3.2a Ernährung vor und während der Belastung - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Teko:wght@500;600;700&display=swap');
+
+        :root {
+            /* Race Day Theme */
+            --bg-page: #f8fafc;
+            --text-dark: #0f172a;
+            --text-mut: #64748b;
+            
+            --pre-color: #ea580c;    /* Orange for Pre-Comp (Carbs/Heat) */
+            --pre-bg: #fff7ed;
+            
+            --in-color: #0ea5e9;     /* Cyan for In-Comp (Hydration/Fast Energy) */
+            --in-bg: #f0f9ff;
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Exam Box */
+            --abi-bg: #1e1b4b;       /* Very Dark Indigo */
+            --abi-gold: #facc15;     /* Gold */
+            --abi-text: #f8fafc;
+
+            --radius-md: 10px;
+            --radius-lg: 20px;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            background-image: repeating-linear-gradient(45deg, #f1f5f9 0, #f1f5f9 2px, transparent 2px, transparent 10px);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Teko', sans-serif;
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.85); /* semi-transparent to let stripes peek */
+            box-shadow: 0 0 50px rgba(0,0,0,0.03);
+            min-height: 100vh;
+        }
+
+        /* --- HEADER SECTION --- */
+        .doc-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border-left: 10px solid var(--text-dark);
+        }
+
+        .doc-header::after {
+            content: 'RACE DAY';
+            position: absolute;
+            top: 5px; right: 20px;
+            font-size: 7rem;
+            font-family: 'Teko', sans-serif;
+            color: #f1f5f9;
+            font-weight: 700;
+            line-height: 1;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .doc-header h1 {
+            font-size: 3.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .doc-header .intro {
+            font-size: 1.15rem;
+            color: var(--text-mut);
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- SPLIT CONTENT --- */
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .phase-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+        }
+
+        .phase-card h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .card-pre { border-top: 6px solid var(--pre-color); }
+        .card-pre h2 { color: var(--pre-color); }
+        
+        .card-in { border-top: 6px solid var(--in-color); }
+        .card-in h2 { color: var(--in-color); }
+
+        .phase-intro {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .concept-box {
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid;
+        }
+
+        .card-pre .concept-box { border-left-color: var(--pre-color); }
+        .card-in .concept-box { border-left-color: var(--in-color); }
+
+        .concept-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .concept-box p {
+            color: var(--text-mut);
+        }
+
+        .bio-reason {
+            background: #fef2f2;
+            color: #991b1b;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px dashed #ef4444;
+        }
+
+        .bio-reason strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+            color: #dc2626;
+        }
+
+        /* --- CANVAS TIMELINE --- */
+        .timeline-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .timeline-section h2 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-section p {
+            color: var(--text-mut);
+            margin-bottom: 2rem;
+        }
+
+        .canvas-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            border: 1px solid #e2e8f0;
+            padding: 2rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- ABITUR EXAM BOX --- */
+        .abitur-tactics {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-top: 8px solid var(--abi-gold);
+            position: relative;
+        }
+
+        .abitur-tactics h2 {
+            color: var(--abi-gold);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .exam-case {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(250, 204, 21, 0.2);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+        }
+
+        .exam-case h3 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(250, 204, 21, 0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 4px;
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .exam-case .scenario {
+            color: #fca5a5;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 6px;
+        }
+
+        .analysis-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .analysis-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            color: #e2e8f0;
+        }
+
+        .analysis-list li::before {
+            content: '>>';
+            position: absolute;
+            left: 0;
+            color: var(--abi-gold);
+            font-weight: bold;
+        }
+
+        .tip-box {
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px dashed #0ea5e9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .tip-box h4 {
+            color: #38bdf8;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-box p {
+            color: #bae6fd;
+            margin: 0;
+        }
+
+        .highlight {
+            color: var(--abi-gold);
+            font-weight: 700;
+        }
+
+        @media (max-width: 900px) {
+            .doc-header h1 { font-size: 2.8rem; }
+            .doc-header, .abitur-tactics, .phase-card { padding: 2rem; }
+            .phase-card h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>3.3.2a Ernährung vor und während der Belastung</h1>
+        <p class="intro">
+            Um am Tag eines Wettkampfes (z. B. einem Zehnkampf) die maximale physische und kognitive Leistungsfähigkeit abrufen zu können, muss die Ernährung strengen zeitlichen und biochemischen Gesetzmäßigkeiten folgen. Das primäre Ziel ist es, die Energiespeicher (Glykogen) maximal zu füllen, eine Hypoglykämie (Unterzuckerung) zu vermeiden und den Wasser-Elektrolyt-Haushalt zu stabilisieren, ohne dabei den Magen-Darm-Trakt zu belasten.
+        </p>
+    </header>
+
+    <!-- Content Grid -->
+    <div class="nutrition-grid">
+        
+        <!-- Pre-Competition -->
+        <article class="phase-card card-pre">
+            <h2>⏱️ 1. Ernährung im Vorfeld (Pre-Competition)</h2>
+            <p class="phase-intro">Die unmittelbare Vorbereitung beginnt bereits Tage vor dem Wettkampf mit dem sogenannten "Carbo-Loading" (Maximierung der muskulären Glykogenspeicher). Am eigentlichen Wettkampftag gelten folgende strenge Grundsätze:</p>
+
+            <div class="concept-box">
+                <h3>Die 3-Stunden-Regel</h3>
+                <p>Die letzte große Hauptmahlzeit muss zwingend etwa <strong>3 bis 4 Stunden vor der eigentlichen Belastung</strong> eingenommen werden.</p>
+                
+                <div class="bio-reason">
+                    <strong>Biologische Begründung (Blutumverteilung):</strong>
+                    Die Verdauung wird durch den Parasympathikus (den „Ruhenerv“) gesteuert. Während der Verdauungsarbeit sammeln sich große Mengen Blut im <strong>Splanchnikusgebiet</strong> (Magen-Darm-Trakt). Für eine sportliche Höchstleistung muss der Körper jedoch auf eine sympathikotone Reaktionslage umschalten: Das Blut wird im Verdauungstrakt abgezogen und in die Peripherie (die Arbeitsmuskulatur) gepumpt. Ist der Magen beim Startschuss noch voll, konkurrieren Arbeitsmuskulatur und Verdauungsorgane um das Blut. Die Folge: Seitenstechen, Übelkeit und ein massiver Leistungseinbruch.
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h3>Makronährstoff-Zusammensetzung</h3>
+                <p>Diese letzte Mahlzeit muss <strong>extrem kohlenhydratreich</strong> (komplexe Kohlenhydrate wie Nudeln oder Haferflocken für eine konstante Blutzuckerkurve), aber gleichzeitig <strong>sehr fett- und ballaststoffarm</strong> sein, da Fett die Magenverweildauer drastisch verlängert.</p>
+            </div>
+        </article>
+
+        <!-- In-Competition -->
+        <article class="phase-card card-in">
+            <h2>⚡ 2. Ernährung während der Belastung (In-Competition)</h2>
+            <p class="phase-intro">Sobald die Belastung beginnt, geht es primär um die Aufrechterhaltung des Blutzuckerspiegels und den Ausgleich von Flüssigkeitsverlusten durch Schweiß.</p>
+
+            <div class="concept-box">
+                <h3>Leichtverdauliche Kohlenhydrate</h3>
+                <p>Während eines langen Wettkampftages (z. B. zwischen den Disziplinen eines Zehnkampfes) dürfen keine schweren Mahlzeiten mehr eingenommen werden. Die Energiezufuhr erfolgt nun über leichtverdauliche, <strong>kurzkettige Kohlenhydrate</strong> (z. B. reife Bananen, spezielle Sport-Gels, Maltodextrin). Diese passieren den Magen extrem schnell, werden im Dünndarm sofort resorbiert und stehen der arbeitenden Muskulatur fast verzögerungsfrei als Glukose zur ATP-Resynthese zur Verfügung.</p>
+            </div>
+
+            <div class="concept-box">
+                <h3>Ausreichende Flüssigkeitszufuhr (Isotone Getränke)</h3>
+                <p>Der Schweißverlust muss kontinuierlich (in kleinen Schlucken) ausgeglichen werden. Hierbei ist die <strong>Osmolarität</strong> des Getränks entscheidend.</p>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem; color: var(--text-mut);">
+                    <li style="margin-bottom: 0.5rem;">Das Getränk muss <strong>isotonisch</strong> sein (die gleiche Konzentration an gelösten Teilchen aufweisen wie das menschliche Blutplasma). Dadurch kann das Wasser im Dünndarm osmotisch am schnellsten in die Blutbahn aufgenommen werden.</li>
+                    <li>Zudem muss das Getränk <strong>Elektrolyte (insbesondere Natrium)</strong> enthalten, da diese beim Schwitzen verloren gehen. Ein massiver Natriumverlust stört die Reizweiterleitung an der motorischen Endplatte und führt unweigerlich zu Muskelkrämpfen (Versagen der intramuskulären Koordination).</li>
+                </ul>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- Canvas Timeline -->
+    <section class="timeline-section">
+        <h2>Wettkampftag-Timeline</h2>
+        <p>Der optimale Ernährungsrhythmus vom Aufstehen bis zum Zielstrich</p>
+        <div class="canvas-wrapper">
+            <canvas id="raceTimeline" width="1000" height="350"></canvas>
+        </div>
+    </section>
+
+    <!-- Abitur Transfer Box -->
+    <section class="abitur-tactics">
+        <h2><span style="font-size: 3rem;">🚨</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die Ernährungsstrategie für Wettkampftage ist vom Kultusministerium mit dem Prädikat "Extrem hoch!" und als <span class="highlight">absoluter Klausurschwerpunkt</span> definiert worden. Du musst hier das biologische Wissen meisterhaft vernetzen.
+        </p>
+
+        <div class="exam-case">
+            <h3>Trainingsfehler in der Fallstudie korrigieren</h3>
+            <div class="scenario">
+                <strong>Szenario:</strong> Ein Zehnkämpfer isst 30 Minuten vor dem 400-m-Lauf (hochintensiv laktazid) noch eine große Portion Nudeln mit Sahnesoße und trinkt danach reines Leitungswasser.
+            </div>
+            
+            <p style="color: white; font-weight: bold; margin-bottom: 1rem;">Deine eA-Analyse (Den Plan biologisch zerlegen!):</p>
+            <ul class="analysis-list">
+                <li>Die Nudeln mit Sahnesoße (fettreich) liegen zu schwer im Magen. Du argumentierst mit dem <strong>Prinzip der Blutumverteilung</strong> (Parasympathikus vs. Sympathikus; das Blut fehlt in der Arbeitsmuskulatur).</li>
+                <li>Du forderst die strikte Einhaltung der <strong>3-Stunden-Regel</strong> für große Mahlzeiten.</li>
+                <li>Du bemängelst das reine Wasser: Es ist <strong>hypotonisch</strong> und füllt die verlorenen Elektrolyte nicht auf. Du forderst ein isotonisches Elektrolytgetränk, um die Erregungsleitung an der motorischen Endplatte zu sichern und Krämpfen (periphere Ermüdung) beim 400-m-Lauf vorzubeugen.</li>
+            </ul>
+        </div>
+
+        <div class="tip-box">
+            <h4>⏱️ Den Disziplinen-Rhythmus beachten</h4>
+            <p>Der Zehnkampf dauert von morgens bis abends. Wenn du konkrete Grundsätze aufstellen sollst, betone, dass der Athlet zwischen den fünf Disziplinen am Tag <strong>keine echte Mittagspause</strong> mit einer großen Mahlzeit einlegen darf. Die Ernährung muss auf eine stetige, „flüssige oder gel-basierte“ Kohlenhydratversorgung (Maltodextrin) umgestellt werden, um das Verdauungssystem auszuschalten und den Blutzuckerspiegel dennoch hochzuhalten.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('raceTimeline');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Timeline Setup
+    const padding = 50;
+    const lineY = h / 2 + 20;
+    
+    // Markers X positions
+    const xStart = padding;
+    const xT3 = padding + 150;      // t-3h
+    const xT0 = padding + 450;      // t-0h (Wettkampfbeginn)
+    const xT1 = padding + 650;      // Belastung 1
+    const xT2 = padding + 850;      // Belastung 2
+    const xEnd = w - padding;
+
+    // --- DRAWING ICONS ---
+    
+    // Plate with noodles
+    function drawPlate(x, y) {
+        ctx.fillStyle = '#ffffff';
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = 3;
+        // Plate outer
+        ctx.beginPath(); ctx.ellipse(x, y, 35, 15, 0, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+        // Plate inner
+        ctx.beginPath(); ctx.ellipse(x, y+2, 25, 10, 0, 0, Math.PI*2); ctx.stroke();
+        // Noodles (wavy lines)
+        ctx.strokeStyle = '#facc15'; ctx.lineWidth = 4; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(x-15, y); ctx.quadraticCurveTo(x-5, y-10, x+5, y); ctx.quadraticCurveTo(x+15, y+10, x+15, y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x-10, y-5); ctx.quadraticCurveTo(x, y+5, x+10, y-5); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x-20, y+2); ctx.quadraticCurveTo(x-10, y+12, x, y+2); ctx.stroke();
+    }
+
+    // Starting Flag
+    function drawFlag(x, y) {
+        ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 4; ctx.lineCap = 'round';
+        // Pole
+        ctx.beginPath(); ctx.moveTo(x - 10, y + 15); ctx.lineTo(x - 10, y - 25); ctx.stroke();
+        // Flag
+        ctx.fillStyle = '#ef4444';
+        ctx.beginPath(); ctx.moveTo(x - 10, y - 25); ctx.lineTo(x + 15, y - 15); ctx.lineTo(x - 10, y - 5); ctx.fill();
+    }
+
+    // Water bottle
+    function drawBottle(x, y) {
+        ctx.fillStyle = '#0ea5e9'; ctx.strokeStyle = '#0284c7'; ctx.lineWidth = 2;
+        // Body
+        ctx.beginPath(); ctx.roundRect(x - 10, y - 10, 20, 25, 3); ctx.fill(); ctx.stroke();
+        // Neck/Cap
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(x - 6, y - 15, 12, 5);
+        ctx.fillRect(x - 4, y - 18, 8, 3);
+        // Water line
+        ctx.strokeStyle = '#bae6fd'; ctx.beginPath(); ctx.moveTo(x-8, y); ctx.lineTo(x+8, y); ctx.stroke();
+    }
+
+    // Banana
+    function drawBanana(x, y) {
+        ctx.fillStyle = '#facc15'; ctx.strokeStyle = '#ca8a04'; ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x - 15, y - 10);
+        ctx.quadraticCurveTo(x, y + 15, x + 15, y - 10);
+        ctx.quadraticCurveTo(x, y + 5, x - 15, y - 10);
+        ctx.fill(); ctx.stroke();
+        // Stalks
+        ctx.fillStyle = '#1e293b';
+        ctx.beginPath(); ctx.arc(x - 15, y - 10, 2, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + 15, y - 10, 2, 0, Math.PI*2); ctx.fill();
+    }
+
+
+    // --- DRAW TIMELINE BACKGROUND & LINE ---
+    
+    // Background bands
+    ctx.fillStyle = 'rgba(234, 88, 12, 0.05)'; // Pre comp band
+    ctx.fillRect(xStart, 20, xT0 - xStart, h - 40);
+    ctx.fillStyle = 'rgba(14, 165, 233, 0.05)'; // In comp band
+    ctx.fillRect(xT0, 20, xEnd - xT0, h - 40);
+
+    // Main horizontal line
+    ctx.strokeStyle = '#94a3b8';
+    ctx.lineWidth = 6;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(xStart, lineY);
+    ctx.lineTo(xEnd, lineY);
+    ctx.stroke();
+
+    // Arrow on end
+    ctx.fillStyle = '#94a3b8';
+    ctx.beginPath();
+    ctx.moveTo(xEnd, lineY - 8);
+    ctx.lineTo(xEnd + 15, lineY);
+    ctx.lineTo(xEnd, lineY + 8);
+    ctx.fill();
+
+    // --- DRAW MARKERS & TEXTS ---
+    
+    function drawMarker(x, timeText, isMain=false, color='#1e293b') {
+        // Tick mark
+        ctx.strokeStyle = color;
+        ctx.lineWidth = isMain ? 4 : 3;
+        ctx.beginPath();
+        ctx.moveTo(x, lineY - (isMain ? 15 : 10));
+        ctx.lineTo(x, lineY + (isMain ? 15 : 10));
+        ctx.stroke();
+
+        // Time label below
+        ctx.fillStyle = color;
+        ctx.font = (isMain ? 'bold ' : '') + '18px Teko';
+        ctx.textAlign = 'center';
+        ctx.fillText(timeText, x, lineY + 35);
+    }
+
+    function drawTextBox(x, y, lines, align='center', bgColor, borderColor) {
+        ctx.font = '13px Inter';
+        ctx.textAlign = align;
+        
+        // Find max width
+        let maxW = 0;
+        lines.forEach(l => {
+            let m = ctx.measureText(l);
+            if(m.width > maxW) maxW = m.width;
+        });
+
+        const pad = 10;
+        const boxW = maxW + pad*2;
+        const boxH = lines.length * 18 + pad*2;
+        const boxX = align === 'center' ? x - boxW/2 : (align === 'left' ? x : x - boxW);
+        const boxY = y;
+
+        // Draw line connecting to timeline
+        ctx.strokeStyle = borderColor;
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4,4]);
+        ctx.beginPath(); ctx.moveTo(x, lineY); ctx.lineTo(x, y + boxH); ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Box
+        ctx.fillStyle = bgColor;
+        ctx.strokeStyle = borderColor;
+        ctx.beginPath(); ctx.roundRect(boxX, boxY, boxW, boxH, 6); ctx.fill(); ctx.stroke();
+
+        // Text
+        ctx.fillStyle = '#1e293b';
+        ctx.textBaseline = 'top';
+        lines.forEach((l, i) => {
+            const textX = align === 'center' ? x : (align === 'left' ? boxX + pad : boxX + boxW - pad);
+            ctx.fillText(l, textX, boxY + pad + i*18);
+        });
+    }
+
+    // 1. T-3h Marker
+    drawMarker(xT3, 't - 3h', true, '#ea580c');
+    drawPlate(xT3, lineY - 45);
+    drawTextBox(xT3, lineY - 140, [
+        "Letzte Hauptmahlzeit:",
+        "Komplexe KH, fettarm,",
+        "Blutumverteilung ermöglichen"
+    ], 'center', '#fff7ed', '#ea580c');
+
+    // 2. T-0h Marker (Start)
+    drawMarker(xT0, 't = 0h (START)', true, '#0f172a');
+    drawFlag(xT0, lineY - 45);
+
+    // 3. During Competition Markers
+    drawMarker(xT1, 't + 1h', false, '#0ea5e9');
+    drawBottle(xT1 - 15, lineY - 40); drawBanana(xT1 + 15, lineY - 40);
+    
+    drawMarker(xT2, 't + 2h', false, '#0ea5e9');
+    drawBottle(xT2 - 15, lineY - 40); drawBanana(xT2 + 15, lineY - 40);
+
+    // Connecting text box for during competition
+    const inCompBoxX = (xT1 + xT2) / 2;
+    drawTextBox(inCompBoxX, lineY - 140, [
+        "Isotonische Getränke &",
+        "Kurzkettige KH zur",
+        "Blutzucker-Stabilisierung"
+    ], 'center', '#f0f9ff', '#0ea5e9');
+
+    // Connecting line for the box
+    ctx.strokeStyle = '#0ea5e9';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(xT1, lineY - 50); ctx.lineTo(xT1, lineY - 70); ctx.lineTo(xT2, lineY - 70); ctx.lineTo(xT2, lineY - 50); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(inCompBoxX, lineY - 70); ctx.lineTo(inCompBoxX, lineY - 85); ctx.stroke();
+
+    // Section Labels
+    ctx.fillStyle = '#ea580c'; ctx.font = 'bold 24px Teko'; ctx.textAlign = 'left';
+    ctx.fillText('PRE-COMPETITION', xStart + 20, 50);
+    
+    ctx.fillStyle = '#0ea5e9'; ctx.textAlign = 'right';
+    ctx.fillText('IN-COMPETITION', xEnd - 20, 50);
+
+</script>
+</body>
+</html>

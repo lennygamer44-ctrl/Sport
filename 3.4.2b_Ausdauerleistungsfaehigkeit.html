@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.4.2b Ausdauerleistungsfähigkeit: Blutdoping und EPO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-body: #f8fafc;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --crimson-primary: #dc2626;
+            --crimson-dark: #991b1b;
+            --crimson-light: #fef2f2;
+            --oxygen-blue: #2563eb;
+            --oxygen-light: #eff6ff;
+            --gold: #d97706;
+            --gold-bg: #fffbeb;
+            --white: #ffffff;
+            --radius-sm: 8px;
+            --radius-lg: 20px;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 0;
+            font-size: 1.05rem;
+        }
+
+        /* Hero Header */
+        header {
+            background: linear-gradient(135deg, var(--crimson-dark) 0%, var(--crimson-primary) 100%);
+            color: var(--white);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -10%; width: 50%; height: 200%;
+            background: rgba(255,255,255,0.05);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+
+        .badge-top {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .intro {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem 5rem;
+        }
+
+        /* Section Headings */
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.2rem;
+            color: var(--crimson-dark);
+            margin: 4rem 0 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        h2::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 35px;
+            background-color: var(--oxygen-blue);
+            border-radius: 4px;
+        }
+
+        h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-bottom: 0.8rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            border-top: 5px solid var(--crimson-primary);
+        }
+
+        .content-card.blue-accent {
+            border-top-color: var(--oxygen-blue);
+        }
+
+        /* Mechanism Highlight Box */
+        .mechanism-box {
+            background-color: var(--oxygen-light);
+            border-left: 4px solid var(--oxygen-blue);
+            padding: 1.5rem;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin: 1.5rem 0;
+            color: var(--oxygen-blue);
+        }
+
+        .mechanism-box strong {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        /* Risk Alert Box */
+        .risk-box {
+            background-color: var(--crimson-light);
+            border: 1px solid #fecaca;
+            padding: 1.5rem;
+            border-radius: var(--radius-sm);
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .risk-box strong {
+            color: var(--crimson-primary);
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Math formula formatting */
+        .formula {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: bold;
+            color: var(--oxygen-blue);
+        }
+
+        /* Canvas Containers */
+        .interactive-visual {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-xl);
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .interactive-visual h3 {
+            color: var(--crimson-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .interactive-visual p.subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            border-radius: var(--radius-sm);
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Premium Abitur Box */
+        .abitur-premium {
+            background: var(--gold-bg);
+            border: 2px solid #fcd34d;
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin-top: 5rem;
+            box-shadow: 0 10px 15px -3px rgba(217, 119, 6, 0.1);
+            position: relative;
+        }
+
+        .abitur-premium::before {
+            content: '★ ABITUR-TRANSFER ★';
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--white);
+            padding: 0.4rem 2rem;
+            border-radius: 30px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .transfer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .transfer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .transfer-item {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-sm);
+            border-top: 4px solid var(--gold);
+            box-shadow: var(--shadow-md);
+        }
+
+        .transfer-item h4 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="badge-top">Lernbereich 3.4.2b</div>
+        <h1>Ausdauerleistungsfähigkeit: Blutdoping & EPO</h1>
+        <p class="intro">
+            Die aerobe Ausdauerleistungsfähigkeit (<span class="formula">VO<sub>2</sub>max</span>) wird maßgeblich durch die maximale Sauerstofftransportkapazität des kardiovaskulären Systems limitiert. Da der Sauerstoff im Blut nahezu vollständig chemisch an das Hämoglobin der roten Blutkörperchen (Erythrozyten) gebunden transportiert wird, zielen Dopingmethoden im Ausdauersport (z. B. Straßenradsport, Langstreckenlauf, Skilanglauf) primär darauf ab, die absolute Erythrozytenzahl und damit den Hämatokritwert unphysiologisch zu erhöhen. Dies führt zu einer gesteigerten Sauerstoffaufnahme und -versorgung der skelettalen Arbeitsmuskulatur.
+        </p>
+    </header>
+
+    <main>
+
+        <!-- Section: EPO -->
+        <h2>Erythropoetin (EPO)</h2>
+        <div class="content-card">
+            <p>
+                Erythropoetin ist ein körpereigenes (endogenes) Peptidhormon (Glykoprotein), das bei physiologischem Sauerstoffmangel (Hypoxie) primär in den Nieren gebildet wird. Im Doping wird synthetisch hergestelltes, rekombinantes EPO (rhEPO) exogen zugeführt.
+            </p>
+
+            <div class="mechanism-box">
+                <strong>Wirkungsweise</strong>
+                EPO bindet an spezifische Rezeptoren der blutbildenden Stammzellen im roten Knochenmark. Es stimuliert dort hochspezifisch die Proliferation und Differenzierung der Vorläuferzellen zu reifen Erythrozyten (Erythropoese). Der künstlich induzierte Anstieg der Erythrozytenzahl erhöht die Hämoglobinkonzentration und somit die arterielle Sauerstoffkapazität signifikant.
+            </div>
+
+            <div class="risk-box">
+                <strong>⚠️ Spezifische gesundheitliche Risiken</strong>
+                Die massiv gesteigerte Erythrozytenkonzentration führt zu einem dramatischen Anstieg des Hämatokritwerts (oft auf über 50-60 %). Dies verändert die rheologischen Eigenschaften (Fließeigenschaften) des Blutes drastisch: Das Blut verdickt sich (Hyperviskositätssyndrom). Der periphere Gefäßwiderstand steigt, wodurch das Herz gegen eine massiv erhöhte Nachlast (Afterload) pumpen muss. Es besteht akute Lebensgefahr durch arterielle und venöse Thrombosen, Lungenembolien, Herzinfarkte und Schlaganfälle.
+            </div>
+        </div>
+
+        <!-- Canvas 1: EPO Flussdiagramm -->
+        <div class="interactive-visual">
+            <h3>Flussdiagramm: Physiologischer Weg der Erythropoese</h3>
+            <p class="subtitle">Einfluss von exogenem rhEPO auf den Körper und Unterdrückung der endogenen Nierenproduktion.</p>
+            <canvas id="epoCanvas" width="900" height="450"></canvas>
+        </div>
+
+        <!-- Section: Blutdoping -->
+        <h2>Blutdoping (Bluttransfusionen)</h2>
+        <div class="content-card blue-accent">
+            <p>
+                Blutdoping beschreibt die intravenöse Verabreichung von Vollblut oder Zubereitungen, die rote Blutkörperchen enthalten. Man unterscheidet zwischen autologem (Eigenblut) und homologem (Fremdblut) Blutdoping.
+            </p>
+
+            <div class="mechanism-box">
+                <strong>Wirkungsweise (Autologes Doping)</strong>
+                Beim autologen Blutdoping wird dem Athleten Wochen vor dem Wettkampf Blut entnommen. Die Erythrozyten werden zentrifugiert, separiert und tiefgefroren (Kryokonservierung). Der Körper kompensiert den Blutverlust durch natürliche Erythropoese. Kurz vor dem Wettkampf werden die konservierten Erythrozyten reinfundiert. Dies führt, genau wie bei EPO, zu einem sofortigen, künstlichen Anstieg der Sauerstofftransportkapazität.
+            </div>
+
+            <div class="risk-box">
+                <strong>⚠️ Spezifische gesundheitliche Risiken</strong>
+                Neben den bereits bei EPO genannten extremen Risiken der Hyperviskosität (Thrombose, Herzinfarkt) birgt Blutdoping zusätzliche Gefahren: Bei homologen Transfusionen besteht das Risiko schwerer immunologischer Abstoßungsreaktionen (hämolytische Transfusionsreaktionen) und der Übertragung viraler Infektionen (z. B. HIV, Hepatitis). Zudem kann unsachgemäße Lagerung oder Infusion zu lebensbedrohlicher Sepsis führen.
+            </div>
+        </div>
+
+        <!-- Canvas 2: Blutdoping Zeitleiste & Hämatokrit-Graph -->
+        <div class="interactive-visual">
+            <h3>Infografik: Autologes Blutdoping Zeitleiste & Hämatokrit-Spike</h3>
+            <p class="subtitle">Verlauf des Hämatokritwerts (%) in Relation zu den 4 Phasen des autologen Blutdopings.</p>
+            <canvas id="timelineCanvas" width="900" height="500"></canvas>
+        </div>
+
+
+        <!-- Abitur Transfer Premium Box -->
+        <section class="abitur-premium">
+            <p style="text-align: center; color: var(--gold); font-weight: bold; margin-bottom: 2rem;">
+                In Abituraufgaben auf erhöhtem Anforderungsniveau (eA) wird bei diesem Thema häufig die Verknüpfung von Dopingwirkungen mit physiologischen Wettkampfbedingungen verlangt.
+            </p>
+
+            <div class="transfer-grid">
+                <div class="transfer-item">
+                    <h4>1. Hämatokrit-Analyse & Dehydratation</h4>
+                    <p>Eine typische Transferaufgabe (oft materialgestützt mit Laborwerten) verlangt, die tödliche Gefahr von EPO/Blutdoping im Ausdauersport biologisch zu begründen. Du musst den Dopingeffekt mit massivem Flüssigkeitsverlust (Schwitzen) koppeln.</p>
+                    <p style="background: #fff7ed; padding: 1rem; border-left: 3px solid var(--gold); font-size: 0.95rem;">
+                        <strong>Erwartete Transferleistung:</strong> Der rennbedingte Schweißverlust verringert das Blutplasmavolumen extrem, während die Erythrozytenzahl durch Doping maximal hoch bleibt. Dies treibt den relativen Hämatokritwert akut in letale Bereiche (>60%), das Blut "verklumpt" förmlich, was zu sofortigem Herzversagen bei maximaler Belastung führen kann.
+                    </p>
+                </div>
+
+                <div class="transfer-item">
+                    <h4>2. Diagnostik und Nachweis (Biologischer Pass)</h4>
+                    <p>Wenn in einer gesellschaftspolitischen Aufgabe die Problematik des Nachweises diskutiert wird, musst du erklären können, warum autologes Blutdoping schwer direkt nachweisbar ist (körpereigenes Gewebe).</p>
+                    <p style="background: #fff7ed; padding: 1rem; border-left: 3px solid var(--gold); font-size: 0.95rem;">
+                        <strong>Lösungsansatz:</strong> Hier wird das Wissen über den indirekten Nachweis durch den "Biologischen Pass" erwartet. Dieser überwacht langfristig Retikulozyten (junge Erythrozyten) und unphysiologische Hämatokrit-Schwankungen. Ein plötzlicher Spike ohne Höhentraining gilt als indirekter Dopingbeweis.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // High DPI Canvas Setup utility
+        function setupCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            
+            return { ctx, w: rect.width, h: rect.height };
+        }
+
+        // Draw Arrow utility
+        function drawArrow(ctx, fromX, fromY, toX, toY, color, width=3, dashed=false) {
+            ctx.beginPath();
+            ctx.moveTo(fromX, fromY);
+            ctx.lineTo(toX, toY);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = width;
+            if(dashed) ctx.setLineDash([8, 6]);
+            else ctx.setLineDash([]);
+            ctx.stroke();
+
+            // Arrowhead
+            const angle = Math.atan2(toY - fromY, toX - fromX);
+            ctx.beginPath();
+            ctx.moveTo(toX, toY);
+            ctx.lineTo(toX - 15 * Math.cos(angle - Math.PI/6), toY - 15 * Math.sin(angle - Math.PI/6));
+            ctx.lineTo(toX - 15 * Math.cos(angle + Math.PI/6), toY - 15 * Math.sin(angle + Math.PI/6));
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.setLineDash([]); // reset
+        }
+
+        function drawCross(ctx, x, y) {
+            ctx.beginPath();
+            ctx.strokeStyle = '#dc2626';
+            ctx.lineWidth = 4;
+            ctx.moveTo(x - 15, y - 15); ctx.lineTo(x + 15, y + 15);
+            ctx.moveTo(x + 15, y - 15); ctx.lineTo(x - 15, y + 15);
+            ctx.stroke();
+        }
+
+        // --- CANVAS 1: EPO Flowchart ---
+        function drawEPOFlowchart() {
+            const { ctx, w, h } = setupCanvas('epoCanvas');
+            
+            const colKidney = '#94a3b8';
+            const colEPO = '#dc2626';
+            const colBone = '#b45309';
+            const colBlood = '#2563eb';
+            const colO2 = '#16a34a';
+
+            function drawNode(x, y, width, height, title, subtitle, bgColor) {
+                ctx.fillStyle = bgColor;
+                ctx.shadowColor = 'rgba(0,0,0,0.15)';
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetY = 4;
+                ctx.beginPath();
+                ctx.roundRect(x - width/2, y - height/2, width, height, 12);
+                ctx.fill();
+                ctx.shadowColor = 'transparent';
+
+                ctx.fillStyle = '#ffffff';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.font = 'bold 16px Nunito';
+                ctx.fillText(title, x, y - (subtitle ? 10 : 0));
+                
+                if(subtitle) {
+                    ctx.font = '13px Nunito';
+                    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+                    ctx.fillText(subtitle, x, y + 12);
+                }
+            }
+
+            // Positions
+            const leftX = w * 0.25;
+            const rightX = w * 0.75;
+            const midX = w * 0.5;
+            
+            // Nodes
+            drawNode(midX, 60, 200, 60, "Exogenes rhEPO", "(Synthetische Zufuhr)", colEPO);
+            drawNode(leftX, 180, 180, 60, "Niere", "(Endogene Produktion)", colKidney);
+            drawNode(midX, 180, 220, 70, "Rotes Knochenmark", "(Verstärkte Proliferation)", colBone);
+            drawNode(midX, 320, 220, 70, "Blutbahn", "(Erythrozyten & Hämatokrit ↑)", colBlood);
+            drawNode(rightX, 320, 180, 60, "O2-Kapazität ↑", "(Leistungssteigerung)", colO2);
+
+            // Arrows
+            drawArrow(ctx, midX, 90, midX, 145, colEPO, 4); // rhEPO -> Bone
+            
+            // Kidney to Bone (Suppressed)
+            drawArrow(ctx, leftX + 90, 180, midX - 110, 180, colKidney, 2, true); 
+            drawCross(ctx, (leftX + 90 + midX - 110)/2, 180);
+            
+            ctx.fillStyle = '#ef4444';
+            ctx.font = 'bold 12px Nunito';
+            ctx.textAlign = 'center';
+            ctx.fillText("Feedback-Inhibition", (leftX + midX)/2 - 10, 165);
+            ctx.fillText("(Unterdrückung)", (leftX + midX)/2 - 10, 205);
+
+            // Bone to Blood
+            drawArrow(ctx, midX, 215, midX, 285, colBone, 4);
+            
+            // Blood to O2
+            drawArrow(ctx, midX + 110, 320, rightX - 90, 320, colO2, 4);
+
+            // Draw Erythrocytes in Blood
+            for(let i=0; i<6; i++) {
+                ctx.beginPath();
+                ctx.arc(midX - 80 + i*32, 385, 10, 0, Math.PI*2);
+                ctx.fillStyle = '#ef4444';
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#991b1b';
+                ctx.stroke();
+                // inner dimple
+                ctx.beginPath();
+                ctx.arc(midX - 80 + i*32, 385, 5, 0, Math.PI*2);
+                ctx.fillStyle = '#fca5a5';
+                ctx.fill();
+            }
+        }
+
+        // --- CANVAS 2: Timeline & Hematocrit Graph ---
+        function drawTimeline() {
+            const { ctx, w, h } = setupCanvas('timelineCanvas');
+            
+            const padding = 60;
+            const graphH = h * 0.55;
+            const startY = h - padding; // Timeline axis Y
+            const graphBaseY = startY - 40;
+
+            // Coordinates for the 4 phases
+            const pointsX = [
+                padding + 40,
+                padding + (w - 2*padding)*0.33,
+                padding + (w - 2*padding)*0.66,
+                w - padding - 40
+            ];
+
+            // 1. Draw Axis
+            ctx.beginPath();
+            ctx.moveTo(padding, startY);
+            ctx.lineTo(w - padding + 20, startY);
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            drawArrow(ctx, w - padding + 20, startY, w - padding + 40, startY, '#cbd5e1');
+
+            ctx.fillStyle = '#64748b';
+            ctx.font = 'bold 14px Oswald';
+            ctx.textAlign = 'right';
+            ctx.fillText("Zeitachse", w - padding + 40, startY + 30);
+
+            // Labels and Milestones
+            const phases = [
+                { title: "1. Blutentnahme", sub: "(Wochen vorher)", yVal: 45 },
+                { title: "2. Kühlung & Zentrif.", sub: "(Erythrozyten getrennt)", yVal: 35 },
+                { title: "3. Regeneration", sub: "(Kompensation)", yVal: 45 },
+                { title: "4. Reinfusion", sub: "(Unmittelbar vor Start)", yVal: 58 }
+            ];
+
+            // Graph coordinates mapped to Y values (45% -> base, higher % -> higher up)
+            // Let's say 30% is at graphBaseY, 60% is at padding
+            function getY(percent) {
+                const minP = 30;
+                const maxP = 65;
+                const range = maxP - minP;
+                const availableHeight = graphBaseY - padding;
+                return graphBaseY - ((percent - minP) / range) * availableHeight;
+            }
+
+            // Draw Graph Line
+            ctx.beginPath();
+            ctx.moveTo(padding, getY(45)); // start baseline
+            
+            // Phase 1 (Extraction drops level)
+            ctx.lineTo(pointsX[0], getY(45));
+            ctx.lineTo(pointsX[1], getY(35)); 
+            
+            // Phase 2 to 3 (Regeneration)
+            // Using a curve for natural regeneration
+            ctx.quadraticCurveTo((pointsX[1]+pointsX[2])/2, getY(45), pointsX[2], getY(45));
+            
+            // Phase 4 (Reinfusion Spike)
+            ctx.lineTo(pointsX[3]-20, getY(45));
+            ctx.lineTo(pointsX[3], getY(58));
+            ctx.lineTo(w - padding, getY(58));
+
+            ctx.strokeStyle = '#dc2626';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+
+            // Fill area under curve
+            ctx.lineTo(w - padding, graphBaseY);
+            ctx.lineTo(padding, graphBaseY);
+            ctx.fillStyle = 'rgba(220, 38, 38, 0.1)';
+            ctx.fill();
+
+            // Draw Y-Axis Labels (Hematocrit)
+            ctx.fillStyle = '#64748b';
+            ctx.font = '12px Nunito';
+            ctx.textAlign = 'right';
+            [35, 45, 58].forEach(val => {
+                const y = getY(val);
+                ctx.fillText(val + "%", padding - 10, y + 4);
+                // Grid line
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(w - padding, y);
+                ctx.strokeStyle = 'rgba(203, 213, 225, 0.4)';
+                ctx.lineWidth = 1;
+                if(val === 45) {
+                    ctx.setLineDash([4,4]);
+                    ctx.strokeStyle = 'rgba(37, 99, 235, 0.5)'; // baseline marker
+                }
+                ctx.stroke();
+                ctx.setLineDash([]);
+            });
+            ctx.fillStyle = '#2563eb';
+            ctx.font = 'bold 12px Nunito';
+            ctx.fillText("Normalwert", padding - 10, getY(45) - 10);
+            
+            ctx.fillStyle = '#dc2626';
+            ctx.fillText("Hyperviskosität!", padding - 10, getY(58) - 10);
+
+            // Draw Timeline Nodes and Text
+            phases.forEach((phase, i) => {
+                const x = pointsX[i];
+                
+                // Timeline dot
+                ctx.beginPath();
+                ctx.arc(x, startY, 8, 0, Math.PI*2);
+                ctx.fillStyle = '#ffffff';
+                ctx.fill();
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = '#2563eb';
+                ctx.stroke();
+
+                // Phase Text
+                ctx.fillStyle = '#334155';
+                ctx.font = 'bold 14px Nunito';
+                ctx.textAlign = 'center';
+                ctx.fillText(phase.title, x, startY + 25);
+                ctx.font = '12px Nunito';
+                ctx.fillStyle = '#64748b';
+                ctx.fillText(phase.sub, x, startY + 42);
+
+                // Graph Dot
+                const gY = getY(phase.yVal);
+                ctx.beginPath();
+                ctx.arc(x, gY, 6, 0, Math.PI*2);
+                ctx.fillStyle = '#dc2626';
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#ffffff';
+                ctx.stroke();
+            });
+
+            // Warning Icon at Spike
+            const spikeX = pointsX[3];
+            const spikeY = getY(58) - 25;
+            ctx.fillStyle = '#dc2626';
+            ctx.font = '24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText("⚠️", spikeX, spikeY);
+        }
+
+        // Render Canvases on load and resize
+        window.addEventListener('load', () => {
+            drawEPOFlowchart();
+            drawTimeline();
+        });
+
+        // Simple debounce for resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                drawEPOFlowchart();
+                drawTimeline();
+            }, 250);
+        });
+
+    </script>
+</body>
+</html>

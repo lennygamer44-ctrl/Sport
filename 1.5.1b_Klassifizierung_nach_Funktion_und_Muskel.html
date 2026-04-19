@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.5.1b Klassifizierung nach Funktion und Muskel</title>
+    <style>
+        /* Kinetic & Structure Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rubik:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Kinetic Palette */
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            
+            --kinetic-violet: #5b21b6; /* Deep Purple */
+            --kinetic-violet-light: #ede9fe;
+            
+            --kinetic-emerald: #10b981; /* Neon Green */
+            --kinetic-emerald-light: #d1fae5;
+            
+            --kinetic-accent: #3b82f6; /* Blue */
+            
+            --abi-bg: #1e293b;
+            --abi-gold: #f59e0b;
+            --abi-red: #ef4444;
+            
+            --radius-box: 12px;
+            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem;
+            background-image: radial-gradient(circle at 100% 0%, rgba(91, 33, 182, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at 0% 100%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .document-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        /* Kinetic Header */
+        .header-panel {
+            background: var(--bg-card);
+            border-radius: var(--radius-box);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-card);
+            border-top: 6px solid var(--kinetic-violet);
+            position: relative;
+        }
+
+        .sys-badge {
+            display: inline-block;
+            background: var(--kinetic-violet-light);
+            color: var(--kinetic-violet);
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-lead {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            max-width: 900px;
+        }
+
+        /* Section Styling */
+        .section-wrapper {
+            background: var(--bg-card);
+            border-radius: var(--radius-box);
+            padding: 3rem;
+            box-shadow: var(--shadow-card);
+        }
+
+        h2 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.8rem;
+            color: var(--kinetic-violet);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        h2 .num {
+            background: var(--kinetic-violet);
+            color: white;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 1.2rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        /* Comparison Cards */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .compare-grid { grid-template-columns: 1fr; }
+        }
+
+        .struct-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: transform 0.2s ease;
+        }
+
+        .struct-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--kinetic-violet);
+            box-shadow: 0 10px 20px rgba(91, 33, 182, 0.05);
+        }
+
+        .struct-card h3 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .tag-row {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 15px;
+            margin-bottom: 1rem;
+            align-items: baseline;
+        }
+
+        .tag-label {
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: var(--kinetic-emerald-light);
+            color: #065f46;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .tag-content {
+            font-size: 0.95rem;
+        }
+
+        /* Specific Highlighting inside cards */
+        .struct-card.static { border-top: 4px solid var(--abi-red); }
+        .struct-card.dynamic { border-top: 4px solid var(--kinetic-emerald); }
+        
+        .struct-card.general { border-top: 4px solid var(--kinetic-accent); }
+        .struct-card.special { border-top: 4px solid var(--kinetic-violet); }
+
+        .note-box {
+            background: var(--kinetic-violet-light);
+            border-left: 4px solid var(--kinetic-violet);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Canvas Wrapper */
+        .canvas-container {
+            background: var(--bg-card);
+            border-radius: var(--radius-box);
+            padding: 2rem;
+            box-shadow: var(--shadow-card);
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            overflow: hidden; /* prevents canvas overflow on small screens */
+        }
+
+        .canvas-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .canvas-header h3 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-width: 1000px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Massive Abitur Box */
+        .abitur-analytics {
+            background: var(--abi-bg);
+            color: #f1f5f9;
+            padding: 4rem;
+            border-radius: var(--radius-box);
+            margin-top: 2rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-bottom: 8px solid var(--abi-gold);
+        }
+
+        .abi-badge {
+            position: absolute;
+            top: -20px;
+            left: 3rem;
+            background: var(--abi-gold);
+            color: var(--text-dark);
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.6rem 2rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .abitur-analytics > p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .analysis-case {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+        }
+
+        .analysis-case h4 {
+            font-family: 'Chakra Petch', sans-serif;
+            color: var(--kinetic-emerald);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .arg-block {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed rgba(255,255,255,0.2);
+        }
+
+        .arg-block strong {
+            color: var(--abi-gold);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .key-concept {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(0,0,0,0));
+            border-left: 4px solid var(--abi-red);
+            padding: 2rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 2rem;
+        }
+
+        .key-concept h4 {
+            color: var(--abi-red);
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="document-grid">
+
+    <!-- Header -->
+    <header class="header-panel">
+        <div class="sys-badge">Lernbereich 1.5.1b</div>
+        <h1>Klassifizierung nach Funktion und Muskel</h1>
+        <p class="intro-lead">Neben der Unterscheidung nach Belastungsdauer und Energiebereitstellung ist es für eine präzise sportwissenschaftliche Trainingssteuerung zwingend notwendig, die Ausdauer nach weiteren strukturellen Aspekten zu differenzieren. Eine Ausdauerleistung ist maßgeblich davon abhängig, wie der Muskel arbeitet, wie viel Muskelmasse beteiligt ist und welchen Zweck die Ausdauer für die Sportart erfüllt.</p>
+    </header>
+
+    <!-- Canvas Flow-Chart (Positioned early for structural overview) -->
+    <div class="canvas-container">
+        <div class="canvas-header">
+            <h3>Strukturelle Ausdauer-Klassifizierung</h3>
+            <p style="color: var(--text-light); font-size: 0.95rem;">Systematik der Ausdauer nach Muskelanteil, Arbeitsweise und Spezifität.</p>
+        </div>
+        <canvas id="structureChart" width="1000" height="550"></canvas>
+    </div>
+
+    <!-- Section 1 -->
+    <section class="section-wrapper">
+        <h2><span class="num">1</span> Klassifizierung nach dem Anteil der beteiligten Muskulatur</h2>
+        <div class="note-box">
+            Dieses Kriterium unterscheidet, wie groß der Anteil der gesamten Skelettmuskulatur ist, der an der Bewegung beteiligt ist. Die Grenze wird in der Sportwissenschaft meist bei <strong>ca. 1/7 bis 1/6 der gesamten Muskelmasse</strong> gezogen (das entspricht in etwa der Muskulatur eines Beines).
+        </div>
+
+        <div class="compare-grid">
+            <div class="struct-card">
+                <h3>Allgemeine Ausdauer</h3>
+                <div class="tag-row">
+                    <span class="tag-label">Definition</span>
+                    <span class="tag-content">Mehr als 1/7 bis 1/6 der Gesamtmuskulatur ist im Einsatz.</span>
+                </div>
+                <div class="tag-row">
+                    <span class="tag-label" style="background:#fee2e2; color:#991b1b;">Limitation</span>
+                    <span class="tag-content">Der limitierende Faktor ist hier in der Regel nicht die lokale Muskelzelle, sondern das <strong>Herz-Kreislauf-System</strong> (die kardiopulmonale Leistungsfähigkeit) und die Sauerstoffaufnahme (VO<sub>2</sub>max).</span>
+                </div>
+                <div class="tag-row">
+                    <span class="tag-label" style="background:#e0f2fe; color:#0369a1;">Beispiel</span>
+                    <span class="tag-content">Joggen, Schwimmen, Radfahren, Skilanglauf.</span>
+                </div>
+            </div>
+
+            <div class="struct-card">
+                <h3>Lokale Ausdauer</h3>
+                <div class="tag-row">
+                    <span class="tag-label">Definition</span>
+                    <span class="tag-content">Weniger als 1/7 bis 1/6 der Gesamtmuskulatur wird beansprucht.</span>
+                </div>
+                <div class="tag-row">
+                    <span class="tag-label" style="background:#fee2e2; color:#991b1b;">Limitation</span>
+                    <span class="tag-content">Das Herz-Kreislauf-System wird kaum belastet (Puls steigt kaum). Limitierend wirken die <strong>periphere Stoffwechselkapazität</strong>, die Kapillarisierung im spezifischen Muskel und die lokale Ermüdungswiderstandsfähigkeit.</span>
+                </div>
+                <div class="tag-row">
+                    <span class="tag-label" style="background:#e0f2fe; color:#0369a1;">Beispiel</span>
+                    <span class="tag-content">Trizeps-Ausdauer beim Dartsport, Unterarmmuskulatur beim Sportklettern, reines Armkurbeln.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="section-wrapper">
+        <h2><span class="num">2</span> Klassifizierung nach der Muskelarbeitsweise</h2>
+        <p>Hier wird untersucht, ob die Muskulatur bei der Ausdauerleistung in Bewegung ist (Längenänderung) oder Haltearbeit verrichten muss.</p>
+
+        <div class="compare-grid">
+            <div class="struct-card dynamic">
+                <h3>Dynamische Ausdauer</h3>
+                <div class="tag-row">
+                    <span class="tag-label">Definition</span>
+                    <span class="tag-content">Charakterisiert durch einen ständigen Wechsel von Anspannung (Kontraktion) und Entspannung (Erschlaffung) der Arbeitsmuskulatur.</span>
+                </div>
+                <div class="tag-row">
+                    <span class="tag-label" style="background:#f3e8ff; color:#6b21a8;">Physiologie</span>
+                    <span class="tag-content">Durch den rhythmischen Wechsel fungiert die Muskulatur als <strong>"Muskelpumpe"</strong>. In der Entspannungsphase kann frisches, sauerstoffreiches Blut in die Kapillaren einströmen, was eine optimale aerobe Energiebereitstellung ermöglicht.</span>
+                </div>
+            </div>
+
+            <div class="struct-card static">
+                <h3>Statische Ausdauer</h3>
+                <div class="tag-row">
+                    <span class="tag-label">Definition</span>
+                    <span class="tag-content">Der Muskel leistet reine Haltearbeit (isometrische Kontraktion).</span>
+                </div>
+                <div class="tag-row">
+                    <span class="tag-label" style="background:#f3e8ff; color:#6b21a8;">Physiologie</span>
+                    <span class="tag-content">Der Dauertonus im Muskel quetscht die Blutgefäße (Kapillaren) zusammen. Bereits ab ca. 15–20 % der Maximalkraft wird die Durchblutung eingeschränkt; ab ca. 50 % sind die Gefäße komplett blockiert (<strong>Okklusion</strong>). Folglich wird die Sauerstoffzufuhr unterbrochen. Die Energiebereitstellung muss nun <strong>zwingend anaerob</strong> erfolgen, auch wenn die eigentliche Last gering ist!</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="section-wrapper">
+        <h2><span class="num">3</span> Klassifizierung nach der Sportartspezifität</h2>
+        <p>Diese Einteilung trennt die Basis-Leistungsfähigkeit von der Spezial-Leistungsfähigkeit eines Athleten.</p>
+
+        <div class="compare-grid">
+            <div class="struct-card general">
+                <h3>Allgemeine (Grundlagen-)Ausdauer</h3>
+                <p>Die <strong>sportartunabhängige Basis</strong> für alle Athleten (egal ob Turner, Kugelstoßer oder Fußballer). Sie befähigt den Sportler, ein langes Training überhaupt durchzuhalten, und beschleunigt die Regeneration massiv.</p>
+            </div>
+
+            <div class="struct-card special">
+                <h3>Spezielle Ausdauer</h3>
+                <p>Die <strong>exakte Ausprägung</strong> der Ausdauer, die durch das Anforderungsprofil der jeweiligen Wettkampfsportart diktiert wird.</p>
+                <div class="tag-row" style="margin-top: 15px;">
+                    <span class="tag-label" style="background:#e0f2fe; color:#0369a1;">Beispiel</span>
+                    <span class="tag-content">Die "Spielausdauer" eines Fußballers (wechselnde Sprints, Trabphasen, Richtungswechsel über 90 Minuten) oder die "Kampfausdauer" eines Boxers.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abitur Analytics Box -->
+    <div class="abitur-analytics">
+        <div class="abi-badge">Abitur-Transfer & Praxis (eA)</div>
+        <p>In Klausuren auf dem erhöhten Anforderungsniveau (eA) wird dieses Wissen nicht als Vokabeltest abgefragt, sondern als analytisches Werkzeug zur Entschlüsselung komplexer sportlicher Bewegungen. Du musst in der Lage sein, eine Sportart in all ihre Ausdauer-Facetten zu zerlegen und physiologisch zu begründen.</p>
+
+        <div class="analysis-case">
+            <h4>🚵 Multidimensionale Analyse: Mountainbike Downhill</h4>
+            <p>Wenn du in einer Abituraufgabe die Ausdaueranforderungen an einen Mountainbiker bei einer steilen, technisch anspruchsvollen und langen Abfahrt (Downhill) analysieren musst, erwartet das Kultusministerium eine präzise Zerlegung der Klassifikationen.</p>
+
+            <div class="arg-block">
+                <strong>1. Argumentation Muskelarbeitsweise (Beine)</strong>
+                Die Beinmuskulatur des Fahrers befindet sich beim Stehen auf den Pedalen in ständiger Beuge-Haltung (Isometrie), um Stöße abzufedern. Du musst erklären, dass hier eine <strong>statische Ausdauer</strong> gefordert ist. Wegen der <em>Kapillarokklusion</em> im Oberschenkel arbeitet die Muskulatur anaerob-laktazid, was zum typischen "Brennen" in den Oberschenkeln führt, obwohl der Athlet nicht aktiv strampelt.
+            </div>
+
+            <div class="arg-block">
+                <strong>2. Argumentation Muskelanteil (Arme)</strong>
+                Die Unterarmmuskulatur zum ständigen Halten der Bremsen verrichtet <strong>lokale Ausdauerarbeit</strong>. Auch hier kommt es extrem schnell zur peripheren Ermüdung ("Arm-Pump"), obwohl das Herzkreislaufsystem (die allgemeine Ausdauer) bei der Abfahrt gar nicht primär limitiert.
+            </div>
+        </div>
+
+        <div class="key-concept">
+            <h4>Der Abitur-Schlüsselbegriff: "Spezielle Ausdauer"</h4>
+            <p>Verwende die Systematik, um Trainingspläne zu bewerten. Wenn ein Volleyballer zur Verbesserung seiner Sprungkraftausdauer nur langsame 10-km-Dauerläufe macht, musst du im Abitur kritisieren, dass er zwar seine allgemeine Grundlagenausdauer trainiert, aber die <strong>spezielle Ausdauer</strong> (wiederholte, extrem kurze und anaerobe Maximalkrafteinsätze beim Block) damit völlig verfehlt und das Training somit nicht zielgerichtet ist.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Canvas Flow-Chart / Mindmap
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('structureChart');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Support
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+
+        function drawMindmap() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Styling Constants
+            const colorRoot = '#1e293b'; // Dark slate
+            const colorBranch1 = '#3b82f6'; // Blue (Anteil)
+            const colorBranch2 = '#10b981'; // Green (Arbeitsweise)
+            const colorBranch3 = '#8b5cf6'; // Purple (Spezifität)
+            const colorNodeBg = '#ffffff';
+            const colorText = '#334155';
+            
+            // Coordinates
+            const rootX = width / 2;
+            const rootY = 60;
+            const level1Y = 200;
+            const level2Y = 360;
+
+            const b1X = width * 0.2; // Left branch
+            const b2X = width * 0.5; // Center branch
+            const b3X = width * 0.8; // Right branch
+
+            // Helper to draw smooth connecting lines
+            function drawConnect(x1, y1, x2, y2, color) {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                // Orthogonal-style bezier
+                ctx.bezierCurveTo(x1, (y1 + y2) / 2, x2, (y1 + y2) / 2, x2, y2);
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 3;
+                ctx.stroke();
+            }
+
+            // Helper to draw a modern card node
+            function drawNode(x, y, w, h, textLines, icon, borderColor, isRoot = false) {
+                // Shadow
+                ctx.shadowColor = 'rgba(0,0,0,0.08)';
+                ctx.shadowBlur = 15;
+                ctx.shadowOffsetY = 5;
+
+                // Box
+                ctx.beginPath();
+                ctx.roundRect(x - w/2, y - h/2, w, h, 8);
+                ctx.fillStyle = isRoot ? borderColor : colorNodeBg;
+                ctx.fill();
+                
+                ctx.shadowColor = 'transparent'; // Reset shadow
+
+                if (!isRoot) {
+                    // Top border accent
+                    ctx.beginPath();
+                    ctx.roundRect(x - w/2, y - h/2, w, 4, [8, 8, 0, 0]);
+                    ctx.fillStyle = borderColor;
+                    ctx.fill();
+                    
+                    ctx.strokeStyle = '#e2e8f0';
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect(x - w/2, y - h/2, w, h);
+                }
+
+                // Icon Background (for subnodes)
+                if (icon && !isRoot) {
+                    ctx.beginPath();
+                    ctx.arc(x, y - h/2 + 25, 18, 0, Math.PI*2);
+                    ctx.fillStyle = borderColor + '22'; // 22 is hex alpha for ~13%
+                    ctx.fill();
+                    
+                    ctx.font = '20px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(icon, x, y - h/2 + 27);
+                }
+
+                // Text
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                if (isRoot) {
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = 'bold 16px Chakra Petch';
+                    textLines.forEach((line, i) => {
+                        ctx.fillText(line, x, y - (textLines.length-1)*10 + i*20);
+                    });
+                } else {
+                    ctx.fillStyle = colorText;
+                    ctx.font = 'bold 14px Chakra Petch';
+                    const startY = icon ? y + 10 : y - (textLines.length-1)*10;
+                    textLines.forEach((line, i) => {
+                        if(i === 1) { ctx.font = 'normal 12px Rubik'; ctx.fillStyle = '#64748b'; } // Subtitle style
+                        ctx.fillText(line, x, startY + i*18);
+                    });
+                }
+            }
+
+            // --- DRAW EDGES FIRST (so they are under nodes) ---
+            
+            // Root to Level 1
+            drawConnect(rootX, rootY + 30, b1X, level1Y - 30, colorBranch1);
+            drawConnect(rootX, rootY + 30, b2X, level1Y - 30, colorBranch2);
+            drawConnect(rootX, rootY + 30, b3X, level1Y - 30, colorBranch3);
+
+            // Level 1 to Level 2 (Branch 1)
+            drawConnect(b1X, level1Y + 30, b1X - 90, level2Y - 45, colorBranch1);
+            drawConnect(b1X, level1Y + 30, b1X + 90, level2Y - 45, colorBranch1);
+
+            // Level 1 to Level 2 (Branch 2)
+            drawConnect(b2X, level1Y + 30, b2X - 90, level2Y - 45, colorBranch2);
+            drawConnect(b2X, level1Y + 30, b2X + 90, level2Y - 45, colorBranch2);
+
+            // Level 1 to Level 2 (Branch 3)
+            drawConnect(b3X, level1Y + 30, b3X - 90, level2Y - 45, colorBranch3);
+            drawConnect(b3X, level1Y + 30, b3X + 90, level2Y - 45, colorBranch3);
+
+
+            // --- DRAW NODES ---
+            
+            // ROOT
+            drawNode(rootX, rootY, 320, 60, ["STRUKTURELLE AUSDAUER-", "KLASSIFIZIERUNG"], null, colorRoot, true);
+
+            // LEVEL 1 (Categories)
+            drawNode(b1X, level1Y, 180, 50, ["Nach Muskelanteil"], null, colorBranch1);
+            drawNode(b2X, level1Y, 180, 50, ["Nach Arbeitsweise"], null, colorBranch2);
+            drawNode(b3X, level1Y, 180, 50, ["Nach Spezifität"], null, colorBranch3);
+
+            // LEVEL 2 (Sub-categories)
+            const subW = 160;
+            const subH = 90;
+            
+            // Branch 1
+            drawNode(b1X - 90, level2Y, subW, subH, ["Allgemein", "> 1/6 der Muskeln"], "❤️", colorBranch1);
+            drawNode(b1X + 90, level2Y, subW, subH, ["Lokal", "< 1/6 der Muskeln"], "💪", colorBranch1);
+
+            // Branch 2
+            drawNode(b2X - 90, level2Y, subW, subH, ["Dynamisch", "Bewegung (Pumpe)"], "🚴", colorBranch2);
+            drawNode(b2X + 90, level2Y, subW, subH, ["Statisch", "Haltearbeit (Block)"], "🧱", colorBranch2);
+
+            // Branch 3
+            drawNode(b3X - 90, level2Y, subW, subH, ["Allgemein", "Sportart-Basis"], "🏗️", colorBranch3);
+            drawNode(b3X + 90, level2Y, subW, subH, ["Speziell", "Sportart-Profil"], "🎯", colorBranch3);
+        }
+
+        drawMindmap();
+
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawMindmap();
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Biologische Adaptation Beweglichkeit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: 'Space Grotesk' for technical/bio headers, 'Plus Jakarta Sans' for clean text -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        bio: {
+                            900: '#0f172a', // Deep Slate
+                            800: '#1e293b',
+                            700: '#334155',
+                            50: '#f8fafc',
+                        },
+                        muscle: '#f43f5e',   // Rose/Red for muscle tissue
+                        neuro: '#0ea5e9',    // Cyan for ZNS/Nerves
+                        stiffness: '#eab308',// Yellow/Gold for Stiffness
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                            vault: '#171717',
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(15, 23, 42, 0.1)',
+                        'glow-muscle': '0 0 20px rgba(244, 63, 94, 0.3)',
+                        'glow-neuro': '0 0 20px rgba(14, 165, 233, 0.3)',
+                        'glow-abitur': '0 0 30px rgba(245, 158, 11, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f1f5f9;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Bio-Performance Cards */
+        .card-clinical {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-clinical:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.1);
+        }
+
+        .card-dark {
+            background: #1e293b;
+            color: #f8fafc;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
+            border: 1px solid #334155;
+        }
+
+        /* Canvas Wrapper */
+        .canvas-container {
+            background: #0f172a;
+            border-radius: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+            border: 1px solid #334155;
+        }
+
+        /* Abitur Vault Box */
+        .abitur-vault {
+            background: linear-gradient(135deg, #171717 0%, #000000 100%);
+            border-top: 6px solid #f59e0b;
+            color: #f8fafc;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(245, 158, 11, 0.25);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        /* Hexagon Background Pattern */
+        .bg-hex {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='103.92304845413264' viewBox='0 0 60 103.92304845413264' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e2e8f0' fill-opacity='0.4'%3E%3Cpath d='M30 103.92304845413264l-30-17.32050807568877V51.96152422706632l30-17.32050807568877 30 17.32050807568877v34.64101615137755l-30 17.32050807568877zM15 77.94228634059968l15 8.660254037844386 15-8.660254037844386V60.62177826491092l-15-8.660254037844386-15 8.660254037844386v17.32050807568876z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .highlight-text {
+            background: linear-gradient(120deg, #f43f5e, #0ea5e9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="leading-relaxed pb-20 relative overflow-x-hidden bg-hex">
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 space-y-16 relative z-10">
+        
+        <!-- Header -->
+        <header class="bg-white/90 backdrop-blur-xl rounded-[2rem] p-8 md:p-14 shadow-glass border border-white relative overflow-hidden">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-6">
+                <div class="flex items-center gap-3">
+                    <span class="bg-bio-900 text-white font-bold px-4 py-1.5 rounded-full text-sm font-display tracking-widest uppercase">1.7.3b</span>
+                    <span class="text-bio-700 font-bold tracking-widest text-xs uppercase border border-bio-200 bg-bio-50 px-3 py-1.5 rounded-full">Biologie & Spezifität</span>
+                </div>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-display font-extrabold text-bio-900 mb-6 leading-[1.1] tracking-tight">
+                Biologische <br>
+                <span class="highlight-text">Adaptation</span> & Anwendung
+            </h1>
+            
+            <div class="max-w-4xl">
+                <p class="text-lg md:text-xl text-slate-600 font-medium leading-relaxed mb-6">
+                    Das Beweglichkeitstraining unterscheidet sich in seinen Anpassungsmechanismen fundamental vom Kraft- oder Ausdauertraining. 
+                </p>
+                <div class="bg-bio-50 border-l-4 border-muscle p-5 rounded-r-xl">
+                    <p class="text-bio-900 font-medium">
+                        Eine verbesserte Bewegungsamplitude (ROM) ist <strong class="text-muscle">selten eine physische "Verlängerung"</strong> des Muskels im makroskopischen Sinn, sondern basiert auf einem hochkomplexen Zusammenspiel aus neurophysiologischer Gewöhnung und mikroskopischen Umbauten. Die Anwendung muss <strong>zwingend sportartspezifisch</strong> erfolgen!
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Section 1: Biologische Adaptationen -->
+        <section>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-14 rounded-full bg-bio-900 flex items-center justify-center text-white shadow-lg">
+                    <span class="font-display font-bold text-2xl">1</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-bio-900">Die Adaptationen (Zelle & ZNS)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-8">
+                
+                <!-- Neurophysiologisch -->
+                <article class="card-clinical p-8 border-t-4 border-t-neuro">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2 bg-neuro/10 rounded-lg text-neuro">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-bio-900">Neurophysiologische Anpassung</h3>
+                    </div>
+                    <strong class="text-xs uppercase tracking-widest text-neuro block mb-3">Die Dehntoleranz (Habituation)</strong>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        Die schnellsten und signifikantesten Fortschritte beruhen <em>nicht</em> auf Gewebeveränderungen, sondern auf einer Gewöhnung des Zentralnervensystems. Die Schmerztoleranz für den Dehnreiz steigt!
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl text-sm text-slate-700 border border-slate-200">
+                        Das ZNS "lernt", die von den Muskelspindeln/Schmerzrezeptoren gesendeten Warnsignale später oder geringer mit einer reflektorischen Gegenspannung zu beantworten. <strong>Der Athlet kann weiter in die Dehnung gehen, bevor die autogene Hemmung blockiert.</strong>
+                    </div>
+                </article>
+
+                <!-- Morphologisch -->
+                <article class="card-clinical p-8 border-t-4 border-t-muscle">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2 bg-muscle/10 rounded-lg text-muscle">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-bio-900">Morphologische Anpassung</h3>
+                    </div>
+                    <strong class="text-xs uppercase tracking-widest text-muscle block mb-3">Der strukturelle Umbau</strong>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li>
+                            <strong class="text-bio-900 block">Serielle Sarkomer-Addition:</strong> Bei extremem, langfristigem Dehntraining (oft + Exzentrik) werden neue funktionelle Bausteine (Sarkomere) <em>in Serie</em> an den Enden der Myofibrillen angebaut. Ein echtes Längenwachstum!
+                        </li>
+                        <li>
+                            <strong class="text-bio-900 block">Remodeling des Bindegewebes:</strong> Faszien reagieren auf Zugstress mit einem Umbau der Kollagenfasern. Das Gewebe wird nachgiebiger, elastischer und reißfester.
+                        </li>
+                        <li>
+                            <strong class="text-bio-900 block">Senkung des Ruhetonus:</strong> Langfristiges statisches Dehnen senkt die Grundspannung, was Durchblutung und Trophik verbessert.
+                        </li>
+                    </ul>
+                </article>
+
+            </div>
+
+            <!-- Microscopic Canvas Section (KI 2 Task 1) -->
+            <div class="canvas-container p-6 md:p-8 w-full mt-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-slate-700 pb-4">
+                    <div>
+                        <h4 class="text-2xl font-display font-bold text-white">Mikroskopischer Querschnitt</h4>
+                        <p class="text-sm text-neuro font-medium mt-1">Zelluläre Morphologie: Ungedehnt vs. Adaptiert</p>
+                    </div>
+                    <div class="flex gap-4 text-xs font-bold font-sans uppercase tracking-widest text-slate-300 mt-4 md:mt-0">
+                        <div class="flex items-center gap-2"><div class="w-3 h-3 bg-muscle rounded-sm"></div> Myofibrille</div>
+                        <div class="flex items-center gap-2"><div class="w-3 h-3 bg-blue-300 rounded-sm"></div> Faszien/Kollagen</div>
+                    </div>
+                </div>
+                <canvas id="muscleCanvas" class="w-full h-[350px] md:h-[400px] block rounded-lg bg-bio-900/50 border border-slate-800"></canvas>
+            </div>
+        </section>
+
+        <!-- Section 2: Sportartspezifische Anwendung -->
+        <section>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-14 rounded-full bg-bio-900 flex items-center justify-center text-white shadow-lg">
+                    <span class="font-display font-bold text-2xl">2</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-bio-900">Das Anforderungsprofil</h2>
+            </div>
+            <p class="text-slate-600 mb-8 text-lg max-w-4xl">
+                Beweglichkeit ist kein Selbstzweck. Das biologische <strong>Prinzip der Spezifität</strong> fordert, dass das Dehnprogramm exakt auf das Anforderungsprofil der Sportart zugeschnitten ist:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <!-- Turnen -->
+                <div class="card-clinical p-8 border-t-4 border-t-neuro">
+                    <h3 class="text-xl font-bold text-bio-900 mb-2">Maximale Beweglichkeit</h3>
+                    <p class="text-xs text-neuro uppercase font-bold tracking-widest mb-4">Turnen / RSG / Kampfsport</p>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        Das Erreichen der maximalen anatomischen Gelenkigkeit ist leistungslimitierend. Ein Spagat oder extrem hoher Kick erfordert langfristige, isolierte Trainingseinheiten.
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl text-sm border border-slate-200">
+                        <strong>Methode:</strong> Primär PNF-Methoden (z. B. CHRS) und extremes passiv-statisches Dehnen, um die anatomische Beweglichkeitsreserve voll auszuschöpfen.
+                    </div>
+                </div>
+
+                <!-- Sprint -->
+                <div class="card-clinical p-8 border-t-4 border-t-stiffness">
+                    <h3 class="text-xl font-bold text-bio-900 mb-2">Optimale Beweglichkeit vs. Stiffness</h3>
+                    <p class="text-xs text-stiffness uppercase font-bold tracking-widest mb-4">Sprint / Sprungdisziplinen</p>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        In Schnell-/Reaktivkraftsportarten ist eine "zu große" Beweglichkeit kontraproduktiv! Der Sprinter benötigt im Muskel-Sehnen-Apparat eine <strong>extrem hohe Stiffness (Steifigkeit)</strong>.
+                    </p>
+                    <div class="bg-amber-50 p-4 rounded-xl text-sm border border-amber-200 text-amber-900">
+                        <strong>Biomechanik:</strong> Stiffness speichert kinetische Energie wie eine harte Sprungfeder für den Dehnungs-Verkürzungs-Zyklus. Eine zu weiche, "überdehnte" Sehne lässt diese Energie verpuffen! Hier wird nur <em>optimal</em> gedehnt (aktiv-dynamisch).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bar Chart Canvas Section (KI 2 Task 2) -->
+            <div class="card-dark p-6 md:p-8 w-full mt-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-slate-700 pb-4">
+                    <div>
+                        <h4 class="text-2xl font-display font-bold text-white">Anforderungsprofile im Vergleich</h4>
+                        <p class="text-sm text-slate-400 font-medium mt-1">Stiffness vs. Beweglichkeit in 3 Sportarten</p>
+                    </div>
+                    <div class="flex gap-4 text-xs font-bold font-sans uppercase tracking-widest text-slate-300 mt-4 md:mt-0">
+                        <div class="flex items-center gap-2"><div class="w-3 h-3 bg-neuro rounded-sm"></div> Beweglichkeit</div>
+                        <div class="flex items-center gap-2"><div class="w-3 h-3 bg-stiffness rounded-sm"></div> Stiffness</div>
+                    </div>
+                </div>
+                <canvas id="stiffnessCanvas" class="w-full h-[300px] block"></canvas>
+            </div>
+        </section>
+
+        <!-- Section 3: Timing -->
+        <section>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-14 rounded-full bg-bio-900 flex items-center justify-center text-white shadow-lg">
+                    <span class="font-display font-bold text-2xl">3</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-bio-900">Timing im Trainingsprozess</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card-clinical p-6">
+                    <h3 class="font-bold text-lg text-bio-900 mb-2">Im Aufwärmen (Warm-up)</h3>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider mb-3">Ausschließlich Dynamisch</div>
+                    <p class="text-sm text-slate-600">Ziel: Erhöhung der Durchblutung, Senkung der Viskosität, Tonisierung der Muskulatur. <strong class="text-muscle">Langes statisches Dehnen ist hier verboten</strong>, da es Ruhetonus und Reaktivkraft massiv herabsetzt!</p>
+                </div>
+                <div class="card-clinical p-6 border-l-4 border-l-neuro">
+                    <h3 class="font-bold text-lg text-bio-900 mb-2">Im Abwärmen (Cool-down)</h3>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider mb-3">Leicht Statisch</div>
+                    <p class="text-sm text-slate-600">Ziel: Regeneration einleiten durch Senkung des Muskeltonus. <strong class="text-red-500">Achtung:</strong> Niemals nach stark exzentrischen Belastungen (DOMS), da weiterer Zugstress die Mikrotraumata vergrößert!</p>
+                </div>
+                <div class="card-clinical p-6">
+                    <h3 class="font-bold text-lg text-bio-900 mb-2">Als eigenständige Einheit</h3>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider mb-3">PNF & Intensiv Statisch</div>
+                    <p class="text-sm text-slate-600">Um <em>echte morphologische Adaptationen</em> (Sarkomer-Addition) zu erzielen, reichen 5 Min. nach dem Joggen nicht. Erfordert separate, 30-60 minütige Einheiten im erholten Zustand an der Reizschwelle.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Abitur Premium Transfer Box -->
+        <section class="abitur-vault rounded-[2rem] p-8 md:p-14 shadow-glow-abitur mt-24">
+            <div class="absolute right-0 top-0 opacity-10 pointer-events-none w-full h-full overflow-hidden">
+                <svg class="absolute right-[-5%] top-[-20%] w-[500px] h-[500px] text-abitur transform rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+            </div>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-12 border-b border-zinc-800 pb-8">
+                    <div class="bg-gradient-to-br from-yellow-400 to-yellow-600 text-bio-900 p-5 rounded-2xl shadow-lg">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-5xl font-display font-bold text-white tracking-tight mb-2">Abitur-Transfer & Praxis</h2>
+                        <div class="inline-flex items-center gap-3">
+                            <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">eA-Niveau</span>
+                            <span class="text-abitur font-medium text-lg">Fehleranalysen & Biologische Mythen</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    
+                    <!-- Fallstudie 1: Stiffness-Verlust -->
+                    <div class="bg-bio-900/60 p-8 rounded-2xl border border-slate-800 hover:border-abitur/50 transition-colors">
+                        <h3 class="text-xl font-display font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-abitur text-2xl">1</span> Der Stiffness-Leistungsabfall
+                        </h3>
+                        <div class="bg-slate-800/50 p-4 rounded text-sm text-slate-400 mb-4 font-mono border-l-2 border-red-500">
+                            <strong>Szenario:</strong> Ein Weitspringer macht direkt vor dem Wettkampf 15 Min. intensives, passiv-statisches Stretching (60s halten).
+                        </div>
+                        <strong class="text-abitur block mb-2 uppercase tracking-wide text-sm">Deine biologische Demontage:</strong>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-2">
+                            Das langes statische Halten aktiviert die autogene Hemmung über die Golgi-Sehnenorgane &rarr; <strong>Massive Senkung des Muskeltonus.</strong>
+                        </p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Zudem verliert der Muskel-Sehnen-Apparat seine Stiffness (Steifigkeit). Resultat: Die elastischen Komponenten können beim Absprung keine kinetische Energie mehr effizient speichern, die <strong>Schnellkraft und Reaktivkraft brechen zusammen</strong>, die Leistung sinkt dramatisch!
+                        </p>
+                    </div>
+
+                    <!-- Fallstudie 2: Mythen Entlarven -->
+                    <div class="bg-bio-900/60 p-8 rounded-2xl border border-slate-800 hover:border-abitur/50 transition-colors">
+                        <h3 class="text-xl font-display font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-abitur text-2xl">2</span> Differenzierung der Anpassung
+                        </h3>
+                        <div class="bg-slate-800/50 p-4 rounded text-sm text-slate-400 mb-4 font-mono border-l-2 border-neuro">
+                            <strong>Textquelle / Mythos:</strong> Hobbysportler behauptet: "Ich habe durch Dehnen meine Beinmuskeln innerhalb von zwei Wochen um 10 cm verlängert."
+                        </div>
+                        <strong class="text-abitur block mb-2 uppercase tracking-wide text-sm">Deine Fundierte Entlarvung:</strong>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-2">
+                            In diesem kurzen Zeitraum von zwei Wochen kann keine echte morphologische Adaptation (Serielle Sarkomer-Addition) stattgefunden haben. Physisches Längenwachstum erfordert Monate.
+                        </p>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Die verbesserte Reichweite basiert <strong>ausschließlich auf einer neurophysiologischen Adaptation</strong> – der verbesserten Dehntoleranz und der Habituation des ZNS gegenüber dem Schmerzreiz.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="mt-16 pt-8 pb-12 border-t border-slate-300 text-center relative z-10">
+        <p class="font-display font-bold text-slate-500 tracking-widest text-sm mb-1 uppercase">Abiturwissen Sport (G9, eA)</p>
+        <p class="text-slate-400 font-sans text-sm">Lernbereich 1.7.3b Adaptation & Spezifität im Beweglichkeitstraining</p>
+    </footer>
+
+    <!-- Interactive Canvas Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Canvas 1: Microscopic Muscle Cross-Section ---
+            const mCanvas = document.getElementById('muscleCanvas');
+            const mCtx = mCanvas.getContext('2d');
+            
+            // --- Canvas 2: Stiffness Bar Chart ---
+            const sCanvas = document.getElementById('stiffnessCanvas');
+            const sCtx = sCanvas.getContext('2d');
+            
+            function resizeCanvases() {
+                const dpr = window.devicePixelRatio || 1;
+                
+                // Muscle Canvas
+                const mRect = mCanvas.parentElement.getBoundingClientRect();
+                mCanvas.width = mRect.width * dpr;
+                mCanvas.height = mRect.height * dpr;
+                mCtx.scale(dpr, dpr);
+                mCanvas.style.width = `${mRect.width}px`;
+                mCanvas.style.height = `${mRect.height}px`;
+
+                // Stiffness Canvas
+                const sRect = sCanvas.parentElement.getBoundingClientRect();
+                sCanvas.width = sRect.width * dpr;
+                sCanvas.height = sRect.height * dpr;
+                sCtx.scale(dpr, dpr);
+                sCanvas.style.width = `${sRect.width}px`;
+                sCanvas.style.height = `${sRect.height}px`;
+            }
+            
+            window.addEventListener('resize', resizeCanvases);
+            resizeCanvases();
+
+            let time = 0;
+
+            // --- Draw Logic for Muscle Canvas ---
+            function drawMuscleCanvas() {
+                const w = mCanvas.parentElement.clientWidth;
+                const h = mCanvas.parentElement.clientHeight;
+                mCtx.clearRect(0, 0, w, h);
+
+                const midY = h / 2;
+                
+                // Labels
+                mCtx.fillStyle = '#94a3b8';
+                mCtx.font = 'bold 12px "Plus Jakarta Sans"';
+                mCtx.textAlign = 'left';
+                mCtx.fillText("VORHER (Ungedehnt)", 20, 30);
+                mCtx.fillText("NACHHER (Morphologisch adaptiert)", 20, midY + 30);
+
+                // Helper to draw a sarcomere
+                function drawSarcomere(x, y, width, height, isContracted) {
+                    // Actin/Myosin block
+                    mCtx.fillStyle = '#f43f5e'; // Rose
+                    mCtx.fillRect(x, y, width, height);
+                    
+                    // Z-Discs (Borders)
+                    mCtx.strokeStyle = '#fda4af';
+                    mCtx.lineWidth = 2;
+                    mCtx.beginPath();
+                    mCtx.moveTo(x, y - 5); mCtx.lineTo(x, y + height + 5);
+                    mCtx.moveTo(x + width, y - 5); mCtx.lineTo(x + width, y + height + 5);
+                    mCtx.stroke();
+                    
+                    // Center M-Line
+                    mCtx.beginPath();
+                    mCtx.moveTo(x + width/2, y); mCtx.lineTo(x + width/2, y + height);
+                    mCtx.strokeStyle = '#881337';
+                    mCtx.stroke();
+                }
+
+                // Helper to draw fascia/collagen lines
+                function drawFascia(startX, startY, endX, isOrdered) {
+                    mCtx.beginPath();
+                    mCtx.moveTo(startX, startY);
+                    
+                    if (!isOrdered) {
+                        // Messy, tangled collagen
+                        for (let x = startX; x < endX; x += 10) {
+                            mCtx.lineTo(x, startY + (Math.random() - 0.5) * 20);
+                        }
+                    } else {
+                        // Ordered, wavy, elastic collagen
+                        for (let x = startX; x < endX; x += 5) {
+                            mCtx.lineTo(x, startY + Math.sin(x * 0.1 + time*2) * 5);
+                        }
+                    }
+                    mCtx.strokeStyle = 'rgba(147, 197, 253, 0.6)'; // Blue-300 with opacity
+                    mCtx.lineWidth = 2;
+                    mCtx.stroke();
+                }
+
+                const sHeight = 40;
+                const startX = 150;
+                
+                // Top: Unadapted Muscle
+                const sWidthTop = 60;
+                const numSarcTop = 4;
+                const topY = midY/2 - sHeight/2;
+                
+                for(let i=0; i<numSarcTop; i++) {
+                    drawSarcomere(startX + i*sWidthTop, topY, sWidthTop, sHeight, false);
+                }
+                // Tangled Fascia above and below
+                for(let i=0; i<3; i++) {
+                    drawFascia(startX, topY - 15 - i*8, startX + numSarcTop*sWidthTop, false);
+                    drawFascia(startX, topY + sHeight + 15 + i*8, startX + numSarcTop*sWidthTop, false);
+                }
+
+                // Bottom: Adapted Muscle (Serielle Sarkomer-Addition)
+                // Same total physical space to start, but stretches further due to more sarcomeres
+                const sWidthBot = 60; 
+                const numSarcBot = 6; // 2 more added!
+                const botY = midY + midY/2 - sHeight/2;
+
+                // Pulsing glow to highlight addition
+                mCtx.shadowColor = '#f43f5e';
+                mCtx.shadowBlur = 10 + Math.sin(time*4)*5;
+
+                for(let i=0; i<numSarcBot; i++) {
+                    drawSarcomere(startX + i*sWidthBot, botY, sWidthBot, sHeight, false);
+                }
+                mCtx.shadowBlur = 0;
+
+                // Ordered Fascia above and below
+                for(let i=0; i<3; i++) {
+                    drawFascia(startX, botY - 15 - i*8, startX + numSarcBot*sWidthBot, true);
+                    drawFascia(startX, botY + sHeight + 15 + i*8, startX + numSarcBot*sWidthBot, true);
+                }
+
+                // Annotations
+                mCtx.fillStyle = '#0ea5e9'; // Neuro cyan for highlight text
+                mCtx.font = '11px "Plus Jakarta Sans"';
+                mCtx.fillText("← Ungeordnetes/Sprödes Kollagen", startX + numSarcTop*sWidthTop + 20, topY);
+                mCtx.fillText("← 4 Sarkomere in Serie", startX + numSarcTop*sWidthTop + 20, topY + sHeight);
+
+                mCtx.fillStyle = '#f59e0b'; // Amber
+                mCtx.fillText("← Geordnetes/Elastisches Remodeling", startX + numSarcBot*sWidthBot + 20, botY);
+                mCtx.fillStyle = '#f43f5e';
+                mCtx.font = 'bold 12px "Plus Jakarta Sans"';
+                mCtx.fillText("← 6 Sarkomere! (Serielle Addition)", startX + numSarcBot*sWidthBot + 20, botY + sHeight);
+            }
+
+            // --- Draw Logic for Stiffness Bar Chart ---
+            function drawStiffnessCanvas() {
+                const w = sCanvas.parentElement.clientWidth;
+                const h = sCanvas.parentElement.clientHeight;
+                sCtx.clearRect(0, 0, w, h);
+
+                const data = [
+                    { label: "Turnen / RSG", flex: 95, stiff: 10 },
+                    { label: "100-m-Sprint", flex: 60, stiff: 95 },
+                    { label: "Langstrecke", flex: 40, stiff: 50 }
+                ];
+
+                const padding = 40;
+                const chartW = w - padding * 2;
+                const chartH = h - padding * 2;
+                const barGroupW = chartW / 3;
+                const barW = Math.min(40, barGroupW * 0.3);
+
+                // Draw Grid
+                sCtx.strokeStyle = 'rgba(255,255,255,0.1)';
+                sCtx.lineWidth = 1;
+                sCtx.beginPath();
+                sCtx.moveTo(padding, padding); sCtx.lineTo(padding, h - padding);
+                sCtx.moveTo(padding, h - padding); sCtx.lineTo(w - padding, h - padding);
+                sCtx.stroke();
+
+                sCtx.fillStyle = '#94a3b8';
+                sCtx.font = '10px "Plus Jakarta Sans"';
+                sCtx.textAlign = 'right';
+                sCtx.fillText("100%", padding - 10, padding + 5);
+                sCtx.fillText("0%", padding - 10, h - padding);
+                
+                sCtx.textAlign = 'center';
+                
+                // Animate bars growing
+                const animProgress = Math.min(1, time / 2); // Grow over 2 seconds
+
+                data.forEach((d, i) => {
+                    const groupX = padding + i * barGroupW + barGroupW/2;
+                    
+                    // Label
+                    sCtx.fillStyle = '#e2e8f0';
+                    sCtx.font = 'bold 12px "Plus Jakarta Sans"';
+                    sCtx.fillText(d.label, groupX, h - padding + 20);
+
+                    const flexH = (d.flex / 100) * chartH * animProgress;
+                    const stiffH = (d.stiff / 100) * chartH * animProgress;
+
+                    // Flex Bar (Cyan)
+                    const flexX = groupX - barW - 5;
+                    const flexY = h - padding - flexH;
+                    sCtx.fillStyle = '#0ea5e9';
+                    sCtx.shadowColor = '#0ea5e9';
+                    sCtx.shadowBlur = 10;
+                    sCtx.beginPath(); sCtx.roundRect(flexX, flexY, barW, flexH, [4,4,0,0]); sCtx.fill();
+                    sCtx.shadowBlur = 0;
+                    
+                    // Stiff Bar (Gold)
+                    const stiffX = groupX + 5;
+                    const stiffY = h - padding - stiffH;
+                    sCtx.fillStyle = '#eab308';
+                    sCtx.shadowColor = '#eab308';
+                    sCtx.shadowBlur = 10;
+                    sCtx.beginPath(); sCtx.roundRect(stiffX, stiffY, barW, stiffH, [4,4,0,0]); sCtx.fill();
+                    sCtx.shadowBlur = 0;
+
+                    // Value text on top
+                    if (animProgress > 0.9) {
+                        sCtx.fillStyle = '#ffffff';
+                        sCtx.font = '10px "Plus Jakarta Sans"';
+                        sCtx.fillText(d.flex, flexX + barW/2, flexY - 8);
+                        sCtx.fillText(d.stiff, stiffX + barW/2, stiffY - 8);
+                    }
+                });
+            }
+
+            function animate() {
+                time += 0.03;
+                drawMuscleCanvas();
+                drawStiffnessCanvas();
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        });
+    </script>
+</body>
+</html>

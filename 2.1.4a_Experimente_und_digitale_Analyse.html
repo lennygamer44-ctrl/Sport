@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.4a Experimente und digitale Analyse - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,500;0,700;0,800;1,500&display=swap');
+
+        :root {
+            /* Base Theme (Physical World) */
+            --bg-light: #f8fafc;
+            --text-dark: #0f172a;
+            --text-mut: #475569;
+            --accent-primary: #2563eb; /* Royal Blue */
+            --card-bg: #ffffff;
+            
+            /* Digital Theme (Software World) */
+            --bg-dark: #0b1120;
+            --text-light: #f1f5f9;
+            --text-dark-mut: #94a3b8;
+            --neon-cyan: #22d3ee;
+            --neon-pink: #f472b6;
+            --neon-green: #4ade80;
+            --neon-yellow: #facc15;
+            
+            /* Abitur Premium */
+            --abi-bg: #1e1b4b;
+            --abi-gold: #fbbf24;
+
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow-float: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.65;
+            font-size: 1.05rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .document-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* --- HEADER --- */
+        .doc-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem;
+            box-shadow: var(--shadow-float);
+            margin-bottom: 3rem;
+            border-top: 6px solid var(--accent-primary);
+        }
+
+        .doc-header h1 {
+            font-size: 2.6rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .doc-header .intro {
+            font-size: 1.15rem;
+            color: var(--text-mut);
+            max-width: 900px;
+        }
+
+        /* --- SECTION 1: PHYSICAL EXPERIMENTS --- */
+        .experiments-section {
+            margin-bottom: 4rem;
+        }
+
+        .experiments-section > h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            border-bottom: 3px solid var(--accent-primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .exp-intro {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .exp-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-float);
+            border-left: 4px solid var(--accent-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .exp-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .exp-card h3 {
+            font-size: 1.3rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .exp-card p {
+            color: var(--text-mut);
+        }
+
+        /* --- SECTION 2: DIGITAL ANALYSIS (DARK MODE) --- */
+        .digital-section {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .digital-section::before {
+            content: 'DATA_ANALYSIS_UI_v2.4';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-family: 'Fira Code', monospace;
+            color: var(--text-dark-mut);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .digital-section > h2 {
+            font-size: 2.2rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .digital-section > p {
+            color: var(--text-dark-mut);
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin-bottom: 3rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+        }
+
+        .tech-item h4 {
+            font-family: 'Fira Code', monospace;
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .tech-item p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        /* Canvas Wrap */
+        .canvas-layout {
+            background: #000;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            border: 1px solid #334155;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* --- ABITUR TRANSFER (PREMIUM) --- */
+        .abitur-terminal {
+            background: var(--abi-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            color: white;
+            position: relative;
+            box-shadow: var(--shadow-float);
+        }
+
+        .abitur-terminal::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0; width: 8px;
+            background: var(--abi-gold);
+            border-top-left-radius: var(--radius-lg);
+            border-bottom-left-radius: var(--radius-lg);
+        }
+
+        .abitur-terminal h2 {
+            color: var(--abi-gold);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.1rem;
+            color: #c7d2fe;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .abi-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .abi-item {
+            background: rgba(0,0,0,0.2);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .abi-item h4 {
+            color: white;
+            font-size: 1.25rem;
+            margin-bottom: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .abi-item p {
+            color: #e2e8f0;
+        }
+
+        .highlight-text {
+            color: var(--abi-gold);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .doc-header, .digital-section, .abitur-terminal { padding: 2rem; }
+            .doc-header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="document-container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>2.1.4a Experimente und digitale Analyse</h1>
+        <p class="intro">
+            Die reine theoretische Kenntnis biomechanischer Prinzipien ist im modernen Leistungssport nicht ausreichend. Die angewandte Trainingswissenschaft nutzt praktische Experimente und digitale Hilfsmittel, um mechanische Gesetzmäßigkeiten erfahrbar zu machen und Leistungsreserven durch exakte Datenanalyse aufzudecken. Das bayerische Curriculum fordert hier explizit die Umsetzung des theoretischen Wissens in die Praxis.
+        </p>
+    </header>
+
+    <!-- Section 1: Physical -->
+    <section class="experiments-section">
+        <h2>1. Durchführung einfacher biomechanischer Experimente</h2>
+        <p class="exp-intro">Um die oft abstrakten physikalischen Gesetze zu veranschaulichen, werden im sportlichen Kontext standardisierte Experimente durchgeführt:</p>
+        
+        <div class="exp-grid">
+            <article class="exp-card">
+                <h3>⚖️ Experimente zum Körperschwerpunkt (KSP)</h3>
+                <p>Zur Demonstration der KSP-Verschiebung kann das Balancieren auf einem Kippbrett (Borelli-Brett) genutzt werden. Die Schülerinnen und Schüler erfahren, dass sich der Unterstützungspunkt (und damit der Schwerpunkt) signifikant verschiebt, sobald Arme oder Beine angehoben werden. Dies beweist die Segmentstruktur des menschlichen Körpers.</p>
+            </article>
+
+            <article class="exp-card">
+                <h3>🌪️ Experimente zur Drehimpulserhaltung</h3>
+                <p>Der klassische <strong>"Pirouetten-Effekt"</strong>. Eine Person sitzt auf einem reibungsarmen Drehstuhl und hält Hanteln in den ausgestreckten Armen, während sie in Rotation versetzt wird. Werden die Arme eng an den Körper herangezogen, verringert sich das Trägheitsmoment massiv. Da der Drehimpuls konstant bleiben muss, erhöht sich die Winkelgeschwindigkeit (die Drehung wird drastisch schneller).</p>
+            </article>
+
+            <article class="exp-card">
+                <h3>🚀 Experimente zu Schwungmassen</h3>
+                <p>Ein Standweitsprung wird einmal mit auf dem Rücken fixierten Armen und einmal mit massivem, isoliertem Armschwung durchgeführt. Die Differenz in der Sprungweite beweist das <strong>Prinzip der zeitlichen und räumlichen Koordination von Einzelimpulsen</strong> (bzw. die Impulsübertragung von den Schwungelementen auf das Gesamtsystem).</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Section 2: Digital -->
+    <section class="digital-section">
+        <h2>2. Analyse von Bewegungen unter Anwendung digitaler Hilfsmittel</h2>
+        <p>Die subjektive Trainerbeobachtung stößt bei hochdynamischen Bewegungen an ihre Grenzen (das menschliche Auge verarbeitet ca. 16-24 Bilder pro Sekunde; ein Golfschwung oder ein Speer-Abwurf dauern oft nur Millisekunden).</p>
+        
+        <div class="tech-grid">
+            <div class="tech-item">
+                <h4>> Kinematische Videoanalyse</h4>
+                <p>Mithilfe von High-Speed-Kameras oder speziellen Tablet-Apps (z. B. Kinovea, Coach's Eye) lassen sich Bewegungen <em>frame by frame</em> (Bild für Bild) analysieren.</p>
+            </div>
+            
+            <div class="tech-item">
+                <h4>> Winkelmessung und Trajektorien</h4>
+                <p>Digitale Tools ermöglichen das Einzeichnen von Gelenkwinkeln (z. B. Beugewinkel im Kniegelenk beim Stemmschritt) und das Verfolgen von Flugkurven (Trajektorien) des KSP oder des Sportgeräts.</p>
+            </div>
+
+            <div class="tech-item">
+                <h4>> Soll-Ist-Wert-Vergleich</h4>
+                <p>Die aufgezeichnete Bewegung des Athleten (Ist-Wert) wird visuell (z. B. durch Übereinanderlegen der Videos) mit der Idealtechnik eines Spitzenathleten (Soll-Wert) verglichen, um kleinste biomechanische Abweichungen zu identifizieren.</p>
+            </div>
+        </div>
+
+        <!-- Visual AI2 Output -->
+        <div class="canvas-layout">
+            <canvas id="techCanvas" width="1000" height="400"></canvas>
+            <p style="margin-top: 15px; font-family: 'Fira Code', monospace; color: #64748b; font-size: 0.9rem;">
+                Fig 1: Analoges Drehstuhlexperiment (Links) vs. Digitale Tablet-Trajektorien-Analyse (Rechts)
+            </p>
+        </div>
+    </section>
+
+    <!-- Abitur Transfer -->
+    <section class="abitur-terminal">
+        <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Der Umfang dieses Teilbereichs ist für die reine Textreproduktion in der Abiturprüfung eher gering, da der Fokus stark auf der unterrichtlichen Praxis liegt. <strong>Dennoch ist dieses Wissen für materialgestützte Transferaufgaben essenziell!</strong>
+        </p>
+
+        <div class="abi-list">
+            <div class="abi-item">
+                <h4>📊 Diagramme interpretieren</h4>
+                <p>Anstatt dich ein Experiment aufbauen zu lassen, könnte dir in der Klausur der Output eines digitalen Messsystems vorgelegt werden. Du könntest ein Liniendiagramm erhalten, das den Kniegelenkswinkel (in Grad) über die Zeit (in Millisekunden) während eines Volleyball-Blocks darstellt. Deine Aufgabe ist es dann, den tiefsten Punkt der Kurve als <span class="highlight-text">"Umkehrpunkt der Vorbereitungsphase"</span> zu identifizieren und biomechanisch (<span class="highlight-text">maximale Anfangskraft</span>) zu erklären.</p>
+            </div>
+
+            <div class="abi-item">
+                <h4>🔍 Experimente zur Beweisführung nutzen</h4>
+                <p>Wenn du in einer Klausur das Prinzip der Impulserhaltung theoretisch erklären sollst (z. B. bei Turn- oder Eiskunstlauf-Elementen), gibt es <span class="highlight-text">massive Pluspunkte (BE)</span>, wenn du zur Untermauerung deiner Argumentation kurz das funktionale Prinzip des Drehstuhl-Experiments als Analogie anführst.</p>
+            </div>
+
+            <div class="abi-item">
+                <h4>⚖️ Digitalisierung im Sport kritisch bewerten</h4>
+                <p>Verknüpfe diesen Bereich mit der Sportpsychologie/Soziologie! Digitale Vermessung macht Athleten gläsern. Dies kann einerseits zur perfekten Leistungsoptimierung und Verletzungsprophylaxe führen, andererseits aber auch den <span class="highlight-text">Druck auf die Athleten enorm erhöhen</span>.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    const canvas = document.getElementById('techCanvas');
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+
+    // Center divider
+    const midX = width / 2;
+
+    // Setup basic background styles
+    ctx.fillStyle = '#0f172a'; // Deep slate background
+    ctx.fillRect(0, 0, width, height);
+
+    // Draw Divider Line
+    ctx.strokeStyle = '#334155';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(midX, 20);
+    ctx.lineTo(midX, height - 20);
+    ctx.stroke();
+
+    // ==========================================
+    // LEFT PANE: Drehstuhl-Experiment
+    // ==========================================
+    const leftCX = midX / 2;
+    const leftCY = height / 2 + 20;
+
+    // Grid effect background left
+    ctx.strokeStyle = '#1e293b';
+    ctx.lineWidth = 1;
+    for(let i=0; i<midX; i+=30) {
+        ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, height); ctx.stroke();
+    }
+    for(let i=0; i<height; i+=30) {
+        ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(midX, i); ctx.stroke();
+    }
+
+    // Chair base
+    ctx.fillStyle = '#cbd5e1';
+    ctx.fillRect(leftCX - 5, leftCY + 40, 10, 60); // pole
+    ctx.beginPath(); ctx.ellipse(leftCX, leftCY + 100, 40, 10, 0, 0, Math.PI*2); ctx.fill(); // base plate
+
+    // Stickman
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.lineWidth = 6;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    
+    // Head
+    ctx.beginPath(); ctx.arc(leftCX, leftCY - 70, 15, 0, Math.PI*2); ctx.stroke();
+    // Torso
+    ctx.beginPath(); ctx.moveTo(leftCX, leftCY - 55); ctx.lineTo(leftCX, leftCY + 10); ctx.stroke();
+    // Legs (sitting)
+    ctx.beginPath(); ctx.moveTo(leftCX, leftCY + 10); ctx.lineTo(leftCX + 30, leftCY + 10); ctx.lineTo(leftCX + 30, leftCY + 50); ctx.stroke();
+    
+    // Arms (outstretched holding dumbbells)
+    ctx.beginPath(); ctx.moveTo(leftCX - 70, leftCY - 30); ctx.lineTo(leftCX + 70, leftCY - 30); ctx.stroke();
+    
+    // Dumbbells
+    ctx.fillStyle = '#94a3b8';
+    ctx.beginPath(); ctx.arc(leftCX - 75, leftCY - 30, 8, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(leftCX + 75, leftCY - 30, 8, 0, Math.PI*2); ctx.fill();
+
+    // Rotation Arrows (Cyan)
+    ctx.strokeStyle = '#22d3ee';
+    ctx.lineWidth = 3;
+    
+    // Top arrow arc
+    ctx.beginPath(); 
+    ctx.ellipse(leftCX, leftCY - 15, 100, 30, 0, Math.PI, 2*Math.PI); 
+    ctx.stroke();
+    // Bottom arrow arc
+    ctx.beginPath(); 
+    ctx.ellipse(leftCX, leftCY - 15, 100, 30, 0, 0, Math.PI); 
+    ctx.stroke();
+    
+    // Draw arrow heads manually
+    ctx.fillStyle = '#22d3ee';
+    ctx.beginPath(); ctx.moveTo(leftCX + 100, leftCY - 15); ctx.lineTo(leftCX + 90, leftCY - 25); ctx.lineTo(leftCX + 110, leftCY - 25); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(leftCX - 100, leftCY - 15); ctx.lineTo(leftCX - 90, leftCY - 5); ctx.lineTo(leftCX - 110, leftCY - 5); ctx.fill();
+
+    // Labels left
+    ctx.font = '16px "Fira Code", monospace';
+    ctx.fillStyle = '#22d3ee';
+    ctx.textAlign = 'center';
+    ctx.fillText('IMPULSERHALTUNG', leftCX, 40);
+    ctx.font = '12px "Fira Code"';
+    ctx.fillStyle = '#94a3b8';
+    ctx.fillText('Trägheitsmoment max. / Rotation min.', leftCX, 60);
+
+
+    // ==========================================
+    // RIGHT PANE: Tablet Video Analysis
+    // ==========================================
+    const rightCX = midX + (midX / 2);
+
+    // Tablet Frame
+    const tabW = 400;
+    const tabH = 260;
+    const tabX = midX + 50;
+    const tabY = 70;
+    
+    ctx.fillStyle = '#1e293b';
+    ctx.beginPath(); ctx.roundRect(tabX, tabY, tabW, tabH, 16); ctx.fill();
+    ctx.strokeStyle = '#475569';
+    ctx.lineWidth = 4;
+    ctx.stroke();
+    
+    // Screen area
+    ctx.fillStyle = '#020617';
+    ctx.beginPath(); ctx.roundRect(tabX + 10, tabY + 10, tabW - 20, tabH - 20, 8); ctx.fill();
+
+    // Video Player UI
+    ctx.fillStyle = '#f472b6'; // record dot
+    ctx.beginPath(); ctx.arc(tabX + 30, tabY + 30, 6, 0, Math.PI*2); ctx.fill();
+    ctx.font = '10px "Fira Code"';
+    ctx.fillText('REC 00:01:24', tabX + 70, tabY + 33);
+    
+    // Playbar
+    ctx.fillStyle = '#334155';
+    ctx.fillRect(tabX + 20, tabY + tabH - 30, tabW - 40, 4);
+    ctx.fillStyle = '#4ade80';
+    ctx.fillRect(tabX + 20, tabY + tabH - 30, 150, 4);
+    ctx.beginPath(); ctx.arc(tabX + 170, tabY + tabH - 28, 6, 0, Math.PI*2); ctx.fill();
+
+    // Jump Stickman in Screen
+    const jX = tabX + 150;
+    const jY = tabY + 120;
+
+    // Trajectory Curve (Parabola)
+    ctx.strokeStyle = '#facc15'; // yellow
+    ctx.lineWidth = 2;
+    ctx.setLineDash([5, 5]);
+    ctx.beginPath();
+    ctx.moveTo(tabX + 30, tabY + 200);
+    ctx.quadraticCurveTo(tabX + 200, tabY - 20, tabX + 350, tabY + 200);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#facc15';
+    ctx.fillText('Trajektorie KSP', tabX + 220, tabY + 60);
+
+    // Drawing Stickman mid-air
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 4;
+    ctx.lineCap = 'round';
+    
+    // Head
+    ctx.beginPath(); ctx.arc(jX + 10, jY - 40, 10, 0, Math.PI*2); ctx.stroke();
+    // Torso
+    ctx.beginPath(); ctx.moveTo(jX + 5, jY - 30); ctx.lineTo(jX, jY); ctx.stroke();
+    // Arms (forward)
+    ctx.beginPath(); ctx.moveTo(jX + 5, jY - 25); ctx.lineTo(jX + 30, jY - 20); ctx.lineTo(jX + 50, jY - 30); ctx.stroke();
+    // Legs (bending forward)
+    // Femur
+    ctx.beginPath(); ctx.moveTo(jX, jY); ctx.lineTo(jX + 30, jY + 10); ctx.stroke();
+    // Tibia
+    ctx.beginPath(); ctx.moveTo(jX + 30, jY + 10); ctx.lineTo(jX + 50, jY + 40); ctx.stroke();
+
+    // Angle Analysis Overlay
+    ctx.strokeStyle = '#f472b6'; // pink angle
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    // draw arc for hip angle
+    ctx.arc(jX, jY, 15, -Math.PI/2, Math.PI/8);
+    ctx.stroke();
+    ctx.fillStyle = '#f472b6';
+    ctx.fillText('105°', jX - 15, jY + 10);
+
+    ctx.strokeStyle = '#4ade80'; // green angle
+    ctx.beginPath();
+    // draw arc for knee angle
+    ctx.arc(jX + 30, jY + 10, 15, Math.PI/8, Math.PI/3);
+    ctx.stroke();
+    ctx.fillStyle = '#4ade80';
+    ctx.fillText('135°', jX + 50, jY + 5);
+
+    // Add KSP Dot
+    ctx.fillStyle = '#facc15';
+    ctx.beginPath(); ctx.arc(jX, jY - 10, 5, 0, Math.PI*2); ctx.fill();
+
+    // Label right
+    ctx.font = '16px "Fira Code", monospace';
+    ctx.fillStyle = '#4ade80';
+    ctx.fillText('DIGITALE KINEMATIK', rightCX, 40);
+
+</script>
+</body>
+</html>

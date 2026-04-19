@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Komplexe Schnelligkeitsfähigkeiten</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif'],
+                    },
+                    colors: {
+                        base: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            50: '#f8fafc',
+                        },
+                        speed: '#06b6d4',     // Cyan
+                        power: '#f97316',     // Orange
+                        endurance: '#8b5cf6', // Violet
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                        }
+                    },
+                    boxShadow: {
+                        'float': '0 20px 40px -10px rgba(0,0,0,0.1)',
+                        'glow-speed': '0 0 20px rgba(6, 182, 212, 0.3)',
+                        'glow-power': '0 0 20px rgba(249, 115, 22, 0.3)',
+                        'glow-endurance': '0 0 20px rgba(139, 92, 246, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .biomech-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .biomech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+
+        /* Diagonal Cut Header */
+        .header-cut {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        /* Canvas Container */
+        .venn-container {
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            border-radius: 2rem;
+            position: relative;
+            box-shadow: inset 0 10px 30px rgba(0,0,0,0.5), 0 20px 40px -10px rgba(15, 23, 42, 0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Abitur Premium Highlight */
+        .abitur-gold-box {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-top: 8px solid #f59e0b;
+            color: white;
+            position: relative;
+        }
+
+        /* Kausalkette Arrows */
+        .causal-arrow {
+            position: relative;
+        }
+        .causal-arrow::after {
+            content: '↓';
+            position: absolute;
+            bottom: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #f59e0b;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        @media (min-width: 768px) {
+            .causal-arrow::after {
+                content: '→';
+                bottom: auto;
+                right: -30px;
+                left: auto;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+        .causal-arrow:last-child::after {
+            display: none;
+        }
+    </style>
+</head>
+<body class="font-sans leading-relaxed">
+
+    <!-- Header Section -->
+    <header class="bg-base-900 text-white header-cut pb-20 pt-8 shadow-xl relative z-10">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center justify-between mb-12">
+                <div class="flex items-center gap-4">
+                    <span class="bg-white/10 text-white font-bold px-4 py-1.5 rounded-lg text-sm tracking-widest font-display">1.6.1b</span>
+                    <span class="text-white/60 font-semibold uppercase tracking-widest text-sm hidden sm:block">Sporttheorie G9</span>
+                </div>
+                <div class="flex gap-2">
+                    <div class="w-2 h-2 rounded-full bg-speed"></div>
+                    <div class="w-2 h-2 rounded-full bg-power"></div>
+                    <div class="w-2 h-2 rounded-full bg-endurance"></div>
+                </div>
+            </div>
+            
+            <div class="max-w-4xl">
+                <h1 class="text-5xl md:text-7xl font-display font-bold uppercase tracking-tight leading-none mb-6">
+                    Komplexe <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-speed via-power to-endurance">Schnelligkeit</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-300 font-light max-w-3xl leading-relaxed border-l-4 border-speed pl-6">
+                    In der sportlichen Praxis treten die reinen Schnelligkeitsformen fast nie isoliert auf. Sobald die Bewegungen gegen einen signifikanten äußeren Widerstand ausgeführt werden oder die Belastungsdauer den alaktaziden Zeitraum überschreitet, verschmilzt die Schnelligkeit mit anderen motorischen Grundfähigkeiten. 
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 -mt-8 relative z-20 space-y-16 mb-24">
+
+        <!-- 1. & 2. Kraftschnelligkeit & Schnelligkeitsausdauer -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Kraftschnelligkeit -->
+            <article class="biomech-card border-t-4 border-t-power">
+                <div class="p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-power/10 flex items-center justify-center text-power shadow-glow-power">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-display font-bold text-base-900 uppercase tracking-tight leading-none">
+                            1. Kraftschnelligkeit <br><span class="text-sm text-slate-400 normal-case font-sans font-normal">(Schnellkraft)</span>
+                        </h2>
+                    </div>
+                    
+                    <p class="text-slate-600 font-medium mb-6">
+                        Die dominierende komplexe Fähigkeit bei allen explosiven sportlichen Handlungen. Fähigkeit, dem eigenen Körper oder einem Sportgerät in der zur Verfügung stehenden Zeit einen <strong class="text-power">maximalen Kraftstoß</strong> zu verleihen.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="bg-base-50 p-5 rounded-xl border border-slate-100">
+                            <h3 class="text-xs font-bold text-power uppercase tracking-wider mb-2">Physiologie & Biomechanik</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                                Ein Hybrid aus Maximalkraft und Aktionsschnelligkeit. Je höher das zu überwindende Gewicht (z. B. 7,26 kg Kugel), desto dominanter der Maximalkraftanteil.
+                            </p>
+                            <ul class="text-sm text-slate-600 space-y-2 list-disc list-inside">
+                                <li>Rekrutierung & Frequenzierung der motorischen Einheiten (FT-Fasern)</li>
+                                <li><strong class="text-slate-800">Prinzip der maximalen Anfangskraft</strong></li>
+                                <li>Dehnungs-Verkürzungs-Zyklus (Reaktivschnelligkeit)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-slate-800 text-white p-5 rounded-xl">
+                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Praxisanwendung</h3>
+                            <p class="text-sm font-medium">Abdrücken aus Startblock (100-m), Absprung (Weitsprung, Volleyball-Block), Kugelstoßen (Zehnkampf).</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Schnelligkeitsausdauer -->
+            <article class="biomech-card border-t-4 border-t-endurance">
+                <div class="p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-endurance/10 flex items-center justify-center text-endurance shadow-glow-endurance">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-display font-bold text-base-900 uppercase tracking-tight leading-none">
+                            2. Schnelligkeitsausdauer
+                        </h2>
+                    </div>
+                    
+                    <p class="text-slate-600 font-medium mb-6">
+                        Fähigkeit, die maximale oder submaximale Lauf-, Schwimm- oder Aktionsgeschwindigkeit nach Erreichen der Höchstgeschwindigkeit <strong class="text-endurance">gegen eine einsetzende Ermüdung</strong> so lange wie möglich aufrechtzuerhalten.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="bg-base-50 p-5 rounded-xl border border-slate-100">
+                            <h3 class="text-xs font-bold text-endurance uppercase tracking-wider mb-2">Physiologische Grundlagen</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                                Tritt bei maximalen Sprints > 7-10 Sekunden auf. Nach Entleerung der ATP/KP-Speicher erfolgt die Energie über die <strong class="text-slate-800">anaerobe Glykolyse (laktazid)</strong>.
+                            </p>
+                            <div class="bg-red-50 text-red-800 text-xs p-3 rounded-lg border border-red-100 font-medium">
+                                <strong class="block mb-1">Limitierendes Problem (Periphere Ermüdung):</strong>
+                                Massive Akkumulation von Laktat und H⁺-Ionen &rarr; pH-Wert fällt &rarr; Enzymaktivität (PFK) gehemmt &rarr; Calcium-Bindung gestört &rarr; Kontraktionsgeschwindigkeit sinkt.
+                            </div>
+                        </div>
+                        
+                        <div class="bg-slate-800 text-white p-5 rounded-xl">
+                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Praxisanwendung</h3>
+                            <p class="text-sm font-medium">400-m-Lauf (absolutes Paradebeispiel), wiederholte Sprints im Fußball / Basketball ohne ausreichende Pausen.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Visual Canvas Model: Venn Diagram -->
+        <section class="space-y-6">
+            <div class="flex items-end justify-between">
+                <div>
+                    <h2 class="text-3xl font-display font-bold text-base-900 uppercase tracking-tight">Die Verschmelzung</h2>
+                    <p class="text-slate-500">Mengenlehre der komplexen Schnelligkeitsfähigkeiten</p>
+                </div>
+            </div>
+
+            <!-- Canvas Container -->
+            <div class="venn-container p-6 md:p-10 w-full overflow-hidden flex flex-col items-center justify-center">
+                <canvas id="vennCanvas" class="w-full max-w-3xl h-[400px] md:h-[500px]"></canvas>
+            </div>
+        </section>
+
+        <!-- 3. Handlungsschnelligkeit -->
+        <section class="bg-white rounded-3xl p-8 md:p-12 shadow-float border border-slate-100 relative overflow-hidden">
+            <!-- Decorative BG -->
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-slate-50 rounded-full border-[20px] border-slate-100/50 pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-3xl">
+                <div class="inline-flex items-center gap-3 bg-base-900 text-white px-4 py-2 rounded-full mb-6">
+                    <span class="font-display font-bold text-lg">3</span>
+                    <span class="text-sm font-semibold tracking-widest uppercase">Sonderspezifik Spielsportarten</span>
+                </div>
+                
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-base-900 uppercase tracking-tight mb-6">
+                    Handlungsschnelligkeit
+                </h2>
+                
+                <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                    In den Spielsportarten wird die komplexe Schnelligkeit durch kognitive Faktoren erweitert. Die Handlungsschnelligkeit bezeichnet die Fähigkeit, auf Basis der Orientierungsfähigkeit Spielsituationen <strong class="text-base-900">blitzschnell kognitiv zu erfassen (Antizipation)</strong>, motorische Lösungen mental zu entwerfen und diese dann physisch maximal schnell umzusetzen.
+                </p>
+                
+                <div class="flex flex-wrap gap-3">
+                    <span class="bg-base-100 text-base-700 px-4 py-2 rounded-lg text-sm font-medium border border-base-200">Reaktion</span>
+                    <span class="text-slate-400 py-2">+</span>
+                    <span class="bg-base-100 text-base-700 px-4 py-2 rounded-lg text-sm font-medium border border-base-200">Aktion</span>
+                    <span class="text-slate-400 py-2">+</span>
+                    <span class="bg-base-100 text-base-700 px-4 py-2 rounded-lg text-sm font-medium border border-base-200">Frequenz</span>
+                    <span class="text-slate-400 py-2">+</span>
+                    <span class="bg-base-900 text-white shadow-md px-4 py-2 rounded-lg text-sm font-bold border border-base-800">Technisch-Taktisches Wissen</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Abitur-Transfer Box -->
+        <section class="abitur-gold-box rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden mt-20">
+            <!-- Background Icon -->
+            <svg class="absolute right-0 bottom-0 w-80 h-80 text-abitur opacity-5 transform translate-x-10 translate-y-10" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13h-13L12 6.5zM11 10v5h2v-5h-2zm0 7v2h2v-2h-2z"/>
+            </svg>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b border-slate-700 pb-8">
+                    <div class="bg-gradient-to-br from-abitur to-abitur-dark text-base-900 p-5 rounded-2xl shadow-lg">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-5xl font-display font-bold text-white tracking-tight mb-2">Abitur-Transfer & Praxis</h2>
+                        <p class="text-abitur font-medium text-lg">Exaktes Differenzierungsvermögen im G9 (eA)</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-10">
+                    <!-- Tip 1: 400m Lauf Kausalkette -->
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-slate-800 text-abitur flex items-center justify-center text-sm font-display">A</span>
+                            Limitierende Faktoren (Bsp. 400-m-Lauf / Zehnkampf)
+                        </h3>
+                        <p class="text-slate-300 mb-6 leading-relaxed max-w-4xl">
+                            Wenn du nach den limitierenden Faktoren im 400-m-Lauf gefragt wirst, darfst du nicht einfach <em>"mangelnde Ausdauer"</em> schreiben. Du musst präzise die <strong class="text-white">Schnelligkeitsausdauer</strong> identifizieren und die <strong>physiologische Kausalkette der peripheren Ermüdung</strong> zwingend darlegen!
+                        </p>
+                        
+                        <!-- Horizontal Causal Chain -->
+                        <div class="bg-base-900/50 p-6 rounded-2xl border border-slate-700 overflow-x-auto">
+                            <div class="flex flex-col md:flex-row items-center justify-between min-w-max md:min-w-0 gap-8 md:gap-4">
+                                
+                                <div class="causal-arrow text-center md:w-1/5">
+                                    <div class="w-12 h-12 mx-auto bg-slate-800 border border-slate-600 rounded-full flex items-center justify-center mb-3">
+                                        <span class="text-xl">🔋</span>
+                                    </div>
+                                    <p class="text-xs font-bold text-slate-300 uppercase tracking-wide">Erschöpfung</p>
+                                    <p class="text-xs text-slate-400 mt-1">der alaktaziden Speicher</p>
+                                </div>
+
+                                <div class="causal-arrow text-center md:w-1/5">
+                                    <div class="w-12 h-12 mx-auto bg-slate-800 border border-slate-600 rounded-full flex items-center justify-center mb-3">
+                                        <span class="text-xl">⚙️</span>
+                                    </div>
+                                    <p class="text-xs font-bold text-slate-300 uppercase tracking-wide">Anaerob-Laktazide</p>
+                                    <p class="text-xs text-slate-400 mt-1">Energiebereitstellung</p>
+                                </div>
+
+                                <div class="causal-arrow text-center md:w-1/5">
+                                    <div class="w-12 h-12 mx-auto bg-red-900/30 border border-red-500/50 rounded-full flex items-center justify-center mb-3">
+                                        <span class="text-xl text-red-400 font-bold font-mono">H⁺</span>
+                                    </div>
+                                    <p class="text-xs font-bold text-red-400 uppercase tracking-wide">Akkumulation</p>
+                                    <p class="text-xs text-red-300/70 mt-1">von H⁺-Ionen & Laktat</p>
+                                </div>
+
+                                <div class="causal-arrow text-center md:w-1/5">
+                                    <div class="w-12 h-12 mx-auto bg-slate-800 border border-slate-600 rounded-full flex items-center justify-center mb-3">
+                                        <span class="text-xl">🚫</span>
+                                    </div>
+                                    <p class="text-xs font-bold text-slate-300 uppercase tracking-wide">Hemmung</p>
+                                    <p class="text-xs text-slate-400 mt-1">der Querbrückenbildung</p>
+                                </div>
+
+                                <div class="causal-arrow text-center md:w-1/5">
+                                    <div class="w-12 h-12 mx-auto bg-abitur/20 border border-abitur rounded-full flex items-center justify-center mb-3">
+                                        <span class="text-xl">📉</span>
+                                    </div>
+                                    <p class="text-xs font-bold text-abitur uppercase tracking-wide">Erzwungener</p>
+                                    <p class="text-xs text-abitur-light/70 mt-1">Geschwindigkeitsabfall</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tip 2: Wechselbeziehungen -->
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-slate-800 text-abitur flex items-center justify-center text-sm font-display">B</span>
+                            Wechselbeziehungen analysieren
+                        </h3>
+                        <div class="bg-base-900/50 border-l-4 border-abitur p-6 rounded-r-2xl">
+                            <p class="text-slate-300 leading-relaxed text-sm">
+                                Die reine, isolierte Betrachtung von Schnelligkeit reicht für die Abiturklausur nicht aus. Die Synthese ist obligatorisch! <br><br>
+                                <strong class="text-white">Beispiel:</strong> Eine Steigerung der Maximalkraft führt (bei korrekter intramuskulärer Umsetzung) zu einer verbesserten Kraftschnelligkeit. Ein Zehnkämpfer trainiert also Maximalkraft (z. B. durch schwere Kniebeugen), um seinen Startantritt beim 100-m-Lauf oder seine Abfluggeschwindigkeit beim Kugelstoßen zu maximieren.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-base-900 text-slate-500 py-12 text-center text-sm border-t border-slate-800">
+        <p class="font-bold text-slate-400 tracking-widest mb-2 font-display uppercase">Abiturwissen Sport (G9, eA)</p>
+        <p>Lernbereich 1.6.1b Komplexe Formen der Schnelligkeit</p>
+    </footer>
+
+    <!-- Retina-Ready Canvas Animation Script for Venn Diagram -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('vennCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let time = 0;
+
+            // Colors based on Tailwind config
+            const colorSpeed = 'rgba(6, 182, 212, 0.6)';     // Cyan
+            const colorPower = 'rgba(249, 115, 22, 0.6)';    // Orange
+            const colorEndurance = 'rgba(139, 92, 246, 0.6)';// Violet
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time += 0.02;
+
+                // Center of the canvas
+                const cx = w / 2;
+                const cy = h / 2 + 20;
+                
+                // Base radius and offset based on screen size
+                const r = Math.min(w, h) * 0.28;
+                const offset = r * 0.65;
+
+                // Pulsing effect for radius
+                const pulseR1 = r + Math.sin(time) * 3;
+                const pulseR2 = r + Math.sin(time + 2) * 3;
+                const pulseR3 = r + Math.sin(time + 4) * 3;
+
+                // Calculate centers for the 3 circles (Triangle formation)
+                // Top: Speed
+                const c1x = cx;
+                const c1y = cy - offset;
+                
+                // Bottom Left: Power
+                const c2x = cx - offset * 0.866; // cos(30)
+                const c2y = cy + offset * 0.5;   // sin(30)
+                
+                // Bottom Right: Endurance
+                const c3x = cx + offset * 0.866;
+                const c3y = cy + offset * 0.5;
+
+                // Use screen blending mode to create bright overlaps
+                ctx.globalCompositeOperation = 'screen';
+
+                // 1. Draw Speed (Top)
+                ctx.beginPath();
+                ctx.arc(c1x, c1y, pulseR1, 0, Math.PI * 2);
+                ctx.fillStyle = colorSpeed;
+                ctx.fill();
+
+                // 2. Draw Power (Bottom Left)
+                ctx.beginPath();
+                ctx.arc(c2x, c2y, pulseR2, 0, Math.PI * 2);
+                ctx.fillStyle = colorPower;
+                ctx.fill();
+
+                // 3. Draw Endurance (Bottom Right)
+                ctx.beginPath();
+                ctx.arc(c3x, c3y, pulseR3, 0, Math.PI * 2);
+                ctx.fillStyle = colorEndurance;
+                ctx.fill();
+
+                // Reset composite operation for text drawing
+                ctx.globalCompositeOperation = 'source-over';
+
+                // Helper to draw crisp text
+                function drawText(text, x, y, size, weight, color) {
+                    ctx.font = `${weight} ${size}px "Oswald", sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    
+                    // Subtle shadow for legibility
+                    ctx.shadowColor = 'rgba(0,0,0,0.8)';
+                    ctx.shadowBlur = 4;
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 2;
+                    
+                    ctx.fillStyle = color;
+                    ctx.fillText(text.toUpperCase(), x, y);
+                    
+                    ctx.shadowBlur = 0; // reset
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 0;
+                }
+
+                // Base Circles Labels
+                drawText('Schnelligkeit', c1x, c1y - r*0.5, 20, '600', '#ffffff');
+                drawText('Kraft', c2x - r*0.4, c2y + r*0.3, 20, '600', '#ffffff');
+                drawText('Ausdauer', c3x + r*0.4, c3y + r*0.3, 20, '600', '#ffffff');
+
+                // Intersection Labels (Complex Abilities)
+                // Between Speed & Power (Top Left)
+                const isect1x = (c1x + c2x) / 2;
+                const isect1y = (c1y + c2y) / 2;
+                drawText('Kraftschnelligkeit', isect1x - 10, isect1y, 14, '700', '#fef08a'); // Yellowish
+
+                // Between Speed & Endurance (Top Right)
+                const isect2x = (c1x + c3x) / 2;
+                const isect2y = (c1y + c3y) / 2;
+                drawText('Schnelligkeits-', isect2x + 10, isect2y - 10, 14, '700', '#c7d2fe'); // Light Indigo
+                drawText('ausdauer', isect2x + 10, isect2y + 10, 14, '700', '#c7d2fe');
+
+                // Between Power & Endurance (Bottom)
+                const isect3x = (c2x + c3x) / 2;
+                const isect3y = (c2y + c3y) / 2;
+                drawText('Kraftausdauer', isect3x, isect3y + 20, 14, '700', '#fbcfe8'); // Pinkish
+
+                // Center (All three) - Optional but good for completeness
+                // drawText('Zehnkampf', cx, cy, 12, '700', '#ffffff');
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

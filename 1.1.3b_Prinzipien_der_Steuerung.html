@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.3b Prinzipien der Steuerung - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Sports Science Dashboard */
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --dark-header: #020617;
+            --primary-cyan: #06b6d4;
+            --primary-blue: #3b82f6;
+            --accent-lime: #84cc16;
+            --alert-red: #ef4444;
+            
+            --abi-bg: #7f1d1d;
+            --abi-gold: #fde047;
+            
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .dashboard-title {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* --- High-Tech Hero Section --- */
+        .hero {
+            background-color: var(--dark-header);
+            background-image: 
+                linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: white;
+            padding: 6rem 2rem;
+            position: relative;
+            border-bottom: 4px solid var(--primary-cyan);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb {
+            color: var(--primary-cyan);
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--primary-cyan);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #cbd5e1;
+            font-weight: 300;
+            max-width: 800px;
+        }
+
+        /* --- Intro Block --- */
+        .intro {
+            background: var(--bg-card);
+            padding: 2.5rem 3rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+            border-top: 5px solid var(--primary-blue);
+        }
+
+        .intro p {
+            font-size: 1.25rem;
+            color: var(--dark-header);
+        }
+
+        .intro strong {
+            color: var(--primary-blue);
+        }
+
+        /* --- Principles Data Cards --- */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin: 5rem 0;
+        }
+
+        .data-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border-left: 6px solid var(--primary-cyan);
+            padding: 3rem;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .data-card:hover {
+            transform: translateX(10px);
+            border-left-color: var(--primary-blue);
+        }
+
+        .data-card:nth-child(2) { border-left-color: var(--accent-lime); }
+        .data-card:nth-child(3) { border-left-color: var(--primary-blue); }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            line-height: 1;
+        }
+
+        .data-card h2 {
+            font-size: 2rem;
+            color: var(--dark-header);
+            letter-spacing: 0.5px;
+        }
+
+        .data-card p {
+            margin-bottom: 1.5rem;
+        }
+
+        .sub-box {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .sub-box h3 {
+            font-size: 1.1rem;
+            color: var(--primary-cyan);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .data-card:nth-child(2) .sub-box h3 { color: var(--accent-lime); }
+        .data-card:nth-child(3) .sub-box h3 { color: var(--primary-blue); }
+
+        /* --- Interactive Dashboard (Canvas) --- */
+        .dashboard-section {
+            background: var(--dark-header);
+            padding: 4rem 3rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 6rem;
+            color: white;
+            border: 1px solid #1e293b;
+        }
+
+        .dashboard-section h2 {
+            color: var(--primary-cyan);
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-intro {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .controls-container {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .controls-container label {
+            display: block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            max-width: 500px;
+            accent-color: var(--primary-cyan);
+            cursor: pointer;
+        }
+
+        .canvas-container {
+            width: 100%;
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            border: 1px solid #334155;
+        }
+
+        canvas {
+            width: 100%;
+            max-height: 450px;
+            display: block;
+        }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-premium {
+            background: linear-gradient(135deg, #991b1b, #7f1d1d);
+            color: white;
+            padding: 4rem;
+            border-radius: 16px;
+            margin-bottom: 6rem;
+            box-shadow: 0 25px 50px -12px rgba(127, 29, 29, 0.5);
+            border: 2px solid #b91c1c;
+            position: relative;
+        }
+
+        .abitur-premium::before {
+            content: 'EXAM';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 8rem;
+            color: rgba(255,255,255,0.03);
+            font-weight: 700;
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .abitur-premium h2 {
+            font-size: 2.5rem;
+            color: var(--abi-gold);
+        }
+
+        .abi-lead {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .abi-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 850px) {
+            .abi-content { grid-template-columns: 1fr; }
+        }
+
+        .abi-block {
+            background: rgba(0,0,0,0.2);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .abi-block h3 {
+            color: var(--abi-gold);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-block p {
+            color: #fca5a5;
+        }
+
+        .highlight-red {
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            padding: 0 4px;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <div class="breadcrumb">LERNBEREICH 1.1.3b</div>
+            <h1>Prinzipien der Steuerung & Spezifizierung</h1>
+            <p>Die exakte Passung des Reizes auf die trainierende Person und das angestrebte Ziel.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro">
+            <p>Während die Prinzipien der Belastung (wie das Prinzip der ansteigenden Belastung) primär die quantitative und zeitliche Ausprägung des Trainingsreizes definieren, fokussieren sich die Prinzipien der Steuerung und Spezifizierung auf die <strong>exakte Passung des Reizes auf die trainierende Person und das angestrebte Ziel</strong>. Sie gewährleisten, dass das Training nicht nur anstrengend, sondern vor allem effizient, zielgerichtet und gesundheitlich vertretbar ist. Das zentralste Prinzip in diesem Kontext ist das Prinzip der individualisierten und altersgemäßen Belastung.</p>
+        </div>
+
+        <div class="principles-grid">
+            
+            <!-- Prinzip 1 -->
+            <div class="data-card">
+                <div class="card-header">
+                    <span class="card-number">01</span>
+                    <h2>Prinzip der individualisierten Belastung</h2>
+                </div>
+                <p>Jeder Mensch reagiert aufgrund seiner Genetik, seiner Trainingshistorie und seiner aktuellen Verfassung unterschiedlich auf denselben Trainingsreiz. Das Prinzip besagt daher, dass der Belastungsreiz exakt der psychophysischen Belastbarkeit, der individuellen Akzeptanz sowie den speziellen Bedürfnissen und Gegebenheiten der jeweiligen Person entsprechen muss.</p>
+                
+                <div class="sub-box">
+                    <h3>Subjektive vs. Objektive Belastung</h3>
+                    <p>Ein objektiv exakt gleicher Belastungsreiz (z. B. ein 10-km-Lauf in 50 Minuten oder eine Bergauffahrt mit dem Mountainbike) kann für die eine Person einen optimalen, fordernden Trainingsreiz darstellen, während er für eine andere Person massiv überfordernd wirkt.</p>
+                </div>
+                <div class="sub-box">
+                    <h3>Einflussfaktoren</h3>
+                    <p>Zu den determinierenden Faktoren gehören das biologische Alter, das Geschlecht, die anatomischen Voraussetzungen (z. B. Muskelfaserverteilung), der aktuelle Trainingszustand (Funktionszustand) sowie psychologische Faktoren wie die Tagesform oder die Motivation.</p>
+                </div>
+            </div>
+
+            <!-- Prinzip 2 -->
+            <div class="data-card">
+                <div class="card-header">
+                    <span class="card-number">02</span>
+                    <h2>Prinzip der alters- und entwicklungsgemäßen Belastung</h2>
+                </div>
+                <p>In enger Verwandtschaft zur Individualisierung steht die altersgemäße Steuerung. Sie fordert, dass Trainingsreize das biologische (nicht zwingend das chronologische) Alter respektieren müssen.</p>
+                <p>Besonders im Kindes- und Jugendalter sind die Belastbarkeit des passiven Bewegungsapparates (Knochen, Knorpel) sowie die sensiblen Phasen für die Entwicklung koordinativer oder konditioneller Fähigkeiten individuell zu berücksichtigen, um Überlastungsschäden (z. B. an den Wachstumsfugen) zu vermeiden.</p>
+            </div>
+
+            <!-- Prinzip 3 -->
+            <div class="data-card">
+                <div class="card-header">
+                    <span class="card-number">03</span>
+                    <h2>Prinzip der zielgerichteten Belastung (Spezifizierung)</h2>
+                </div>
+                <p>Dieses Prinzip besagt, dass biologische Adaptationen hochspezifisch auf den gesetzten Reiz erfolgen.</p>
+                <p>Wer seine Sprungkraft für den Volleyball-Block verbessern möchte, muss spezifische, schnellkräftige Reize setzen. Ein reines Grundlagenausdauertraining würde hier das falsche biologische System (ST-Fasern statt FT-Fasern, aerobe statt anaerob-alaktazide Energiebereitstellung) adressieren und das Trainingsziel verfehlen.</p>
+            </div>
+
+        </div>
+
+        <!-- Interactive Canvas Dashboard -->
+        <section class="dashboard-section">
+            <h2 class="dashboard-title">Biometrisches Belastungs-Dashboard</h2>
+            <p class="dashboard-intro">Visualisierung des "Prinzip der individualisierten Belastung": Stelle einen objektiv gleichen Trainingsplan ein und beobachte, wie sich die subjektive physiologische Belastung bei zwei grundverschiedenen Athleten unterscheidet.</p>
+
+            <div class="controls-container">
+                <label for="planSlider">Objektiver Trainingsplan (z.B. Tempo beim 10km-Lauf)</label>
+                <input type="range" id="planSlider" min="10" max="90" value="50">
+                <div style="display: flex; justify-content: space-between; max-width: 500px; margin: 0 auto; font-size: 0.9rem; color: #06b6d4;">
+                    <span>Leicht (z.B. 7 min/km)</span>
+                    <span>Extrem (z.B. 3 min/km)</span>
+                </div>
+            </div>
+
+            <div class="canvas-container">
+                <canvas id="bioCanvas" width="900" height="400"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Transfer -->
+        <section class="abitur-premium">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+
+            <p class="abi-lead">
+                In den illustrierenden Abituraufgaben (eA) wird enorm viel Wert auf die Beurteilung von Trainingsplänen und -situationen gelegt. Das Prinzip der individualisierten Belastung ist hierbei deine stärkste argumentative Waffe bei der Analyse von Gruppen- oder Partner-Trainingsszenarien!
+            </p>
+
+            <div class="abi-content">
+                <div class="abi-block">
+                    <h3>❌ Der "One-Size-Fits-All"-Fehler</h3>
+                    <p>Wenn dir in einer Prüfungsklausur ein Fallbeispiel präsentiert wird, bei dem ein Trainer einer heterogenen Gruppe (z. B. einer Schulklasse) denselben Trainingsplan mit absoluten Normwerten (z. B. "Jeder läuft 12 km/h") verschreibt, musst du diesen Ansatz <span class="highlight-red">sofort dekonstruieren</span>. Das Prinzip der individualisierten Belastung verbietet absolute Normen für heterogene Gruppen.</p>
+                </div>
+
+                <div class="abi-block">
+                    <h3>✅ Anwendung auf offizielle Musteraufgaben</h3>
+                    <p>In der offiziellen Beispielaufgabe bereiten sich zwei Freundinnen gemeinsam auf eine Alpenüberquerung mit dem Mountainbike vor. Die Laktatdiagnostik zeigt ein völlig unterschiedliches Leistungsniveau. <br><br>Wenn du nach Trainingsprinzipien gefragt wirst, ist dieses Prinzip <span class="highlight-red">zwingend anzuführen</span>: Du musst argumentieren, dass sie trotz gleichem Ziel <strong>unterschiedliche Trainingsintensitäten wählen müssen</strong>, da ein für die trainiertere Freundin optimaler Reiz die andere systematisch überfordern würde.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('bioCanvas');
+            const ctx = canvas.getContext('2d');
+            const slider = document.getElementById('planSlider');
+
+            // Hardcoded Profiles to show the difference
+            const athleteA = {
+                name: 'Person A (Profi)',
+                fitness: 85, // High fitness
+                color: '#06b6d4',
+                details: 'Genetik: ++ | Status: Hoch'
+            };
+
+            const athleteB = {
+                name: 'Person B (Anfänger)',
+                fitness: 30, // Low fitness
+                color: '#84cc16',
+                details: 'Genetik: Ø | Status: Gering'
+            };
+
+            function resizeCanvas() {
+                const container = canvas.parentElement;
+                canvas.width = container.clientWidth - 64; // padding
+                canvas.height = canvas.width < 600 ? 500 : 400; // Taller on mobile
+                drawDashboard();
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            slider.addEventListener('input', drawDashboard);
+
+            // Function to draw a semi-circle gauge
+            function drawGauge(x, y, radius, value, color) {
+                // Background arc
+                ctx.beginPath();
+                ctx.arc(x, y, radius, Math.PI, 0, false);
+                ctx.lineWidth = 15;
+                ctx.strokeStyle = '#1e293b';
+                ctx.stroke();
+
+                // Color gradients for the gauge (Green -> Yellow -> Red)
+                const gradient = ctx.createLinearGradient(x - radius, y, x + radius, y);
+                gradient.addColorStop(0, '#3b82f6'); // Erhaltend
+                gradient.addColorStop(0.5, '#10b981'); // Optimal
+                gradient.addColorStop(0.75, '#f59e0b'); // Hart
+                gradient.addColorStop(1, '#ef4444'); // Überfordernd
+
+                // Value arc
+                // value is 0 to 100. Map to angle from Math.PI to 0
+                // Angle works clockwise. Math.PI is left (0%), Math.PI*2 is right (100%)
+                // So end angle = Math.PI + (value/100) * Math.PI
+                let clampedVal = Math.max(0, Math.min(100, value));
+                let endAngle = Math.PI + (clampedVal / 100) * Math.PI;
+
+                ctx.beginPath();
+                ctx.arc(x, y, radius, Math.PI, endAngle, false);
+                ctx.lineWidth = 15;
+                ctx.strokeStyle = gradient;
+                ctx.stroke();
+
+                // Pointer
+                const pointerLength = radius - 5;
+                const pX = x + Math.cos(endAngle) * pointerLength;
+                const pY = y + Math.sin(endAngle) * pointerLength;
+
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(pX, pY);
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = '#ffffff';
+                ctx.stroke();
+
+                // Center dot
+                ctx.beginPath();
+                ctx.arc(x, y, 8, 0, Math.PI*2);
+                ctx.fillStyle = '#ffffff';
+                ctx.fill();
+
+                // Status Text
+                ctx.font = 'bold 16px Oswald';
+                ctx.textAlign = 'center';
+                let status = "Erhaltend / Zu leicht";
+                let sColor = '#3b82f6';
+                if (clampedVal > 30) { status = "Optimaler Reiz"; sColor = '#10b981'; }
+                if (clampedVal > 70) { status = "Sehr Hart"; sColor = '#f59e0b'; }
+                if (clampedVal > 90) { status = "Massiv Überfordernd!"; sColor = '#ef4444'; }
+
+                ctx.fillStyle = sColor;
+                ctx.fillText(`Subjektiv: ${status}`, x, y + 30);
+            }
+
+            function drawSilhouette(x, y, color) {
+                ctx.fillStyle = color;
+                // Head
+                ctx.beginPath();
+                ctx.arc(x, y - 40, 25, 0, Math.PI*2);
+                ctx.fill();
+                // Body
+                ctx.beginPath();
+                ctx.arc(x, y + 40, 45, Math.PI, 0, false);
+                ctx.fill();
+            }
+
+            function drawDashboard() {
+                const w = canvas.width;
+                const h = canvas.height;
+                const isMobile = w < 600;
+                
+                ctx.clearRect(0, 0, w, h);
+
+                const taskLoad = parseInt(slider.value); // 0-100
+
+                // Center line
+                if (!isMobile) {
+                    ctx.beginPath();
+                    ctx.moveTo(w/2, 20);
+                    ctx.lineTo(w/2, h-20);
+                    ctx.strokeStyle = '#334155';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+
+                // Setup coordinates
+                const xA = isMobile ? w/2 : w * 0.25;
+                const yA = isMobile ? 50 : 80;
+                
+                const xB = isMobile ? w/2 : w * 0.75;
+                const yB = isMobile ? h/2 + 30 : 80;
+
+                // --- Draw Person A ---
+                drawSilhouette(xA, yA, '#1e293b');
+                
+                ctx.fillStyle = athleteA.color;
+                ctx.font = 'bold 20px Oswald';
+                ctx.textAlign = 'center';
+                ctx.fillText(athleteA.name, xA, yA + 70);
+                
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '14px Inter';
+                ctx.fillText(athleteA.details, xA, yA + 90);
+
+                // Calculate Subjective Load for A
+                // Formula: TaskLoad (10-90) relative to Fitness (85). 
+                // If Task = 50, Fitness = 85 -> Load should be low.
+                let loadA = taskLoad - (athleteA.fitness - 50); 
+                drawGauge(xA, yA + 170, isMobile ? 80 : 100, loadA, athleteA.color);
+
+
+                // --- Draw Person B ---
+                drawSilhouette(xB, yB, '#1e293b');
+                
+                ctx.fillStyle = athleteB.color;
+                ctx.font = 'bold 20px Oswald';
+                ctx.textAlign = 'center';
+                ctx.fillText(athleteB.name, xB, yB + 70);
+                
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '14px Inter';
+                ctx.fillText(athleteB.details, xB, yB + 90);
+
+                // Calculate Subjective Load for B
+                // Fitness is 30. Task 50 -> Load should be high.
+                let loadB = taskLoad - (athleteB.fitness - 50) + 20; // +20 extra penalty for low baseline
+                drawGauge(xB, yB + 170, isMobile ? 80 : 100, loadB, athleteB.color);
+
+            }
+
+            // Init
+            resizeCanvas();
+        });
+    </script>
+</body>
+</html>

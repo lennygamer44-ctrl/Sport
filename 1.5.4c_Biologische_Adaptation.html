@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Biologische Adaptation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6', // Teal
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            900: '#134e4a',
+                        },
+                        cardio: '#ef4444',
+                        abitur: {
+                            light: '#fffbeb',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 20px rgba(20, 184, 166, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .glass-panel {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        }
+
+        /* Canvas Container with nice inner shadow */
+        .simulation-wrapper {
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            border-radius: 1.5rem;
+            position: relative;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.5), 0 10px 30px -5px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        /* Custom Scrollbar for Webkit */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Abitur Box Styling */
+        .abitur-premium {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fde68a;
+            border-left: 8px solid #f59e0b;
+        }
+        
+        /* Accordion Animations */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary ~ * { animation: sweep .3s ease-in-out; }
+        
+        @keyframes sweep {
+            0%    {opacity: 0; transform: translateY(-10px)}
+            100%  {opacity: 1; transform: translateY(0)}
+        }
+    </style>
+</head>
+<body class="font-sans leading-relaxed">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <span class="bg-primary-100 text-primary-700 font-bold px-3 py-1 rounded-lg text-sm tracking-wide">Lernbereich 1.5.4c</span>
+                <h1 class="text-xl font-display font-bold text-slate-800 hidden sm:block">Biologische Adaptation</h1>
+            </div>
+            <div class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Sport Abitur G9</div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-12 space-y-20">
+
+        <!-- Introduction -->
+        <section class="max-w-3xl">
+            <h2 class="text-4xl md:text-5xl font-display font-extrabold text-slate-900 mb-6 leading-tight">
+                Anpassungserscheinungen <br><span class="text-primary-600">durch Ausdauertraining</span>
+            </h2>
+            <div class="bg-white border-l-4 border-primary-500 p-6 rounded-r-xl shadow-sm text-lg text-slate-600 leading-relaxed">
+                Ausdauertraining provoziert bei entsprechender Reizsetzung weitreichende morphologische (strukturelle) und funktionelle Anpassungen im menschlichen Organismus. Diese Adaptationen betreffen primär das Herz-Kreislauf-System, das Atmungssystem sowie den muskulären Stoffwechsel und zielen darauf ab, die Energiebereitstellung effizienter zu gestalten und die Ermüdung hinauszuzögern.
+            </div>
+        </section>
+
+        <!-- Section 1: Herz-Kreislauf -->
+        <section>
+            <div class="flex items-center gap-4 mb-8 border-b border-slate-200 pb-4">
+                <div class="bg-rose-100 text-rose-600 p-3 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-display font-bold text-slate-900">1. Adaptationen des Herz-Kreislauf-Systems</h3>
+                    <p class="text-slate-500 mt-1">Zentral für das Verständnis von Leistungssteigerungen.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="glass-panel rounded-2xl p-6">
+                    <h4 class="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Das Herz (Sportherz)
+                    </h4>
+                    <p class="text-slate-600 text-sm">Durch regelmäßiges, intensives Ausdauertraining kommt es zu einer exzentrischen Hypertrophie des Herzmuskels, insbesondere des linken Ventrikels. Dies führt zu einer Zunahme des Schlagvolumens in Ruhe und unter Belastung. Da das Herz pro Schlag mehr Blut auswirft, sinkt die Ruheherzfrequenz (Bradykardie). Das maximale Minutenvolumen (Herzminutenvolumen), welches das Produkt aus Herzfrequenz und Schlagvolumen darstellt, steigt signifikant an, wodurch die maximale Sauerstofftransportkapazität drastisch erhöht wird.</p>
+                </div>
+                <div class="glass-panel rounded-2xl p-6">
+                    <h4 class="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Blutgefäße & Kapillaren
+                    </h4>
+                    <p class="text-slate-600 text-sm">Im trainierten Skelettmuskel vergrößert sich die absolute Anzahl sowie die Dichte der Kapillaren (Kapillarisierung). Dies verkleinert die Diffusionsstrecke für den Sauerstoff vom Blut in die Muskelzelle und vergrößert die Austauschfläche. Zudem wird die Durchblutungsumverteilung (Vasokonstriktion in inaktiven Geweben, Vasodilatation in der Arbeitsmuskulatur) ökonomisiert.</p>
+                </div>
+                <div class="glass-panel rounded-2xl p-6">
+                    <h4 class="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span> Das Blut
+                    </h4>
+                    <p class="text-slate-600 text-sm">Die absolute Blutmenge kann um 1 bis 2 Liter steigen. Obwohl sich das Blutplasma stärker vermehrt als die festen Bestandteile (Sporthämodilution, was die Fließeigenschaften verbessert), nimmt die absolute Menge an Erythrozyten und Hämoglobin zu. Dies optimiert die Sauerstofftransportkapazität. Zudem verbessert sich die Pufferkapazität des Blutes (späteres Absinken des pH-Wertes).</p>
+                </div>
+            </div>
+
+            <!-- Vergleichstabelle -->
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <div class="bg-slate-50 px-6 py-4 border-b border-slate-200">
+                    <h4 class="font-bold text-slate-700">Vergleich wesentlicher Parameter</h4>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-white text-sm font-semibold text-slate-500 border-b border-slate-200">
+                                <th class="px-6 py-4">Parameter</th>
+                                <th class="px-6 py-4 text-center">Untrainierte Person</th>
+                                <th class="px-6 py-4 text-center text-primary-700 bg-primary-50/50">Ausdauerathlet (Sportherz)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm text-slate-600 divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-900">Herzfrequenz (Ruhe)</td>
+                                <td class="px-6 py-4 text-center">ca. 70 S/min</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-700 bg-primary-50/50">ca. 40 S/min <span class="block text-xs font-normal text-slate-400">Bradykardie</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-900">Herzfrequenz (Submax.)</td>
+                                <td class="px-6 py-4 text-center">ca. 150 S/min</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-700 bg-primary-50/50">ca. 120 S/min <span class="block text-xs font-normal text-slate-400">Ökonomisierung</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-900">Herzfrequenz (Maximal)</td>
+                                <td class="px-6 py-4 text-center">ca. 200 S/min</td>
+                                <td class="px-6 py-4 text-center font-bold text-slate-700 bg-primary-50/50">ca. 190 S/min <span class="block text-xs font-normal text-slate-400">leicht verringert</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-900">Schlagvolumen (SV) in Ruhe</td>
+                                <td class="px-6 py-4 text-center">ca. 60 - 70 ml</td>
+                                <td class="px-6 py-4 text-center font-bold text-primary-700 bg-primary-50/50">ca. 100 - 110 ml</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="px-6 py-4 font-medium text-slate-900">Herzminutenvolumen (Max.)</td>
+                                <td class="px-6 py-4 text-center">ca. 20 l/min</td>
+                                <td class="px-6 py-4 text-center font-black text-rose-600 bg-primary-50/50 text-base">ca. 35 - 40 l/min</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Atmung (Asymmetrical) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="bg-cyan-100 text-cyan-600 p-3 rounded-xl">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-slate-900">2. Atmungssystem</h3>
+                </div>
+                <p class="text-slate-600 mb-8">Auch das respiratorische System passt sich an, um den Gasaustausch unter Belastung zu optimieren.</p>
+                
+                <div class="space-y-4">
+                    <details class="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden" open>
+                        <summary class="flex cursor-pointer items-center justify-between p-5 text-slate-900 font-bold bg-slate-50/50 hover:bg-slate-50 transition">
+                            Atemmechanik und Kenngrößen
+                            <span class="transition duration-300 group-open:-rotate-180 text-primary-500">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                            </span>
+                        </summary>
+                        <div class="p-5 text-slate-600 border-t border-slate-100">
+                            Die Atemmuskulatur (Zwerchfell, Interkostalmuskulatur) hypertrophiert und wird ausdauernder. Dies kann zu einer funktionellen Vergrößerung der Vitalkapazität und des maximalen Atemzugvolumens führen.
+                        </div>
+                    </details>
+
+                    <details class="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <summary class="flex cursor-pointer items-center justify-between p-5 text-slate-900 font-bold bg-slate-50/50 hover:bg-slate-50 transition">
+                            Atemökonomie
+                            <span class="transition duration-300 group-open:-rotate-180 text-primary-500">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                            </span>
+                        </summary>
+                        <div class="p-5 text-slate-600 border-t border-slate-100">
+                            In Ruhe und bei submaximalen Belastungen sinkt die Atemfrequenz, während das Atemzugvolumen steigt. Die Atmung wird dadurch tiefer und ökonomischer, da der Anteil des Totraums an der Gesamtventilation sinkt.
+                        </div>
+                    </details>
+
+                    <details class="group bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <summary class="flex cursor-pointer items-center justify-between p-5 text-slate-900 font-bold bg-slate-50/50 hover:bg-slate-50 transition">
+                            VO2max (Sauerstoffaufnahme)
+                            <span class="transition duration-300 group-open:-rotate-180 text-primary-500">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                            </span>
+                        </summary>
+                        <div class="p-5 text-slate-600 border-t border-slate-100">
+                            Die maximale Sauerstoffaufnahme (VO2max) als <strong>Bruttokriterium der aeroben Ausdauerleistungsfähigkeit</strong> steigt als Resultat der optimierten Systeme (Atmung, Herz-Kreislauf, zellulärer Stoffwechsel) deutlich an.
+                        </div>
+                    </details>
+                </div>
+            </div>
+            
+            <div class="hidden lg:block relative p-8">
+                <!-- Decorative Graphic -->
+                <div class="absolute inset-0 bg-primary-50 rounded-full transform -skew-y-6 scale-105 -z-10"></div>
+                <img src="https://api.dicebear.com/7.x/shapes/svg?seed=biology&backgroundColor=0f766e&shape1Color=34d399" alt="Abstrakt" class="w-full h-auto rounded-full shadow-2xl opacity-90 border-8 border-white mix-blend-multiply">
+            </div>
+        </section>
+
+        <!-- Section 3: Stoffwechsel & Canvas -->
+        <section>
+            <div class="flex items-center gap-4 mb-8 border-b border-slate-200 pb-4">
+                <div class="bg-emerald-100 text-emerald-600 p-3 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-display font-bold text-slate-900">3. Stoffwechsel & Skelettmuskulatur</h3>
+                    <p class="text-slate-500 mt-1">Die Arbeitsmuskulatur muss den Sauerstoff effektiv verwerten können.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white border border-emerald-200 border-t-4 border-t-emerald-500 rounded-xl shadow-sm p-6 hover:shadow-md transition">
+                    <h4 class="font-bold text-slate-900 mb-2">Mitochondrien</h4>
+                    <p class="text-sm text-slate-600">Die Anzahl und Größe der Mitochondrien ("Kraftwerke der Zelle") in den langsam kontrahierenden Muskelfasern nehmen stark zu. Dies vergrößert die Enzymkapazität für den aeroben Stoffwechsel.</p>
+                </div>
+                <div class="bg-white border border-amber-200 border-t-4 border-t-amber-500 rounded-xl shadow-sm p-6 hover:shadow-md transition">
+                    <h4 class="font-bold text-slate-900 mb-2">Glykogenspareffekt</h4>
+                    <p class="text-sm text-slate-600">Trainierte Athleten greifen bei gleicher Intensität früher und in höherem Maße auf freie Fettsäuren als Energiequelle zurück. Limitierte Kohlenhydratspeicher werden geschont.</p>
+                </div>
+                <div class="bg-white border border-indigo-200 border-t-4 border-t-indigo-500 rounded-xl shadow-sm p-6 hover:shadow-md transition">
+                    <h4 class="font-bold text-slate-900 mb-2">Myoglobingehalt</h4>
+                    <p class="text-sm text-slate-600">Die Konzentration von Myoglobin (intrazellulärer Sauerstoffspeicher) steigt. Dies beschleunigt den Sauerstofftransport von der Zellmembran zu den Mitochondrien.</p>
+                </div>
+            </div>
+
+            <!-- Canvas Animation -->
+            <div class="simulation-wrapper p-6 md:p-8">
+                <div class="text-center mb-6">
+                    <h4 class="text-xl font-bold text-white mb-1">Visuelles Modell: Der Weg des Sauerstoffs</h4>
+                    <p class="text-sm text-slate-400">Interaktive Simulation des optimierten O₂-Transports durch Adaption</p>
+                </div>
+                <div class="relative w-full h-[300px] md:h-[400px]">
+                    <canvas id="o2Canvas" class="absolute inset-0 w-full h-full"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Abitur-Transfer Box -->
+        <section class="abitur-premium rounded-3xl p-8 md:p-12 shadow-soft relative overflow-hidden">
+            <!-- Background Icon -->
+            <svg class="absolute -right-10 -bottom-10 w-64 h-64 text-abitur-dark opacity-10 pointer-events-none" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L1 12h3v9h6v-6h4v6h6v-9h3L12 2zm0 2.84L19.5 10H18v9h-2v-6H8v6H6v-9H4.5L12 4.84z"/>
+            </svg>
+
+            <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="bg-abitur-dark text-white p-4 rounded-2xl shadow-md">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-display font-extrabold text-abitur-dark tracking-tight">Abitur-Transfer & Praxis</h2>
+                </div>
+                
+                <p class="text-lg text-slate-800 font-medium mb-8 max-w-4xl">
+                    Im Abitur auf erhöhtem Anforderungsniveau wird dieses Wissen selten als reine Reproduktion abgefragt, sondern fast immer anwendungsorientiert verlangt. Eine typische Aufgabenstellung fordert zunächst die Erläuterung von Trainingsmethoden und daran anknüpfend explizit die Nennung beabsichtigter physiologischer Adaptationen.
+                </p>
+
+                <div class="bg-white rounded-2xl p-6 md:p-8 border-2 border-abitur-light shadow-sm">
+                    <h4 class="text-xl font-bold text-abitur-dark mb-4 border-b border-slate-100 pb-2">Der Abitur-Schlüssel: Biologische Kausalketten</h4>
+                    <p class="text-slate-600 mb-6">Vermeide oberflächliche Phrasen wie <em>"das Herz wird größer"</em>. Das Kultusministerium erwartet exakte Kausalketten. Zeige den genauen physiologischen Ablauf auf:</p>
+                    
+                    <!-- Kausalkette mit SVG Pfeilen statt Text -->
+                    <div class="flex flex-col gap-3 font-medium text-slate-800 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-primary-100 text-primary-700 w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5">1</div>
+                            <div class="pt-1">Spezifische Reizsetzung <span class="text-slate-500 font-normal">(z. B. durch die extensive Intervallmethode)</span> induziert eine exzentrische Hypertrophie.</div>
+                        </div>
+                        
+                        <div class="ml-4 pl-3 py-1 border-l-2 border-dashed border-slate-300 flex items-center gap-2 text-primary-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="bg-primary-100 text-primary-700 w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5">2</div>
+                            <div class="pt-1">Das <strong>Schlagvolumen</strong> steigt an.</div>
+                        </div>
+
+                        <div class="ml-4 pl-3 py-1 border-l-2 border-dashed border-slate-300 flex items-center gap-2 text-primary-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="bg-primary-100 text-primary-700 w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5">3</div>
+                            <div class="pt-1">Das Herz arbeitet ökonomischer <span class="text-slate-500 font-normal">(niedrigere Herzfrequenz bei gleicher Belastung)</span>.</div>
+                        </div>
+
+                        <div class="ml-4 pl-3 py-1 border-l-2 border-dashed border-slate-300 flex items-center gap-2 text-primary-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="bg-primary-500 text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5">4</div>
+                            <div class="pt-1 text-primary-800">Die <strong>absolute Förderleistung</strong> (Minutenvolumen) steigt.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-lg text-rose-800 text-sm">
+                        <strong>Wichtig:</strong> Begründe stets, warum diese Adaptation für die vorgegebene Sportart leistungsfördernd ist – beispielsweise, weil das Hinauszögern der peripheren Ermüdung durch eine verbesserte Sauerstoff- und Nährstoffversorgung bei einer stundenlangen Belastung wie dem Mountainbiken essentiell ist.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-10 text-center text-sm mt-16 border-t border-slate-800">
+        <p class="font-medium text-slate-300">Abiturwissen Sport (G9, eA)</p>
+        <p class="mt-2">Lernbereich 1.5 Ausdauertraining</p>
+    </footer>
+
+    <!-- Retina-Ready Canvas Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('o2Canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Handles high-DPI (Retina) displays to prevent blurry canvas text/lines
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                
+                // Scale context to ensure correct drawing operations
+                ctx.scale(dpr, dpr);
+                
+                // Force CSS size
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            
+            window.addEventListener('resize', resize);
+            resize();
+
+            let time = 0;
+            const particles = [];
+            const particleCount = 60; // More particles for smoother flow
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                    this.progress = Math.random(); // Start at random point
+                }
+                reset() {
+                    this.progress = 0;
+                    this.speed = 0.0015 + Math.random() * 0.001;
+                    this.offset = (Math.random() - 0.5) * 12; // Path thickness jitter
+                    this.size = 2 + Math.random() * 2;
+                }
+                update() {
+                    this.progress += this.speed;
+                    if (this.progress >= 1) this.reset();
+                }
+            }
+
+            for(let i=0; i<particleCount; i++) particles.push(new Particle());
+
+            function drawNode(x, y, label, sublabel, iconStr, color, pulse) {
+                const r = 40 + pulse;
+                
+                // Glow
+                ctx.beginPath();
+                ctx.arc(x, y, r + 10, 0, Math.PI*2);
+                ctx.fillStyle = color.replace('1)', '0.15)');
+                ctx.fill();
+
+                // Circle
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, Math.PI*2);
+                ctx.fillStyle = '#1e293b';
+                ctx.fill();
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = color;
+                ctx.stroke();
+
+                // Text
+                ctx.fillStyle = '#f8fafc';
+                ctx.font = 'bold 14px "Plus Jakarta Sans", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(label, x, y + r + 20);
+                
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '12px Inter, sans-serif';
+                ctx.fillText(sublabel, x, y + r + 36);
+
+                // Simple icon representation inside circle
+                ctx.fillStyle = color;
+                ctx.font = '24px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(iconStr, x, y);
+                ctx.textBaseline = 'alphabetic'; // reset
+            }
+
+            function animate() {
+                // Determine logical size based on CSS size (not actual pixel size)
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time++;
+
+                const centerY = h / 2 - 20;
+                
+                // Calculate positions responsively
+                const lungsX = w * 0.15;
+                const heartX = w * 0.45;
+                const muscleX = w * 0.85;
+
+                // 1. Draw connecting paths
+                ctx.beginPath();
+                ctx.moveTo(lungsX, centerY);
+                ctx.lineTo(muscleX, centerY);
+                ctx.lineWidth = 14;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = '#334155'; // Background track
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(lungsX, centerY);
+                ctx.lineTo(heartX, centerY);
+                ctx.lineWidth = 6;
+                ctx.strokeStyle = 'rgba(239, 68, 68, 0.4)'; // Red track
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(heartX, centerY);
+                ctx.lineTo(muscleX, centerY);
+                ctx.strokeStyle = 'rgba(16, 185, 129, 0.4)'; // Green track
+                ctx.stroke();
+
+                // 2. Draw Particles (Oxygen flow)
+                particles.forEach(p => {
+                    p.update();
+                    
+                    // Linear interpolation across the whole path
+                    const currentX = lungsX + (muscleX - lungsX) * p.progress;
+                    const wave = Math.sin(p.progress * Math.PI * 15) * p.offset;
+                    const currentY = centerY + wave;
+
+                    ctx.beginPath();
+                    ctx.arc(currentX, currentY, p.size, 0, Math.PI*2);
+                    
+                    // Color changes as it moves through the system
+                    if (p.progress < (heartX-lungsX)/(muscleX-lungsX)) {
+                        ctx.fillStyle = '#67e8f9'; // Cyan from lungs to heart
+                    } else {
+                        ctx.fillStyle = '#34d399'; // Emerald to muscles
+                    }
+                    
+                    ctx.fill();
+                });
+
+                // 3. Draw Nodes (Stations)
+                const heartPulse = Math.sin(time * 0.08) * 4;
+                
+                drawNode(lungsX, centerY, 'Lunge', 'VO₂max ↑', '💨', 'rgba(6, 182, 212, 1)', 0);
+                drawNode(heartX, centerY, 'Sportherz', 'HMV ↑', '❤️', 'rgba(239, 68, 68, 1)', heartPulse);
+                drawNode(muscleX, centerY, 'Muskelzelle', 'Mitochondrien ↑', '⚡', 'rgba(16, 185, 129, 1)', 0);
+
+                requestAnimationFrame(animate);
+            }
+
+            // Start animation loop
+            animate();
+        });
+    </script>
+</body>
+</html>

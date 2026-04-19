@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.3.1b Energieumsatz: Grund- und Leistungsumsatz - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+        :root {
+            /* Data Dashboard Theme */
+            --bg-main: #f1f5f9;
+            --text-dark: #0f172a;
+            --text-mut: #64748b;
+            
+            --bmr-color: #3b82f6;      /* Blue for Basal Metabolic Rate */
+            --bmr-bg: #eff6ff;
+            
+            --amr-color: #f97316;      /* Orange for Active Metabolic Rate */
+            --amr-bg: #fff7ed;
+            
+            --total-color: #8b5cf6;    /* Purple for Total/Balance */
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Exam Box */
+            --abi-bg: #020617;         /* Deepest Slate */
+            --abi-gold: #facc15;       /* Warning/Gold */
+            --abi-text: #f8fafc;
+
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.65;
+            font-size: 1.05rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER SECTION --- */
+        .doc-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-top: 6px solid var(--total-color);
+        }
+
+        .doc-header::after {
+            content: '⚡';
+            position: absolute;
+            top: -10px; right: 20px;
+            font-size: 8rem;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .doc-header h1 {
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+        }
+
+        .doc-header .intro {
+            font-size: 1.15rem;
+            color: var(--text-mut);
+            max-width: 900px;
+        }
+
+        /* --- 1. GRUNDUMSATZ (BMR) --- */
+        .bmr-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bmr-intro {
+            background: var(--bmr-bg);
+            border-left: 4px solid var(--bmr-color);
+            padding: 1.5rem 2rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin-bottom: 2.5rem;
+            color: #1e3a8a;
+        }
+
+        .det-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .det-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.2s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .det-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--bmr-color);
+        }
+
+        .det-card h3 {
+            font-size: 1.2rem;
+            color: var(--bmr-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .det-card p {
+            font-size: 0.95rem;
+            color: var(--text-mut);
+        }
+
+        /* --- 2. LEISTUNGSUMSATZ (AMR) --- */
+        .amr-section {
+            margin-bottom: 4rem;
+        }
+
+        .amr-intro {
+            background: var(--amr-bg);
+            border-left: 4px solid var(--amr-color);
+            padding: 1.5rem 2rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin-bottom: 2.5rem;
+            color: #9a3412;
+        }
+
+        .amr-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .amr-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            border-top: 4px solid var(--amr-color);
+        }
+
+        .amr-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .data-tag {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            background: #f1f5f9;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: var(--amr-color);
+            font-weight: 700;
+        }
+
+        /* --- CANVAS SECTION --- */
+        .canvas-section {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .canvas-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p {
+            color: var(--text-mut);
+            margin-bottom: 2rem;
+        }
+
+        .canvas-wrapper {
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            overflow-x: auto;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- 3. ENERGIEBILANZ --- */
+        .balance-section {
+            margin-bottom: 4rem;
+        }
+
+        .balance-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .balance-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 6px solid;
+        }
+
+        .bal-iso { border-bottom-color: #10b981; }   /* Green */
+        .bal-hyper { border-bottom-color: #ef4444; } /* Red */
+        .bal-hypo { border-bottom-color: #8b5cf6; }  /* Purple */
+
+        .balance-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .bal-formula {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-mut);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .balance-card p {
+            font-size: 0.95rem;
+        }
+
+        /* --- ABITUR TRANSFER BOX --- */
+        .abitur-matrix {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-top: 8px solid var(--abi-gold);
+            position: relative;
+        }
+
+        .abitur-matrix h2 {
+            color: var(--abi-gold);
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .case-study {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(250, 204, 21, 0.2);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+        }
+
+        .case-study h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(250, 204, 21, 0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 4px;
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .case-study p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .solution-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px dashed #10b981;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .solution-box strong {
+            color: #34d399;
+            display: block;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .solution-box p {
+            color: #ecfdf5;
+            margin: 0;
+        }
+
+        @media (max-width: 900px) {
+            .amr-grid, .balance-grid { grid-template-columns: 1fr; }
+            .doc-header, .abitur-matrix { padding: 2rem; }
+            .doc-header h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>3.3.1b Energieumsatz: Grund- und Leistungsumsatz</h1>
+        <p class="intro">
+            Der menschliche Organismus benötigt permanent Energie, um seine Körpertemperatur aufrechtzuerhalten, Stoffwechselprozesse anzutreiben und mechanische Arbeit (Muskelkontraktion) zu verrichten. Die Summe der pro Tag verbrauchten Energie wird als <strong>Gesamtenergieumsatz</strong> bezeichnet. Er setzt sich im Wesentlichen aus zwei Hauptkomponenten zusammen: dem Grundumsatz und dem Leistungsumsatz.
+        </p>
+    </header>
+
+    <!-- 1. Grundumsatz (BMR) -->
+    <section class="bmr-section">
+        <h2 class="section-title" style="color: var(--bmr-color);">1. Der Grundumsatz (BMR)</h2>
+        <div class="bmr-intro">
+            Der Grundumsatz (Basal Metabolic Rate) ist die Energiemenge, die der Körper pro Tag (24 Stunden) bei <strong>völliger Ruhe, nüchtern (postabsorptiv) und bei einer indifferenten Umgebungstemperatur</strong> (ca. 20–24 °C) zur Aufrechterhaltung seiner lebensnotwendigen Funktionen (Atmung, Herz-Kreislauf, Organstoffwechsel, Thermoregulation) benötigt.
+        </div>
+
+        <h3 style="margin-bottom: 1rem; color: var(--text-dark);">Determinanten des Grundumsatzes:</h3>
+        <div class="det-grid">
+            <article class="det-card">
+                <h3>💪 Körperzusammensetzung</h3>
+                <p>Dies ist der wichtigste Faktor (Fat Free Mass). Da die Skelettmuskulatur auch im Ruhezustand hochgradig stoffwechselaktiv ist (sie verbrennt Energie, reines Fettgewebe kaum), hat ein muskulöser Athlet einen signifikant höheren Grundumsatz als eine untrainierte Person gleichen Gewichts.</p>
+            </article>
+            <article class="det-card">
+                <h3>🧬 Geschlecht und Alter</h3>
+                <p>Männer haben genetisch und hormonell (Testosteron) bedingt meist einen höheren Muskelanteil und damit einen höheren Grundumsatz. Mit zunehmendem Alter sinkt der Grundumsatz (Sarkopenie).</p>
+            </article>
+            <article class="det-card">
+                <h3>🩸 Hormoneller Status</h3>
+                <p>Schilddrüsenhormone (insbesondere Thyroxin) regulieren die allgemeine Stoffwechselrate maßgeblich und beeinflussen somit den Energie-Grundbedarf direkt.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- 2. Leistungsumsatz (AMR) -->
+    <section class="amr-section">
+        <h2 class="section-title" style="color: var(--amr-color);">2. Der Leistungsumsatz (AMR)</h2>
+        <div class="amr-intro">
+            Der Leistungsumsatz (Active Metabolic Rate) ist die Energiemenge, die der Körper zusätzlich zum Grundumsatz aufbringen muss, um mechanische Arbeit zu verrichten (Alltagsbewegung, Beruf, sportliche Aktivität) sowie für die nahrungsinduzierte Thermogenese.
+        </div>
+
+        <div class="amr-grid">
+            <article class="amr-card">
+                <h3>Der PAL-Faktor</h3>
+                <p style="margin-bottom: 1rem; color: var(--text-mut);">Zur Berechnung des Gesamtenergiebedarfs wird der Grundumsatz mit dem PAL-Faktor (Physical Activity Level) multipliziert.</p>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.8rem;">
+                    <li><span class="data-tag">PAL 1.4 - 1.5</span> Büroangestellter (sitzend)</li>
+                    <li><span class="data-tag">PAL 1.8 - 1.9</span> Stehender Beruf (Verkäufer)</li>
+                    <li><span class="data-tag">PAL > 4.0</span> Ausdauer-Leistungssportler (Wettkampf)</li>
+                </ul>
+            </article>
+            <article class="amr-card">
+                <h3>Sportartspezifischer Umsatz</h3>
+                <p style="color: var(--text-mut);">Die Höhe der beim Sport verbrannten Kalorien korreliert direkt mit der Intensität, der Dauer der Belastung und der <strong>eingesetzten Muskelmasse</strong>.</p>
+                <p style="margin-top: 1rem; color: var(--text-mut);">Ein 90-minütiger Dauerlauf beansprucht große Muskelgruppen permanent und führt zu massiven Umsätzen. Ein isoliertes Bizeps-Training verbrennt hingegen relativ wenig Akut-Energie.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Canvas Stacked Bar Chart -->
+    <section class="canvas-section">
+        <h3>Vergleich des Gesamtenergieumsatzes</h3>
+        <p>Büroangestellter vs. Ausdauer-Leistungssportler im Tagesprofil</p>
+        <div class="canvas-wrapper">
+            <canvas id="energyChart" width="800" height="500"></canvas>
+        </div>
+    </section>
+
+    <!-- 3. Energiebilanz -->
+    <section class="balance-section">
+        <h2 class="section-title" style="color: var(--total-color);">3. Die Energiebilanz im sportlichen Kontext</h2>
+        <p style="color: var(--text-mut);">Die Differenz aus Energiezufuhr (Makronährstoffe) und Gesamtenergieumsatz bestimmt das Körpergewicht und die Adaptationsfähigkeit des Athleten.</p>
+
+        <div class="balance-grid">
+            <article class="balance-card bal-iso">
+                <h3>⚖️ Isokalorische Bilanz</h3>
+                <span class="bal-formula">Zufuhr = Verbrauch</span>
+                <p>Das Körpergewicht bleibt konstant. Ideal für den Erhalt der Leistungsfähigkeit in der Wettkampfphase.</p>
+            </article>
+
+            <article class="balance-card bal-hyper">
+                <h3>📈 Hyperkalorische Bilanz</h3>
+                <span class="bal-formula">Zufuhr > Verbrauch (Überschuss)</span>
+                <p>Zwingend notwendig für anabole (aufbauende) Prozesse. Ein Sportler, der Muskelmasse aufbauen will (Hypertrophietraining), muss im Überschuss sein, sonst synthetisiert der Körper kein neues Gewebe.</p>
+            </article>
+
+            <article class="balance-card bal-hypo">
+                <h3>📉 Hypokalorische Bilanz</h3>
+                <span class="bal-formula">Zufuhr < Verbrauch (Defizit)</span>
+                <p>Führt zu katabolen (abbauenden) Prozessen und Gewichtsverlust. Im Leistungssport oft zur Optimierung des Leistungsgewichts genutzt. <strong>Gefahr:</strong> Drosselt Regeneration und baut Muskelprotein ab.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Abitur Transfer Box -->
+    <section class="abitur-matrix">
+        <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die Begriffe Grund- und Leistungsumsatz sind das <strong>mathematische und biologische Fundament</strong> für komplexere Abituraufgaben im Bereich der Trainingsplanung und Ernährungsstrategie.
+        </p>
+
+        <div class="case-study">
+            <h4>Fehlerdiagnose bei Trainingszielen</h4>
+            <p style="font-style: italic; margin-bottom: 1rem;">Klausurbeispiel: "Ein Athlet trainiert seit 6 Monaten nach der Methode der wiederholten submaximalen Krafteinsätze (Hypertrophietraining), baut aber keine Muskelmasse auf, obwohl der Reiz überschwellig ist. Er ernährt sich strikt isokalorisch."</p>
+            
+            <div class="solution-box">
+                <strong>Die eA-Lösungsstrategie (Vernetzung!):</strong>
+                <p>Du musst das Wissen aus Lernbereich 1 (Krafttraining) mit Lernbereich 3 (Ernährung) vernetzen! Du argumentierst: Das Training setzt zwar den Reiz, aber der Körper benötigt für die Proteinsynthese (Aufbau neuer Sarkomere) Baustoffe und Energie. Da der Athlet sich nur isokalorisch ernährt (Zufuhr = Grundumsatz + Leistungsumsatz), fehlt ihm die <strong>hyperkalorische Bilanz (der Energieüberschuss)</strong>, um das morphologische Trainingsziel zu erreichen.</p>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <h4>Beurteilung von Gewichtsreduktionsprogrammen</h4>
+            <p style="font-style: italic; margin-bottom: 1rem;">Klausurbeispiel: "Beurteilen Sie, warum ein reines Ausdauertraining (ohne Krafttraining) zur langfristigen Gewichtsreduktion oft scheitert (Jojo-Effekt)."</p>
+            
+            <div class="solution-box" style="border-color: #38bdf8; background: rgba(56, 189, 248, 0.1);">
+                <strong style="color: #38bdf8;">Die eA-Lösung (Grundumsatz-Argumentation):</strong>
+                <p style="color: #e0f2fe;">Hier nutzt du dein Wissen über den Grundumsatz. Reines Ausdauertraining im Kaloriendefizit baut oft auch Muskelmasse ab (katabole Stoffwechsellage). Weniger Muskelmasse bedeutet einen <strong>sinkenden Grundumsatz</strong>. Wenn die Person später wieder normal isst, hat sie einen niedrigeren Grundumsatz als zuvor und nimmt extrem schnell wieder zu. Die Lösung: Die Integration von Krafttraining, um die Skelettmuskulatur zu erhalten/aufzubauen, was den Grundumsatz dauerhaft erhöht.</p>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('energyChart');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Chart Configuration
+    const margin = { top: 40, right: 200, bottom: 60, left: 80 }; // Extra right margin for legend
+    const chartW = w - margin.left - margin.right;
+    const chartH = h - margin.top - margin.bottom;
+    
+    // Data values (in kcal)
+    const maxKcal = 6000; // Y-axis max
+    
+    const data = [
+        { 
+            label: "Büroangestellter", 
+            bmr: 1800, 
+            amr: 600 
+        },
+        { 
+            label: "Ausdauer-Sportler", 
+            bmr: 2100, // Slightly higher BMR due to muscle mass
+            amr: 3500  // Massively higher AMR
+        }
+    ];
+
+    // Colors matching CSS
+    const colBmr = '#3b82f6';
+    const colAmr = '#f97316';
+
+    // 1. Draw Grid Lines & Y-Axis Labels
+    ctx.fillStyle = '#64748b';
+    ctx.font = '14px "Space Mono"';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    
+    const numTicks = 6;
+    for(let i=0; i<=numTicks; i++) {
+        let kcalVal = (maxKcal / numTicks) * i;
+        let yPos = margin.top + chartH - (kcalVal / maxKcal) * chartH;
+        
+        // Label
+        ctx.fillText(kcalVal + " kcal", margin.left - 15, yPos);
+        
+        // Grid line
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 1;
+        if(i === 0) {
+            ctx.strokeStyle = '#94a3b8'; // Base line darker
+            ctx.lineWidth = 2;
+        }
+        ctx.beginPath();
+        ctx.moveTo(margin.left, yPos);
+        ctx.lineTo(margin.left + chartW, yPos);
+        ctx.stroke();
+    }
+
+    // 2. Draw Stacked Bars
+    const barWidth = 120;
+    const gap = (chartW - (data.length * barWidth)) / (data.length + 1);
+
+    data.forEach((item, index) => {
+        const xPos = margin.left + gap + (index * (barWidth + gap));
+        
+        // Calculate heights in pixels
+        const bmrH = (item.bmr / maxKcal) * chartH;
+        const amrH = (item.amr / maxKcal) * chartH;
+        
+        // Y positions (drawing from bottom up)
+        const yBmrTop = margin.top + chartH - bmrH;
+        const yAmrTop = yBmrTop - amrH;
+
+        // Draw BMR Bar (Bottom)
+        ctx.fillStyle = colBmr;
+        ctx.fillRect(xPos, yBmrTop, barWidth, bmrH);
+        
+        // Draw AMR Bar (Top)
+        ctx.fillStyle = colAmr;
+        ctx.fillRect(xPos, yAmrTop, barWidth, amrH);
+
+        // Add numerical text inside bars
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 16px "Outfit"';
+        ctx.textAlign = 'center';
+        // BMR text
+        if(bmrH > 30) ctx.fillText(item.bmr, xPos + barWidth/2, yBmrTop + bmrH/2);
+        // AMR text
+        if(amrH > 30) ctx.fillText(item.amr, xPos + barWidth/2, yAmrTop + amrH/2);
+
+        // Add X-Axis Label
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 16px "Outfit"';
+        ctx.fillText(item.label, xPos + barWidth/2, margin.top + chartH + 25);
+    });
+
+    // 3. Draw Legend (Right side)
+    const legX = margin.left + chartW + 30;
+    const legY = margin.top + chartH / 2 - 40;
+
+    // BMR Legend item
+    ctx.fillStyle = colBmr;
+    ctx.fillRect(legX, legY, 20, 20);
+    ctx.fillStyle = '#334155';
+    ctx.textAlign = 'left';
+    ctx.font = '600 16px "Outfit"';
+    ctx.fillText("Grundumsatz", legX + 30, legY + 15);
+    ctx.font = '12px "Outfit"';
+    ctx.fillStyle = '#64748b';
+    ctx.fillText("(Erhöht durch Muskeln)", legX + 30, legY + 30);
+
+    // AMR Legend item
+    ctx.fillStyle = colAmr;
+    ctx.fillRect(legX, legY + 50, 20, 20);
+    ctx.fillStyle = '#334155';
+    ctx.font = '600 16px "Outfit"';
+    ctx.fillText("Leistungsumsatz", legX + 30, legY + 65);
+    ctx.font = '12px "Outfit"';
+    ctx.fillStyle = '#64748b';
+    ctx.fillText("(Training, Alltag)", legX + 30, legY + 80);
+
+</script>
+</body>
+</html>

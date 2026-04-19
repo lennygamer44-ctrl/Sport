@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.3b Bewegungsmerkmale und spezifische Strukturen</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700;900&display=swap');
+
+        :root {
+            --bg-page: #f5f7fa;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            
+            /* Theme Colors */
+            --quant-color: #047857; /* Emerald */
+            --quant-bg: #ecfdf5;
+            --qual-color: #4338ca; /* Indigo */
+            --qual-bg: #eef2ff;
+            
+            --struct-accent: #b91c1c; /* Crimson */
+            
+            --table-speer: #0ea5e9; /* Sky Blue */
+            --table-diskus: #f59e0b; /* Amber */
+            
+            --abi-bg: #0f172a;
+            --abi-accent: #fbbf24;
+
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Lora', serif;
+            color: #0f172a;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Header */
+        .doc-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .doc-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .doc-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Dashboard Section 1: Quant vs Qual */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .dash-card {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-subtle);
+            border-top: 6px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .dash-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-quant { border-color: var(--quant-color); }
+        .card-qual { border-color: var(--qual-color); }
+
+        .dash-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-quant h2 { color: var(--quant-color); }
+        .card-qual h2 { color: var(--qual-color); }
+
+        .dash-card p {
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 500;
+        }
+
+        .feature-list li:last-child { border-bottom: none; }
+        
+        .card-quant .feature-list li { color: var(--quant-color); }
+        .card-qual .feature-list li { color: var(--qual-color); }
+
+        /* Section 2: Spezifische Strukturen */
+        .structures-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 4rem;
+        }
+
+        .structures-section > h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .structures-section > p {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .structure-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .structure-item {
+            display: flex;
+            background: #f1f5f9;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border-left: 5px solid var(--struct-accent);
+        }
+
+        .struct-icon {
+            background: var(--struct-accent);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.5rem;
+            min-width: 80px;
+        }
+
+        .struct-content {
+            padding: 1.5rem;
+        }
+
+        .struct-content h3 {
+            font-size: 1.3rem;
+            color: var(--struct-accent);
+            margin-bottom: 0.5rem;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Section 3: Disziplinenvergleich (The Table) */
+        .comparison-section {
+            margin-bottom: 4rem;
+        }
+
+        .comparison-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .commonalities-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .commonalities-box h3 {
+            color: #334155;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        /* Advanced Comparison Table */
+        .table-wrapper {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-hover);
+            overflow: hidden;
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .compare-table th {
+            padding: 1.5rem;
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            color: #ffffff;
+        }
+
+        .th-feature { background: #334155; width: 30%; }
+        .th-speer { background: var(--table-speer); width: 35%; }
+        .th-diskus { background: var(--table-diskus); width: 35%; }
+
+        .compare-table td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        .compare-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .td-feature {
+            font-weight: 700;
+            color: #475569;
+            background: #f8fafc;
+        }
+
+        .compare-table tbody tr:hover td {
+            background-color: #f1f5f9;
+        }
+
+        /* Abitur Transfer Box */
+        .abitur-strategy {
+            background: var(--abi-bg);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem;
+            color: #f8fafc;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-top: 8px solid var(--abi-accent);
+            position: relative;
+        }
+
+        .abitur-strategy h2 {
+            color: var(--abi-accent);
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .abitur-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .strat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .strat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .strat-card h4 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .strat-card h4::before {
+            content: '✓';
+            color: var(--abi-accent);
+            font-weight: 900;
+        }
+
+        .strat-card p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .highlight-exam {
+            color: var(--abi-accent);
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .doc-header h1 { font-size: 2.2rem; }
+            .compare-table th, .compare-table td { padding: 1rem; font-size: 0.95rem; }
+            .struct-icon { min-width: 50px; font-size: 1.2rem; padding: 1rem; }
+            .abitur-strategy { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>2.1.3b Bewegungsmerkmale und spezifische Strukturen</h1>
+        <p>Qualitative und quantitative Bewegungsmerkmale sowie der Disziplinenvergleich</p>
+    </header>
+
+    <!-- Section 1: Quantitative vs Qualitative -->
+    <div class="dashboard-grid">
+        <article class="dash-card card-quant">
+            <h2>Quantitative Bewegungsmerkmale</h2>
+            <p>
+                Dies sind <strong>objektiv messbare, physikalische Größen</strong>. Sie dienen der harten Leistungsdiagnostik (z. B. in der Biomechanik).
+            </p>
+            <ul class="feature-list">
+                <li>⏱️ Benötigte Zeit</li>
+                <li>📏 Zurückgelegte Distanz</li>
+                <li>🚀 Durchschnittliche Geschwindigkeit</li>
+                <li>⛰️ Zurückgelegte Höhenmeter (z.B. Mountainbiken)</li>
+            </ul>
+        </article>
+
+        <article class="dash-card card-qual">
+            <h2>Qualitative Bewegungsmerkmale</h2>
+            <p>
+                Dies sind von außen <strong>beobachtbare, beschreibende Kriterien</strong>, die die Güte einer Bewegungskoordination bewerten.
+            </p>
+            <ul class="feature-list">
+                <li>🌊 Bewegungsfluss</li>
+                <li>🎵 Bewegungsrhythmus</li>
+                <li>🔗 Bewegungskopplung</li>
+                <li>🎯 Bewegungspräzision</li>
+            </ul>
+        </article>
+    </div>
+
+    <!-- Section 2: Specific Structures -->
+    <section class="structures-section">
+        <h2>Analyse spezifischer Bewegungsstrukturen</h2>
+        <p>In Wurf-, Stoß- und Sprungdisziplinen finden sich hochspezifische, wiederkehrende Bewegungsmuster, die die Grundlage für eine maximale Kraftentfaltung bilden:</p>
+        
+        <div class="structure-list">
+            <div class="structure-item">
+                <div class="struct-icon">1</div>
+                <div class="struct-content">
+                    <h3>Die Sukzessivkopplung (Kinematische Kette)</h3>
+                    <p>Der sukzessive (nacheinander folgende) Einsatz der Teilkräfte. Große, starke und eher langsame Muskelgruppen (Beine, Hüfte, Rumpf) setzen zuerst ein, um den Gesamtkörper zu beschleunigen. Erst danach folgen die kleineren, schnelleren Muskelgruppen (Schulter, Wurfarm, Hand).</p>
+                </div>
+            </div>
+
+            <div class="structure-item">
+                <div class="struct-icon">2</div>
+                <div class="struct-content">
+                    <h3>Der Stemmschritt und der "Block"</h3>
+                    <p>Eine deutliche Gewichtsverlagerung vom hinteren auf das vordere Bein in der Hauptphase. Durch das abrupte Aufsetzen des vorderen (gestreckten) Beins entsteht ein "Block der linken Körperseite" (bei Rechtswerfern), der die translatorische Energie des Anlaufs in die Wurfschulter bzw. das Wurfgerät umleitet.</p>
+                </div>
+            </div>
+
+            <div class="structure-item">
+                <div class="struct-icon">3</div>
+                <div class="struct-content">
+                    <h3>Die Bogenspannung / Verwringung</h3>
+                    <p>Durch ein Zurückbleiben des Oberkörpers oder des Wurfarms gegenüber der beschleunigenden Hüfte entsteht eine muskuläre Vorspannung, die peitschenartig aufgelöst wird.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Disziplinenvergleich (Speer vs Diskus) -->
+    <section class="comparison-section">
+        <h2>Der Strukturvergleich: Speerwurf vs. Diskuswurf</h2>
+        
+        <div class="commonalities-box">
+            <h3>Bewegungsstrukturelle Gemeinsamkeiten</h3>
+            <p>Ein zentrales Element des Lehrplans ist der strukturierte Vergleich komplexer Bewegungen. Der Speer- und Diskuswurf verfolgen dasselbe Ziel (maximale Abfluggeschwindigkeit bei optimalem Winkel). <strong>Gemeinsamkeiten sind:</strong></p>
+            <ul style="margin-top: 1rem; margin-left: 1.5rem; color: #475569;">
+                <li>Beide weisen in der Vorbereitungsphase den Gegenarm in Vorhalte und einen nahezu gestreckten Wurfarm auf.</li>
+                <li>In der Hauptphase erfolgt der Abwurf aus einer Schrittstellung (bei Rechtswerfern: linkes Bein vorne).</li>
+                <li>Beide nutzen die <strong>Sukzessivkopplung</strong>, den <strong>Stemmschritt</strong> und den <strong>Block der linken Körperseite</strong>.</li>
+                <li>In der Endphase muss die hohe Endgeschwindigkeit abgefangen werden, um das Gleichgewicht wiederzuerlangen und ein Übertreten zu verhindern.</li>
+            </ul>
+        </div>
+
+        <!-- The Comparison Table -->
+        <div class="table-wrapper">
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th class="th-feature">Merkmal (Unterschiede)</th>
+                        <th class="th-speer">Speerwurf</th>
+                        <th class="th-diskus">Diskuswurf</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="td-feature">Grundlegende Bewegungsart</td>
+                        <td><strong>Translatorischer Ansatz:</strong> Die Annäherung erfolgt geradlinig (Translation).</td>
+                        <td><strong>Rotatorischer Ansatz:</strong> Die Annäherung im Ring erfolgt drehend (Rotation).</td>
+                    </tr>
+                    <tr>
+                        <td class="td-feature">Wurfauslage</td>
+                        <td>Zeichnet sich durch eine <strong>Oberkörperrücklage</strong> (Schulterachse in Wurfrichtung) aus, was zu einer massiven <strong>Bogenspannung</strong> führt.</td>
+                        <td>Zeichnet sich durch eine starke <strong>Körperverwringung</strong> aus (Schulterachse zeigt rechtwinklig zur Wurfrichtung).</td>
+                    </tr>
+                    <tr>
+                        <td class="td-feature">Armführung</td>
+                        <td>Es ist eine <strong>Schlagwurfbewegung</strong>: Der Ellbogen zieht von hinten nach vorne-oben am Kopf vorbei.</td>
+                        <td>Es handelt sich um eine <strong>Schleuderbewegung</strong> mit gestrecktem Wurfarm.</td>
+                    </tr>
+                    <tr>
+                        <td class="td-feature">Beschleunigungsweg</td>
+                        <td>Der Speer wird <strong>linear</strong> beschleunigt.</td>
+                        <td>Der Diskus wird auf einem <strong>stetig gekrümmten</strong> Beschleunigungsweg beschleunigt.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Section 4: Premium Abitur Transfer -->
+    <section class="abitur-strategy">
+        <h2>Abitur-Transfer & Praxis</h2>
+        <p class="abitur-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die Gegenüberstellung von Disziplinen ist ein absoluter Klassiker in der Abiturprüfung. Wenn du in der Klausur die Gemeinsamkeiten und Unterschiede von Bewegungsstrukturen benennen sollst, reicht es nicht, laienhaft zu beschreiben ("Der eine rennt, der andere dreht sich").
+        </p>
+
+        <div class="strat-grid">
+            <div class="strat-card">
+                <h4>Terminologie ist alles</h4>
+                <p>Du musst die Fachbegriffe wie <span class="highlight-exam">Sukzessivkopplung</span>, <span class="highlight-exam">Stemmschritt</span>, <span class="highlight-exam">Block</span> und <span class="highlight-exam">Bogenspannung/Verwringung</span> zwingend verwenden. Sie sind die Checkliste der Korrektoren für die Vergabe von Bewertungseinheiten (BE).</p>
+            </div>
+
+            <div class="strat-card">
+                <h4>Biomechanischer Kern</h4>
+                <p>Der entscheidende, punktebringende Unterschied beim Vergleich liegt in der mechanischen Zuordnung: Du musst den Speerwurf explizit als <span class="highlight-exam">translatorische bzw. lineare Beschleunigung</span> und den Diskuswurf als <span class="highlight-exam">rotatorische Bewegung mit gekrümmtem Beschleunigungsweg</span> charakterisieren.</p>
+            </div>
+
+            <div class="strat-card">
+                <h4>Transfer auf koordinative Fähigkeiten</h4>
+                <p>Dieses Wissen musst du vernetzen können. Beispielsweise erfordert das abrupte Abbremsen nach dem Stemmschritt (bei beiden Würfen) eine extreme <span class="highlight-exam">Gleichgewichtsfähigkeit</span>, während die Sukzessivkopplung zwingend eine hoch ausgeprägte <span class="highlight-exam">Kopplungsfähigkeit</span> voraussetzt.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>

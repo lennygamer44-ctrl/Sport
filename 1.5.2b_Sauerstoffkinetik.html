@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.5.2b Sauerstoffkinetik</title>
+    <style>
+        /* Aero-Flow & Dynamics Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Aero Palette */
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            
+            --text-dark: #0f172a;
+            --text-main: #334155;
+            --text-light: #64748b;
+            
+            /* Phase Colors */
+            --phase-deficit: #f97316; /* Orange */
+            --phase-deficit-light: #ffedd5;
+            
+            --phase-steady: #0ea5e9; /* Blue */
+            --phase-steady-light: #e0f2fe;
+            
+            --phase-epoc: #10b981; /* Mint Green */
+            --phase-epoc-light: #d1fae5;
+            
+            --abi-bg: #0f172a;
+            --abi-gold: #f59e0b;
+            --abi-glow: #8b5cf6;
+            
+            --radius-soft: 20px;
+            --radius-pill: 50px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2rem;
+            /* Soft background waves */
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .document-wrapper {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        /* Fluid Header */
+        header {
+            background: var(--bg-card);
+            border-radius: var(--radius-soft);
+            padding: 4rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid var(--phase-steady);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--phase-deficit-light), var(--phase-steady-light));
+            border-radius: 50%;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .sys-badge {
+            display: inline-block;
+            background: var(--text-dark);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            padding: 0.4rem 1.2rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--text-dark);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -1px;
+        }
+
+        .intro-lead {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        /* Flow Cards for Phases */
+        .phase-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .phase-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-soft);
+            padding: 3rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 8px solid transparent;
+        }
+
+        .phase-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .phase-card.deficit { border-left-color: var(--phase-deficit); }
+        .phase-card.steady { border-left-color: var(--phase-steady); }
+        .phase-card.epoc { border-left-color: var(--phase-epoc); }
+
+        .phase-number {
+            position: absolute;
+            top: -15px;
+            right: 3rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            opacity: 0.08;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .phase-card.deficit .phase-number { color: var(--phase-deficit); opacity: 0.15; }
+        .phase-card.steady .phase-number { color: var(--phase-steady); opacity: 0.15; }
+        .phase-card.epoc .phase-number { color: var(--phase-epoc); opacity: 0.15; }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .phase-card.deficit h2 { color: var(--phase-deficit); }
+        .phase-card.steady h2 { color: var(--phase-steady); }
+        .phase-card.epoc h2 { color: var(--phase-epoc); }
+
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin: 1.5rem 0 0.8rem 0;
+            display: inline-block;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        .highlight-box {
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .deficit .highlight-box { background: var(--phase-deficit-light); color: #9a3412; }
+        .epoc .highlight-box { background: var(--phase-epoc-light); color: #065f46; }
+
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .epoc-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .epoc-split { grid-template-columns: 1fr; }
+        }
+
+        .epoc-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .epoc-item h4 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--phase-epoc);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Canvas Wrapper */
+        .canvas-section {
+            background: var(--bg-card);
+            border-radius: var(--radius-soft);
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: inset 0 0 0 1px #e2e8f0, 0 10px 30px rgba(0,0,0,0.03);
+            text-align: center;
+        }
+
+        .canvas-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .canvas-header h3 {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            display: block;
+        }
+
+        /* Massive Abitur Transfer Dossier */
+        .exam-dossier {
+            background: var(--abi-bg);
+            color: #f1f5f9;
+            padding: 4rem;
+            border-radius: var(--radius-soft);
+            margin-top: 5rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.5);
+            border-top: 6px solid var(--abi-gold);
+        }
+
+        .exam-dossier::before {
+            content: 'EXAM DOSSIER (eA)';
+            position: absolute;
+            top: 0; right: 3rem;
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            padding: 0.5rem 1.5rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            border-radius: 0 0 12px 12px;
+            letter-spacing: 1px;
+        }
+
+        .exam-dossier h2 {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+
+        .dossier-intro {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        .scenario-box {
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid var(--abi-glow);
+            padding: 2rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 3rem;
+            font-style: italic;
+            color: #ddd6fe;
+        }
+
+        .scenario-box strong {
+            display: block;
+            font-style: normal;
+            font-family: 'Outfit', sans-serif;
+            color: var(--abi-glow);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        /* 3-Step Argumentation */
+        .argumentation-steps {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .step-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .step-card h4 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--abi-gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-number {
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .step-card p {
+            margin-bottom: 0;
+            color: #f1f5f9;
+        }
+
+        .step-card strong {
+            color: #38bdf8;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="document-wrapper">
+
+    <header>
+        <div class="sys-badge">Lernbereich 1.5.2b</div>
+        <h1>Sauerstoffkinetik</h1>
+        <p class="intro-lead">Die Sauerstoffkinetik beschreibt das zeitliche Verhalten der Sauerstoffaufnahme (VO<sub>2</sub>) des Körpers im Verhältnis zum tatsächlichen Sauerstoffbedarf der Arbeitsmuskulatur. Das kardiopulmonale System ist relativ träge und kann die Sauerstoffversorgung nicht von der ersten Sekunde an hochfahren, was zu charakteristischen Phasenverschiebungen führt.</p>
+    </header>
+
+    <div class="phase-grid">
+        
+        <!-- Defizit -->
+        <div class="phase-card deficit">
+            <span class="phase-number">01</span>
+            <h2>Das Sauerstoffdefizit <br><span style="font-size: 1.2rem; color: var(--text-light); font-weight: 400;">(Die Einlaufphase)</span></h2>
+            <p>Bei jedem Beginn einer sportlichen Belastung oder bei einer plötzlichen Intensitätssteigerung (z. B. einem Zwischensprint oder einem steilen Anstieg) steigt der Energiebedarf der Muskulatur schlagartig (innerhalb von Millisekunden) an.</p>
+            
+            <h3>Das physiologische Problem</h3>
+            <p>Die Atmung, die Herzfrequenz und das Schlagvolumen benötigen jedoch eine gewisse Anlaufzeit (ca. 1 bis 3 Minuten), um sich an die neue Belastungsstufe anzupassen. Die tatsächliche Sauerstoffaufnahme hinkt dem eigentlichen Sauerstoffbedarf also hinterher.</p>
+
+            <div class="highlight-box">
+                <strong>Die "Sauerstofflücke" (Das Defizit)</strong>
+                Die Differenz zwischen der theoretisch benötigten Sauerstoffmenge (Bedarf) und der in dieser Zeit tatsächlich aufgenommenen Sauerstoffmenge nennt man Sauerstoffdefizit.
+            </div>
+
+            <h3>Energetische Überbrückung</h3>
+            <p>Da der aerobe Weg zu Beginn noch nicht die volle Leistung erbringt, muss der Körper diese Lücke zwingend überbrücken, um die Belastung überhaupt durchführen zu können. Dies geschieht <strong>ausschließlich durch die anaerobe Energiebereitstellung</strong> (zunächst anaerob-alaktazid durch ATP/KP, dann anaerob-laktazid durch Glykolyse).</p>
+            
+            <p style="font-weight: 600; color: #9a3412; font-style: italic; margin-top: 10px;">Merke: Je intensiver der Belastungsbeginn, desto größer ist das entstehende Sauerstoffdefizit und desto mehr Laktat fällt bereits in den ersten Minuten an.</p>
+        </div>
+
+        <!-- Steady State -->
+        <div class="phase-card steady">
+            <span class="phase-number">02</span>
+            <h2>Das Sauerstoff-Steady-State</h2>
+            <p>Bleibt die Belastung nach der Einlaufphase auf einem konstanten, moderaten Niveau (unterhalb der anaeroben Schwelle), erreicht das kardiopulmonale System nach einigen Minuten einen Zustand, in dem die Sauerstoffaufnahme <strong>exakt dem Sauerstoffbedarf entspricht</strong>.</p>
+            <p>Diesen Gleichgewichtszustand nennt man Sauerstoff-Steady-State. Das Sauerstoffdefizit vergrößert sich ab hier nicht weiter.</p>
+        </div>
+
+        <!-- EPOC -->
+        <div class="phase-card epoc">
+            <span class="phase-number">03</span>
+            <h2>Sauerstoffmehraufnahme <br><span style="font-size: 1.2rem; color: var(--text-light); font-weight: 400;">(EPOC / Sauerstoffschuld)</span></h2>
+            <p>Beendet der Athlet die sportliche Belastung, sinkt der muskuläre Sauerstoffbedarf augenblicklich wieder auf das Ruheniveau. Die Atmung und die Herzfrequenz bleiben jedoch noch über einen längeren Zeitraum (Minuten bis Stunden) deutlich erhöht.</p>
+
+            <div class="highlight-box">
+                <strong>Definition EPOC</strong>
+                Die Menge an Sauerstoff, die <em>nach Belastungsende</em> über dem normalen Ruhebedarf aufgenommen wird, nennt man Sauerstoffmehraufnahme (EPOC = Excess Post-exercise Oxygen Consumption; früher auch "Sauerstoffschuld").
+            </div>
+
+            <h3>Funktion (Warum atmen wir nach?)</h3>
+            <p>Diese erhöhte Sauerstoffaufnahme dient der komplexen metabolischen Regeneration des Körpers. Sie wird in zwei Phasen unterteilt:</p>
+
+            <div class="epoc-split">
+                <div class="epoc-item">
+                    <h4>1. Schnelle (alaktazide) Phase</h4>
+                    <p style="font-size: 0.95rem; margin:0;">Dauert nur wenige Minuten. Dient der aeroben Wiederauffüllung der muskulären ATP- und Kreatinphosphat-Speicher sowie der Wiederbeladung des Myoglobins (O<sub>2</sub>-Speicher im Muskel) mit Sauerstoff.</p>
+                </div>
+                <div class="epoc-item">
+                    <h4>2. Langsame (laktazide) Phase</h4>
+                    <p style="font-size: 0.95rem; margin:0;">Dauert bis zu mehreren Stunden. Dient maßgeblich dem aeroben Abbau des während der Belastung (im Defizit) angehäuften Laktats in Herz, Leber und ruhender Skelettmuskulatur.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Canvas Diagramm -->
+    <div class="canvas-section">
+        <div class="canvas-header">
+            <h3>Sauerstoffkinetik-Diagramm</h3>
+            <p style="font-size: 0.95rem; color: var(--text-light);">Visualisierung von Sauerstoffbedarf vs. tatsächlicher Sauerstoffaufnahme über die Zeit.</p>
+        </div>
+        <canvas id="kineticsCanvas" width="900" height="450"></canvas>
+    </div>
+
+    <!-- Abitur Dossier -->
+    <div class="exam-dossier">
+        <h2>Abitur-Transfer & Praxis</h2>
+        <p class="dossier-intro">In der G9-Abiturprüfung (eA) wird dieses Thema besonders im Zusammenhang mit Materialauswertungen zu Ausdauer- oder Intervallbelastungen geprüft. Das absolute Schlüsselwort für diesen Transfer ist das "Nachatmen" oder anhaltende "Außer-Atem-Sein".</p>
+
+        <div class="scenario-box">
+            <strong>Die physiologische Beweisführung aus dem Text</strong>
+            „[...] Und selbst danach [nach der Kuppe] war ich noch ganz schön lang außer Atem.“ (Beispiel der illustrierenden Abituraufgabe zum Mountainbiken).
+        </div>
+
+        <p style="font-weight: 700; color: #f8fafc; margin-bottom: 1.5rem; font-size: 1.2rem;">Deine Klausur-Argumentation (Erwartungshorizont):</p>
+
+        <div class="argumentation-steps">
+            <!-- Step 1 -->
+            <div class="step-card">
+                <h4><span class="step-number">1</span> Die Ursache benennen</h4>
+                <p>Während des steilen Anstiegs (oder beim Start) reichte die aerobe Energiebereitstellung nicht aus; die Athletin ging ein <strong>Sauerstoffdefizit</strong> ein und überbrückte diese Phase anaerob, wodurch sie massiv <strong>Laktat akkumulierte</strong>.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card">
+                <h4><span class="step-number">2</span> Das Phänomen erklären</h4>
+                <p>Obwohl die muskuläre Belastung nach der Kuppe sinkt (der mechanische O<sub>2</sub>-Bedarf fällt abrupt ab), bleiben Herzfrequenz und Atemfrequenz hoch. Dies geschieht zwingend, um die <strong>Sauerstoffmehraufnahme (EPOC)</strong> zu gewährleisten.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card">
+                <h4><span class="step-number">3</span> Den Zweck physiologisch begründen</h4>
+                <p>Die Athletin muss "nachatmen", um den "Extra-Sauerstoff" für die aerobe Regeneration zu nutzen – konkret, um das <strong>angehäufte Laktat unter Sauerstoffverbrauch zu eliminieren</strong> (laktazide Phase) und die entleerten energiereichen <strong>Phosphate (ATP/KP) wieder aufzufüllen</strong> (alaktazide Phase).</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; text-align: center; color: var(--abi-glow); font-weight: 700; font-family: 'Outfit', sans-serif; font-size: 1.1rem;">
+            🏆 Wer das "Außer-Atem-Sein" nach Belastungsende auf diese metabolischen Aufräumarbeiten (und nicht einfach nur auf "Erschöpfung") zurückführt, demonstriert fundiertes eA-Niveau.
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Canvas O2 Kinetics Diagram
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('kineticsCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Support
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+
+        function drawDiagram() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Margins & Dimensions
+            const padX = 60;
+            const padY = 50;
+            const chartW = width - padX * 2;
+            const chartH = height - padY * 2;
+            
+            // Y-Values
+            const yRuhe = height - padY - 40; // Base level
+            const yMax = padY + 60;          // Demand level
+            
+            // X-Values (Time points)
+            const tStart = padX;
+            const tBelastungsBeginn = padX + chartW * 0.15;
+            const tBelastungsEnde = padX + chartW * 0.55;
+            const tEnd = padX + chartW;
+
+            // Colors
+            const colDemand = '#1e293b';
+            const colUptake = '#3b82f6';
+            const colDeficit = 'rgba(249, 115, 22, 0.4)'; // Orange fill
+            const colEPOC = 'rgba(16, 185, 129, 0.4)';    // Mint fill
+
+            // 1. Draw Grid
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            for(let i=0; i<=4; i++) {
+                let y = padY + (chartH/4)*i;
+                ctx.beginPath(); ctx.moveTo(padX, y); ctx.lineTo(width-padX, y); ctx.stroke();
+            }
+
+            // 2. Draw Demand (Bedarf) - Dashed Step Line
+            ctx.beginPath();
+            ctx.setLineDash([8, 6]);
+            ctx.moveTo(tStart, yRuhe);
+            ctx.lineTo(tBelastungsBeginn, yRuhe); // Ruhe
+            ctx.lineTo(tBelastungsBeginn, yMax);  // Jump up
+            ctx.lineTo(tBelastungsEnde, yMax);    // Plateau (Bedarf während Belastung)
+            ctx.lineTo(tBelastungsEnde, yRuhe);   // Jump down
+            ctx.lineTo(tEnd, yRuhe);              // Erholung
+            ctx.strokeStyle = colDemand;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            ctx.setLineDash([]); // Reset
+
+            // 3. Create Path for Uptake (Aufnahme) Curve
+            const uptakePath = new Path2D();
+            uptakePath.moveTo(tStart, yRuhe);
+            uptakePath.lineTo(tBelastungsBeginn, yRuhe);
+            
+            // Rise (Exponential-like via Bezier)
+            const riseCPX = tBelastungsBeginn + (chartW * 0.1);
+            const riseEnd = tBelastungsBeginn + (chartW * 0.25);
+            uptakePath.bezierCurveTo(riseCPX, yRuhe, riseCPX, yMax, riseEnd, yMax);
+            
+            // Plateau (Steady State)
+            uptakePath.lineTo(tBelastungsEnde, yMax);
+            
+            // Fall (EPOC via Bezier)
+            const fallCPX = tBelastungsEnde + (chartW * 0.15);
+            const fallEnd = tBelastungsEnde + (chartW * 0.4);
+            uptakePath.bezierCurveTo(fallCPX, yMax, fallCPX, yRuhe, fallEnd, yRuhe);
+            uptakePath.lineTo(tEnd, yRuhe);
+
+            // 4. Fill Deficit Area
+            // Deficit is bounded by: Demand Line (top), Uptake Curve (bottom), Belastungsbeginn (left)
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(tBelastungsBeginn, yRuhe);
+            ctx.lineTo(tBelastungsBeginn, yMax);
+            ctx.lineTo(riseEnd, yMax);
+            // Draw curve backwards... easier to use clip
+            ctx.restore();
+            
+            // Clip approach for Deficit
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(tBelastungsBeginn, yRuhe);
+            ctx.lineTo(tBelastungsBeginn, yMax);
+            ctx.lineTo(riseEnd, yMax);
+            ctx.lineTo(riseEnd, yRuhe);
+            ctx.closePath();
+            ctx.clip(); // Restrict to the rectangle of the rise phase
+            
+            // Fill area ABOVE the uptake path, BELOW the max demand
+            ctx.fillStyle = colDeficit;
+            ctx.fillRect(tBelastungsBeginn, yMax, riseEnd - tBelastungsBeginn, yRuhe - yMax);
+            // Erase the area under the uptake curve by drawing it with globalCompositeOperation
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.fill(uptakePath);
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.restore();
+
+
+            // Clip approach for EPOC
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(tBelastungsEnde, yRuhe);
+            ctx.lineTo(tBelastungsEnde, yMax);
+            ctx.lineTo(fallEnd, yMax);
+            ctx.lineTo(fallEnd, yRuhe);
+            ctx.closePath();
+            ctx.clip();
+            
+            // Fill area UNDER the uptake path
+            ctx.fillStyle = colEPOC;
+            ctx.fill(uptakePath);
+            // Erase the area under yRuhe
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.fillRect(tBelastungsEnde, yRuhe, fallEnd - tBelastungsEnde, height);
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.restore();
+
+
+            // 5. Draw the actual Uptake Curve line
+            ctx.strokeStyle = colUptake;
+            ctx.lineWidth = 4;
+            ctx.stroke(uptakePath);
+
+
+            // 6. Draw Axes & Labels
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(padX, padY-20); ctx.lineTo(padX, height-padY); ctx.stroke(); // Y
+            ctx.beginPath(); ctx.moveTo(padX, height-padY); ctx.lineTo(width-padX+20, height-padY); ctx.stroke(); // X
+
+            // Axis Text
+            ctx.fillStyle = '#64748b';
+            ctx.font = 'bold 14px Nunito';
+            ctx.textAlign = 'center';
+            ctx.fillText('Zeit (Phasen)', padX + chartW/2, height - 15);
+            
+            ctx.save();
+            ctx.translate(20, padY + chartH/2);
+            ctx.rotate(-Math.PI/2);
+            ctx.fillText('O₂-Volumen (ml/min)', 0, 0);
+            ctx.restore();
+
+            // Phase Markers (X-Axis)
+            ctx.fillStyle = '#334155';
+            ctx.font = '13px Nunito';
+            ctx.fillText('Ruhe', tStart + (tBelastungsBeginn - tStart)/2, height - padY + 20);
+            ctx.fillText('Belastung', tBelastungsBeginn + (tBelastungsEnde - tBelastungsBeginn)/2, height - padY + 20);
+            ctx.fillText('Erholung / Nachbelastung', tBelastungsEnde + (tEnd - tBelastungsEnde)/2, height - padY + 20);
+
+            // Vertical Dividers
+            ctx.beginPath(); ctx.setLineDash([4,4]); ctx.strokeStyle = '#cbd5e1';
+            ctx.moveTo(tBelastungsBeginn, padY); ctx.lineTo(tBelastungsBeginn, height-padY);
+            ctx.moveTo(tBelastungsEnde, padY); ctx.lineTo(tBelastungsEnde, height-padY);
+            ctx.stroke(); ctx.setLineDash([]);
+
+            // Annotations
+            ctx.font = 'bold 14px Outfit';
+            
+            // Deficit Text
+            ctx.fillStyle = '#c2410c'; // Darker orange
+            ctx.textAlign = 'center';
+            ctx.fillText('O₂-Defizit', tBelastungsBeginn + 50, yMax + 50);
+
+            // Steady State Text
+            ctx.fillStyle = '#0284c7';
+            ctx.fillText('Steady-State', riseEnd + (tBelastungsEnde - riseEnd)/2, yMax - 15);
+
+            // EPOC Text
+            ctx.fillStyle = '#047857'; // Darker mint
+            ctx.fillText('EPOC', tBelastungsEnde + 60, yMax + 60);
+            ctx.font = '12px Nunito';
+            ctx.fillText('(O₂-Mehraufnahme)', tBelastungsEnde + 60, yMax + 75);
+
+            // Legend
+            ctx.textAlign = 'left';
+            ctx.font = 'bold 13px Nunito';
+            ctx.fillStyle = colDemand;
+            ctx.fillText('- - - O₂-Bedarf der Muskulatur', padX + 20, padY - 15);
+            ctx.fillStyle = colUptake;
+            ctx.fillText('—— Tatsächliche O₂-Aufnahme', padX + 250, padY - 15);
+        }
+
+        drawDiagram();
+
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawDiagram();
+        });
+    });
+</script>
+
+</body>
+</html>

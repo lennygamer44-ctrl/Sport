@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.4.2c Beeinflussung und Verschleierung</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Dark Neuro Theme */
+            --bg-base: #0b0f19;
+            --bg-surface: #151b2b;
+            --bg-surface-hover: #1e2638;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            
+            /* Neon Accents */
+            --neon-orange: #ff7a00;
+            --neon-purple: #b142ff;
+            --neon-cyan: #00e5ff;
+            --neon-red: #ff3366;
+            
+            /* Premium Gold */
+            --gold-primary: #fbbf24;
+            --gold-glow: rgba(251, 191, 36, 0.2);
+
+            --radius-md: 12px;
+            --radius-lg: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 0;
+            font-size: 1.05rem;
+            overflow-x: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            padding: 6rem 2rem 4rem;
+            background: radial-gradient(circle at 50% 0%, #1e293b 0%, var(--bg-base) 80%);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            position: relative;
+        }
+
+        .category-pill {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem 6rem;
+        }
+
+        /* --- Grid Layout for Substances --- */
+        .substance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .substance-card {
+            background-color: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            position: relative;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .substance-card:hover {
+            transform: translateY(-5px);
+            background-color: var(--bg-surface-hover);
+        }
+
+        /* Card Accents */
+        .card-stim { border-top: 4px solid var(--neon-orange); box-shadow: 0 -10px 30px -10px rgba(255, 122, 0, 0.15); }
+        .card-narc { border-top: 4px solid var(--neon-purple); box-shadow: 0 -10px 30px -10px rgba(177, 66, 255, 0.15); }
+        .card-diur { border-top: 4px solid var(--neon-cyan); box-shadow: 0 -10px 30px -10px rgba(0, 229, 255, 0.15); }
+
+        .substance-card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-stim h2 { color: var(--neon-orange); }
+        .card-narc h2 { color: var(--neon-purple); }
+        .card-diur h2 { color: var(--neon-cyan); }
+
+        .subtitle {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .card-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .card-section h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .risk-highlight {
+            background: rgba(255, 51, 102, 0.1);
+            border-left: 3px solid var(--neon-red);
+            padding: 1rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            color: #ffb3c6;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+        }
+
+        /* --- Canvas Interactive Visual --- */
+        .canvas-container {
+            background: var(--bg-surface);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canvas-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-orange), transparent);
+        }
+
+        .canvas-container h3 {
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-container p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: var(--radius-md);
+            background: #0b0f19; /* dark inner bg */
+        }
+
+        /* --- Data Table --- */
+        .table-section {
+            margin: 4rem 0;
+        }
+
+        .table-section h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 800px;
+        }
+
+        th {
+            background: rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        
+        tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .td-class { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.2rem; }
+        .text-stim { color: var(--neon-orange); }
+        .text-narc { color: var(--neon-purple); }
+        .text-diur { color: var(--neon-cyan); }
+
+        /* --- Premium Abitur Box --- */
+        .premium-box {
+            background: linear-gradient(145deg, #221c0b 0%, #151105 100%);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            margin-top: 5rem;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 80px rgba(251, 191, 36, 0.05);
+        }
+
+        .premium-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold-primary);
+            color: #000;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            padding: 0.5rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+        }
+
+        .premium-box > p.box-intro {
+            text-align: center;
+            color: #d1d5db;
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .transfer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .transfer-item {
+            background: rgba(255,255,255,0.03);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border-left: 2px solid var(--gold-primary);
+        }
+
+        .transfer-item h4 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--gold-primary);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .transfer-item p {
+            color: #d1d5db;
+            font-size: 0.95rem;
+        }
+
+        .transfer-item strong {
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="category-pill">Lernbereich 3.4.2c</div>
+        <h1>Beeinflussung & Verschleierung</h1>
+        <p class="intro-text">
+            Neben den muskelaufbauenden und blutbildenden Substanzen existieren Wirkstoffgruppen, die die physiologische Leistungsfähigkeit nicht durch strukturellen Aufbau (Adaptation) steigern, sondern das zentrale Nervensystem (ZNS) manipulieren, Schmerzen unterdrücken oder den Nachweis anderer Dopingmittel verhindern.
+        </p>
+    </header>
+
+    <main>
+
+        <div class="substance-grid">
+            
+            <!-- Stimulanzien -->
+            <article class="substance-card card-stim">
+                <h2>Stimulanzien</h2>
+                <div class="subtitle">Aufputschmittel (z.B. Amphetamine, Kokain)</div>
+                
+                <p>Sie wirken als <strong>Sympathomimetika</strong>, da sie die Wirkung der körpereigenen Katecholamine (Adrenalin und Noradrenalin) im vegetativen Nervensystem imitieren oder verstärken.</p>
+                
+                <div class="card-section">
+                    <h3>⚡ Wirkungsweise</h3>
+                    <p>Versetzen den Organismus künstlich in eine extreme "Fight-oder-Flight"-Reaktion. Herzfrequenz, Blutdruck und Muskeltonus steigen.</p>
+                    <p><strong>Im ZNS:</strong> Gesteigerte Wachsamkeit, erhöhtes Aggressionspotenzial und massive Unterdrückung des natürlichen Ermüdungsgefühls. Dadurch wird es dem Athleten ermöglicht, in Bereiche der sogenannten <strong>autonomen Schutzreserve</strong> vorzudringen (die physiologisch nicht willkürlich zugänglich ist).</p>
+                </div>
+
+                <div class="risk-highlight">
+                    <strong>Spezifische Risiken:</strong> Völlige Erschöpfung bis zum lebensbedrohlichen Kollaps/Herzversagen (durch aufbrauchen der Schutzreserve). Tödlicher Hitzschlag (Hyperthermie) durch Vasokonstriktion. Massives Suchtpotenzial.
+                </div>
+            </article>
+
+            <!-- Narkotika -->
+            <article class="substance-card card-narc">
+                <h2>Narkotika</h2>
+                <div class="subtitle">Schmerzmittel (z.B. Fentanyl, Morphin)</div>
+                
+                <p>Starke, zentral wirksame Analgetika, primär aus der Gruppe der Opioide. Sie haben keinen direkten leistungssteigernden Effekt im Sinne von Kraft- oder Ausdauerzuwachs.</p>
+                
+                <div class="card-section">
+                    <h3>🧠 Wirkungsweise</h3>
+                    <p>Narkotika binden als Agonisten an spezifische <strong>Opioidrezeptoren</strong> im zentralen Nervensystem und hemmen so die Weiterleitung und Verarbeitung von Schmerzsignalen.</p>
+                    <p>Sie werden eingesetzt, um trotz schwerwiegender Verletzungen oder extrem schmerzhafter Erschöpfungszustände weiterkämpfen zu können (z. B. im Kampfsport oder bei Radsport-Etappen).</p>
+                </div>
+
+                <div class="risk-highlight">
+                    <strong>Spezifische Risiken:</strong> Unbemerkte Zerstörung von Gelenken, Bändern oder Muskulatur (Rupturen), da das Warnsignal Schmerz fehlt. Extremes Suchtpotenzial. Akute Lebensgefahr durch Atemdepression (Hemmung des Atemzentrums in der Medulla oblongata).
+                </div>
+            </article>
+
+            <!-- Diuretika -->
+            <article class="substance-card card-diur">
+                <h2>Diuretika</h2>
+                <div class="subtitle">Entwässerungsmittel (z.B. Furosemid)</div>
+                
+                <p>Medikamente, die die Nierenfunktion beeinflussen und eine stark vermehrte Harnausscheidung (Diurese) bewirken.</p>
+                
+                <div class="card-section">
+                    <h3>💧 Wirkungsweise im Sport</h3>
+                    <p><strong>1. "Gewichtmachen":</strong> Rapide, kurzfristige Gewichtsreduktion, um sich in Kampfsportarten in eine niedrigere Gewichtsklasse einzuwiegen.</p>
+                    <p><strong>2. Verschleierung (Masking Agents):</strong> Durch die künstlich erhöhte Urinproduktion wird der Urin stark verdünnt, was die Konzentration anderer verbotener Substanzen (z. B. Steroide) unter die Nachweisgrenze drücken soll.</p>
+                </div>
+
+                <div class="risk-highlight">
+                    <strong>Spezifische Risiken:</strong> Gefährliche Dehydratation (Exsikkose) und Elektrolytdysbalance (Ausschwemmen von Kalium/Natrium). Dies stört die Reizleitung am Herzen massiv: Herzrhythmusstörungen, Hypotonie, Muskelkrämpfe und Nierenversagen.
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Canvas Interactive Visualization -->
+        <div class="canvas-container">
+            <h3>Modell der Autonomen Schutzreserve</h3>
+            <p>Die physiologische Ermüdung schützt den Körper. Sympathomimetika (Stimulanzien) durchbrechen diese Warnschwelle, was zum fatalen Aufbrauchen der letzten Energiereserven führt.</p>
+            <canvas id="reserveCanvas" width="800" height="400"></canvas>
+        </div>
+
+        <!-- HTML Data Table -->
+        <div class="table-section">
+            <h3>Tabellarische Gegenüberstellung</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Substanzklasse</th>
+                            <th>Physiologischer Wirkmechanismus</th>
+                            <th>Primärer Nutzen im Sport</th>
+                            <th>Akute/Chronische Gesundheitsrisiken</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="td-class text-stim">Stimulanzien<br><span style="font-size:0.85rem;font-weight:400;color:var(--text-muted)">Sympathomimetika</span></td>
+                            <td>Imitieren/Verstärken Katecholamine. Lösen systemische "Fight-or-Flight"-Reaktion aus.</td>
+                            <td>Unterdrückung der Ermüdung, gesteigerte Aggression, Zugriff auf <strong>autonome Schutzreserve</strong>.</td>
+                            <td>Kollaps/Herzversagen, Hyperthermie (Hitzschlag), massive psychische Abhängigkeit.</td>
+                        </tr>
+                        <tr>
+                            <td class="td-class text-narc">Narkotika<br><span style="font-size:0.85rem;font-weight:400;color:var(--text-muted)">Opioide</span></td>
+                            <td>Agonisten an ZNS-Opioidrezeptoren. Hemmen Weiterleitung & Verarbeitung von Schmerzsignalen.</td>
+                            <td>Ignorieren schwerster Verletzungen und Schmerzen ("Weiterkämpfen um jeden Preis").</td>
+                            <td>Strukturelle Zerstörung des Gewebes (Bänderrisse), extreme Sucht, tödliche <strong>Atemdepression</strong>.</td>
+                        </tr>
+                        <tr>
+                            <td class="td-class text-diur">Diuretika<br><span style="font-size:0.85rem;font-weight:400;color:var(--text-muted)">Renale Manipulation</span></td>
+                            <td>Eingriff in Nierenfunktion, erzwingen massive Harnausscheidung (Diurese) und Elektrolytverlust.</td>
+                            <td>1. "Gewichtmachen" in Kampfsportarten.<br>2. <strong>Verschleierungstaktik</strong> (Masking Agent) durch Urin-Verdünnung.</td>
+                            <td>Lebensgefährliche Dehydratation, Herzrhythmusstörungen (durch Elektrolytmangel), akutes Nierenversagen.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Premium Abitur Box -->
+        <section class="premium-box">
+            <div class="premium-badge">Abitur-Transfer & Praxis (eA)</div>
+            <p class="box-intro">
+                In Abiturklausuren auf erhöhtem Anforderungsniveau wird bei diesen Substanzklassen häufig die ethisch-medizinische Abgrenzung sowie das Verständnis für <em>indirekte</em> Manipulation verlangt.
+            </p>
+
+            <div class="transfer-grid">
+                <div class="transfer-item">
+                    <h4>1. Die autonome Schutzreserve</h4>
+                    <p>Ein klassischer Transfer-Schwerpunkt liegt bei den Stimulanzien. In Klausuren wird oft ein Athlet geschildert, der im Ziel plötzlich kollabiert.</p>
+                    <p style="margin-top: 1rem;"><strong>Transferleistung:</strong> Du musst begründen, dass der Athlet durch Sympathomimetika die Reizschwelle für Ermüdung unterdrückt hat. Der Zugriff und die Erschöpfung der normalerweise geschützten Reserven führt zwangsläufig zum Zusammenbruch der Vitalfunktionen (Herz-Kreislauf-Versagen).</p>
+                </div>
+
+                <div class="transfer-item">
+                    <h4>2. Verschleierung vs. Leistungssteigerung</h4>
+                    <p>Bei Diuretika musst du die Unterscheidung zwischen direkter Manipulation und Verschleierungstaktik beherrschen.</p>
+                    <p style="margin-top: 1rem;"><strong>Transferleistung:</strong> Wenn ein <em>Kraftsportler</em> positiv auf Diuretika getestet wird, musst du analysieren, warum er diese nimmt (um anabole Steroide zu verschleiern). Diuretika selbst mindern durch die Dehydratation nämlich die Muskelkraft und wären als alleiniges Dopingmittel im Kraftsport sinnlos.</p>
+                </div>
+
+                <div class="transfer-item">
+                    <h4>3. Das Schmerzmittel-Paradoxon</h4>
+                    <p>In gesellschaftspolitischen Aufgaben (Bereich "Kommerzialisierung") wird oft "legales" Schmerzmitteldoping im Profifußball mit illegalen Narkotika verglichen.</p>
+                    <p style="margin-top: 1rem;"><strong>Transferleistung:</strong> Du musst argumentieren, dass die Ausschaltung des Warnsignals Schmerz in <em>beiden</em> Fällen zu irreparablen Langzeitschäden (Arthrose, Gewebezerstörung) führt – unabhängig vom juristischen Status der Substanz auf der WADA-Liste.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // High DPI Canvas Setup
+        function setupCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            
+            return { ctx, w: rect.width, h: rect.height };
+        }
+
+        // Draw the Autonomic Reserve Model
+        function drawReserveModel() {
+            const { ctx, w, h } = setupCanvas('reserveCanvas');
+            
+            const paddingX = 60;
+            const paddingY = 40;
+            const graphW = w - paddingX * 2;
+            const graphH = h - paddingY * 2;
+            
+            // Y-Levels
+            const baseY = h - paddingY;
+            const limitAbsY = paddingY + 30; // 100% Absolute Leistungsgrenze
+            const limitPhysY = limitAbsY + (graphH * 0.3); // ~70% Physiologische Ermüdungsschwelle
+
+            // Clear
+            ctx.clearRect(0, 0, w, h);
+
+            // 1. Draw Zones
+            // Autonome Schutzreserve (Red Zone)
+            ctx.fillStyle = 'rgba(255, 51, 102, 0.15)';
+            ctx.fillRect(paddingX, limitAbsY, graphW, limitPhysY - limitAbsY);
+            
+            // Physiologische Nutzkapazität (Green/Blue Zone)
+            ctx.fillStyle = 'rgba(0, 229, 255, 0.05)';
+            ctx.fillRect(paddingX, limitPhysY, graphW, baseY - limitPhysY);
+
+            // 2. Draw Grid/Lines
+            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+            ctx.lineWidth = 1;
+            
+            // Absolute Grenze
+            ctx.beginPath();
+            ctx.setLineDash([5, 5]);
+            ctx.moveTo(paddingX, limitAbsY);
+            ctx.lineTo(w - paddingX, limitAbsY);
+            ctx.stroke();
+
+            // Physiologische Grenze
+            ctx.beginPath();
+            ctx.moveTo(paddingX, limitPhysY);
+            ctx.lineTo(w - paddingX, limitPhysY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Axis
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            // Y
+            ctx.moveTo(paddingX, paddingY);
+            ctx.lineTo(paddingX, baseY);
+            // X
+            ctx.lineTo(w - paddingX + 20, baseY);
+            ctx.stroke();
+
+            // 3. Labels
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '12px Inter';
+            ctx.textAlign = 'right';
+            ctx.fillText("100%", paddingX - 10, limitAbsY + 4);
+            ctx.fillText("70%", paddingX - 10, limitPhysY + 4);
+            ctx.fillText("0%", paddingX - 10, baseY + 4);
+            
+            ctx.textAlign = 'left';
+            ctx.fillStyle = '#ff3366';
+            ctx.font = 'bold 13px Inter';
+            ctx.fillText("Absolute Leistungsgrenze", paddingX + 10, limitAbsY - 10);
+            
+            ctx.fillStyle = '#94a3b8';
+            ctx.fillText("Physiologische Ermüdungsschwelle", paddingX + 10, limitPhysY - 10);
+
+            ctx.fillStyle = 'rgba(255, 51, 102, 0.5)';
+            ctx.font = 'bold 16px Outfit';
+            ctx.fillText("AUTONOME SCHUTZRESERVE", paddingX + 20, limitAbsY + (limitPhysY - limitAbsY)/2 + 6);
+
+            // 4. Draw Curves
+            const startX = paddingX + 20;
+            const curveControlX1 = paddingX + graphW * 0.4;
+            
+            // Curve A: Normaler Athlet (Blue)
+            ctx.beginPath();
+            ctx.moveTo(startX, baseY);
+            ctx.quadraticCurveTo(curveControlX1, limitPhysY + 20, paddingX + graphW * 0.6, limitPhysY);
+            ctx.quadraticCurveTo(paddingX + graphW * 0.7, limitPhysY, paddingX + graphW * 0.9, baseY - 20);
+            ctx.strokeStyle = '#00e5ff';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+
+            // Curve B: Doping Athlet (Orange)
+            ctx.beginPath();
+            ctx.moveTo(startX, baseY);
+            // Grows faster and ignores the 70% threshold
+            ctx.quadraticCurveTo(curveControlX1, limitPhysY - 20, paddingX + graphW * 0.65, limitAbsY);
+            ctx.strokeStyle = '#ff7a00';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+
+            // The Collapse (Straight down)
+            ctx.beginPath();
+            ctx.moveTo(paddingX + graphW * 0.65, limitAbsY);
+            ctx.lineTo(paddingX + graphW * 0.65, baseY);
+            ctx.strokeStyle = '#ff3366';
+            ctx.setLineDash([8, 6]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // 5. Legends & Markers
+            // Normal Marker
+            ctx.fillStyle = '#00e5ff';
+            ctx.beginPath();
+            ctx.arc(paddingX + graphW * 0.6, limitPhysY, 6, 0, Math.PI*2);
+            ctx.fill();
+            ctx.font = '12px Inter';
+            ctx.fillText("Natürliche Erschöpfung", paddingX + graphW * 0.6 - 40, limitPhysY + 20);
+
+            // Doping Marker
+            ctx.fillStyle = '#ff7a00';
+            ctx.beginPath();
+            ctx.arc(paddingX + graphW * 0.65, limitAbsY, 6, 0, Math.PI*2);
+            ctx.fill();
+            ctx.fillText("Doping", paddingX + graphW * 0.65 - 20, limitAbsY - 15);
+
+            // Collapse Marker
+            ctx.fillStyle = '#ff3366';
+            ctx.font = '24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText("💥", paddingX + graphW * 0.65, baseY - 10);
+            ctx.font = 'bold 14px Inter';
+            ctx.fillText("KOLLAPS", paddingX + graphW * 0.65, baseY + 20);
+        }
+
+        // Init and handle resize
+        window.addEventListener('load', drawReserveModel);
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(drawReserveModel, 200);
+        });
+    </script>
+</body>
+</html>

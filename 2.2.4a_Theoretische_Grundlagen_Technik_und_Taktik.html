@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.2.4a Theoretische Grundlagen: Technik und Taktik - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;800;900&family=Nunito+Sans:wght@300;400;600;700&display=swap');
+
+        :root {
+            /* General Backgrounds */
+            --bg-body: #f4f5f7;
+            --card-bg: #ffffff;
+            
+            /* Typography */
+            --text-dark: #1f2937;
+            --text-muted: #6b7280;
+            
+            /* TECHNIK Theme (Mechanics) */
+            --tech-primary: #0284c7;  /* Deep Sky Blue */
+            --tech-light: #e0f2fe;
+            --tech-dark: #075985;
+            
+            /* TAKTIK Theme (Mind/Strategy) */
+            --tact-primary: #ea580c;  /* Fiery Orange */
+            --tact-light: #ffedd5;
+            --tact-dark: #9a3412;
+            
+            /* Synergy / Abitur Theme */
+            --syn-bg: #111827;        /* Very Dark Slate */
+            --syn-gold: #f59e0b;
+            
+            /* UI Elements */
+            --radius-md: 10px;
+            --radius-lg: 20px;
+            --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.05);
+            --shadow-lg: 0 15px 30px -5px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.65;
+            font-size: 1.1rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Exo 2', sans-serif;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .document-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- 1. HEADER --- */
+        .master-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 8px solid;
+            border-image: linear-gradient(90deg, var(--tech-primary) 50%, var(--tact-primary) 50%) 1;
+        }
+
+        .master-header::before {
+            content: '⚙️ x 🧠';
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 8rem;
+            opacity: 0.05;
+            letter-spacing: -20px;
+        }
+
+        .master-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+        }
+
+        .master-header .lead {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 900px;
+        }
+
+        /* --- 2. DUAL SPLIT LAYOUT (TECHNIK VS TAKTIK) --- */
+        .dual-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .concept-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2.5rem;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+
+        .concept-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Technik Specifically */
+        .card-technik {
+            border-left: 6px solid var(--tech-primary);
+        }
+        .card-technik h2 { color: var(--tech-dark); }
+        .card-technik .highlight-badge { background: var(--tech-light); color: var(--tech-dark); }
+
+        /* Taktik Specifically */
+        .card-taktik {
+            border-left: 6px solid var(--tact-primary);
+        }
+        .card-taktik h2 { color: var(--tact-dark); }
+        .card-taktik .highlight-badge { background: var(--tact-light); color: var(--tact-dark); }
+
+        .official-def {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px dashed #cbd5e1;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .official-def span {
+            display: block;
+            font-family: 'Exo 2', sans-serif;
+            font-style: normal;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .factor-list {
+            list-style: none;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .factor-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .factor-item .icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .factor-item p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .factor-item strong {
+            display: block;
+            margin-bottom: 2px;
+            font-size: 1.05rem;
+        }
+
+        /* --- 3. GEAR SYNERGY CANVAS --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .canvas-section h3 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .canvas-wrapper {
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            overflow-x: auto;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- 4. ABITUR PREMIUM BOX --- */
+        .abitur-masterplan {
+            background: var(--syn-bg);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            border-top: 6px solid var(--syn-gold);
+        }
+
+        .abitur-masterplan::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; width: 300px;
+            background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.05));
+            pointer-events: none;
+        }
+
+        .abitur-masterplan h2 {
+            color: var(--syn-gold);
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #9ca3af;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 1.5rem;
+        }
+
+        .strat-block {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--syn-gold);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .strat-block h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .strat-block p {
+            color: #d1d5db;
+        }
+
+        .exam-highlight {
+            color: var(--syn-gold);
+            font-weight: 700;
+        }
+
+        @media (max-width: 900px) {
+            .dual-section { grid-template-columns: 1fr; }
+            .master-header h1 { font-size: 2.2rem; }
+            .concept-card, .master-header, .abitur-masterplan { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="document-wrapper">
+
+    <!-- Header -->
+    <header class="master-header">
+        <h1>2.2.4a Theoretische Grundlagen: Technik und Taktik</h1>
+        <p class="lead">
+            Jede sportliche Höchstleistung basiert auf der perfekten Abstimmung von körperlichen Voraussetzungen und geistiger Planung. Diese Abstimmung wird in der Trainingswissenschaft durch die Begriffspaare <strong>„Technik“ (das Wie)</strong> und <strong>„Taktik“ (das Was, Wann und Warum)</strong> beschrieben.
+        </p>
+    </header>
+
+    <!-- Dual Split Section -->
+    <section class="dual-section">
+        
+        <!-- TECHNIK CARD -->
+        <article class="concept-card card-technik">
+            <h2>⚙️ Die sportliche Technik</h2>
+            
+            <div class="official-def">
+                <span>Offizielle Definition</span>
+                Unter dem Begriff „sportliche Technik“ versteht man ein in der Praxis entwickeltes Verfahren zur idealen Lösung einer Bewegungsaufgabe.
+            </div>
+
+            <p style="margin-bottom: 1.5rem;">
+                <strong>Bedeutung:</strong> Eine saubere Technik ist das Instrument, um konditionelle Leistung überhaupt in sportlichen Erfolg umwandeln zu können. Selbst der stärkste Athlet wird beim Speerwurf scheitern, wenn er die Kraft durch eine unsaubere Technik nicht auf das Gerät übertragen kann.
+            </p>
+
+            <h3 style="font-size: 1.2rem; color: var(--tech-dark); border-bottom: 2px solid var(--tech-light); padding-bottom: 0.5rem;">Leistungsbestimmende Faktoren</h3>
+            
+            <ul class="factor-list">
+                <li class="factor-item">
+                    <span class="icon">🔗</span>
+                    <div>
+                        <strong style="color: var(--tech-dark);">Koordinative Fähigkeiten</strong>
+                        <p>Das Fundament. Ohne Kopplungs- oder Gleichgewichtsfähigkeit kann keine Technik präzise ausgeführt werden.</p>
+                    </div>
+                </li>
+                <li class="factor-item">
+                    <span class="icon">💪</span>
+                    <div>
+                        <strong style="color: var(--tech-dark);">Konditionelle Fähigkeiten</strong>
+                        <p>Eine Technik (z. B. der Volleyball-Block) erfordert oft ein Mindestmaß an Schnellkraft oder Kraftausdauer.</p>
+                    </div>
+                </li>
+                <li class="factor-item">
+                    <span class="icon">📐</span>
+                    <div>
+                        <strong style="color: var(--tech-dark);">Biomechanische Gesetzmäßigkeiten</strong>
+                        <p>Die Bewegungsgesetze (z. B. Impulserhaltung) diktieren, wie eine Technik zwingend auszusehen hat.</p>
+                    </div>
+                </li>
+                <li class="factor-item">
+                    <span class="icon">🦴</span>
+                    <div>
+                        <strong style="color: var(--tech-dark);">Morphologische Merkmale</strong>
+                        <p>Körperbau, Hebelverhältnisse (Armlänge, Körpergröße).</p>
+                    </div>
+                </li>
+            </ul>
+        </article>
+
+        <!-- TAKTIK CARD -->
+        <article class="concept-card card-taktik">
+            <h2>🧠 Die sportliche Taktik</h2>
+            
+            <div class="official-def" style="border-color: #fdba74;">
+                <span style="color: var(--tact-dark);">Offizielle Definition</span>
+                Taktik ist das planmäßige, auf die eigene und gegnerische Leistungsfähigkeit sowie auf die äußeren Bedingungen abgestimmte Verhalten im Wettkampf.
+            </div>
+
+            <p style="margin-bottom: 1.5rem;">
+                Sie ist der kognitive (geistige) Entscheidungsprozess.<br><strong>Ausrichtungen der Taktik:</strong>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">
+                    <li><strong>Individualtaktik:</strong> Verhalten des Einzelnen (z.B. Stoppball im Tennis).</li>
+                    <li><strong>Gruppentaktik:</strong> Abgestimmtes Verhalten mehrerer Spieler (z.B. Doppelblock im Volleyball).</li>
+                    <li><strong>Mannschaftstaktik:</strong> Übergeordnetes System (z.B. 4-4-2 im Fußball).</li>
+                </ul>
+            </p>
+
+            <h3 style="font-size: 1.2rem; color: var(--tact-dark); border-bottom: 2px solid var(--tact-light); padding-bottom: 0.5rem;">Leistungsbestimmende Faktoren</h3>
+            
+            <ul class="factor-list">
+                <li class="factor-item">
+                    <span class="icon">👁️</span>
+                    <div>
+                        <strong style="color: var(--tact-dark);">Kognitive Fähigkeiten</strong>
+                        <p>Wahrnehmung (Erkennen von Lücken), Antizipation (Vorhersehen gegnerischer Aktionen) und Handlungsschnelligkeit.</p>
+                    </div>
+                </li>
+                <li class="factor-item">
+                    <span class="icon">⚙️</span>
+                    <div>
+                        <strong style="color: var(--tact-dark);">Technische Fertigkeiten</strong>
+                        <p>Das Taktik-Technik-Wechselspiel! Ein genialer Plan nützt nichts, wenn die technische Fähigkeit (z. B. der 40-Meter-Pass) fehlt. <span style="text-decoration: underline;">Die Technik limitiert die Taktik.</span></p>
+                    </div>
+                </li>
+                <li class="factor-item">
+                    <span class="icon">🫁</span>
+                    <div>
+                        <strong style="color: var(--tact-dark);">Konditioneller Zustand</strong>
+                        <p>Unter physischer Ermüdung bricht die kognitive Leistungsfähigkeit massiv ein. Erschöpfte Spieler treffen schlechte taktische Entscheidungen.</p>
+                    </div>
+                </li>
+            </ul>
+        </article>
+
+    </section>
+
+    <!-- Gears Synergy Canvas -->
+    <section class="canvas-section">
+        <h3>Die untrennbare Verzahnung</h3>
+        <p>Sportliche Leistung entsteht erst, wenn Werkzeug und Plan perfekt ineinandergreifen.</p>
+        <div class="canvas-wrapper">
+            <canvas id="gearsCanvas" width="900" height="400"></canvas>
+        </div>
+    </section>
+
+    <!-- Abitur Transfer Box -->
+    <section class="abitur-masterplan">
+        <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die exakte terminologische Abgrenzung dieser beiden Begriffe ist essenziell für die Klausur, da Schülerinnen und Schüler diese im Alltag oft synonym verwenden. Das Kultusministerium legt hier großen Wert auf Präzision.
+        </p>
+
+        <div class="strat-block">
+            <h4>1. Die Definition beherrschen</h4>
+            <p>Die Definition von Technik ("Verfahren zur idealen Lösung einer Bewegungsaufgabe") ist absolut bindend und wurde in den offiziellen illustrierenden Prüfungsaufgaben als <span class="exam-highlight">exakte Reproduktionsleistung</span> abgefragt. Lerne diesen einen Satz auswendig!</p>
+        </div>
+
+        <div class="strat-block">
+            <h4>2. Analytischer Transfer (Spielbeobachtung)</h4>
+            <p>In der Prüfung wird oft eine Spielsituation textlich beschrieben (z.B. Volleyball: <em>"Der Gegner stellt den Block immer sehr weit nach außen"</em>). Deine Aufgabe ist es, eine <span class="exam-highlight">taktische Lösung</span> (Individualtaktik: <em>"Schlag die Linie entlang"</em>) zu entwickeln und zu benennen, welche <span class="exam-highlight">leistungsbestimmenden Faktoren</span> (z. B. technische Präzision, Antizipation der Lücke) dafür nötig sind.</p>
+        </div>
+
+        <div class="strat-block">
+            <h4>3. Technik- und Taktikeinbruch begründen</h4>
+            <p>Wenn in einem Fallbeispiel (z.B. am Ende eines anstrengenden Zehnkampfes oder im fünften Satz eines Volleyballspiels) Fehler gehäuft auftreten, <strong>argumentiere zwingend mit dem Zusammenspiel der Faktoren!</strong></p>
+            <p style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                Eine schlechte Ausführung ist dann meistens keine Folge von "Verlernen" der Technik, sondern die Folge von <span class="exam-highlight">zentralnervöser und muskulärer Ermüdung</span> (konditioneller Faktor limitiert die Technik) sowie einem <span class="exam-highlight">Nachlassen der kognitiven Wahrnehmung</span> (konditioneller Faktor limitiert die Taktik).
+            </p>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    const canvas = document.getElementById('gearsCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Canvas center elements
+    const cx1 = w / 2 - 145; // Left Gear Center
+    const cx2 = w / 2 + 145; // Right Gear Center
+    const cy = h / 2;
+
+    const rBase = 110;  // Base radius of gear
+    const toothH = 20;  // Tooth height
+    const teeth = 12;   // Number of teeth
+
+    /**
+     * Helper to draw a gear
+     */
+    function drawGear(x, y, radius, tHeight, numTeeth, rotation, fillColor, strokeColor, centerText, subTitle) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        
+        ctx.beginPath();
+        const angleStep = (Math.PI * 2) / numTeeth;
+        const toothWidth = angleStep * 0.4; // width of tooth at top
+
+        for (let i = 0; i < numTeeth; i++) {
+            const angle = i * angleStep;
+            
+            // Inner corner 1
+            ctx.lineTo(
+                Math.cos(angle - toothWidth) * radius, 
+                Math.sin(angle - toothWidth) * radius
+            );
+            
+            // Outer corner 1
+            ctx.lineTo(
+                Math.cos(angle - toothWidth * 0.8) * (radius + tHeight), 
+                Math.sin(angle - toothWidth * 0.8) * (radius + tHeight)
+            );
+            
+            // Outer corner 2
+            ctx.lineTo(
+                Math.cos(angle + toothWidth * 0.8) * (radius + tHeight), 
+                Math.sin(angle + toothWidth * 0.8) * (radius + tHeight)
+            );
+            
+            // Inner corner 2
+            ctx.lineTo(
+                Math.cos(angle + toothWidth) * radius, 
+                Math.sin(angle + toothWidth) * radius
+            );
+        }
+        
+        ctx.closePath();
+        
+        // Shadow & Fill
+        ctx.shadowColor = 'rgba(0,0,0,0.15)';
+        ctx.shadowBlur = 10;
+        ctx.shadowOffsetX = 4;
+        ctx.shadowOffsetY = 4;
+        ctx.fillStyle = fillColor;
+        ctx.fill();
+        
+        ctx.shadowColor = 'transparent';
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = 6;
+        ctx.stroke();
+
+        // Inner Cutout
+        ctx.beginPath();
+        ctx.arc(0, 0, radius - 30, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.stroke();
+        
+        // Inner Axel
+        ctx.beginPath();
+        ctx.arc(0, 0, 15, 0, Math.PI * 2);
+        ctx.fillStyle = strokeColor;
+        ctx.fill();
+
+        ctx.restore();
+
+        // Draw Text perfectly horizontal over the gear center
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        ctx.fillStyle = strokeColor;
+        ctx.font = '900 24px "Exo 2"';
+        ctx.fillText(centerText, x, y - 45);
+        
+        ctx.font = 'italic 14px "Nunito Sans"';
+        ctx.fillStyle = '#64748b';
+        ctx.fillText(subTitle, x, y - 25);
+    }
+
+    /**
+     * Helper to draw sub-points pointing to gear
+     */
+    function drawNode(gearX, gearY, nodeX, nodeY, textLines, color) {
+        // Draw line
+        ctx.beginPath();
+        ctx.moveTo(gearX, gearY);
+        ctx.lineTo(nodeX, nodeY);
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Draw dot
+        ctx.beginPath();
+        ctx.arc(nodeX, nodeY, 6, 0, Math.PI*2);
+        ctx.fillStyle = color;
+        ctx.fill();
+
+        // Draw Text box
+        ctx.textAlign = gearX > nodeX ? 'right' : 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#1e293b';
+        ctx.font = 'bold 13px "Nunito Sans"';
+        
+        const paddingX = gearX > nodeX ? -15 : 15;
+        
+        textLines.forEach((line, index) => {
+            const offsetY = (index - (textLines.length-1)/2) * 16;
+            ctx.fillText(line, nodeX + paddingX, nodeY + offsetY);
+        });
+    }
+
+    // 1. Draw Left Gear (TECHNIK)
+    // Rotation is 0
+    drawGear(cx1, cy, rBase, toothH, teeth, '#e0f2fe', '#0284c7', 'TECHNIK', '(Das Werkzeug)');
+    
+    // Draw Nodes for Technik
+    drawNode(cx1, cy, cx1 - 180, cy - 80, ['Biomechanik'], '#0284c7');
+    drawNode(cx1, cy, cx1 - 200, cy, ['Koordination'], '#0284c7');
+    drawNode(cx1, cy, cx1 - 180, cy + 80, ['Kondition'], '#0284c7');
+
+    // 2. Draw Right Gear (TAKTIK)
+    // Needs to mesh. If teeth = 12, angle step is 360/12 = 30 deg.
+    // Offset by half a tooth (15 deg) to mesh correctly.
+    const rotationOffset = (Math.PI * 2 / teeth) / 2;
+    drawGear(cx2, cy, rBase, toothH, teeth, '#ffedd5', '#ea580c', 'TAKTIK', '(Der Plan)');
+
+    // Draw Nodes for Taktik
+    drawNode(cx2, cy, cx2 + 180, cy - 80, ['Kognition &', 'Antizipation'], '#ea580c');
+    drawNode(cx2, cy, cx2 + 200, cy, ['Individualtaktik'], '#ea580c');
+    drawNode(cx2, cy, cx2 + 180, cy + 80, ['Gruppen- &', 'Mannschaftstaktik'], '#ea580c');
+
+    // 3. Highlight the synergy / interlocking area
+    ctx.beginPath();
+    ctx.arc(w/2, cy, 35, 0, Math.PI * 2);
+    const grad = ctx.createRadialGradient(w/2, cy, 0, w/2, cy, 35);
+    grad.addColorStop(0, 'rgba(250, 204, 21, 0.4)'); // Glowing center
+    grad.addColorStop(1, 'rgba(250, 204, 21, 0)');
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // Arrows pointing to center
+    ctx.fillStyle = '#1e293b';
+    ctx.font = '24px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('⚡', w/2, cy);
+
+</script>
+</body>
+</html>

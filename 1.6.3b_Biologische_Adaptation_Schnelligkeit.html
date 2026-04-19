@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Biologische Adaptation Schnelligkeit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: 'Syne' for bio-tech headers, 'Sora' for extremely clean reading -->
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Sora', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                    },
+                    colors: {
+                        clinical: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        neuro: '#06b6d4',   // Cyan
+                        morpho: '#f43f5e',  // Rose
+                        meta: '#f59e0b',    // Amber
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#fbbf24',
+                            dark: '#b45309',
+                        }
+                    },
+                    boxShadow: {
+                        'bio': '0 20px 40px -15px rgba(0, 0, 0, 0.05)',
+                        'cell': '0 10px 25px -5px rgba(15, 23, 42, 0.05)',
+                        'glow-abitur': '0 0 30px rgba(251, 191, 36, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+            /* Subtle dotted background for laboratory feel */
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Bio-Tech Cards */
+        .bio-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.1);
+        }
+
+        /* Organic decorative blobs */
+        .blob-bg {
+            position: absolute;
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.15;
+            border-radius: 50%;
+            animation: breathe 8s infinite alternate ease-in-out;
+        }
+
+        @keyframes breathe {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(20px, 10px); }
+        }
+
+        /* Flowchart Canvas Container */
+        .flowchart-wrapper {
+            background: #ffffff;
+            border-radius: 2rem;
+            position: relative;
+            box-shadow: inset 0 2px 15px rgba(0,0,0,0.03), 0 15px 30px -10px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Abitur Premium Box - Deep Vault */
+        .abitur-vault {
+            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+            border-top: 6px solid #fbbf24;
+            color: #f8fafc;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .gradient-text-bio {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="font-sans leading-relaxed pt-8 pb-24 relative overflow-x-hidden">
+
+    <!-- Background Blobs -->
+    <div class="blob-bg w-[500px] h-[500px] bg-neuro top-[-100px] left-[-100px]"></div>
+    <div class="blob-bg w-[600px] h-[600px] bg-morpho top-[40%] right-[-200px]" style="animation-delay: -2s;"></div>
+    <div class="blob-bg w-[400px] h-[400px] bg-meta bottom-[10%] left-[-150px]" style="animation-delay: -4s;"></div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+        
+        <!-- Header -->
+        <header class="glass-pill p-8 md:p-12 mb-16 rounded-[2.5rem] relative overflow-hidden">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
+                <div class="flex items-center gap-4">
+                    <span class="bg-clinical-900 text-white font-bold px-4 py-2 rounded-full text-sm font-display tracking-widest shadow-md">1.6.3b</span>
+                    <span class="text-clinical-800 font-bold tracking-widest text-sm uppercase">Biologie der Anpassung</span>
+                </div>
+                <!-- Mini DNA Icon Indicator -->
+                <div class="hidden sm:flex items-center gap-2 text-clinical-500">
+                    <svg class="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                </div>
+            </div>
+
+            <h1 class="text-5xl md:text-6xl font-display font-extrabold uppercase tracking-tight text-clinical-900 leading-[1.1] mb-6">
+                Biologische <br>
+                <span class="bg-gradient-to-r from-neuro via-morpho to-meta gradient-text-bio">Adaptation</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-clinical-800 font-medium max-w-4xl leading-relaxed">
+                Ein zielgerichtetes Schnelligkeitstraining provoziert im menschlichen Körper hochspezifische Anpassungen, die sich fundamental von den Adaptationen eines Ausdauer- oder reinen Hypertrophietrainings unterscheiden.
+            </p>
+            <div class="mt-8 bg-clinical-50 border-l-4 border-clinical-900 p-5 rounded-r-2xl max-w-4xl text-clinical-800 font-medium shadow-sm">
+                Da die Schnelligkeit sowohl durch das <strong>Zentralnervensystem (ZNS)</strong> als auch durch die <strong>muskuläre Energiebereitstellung</strong> limitiert wird, finden die biologischen Anpassungen exakt auf diesen beiden Ebenen statt.
+            </div>
+        </header>
+
+        <main class="space-y-12">
+
+            <!-- Section 1 & 2 & 3: The 3 Biological Systems -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- 1. Neuronale Anpassungen -->
+                <article class="bio-card p-8 flex flex-col border-t-4 border-t-neuro">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-50 flex items-center justify-center text-neuro shadow-inner">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <h2 class="text-2xl font-display font-bold text-clinical-900 leading-tight">Neuronale <br>Anpassungen</h2>
+                    </div>
+                    <div class="text-sm font-bold text-neuro uppercase tracking-wider mb-4">Das ZNS-Upgrade</div>
+                    
+                    <p class="text-sm text-clinical-600 mb-6 font-medium">Die frühesten Leistungssteigerungen basieren nicht auf Muskelwachstum, sondern auf Optimierung der neuronalen Steuerung. Das Gehirn „lernt“.</p>
+                    
+                    <div class="space-y-4 flex-grow">
+                        <div class="bg-clinical-50 p-4 rounded-xl border border-clinical-100">
+                            <strong class="text-clinical-900 block text-sm mb-1">Rekrutierung & Frequenzierung</strong>
+                            <p class="text-xs text-clinical-600">ZNS rekrutiert bei explosivem Reiz schlagartig mehr motorische Einheiten (FT-Fasern). Max. Entladungsfrequenz (Impulsdichte) steigt &rarr; maximierte Anfangskraft.</p>
+                        </div>
+                        <div class="bg-clinical-50 p-4 rounded-xl border border-clinical-100">
+                            <strong class="text-clinical-900 block text-sm mb-1">Intermuskuläre Koordination</strong>
+                            <p class="text-xs text-clinical-600">ZNS hemmt den Antagonisten im Moment der Kontraktion des Agonisten noch effektiver. Minimiert innere Reibungswiderstände.</p>
+                        </div>
+                        <div class="bg-clinical-50 p-4 rounded-xl border border-clinical-100">
+                            <strong class="text-clinical-900 block text-sm mb-1">Wechselinnervation</strong>
+                            <p class="text-xs text-clinical-600">Erregungs-/Hemmungsprozesse werden schneller umgeschaltet. Absolute Grundlage für höhere Schrittfrequenz.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2. Morphologische Anpassungen -->
+                <article class="bio-card p-8 flex flex-col border-t-4 border-t-morpho">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-rose-50 flex items-center justify-center text-morpho shadow-inner">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </div>
+                        <h2 class="text-2xl font-display font-bold text-clinical-900 leading-tight">Morphologische <br>Anpassungen</h2>
+                    </div>
+                    <div class="text-sm font-bold text-morpho uppercase tracking-wider mb-4">Die Muskelarchitektur</div>
+                    
+                    <p class="text-sm text-clinical-600 mb-6 font-medium">Obwohl es kein primäres Muskelaufbautraining ist, verändert sich die mikroskopische Struktur der Arbeitsmuskulatur.</p>
+                    
+                    <div class="space-y-4 flex-grow">
+                        <div class="bg-clinical-50 p-4 rounded-xl border border-clinical-100">
+                            <strong class="text-clinical-900 block text-sm mb-1">Selektive Hypertrophie der FT-Fasern</strong>
+                            <p class="text-xs text-clinical-600 mb-3">Die schnellen, weißen Muskelfasern (Typ II) nehmen an Querschnitt zu. Vermehrt kontraktile Proteine (Aktin/Myosin) werden eingelagert.</p>
+                            <p class="text-xs text-clinical-600">Dies vergrößert den Querschnitt der motorischen Endplatten und steigert das absolute Kraftpotenzial für explosive Kontraktionen.</p>
+                        </div>
+                        <div class="mt-4 bg-rose-50/50 p-3 rounded-lg border-l-2 border-morpho text-[11px] text-clinical-700">
+                            <strong>Hinweis:</strong> Eine echte Fasertransformation von ST- zu FT-Fasern ist genetisch extrem limitiert, jedoch wird das vorhandene FT-Potenzial maximal ausgeschöpft.
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3. Metabolische Anpassungen -->
+                <article class="bio-card p-8 flex flex-col border-t-4 border-t-meta">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-meta shadow-inner">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h2 class="text-2xl font-display font-bold text-clinical-900 leading-tight">Metabolische <br>Anpassungen</h2>
+                    </div>
+                    <div class="text-sm font-bold text-meta uppercase tracking-wider mb-4">Energiebereitstellung</div>
+                    
+                    <p class="text-sm text-clinical-600 mb-6 font-medium">Um die schnellen Kontraktionen energetisch abzusichern, adaptiert der alaktazide Stoffwechsel.</p>
+                    
+                    <div class="space-y-4 flex-grow">
+                        <div class="bg-clinical-50 p-4 rounded-xl border border-clinical-100">
+                            <strong class="text-clinical-900 block text-sm mb-1">Vergrößerung der Energiespeicher</strong>
+                            <p class="text-xs text-clinical-600">Intrazelluläre Depots an ATP und KP in den FT-Fasern vergrößern sich. Ermöglicht längere Aufrechterhaltung der Maximalgeschwindigkeit (z. B. 7-8s statt 5s) vor Laktat-Einsatz.</p>
+                        </div>
+                        <div class="bg-clinical-50 p-4 rounded-xl border border-clinical-100">
+                            <strong class="text-clinical-900 block text-sm mb-1">Gesteigerte Enzymaktivität</strong>
+                            <p class="text-xs text-clinical-600">Aktivität der schlüsselregulierenden Enzyme für alaktazide Energiegewinnung wird drastisch erhöht:</p>
+                            <ul class="text-[11px] mt-2 space-y-1 text-clinical-500 list-disc list-inside">
+                                <li><strong>Kreatinkinase:</strong> katalysiert Resynthese von ATP aus KP.</li>
+                                <li><strong>Myosin-ATPase:</strong> spaltet ATP für Muskelkontraktion.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Flowchart Section (KI-2 Task) -->
+            <section class="mt-12">
+                <div class="flex items-end justify-between mb-6 px-2">
+                    <div>
+                        <h2 class="text-3xl font-display font-bold text-clinical-900 tracking-tight">Anpassungs-Flussdiagramm</h2>
+                        <p class="text-clinical-500 text-sm mt-1">Die Kaskade der biologischen Adaptation durch Schnelligkeitsreize</p>
+                    </div>
+                </div>
+
+                <div class="flowchart-wrapper p-6 md:p-10 w-full relative">
+                    <!-- Flowchart Canvas -->
+                    <canvas id="adaptationFlowchart" class="w-full h-[500px] md:h-[600px] block"></canvas>
+                </div>
+            </section>
+
+            <!-- Section 4: Rückschlüsse für das Training (SAID Prinzip) -->
+            <section class="mt-16">
+                <div class="mb-8 px-2">
+                    <h2 class="text-3xl font-display font-bold text-clinical-900 tracking-tight mb-2">4. Rückschlüsse für Trainingsinhalte</h2>
+                    <p class="text-clinical-700 text-lg">
+                        Das biologische Prinzip der spezifischen Adaptation <strong class="text-clinical-900">(SAID-Prinzip: Specific Adaptation to Imposed Demands)</strong> diktiert die methodischen Konsequenzen:
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- R1 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-cell border border-clinical-100 relative overflow-hidden group hover:border-neuro transition-colors">
+                        <div class="absolute top-0 right-0 bg-neuro text-white w-10 h-10 rounded-bl-2xl flex items-center justify-center font-display font-bold">1</div>
+                        <h3 class="font-bold text-clinical-900 mb-2">Neuronale Frische</h3>
+                        <p class="text-sm text-clinical-600 leading-relaxed">
+                            Da neuronale Anpassungen (Frequenzierung, Wechselinnervation) ein absolut erholtes ZNS erfordern, muss Schnelligkeitstraining <strong>immer an den Anfang einer Einheit</strong> (nach dem Aufwärmen) gestellt werden. Ermüdetes Training = Schnelligkeitsausdauer!
+                        </p>
+                    </div>
+                    <!-- R2 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-cell border border-clinical-100 relative overflow-hidden group hover:border-meta transition-colors">
+                        <div class="absolute top-0 right-0 bg-meta text-white w-10 h-10 rounded-bl-2xl flex items-center justify-center font-display font-bold">2</div>
+                        <h3 class="font-bold text-clinical-900 mb-2">Pausengestaltung</h3>
+                        <p class="text-sm text-clinical-600 leading-relaxed">
+                            Um die metabolische Anpassung auf ATP/KP-Speicher zu fokussieren und Laktat zu vermeiden, müssen die <strong>Pausen vollständig sein</strong> (z. B. 3–5 Minuten nach einem 30-m-Sprint).
+                        </p>
+                    </div>
+                    <!-- R3 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-cell border border-clinical-100 relative overflow-hidden group hover:border-morpho transition-colors">
+                        <div class="absolute top-0 right-0 bg-morpho text-white w-10 h-10 rounded-bl-2xl flex items-center justify-center font-display font-bold">3</div>
+                        <h3 class="font-bold text-clinical-900 mb-2">Spezifität der Übungen</h3>
+                        <p class="text-sm text-clinical-600 leading-relaxed">
+                            Azyklische Schnelligkeit (Kugelstoß) erfordert <strong>bewegungsspezifische</strong> Übungen (z.B. Medizinball), da intramuskuläre Rekrutierung spezifisch ist. Reine Sprints hypertrophieren nicht die Wurf-Muskelkette!
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Abitur Premium Box (Vault) -->
+            <section class="abitur-vault rounded-[2.5rem] p-8 md:p-12 mt-20 overflow-hidden relative">
+                <!-- Background Decoration -->
+                <div class="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none">
+                    <svg class="absolute right-[-10%] top-[-10%] w-2/3 h-2/3 text-clinical-800 opacity-20 transform rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+
+                <div class="relative z-10">
+                    <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b border-clinical-800 pb-8">
+                        <div class="bg-gradient-to-br from-yellow-400 to-yellow-600 text-clinical-900 p-5 rounded-2xl shadow-glow-abitur">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl md:text-5xl font-display font-bold text-white tracking-tight mb-2">Abitur-Transfer & Praxis</h2>
+                            <div class="inline-flex items-center gap-3">
+                                <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">eA-Niveau</span>
+                                <span class="text-abitur font-medium text-lg">Hochkomplexe Transferaufgaben meistern</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                        
+                        <!-- Fehler Dekonstruktion -->
+                        <div class="bg-clinical-900/60 p-6 md:p-8 rounded-2xl border border-clinical-800">
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                                <span class="text-abitur">1.</span> Trainingspläne dekonstruieren
+                            </h3>
+                            <p class="text-clinical-300 text-sm mb-4 leading-relaxed">
+                                Das Kultusministerium liebt es, Fehler in Plänen analysieren zu lassen. <br>
+                                <strong>Szenario:</strong> Ein Athlet absolviert <em class="text-white">10x 50-Meter-Sprints mit 30s Pause</em>, um "schneller zu werden".
+                            </p>
+                            <div class="bg-red-950/30 border-l-4 border-red-500 p-4 rounded-r-lg text-sm">
+                                <strong class="text-red-400 block mb-2">Deine biologische Dekonstruktion:</strong>
+                                <ul class="text-clinical-400 space-y-2 list-disc list-inside">
+                                    <li>Unvollständige Pause verhindert ATP/KP-Resynthese.</li>
+                                    <li>Energie wird <strong class="text-clinical-200">anaerob-laktazid</strong> bereitgestellt &rarr; Übersäuerung.</li>
+                                    <li>Kontraktionsgeschwindigkeit wird drastisch reduziert.</li>
+                                    <li><strong class="text-white">Fazit:</strong> Beabsichtigte neuronale Anpassungen (max. Frequenzierung) und metabolische (KP-Speicher) können unmöglich erreicht werden. Ziel komplett verfehlt!</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Zehnkämpfer Kausalketten -->
+                        <div class="bg-clinical-900/60 p-6 md:p-8 rounded-2xl border border-clinical-800">
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                                <span class="text-abitur">2.</span> Exakte Kausalketten (Zehnkämpfer)
+                            </h3>
+                            <p class="text-clinical-300 text-sm mb-4 leading-relaxed">
+                                Wenn du Rückschlüsse für das Training ziehen sollst, vermeide vage Aussagen wie <em>"Er muss sprinten üben"</em>. Nutze exakte biologische Kausalketten!
+                            </p>
+                            
+                            <div class="bg-clinical-800/50 p-5 rounded-xl border border-clinical-700 font-sans text-sm text-clinical-300 space-y-4">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-8 h-8 rounded-full bg-abitur/20 text-abitur flex items-center justify-center font-bold">1</span>
+                                    <span>Ziel: Frequenzschnelligkeit für 100m steigern.</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="w-8 h-8 rounded-full bg-abitur/20 text-abitur flex items-center justify-center font-bold">2</span>
+                                    <span>Erfordert: Verbesserung der <strong>Wechselinnervation</strong> des ZNS.</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="w-8 h-8 rounded-full bg-abitur/20 text-abitur flex items-center justify-center font-bold">3</span>
+                                    <span>Inhalt: <strong>Bergabläufe (Overspeed)</strong>.</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="w-8 h-8 rounded-full bg-abitur/20 text-abitur flex items-center justify-center font-bold">4</span>
+                                    <span>Adaptation: ZNS muss supramaximale Frequenzen verarbeiten &rarr; Neuronale Adaptation.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="mt-16 pt-8 pb-12 text-center border-t border-clinical-200">
+            <p class="font-display font-bold text-clinical-800 uppercase tracking-widest text-sm mb-2">Abiturwissen Sport (G9, eA)</p>
+            <p class="text-clinical-500 font-sans text-sm">Lernbereich 1.6.3b Biologische Adaptation im Schnelligkeitstraining</p>
+        </footer>
+    </div>
+
+    <!-- Canvas Logic: Biological Adaptation Flowchart -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('adaptationFlowchart');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let time = 0;
+            
+            // Layout definitions
+            const colors = {
+                neuro: '#06b6d4',
+                morpho: '#f43f5e',
+                meta: '#f59e0b',
+                bg: '#ffffff',
+                text: '#0f172a',
+                nodeBg: '#f8fafc',
+                border: '#e2e8f0'
+            };
+
+            class Signal {
+                constructor(startX, startY, endX, endY, color, delay = 0) {
+                    this.startX = startX;
+                    this.startY = startY;
+                    this.endX = endX;
+                    this.endY = endY;
+                    this.color = color;
+                    this.progress = -delay; // Start with delay
+                    this.speed = 0.006;
+                }
+                update() {
+                    this.progress += this.speed;
+                    if (this.progress > 1) this.progress = 0; // loop
+                }
+                draw(ctx, controlY1, controlY2) {
+                    if (this.progress < 0) return; // Wait for delay
+
+                    // Calculate position along cubic bezier curve
+                    const t = this.progress;
+                    const u = 1 - t;
+                    const tt = t * t;
+                    const uu = u * u;
+                    const uuu = uu * u;
+                    const ttt = tt * t;
+
+                    // Point P0 (start), P1 (control1), P2 (control2), P3 (end)
+                    const p0 = {x: this.startX, y: this.startY};
+                    const p1 = {x: this.startX, y: controlY1};
+                    const p2 = {x: this.endX, y: controlY2};
+                    const p3 = {x: this.endX, y: this.endY};
+
+                    const x = uuu * p0.x + 3 * uu * t * p1.x + 3 * u * tt * p2.x + ttt * p3.x;
+                    const y = uuu * p0.y + 3 * uu * t * p1.y + 3 * u * tt * p2.y + ttt * p3.y;
+
+                    ctx.shadowColor = this.color;
+                    ctx.shadowBlur = 12;
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 4, 0, Math.PI*2);
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            let signals = [];
+            let initialized = false;
+
+            function drawRoundedRect(ctx, x, y, width, height, radius, fill, stroke, textColor, title, subs, iconColor) {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width - radius, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+                ctx.lineTo(x + width, y + height - radius);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                ctx.lineTo(x + radius, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+                ctx.closePath();
+                
+                ctx.fillStyle = fill;
+                ctx.fill();
+                
+                if (stroke) {
+                    // Top border color accent
+                    ctx.beginPath();
+                    ctx.moveTo(x + radius, y);
+                    ctx.lineTo(x + width - radius, y);
+                    ctx.strokeStyle = iconColor || stroke;
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+                    
+                    // Rest of border
+                    ctx.beginPath();
+                    ctx.moveTo(x + width - radius, y);
+                    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+                    ctx.lineTo(x + width, y + height - radius);
+                    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                    ctx.lineTo(x + radius, y + height);
+                    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+                    ctx.lineTo(x, y + radius);
+                    ctx.quadraticCurveTo(x, y, x + radius, y);
+                    ctx.strokeStyle = stroke;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+
+                // Title
+                ctx.fillStyle = textColor;
+                ctx.font = 'bold 14px "Sora"';
+                ctx.textAlign = 'center';
+                ctx.fillText(title, x + width/2, y + 25);
+
+                // Sub items
+                if (subs && subs.length > 0) {
+                    ctx.font = '12px "Inter"';
+                    ctx.fillStyle = '#64748b'; // slate-500
+                    subs.forEach((sub, i) => {
+                        // Draw bullet
+                        if(iconColor) {
+                            ctx.fillStyle = iconColor;
+                            ctx.beginPath();
+                            ctx.arc(x + width/2 - ctx.measureText(sub).width/2 - 8, y + 50 + (i*18) - 4, 2.5, 0, Math.PI*2);
+                            ctx.fill();
+                            ctx.fillStyle = '#64748b';
+                        }
+                        ctx.fillText(sub, x + width/2, y + 50 + (i*18));
+                    });
+                }
+            }
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time += 0.02;
+
+                // --- Node Coordinates ---
+                const nodeW = w > 768 ? 220 : 160;
+                const nodeH = 100;
+                
+                // Top Node (Start)
+                const startX = w / 2;
+                const startY = 40;
+                
+                // Middle Nodes (3 Paths)
+                const midY = h * 0.45;
+                const gap = w > 768 ? (w - (3 * nodeW)) / 4 : 10;
+                const path1X = gap + nodeW/2;
+                const path2X = w / 2;
+                const path3X = w - gap - nodeW/2;
+
+                // Bottom Node (Target)
+                const targetY = h - 100;
+
+                // Initialize signals once we know coordinates
+                if (!initialized) {
+                    for(let i=0; i<3; i++) {
+                        signals.push(new Signal(startX, startY + nodeH/2, path1X, midY - nodeH/2, colors.neuro, i*0.33));
+                        signals.push(new Signal(path1X, midY + nodeH/2, startX, targetY - 30, colors.neuro, i*0.33 + 0.1));
+                        
+                        signals.push(new Signal(startX, startY + nodeH/2, path2X, midY - nodeH/2, colors.morpho, i*0.33 + 0.15));
+                        signals.push(new Signal(path2X, midY + nodeH/2, startX, targetY - 30, colors.morpho, i*0.33 + 0.25));
+                        
+                        signals.push(new Signal(startX, startY + nodeH/2, path3X, midY - nodeH/2, colors.meta, i*0.33 + 0.3));
+                        signals.push(new Signal(path3X, midY + nodeH/2, startX, targetY - 30, colors.meta, i*0.33 + 0.4));
+                    }
+                    initialized = true;
+                }
+
+                // --- 1. Draw Paths (Bezier curves) ---
+                function drawPath(sx, sy, ex, ey, color) {
+                    const cy1 = sy + (ey - sy) * 0.5;
+                    const cy2 = ey - (ey - sy) * 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(sx, sy);
+                    ctx.bezierCurveTo(sx, cy1, ex, cy2, ex, ey);
+                    ctx.strokeStyle = color + '40'; // 25% opacity
+                    ctx.lineWidth = 3;
+                    ctx.stroke();
+                }
+
+                // From Start to Mid
+                drawPath(startX, startY + 30, path1X, midY - 60, colors.neuro);
+                drawPath(startX, startY + 30, path2X, midY - 60, colors.morpho);
+                drawPath(startX, startY + 30, path3X, midY - 60, colors.meta);
+
+                // From Mid to Target
+                drawPath(path1X, midY + 60, startX, targetY - 30, colors.neuro);
+                drawPath(path2X, midY + 60, startX, targetY - 30, colors.morpho);
+                drawPath(path3X, midY + 60, startX, targetY - 30, colors.meta);
+
+                // --- 2. Draw Signals (Flowing data) ---
+                signals.forEach(sig => {
+                    sig.update();
+                    const cy1 = sig.startY + (sig.endY - sig.startY) * 0.5;
+                    const cy2 = sig.endY - (sig.endY - sig.startY) * 0.5;
+                    sig.draw(ctx, cy1, cy2);
+                });
+
+                // --- 3. Draw Nodes ---
+                
+                // Top Node
+                ctx.shadowColor = 'rgba(15, 23, 42, 0.1)';
+                ctx.shadowBlur = 15;
+                drawRoundedRect(ctx, startX - 140, startY - 25, 280, 50, 10, colors.nodeBg, colors.border, colors.text, 'Schnelligkeitsreiz (Wiederholungsmethode)');
+                ctx.shadowBlur = 0;
+
+                // Mid Nodes
+                const midTop = midY - 60;
+                
+                // Neuronale
+                drawRoundedRect(ctx, path1X - nodeW/2, midTop, nodeW, 120, 12, colors.nodeBg, colors.border, colors.text, 
+                    '1. Neuronale Anpassung', 
+                    ['Rekrutierung', 'Frequenzierung', 'Wechselinnervation'],
+                    colors.neuro
+                );
+                
+                // Morphologische
+                drawRoundedRect(ctx, path2X - nodeW/2, midTop, nodeW, 120, 12, colors.nodeBg, colors.border, colors.text, 
+                    '2. Morphol. Anpassung', 
+                    ['Selektive FT-Faser-Hypertrophie'],
+                    colors.morpho
+                );
+                
+                // Metabolische
+                drawRoundedRect(ctx, path3X - nodeW/2, midTop, nodeW, 120, 12, colors.nodeBg, colors.border, colors.text, 
+                    '3. Metabol. Anpassung', 
+                    ['Größere ATP/KP-Speicher', 'Erhöhte Enzymaktivität'],
+                    colors.meta
+                );
+
+                // Bottom Node (Target)
+                const pulseTarget = Math.sin(time*3) * 2;
+                
+                ctx.shadowColor = 'rgba(15, 23, 42, 0.15)';
+                ctx.shadowBlur = 20;
+                
+                // Target Gradient
+                const grad = ctx.createLinearGradient(startX - 150, 0, startX + 150, 0);
+                grad.addColorStop(0, colors.neuro);
+                grad.addColorStop(0.5, colors.morpho);
+                grad.addColorStop(1, colors.meta);
+                
+                drawRoundedRect(ctx, startX - 160 - pulseTarget, targetY - 30 - pulseTarget, 320 + pulseTarget*2, 60 + pulseTarget*2, 16, grad, null, '#ffffff', 'Gesteigerte motorische Schnelligkeit');
+                
+                ctx.shadowBlur = 0;
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

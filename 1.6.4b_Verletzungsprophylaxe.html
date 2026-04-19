@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Verletzungsprophylaxe im Schnelligkeitstraining</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: 'Space Grotesk' for technical/medical headers, 'Outfit' for highly readable body -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        med: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            red: '#e11d48',    // Clinical Red (Danger/Tear)
+                            dark: '#881337',
+                        },
+                        rehab: {
+                            50: '#f0fdfa',
+                            teal: '#0d9488',   // Rehab Teal (Prevention/Cure)
+                            dark: '#115e59',
+                        },
+                        slate: {
+                            850: '#152033',
+                            900: '#0f172a',
+                        },
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                        }
+                    },
+                    boxShadow: {
+                        'clinical': '0 10px 30px -10px rgba(0, 0, 0, 0.05)',
+                        'danger': '0 4px 20px -5px rgba(225, 29, 72, 0.3)',
+                        'safe': '0 4px 20px -5px rgba(13, 148, 136, 0.3)',
+                        'glow-abitur': '0 0 30px rgba(245, 158, 11, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            -webkit-font-smoothing: antialiased;
+            /* Subtle cross grid for medical feel */
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Medical Report Cards */
+        .med-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .med-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .danger-stripe { border-left: 4px solid #e11d48; }
+        .safe-stripe { border-left: 4px solid #0d9488; }
+
+        /* Prophylaxis Protocol Table */
+        .protocol-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .protocol-table th {
+            background: #0f172a;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.02em;
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+        }
+        .protocol-table td {
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        .protocol-table tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        /* Canvas Wrapper */
+        .biomech-canvas-wrapper {
+            background: #0f172a;
+            border-radius: 1rem;
+            border: 2px solid #334155;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Abitur Premium Box - Emergency File */
+        .abitur-file {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-top: 6px solid #f59e0b;
+            color: #f8fafc;
+            position: relative;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="leading-relaxed py-10 px-4 sm:px-6">
+
+    <div class="max-w-6xl mx-auto space-y-16">
+        
+        <!-- Header -->
+        <header class="bg-white rounded-2xl p-8 md:p-12 relative shadow-clinical border border-slate-200 overflow-hidden">
+            <!-- Medical Cross Background -->
+            <div class="absolute -right-10 -top-10 text-slate-50 opacity-50 pointer-events-none transform rotate-12">
+                <svg width="300" height="300" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 14H9v-4H5v-2h4V7h2v4h4v2h-4v4z"/>
+                </svg>
+            </div>
+
+            <div class="flex items-center gap-3 mb-6 relative z-10">
+                <span class="bg-slate-900 text-white font-bold px-3 py-1 text-sm tracking-widest font-display rounded uppercase">1.6.4b</span>
+                <span class="text-med-red font-bold tracking-widest text-xs uppercase bg-med-50 px-3 py-1 rounded border border-med-100 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    Prävention
+                </span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-display font-bold uppercase tracking-tight text-slate-900 mb-6 relative z-10">
+                Verletzungs<span class="text-rehab-teal">prophylaxe</span>
+            </h1>
+            
+            <p class="text-lg text-slate-600 font-medium max-w-4xl border-l-4 border-slate-900 pl-5 relative z-10">
+                Das Schnelligkeitstraining stellt höchste biomechanische und physiologische Anforderungen an den aktiven und passiven Bewegungsapparat. Aufgrund der explosiven Muskelkontraktionen und der enormen mechanischen Zugkräfte ist das Risiko für strukturelle Verletzungen signifikant höher als bei anderen Trainingsformen.
+            </p>
+            <div class="mt-6 inline-block bg-med-50 text-med-dark px-4 py-2 rounded-lg text-sm font-bold border border-med-100 relative z-10 shadow-sm">
+                Eine fundierte Verletzungsprophylaxe ist nicht nur ein gesundheitlicher, sondern ein leistungslimitierender Faktor!
+            </div>
+        </header>
+
+        <!-- Section 1: Ursachen -->
+        <section>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-med-red text-white w-12 h-12 flex items-center justify-center rounded-xl shadow-danger">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h2 class="text-3xl font-display font-bold text-slate-900 uppercase">1. Physiologische Ursachen</h2>
+            </div>
+            <p class="text-slate-600 mb-8 text-lg">Um Verletzungen zu verhindern, müssen zunächst deren Entstehungsmechanismen auf zellulärer und neuromuskulärer Ebene verstanden werden:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Cause 1 -->
+                <div class="med-card danger-stripe p-6">
+                    <h3 class="font-bold text-lg text-slate-900 mb-3 flex items-center gap-2">
+                        <span class="text-med-red text-xl">⚠️</span> ZNS-Ermüdung
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        <strong>Ermüdungsbedingte Koordinationsstörungen:</strong> Ermüdet das ZNS, leidet die intermuskuläre Koordination. Erfolgt die Hemmung des Antagonisten im Moment der maximalen Kontraktion des Agonisten auch nur Millisekunden zu spät (Ko-Kontraktion), wirken gewaltige entgegengesetzte Kräfte &rarr; <strong>sofortiger Faserriss</strong>.
+                    </p>
+                </div>
+                <!-- Cause 2 -->
+                <div class="med-card danger-stripe p-6">
+                    <h3 class="font-bold text-lg text-slate-900 mb-3 flex items-center gap-2">
+                        <span class="text-med-red text-xl">⚖️</span> Dysbalancen
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        <strong>Muskuläre Dysbalancen:</strong> Oft ist der Quadrizeps im Verhältnis zur Oberschenkelrückseite (Ischiocrurale M.) unverhältnismäßig stark. Da die hintere Muskulatur den Unterschenkel in der Schwungphase extrem schnell exzentrisch (nachgebend) abbremsen muss, reißt sie bei relativer Schwäche fast zwangsläufig.
+                    </p>
+                </div>
+                <!-- Cause 3 -->
+                <div class="med-card danger-stripe p-6">
+                    <h3 class="font-bold text-lg text-slate-900 mb-3 flex items-center gap-2">
+                        <span class="text-med-red text-xl">🧊</span> Viskosität
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        <strong>Unzureichende Gewebeelastizität:</strong> Eine zu niedrige Körperkerntemperatur bedeutet eine hohe Viskosität (innere Reibung) der Muskulatur und Gelenkschmiere. Kaltes Gewebe ist spröde und reißt unter explosiver Belastung deutlich schneller.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Canvas Interactive Visualization -->
+        <section class="mt-12">
+            <div class="biomech-canvas-wrapper p-6 md:p-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-slate-700 pb-4">
+                    <div>
+                        <h4 class="text-2xl font-display font-bold text-white uppercase tracking-wide">Klinische Biomechanik</h4>
+                        <p class="text-sm text-slate-400 font-sans">Simulation: Hamstring-Riss durch ZNS-Ermüdung (Schwungphase Sprint)</p>
+                    </div>
+                    <div class="flex items-center gap-4 mt-4 md:mt-0">
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-rehab-teal/20 text-rehab-teal border border-rehab-teal/50">Gesund: Perfekte Hemmung</span>
+                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-med-red/20 text-med-red border border-med-red/50">Ermüdet: Ko-Kontraktion (Riss)</span>
+                    </div>
+                </div>
+                
+                <canvas id="injuryCanvas" class="w-full h-[350px] bg-slate-900 rounded-lg"></canvas>
+                
+                <div class="mt-4 text-center text-sm font-medium text-slate-400">
+                    Beobachte das ZNS-Signal: Bei Ermüdung bleibt die rote "Brake"-Muskulatur aktiv während der blaue Quadrizeps feuert &rarr; Strukturelles Versagen.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Prophylaxe & Table (KI 2) -->
+        <section class="mt-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-rehab-teal text-white w-12 h-12 flex items-center justify-center rounded-xl shadow-safe">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                </div>
+                <h2 class="text-3xl font-display font-bold text-slate-900 uppercase">2. Maßnahmen zur Prävention</h2>
+            </div>
+            
+            <p class="text-slate-600 mb-8 text-lg">Aus den neuromuskulären Ursachen lassen sich direkte präventive Trainingsmaßnahmen (Prophylaxe-Protokoll) ableiten:</p>
+
+            <!-- KI 2 Table -->
+            <div class="shadow-clinical rounded-2xl overflow-hidden mb-12">
+                <div class="bg-slate-900 text-white p-6 border-b-4 border-rehab-teal flex items-center justify-between">
+                    <h3 class="font-display text-2xl tracking-wide uppercase">Protokoll: Verletzungsprophylaxe</h3>
+                    <svg class="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                </div>
+                <table class="protocol-table">
+                    <thead>
+                        <tr>
+                            <th class="w-1/2">Verletzungsrisiko / Physiologische Ursache</th>
+                            <th class="w-1/2 bg-slate-800">Prophylaktische Trainingsmaßnahme</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm text-slate-700">
+                        <tr>
+                            <td class="danger-stripe bg-white">
+                                <strong class="text-med-red block mb-1 text-base">Hohe Gewebeviskosität (Sprödes Gewebe)</strong>
+                                Unzureichende Körperkerntemperatur und inaktive neuronale Bahnen erhöhen das Risiko für Faser- und Sehnenrisse bei Explosivbelastung massiv.
+                            </td>
+                            <td class="safe-stripe bg-slate-50">
+                                <strong class="text-rehab-teal block mb-1 text-base">Das hochspezifische Warm-up</strong>
+                                Intensives Aufwärmen (auf ca. 39°C) zur Senkung der Viskosität. Gefolgt von <strong>aktiv-dynamischem Dehnen</strong> und Lauf-ABC. "Weckt" das ZNS und optimiert Gelenkamplituden für die FT-Fasern.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="danger-stripe bg-white">
+                                <strong class="text-med-red block mb-1 text-base">Gestörte intermuskuläre Koordination</strong>
+                                ZNS-Ermüdung führt zu Fehlsteuerungen und Ko-Kontraktionen (Gleichzeitiges Anspannen von Beuger und Strecker).
+                            </td>
+                            <td class="safe-stripe bg-slate-50">
+                                <strong class="text-rehab-teal block mb-1 text-base">Methodische ZNS-Frische</strong>
+                                Maximale Schnelligkeit darf <strong>niemals im ermüdeten Zustand</strong> trainiert werden. Sofortiger Abbruch der Einheit bei Geschwindigkeitsverlust oder unsauberer Technik.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="danger-stripe bg-white">
+                                <strong class="text-med-red block mb-1 text-base">Muskuläre Dysbalancen (Quadrizeps / Hamstrings)</strong>
+                                Schwache Oberschenkelrückseite reißt beim extrem schnellen, exzentrischen Abbremsen des Unterschenkels in der Schwungphase.
+                            </td>
+                            <td class="safe-stripe bg-slate-50">
+                                <strong class="text-rehab-teal block mb-1 text-base">Exzentrisches Krafttraining</strong>
+                                Spezifische Stärkung der Antagonisten (z. B. <strong>Nordic Hamstring Curls</strong>). Der Muskel lernt, massive Zugkräfte während der Dehnung strukturell zu tolerieren.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="danger-stripe bg-white">
+                                <strong class="text-med-red block mb-1 text-base">Scherkräfte auf Gelenke und Sehnen</strong>
+                                Unökonomische Bewegungsmuster oder Ausweichbewegungen leiten mechanische Kräfte in falsche Vektoren.
+                            </td>
+                            <td class="safe-stripe bg-slate-50">
+                                <strong class="text-rehab-teal block mb-1 text-base">Techniktraining</strong>
+                                Lauf- oder wurfspezifische Technikschulung verhindert Fehlbelastungen. Saubere Biomechanik ist der beste strukturelle Schutz.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 3: Abitur Premium Box (Emergency File) -->
+        <section class="abitur-file rounded-2xl p-8 md:p-12 shadow-2xl mt-16 overflow-hidden">
+            <!-- Medical Cross Background Outline -->
+            <svg class="absolute right-[-10%] top-[-20%] w-[500px] h-[500px] text-slate-800 opacity-30 transform rotate-45 pointer-events-none" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 14H9v-4H5v-2h4V7h2v4h4v2h-4v4z"/>
+            </svg>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b border-slate-700 pb-8">
+                    <div class="bg-gradient-to-br from-abitur to-abitur-dark text-slate-900 p-5 rounded-2xl shadow-glow-abitur">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-5xl font-display font-bold text-white tracking-tight mb-2">Abitur-Transfer & Praxis</h2>
+                        <div class="inline-flex items-center gap-3">
+                            <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">eA-Niveau</span>
+                            <span class="text-abitur font-medium text-lg">Fehleranalysen & Medizinische Fallstudien</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-lg text-slate-300 mb-8 max-w-4xl leading-relaxed">
+                    In materialgestützten Klausuren des erhöhten Anforderungsniveaus wird die Verletzungsprophylaxe fast immer in Form von <strong class="text-white">Fehleranalysen</strong> abgefragt. Du musst methodische Sünden schonungslos sportbiologisch demontieren!
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- Fallstudie 1: Der Fußballtrainer -->
+                    <div class="bg-slate-900/80 p-6 rounded-xl border border-slate-700 hover:border-abitur transition-colors">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-white">Akte 1: Der Fußballtrainer</h3>
+                            <span class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded border border-slate-600">Trainingsplan-Analyse</span>
+                        </div>
+                        <div class="bg-slate-800 p-4 rounded text-sm text-slate-300 mb-4 border-l-2 border-slate-500 font-mono">
+                            Szenario: 90 Min. hartes Konditionstraining. Zum Abschluss 10x 30m Max-Sprints für die "Spritzigkeit".
+                        </div>
+                        <strong class="text-abitur block mb-2 text-sm uppercase tracking-wide">Deine Demontage:</strong>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Die Spieler sind physisch und neuronal (ZNS) maximal ermüdet. Sprinten trainiert hier nicht die Schnelligkeit. Aufgrund der versagenden <strong class="text-white">intermuskulären Koordination</strong> (Ko-Kontraktionen) ist die Maßnahme hochgefährlich. Die Wahrscheinlichkeit für einen Faserriss der Hamstrings steigt exponentiell.
+                        </p>
+                    </div>
+
+                    <!-- Fallstudie 2: Der Zehnkampf -->
+                    <div class="bg-slate-900/80 p-6 rounded-xl border border-slate-700 hover:border-abitur transition-colors">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-white">Akte 2: Der Zehnkämpfer</h3>
+                            <span class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded border border-slate-600">Biochemischer Krampf</span>
+                        </div>
+                        <div class="bg-slate-800 p-4 rounded text-sm text-slate-300 mb-4 border-l-2 border-slate-500 font-mono">
+                            Szenario: Der 400-m-Lauf (Schnelligkeitsausdauer) am Ende des 1. Wettkampftages ist berüchtigt für Oberschenkelrisse.
+                        </div>
+                        <strong class="text-abitur block mb-2 text-sm uppercase tracking-wide">Die Biochemische Kausalkette:</strong>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Muskuläre Übersäuerung (Laktat) <strong class="text-white">stört die Kalzium-Bindung</strong> im Muskel. Folge: Unvollständige Entspannung (Relaxation) der Muskelfasern. Dieser biochemische <em>"Krampfzustand"</em> unter hoher mechanischer Zuglast reißt die Struktur. Prävention: Exzentrisches Krafttraining vorab & perfektes Cool-down!
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="mt-16 py-8 text-center border-t border-slate-200">
+        <p class="font-display font-bold text-slate-800 uppercase tracking-widest text-sm mb-1">Abiturwissen Sport (G9, eA)</p>
+        <p class="text-slate-500 font-sans text-sm">Lernbereich 1.6.4b Verletzungsprophylaxe</p>
+    </footer>
+
+    <!-- Interactive Canvas Logic: Biomechanical Injury Simulator -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('injuryCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let time = 0;
+            const stateDuration = 150; // frames per state
+            
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time++;
+
+                // Toggle state every stateDuration frames
+                const isFatigued = Math.floor(time / stateDuration) % 2 !== 0;
+                const cycleProgress = (time % stateDuration) / stateDuration; // 0 to 1
+
+                // Simulate running leg (Knee extension during swing phase)
+                // Angle goes from 120 deg (flexed) to 20 deg (extended)
+                const startAngle = 140;
+                const endAngle = 20;
+                const currentAngle = startAngle - (startAngle - endAngle) * cycleProgress;
+                const rad = currentAngle * (Math.PI / 180);
+
+                // Joint coordinates
+                const hipX = w / 2;
+                const hipY = 50;
+                
+                const femurLength = 120;
+                const kneeX = hipX; // fixed femur
+                const kneeY = hipY + femurLength;
+                
+                const tibiaLength = 110;
+                const ankleX = kneeX - Math.sin(rad) * tibiaLength;
+                const ankleY = kneeY + Math.cos(rad) * tibiaLength;
+
+                // --- Background Status Text ---
+                ctx.textAlign = 'left';
+                ctx.font = 'bold 24px "Space Grotesk"';
+                if (!isFatigued) {
+                    ctx.fillStyle = '#0d9488'; // Teal
+                    ctx.fillText('ZNS STATUS: OPTIMAL', 30, 40);
+                    ctx.font = '14px "Outfit"';
+                    ctx.fillText('Hemmung des Antagonisten greift pünktlich.', 30, 65);
+                } else {
+                    // Flash red in second half of swing
+                    if (cycleProgress > 0.6 && Math.floor(time/5)%2===0) {
+                        ctx.fillStyle = '#e11d48'; // Red Flash
+                    } else {
+                        ctx.fillStyle = '#991b1b'; // Dark red
+                    }
+                    ctx.fillText('ZNS STATUS: ERMÜDET', 30, 40);
+                    ctx.font = '14px "Outfit"';
+                    ctx.fillText('Latenz! Ko-Kontraktion der Hamstrings.', 30, 65);
+                }
+
+                // --- Draw Bones ---
+                ctx.lineWidth = 12;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.strokeStyle = '#cbd5e1';
+                
+                // Femur
+                ctx.beginPath(); ctx.moveTo(hipX, hipY); ctx.lineTo(kneeX, kneeY); ctx.stroke();
+                // Tibia
+                ctx.beginPath(); ctx.moveTo(kneeX, kneeY); ctx.lineTo(ankleX, ankleY); ctx.stroke();
+
+                // Joints
+                ctx.fillStyle = '#94a3b8';
+                ctx.beginPath(); ctx.arc(hipX, hipY, 10, 0, Math.PI*2); ctx.fill();
+                ctx.beginPath(); ctx.arc(kneeX, kneeY, 10, 0, Math.PI*2); ctx.fill();
+                ctx.beginPath(); ctx.arc(ankleX, ankleY, 8, 0, Math.PI*2); ctx.fill();
+
+                // --- Draw Muscles ---
+                // 1. Quadrizeps (Agonist - Front)
+                // Always active during extension
+                ctx.beginPath();
+                ctx.moveTo(hipX - 10, hipY);
+                ctx.quadraticCurveTo(kneeX - 40 - (cycleProgress*20), (hipY+kneeY)/2, kneeX - 10, kneeY);
+                ctx.strokeStyle = '#38bdf8'; // Active Blue
+                ctx.lineWidth = 20 + Math.sin(cycleProgress*Math.PI)*10; // Bulge
+                ctx.stroke();
+
+                // 2. Hamstrings (Antagonist - Back)
+                ctx.beginPath();
+                ctx.moveTo(hipX + 10, hipY);
+                
+                // In healthy state: thins out and relaxes as leg extends
+                // In fatigued state: stays thick and suddenly flashes red near max extension
+                
+                let hamWidth = 15;
+                let hamColor = '#475569'; // Relaxed grey
+                
+                if (!isFatigued) {
+                    hamWidth = 15 - (cycleProgress * 8); // thins out
+                } else {
+                    hamWidth = 15 + (cycleProgress * 5); // wrongly bulges
+                    if (cycleProgress > 0.7) {
+                        hamColor = '#e11d48'; // DANGER RED
+                    } else if (cycleProgress > 0.4) {
+                        hamColor = '#f59e0b'; // Warning Orange
+                    }
+                }
+
+                ctx.quadraticCurveTo(kneeX + 20, (hipY+kneeY)/2, kneeX + 10, kneeY);
+                ctx.strokeStyle = hamColor;
+                ctx.lineWidth = hamWidth;
+                ctx.stroke();
+                
+                // Tendon connecting to Tibia (Excentric brake)
+                ctx.beginPath();
+                ctx.moveTo(kneeX + 10, kneeY);
+                ctx.lineTo(ankleX + 5, ankleY - 20);
+                ctx.strokeStyle = hamColor;
+                ctx.lineWidth = Math.max(4, hamWidth - 5);
+                ctx.stroke();
+
+                // --- TEAR VISUALIZATION ---
+                if (isFatigued && cycleProgress > 0.8) {
+                    // Draw jagged lightning tear across hamstring
+                    const tearY = (hipY + kneeY) / 2 + 10;
+                    const tearX = kneeX + 15;
+                    
+                    ctx.shadowColor = '#fbbf24';
+                    ctx.shadowBlur = 10;
+                    ctx.strokeStyle = '#fbbf24'; // Yellow spark
+                    ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    ctx.moveTo(tearX - 15, tearY - 10);
+                    ctx.lineTo(tearX + 5, tearY - 5);
+                    ctx.lineTo(tearX - 5, tearY + 5);
+                    ctx.lineTo(tearX + 15, tearY + 10);
+                    ctx.stroke();
+                    ctx.shadowBlur = 0;
+
+                    // Screen shake effect translation
+                    ctx.translate(Math.random()*4-2, Math.random()*4-2);
+                    
+                    // Large Warning Text
+                    ctx.fillStyle = '#e11d48';
+                    ctx.textAlign = 'center';
+                    ctx.font = '900 40px "Space Grotesk"';
+                    ctx.fillText('STRUCTURAL FAILURE', w/2, h - 40);
+                }
+
+                requestAnimationFrame(() => {
+                    ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset translation from shake
+                    resizeCanvas(); // quick hack to handle high DPI scaling cleanly on transform reset
+                    draw();
+                });
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

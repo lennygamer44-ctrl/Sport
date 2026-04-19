@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Periphere Ermüdung</title>
+    <style>
+        /* Academic / Medical Style Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            /* Theme Colors: Indigo (Science) & Crimson (Fatigue/Acid) */
+            --bg-page: #f4f5f7;
+            --bg-paper: #ffffff;
+            --text-main: #374151;
+            --text-muted: #6b7280;
+            
+            --indigo-900: #312e81;
+            --indigo-700: #4338ca;
+            --indigo-100: #e0e7ff;
+            
+            --crimson-600: #e11d48;
+            --crimson-100: #ffe4e6;
+            
+            --abi-bg: #111827; /* Dark Gray for heavy contrast */
+            --abi-gold: #fbbf24;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+
+        /* Document Container */
+        .academic-paper {
+            max-width: 960px;
+            margin: 0 auto;
+            background: var(--bg-paper);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
+            border-top: 8px solid var(--indigo-700);
+            border-radius: 4px;
+        }
+
+        /* Header */
+        header {
+            padding: 4rem 4rem 2rem 4rem;
+            border-bottom: 2px solid var(--indigo-100);
+        }
+
+        .category-tag {
+            display: inline-block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--indigo-700);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--indigo-100);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+        }
+
+        h1 {
+            font-family: 'Lora', serif;
+            font-size: 2.6rem;
+            color: var(--indigo-900);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-lead {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            font-weight: 300;
+        }
+
+        /* Content Areas */
+        .content {
+            padding: 3rem 4rem;
+        }
+
+        @media (max-width: 768px) {
+            header, .content { padding: 2rem 1.5rem; }
+            h1 { font-size: 2rem; }
+        }
+
+        h2 {
+            font-family: 'Lora', serif;
+            font-size: 1.8rem;
+            color: var(--indigo-900);
+            margin: 2.5rem 0 1.5rem 0;
+            border-left: 5px solid var(--indigo-700);
+            padding-left: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        /* Scientific Timeline List */
+        .timeline {
+            margin: 3rem 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--indigo-700), var(--crimson-600));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            transition: transform 0.2s;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 1.5rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-paper);
+            border: 3px solid var(--indigo-700);
+            z-index: 2;
+        }
+
+        /* Color transitions for timeline dots */
+        .timeline-item:nth-child(3)::before, 
+        .timeline-item:nth-child(4)::before {
+            border-color: var(--crimson-600);
+        }
+
+        .timeline-item h3 {
+            font-family: 'Lora', serif;
+            color: var(--indigo-900);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item:nth-child(3) h3,
+        .timeline-item:nth-child(4) h3 {
+            color: var(--crimson-600);
+        }
+
+        .chemical {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: var(--crimson-600);
+            background: var(--crimson-100);
+            padding: 0 0.3rem;
+            border-radius: 3px;
+        }
+
+        .result-box {
+            background: var(--crimson-100);
+            border-left: 4px solid var(--crimson-600);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            font-weight: 500;
+            color: #881337;
+            margin: 2rem 0;
+        }
+
+        /* Canvas Wrapper */
+        .canvas-wrapper {
+            background: #f9fafb;
+            padding: 2rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .canvas-wrapper h4 {
+            font-family: 'Lora', serif;
+            color: var(--indigo-900);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+        }
+
+        /* Abitur Transfer Box - Massive & Brutalist */
+        .abi-container {
+            background: var(--abi-bg);
+            color: #f3f4f6;
+            margin: 4rem -4rem -3rem -4rem; /* Break out of content padding */
+            padding: 4rem;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .abi-container { margin: 3rem -1.5rem -2rem -1.5rem; padding: 3rem 1.5rem; }
+        }
+
+        .abi-title {
+            color: var(--crimson-600);
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 2px;
+            background: rgba(225, 29, 72, 0.3);
+        }
+
+        .abi-container p {
+            font-size: 1.1rem;
+            color: #d1d5db;
+        }
+
+        .abi-card {
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid var(--abi-gold);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .abi-card strong {
+            color: var(--abi-gold);
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .abi-step-list {
+            list-style: none;
+            counter-reset: abi-counter;
+            margin-top: 1.5rem;
+        }
+
+        .abi-step-list li {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            color: #e5e7eb;
+        }
+
+        .abi-step-list li::before {
+            counter-increment: abi-counter;
+            content: counter(abi-counter);
+            position: absolute;
+            left: 0;
+            top: -2px;
+            width: 28px;
+            height: 28px;
+            background: var(--crimson-600);
+            color: white;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .threshold-box {
+            background: linear-gradient(135deg, rgba(225, 29, 72, 0.2), rgba(0,0,0,0));
+            border: 1px solid var(--crimson-600);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-top: 2rem;
+        }
+
+        .threshold-box strong {
+            color: #fda4af;
+        }
+
+    </style>
+</head>
+<body>
+
+<main class="academic-paper">
+    <header>
+        <span class="category-tag">Lernbereich 1.4.2a</span>
+        <h1>Periphere Ermüdung</h1>
+        <p class="intro-lead">Zusammenhang zu den Ursachen der peripheren Ermüdung</p>
+    </header>
+
+    <div class="content">
+        <p>Die sportliche Ermüdung wird grundsätzlich in eine zentrale Ermüdung (Ermüdung des Zentralnervensystems) und eine periphere Ermüdung unterteilt. Die <strong>periphere Ermüdung</strong> findet lokal direkt im beanspruchten Muskel statt und ist eng an die Prozesse der Energiebereitstellung – insbesondere die anaerob-laktazide Stoffwechsellage – gekoppelt. Sie äußert sich in einer spürbaren, vorübergehenden Abnahme der muskulären Leistungsfähigkeit (Kontraktionskraft und -geschwindigkeit).</p>
+
+        <h2>1. Die physiologischen Ursachen der peripheren Ermüdung</h2>
+        <p>Die Hauptursache der peripheren Ermüdung bei intensiven sportlichen Belastungen liegt in der <strong>Übersäuerung (Azidose)</strong> der Arbeitsmuskulatur. Dieser Prozess läuft wie folgt ab:</p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>Laktat-Akkumulation</h3>
+                <p>Wird die anaerobe Schwelle überschritten, fällt durch die anaerobe Glykolyse mehr Laktat an, als der Körper gleichzeitig abbauen oder puffern kann.</p>
+            </div>
+            
+            <div class="timeline-item">
+                <h3>Abfall des pH-Werts</h3>
+                <p>Mit dem Laktat reichern sich vermehrt freie Wasserstoffionen (<span class="chemical">H⁺-Ionen</span>) in der Muskelzelle und anschließend im Blut an. Dies führt zu einem signifikanten Absinken des pH-Werts (Übersäuerung) im Muskelgewebe.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Enzymhemmung</h3>
+                <p>Die an der Energiebereitstellung beteiligten Enzyme (insbesondere das Schlüsselenzym Phosphofruktokinase) sind extrem pH-abhängig. Durch die zunehmende Azidose wird ihre Aktivität gehemmt. In der Folge wird die weitere Energiefreisetzung (ATP-Resynthese) massiv behindert.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Beeinträchtigung der Muskelkontraktion</h3>
+                <p>Die angesammelten <span class="chemical">H⁺-Ionen</span> konkurrieren zudem mit den Calcium-Ionen (<span class="chemical">Ca²⁺</span>) um die Bindungsstellen am Troponin. Dadurch wird der Greif-Loslass-Zyklus der Aktin- und Myosinfilamente gestört, was die Muskelkontraktion mechanisch abschwächt.</p>
+            </div>
+        </div>
+
+        <div class="result-box">
+            <strong>Das Resultat all dieser Faktoren ist die periphere Ermüdung:</strong> Der Athlet kann die hohe Intensität nicht mehr aufrechterhalten und wird durch seinen eigenen Körper zum Belastungsabbruch oder zur Reduktion der Intensität gezwungen.
+        </div>
+
+        <!-- Canvas Flowchart: Kausalzusammenhang der peripheren Ermüdung -->
+        <div class="canvas-wrapper">
+            <h4>Kausalkette der peripheren Ermüdung</h4>
+            <canvas id="fatigueFlowchart" width="800" height="400"></canvas>
+        </div>
+
+        <!-- Abitur Transfer & Praxis -->
+        <div class="abi-container">
+            <div class="abi-title">Abitur-Transfer & Praxis (eA)</div>
+            
+            <p>In den Abiturklausuren auf erhöhtem Anforderungsniveau (eA) wird die periphere Ermüdung fast immer in einen anwendungsbezogenen Kontext (z. B. eine Fallstudie oder einen Wettkampfbericht) eingebettet.</p>
+
+            <div class="abi-card">
+                <strong>Die physiologische Beweisführung</strong>
+                <p>Wenn in einem Material geschildert wird, dass ein Athlet die Belastung stark reduzieren oder abbrechen muss (z. B. der Blogauszug: <em>„Kurz vor der Gorialm musste meine Freundin erschöpft absteigen...“</em>), darfst du als Antwort <strong>nicht einfach nur "Erschöpfung" oder "zu wenig Ausdauer"</strong> schreiben. Das Kultusministerium verlangt hier die exakte Herleitung der peripheren Ermüdung.</p>
+            </div>
+
+            <strong style="color: white; font-size: 1.2rem; margin-top: 2rem; display: block;">Die Argumentationskette für die Klausur:</strong>
+            <p>Du musst Schritt für Schritt argumentieren:</p>
+            
+            <ul class="abi-step-list">
+                <li>Die Fahrerin hat ihren Laktat-Steady-State überschritten, da ihr Trainingszustand für die Intensität nicht ausreicht.</li>
+                <li>Es fällt mehr Laktat an, als abgepuffert werden kann.</li>
+                <li>Die Arbeitsmuskulatur übersäuert zunehmend (Azidose).</li>
+                <li>Die Enzyme der Energiefreisetzung werden behindert, was den Muskel zwingt, die Arbeit einzustellen (periphere Ermüdung).</li>
+            </ul>
+
+            <div class="threshold-box">
+                <strong>💡 Schwellen-Verständnis:</strong>
+                <p style="margin-top: 5px;">Die periphere Ermüdung ist der biologische Beweis dafür, dass sich der Athlet jenseits der anaeroben Schwelle (im Bereich <strong>> 4 mmol Laktat/l Blut</strong>) befindet. Du musst Laktatkurven entsprechend interpretieren können und den Punkt identifizieren, an dem die Ermüdung unweigerlich einsetzt.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Canvas Flowchart Logic
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('fatigueFlowchart');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Display Support
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+
+        // Flowchart Nodes Data
+        const nodes = [
+            { text: ["Hohe", "Intensität"], bg: "#4338ca", color: "#fff" },
+            { text: ["Anaerobe", "Glykolyse"], bg: "#6366f1", color: "#fff" },
+            { text: ["Laktat- &", "H⁺-Akkumulation"], bg: "#fbbf24", color: "#1f2937" },
+            { text: ["Absinken des", "pH-Werts", "(Azidose)"], bg: "#f43f5e", color: "#fff" },
+            { text: ["Enzymhemmung &", "gestörte", "Calcium-Bindung"], bg: "#e11d48", color: "#fff" },
+            { text: ["Abbruch der", "Kontraktion", "(Periphere Ermüdung)"], bg: "#9f1239", color: "#fff" }
+        ];
+
+        function drawFlowchart() {
+            ctx.clearRect(0, 0, width, height);
+
+            const nodeWidth = 140;
+            const nodeHeight = 80;
+            const startX = 40;
+            const gapX = (width - 2 * startX - 3 * nodeWidth) / 2; // Gap for 3 cols
+            const startY = 40;
+            const gapY = 120; // Gap for 2 rows
+
+            // Define positions (Zig-Zag: Top row L->R, Bottom row R->L or just L->R then L->R)
+            // Let's do a Snake layout: Row 1 (L->R), Row 2 (L->R) to keep reading flow simple
+            const positions = [
+                { x: startX, y: startY },
+                { x: startX + nodeWidth + gapX, y: startY },
+                { x: startX + 2 * (nodeWidth + gapX), y: startY },
+                { x: startX, y: startY + nodeHeight + gapY },
+                { x: startX + nodeWidth + gapX, y: startY + nodeHeight + gapY },
+                { x: startX + 2 * (nodeWidth + gapX), y: startY + nodeHeight + gapY }
+            ];
+
+            // Helper to draw rounded rectangle
+            function roundRect(x, y, w, h, radius, fill, stroke) {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + w - radius, y);
+                ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+                ctx.lineTo(x + w, y + h - radius);
+                ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+                ctx.lineTo(x + radius, y + h);
+                ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+                ctx.closePath();
+                if (fill) {
+                    ctx.fillStyle = fill;
+                    ctx.fill();
+                }
+                if (stroke) {
+                    ctx.strokeStyle = stroke;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+            }
+
+            // Helper to draw arrow
+            function drawArrow(fromX, fromY, toX, toY) {
+                const headlen = 12; // length of head in pixels
+                const dx = toX - fromX;
+                const dy = toY - fromY;
+                const angle = Math.atan2(dy, dx);
+                
+                ctx.beginPath();
+                ctx.moveTo(fromX, fromY);
+                ctx.lineTo(toX, toY);
+                ctx.strokeStyle = "#9ca3af";
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                
+                // Arrowhead
+                ctx.beginPath();
+                ctx.moveTo(toX, toY);
+                ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+                ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+                ctx.lineTo(toX, toY);
+                ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+                ctx.fillStyle = "#9ca3af";
+                ctx.fill();
+            }
+
+            // Draw connections FIRST so they are under the nodes
+            // 0 -> 1
+            drawArrow(positions[0].x + nodeWidth, positions[0].y + nodeHeight/2, positions[1].x, positions[1].y + nodeHeight/2);
+            // 1 -> 2
+            drawArrow(positions[1].x + nodeWidth, positions[1].y + nodeHeight/2, positions[2].x, positions[2].y + nodeHeight/2);
+            
+            // 2 -> 3 (Curve from Top Right to Bottom Left)
+            ctx.beginPath();
+            ctx.moveTo(positions[2].x + nodeWidth/2, positions[2].y + nodeHeight);
+            // Control points for a nice S-curve or direct line
+            ctx.bezierCurveTo(
+                positions[2].x + nodeWidth/2, positions[2].y + nodeHeight + gapY/2,
+                positions[3].x + nodeWidth/2, positions[3].y - gapY/2,
+                positions[3].x + nodeWidth/2, positions[3].y - 5
+            );
+            ctx.strokeStyle = "#9ca3af";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            // Arrowhead pointing down to 3
+            drawArrow(positions[3].x + nodeWidth/2, positions[3].y - 10, positions[3].x + nodeWidth/2, positions[3].y);
+
+            // 3 -> 4
+            drawArrow(positions[3].x + nodeWidth, positions[3].y + nodeHeight/2, positions[4].x, positions[4].y + nodeHeight/2);
+            // 4 -> 5
+            drawArrow(positions[4].x + nodeWidth, positions[4].y + nodeHeight/2, positions[5].x, positions[5].y + nodeHeight/2);
+
+
+            // Draw Nodes
+            nodes.forEach((node, i) => {
+                const pos = positions[i];
+                
+                // Shadow
+                ctx.shadowColor = 'rgba(0,0,0,0.15)';
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 4;
+                
+                roundRect(pos.x, pos.y, nodeWidth, nodeHeight, 8, node.bg, null);
+                
+                // Reset shadow for text
+                ctx.shadowColor = 'transparent';
+                
+                ctx.fillStyle = node.color;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                // Multi-line text logic
+                const lines = node.text;
+                const lineHeight = 18;
+                let startTextY = pos.y + (nodeHeight / 2) - ((lines.length - 1) * lineHeight / 2);
+                
+                lines.forEach((line) => {
+                    if(i === 5) { // Bold the final step
+                        ctx.font = 'bold 13px Inter';
+                    } else {
+                        ctx.font = '600 13px Inter';
+                    }
+                    ctx.fillText(line, pos.x + nodeWidth/2, startTextY);
+                    startTextY += lineHeight;
+                });
+            });
+        }
+
+        // Draw immediately and on resize
+        drawFlowchart();
+
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawFlowchart();
+        });
+    });
+</script>
+
+</body>
+</html>

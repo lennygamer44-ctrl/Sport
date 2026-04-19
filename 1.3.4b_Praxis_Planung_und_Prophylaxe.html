@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.3.4b Praxis - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Clinical Coaching & Prevention */
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            
+            --text-main: #334155;
+            --text-muted: #64748b;
+            
+            --coach-blue: #2563eb;     /* Planning & Logic */
+            --coach-blue-light: #eff6ff;
+            
+            --warn-red: #ef4444;       /* Danger / Injuries */
+            --warn-red-light: #fef2f2;
+            
+            --safe-green: #10b981;     /* Prevention / Correct */
+            --safe-green-light: #ecfdf5;
+            
+            --abi-bg: #0f172a;         /* Deep Slate for Exam */
+            --abi-gold: #f59e0b;
+            
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
+            --shadow-hover: 0 15px 35px rgba(37, 99, 235, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 100% 0%, rgba(37, 99, 235, 0.05) 0%, transparent 50%);
+        }
+
+        h1, h2, h3, h4, .coach-font {
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: var(--coach-blue);
+            color: white;
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-tag {
+            background: white;
+            color: var(--coach-blue);
+            padding: 0.4rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--coach-blue-light);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- Intro Box --- */
+        .intro-box {
+            background: var(--bg-card);
+            padding: 2.5rem 3rem;
+            border-radius: var(--radius-md);
+            margin: 0 auto 5rem;
+            border-left: 6px solid var(--coach-blue);
+            box-shadow: var(--shadow-soft);
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        /* --- Section Titles --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin: 5rem 0 2rem;
+        }
+
+        .section-num {
+            background: var(--coach-blue);
+            color: white;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        /* --- 1. Planung --- */
+        .plan-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .plan-card {
+            background: var(--bg-card);
+            border: 1px solid #e2e8f0;
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        @media (min-width: 800px) {
+            .plan-card { flex-direction: row; align-items: flex-start; gap: 2.5rem; }
+            .plan-icon { flex: 0 0 80px; }
+        }
+
+        .plan-icon {
+            width: 80px; height: 80px;
+            background: var(--coach-blue-light);
+            color: var(--coach-blue);
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .plan-card h3 {
+            font-size: 1.6rem;
+            color: var(--coach-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-card p { color: var(--text-muted); }
+        .plan-card strong { color: var(--text-main); }
+
+        /* --- 2. Verletzungsprophylaxe (Dysbalancen) --- */
+        .balance-box {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 4rem;
+            border-top: 6px solid var(--safe-green);
+        }
+
+        .balance-box h3 {
+            color: var(--safe-green);
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .balance-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 800px) {
+            .balance-content { grid-template-columns: 1fr; }
+        }
+
+        /* --- Canvas Split Screen --- */
+        .canvas-section {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid #e2e8f0;
+        }
+
+        .canvas-section h2 {
+            text-align: center;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .canvas-section p {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- 3. Gefahren (Pressatmung) --- */
+        .danger-zone {
+            background: var(--warn-red-light);
+            border: 2px solid var(--warn-red);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .danger-zone::before {
+            content: 'WARNUNG';
+            position: absolute;
+            top: -15px; left: 30px;
+            background: var(--warn-red);
+            color: white;
+            padding: 0.2rem 1.5rem;
+            border-radius: 4px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .danger-zone h3 {
+            color: var(--warn-red);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .danger-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 850px) {
+            .danger-grid { grid-template-columns: 1fr; }
+        }
+
+        .danger-text { color: #7f1d1d; }
+        .danger-text strong { color: #991b1b; display: block; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+
+        .breathe-rule {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--safe-green);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            align-self: center;
+        }
+
+        .breathe-rule h4 {
+            color: var(--safe-green);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* --- 4. Passiver Apparat --- */
+        .passive-box {
+            background: var(--bg-card);
+            border: 1px solid #e2e8f0;
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 6rem;
+            border-left: 6px solid var(--text-muted);
+        }
+
+        /* --- Premium Abitur Transfer Box --- */
+        .abitur-prep {
+            background: var(--abi-bg);
+            color: #e2e8f0;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.5);
+            border-top: 6px solid var(--abi-gold);
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2.5rem;
+            font-weight: 900;
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #fde68a;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .abi-card {
+            background: rgba(255,255,255,0.03);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .abi-card.pech { border-left-color: var(--safe-green); }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+        .abi-card p:last-child { margin-bottom: 0; }
+
+        .hl-gold { color: var(--abi-gold); font-weight: 700; }
+        .hl-green { color: var(--safe-green); font-weight: 700; }
+        .hl-white { color: white; font-weight: 700; }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="hero-tag">Lernbereich 1.3.4b</span>
+            <h1>Praxis: Planung & Prophylaxe</h1>
+            <p>Die methodische Erprobung von Krafttraining, Periodisierung und die konsequente Vermeidung von Überlastungsschäden.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-box">
+            Theoretisches biomechanisches Wissen entfaltet seinen Wert erst in der konkreten Trainingspraxis. Bei der Planung und Erprobung eines Krafttrainings müssen die biologischen Gesetzmäßigkeiten (z. B. Reizstufenregel, Heterochronismus der Adaptation) <strong>zwingend mit präventivmedizinischen Grundsätzen kombiniert werden</strong>, um Leistungssteigerungen zu erzielen und Überlastungsschäden zu vermeiden.
+        </div>
+
+        <!-- Section 1 -->
+        <div class="section-header">
+            <div class="section-num">1</div>
+            <h2 class="coach-font">Methodische Planung eines Krafttrainings</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Ein zielgerichtetes Krafttraining wird niemals isoliert, sondern immer im Rahmen des kybernetischen Regelkreises der Trainingssteuerung geplant (Blockperiodisierung):</p>
+
+        <div class="plan-grid">
+            <div class="plan-card">
+                <div class="plan-icon">📊</div>
+                <div>
+                    <h3 class="coach-font">Diagnostik (Ist-Zustand)</h3>
+                    <p>Vor jedem Trainingsblock steht die Ermittlung des individuellen 1RM (One Repetition Maximum) oder eines Mehrwiederholungs-Maximums (z. B. 10RM), um die <strong>Trainingsgewichte prozentual exakt festzulegen</strong>.</p>
+                </div>
+            </div>
+            
+            <div class="plan-card">
+                <div class="plan-icon">📈</div>
+                <div>
+                    <h3 class="coach-font">Phasenhafter Aufbau (Blockperiodisierung)</h3>
+                    <p>Ein sinnvoller Makrozyklus für die Kraftentwicklung (z. B. für einen Kugelstoßer) beginnt immer mit einer Phase des <strong>Muskelaufbautrainings</strong> (Hypertrophie, 60-80 % Intensität), um die morphologische Basis (den Muskelquerschnitt) zu vergrößern.</p>
+                    <p style="margin-top: 1rem;">Erst im darauffolgenden Mesozyklus wechselt man zum <strong>Intramuskulären Koordinationstraining</strong> (IK-Training, 90-100 % Intensität), um das zentrale Nervensystem darauf zu trainieren, die neu gewonnene Muskelmasse explosiv anzusteuern. <br><strong style="color: var(--warn-red);">Ein direkter Einstieg ins IK-Training ohne morphologische Basis ist ineffizient und extrem verletzungsanfällig.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section-header">
+            <div class="section-num" style="background: var(--safe-green); box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);">2</div>
+            <h2 class="coach-font">Verletzungsprophylaxe: Muskuläre Dysbalancen</h2>
+        </div>
+
+        <div class="balance-box">
+            <h3 class="coach-font">🛡️ Das höchste Gebot im Krafttraining</h3>
+            <p style="font-size: 1.15rem;">Die Erhaltung oder Wiederherstellung der muskulären Balance am Gelenk.</p>
+            
+            <div class="balance-content">
+                <div>
+                    <strong style="color: var(--text-main); font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">Das Agonist-Antagonist-Prinzip</strong>
+                    <p style="color: var(--text-muted);">Ein Gelenk wird durch Zugkräfte im Gleichgewicht gehalten. Wird nur der arbeitende Muskel (Agonist, z. B. Brustmuskulatur / M. pectoralis major) trainiert, hypertrophiert dieser, gewinnt an Ruhespannung (Tonus) und verkürzt sich strukturell. Wird der Gegenspieler (Antagonist, z. B. obere Rückenmuskulatur) vernachlässigt, <strong>zieht der zu starke Agonist das Gelenk aus seiner physiologischen Neutralstellung</strong> (z. B. nach vorne rotierte Schultern - Rundrücken).</p>
+                </div>
+                <div>
+                    <strong style="color: var(--safe-green); font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">Konsequenz für den Trainingsplan</strong>
+                    <p style="color: var(--text-muted);">Ein funktioneller Krafttrainingsplan muss zwingend <strong>alle Muskelgruppen eines Gelenks gleichmäßig adressieren</strong> (z. B. durch systematische "Push & Pull"-Einheiten), um Haltungsschäden und den dadurch resultierenden massiven Gelenkverschleiß (Arthrose) präventiv zu verhindern.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Section: Split Screen -->
+        <section class="canvas-section">
+            <h2 class="coach-font">Biomechanische Kraftanalyse: Die Schulter</h2>
+            <p>Die Auswirkung von isoliertem Training vs. ausbalanciertem Push & Pull-Training auf die Körperhaltung.</p>
+            <div class="canvas-container">
+                <canvas id="dysbalanceCanvas" width="900" height="450"></canvas>
+            </div>
+        </section>
+
+        <!-- Section 3 -->
+        <div class="section-header">
+            <div class="section-num" style="background: var(--warn-red); box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);">3</div>
+            <h2 class="coach-font">Physiologische Gefahren: Die Pressatmung</h2>
+        </div>
+
+        <div class="danger-zone">
+            <h3 class="coach-font">Das Valsalva-Manöver (Pressatmung)</h3>
+            <p style="color: #7f1d1d; font-size: 1.15rem; margin-bottom: 2rem;">Eine korrekte Atmung ist bei der Erprobung von Krafttraining essenziell. Besonders Anfänger neigen bei hohen Widerständen zur Pressatmung (Ausatmen gegen die geschlossene Stimmritze bei angespannter Atemmuskulatur).</p>
+            
+            <div class="danger-grid">
+                <div class="danger-text">
+                    <strong>Die biologische Gefahr:</strong>
+                    <p>Durch das Pressen steigt der intrathorakale (Brustkorb) und intraabdominale (Bauchraum) Druck massiv an. Dieser extreme Druck presst die große Hohlvene (Vena cava) zusammen.</p>
+                    <p style="margin-top: 1rem;">Der venöse Blutrückstrom zum rechten Vorhof des Herzens wird drastisch reduziert, wodurch das Schlagvolumen und der Blutdruck kurzfristig extrem abfallen <span style="color: var(--warn-red); font-weight: bold;">(Gefahr der Ohnmacht / Synkope unter der Hantel)</span>.</p>
+                    <p style="margin-top: 1rem;">Nach dem Lösen der Pressatmung schießt das angestaute Blut schlagartig zurück, was zu einer massiven, gefährlichen Blutdruckspitze (insbesondere in den Hirngefäßen) führt.</p>
+                </div>
+                
+                <div class="breathe-rule">
+                    <h4 class="coach-font">Die richtige Atemtechnik</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">Die Atmung muss der Biomechanik folgen:</p>
+                    <p><strong>Ausatmen:</strong> Bei der konzentrischen (überwindenden, anstrengenden) Phase.</p>
+                    <p style="margin-top: 0.5rem;"><strong>Einatmen:</strong> Bei der exzentrischen (nachgebenden) Phase.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section-header">
+            <div class="section-num">4</div>
+            <h2 class="coach-font">Anpassung des passiven Bewegungsapparates</h2>
+        </div>
+        
+        <div class="passive-box">
+            <p>Wie bereits bei der Adaptation (1.3.2b) erwähnt, hypertrophiert die Muskulatur deutlich schneller als die bradytrophen Strukturen (Sehnen, Bänder, Knorpel). Ein Trainingsplan muss daher ausreichend lange Adaptationszeiten vorsehen, bevor Gewichte drastisch gesteigert werden, da sonst <strong>Muskelabrisse an den (noch zu schwachen) Sehnenansätzen drohen</strong>.</p>
+        </div>
+
+        <!-- Premium Abitur Transfer Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2 class="coach-font">Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                In der schriftlichen Abiturprüfung (eA) dient dieser Punkt fast ausschließlich als Grundlage für die Fehleranalyse (AFB III - Bewerten und Beurteilen).
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card">
+                    <h3 class="coach-font">📋 Trainingspläne zerpflücken</h3>
+                    <p>Wenn dir in einer materialgestützten Klausur der Trainingsplan eines ambitionierten Anfängers vorgelegt wird, der an fünf Tagen die Woche nur Brust und Bizeps mit Maximalkraft trainiert, <span class="hl-white">musst du diesen Plan aus präventiver Sicht zerstören!</span></p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem; color: #cbd5e1; line-height: 1.8;">
+                        <li>Du prangerst die fehlende muskuläre Balance an und erklärst die Entstehung einer <span class="hl-gold">Dysbalance (Brust vs. oberer Rücken)</span> mit den drohenden Haltungsschäden.</li>
+                        <li>Du argumentierst mit dem <span class="hl-gold">Heterochronismus der Anpassung</span>, dass der Anfänger seinen passiven Bewegungsapparat (Sehnen) durch den sofortigen Fokus auf Maximalkraft massiv überlastet und Verletzungen provoziert.</li>
+                    </ul>
+                </div>
+
+                <div class="abi-card pech">
+                    <h3 class="coach-font" style="color: var(--safe-green);">🚑 Erste Hilfe (PECH-Regel)</h3>
+                    <p>Die Verletzungsprophylaxe bildet zudem die Schnittstelle zum Lernbereich 3 (Sport und Gesundheit). Sollte ein Sportler sich beim Krafttraining dennoch verletzen (z. B. eine Muskelzerrung durch mangelndes Aufwärmen), musst du in der Lage sein, die Sofortmaßnahmen nach der PECH-Regel biologisch zu begründen:</p>
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                        <span class="hl-green">P</span>ause • <span class="hl-green">E</span>is • <span class="hl-green">C</span>ompression • <span class="hl-green">H</span>ochlegen
+                        <br><br>
+                        <strong>Biologische Begründung (Beispiel Eis):</strong> Kälte verengt die Blutgefäße (Vasokonstriktion), verringert die Durchblutung im verletzten Gebiet und minimiert dadurch die schmerzhafte Ödembildung (Schwellung) im Gewebe.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('dysbalanceCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 900;
+            const logicalH = 450;
+            
+            let time = 0;
+            let animationId;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayW = Math.min(rect.width, logicalW);
+                const scale = displayW / logicalW;
+                const displayH = logicalH * scale;
+                
+                canvas.width = displayW * dpr;
+                canvas.height = displayH * dpr;
+                canvas.style.width = `${displayW}px`;
+                canvas.style.height = `${displayH}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // Drawing helpers
+            function drawArrow(x, y, length, angle, color) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(angle);
+                
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(length, 0);
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                
+                // Arrow head
+                ctx.beginPath();
+                ctx.moveTo(length, 0);
+                ctx.lineTo(length - 12, -8);
+                ctx.lineTo(length - 12, 8);
+                ctx.fillStyle = color;
+                ctx.fill();
+                
+                ctx.restore();
+            }
+
+            function drawSplitScreen() {
+                ctx.clearRect(0, 0, logicalW, logicalH);
+
+                const leftW = logicalW / 2;
+
+                // --- LEFT: WRONG (Dysbalance) ---
+                ctx.fillStyle = '#fef2f2'; // Very light red
+                ctx.fillRect(0, 0, leftW, logicalH);
+                
+                // Title
+                ctx.fillStyle = '#ef4444';
+                ctx.font = 'bold 24px Outfit';
+                ctx.textAlign = 'center';
+                ctx.fillText('FALSCH: Dysbalance', leftW/2, 40);
+                ctx.fillStyle = '#7f1d1d';
+                ctx.font = '14px Inter';
+                ctx.fillText('Einseitiges Brusttraining', leftW/2, 60);
+
+                // Silhouette Base (Hunched)
+                const cxL = leftW / 2;
+                const cyL = 250;
+                
+                ctx.strokeStyle = '#cbd5e1';
+                ctx.lineWidth = 20;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                // Spine (Curved forward)
+                ctx.beginPath();
+                ctx.moveTo(cxL, cyL - 80); // Neck base
+                ctx.quadraticCurveTo(cxL + 40, cyL, cxL, cyL + 100); // Hunched back
+                ctx.stroke();
+                
+                // Head (Forward posture)
+                ctx.beginPath();
+                ctx.arc(cxL - 30, cyL - 110, 25, 0, Math.PI*2);
+                ctx.fillStyle = '#cbd5e1';
+                ctx.fill();
+
+                // Arm
+                ctx.beginPath();
+                ctx.moveTo(cxL - 10, cyL - 60); // Shoulder pulled forward
+                ctx.lineTo(cxL - 10, cyL + 40); // Elbow
+                ctx.lineWidth = 14;
+                ctx.stroke();
+
+                // Muscle Pectoralis (Front, Thick, Red)
+                ctx.beginPath();
+                ctx.moveTo(cxL - 10, cyL - 60); // Shoulder
+                ctx.quadraticCurveTo(cxL - 40, cyL - 40, cxL - 15, cyL - 10); // Sternum attach
+                ctx.fillStyle = '#ef4444';
+                ctx.fill();
+
+                // Muscle Back (Overstretched, Thin, Grey)
+                ctx.beginPath();
+                ctx.moveTo(cxL - 10, cyL - 60); // Shoulder
+                ctx.quadraticCurveTo(cxL + 20, cyL - 70, cxL + 30, cyL - 30); // Back attach
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 6;
+                ctx.stroke();
+
+                // Forces (Red arrow pulling forward)
+                const pullLength = 30 + Math.sin(time*5)*10; // Pulsing arrow
+                drawArrow(cxL - 10, cyL - 50, pullLength, Math.PI - 0.2, '#ef4444');
+
+                // Labels
+                ctx.fillStyle = '#ef4444';
+                ctx.font = 'bold 12px Inter';
+                ctx.fillText('Pectoralis stark/verkürzt', cxL - 80, cyL + 10);
+                
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillText('Rücken schwach/überdehnt', cxL + 90, cyL - 80);
+                
+                ctx.fillStyle = '#7f1d1d';
+                ctx.font = 'bold 14px Inter';
+                ctx.fillText('→ Rundrücken & Gelenkverschleiß', cxL, logicalH - 30);
+
+
+                // --- RIGHT: CORRECT (Balanced) ---
+                ctx.fillStyle = '#ecfdf5'; // Very light green
+                ctx.fillRect(leftW, 0, leftW, logicalH);
+
+                const cxR = leftW + leftW / 2;
+                const cyR = 250;
+
+                // Title
+                ctx.fillStyle = '#10b981';
+                ctx.font = 'bold 24px Outfit';
+                ctx.fillText('KORREKT: Balance', cxR, 40);
+                ctx.fillStyle = '#064e3b';
+                ctx.font = '14px Inter';
+                ctx.fillText('Agonist & Antagonist trainiert', cxR, 60);
+
+                // Silhouette Base (Upright)
+                ctx.strokeStyle = '#cbd5e1';
+                ctx.lineWidth = 20;
+
+                // Spine (Straight/Healthy)
+                ctx.beginPath();
+                ctx.moveTo(cxR, cyR - 80); // Neck base
+                ctx.lineTo(cxR, cyR + 100); // Straight back
+                ctx.stroke();
+                
+                // Head (Aligned)
+                ctx.beginPath();
+                ctx.arc(cxR, cyR - 120, 25, 0, Math.PI*2);
+                ctx.fillStyle = '#cbd5e1';
+                ctx.fill();
+
+                // Arm (Neutral)
+                ctx.beginPath();
+                ctx.moveTo(cxR, cyR - 60); // Neutral shoulder
+                ctx.lineTo(cxR, cyR + 40);
+                ctx.lineWidth = 14;
+                ctx.stroke();
+
+                // Muscle Pectoralis (Balanced, Green)
+                ctx.beginPath();
+                ctx.moveTo(cxR, cyR - 60);
+                ctx.quadraticCurveTo(cxR - 25, cyR - 40, cxR - 5, cyR - 10);
+                ctx.fillStyle = '#10b981';
+                ctx.fill();
+
+                // Muscle Back (Balanced, Green)
+                ctx.beginPath();
+                ctx.moveTo(cxR, cyR - 60);
+                ctx.quadraticCurveTo(cxR + 25, cyR - 40, cxR + 5, cyR - 10);
+                ctx.fill(); // Also fill back muscle to show volume
+
+                // Forces (Balanced green arrows)
+                const balancedPull = 20;
+                drawArrow(cxR - 5, cyR - 40, balancedPull, Math.PI - 0.5, '#10b981'); // Pull front
+                drawArrow(cxR + 5, cyR - 40, balancedPull, 0.5, '#10b981'); // Pull back
+
+                // Labels
+                ctx.fillStyle = '#059669';
+                ctx.font = 'bold 12px Inter';
+                ctx.fillText('Zugkraft Agonist', cxR - 60, cyR + 10);
+                ctx.fillText('Zugkraft Antagonist', cxR + 60, cyR + 10);
+                
+                ctx.fillStyle = '#064e3b';
+                ctx.font = 'bold 14px Inter';
+                ctx.fillText('→ Aufrechte, gesunde Haltung', cxR, logicalH - 30);
+
+
+                // --- Center Divider ---
+                ctx.beginPath();
+                ctx.moveTo(leftW, 0);
+                ctx.lineTo(leftW, logicalH);
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+                // VS Badge
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.arc(leftW, logicalH/2, 25, 0, Math.PI*2);
+                ctx.fill();
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                ctx.fillStyle = '#64748b';
+                ctx.font = 'bold 16px Outfit';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('VS', leftW, logicalH/2);
+                ctx.textBaseline = 'alphabetic'; // reset
+            }
+
+            function animate() {
+                time += 0.03;
+                drawSplitScreen();
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

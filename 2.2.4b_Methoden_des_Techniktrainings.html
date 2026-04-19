@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.2.4b Methoden des Techniktrainings - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap');
+
+        :root {
+            /* Color Palette */
+            --bg-main: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            
+            --theme-blue: #0284c7;    /* Ganzheitlich/Zergliederung */
+            --theme-green: #059669;   /* Induktiv/Deduktiv */
+            --theme-purple: #7c3aed;  /* Weitere Maßnahmen */
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Exam Box */
+            --abi-bg: #1e1b4b;        /* Deep Indigo */
+            --abi-gold: #fbbf24;      /* Amber */
+            --abi-text: #f1f5f9;
+
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- 1. HEADER --- */
+        .doc-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 4rem;
+            position: relative;
+            border-top: 8px solid var(--theme-blue);
+        }
+
+        .doc-header h1 {
+            font-size: 2.6rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .doc-header .intro {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 900px;
+        }
+
+        /* --- 2. SPLIT COMPARISON CARDS --- */
+        .comparison-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .comp-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .comp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .comp-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .comp-card p {
+            margin-bottom: 1.5rem;
+        }
+
+        .example-box {
+            background: #f8fafc;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid;
+            font-style: italic;
+            color: #475569;
+        }
+
+        /* Color Variations for Sections */
+        .color-blue .comp-card { border-top: 5px solid var(--theme-blue); }
+        .color-blue h3 { color: var(--theme-blue); }
+        .color-blue .example-box { border-left-color: var(--theme-blue); }
+
+        .color-green .comp-card { border-top: 5px solid var(--theme-green); }
+        .color-green h3 { color: var(--theme-green); }
+        .color-green .example-box { border-left-color: var(--theme-green); }
+
+        /* --- 3. MATRIX CANVAS --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .canvas-section h3 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .canvas-wrapper {
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            overflow-x: auto;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- 4. WEITERE MAßNAHMEN --- */
+        .measures-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .measure-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            border-top: 4px solid var(--theme-purple);
+        }
+
+        .measure-card h4 {
+            color: var(--theme-purple);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .measure-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- 5. ABITUR PREMIUM BOX --- */
+        .abitur-matrix {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-top: 8px solid var(--abi-gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-matrix::before {
+            content: 'TRANSFER';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-family: 'Outfit', sans-serif;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 4rem;
+            font-weight: 800;
+        }
+
+        .abitur-matrix h2 {
+            color: var(--abi-gold);
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .abi-case {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--abi-gold);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .abi-case h4 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.15);
+            padding: 0.3rem 1rem;
+            border-radius: 4px;
+        }
+
+        .abi-case p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .abi-case ul {
+            margin-left: 1.5rem;
+            color: #cbd5e1;
+        }
+
+        .abi-case li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-text {
+            color: var(--abi-gold);
+            font-weight: bold;
+        }
+
+        @media (max-width: 900px) {
+            .comparison-grid { grid-template-columns: 1fr; }
+            .doc-header, .abitur-matrix { padding: 2.5rem; }
+            .doc-header h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <header class="doc-header">
+        <h1>2.2.4b Methoden des Techniktrainings</h1>
+        <p class="intro">
+            Der Technikerwerbsprozess vollzieht sich nicht von allein, sondern erfordert den gezielten Einsatz methodischer Maßnahmen und Prinzipien. Je nach Komplexität der Bewegung, dem immanenten Gefahrenpotenzial und dem Leistungsstand der Athletinnen und Athleten müssen Lehrkräfte und Trainer unterschiedliche Vermittlungsmethoden anwenden.
+        </p>
+    </header>
+
+    <section class="comparison-section color-blue">
+        <h2 class="section-title">1. Ganzheitsmethode vs. Zergliederungsmethode</h2>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Diese methodischen Grundsätze beschreiben, ob eine Bewegungskonzeption am Stück oder in isolierten Teilschritten erlernt wird.</p>
+        
+        <div class="comparison-grid">
+            <article class="comp-card">
+                <h3>Ganzheitsmethode</h3>
+                <p>Das ganzheitliche Erlernen einer in ihrer Struktur meist recht einfachen Bewegung. Der Bewegungsrhythmus bleibt von Beginn an erhalten.</p>
+                <div class="example-box">
+                    <strong>🏃 Sportpraktisches Beispiel:</strong> Sehr gut geeignet für das Erlernen des Sprints.
+                </div>
+            </article>
+
+            <article class="comp-card">
+                <h3>Zergliederungsmethode</h3>
+                <p>Das Erlernen einer in ihrer Struktur meist komplexeren Bewegung in isolierten Teilschritten. Die Phasen werden getrennt geübt und erst im Anschluss zur Gesamtbewegung zusammengesetzt (Synthese).</p>
+                <div class="example-box">
+                    <strong>🤸 Sportpraktisches Beispiel:</strong> Geeignet für den Stabhochsprung.
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="comparison-section color-green">
+        <h2 class="section-title">2. Induktive Methode vs. Deduktive Methode</h2>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Hierbei geht es um den Grad der Steuerung durch die Lehrperson.</p>
+        
+        <div class="comparison-grid">
+            <article class="comp-card">
+                <h3>Induktive Methode</h3>
+                <p>Das Lernen erfolgt über offene Bewegungsaufgaben mit dem Ziel, dass die Athleten eigenständig zu einer Lösung kommen.</p>
+                <p><strong>Anwendungsbereich:</strong> Geeignet für wenig gefahrengeneigte Bewegungen, da Fehler keine gravierenden Verletzungen nach sich ziehen.</p>
+                <div class="example-box">
+                    <strong>🦅 Sportpraktisches Beispiel:</strong> Geeignet für den Weitsprung.
+                </div>
+            </article>
+
+            <article class="comp-card">
+                <h3>Deduktive Methode</h3>
+                <p>Das Lernen erfolgt über die exakte Anleitung einer Lehrperson mithilfe streng normierter methodischer Übungs- oder Spielreihen.</p>
+                <p><strong>Anwendungsbereich:</strong> Zwingend notwendig bei eher gefahrengeneigten Bewegungen, um Verletzungen durch falsche Ausführung zu verhindern.</p>
+                <div class="example-box">
+                    <strong>🎯 Sportpraktisches Beispiel:</strong> Geeignet für den Speerwurf.
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="canvas-section">
+        <h3>Die Trainer-Entscheidungsmatrix</h3>
+        <p>Die Wahl der Methode in Abhängigkeit von Komplexität und Gefahrenpotenzial der Bewegung.</p>
+        <div class="canvas-wrapper">
+            <canvas id="matrixCanvas" width="900" height="500"></canvas>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title" style="color: var(--theme-purple);">3. Weitere methodische Maßnahmen und Prinzipien</h2>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Der Lehrplan fordert zudem die Kenntnis ergänzender Strategien zur Optimierung des Techniktrainings:</p>
+
+        <div class="measures-grid">
+            <div class="measure-card">
+                <h4>Massiertes Üben</h4>
+                <p>Das Lernmaterial wird unmittelbar aufeinander und schrittweise angeboten. Es eignet sich für definierte, geschlossene Fertigkeiten (z. B. geeignet für den Tiefstart).</p>
+            </div>
+            
+            <div class="measure-card">
+                <h4>Vereinfachungsstrategien</h4>
+                <p>Das koordinative Anforderungsniveau wird anfangs künstlich reduziert und im Verlauf des Übungsprozesses sukzessive erhöht.</p>
+            </div>
+
+            <div class="measure-card">
+                <h4>Differentielles Lernen</h4>
+                <p>Ein moderner Ansatz, der auf die ständige Variation der Übungsbedingungen setzt, um das motorische Nervensystem zur eigenständigen Lösungsfindung anzuregen.</p>
+            </div>
+
+            <div class="measure-card">
+                <h4>Mentale Methoden</h4>
+                <p>Mentales Training bietet im Leistungsbereich enorme Möglichkeiten der Technikoptimierung (z. B. durch inneres Durchgehen oder Antizipieren der Bewegung).</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="abitur-matrix">
+        <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die bloße Reproduktion (das Aufzählen) dieser Methoden reicht für das erhöhte Anforderungsniveau nicht aus. Das Kultusministerium verlangt in den Prüfungsaufgaben die <strong>passgenaue Zuordnung und fundierte Begründung</strong> für spezifische Sportarten.
+        </p>
+
+        <div class="abi-case">
+            <h4>1. Methodenwahl stichhaltig begründen</h4>
+            <p>In der Klausur wird oft verlangt, wesentliche Methoden des Techniktrainings jeweils unter Angabe einer geeigneten Disziplin darzustellen. Der kritische Fehler ist hier eine fehlende oder unlogische Begründung.</p>
+            <ul>
+                <li>Wenn du die <span class="highlight-text">deduktive Methode für den Speerwurf</span> wählst, musst du dies zwingend mit der erhöhten Verletzungsgefahr (Gefahrengeneigtheit) des Wurfgeräts begründen.</li>
+                <li>Wählst du die <span class="highlight-text">Ganzheitsmethode für den Sprint</span>, musst du die relativ einfache, geschlossene Struktur der Bewegung als Argument anführen.</li>
+            </ul>
+        </div>
+
+        <div class="abi-case">
+            <h4>2. Transfer auf methodische Vorgehensweisen</h4>
+            <p style="font-style: italic; margin-bottom: 1rem;">Typische Transferaufgabe: "Beschreiben Sie zwei geeignete methodische Vorgehensweisen zum Erlernen des Angriffsschlags im Volleyball".</p>
+            <ul>
+                <li><strong>Hier nutzt du die <span class="highlight-text">Zergliederungsmethode</span>:</strong> Die komplexe Bewegung wird in Teilbewegungen zergliedert (z. B. zuerst isoliert den Anlaufrhythmus einüben, dann isoliert die Schlagbewegung).</li>
+                <li><strong>Zusätzlich wendest du <span class="highlight-text">Vereinfachungsstrategien</span> an:</strong> Du erklärst, dass das koordinative Niveau anfangs reduziert wird (z. B. wird zuerst der über Netzhöhe gehaltene Ball geschlagen, dann der von unten angeworfene Ball und zuletzt der real gestellte Ball).</li>
+            </ul>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Dimensions
+    const cx = w / 2;
+    const cy = h / 2;
+    const padding = 60;
+
+    // Draw Axes
+    ctx.strokeStyle = '#cbd5e1';
+    ctx.lineWidth = 4;
+    
+    // X-Axis (Complexity)
+    ctx.beginPath();
+    ctx.moveTo(padding, cy);
+    ctx.lineTo(w - padding, cy);
+    ctx.stroke();
+    // Arrow X
+    ctx.beginPath(); ctx.moveTo(w - padding, cy); ctx.lineTo(w - padding - 15, cy - 10); ctx.lineTo(w - padding - 15, cy + 10); ctx.fillStyle = '#cbd5e1'; ctx.fill();
+
+    // Y-Axis (Danger)
+    ctx.beginPath();
+    ctx.moveTo(cx, padding);
+    ctx.lineTo(cx, h - padding);
+    ctx.stroke();
+    // Arrow Y
+    ctx.beginPath(); ctx.moveTo(cx, padding); ctx.lineTo(cx - 10, padding + 15); ctx.lineTo(cx + 10, padding + 15); ctx.fill();
+
+    // Labels for Axes
+    ctx.font = 'bold 14px Inter';
+    ctx.fillStyle = '#64748b';
+    ctx.textAlign = 'center';
+    
+    ctx.fillText('Komplex (Zergliederung)', w - 100, cy - 20);
+    ctx.fillText('Einfach (Ganzheitlich)', 120, cy - 20);
+    
+    ctx.textAlign = 'left';
+    ctx.fillText('Gefahrengeneigt', cx + 20, padding + 20);
+    ctx.fillText('(Deduktiv)', cx + 20, padding + 40);
+    
+    ctx.fillText('Wenig Gefahr', cx + 20, h - padding - 20);
+    ctx.fillText('(Induktiv)', cx + 20, h - padding);
+
+
+    // ---- DRAWING ICONS (STICKMEN) ----
+    
+    function drawHead(x, y, color) {
+        ctx.beginPath(); ctx.arc(x, y, 12, 0, Math.PI*2); ctx.fillStyle = color; ctx.fill();
+    }
+
+    // 1. Top-Left (Einfach + Gefahr -> None directly in text, let's place based on user prompt)
+    // Wait, user prompt:
+    // Achse 1: Einfach -> Ganzheitlich (Sprint) vs Komplex -> Zergliederung (Stabhoch)
+    // Achse 2: Wenig Gefahr -> Induktiv (Weitsprung) vs Gefahrengeneigt -> Deduktiv (Speerwurf)
+    // Let's place them in 4 distinct spots matching the combinations if possible, or just along the axes.
+    // Actually, setting them in quadrants:
+    // Q-Top-Left: Einfach & Wenig Gefahr -> SPRINT
+    // Q-Top-Right: Komplex & Hoch Gefahr -> STABHOCHSPRUNG
+    // Q-Bottom-Left: Einfach & Wenig Gefahr -> WEITSPRUNG (or medium complex)
+    // Q-Bottom-Right: Komplex & Gefahr -> SPEERWURF
+    // Let's just draw 4 feature boxes.
+
+    function drawBox(x, y, title, method, color, drawIconFunc) {
+        // Box
+        ctx.fillStyle = '#ffffff';
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.roundRect(x - 120, y - 80, 240, 160, 12); ctx.fill(); ctx.stroke();
+        
+        // Title
+        ctx.fillStyle = color;
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 16px Outfit';
+        ctx.fillText(title, x, y - 50);
+        
+        ctx.fillStyle = '#475569';
+        ctx.font = 'italic 12px Inter';
+        ctx.fillText(method, x, y - 30);
+
+        // Icon
+        drawIconFunc(x, y + 25, color);
+    }
+
+    // Quadrant Centers
+    const q1x = cx - 200; const q1y = cy - 120; // Top-Left (Einfach, Gefahr? Let's say Sprint)
+    const q2x = cx + 200; const q2y = cy - 120; // Top-Right (Komplex, Gefahr -> Stabhochsprung)
+    const q3x = cx - 200; const q3y = cy + 120; // Bottom-Left (Wenig Gefahr -> Weitsprung)
+    const q4x = cx + 200; const q4y = cy + 120; // Bottom-Right (Gefahr -> Speerwurf)
+
+    // Icons Drawing Functions
+    const drawSprint = (x, y, c) => {
+        ctx.strokeStyle = c; ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        drawHead(x+5, y-35, c);
+        ctx.beginPath();
+        ctx.moveTo(x, y-25); ctx.lineTo(x-5, y); // torso
+        ctx.lineTo(x-15, y+10); ctx.lineTo(x-25, y+5); // back leg
+        ctx.moveTo(x-5, y); ctx.lineTo(x+15, y); ctx.lineTo(x+10, y+20); // front leg
+        ctx.moveTo(x, y-20); ctx.lineTo(x-15, y-15); ctx.lineTo(x-10, y-5); // back arm
+        ctx.moveTo(x, y-20); ctx.lineTo(x+15, y-15); ctx.lineTo(x+20, y-30); // front arm
+        ctx.stroke();
+    };
+
+    const drawPoleVault = (x, y, c) => {
+        ctx.strokeStyle = c; ctx.lineWidth = 4; ctx.lineCap = 'round';
+        drawHead(x, y-40, c);
+        ctx.beginPath();
+        ctx.moveTo(x, y-30); ctx.lineTo(x-5, y); // torso
+        ctx.lineTo(x-15, y+20); // down leg
+        ctx.moveTo(x-5, y); ctx.lineTo(x+15, y-5); // up leg
+        ctx.moveTo(x-5, y-25); ctx.lineTo(x+15, y-20); // arms forward
+        ctx.stroke();
+        // Pole
+        ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(x+15, y-15); ctx.quadraticCurveTo(x+20, y+30, x-20, y+40); ctx.stroke();
+    };
+
+    const drawLongJump = (x, y, c) => {
+        ctx.strokeStyle = c; ctx.lineWidth = 4; ctx.lineCap = 'round';
+        drawHead(x, y-35, c);
+        ctx.beginPath();
+        ctx.moveTo(x, y-25); ctx.lineTo(x, y+5); // torso
+        ctx.lineTo(x+20, y+5); ctx.lineTo(x+30, y+20); // leg 1
+        ctx.moveTo(x, y+5); ctx.lineTo(x+15, y+15); ctx.lineTo(x+20, y+30); // leg 2
+        ctx.moveTo(x, y-20); ctx.lineTo(x-20, y-10); // arm 1
+        ctx.moveTo(x, y-20); ctx.lineTo(x+15, y-30); // arm 2
+        ctx.stroke();
+        // Sand pit
+        ctx.strokeStyle = '#facc15'; ctx.beginPath(); ctx.moveTo(x-20, y+35); ctx.lineTo(x+40, y+35); ctx.stroke();
+    };
+
+    const drawJavelin = (x, y, c) => {
+        ctx.strokeStyle = c; ctx.lineWidth = 4; ctx.lineCap = 'round';
+        drawHead(x-5, y-30, c);
+        ctx.beginPath();
+        ctx.moveTo(x-5, y-20); ctx.lineTo(x-10, y+10); // torso leaning back
+        ctx.lineTo(x-20, y+30); // back leg
+        ctx.moveTo(x-10, y+10); ctx.lineTo(x+15, y+30); // front block leg
+        ctx.moveTo(x-5, y-15); ctx.lineTo(x-25, y-10); ctx.lineTo(x-35, y-25); // back arm holding javelin
+        ctx.moveTo(x-5, y-15); ctx.lineTo(x+20, y-20); // front arm
+        ctx.stroke();
+        // Javelin
+        ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(x-45, y-15); ctx.lineTo(x+20, y-40); ctx.stroke();
+    };
+
+    // Render Boxes
+    drawBox(q1x, q1y, 'Ganzheitsmethode', 'Einfache Struktur', '#0284c7', drawSprint);
+    drawBox(q2x, q2y, 'Zergliederungsmethode', 'Komplexe Struktur', '#0284c7', drawPoleVault);
+    drawBox(q3x, q3y, 'Induktive Methode', 'Wenig gefahrengeneigt', '#059669', drawLongJump);
+    drawBox(q4x, q4y, 'Deduktive Methode', 'Gefahrengeneigt', '#059669', drawJavelin);
+
+</script>
+</body>
+</html>

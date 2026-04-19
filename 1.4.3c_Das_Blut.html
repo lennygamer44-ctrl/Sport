@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Das Blut - Zusammensetzung und Funktionen</title>
+    <style>
+        /* Modern Fluid & Infographic Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Inter:wght@300;400;600;800&display=swap');
+
+        :root {
+            /* Fluid Theme Colors */
+            --bg-body: #f8fafc;
+            --text-dark: #1e293b;
+            --text-main: #334155;
+            --text-light: #64748b;
+            
+            --blood-red: #dc2626;
+            --blood-dark: #7f1d1d;
+            --blood-light: #fef2f2;
+            
+            --plasma-yellow: #facc15;
+            --plasma-light: #fefce8;
+            
+            --white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            
+            --radius-large: 24px;
+            --radius-medium: 16px;
+            
+            --abi-black: #0f172a;
+            --abi-red: #ef4444;
+            --abi-gold: #fbbf24;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            /* Subtler background pattern */
+            background-image: radial-gradient(var(--blood-light) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        .document-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Fluid Header */
+        .fluid-header {
+            background: linear-gradient(135deg, var(--blood-red), var(--blood-dark));
+            color: var(--white);
+            padding: 4rem 3rem 6rem 3rem;
+            border-radius: var(--radius-large) var(--radius-large) 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fluid-header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--bg-body);
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+
+        .topic-badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .lead-text {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.95;
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-large);
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        h2 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 2rem;
+            color: var(--blood-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin: 2rem 0 1rem 0;
+            display: inline-block;
+            border-bottom: 3px solid var(--blood-red);
+            padding-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Composition Layout */
+        .composition-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .component-box {
+            padding: 1.5rem;
+            border-radius: var(--radius-medium);
+            border-left: 6px solid;
+            background: var(--white);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .plasma-box { border-color: var(--plasma-yellow); }
+        .cell-box { border-color: var(--blood-red); }
+
+        .component-box h4 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .percentage {
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.8;
+        }
+
+        /* Functions Grid */
+        .functions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .function-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-medium);
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+
+        .function-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+        }
+
+        .function-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .function-card h4 {
+            color: var(--blood-dark);
+            margin-bottom: 1rem;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        /* Canvas Container */
+        .canvas-wrapper {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-large);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+            border: 1px dashed #cbd5e1;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+        }
+
+        /* Massive Abitur Transfer Box */
+        .doping-alert-box {
+            background: var(--abi-black);
+            color: var(--white);
+            padding: 4rem;
+            border-radius: var(--radius-large);
+            margin-top: 5rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 2px solid #334155;
+            overflow: hidden;
+        }
+
+        .doping-alert-box::before {
+            content: 'ABITUR-TRANSFER (eA)';
+            position: absolute;
+            top: 0; left: 0;
+            background: var(--abi-red);
+            color: var(--white);
+            padding: 0.8rem 3rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            letter-spacing: 2px;
+            border-radius: 0 0 24px 0;
+            font-size: 1.1rem;
+        }
+
+        .doping-alert-box p {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .doping-alert-box h3 {
+            color: var(--white);
+            border-bottom: none;
+            padding-bottom: 0;
+            font-size: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .doping-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .doping-card {
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid var(--abi-gold);
+            padding: 2rem;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .doping-card.risk {
+            border-left-color: var(--abi-red);
+            background: linear-gradient(90deg, rgba(239, 68, 68, 0.1) 0%, rgba(255,255,255,0.05) 100%);
+        }
+
+        .doping-card strong {
+            display: block;
+            color: var(--abi-gold);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .doping-card.risk strong {
+            color: var(--abi-red);
+        }
+
+        .doping-card.buffer {
+            border-left-color: #38bdf8;
+        }
+        .doping-card.buffer strong {
+            color: #38bdf8;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="document-container">
+    
+    <header class="fluid-header">
+        <div class="topic-badge">Lernbereich 1.4.3c</div>
+        <h1>Das Blut</h1>
+        <p class="lead-text">Zusammensetzung und Funktionen des Blutes. Das flüssige Organ und Transportsystem für höchste sportliche Ausdauerleistungen.</p>
+    </header>
+
+    <!-- Intro -->
+    <div class="glass-card" style="margin-top: -30px; z-index: 10;">
+        <p>Das Blut ist ein flüssiges Organ und das wichtigste Transportmedium des menschlichen Körpers. Ein erwachsener Mensch besitzt etwa <strong>5 bis 6 Liter Blut</strong> (ca. 8 % des Körpergewichts). Für die sportliche Leistungsfähigkeit, insbesondere im Ausdauer- und hochintensiven Intervallbereich, ist sowohl die Zusammensetzung als auch die spezifische Funktionstüchtigkeit des Blutes von absolut zentraler Bedeutung.</p>
+    </div>
+
+    <!-- Zusammensetzung -->
+    <div class="glass-card">
+        <h2>🩸 1. Die Zusammensetzung des Blutes</h2>
+        <p>Blut ist eine Suspension, also ein Gemisch aus einer Flüssigkeit und darin gelösten zellulären Bestandteilen. Man unterteilt es makroskopisch in zwei Hauptbestandteile:</p>
+
+        <div class="composition-grid">
+            <!-- Plasma -->
+            <div class="component-box plasma-box">
+                <h4><span style="color: #ca8a04;">Das Blutplasma</span> <span class="percentage">ca. 55 %</span></h4>
+                <p>Die flüssige Interzellularsubstanz des Blutes.</p>
+                <ul>
+                    <li><strong>Wasser (ca. 90 %):</strong> Dient als universelles Lösungs- und Transportmittel.</li>
+                    <li><strong>Proteine (ca. 8 %):</strong> Z. B. Albumin (verantwortlich für den kolloidosmotischen Druck, der das Wasser in den Gefäßen hält) und Fibrinogen (wichtig für die Blutgerinnung).</li>
+                    <li><strong>Elektrolyte, Nährstoffe, Hormone (ca. 2 %).</strong></li>
+                </ul>
+            </div>
+
+            <!-- Zellen -->
+            <div class="component-box cell-box">
+                <h4><span style="color: var(--blood-red);">Die zellulären Bestandteile</span> <span class="percentage">ca. 45 %</span></h4>
+                <p>Der prozentuale Volumenanteil der Blutzellen am gesamten Blutvolumen wird als <strong>Hämatokrit</strong> bezeichnet.</p>
+                <ul>
+                    <li><strong>Erythrozyten (Rote Blutkörperchen):</strong> Sie machen mit 99 % den absoluten Großteil der Blutzellen aus. Sie sind kernlos, verformbar und enthalten den roten Blutfarbstoff Hämoglobin, der für die Bindung und den Transport von Sauerstoff (O<sub>2</sub>) zuständig ist.</li>
+                    <li><strong>Leukozyten (Weiße Blutkörperchen):</strong> Zuständig für die Immunabwehr und das Erkennen von körperfremden Strukturen oder Krankheitserregern.</li>
+                    <li><strong>Thrombozyten (Blutplättchen):</strong> Verantwortlich für die primäre Blutstillung (Gerinnung) bei Verletzungen.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Canvas Infographic -->
+        <div class="canvas-wrapper">
+            <h4 style="font-family: 'Quicksand', sans-serif; font-size: 1.2rem; color: var(--text-dark); margin-bottom: 10px;">Blutzusammensetzung im zentrifugierten Reagenzglas</h4>
+            <canvas id="bloodTubeCanvas" width="800" height="500"></canvas>
+            <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 15px;">Schematische Darstellung des Hämatokrits nach Zentrifugation.</p>
+        </div>
+    </div>
+
+    <!-- Funktionen -->
+    <div class="glass-card">
+        <h2>⚙️ 2. Die Funktionen des Blutes im sportlichen Kontext</h2>
+        <p>Neben der offensichtlichen Transportfunktion übernimmt das Blut bei sportlicher Belastung weitere essenzielle, leistungsbestimmende Aufgaben:</p>
+
+        <div class="functions-grid">
+            <div class="function-card">
+                <span class="function-icon">🚛</span>
+                <h4>Transportfunktion</h4>
+                <p style="font-size: 0.95rem;">Das Blut transportiert <strong>O<sub>2</sub></strong> zur Muskulatur und <strong>CO<sub>2</sub></strong> zurück zur Lunge. Zudem transportiert es energiereiche Substrate (Glukose, Fette) zu den Zellen und entsorgt Metabolite (z. B. Laktat zur Leber/Herz).</p>
+            </div>
+            
+            <div class="function-card">
+                <span class="function-icon">🌡️</span>
+                <h4>Wärmeregulation</h4>
+                <p style="font-size: 0.95rem;">Bei Muskelkontraktion wird massiv Wärme frei. Das Blut nimmt diese Wärme im Körperkern auf und transportiert sie an die Haut, wo sie durch Strahlung und Schweißverdunstung abgegeben wird (Schutz vor Überhitzung).</p>
+            </div>
+
+            <div class="function-card">
+                <span class="function-icon">🛡️</span>
+                <h4>Pufferfunktion</h4>
+                <p style="font-size: 0.95rem;">Bei hochintensiven Belastungen (laktazid) fallen H⁺-Ionen an. Puffersysteme im Blut (Bikarbonatpuffer, Proteinpuffer des Hämoglobins) fangen diese ab, um ein tödliches Absinken des pH-Werts (Normal: 7,4) zu verhindern.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Abitur Transfer Doping -->
+    <div class="doping-alert-box">
+        <p style="margin-top: 2rem;">Dieser scheinbar rein biologische Themenbereich ist in der eA-Abiturprüfung ein klassisches "Sprungbrett" für komplexe Transferaufgaben aus dem Bereich <strong>Doping (Lernbereich 3.4)</strong> und <strong>Ermüdung (Lernbereich 1.4.2)</strong>.</p>
+
+        <h3>Transfer auf Blutdoping und EPO</h3>
+        <p>Wenn in einer Klausur nach der Wirkungsweise und den Risiken von Blutdoping oder EPO (Erythropoetin) für Ausdauersportler (z. B. Radrennfahrer, Skilangläufer) gefragt wird, musst du <strong>direkt bei der Blutzusammensetzung ansetzen.</strong></p>
+
+        <div class="doping-grid">
+            <div class="doping-card">
+                <strong>Argumentationskette (Wirkung)</strong>
+                <p style="margin: 0;">Durch Blutdoping/EPO wird die Anzahl der Erythrozyten künstlich erhöht. Mehr Erythrozyten bedeuten mehr Hämoglobin. Dadurch <strong>steigt die Sauerstofftransportkapazität</strong> des Blutes enorm an, was die aerobe Ausdauerleistungsfähigkeit (VO<sub>2</sub>max) massiv verbessert.</p>
+            </div>
+
+            <div class="doping-card risk">
+                <strong>Das physiologische Risiko</strong>
+                <p style="margin: 0; color: #fca5a5;">Durch die vielen roten Blutkörperchen <strong>steigt der Hämatokritwert drastisch an</strong>. Das Blut wird dickflüssiger (die Blutviskosität steigt). Das Herz muss nun gegen einen viel höheren Widerstand pumpen (Blutdruckanstieg), und es entsteht ein akutes, lebensgefährliches Risiko für Thrombosen (Blutgerinnsel), Herzinfarkte oder Schlaganfälle, besonders bei starkem Flüssigkeitsverlust (Schwitzen) im Wettkampf.</p>
+            </div>
+        </div>
+
+        <h3>Transfer auf die Pufferkapazität</h3>
+        <div class="doping-card buffer">
+            <strong>Verzögerung der peripheren Ermüdung</strong>
+            <p style="margin: 0;">Du musst das Blut im Abitur auch als Verzögerungsfaktor bewerten können. Athleten, deren Blut eine hohe Pufferkapazität aufweist, können die durch anaerob-laktazide Energiebereitstellung anflutenden H⁺-Ionen länger "neutralisieren". Der pH-Wert-Abfall wird hinausgezögert, wodurch die Enzyme der Energiefreisetzung länger ungestört arbeiten können.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('bloodTubeCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Retina Setup
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+
+        function drawInfographic() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Positioning for the Test Tube
+            const tubeWidth = 100;
+            const tubeHeight = 360;
+            const tubeX = width / 2 - 150; // offset to the left
+            const tubeY = 50;
+            const radius = tubeWidth / 2;
+
+            // Fill heights based on percentages
+            // Total volume height inside tube = tubeHeight - 20 (padding top) = 340
+            const volumeH = tubeHeight - 30;
+            const plasmaH = volumeH * 0.55;
+            const buffyH = volumeH * 0.02; // visually slightly enhanced from 1% to be visible
+            const rbcH = volumeH * 0.43;
+
+            // 1. Draw Erythrocytes (Red - Bottom)
+            ctx.beginPath();
+            ctx.moveTo(tubeX, tubeY + 30 + plasmaH + buffyH);
+            ctx.lineTo(tubeX, tubeY + tubeHeight - radius);
+            ctx.arc(tubeX + radius, tubeY + tubeHeight - radius, radius, Math.PI, 0, true);
+            ctx.lineTo(tubeX + tubeWidth, tubeY + 30 + plasmaH + buffyH);
+            ctx.closePath();
+            ctx.fillStyle = '#991b1b'; // Dark Red
+            ctx.fill();
+
+            // 2. Draw Buffy Coat (White/Grey - Middle)
+            ctx.beginPath();
+            ctx.rect(tubeX, tubeY + 30 + plasmaH, tubeWidth, buffyH);
+            ctx.fillStyle = '#f8fafc'; // White/Grey
+            ctx.fill();
+
+            // 3. Draw Plasma (Yellow - Top)
+            ctx.beginPath();
+            ctx.moveTo(tubeX, tubeY + 30); // Top liquid level
+            ctx.quadraticCurveTo(tubeX + radius, tubeY + 40, tubeX + tubeWidth, tubeY + 30); // Liquid meniscus
+            ctx.lineTo(tubeX + tubeWidth, tubeY + 30 + plasmaH);
+            ctx.lineTo(tubeX, tubeY + 30 + plasmaH);
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(250, 204, 21, 0.9)'; // Plasma Yellow
+            ctx.fill();
+
+            // 4. Draw Glass Tube Outline (Over the liquids)
+            ctx.beginPath();
+            ctx.moveTo(tubeX, tubeY);
+            ctx.lineTo(tubeX, tubeY + tubeHeight - radius);
+            ctx.arc(tubeX + radius, tubeY + tubeHeight - radius, radius, Math.PI, 0, true);
+            ctx.lineTo(tubeX + tubeWidth, tubeY);
+            
+            // Tube Lip
+            ctx.moveTo(tubeX - 10, tubeY);
+            ctx.lineTo(tubeX + tubeWidth + 10, tubeY);
+            ctx.lineTo(tubeX + tubeWidth + 5, tubeY + 10);
+            ctx.lineTo(tubeX - 5, tubeY + 10);
+            ctx.closePath();
+            
+            ctx.strokeStyle = 'rgba(148, 163, 184, 0.5)'; // Glass rim color
+            ctx.lineWidth = 4;
+            ctx.stroke();
+
+            // Glass Reflection (Gloss)
+            ctx.beginPath();
+            ctx.moveTo(tubeX + 15, tubeY + 15);
+            ctx.lineTo(tubeX + 15, tubeY + tubeHeight - radius - 10);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.lineWidth = 8;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            // --- Labels and Connecting Lines ---
+            
+            const lineStartX = tubeX + tubeWidth + 10;
+            const labelX = tubeX + tubeWidth + 80;
+
+            function drawLabel(yPosition, lineY, title, desc, iconText, color) {
+                // Line
+                ctx.beginPath();
+                ctx.moveTo(lineStartX, lineY);
+                ctx.lineTo(labelX - 15, yPosition);
+                ctx.lineTo(labelX, yPosition);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Point on tube
+                ctx.beginPath();
+                ctx.arc(lineStartX - 5, lineY, 4, 0, Math.PI*2);
+                ctx.fillStyle = '#cbd5e1';
+                ctx.fill();
+
+                // Icon Box
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.roundRect(labelX, yPosition - 25, 50, 50, 10);
+                ctx.fill();
+                
+                // Icon Text
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '24px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(iconText, labelX + 25, yPosition);
+
+                // Text
+                ctx.textAlign = 'left';
+                ctx.fillStyle = '#1e293b';
+                ctx.font = 'bold 16px Inter';
+                ctx.fillText(title, labelX + 65, yPosition - 5);
+                
+                ctx.fillStyle = '#64748b';
+                ctx.font = '14px Inter';
+                ctx.fillText(desc, labelX + 65, yPosition + 15);
+            }
+
+            // Label 1: Plasma
+            drawLabel(
+                tubeY + 80, 
+                tubeY + 30 + plasmaH/2, 
+                "Blutplasma (55 %)", 
+                "Wasser, Proteine, Nährstoffe", 
+                "💧", 
+                "#eab308" // Yellow
+            );
+
+            // Label 2: Buffy Coat
+            drawLabel(
+                tubeY + 200, 
+                tubeY + 30 + plasmaH + buffyH/2, 
+                "Leukozyten & Thrombozyten (<1 %)", 
+                "Immunabwehr & Blutgerinnung", 
+                "🛡️", 
+                "#94a3b8" // Grey
+            );
+
+            // Label 3: Erythrocytes
+            drawLabel(
+                tubeY + 320, 
+                tubeY + 30 + plasmaH + buffyH + rbcH/2, 
+                "Erythrozyten / Hämatokrit (45 %)", 
+                "O₂-Transport via Hämoglobin", 
+                "🩸", 
+                "#dc2626" // Red
+            );
+        }
+
+        drawInfographic();
+
+        // Responsive redrawing
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawInfographic();
+        });
+    });
+</script>
+
+</body>
+</html>

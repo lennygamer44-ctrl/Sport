@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.5.2a Schwellenkonzepte</title>
+    <style>
+        /* Cyber-Athletics / Diagnostic Monitor Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;700&family=Fira+Code:wght@400;600&display=swap');
+
+        :root {
+            /* Monitor Dark Theme */
+            --bg-monitor: #050505;
+            --bg-panel: #111111;
+            --bg-card: #1a1a1a;
+            
+            --text-main: #d4d4d4;
+            --text-bright: #ffffff;
+            --text-muted: #737373;
+            
+            /* Laktat Zonen Farben (Glow) */
+            --zone-aerob: #10b981;    /* Emerald Green */
+            --zone-trans: #eab308;    /* Warning Yellow */
+            --zone-anaerob: #ef4444;  /* Alarm Red */
+            
+            /* Abitur Focus */
+            --abi-purple: #8b5cf6;
+            --abi-glow: 0 0 20px rgba(139, 92, 246, 0.4);
+            
+            --border-tech: 1px solid #333333;
+            --radius-ui: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-monitor);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem;
+            /* Subtles Tech-Grid im Hintergrund */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .dashboard {
+            max-width: 1050px;
+            margin: 0 auto;
+            display: grid;
+            gap: 2rem;
+        }
+
+        /* Header Section */
+        header {
+            background: var(--bg-panel);
+            border: var(--border-tech);
+            border-top: 4px solid var(--text-bright);
+            padding: 3rem;
+            border-radius: var(--radius-ui);
+            position: relative;
+        }
+
+        .badge-id {
+            font-family: 'Fira Code', monospace;
+            background: #262626;
+            color: #a3a3a3;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            border: 1px solid #404040;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            color: #a3a3a3;
+            max-width: 900px;
+        }
+
+        /* Zones Layout */
+        .zone-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .zone-card {
+            background: var(--bg-card);
+            border: var(--border-tech);
+            border-radius: var(--radius-ui);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .zone-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Farbspezifische Akzente für die Zonen */
+        .zone-card.aerob { border-top: 4px solid var(--zone-aerob); }
+        .zone-card.trans { border-top: 4px solid var(--zone-trans); }
+        .zone-card.anaerob { border-top: 4px solid var(--zone-anaerob); }
+
+        .zone-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100px;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .zone-card.aerob::after { background: linear-gradient(to bottom, var(--zone-aerob), transparent); }
+        .zone-card.trans::after { background: linear-gradient(to bottom, var(--zone-trans), transparent); }
+        .zone-card.anaerob::after { background: linear-gradient(to bottom, var(--zone-anaerob), transparent); }
+
+        .zone-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .zone-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .zone-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            line-height: 1.1;
+        }
+
+        .mmol-badge {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .aerob .mmol-badge { color: var(--zone-aerob); border: 1px solid var(--zone-aerob); }
+        .trans .mmol-badge { color: var(--zone-trans); border: 1px solid var(--zone-trans); }
+        .anaerob .mmol-badge { color: var(--zone-anaerob); border: 1px solid var(--zone-anaerob); }
+
+        .zone-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #737373;
+            margin-bottom: 0.3rem;
+            display: block;
+            margin-top: 1.5rem;
+        }
+
+        .zone-card p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .alert-text {
+            color: #fca5a5;
+        }
+
+        /* Canvas Wrapper */
+        .diag-monitor {
+            background: #0a0a0a;
+            border: 1px solid #262626;
+            border-radius: var(--radius-ui);
+            padding: 2rem;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .diag-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #262626;
+            padding-bottom: 1rem;
+        }
+
+        .diag-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-bright);
+            text-transform: uppercase;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            display: block;
+        }
+
+        /* Massive Abitur Box (Coach Terminal) */
+        .coach-terminal {
+            background: #1e1b4b; /* Deep Indigo background */
+            border: 1px solid #4c1d95;
+            border-radius: var(--radius-ui);
+            padding: 3rem;
+            margin-top: 2rem;
+            box-shadow: var(--abi-glow);
+            position: relative;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .terminal-header h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2.2rem;
+            color: #ddd6fe;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .coach-terminal p {
+            font-size: 1.1rem;
+            color: #a78bfa;
+            margin-bottom: 2rem;
+        }
+
+        /* Symptoms Grid */
+        .symptom-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .symptom-row {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            background: rgba(0,0,0,0.4);
+            border-left: 4px solid;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .symptom-row { grid-template-columns: 1fr; gap: 1rem; }
+        }
+
+        .symptom-row.aerob { border-left-color: var(--zone-aerob); }
+        .symptom-row.trans { border-left-color: var(--zone-trans); }
+        .symptom-row.anaerob { border-left-color: var(--zone-anaerob); }
+
+        .quote-box {
+            font-family: 'Fira Code', monospace;
+            font-size: 1rem;
+            color: #e2e8f0;
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .quote-box::before { content: '» '; color: #64748b; }
+        .quote-box::after { content: ' «'; color: #64748b; }
+
+        .analysis-text {
+            font-size: 1.05rem;
+            color: #e2e8f0;
+        }
+
+        .analysis-text strong {
+            color: #ffffff;
+            background: rgba(255,255,255,0.1);
+            padding: 0 5px;
+            border-radius: 3px;
+        }
+
+        .terminal-tip {
+            margin-top: 3rem;
+            background: linear-gradient(90deg, #4c1d95, transparent);
+            padding: 1.5rem;
+            border-left: 4px solid #8b5cf6;
+            border-radius: 4px;
+        }
+
+        .terminal-tip strong {
+            color: #fca5a5;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.2rem;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+
+    <header>
+        <span class="badge-id">DIAGNOSTIK // MODUL 1.5.2a</span>
+        <h1>Schwellenkonzepte</h1>
+        <p class="intro-text">Um die Ausdauerleistungsfähigkeit eines Athleten objektiv beurteilen und das Training präzise steuern zu können, bedient sich die Leistungsdiagnostik sogenannter Schwellenkonzepte. Diese basieren auf der stetigen Messung der Laktatkonzentration im Blut bei stufenförmig ansteigender Belastungsintensität.</p>
+        
+        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 4px; border-left: 3px solid #737373;">
+            <p style="margin:0; font-size: 0.95rem;">Da Laktat das Endprodukt der anaeroben Glykolyse ist, dient der Laktatwert als direkter Indikator dafür, wie stark der Stoffwechsel gerade im anaeroben Bereich arbeitet. Man teilt die Leistungskurve in drei zentrale metabolische Zonen ein.</p>
+        </div>
+    </header>
+
+    <!-- Zonen Layout -->
+    <div class="zone-container">
+        
+        <!-- AS -->
+        <div class="zone-card aerob">
+            <div class="zone-header">
+                <h2 class="zone-title">1. Die aerobe Schwelle (AS)</h2>
+                <span class="mmol-badge">~ 2 mmol/l</span>
+            </div>
+            <p>Markiert den Punkt, ab dem die Energiebereitstellung nicht mehr rein aerob erfolgen kann, sondern die anaerob-laktazide Energiebereitstellung leicht hinzugeschaltet werden muss.</p>
+            
+            <span class="zone-label">Physiologie</span>
+            <p>Unterhalb dieser Schwelle findet die Energiegewinnung nahezu vollständig unter Einsatz von Sauerstoff statt. Laktat wird nur in der physiologischen Grundmenge gebildet. Ab der AS beginnt der Laktatwert im Blut erstmals leicht über den Ruhewert anzusteigen.</p>
+            
+            <span class="zone-label">Belastungsempfinden</span>
+            <p style="color: var(--text-bright);">Belastungen an oder leicht unter der aeroben Schwelle können von gut trainierten Athleten über mehrere Stunden problemlos aufrechterhalten werden (z. B. lockerer Dauerlauf).</p>
+        </div>
+
+        <!-- Übergang -->
+        <div class="zone-card trans">
+            <div class="zone-header">
+                <h2 class="zone-title" style="font-size: 1.5rem;">2. Aerob-anaerober Übergang</h2>
+                <span class="mmol-badge">2 - 4 mmol/l</span>
+            </div>
+            <p>Beschreibt die Spanne (den Bereich) zwischen der aeroben und der anaeroben Schwelle.</p>
+            
+            <span class="zone-label">Physiologie</span>
+            <p>Die Intensität wird gesteigert, weshalb der Körper vermehrt auf die anaerobe Glykolyse zurückgreifen muss. Es wird deutlich mehr Laktat produziert. Entscheidend ist hierbei jedoch das Prinzip des <strong>Laktat-Steady-States</strong>: Das in der Arbeitsmuskulatur neu gebildete Laktat kann vom Körper im gleichen zeitlichen Umfang wieder unter Sauerstoffzufuhr eliminiert werden.</p>
+            
+            <span class="zone-label">Belastungsempfinden</span>
+            <p style="color: var(--text-bright);">Die Belastung ist fordernd, aber da sich Laktatbildung und Laktatabbau die Waage halten, kommt es zu <em>keiner</em> fortschreitenden Übersäuerung.</p>
+        </div>
+
+        <!-- ANS -->
+        <div class="zone-card anaerob">
+            <div class="zone-header">
+                <h2 class="zone-title">3. Anaerobe Schwelle (ANS)</h2>
+                <span class="mmol-badge">~ 4 mmol/l</span>
+            </div>
+            <p>Die iANS ist der wichtigste Parameter in der Leistungsdiagnostik. Sie markiert den letztmöglichen Punkt, an dem gerade noch ein Gleichgewicht zwischen Laktatbildung und Laktatabbau besteht (MaxLass).</p>
+            
+            <span class="zone-label">Physiologie</span>
+            <p>Wird die Intensität über diesen Bereich hinaus gesteigert, "kippt" das System. Die Laktatproduktion übersteigt die maximale Laktateliminationsrate des Körpers.</p>
+            
+            <span class="zone-label alert-text">Folge (Akkumulation)</span>
+            <p class="alert-text" style="font-weight: 500;">Die Laktatkonzentration steigt massiv und exponentiell an. Es kommt zur <strong>Laktat-Akkumulation</strong> und damit zwingend zur Übersäuerung (Azidose). Enzyme werden gehemmt, der Athlet wird unweigerlich zum Belastungsabbruch gezwungen.</p>
+        </div>
+
+    </div>
+
+    <!-- Canvas Graph -->
+    <div class="diag-monitor">
+        <div class="diag-header">
+            <h3 class="diag-title">Laktatleistungskurve (Stufentest)</h3>
+            <span style="font-family: 'Fira Code', monospace; color: #737373; font-size: 0.85rem;">[Live Chart Rendering]</span>
+        </div>
+        <canvas id="lactateCurve" width="1000" height="450"></canvas>
+    </div>
+
+    <!-- Abitur Transfer Terminal -->
+    <div class="coach-terminal">
+        <div class="terminal-header">
+            <h2>Abitur-Transfer & Praxis (eA)</h2>
+        </div>
+        <p>Für das Abitur reicht es nicht, die Werte 2 und 4 mmol/l auswendig zu lernen. Du musst diese Schwellen als Begründungswerkzeug in Textanalysen nutzen, um das Erschöpfungslevel von Athleten physiologisch zu beweisen. Das Kultusministerium fordert den Transfer von Alltagssprache in die Schwellenkonzepte.</p>
+
+        <div class="symptom-grid">
+            
+            <!-- Symptom 1 -->
+            <div class="symptom-row aerob">
+                <div class="quote-box">"Wir konnten uns problemlos unterhalten."</div>
+                <div class="analysis-text">
+                    Dies identifizierst du als Zustand <strong>unterhalb der aeroben Schwelle (&lt; 2 mmol/l)</strong>. Die Energie wird vollständig aerob (O₂-ausreichend) gewonnen, die Belastungsintensität ist gering und es entsteht keine Atemnot oder relevante Laktatanhäufung.
+                </div>
+            </div>
+
+            <!-- Symptom 2 -->
+            <div class="symptom-row trans">
+                <div class="quote-box">"Der Anstieg hatte es in sich, aber ich konnte weiterfahren."</div>
+                <div class="analysis-text">
+                    Die Fahrerin befindet sich im <strong>aerob-anaeroben Übergangsbereich (2-4 mmol/l)</strong>. Sie arbeitet exakt im <strong>Laktat-Steady-State</strong>, weshalb das anfallende Laktat aus der anaeroben Glykolyse noch rechtzeitig gepuffert und andernorts (Herz/Leber) abgebaut wird. Kein Abbruch nötig.
+                </div>
+            </div>
+
+            <!-- Symptom 3 -->
+            <div class="symptom-row anaerob">
+                <div class="quote-box">"Meine Freundin musste erschöpft absteigen."</div>
+                <div class="analysis-text">
+                    Das ist der Beweis: Sie hat ihre <strong>anaerobe Schwelle (&gt; 4 mmol/l) überschritten</strong>. Die Belastung wurde hochintensiv, das Steady-State ist gekippt. Die Laktatkonzentration stieg exponentiell (<strong>Akkumulation</strong>), was durch die resultierende Übersäuerung (Azidose) den zwingenden Belastungsabbruch nach sich zog.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="terminal-tip">
+            <span style="display: block; color: #ddd6fe; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 5px;">🔥 Klausur-Tipp</span>
+            Verwende immer den Fachbegriff <strong>Laktat-Steady-State</strong>. Das Vorhandensein (oder eben das Überschreiten) dieses Gleichgewichts ist die wichtigste physiologische Begründung für das Durchhalten oder Scheitern bei einer Ausdauerbelastung!
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Canvas: Laktatleistungskurve (Diagnostic Monitor Style)
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('lactateCurve');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Support
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+
+        const padX = 60;
+        const padY = 40;
+        const chartW = width - padX * 2;
+        const chartH = height - padY * 2;
+
+        // Scale functions
+        const maxKmH = 22;
+        const minKmH = 6;
+        const maxLactate = 12;
+
+        const mapX = (kmh) => padX + ((kmh - minKmH) / (maxKmH - minKmH)) * chartW;
+        const mapY = (lactate) => height - padY - (lactate / maxLactate) * chartH;
+
+        function drawMonitor() {
+            ctx.clearRect(0, 0, width, height);
+
+            // 1. Draw Shaded Transition Zone (Aerob-anaerober Übergangsbereich)
+            const y2 = mapY(2);
+            const y4 = mapY(4);
+            
+            ctx.fillStyle = 'rgba(234, 179, 8, 0.1)'; // Warning Yellow transparent
+            ctx.fillRect(padX, y4, chartW, y2 - y4);
+
+            // 2. Draw Grid & Axes
+            ctx.strokeStyle = '#262626';
+            ctx.lineWidth = 1;
+            
+            // Y-Grid (Laktat)
+            for(let l = 0; l <= maxLactate; l += 2) {
+                let y = mapY(l);
+                ctx.beginPath(); ctx.moveTo(padX, y); ctx.lineTo(width - padX, y); ctx.stroke();
+                
+                ctx.fillStyle = '#737373';
+                ctx.font = '12px Fira Code';
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(l, padX - 10, y);
+            }
+
+            // X-Grid (km/h)
+            for(let v = minKmH; v <= maxKmH; v += 2) {
+                let x = mapX(v);
+                ctx.beginPath(); ctx.moveTo(x, height - padY); ctx.lineTo(x, padY); ctx.stroke();
+                
+                ctx.fillStyle = '#737373';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                ctx.fillText(v, x, height - padY + 10);
+            }
+
+            // Axis Titles
+            ctx.fillStyle = '#a3a3a3';
+            ctx.font = '14px Rajdhani';
+            ctx.textAlign = 'center';
+            ctx.fillText('Belastungsintensität (Laufgeschwindigkeit in km/h)', padX + chartW/2, height - 10);
+            
+            ctx.save();
+            ctx.translate(20, padY + chartH/2);
+            ctx.rotate(-Math.PI/2);
+            ctx.fillText('Laktatkonzentration (mmol/l)', 0, 0);
+            ctx.restore();
+
+            // 3. Draw Threshold Lines
+            function drawThreshold(yVal, color, label) {
+                const y = mapY(yVal);
+                ctx.beginPath();
+                ctx.setLineDash([5, 5]);
+                ctx.moveTo(padX, y);
+                ctx.lineTo(width - padX, y);
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.setLineDash([]); // reset
+
+                // Neon glow text
+                ctx.shadowColor = color;
+                ctx.shadowBlur = 10;
+                ctx.fillStyle = color;
+                ctx.font = 'bold 14px Inter';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'bottom';
+                ctx.fillText(label, padX + 20, y - 5);
+                ctx.shadowBlur = 0; // reset
+            }
+
+            drawThreshold(2, '#10b981', 'Aerobe Schwelle (AS)');
+            drawThreshold(4, '#ef4444', 'Anaerobe Schwelle (ANS / MaxLass)');
+
+            // Label for Transition Area
+            ctx.fillStyle = '#eab308';
+            ctx.font = 'italic 13px Inter';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('Aerob-anaerober Übergangsbereich (Steady-State)', width - padX - 20, (y2 + y4)/2);
+
+            // 4. Draw Lactate Curve
+            // Simulated Data points: flat until ~12km/h, reaches 2 at 14km/h, 4 at 16.5km/h, exponential after
+            const curvePoints = [
+                {x: 8, y: 1.0},
+                {x: 10, y: 1.2},
+                {x: 12, y: 1.5},
+                {x: 14, y: 2.0}, // crosses AS
+                {x: 15, y: 2.6},
+                {x: 16.5, y: 4.0}, // crosses ANS
+                {x: 18, y: 7.5},
+                {x: 19, y: 11.0} // Accumulation
+            ];
+
+            ctx.beginPath();
+            ctx.moveTo(mapX(curvePoints[0].x), mapY(curvePoints[0].y));
+            
+            // Draw smooth curve through points
+            for (let i = 1; i < curvePoints.length - 2; i ++) {
+                const xc = (mapX(curvePoints[i].x) + mapX(curvePoints[i + 1].x)) / 2;
+                const yc = (mapY(curvePoints[i].y) + mapY(curvePoints[i + 1].y)) / 2;
+                ctx.quadraticCurveTo(mapX(curvePoints[i].x), mapY(curvePoints[i].y), xc, yc);
+            }
+            // curve through the last two points
+            const last2 = curvePoints.length - 2;
+            const last1 = curvePoints.length - 1;
+            ctx.quadraticCurveTo(mapX(curvePoints[last2].x), mapY(curvePoints[last2].y), mapX(curvePoints[last1].x), mapY(curvePoints[last1].y));
+
+            // Line Styling (Neon Blue)
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 4;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            ctx.shadowColor = '#38bdf8';
+            ctx.shadowBlur = 15;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            // Draw Data Points
+            curvePoints.forEach(pt => {
+                ctx.beginPath();
+                ctx.arc(mapX(pt.x), mapY(pt.y), 5, 0, Math.PI * 2);
+                ctx.fillStyle = '#0f172a';
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#38bdf8';
+                ctx.stroke();
+            });
+
+            // Mark Exhaustion Point
+            const endPt = curvePoints[last1];
+            ctx.fillStyle = '#ef4444';
+            ctx.font = 'bold 12px Fira Code';
+            ctx.textAlign = 'right';
+            ctx.fillText('ABBRUCH', mapX(endPt.x) - 15, mapY(endPt.y));
+            ctx.beginPath();
+            ctx.arc(mapX(endPt.x), mapY(endPt.y), 8, 0, Math.PI * 2);
+            ctx.strokeStyle = '#ef4444';
+            ctx.stroke();
+        }
+
+        drawMonitor();
+
+        // Responsive redrawing
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawMonitor();
+        });
+    });
+</script>
+
+</body>
+</html>

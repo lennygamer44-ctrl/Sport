@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.3.3a Muskelaufbau - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Iron & Gold (Heavy Duty) */
+            --iron-base: #0f0f0f;
+            --iron-card: #1a1a1a;
+            --iron-light: #2a2a2a;
+            
+            --text-main: #f5f5f5;
+            --text-muted: #a3a3a3;
+            
+            --gold-main: #ffcc00;
+            --gold-glow: rgba(255, 204, 0, 0.15);
+            --gold-dark: #b38f00;
+            
+            --stress-mech: #00e5ff;   /* Cyan for mechanical stress */
+            --stress-meta: #ff3366;   /* Pink for metabolic stress */
+            
+            --abi-bg: #1c1917;        /* Warm Dark Slate for Abitur */
+            --abi-red: #ef4444;
+            
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--iron-base);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.01) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.01) 75%, rgba(255,255,255,0.01)),
+                linear-gradient(45deg, rgba(255,255,255,0.01) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.01) 75%, rgba(255,255,255,0.01));
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        h1, h2, h3, h4, .heavy-font {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            background: radial-gradient(circle at 50% 100%, var(--gold-glow) 0%, transparent 60%);
+            border-bottom: 4px solid var(--gold-main);
+            position: relative;
+        }
+
+        .tag {
+            background: var(--iron-card);
+            color: var(--gold-main);
+            border: 1px solid var(--gold-dark);
+            padding: 0.4rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+            line-height: 1.1;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- Intro --- */
+        .intro-box {
+            background: var(--iron-card);
+            padding: 2.5rem 3rem;
+            border-radius: var(--radius-sm);
+            margin: 4rem auto;
+            border-left: 6px solid var(--gold-main);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            font-size: 1.2rem;
+        }
+
+        /* --- Section Header --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 6rem 0 3rem;
+        }
+
+        .section-num {
+            color: var(--iron-base);
+            background: var(--gold-main);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            box-shadow: 4px 4px 0px rgba(255, 204, 0, 0.3);
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+        }
+
+        /* --- DASHBOARD: Rezept-Karte (Prüfungswissen) --- */
+        .recipe-dashboard {
+            background: linear-gradient(145deg, var(--iron-card), #141414);
+            border: 2px solid var(--gold-dark);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin-bottom: 5rem;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 40px rgba(255, 204, 0, 0.05);
+        }
+
+        .recipe-badge {
+            position: absolute;
+            top: -15px;
+            left: 40px;
+            background: var(--gold-main);
+            color: var(--iron-base);
+            padding: 0.2rem 1.5rem;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .recipe-intro {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .recipe-grid { grid-template-columns: 1fr; }
+        }
+
+        .recipe-tile {
+            background: var(--iron-base);
+            border: 1px solid var(--iron-light);
+            border-radius: var(--radius-sm);
+            padding: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .recipe-tile:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-main);
+            box-shadow: var(--gold-glow);
+        }
+
+        .tile-icon {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            background: var(--iron-card);
+            border: 2px solid var(--gold-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* SVG Icons */
+        .icon-svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--gold-main);
+        }
+
+        .tile-content h3 {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .tile-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--gold-main);
+            line-height: 1.2;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .tile-desc {
+            font-size: 0.95rem;
+            color: #888;
+        }
+
+        /* --- Section 2: Physiologische Begründung --- */
+        .physio-intro {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 3rem;
+        }
+
+        .physio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 800px) {
+            .physio-grid { grid-template-columns: 1fr; }
+        }
+
+        .stress-card {
+            background: var(--iron-card);
+            padding: 2.5rem;
+            border-radius: var(--radius-sm);
+            border-top: 4px solid;
+            position: relative;
+        }
+
+        .stress-mech { border-color: var(--stress-mech); }
+        .stress-meta { border-color: var(--stress-meta); }
+
+        .stress-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stress-mech h3 { color: var(--stress-mech); }
+        .stress-meta h3 { color: var(--stress-meta); }
+
+        .stress-card p {
+            color: var(--text-muted);
+        }
+
+        /* --- Interactive Canvas Section --- */
+        .canvas-section {
+            background: var(--iron-base);
+            border: 1px solid var(--iron-light);
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            text-align: center;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .canvas-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .canvas-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .controls {
+            margin-bottom: 2rem;
+            background: var(--iron-card);
+            padding: 1.5rem;
+            border-radius: var(--radius-sm);
+            display: inline-block;
+        }
+
+        .slider-label {
+            font-family: 'Oswald', sans-serif;
+            color: var(--gold-main);
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        input[type=range] {
+            width: 300px;
+            accent-color: var(--gold-main);
+        }
+
+        .canvas-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 8px;
+            background: #050505;
+            border: 1px solid #222;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* --- Premium Abitur Transfer Box --- */
+        .abitur-prep {
+            background: linear-gradient(135deg, var(--abi-bg), var(--iron-base));
+            color: #e2e8f0;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 2px solid var(--abi-red);
+            box-shadow: 0 0 50px rgba(239, 68, 68, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-prep::before {
+            content: 'EXAM';
+            position: absolute;
+            font-size: 8rem;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            color: rgba(239, 68, 68, 0.03);
+            top: -20px;
+            right: 0;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-red);
+            color: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #fca5a5;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .abi-card {
+            background: rgba(0,0,0,0.4);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--abi-red);
+        }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+
+        .abi-card p:last-child { margin-bottom: 0; }
+
+        .hl-red { color: var(--abi-red); font-weight: 700; }
+        .hl-white { color: white; font-weight: 700; }
+
+        .diag-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px dashed var(--abi-red);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <div class="tag">Lernbereich 1.3.3a</div>
+            <h1>Muskelaufbau (Hypertrophie)</h1>
+            <p>Trainingsmethoden für Muskelaufbautraining – Die perfekte Symbiose aus mechanischer Spannung und metabolischer Ermüdung.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-box">
+            Das Muskelaufbautraining (in der Trainingswissenschaft als <strong>Hypertrophietraining</strong> bezeichnet) zielt auf die morphologische Anpassung der Muskulatur ab. Das primäre Ziel ist die Vergrößerung des physiologischen Muskelquerschnitts durch eine Verdickung der vorhandenen Muskelfasern (vermehrte Einlagerung von Aktin- und Myosinfilamenten sowie Titin).
+            <br><br>
+            <span style="color: var(--text-muted);">Um diesen spezifischen biologischen Anpassungsprozess auszulösen, muss eine Trainingsmethode gewählt werden, die eine ausreichend hohe mechanische Spannung mit einer hohen metabolischen Ermüdung (Stoffwechselbelastung) kombiniert. Im Abitur (eA) wird die Kenntnis der <strong>Methode mittlerer bis submaximaler Krafteinsätze</strong> verlangt.</span>
+        </div>
+
+        <!-- Section 1: Dashboard Recipe Card -->
+        <div class="section-header">
+            <div class="section-num">1</div>
+            <h2 class="heavy-font">Das Belastungsgefüge</h2>
+        </div>
+
+        <div class="recipe-dashboard">
+            <div class="recipe-badge">PRÜFUNGSWISSEN: DIE PARAMETRISIERUNG</div>
+            <p class="recipe-intro">Eine Trainingsmethode definiert sich in der Sporttheorie ausschließlich über ihre exakten Belastungskomponenten. Für das Muskelaufbautraining gelten folgende normative Parameter absolut zwingend:</p>
+
+            <div class="recipe-grid">
+                
+                <!-- Intensität -->
+                <div class="recipe-tile">
+                    <div class="tile-icon">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>
+                    </div>
+                    <div class="tile-content">
+                        <h3 class="heavy-font">Intensität</h3>
+                        <span class="tile-value">60% – 80% 1RM</span>
+                        <p class="tile-desc">Submaximal. Das Gewicht muss so gewählt sein, dass am Ende eines Satzes eine deutliche muskuläre Erschöpfung (lokales Muskelversagen) eintritt.</p>
+                    </div>
+                </div>
+
+                <!-- Umfang -->
+                <div class="recipe-tile">
+                    <div class="tile-icon">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+                    </div>
+                    <div class="tile-content">
+                        <h3 class="heavy-font">Umfang</h3>
+                        <span class="tile-value">8–12 Wdh. / 3–5 Sätze</span>
+                        <p class="tile-desc">Maximal 15 Wiederholungen. Dieser Bereich garantiert die optimale Spannungsdauer für das Muskelwachstum.</p>
+                    </div>
+                </div>
+
+                <!-- Dauer -->
+                <div class="recipe-tile">
+                    <div class="tile-icon">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                    </div>
+                    <div class="tile-content">
+                        <h3 class="heavy-font">Dauer (TUT)</h3>
+                        <span class="tile-value">TUT 40–60s</span>
+                        <p class="tile-desc">Langsame bis zügige, hochgradig kontrollierte Bewegung. Exzentrische Phase betonen! TUT = Time under Tension.</p>
+                    </div>
+                </div>
+
+                <!-- Dichte -->
+                <div class="recipe-tile">
+                    <div class="tile-icon">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    </div>
+                    <div class="tile-content">
+                        <h3 class="heavy-font">Dichte (Pause)</h3>
+                        <span class="tile-value">1,5 – 3 Min.</span>
+                        <p class="tile-desc">Unvollständige, "lohnende" Pause zwischen den Sätzen zur bewussten Aufrechterhaltung des metabolischen Stresses.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Section 2: Physiologie -->
+        <div class="section-header">
+            <div class="section-num">2</div>
+            <h2 class="heavy-font">Physiologische Begründung der Methode</h2>
+        </div>
+        <p class="physio-intro">Warum genau diese Parameter? Die Hypertrophie wird durch zwei primäre zelluläre Stressoren getriggert, die im Bereich von 8-12 Wiederholungen ihr absolutes Wirkungsoptimum erreichen:</p>
+
+        <div class="physio-grid">
+            <div class="stress-card stress-mech">
+                <h3 class="heavy-font">⚙️ Mechanischer Stress</h3>
+                <p>Die Intensität von 60-80 % rekrutiert zwingend die dicken, kräftigen FT-Fasern. Durch die betonte exzentrische Phase und die hohe Last entstehen die für das Wachstum notwendigen Mikrotraumata (kleinste Risse in den Z-Scheiben).</p>
+            </div>
+            
+            <div class="stress-card stress-meta">
+                <h3 class="heavy-font">🔥 Metabolischer Stress</h3>
+                <p>Die unvollständige Pause verhindert eine komplette Resynthese des ATP. Die langanhaltende Spannungsdauer (8-12 Wdh.) erzwingt eine anaerob-laktazide Energiebereitstellung. Die resultierende Übersäuerung und der Sauerstoffmangel schütten starke anabole Wachstumshormone aus.</p>
+            </div>
+        </div>
+
+        <!-- Interactive Canvas -->
+        <section class="canvas-section">
+            <h2 class="heavy-font">Visualisierung: Die Hypertrophie-Zone</h2>
+            <p>Verschiebe den Slider (Wiederholungen), um den Zusammenhang zwischen mechanischem und metabolischem Stress zu sehen.</p>
+            
+            <div class="controls">
+                <label class="slider-label" for="repSlider">Anzahl der Wiederholungen: <span id="repVal" style="color: white; font-size: 1.5rem;">10</span></label>
+                <input type="range" id="repSlider" min="1" max="25" value="10">
+            </div>
+
+            <div class="canvas-container">
+                <canvas id="hyperCanvas" width="800" height="350"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2 class="heavy-font">Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                Dieser Unterpunkt ist in schriftlichen Abiturprüfungen ein absoluter Punktesammler, wenn du ihn methodisch korrekt anwendest, aber auch eine große Fehlerquelle, wenn du unpräzise argumentierst!
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card">
+                    <h3 class="heavy-font">❌ Der Klausur-Klassiker "Fehlerdiagnose"</h3>
+                    <p>Ein typisches Fallbeispiel lautet: <em>"Ein Athlet möchte primär Muskelmasse (Hypertrophie) aufbauen. Er trainiert mit 40 % seiner Maximalkraft und absolviert 25 Wiederholungen pro Satz. Beurteilen Sie diesen Trainingsplan."</em></p>
+                    
+                    <div class="diag-box">
+                        <strong class="hl-white" style="display: block; margin-bottom: 0.5rem;">Die methodische Argumentationskette:</strong>
+                        Du musst diesen Plan rigoros dekonstruieren! Du argumentierst, dass das gewählte Belastungsgefüge das Ziel völlig verfehlt. <span class="hl-red">Mit 25 Wiederholungen und 40 % Intensität trainiert er die Kraftausdauer, nicht den Muskelaufbau.</span>
+                        <br><br>
+                        <strong>Biologische Begründung:</strong> Die Intensität ist zu gering, um ausreichend mechanischen Stress in den wuchspotenten FT-Fasern zu erzeugen. 
+                        <br><br>
+                        <strong>Lösung:</strong> Korrigiere den Plan, indem du die normativen Parameter des Hypertrophietrainings (Intensität hoch auf 60-80 %, Umfang runter auf 8-12 Wdh.) exakt benennst.
+                    </div>
+                </div>
+
+                <div class="abi-card">
+                    <h3 class="heavy-font">⚖️ Der Transfer zum 1RM</h3>
+                    <p>In materialgestützten Aufgaben wird oft von "1RM" gesprochen. Erkläre im Kontext des Aufbautrainings kurz, dass das <span class="hl-white">1RM (One Repetition Maximum) das Gewicht ist, das der Athlet exakt einmal sauber bewegen kann</span>.</p>
+                    <p>Erst durch die Diagnostik (Maximaltest) dieses Wertes lässt sich die Intensität (z. B. 75 % für den Muskelaufbau) überhaupt erst individuell berechnen, was den Bogen zum <strong>Prinzip der individualisierten Belastung</strong> spannt.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('hyperCanvas');
+            const ctx = canvas.getContext('2d');
+            const slider = document.getElementById('repSlider');
+            const repValDisplay = document.getElementById('repVal');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 800;
+            const logicalH = 350;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayW = Math.min(rect.width, logicalW);
+                const scale = displayW / logicalW;
+                const displayH = logicalH * scale;
+                
+                canvas.width = displayW * dpr;
+                canvas.height = displayH * dpr;
+                canvas.style.width = `${displayW}px`;
+                canvas.style.height = `${displayH}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                drawGraph();
+            }
+
+            window.addEventListener('resize', initCanvas);
+
+            // Mathematical Models for the Stressors
+            function getMechStress(reps) {
+                // High at 1 rep, drops exponentially
+                return Math.max(0, 100 - (reps - 1) * 3.5);
+            }
+
+            function getMetaStress(reps) {
+                // Low at 1 rep, rises logistically, peaks around 15-20
+                if (reps < 3) return 10;
+                return Math.min(100, 100 / (1 + Math.exp(-0.3 * (reps - 12))));
+            }
+
+            function drawGraph() {
+                ctx.clearRect(0, 0, logicalW, logicalH);
+
+                const currentReps = parseInt(slider.value);
+                repValDisplay.textContent = currentReps;
+
+                const padL = 60;
+                const padR = 40;
+                const padB = 50;
+                const padT = 30;
+                const plotW = logicalW - padL - padR;
+                const plotH = logicalH - padT - padB;
+
+                // --- Background Zones ---
+                // Max Kraft Zone (1-5)
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
+                ctx.fillRect(padL, padT, (4/24) * plotW, plotH);
+                
+                // Hypertrophie Zone (8-12)
+                ctx.fillStyle = 'rgba(255, 204, 0, 0.1)';
+                ctx.fillRect(padL + (7/24) * plotW, padT, (4/24) * plotW, plotH);
+                
+                // Kraftausdauer Zone (15+)
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
+                ctx.fillRect(padL + (14/24) * plotW, padT, (10/24) * plotW, plotH);
+
+                // --- Axes ---
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 1;
+                for (let r = 1; r <= 25; r += 2) {
+                    let x = padL + ((r-1)/24) * plotW;
+                    ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, logicalH - padB); ctx.stroke();
+                }
+
+                ctx.strokeStyle = '#666';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(padL, padT); ctx.lineTo(padL, logicalH - padB); // Y
+                ctx.lineTo(logicalW - padR, logicalH - padB); // X
+                ctx.stroke();
+
+                ctx.fillStyle = '#a3a3a3';
+                ctx.font = '12px Roboto';
+                ctx.textAlign = 'center';
+                ctx.fillText('Wiederholungen (1-25)', padL + plotW/2, logicalH - 15);
+                
+                ctx.save();
+                ctx.translate(20, padT + plotH/2);
+                ctx.rotate(-Math.PI/2);
+                ctx.fillText('Stress / Wirkung', 0, 0);
+                ctx.restore();
+
+                // --- Curves ---
+                ctx.lineJoin = 'round';
+                
+                // Mech Curve
+                ctx.beginPath();
+                ctx.moveTo(padL, (logicalH - padB) - (getMechStress(1)/100)*plotH);
+                for(let r=1; r<=25; r++) {
+                    let x = padL + ((r-1)/24) * plotW;
+                    let y = (logicalH - padB) - (getMechStress(r)/100)*plotH;
+                    ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = '#00e5ff';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // Meta Curve
+                ctx.beginPath();
+                ctx.moveTo(padL, (logicalH - padB) - (getMetaStress(1)/100)*plotH);
+                for(let r=1; r<=25; r++) {
+                    let x = padL + ((r-1)/24) * plotW;
+                    let y = (logicalH - padB) - (getMetaStress(r)/100)*plotH;
+                    ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = '#ff3366';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // --- Current State Marker ---
+                const cX = padL + ((currentReps-1)/24) * plotW;
+                const mStress = getMechStress(currentReps);
+                const metStress = getMetaStress(currentReps);
+                
+                // Line
+                ctx.beginPath();
+                ctx.moveTo(cX, padT);
+                ctx.lineTo(cX, logicalH - padB);
+                ctx.strokeStyle = '#fff';
+                ctx.setLineDash([5, 5]);
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Points
+                ctx.beginPath(); ctx.arc(cX, (logicalH - padB) - (mStress/100)*plotH, 5, 0, Math.PI*2); ctx.fillStyle = '#00e5ff'; ctx.fill();
+                ctx.beginPath(); ctx.arc(cX, (logicalH - padB) - (metStress/100)*plotH, 5, 0, Math.PI*2); ctx.fillStyle = '#ff3366'; ctx.fill();
+
+                // Evaluation Text Box
+                ctx.fillStyle = '#1a1a1a';
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.roundRect(logicalW - 250, 20, 230, 80, 8); ctx.fill(); ctx.stroke();
+
+                ctx.font = 'bold 16px Oswald';
+                ctx.textAlign = 'left';
+                
+                let evalTitle = "Maximal-Kraft";
+                let evalColor = "#fff";
+                if (currentReps >= 8 && currentReps <= 12) {
+                    evalTitle = "HYPERTROPHIE-OPTIMUM";
+                    evalColor = "#ffcc00";
+                    // Highlight the box
+                    ctx.strokeStyle = '#ffcc00'; ctx.lineWidth = 2;
+                    ctx.beginPath(); ctx.roundRect(logicalW - 250, 20, 230, 80, 8); ctx.stroke();
+                } else if (currentReps > 12) {
+                    evalTitle = "Kraftausdauer";
+                }
+
+                ctx.fillStyle = evalColor;
+                ctx.fillText(evalTitle, logicalW - 240, 45);
+                
+                ctx.font = '12px Roboto';
+                ctx.fillStyle = '#00e5ff';
+                ctx.fillText(`Mech. Stress: ${Math.round(mStress)}%`, logicalW - 240, 65);
+                ctx.fillStyle = '#ff3366';
+                ctx.fillText(`Meta. Stress: ${Math.round(metStress)}%`, logicalW - 240, 85);
+
+                // Labels for Zones
+                ctx.fillStyle = '#666';
+                ctx.font = 'bold 12px Oswald';
+                ctx.textAlign = 'center';
+                ctx.fillText('MAX', padL + (2/24)*plotW, padT + 20);
+                ctx.fillStyle = '#b38f00';
+                ctx.fillText('HYPERTROPHIE', padL + (9/24)*plotW, padT + 20);
+                ctx.fillStyle = '#666';
+                ctx.fillText('KRAFTAUSDAUER', padL + (19/24)*plotW, padT + 20);
+            }
+
+            slider.addEventListener('input', drawGraph);
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

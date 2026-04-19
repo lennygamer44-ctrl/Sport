@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.2.2b Prävention: Verletzungsprophylaxe im gesundheits- und leistungsorientierten Sport - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            /* Shield & Defense Theme */
+            --bg-body: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            
+            --shield-navy: #1e3a8a;      /* Deep Navy Blue */
+            --shield-blue: #3b82f6;      /* Bright Blue */
+            --shield-light: #dbeafe;     /* Very Light Blue */
+            
+            --safety-orange: #ea580c;    /* Alert/Safety Orange */
+            --safety-light: #ffedd5;
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Exam Box */
+            --abi-bg: #0f172a;           /* Dark Slate */
+            --abi-gold: #fbbf24;         /* Gold */
+            --abi-text: #f8fafc;
+
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(30, 58, 138, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            background-image: linear-gradient(135deg, rgba(30, 58, 138, 0.03) 25%, transparent 25%, transparent 50%, rgba(30, 58, 138, 0.03) 50%, rgba(30, 58, 138, 0.03) 75%, transparent 75%, transparent);
+            background-size: 40px 40px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.2;
+            color: var(--shield-navy);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER SECTION --- */
+        .defense-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 4rem;
+            border-top: 8px solid var(--shield-navy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .defense-header::after {
+            content: '🛡️';
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 8rem;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .defense-header h1 {
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            font-weight: 900;
+        }
+
+        .defense-header .lead {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 900px;
+        }
+
+        .highlight-orange {
+            color: var(--safety-orange);
+            font-weight: 700;
+            background: var(--safety-light);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* --- 2-COLUMN LAYOUT --- */
+        .prophylaxis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .pillar-column {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .pillar-column h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .col-endo { border-top: 5px solid var(--shield-blue); }
+        .col-exo { border-top: 5px solid var(--safety-orange); }
+
+        .col-endo h2 { color: var(--shield-blue); }
+        .col-exo h2 { color: var(--safety-orange); }
+
+        .pillar-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .measure-card {
+            margin-bottom: 1.8rem;
+            padding-left: 1.5rem;
+            border-left: 4px solid #cbd5e1;
+            position: relative;
+        }
+
+        .measure-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .col-endo .measure-card { border-left-color: var(--shield-light); }
+        .col-exo .measure-card { border-left-color: var(--safety-light); }
+
+        .measure-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .measure-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- CANVAS MINDMAP --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .canvas-section h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--shield-navy);
+        }
+
+        .canvas-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .canvas-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- ABITUR TRANSFER --- */
+        .abitur-board {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            border-top: 6px solid var(--abi-gold);
+            overflow: hidden;
+        }
+
+        .abitur-board::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; width: 300px;
+            background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.05));
+            pointer-events: none;
+        }
+
+        .abitur-board h2 {
+            color: var(--abi-gold);
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .abi-case {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .abi-case h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-case p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .abi-case p:last-child {
+            margin-bottom: 0;
+        }
+
+        .ea-solution {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px dashed #10b981;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .ea-solution strong {
+            color: #34d399;
+            display: block;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .ea-solution p {
+            color: #ecfdf5;
+        }
+
+        @media (max-width: 900px) {
+            .prophylaxis-grid { grid-template-columns: 1fr; }
+            .defense-header, .abitur-board { padding: 2rem; }
+            .defense-header h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="defense-header">
+        <h1>3.2.2b Prävention: Verletzungsprophylaxe</h1>
+        <p class="lead">
+            Die beste Behandlung einer Sportverletzung ist es, sie gar nicht erst entstehen zu lassen. Unter dem Begriff der Verletzungsprophylaxe (Prävention) fasst die Sportmedizin alle aktiven und passiven Maßnahmen zusammen, die das Risiko von <strong>akuten Verletzungen (Makrotraumata)</strong> und <strong>chronischen Überlastungsschäden (Mikrotraumata)</strong> minimieren. Man unterscheidet hierbei systematisch zwischen der Beeinflussung endogener (innerer) und exogener (äußerer) Risikofaktoren.
+        </p>
+    </header>
+
+    <!-- 2 Column Layout -->
+    <section class="prophylaxis-grid">
+        
+        <!-- Endogen -->
+        <article class="pillar-column col-endo">
+            <h2>1. Endogen</h2>
+            <p class="pillar-subtitle">Körperbezogene Maßnahmen. Zielen auf die Optimierung der physiologischen und anatomischen Voraussetzungen des Athleten ab.</p>
+            
+            <div class="measure-card">
+                <h3>Das Aufwärmen (Warm-up)</h3>
+                <p>Der absolute Basis-Schutz. Durch Erhöhung der Körperkerntemperatur (auf ca. 38,5 bis 39 °C) sinkt die innere Reibung der Muskulatur (Viskositätsabnahme). Sehnen und Bänder werden elastischer. Die Produktion von Gelenkschmiere (Synovia) steigt, was den Knorpel schützt.</p>
+            </div>
+
+            <div class="measure-card">
+                <h3>Propriozeptives Training</h3>
+                <p>Ein exzellent geschulter kinästhetischer Analysator ist der beste Schutz gegen Distorsionen. Das ZNS lernt, auf plötzliche Lageveränderungen (z. B. Umknicken) blitzschnell mit einer muskulären Gegenspannung (Gelenkstabilisierung) zu reagieren, bevor das Band reißt.</p>
+            </div>
+
+            <div class="measure-card">
+                <h3>Muskuläre Sicherung</h3>
+                <p>Gelenke werden primär durch das "muskuläre Korsett" gesichert. Ist der Agonist massiv stärker als der Antagonist, entsteht eine muskuläre Dysbalance (häufige Ursache für Muskelfaserrisse). Kraft- und Dehnprogramme stellen das Gleichgewicht her.</p>
+            </div>
+
+            <div class="measure-card">
+                <h3>Belastungssteuerung & Regeneration</h3>
+                <p>Physische Ermüdung ist ein massiver Verletzungstreiber. Unter Erschöpfung sinkt die Konzentration, die intramuskuläre Koordination verschlechtert sich und Techniken brechen zusammen. Periodisierung verhindert diesen Teufelskreis.</p>
+            </div>
+        </article>
+
+        <!-- Exogen -->
+        <article class="pillar-column col-exo">
+            <h2>2. Exogen</h2>
+            <p class="pillar-subtitle">Umwelt- und Ausrüstungsbezogene Maßnahmen. Hierbei werden Faktoren optimiert, die von außen auf den Athleten einwirken.</p>
+            
+            <div class="measure-card">
+                <h3>Sportausrüstung und Protektoren</h3>
+                <p>Das Tragen von sportartspezifischer Schutzausrüstung (z. B. Helm, Schienbeinschoner). Hierzu zählt auch das passgenaue Schuhwerk (Dämpfungselemente zur Knorpelentlastung) sowie das Taping/Bandagieren zur passiven Stabilisierung vorgeschädigter Gelenke.</p>
+            </div>
+
+            <div class="measure-card">
+                <h3>Rahmenbedingungen</h3>
+                <p>Die kritische Überprüfung von Sportgeräten und Bodenbeschaffenheiten (z. B. Hallenboden, Rasenplatz, Witterungsverhältnisse wie Nässe oder Kälte).</p>
+            </div>
+
+            <div class="measure-card">
+                <h3>Fairplay und Regelwerk</h3>
+                <p>In den Spielsportarten ist das Einhalten der Regeln die wirksamste exogene Prophylaxe. Fouls und unfaires Verhalten (z. B. "Unterspringen" im Volleyball oder "Grätschen von hinten" im Fußball) nehmen rücksichtslos schwerste Verletzungen des Gegners in Kauf.</p>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- Canvas Mindmap -->
+    <section class="canvas-section">
+        <h3>Mindmap: Säulen der Verletzungsprophylaxe</h3>
+        <p>Die systematische Kategorisierung präventiver Maßnahmen.</p>
+        <div class="canvas-wrapper">
+            <canvas id="mindmapCanvas" width="1000" height="500"></canvas>
+        </div>
+    </section>
+
+    <!-- Abitur Transfer Box -->
+    <section class="abitur-board">
+        <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die Verletzungsprophylaxe wird im Abitur fast ausschließlich als <span class="highlight-orange">funktionaler Transfer im Rahmen von komplexen Bewegungs- oder Trainingsanalysen</span> abgefragt.
+        </p>
+
+        <div class="abi-case">
+            <h4>Verletzungsursachen in Bildreihen erkennen</h4>
+            <p>Wenn dir die Bildreihe eines Athleten vorgelegt wird, dessen Technik in der Endphase zusammenbricht (z. B. ein einknickendes Knie bei der Landung nach dem Hochsprung), musst du die Gefahr einer Distorsion oder Ruptur benennen. Als Prophylaxe forderst du dann präzise ein <strong>propriozeptives Training zur Gelenkstabilisierung</strong> oder ein gezieltes <strong>Krafttraining der kniegelenksumgreifenden Muskulatur</strong>.</p>
+        </div>
+
+        <div class="abi-case">
+            <h4>Trainingspläne präventiv modifizieren</h4>
+            <p style="font-style: italic; color: #94a3b8;">Eine klassische Aufgabe lautet: "Der Trainer plant am Ende einer zweistündigen, intensiven Fußballeinheit noch ein komplexes Sprint- und Sprungtraining. Beurteilen Sie dies aus präventiver Sicht."</p>
+            
+            <div class="ea-solution">
+                <strong>Die eA-Lösung: Das Vorhaben zerlegen!</strong>
+                <p>
+                    Erkläre, dass die Athleten nach zwei Stunden physisch und zentralnervös ermüdet sind. Die inter- und intramuskuläre Koordination ist herabgesetzt, das Nervensystem kann die Gelenke nicht mehr schnell genug stabilisieren. Ein komplexes Sprungtraining unter diesen Bedingungen provoziert Band- und Muskelverletzungen (Makrotraumata) massiv. Aus präventiver Sicht (endogene Faktoren) ist das Sprungtraining zwingend an den Anfang der Einheit (im ermüdungsfreien Zustand) zu verlegen.
+                </p>
+            </div>
+        </div>
+
+        <div class="abi-case" style="border-left-color: #38bdf8;">
+            <h4 style="color: #38bdf8;">Vernetzung mit Fairplay</h4>
+            <p>Wenn du im Themenbereich "Gesellschaftliche Aspekte des Sports" das Thema Fairplay bearbeitest, nutze die <strong>exogene Verletzungsprophylaxe</strong> als stichhaltiges Argument. Regelverstöße sind nicht nur moralisch verwerflich, sie zerstören aktiv die gesundheitliche Unversehrtheit der Mitspieler.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('mindmapCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Colors
+    const colCenter = '#1e3a8a';
+    const colEndo = '#3b82f6';
+    const colExo = '#ea580c';
+    const textLight = '#ffffff';
+    const textDark = '#1e293b';
+
+    // Helper: Draw rounded rectangle
+    function drawRoundRect(x, y, width, height, radius, fill, stroke) {
+        ctx.beginPath();
+        ctx.roundRect(x - width/2, y - height/2, width, height, radius);
+        if(fill) { ctx.fillStyle = fill; ctx.fill(); }
+        if(stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 3; ctx.stroke(); }
+    }
+
+    // Helper: Draw connecting curved line
+    function drawConnection(x1, y1, x2, y2, color) {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.bezierCurveTo(x1 + (x2 - x1) / 2, y1, x1 + (x2 - x1) / 2, y2, x2, y2);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+    }
+
+    // --- ICONS DRAWING ---
+    function drawThermometer(x, y, c) {
+        ctx.strokeStyle = c; ctx.fillStyle = c; ctx.lineWidth = 2;
+        // Tube
+        ctx.beginPath(); ctx.arc(x, y + 8, 5, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.roundRect(x - 2, y - 12, 4, 20, 2); ctx.stroke();
+        // Mercury level
+        ctx.fillRect(x - 1, y - 5, 2, 10);
+        // Lines
+        ctx.beginPath(); ctx.moveTo(x+3, y-8); ctx.lineTo(x+6, y-8); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x+3, y-2); ctx.lineTo(x+6, y-2); ctx.stroke();
+    }
+
+    function drawBalanceBoard(x, y, c) {
+        ctx.strokeStyle = c; ctx.lineWidth = 3; ctx.lineCap = 'round';
+        // Board
+        ctx.beginPath(); ctx.moveTo(x - 12, y); ctx.lineTo(x + 12, y); ctx.stroke();
+        // Base (half circle)
+        ctx.beginPath(); ctx.arc(x, y, 6, 0, Math.PI); ctx.stroke();
+    }
+
+    function drawScale(x, y, c) {
+        ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.lineJoin = 'round';
+        // Base triangle
+        ctx.beginPath(); ctx.moveTo(x, y+10); ctx.lineTo(x-6, y+12); ctx.lineTo(x+6, y+12); ctx.closePath(); ctx.stroke();
+        // Post
+        ctx.beginPath(); ctx.moveTo(x, y+10); ctx.lineTo(x, y-5); ctx.stroke();
+        // Beam
+        ctx.beginPath(); ctx.moveTo(x-12, y-5); ctx.lineTo(x+12, y-5); ctx.stroke();
+        // Plates
+        ctx.beginPath(); ctx.moveTo(x-12, y-5); ctx.lineTo(x-16, y+2); ctx.lineTo(x-8, y+2); ctx.closePath(); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x+12, y-5); ctx.lineTo(x+8, y+2); ctx.lineTo(x+16, y+2); ctx.closePath(); ctx.stroke();
+    }
+
+    function drawBed(x, y, c) {
+        ctx.strokeStyle = c; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.rect(x - 12, y, 24, 8); ctx.stroke(); // bed frame
+        ctx.beginPath(); ctx.rect(x - 10, y - 6, 8, 6); ctx.stroke(); // pillow
+        ctx.beginPath(); ctx.moveTo(x - 12, y + 8); ctx.lineTo(x - 12, y + 12); ctx.stroke(); // leg
+        ctx.beginPath(); ctx.moveTo(x + 12, y + 8); ctx.lineTo(x + 12, y + 12); ctx.stroke(); // leg
+    }
+
+    function drawHelmet(x, y, c) {
+        ctx.strokeStyle = c; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(x, y + 5, 10, Math.PI, 0); // dome
+        ctx.lineTo(x + 14, y + 5); // brim front
+        ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x-10, y+5); ctx.lineTo(x+10, y+5); ctx.stroke();
+        ctx.beginPath(); ctx.arc(x-5, y+5, 4, 0, Math.PI); ctx.stroke(); // ear cover
+    }
+
+    function drawWhistle(x, y, c) {
+        ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.fillStyle = c;
+        // Body
+        ctx.beginPath(); ctx.arc(x - 4, y, 6, 0, Math.PI*2); ctx.stroke();
+        // Mouthpiece
+        ctx.beginPath(); ctx.rect(x, y - 3, 10, 6); ctx.stroke();
+        // Pea
+        ctx.beginPath(); ctx.arc(x - 4, y, 2, 0, Math.PI*2); ctx.fill();
+    }
+
+    // --- NODE POSITIONS ---
+    const cxCenter = w / 2;
+    const cyCenter = h / 2;
+
+    const cxEndo = cxCenter - 220;
+    const cxExo = cxCenter + 220;
+
+    // Sub-nodes Endogen
+    const endoSubs = [
+        { title: "Warm-up", y: cyCenter - 120, icon: drawThermometer },
+        { title: "Propriozeption", y: cyCenter - 40, icon: drawBalanceBoard },
+        { title: "Musk. Gleichgewicht", y: cyCenter + 40, icon: drawScale },
+        { title: "Regeneration", y: cyCenter + 120, icon: drawBed }
+    ];
+
+    // Sub-nodes Exogen
+    const exoSubs = [
+        { title: "Ausrüstung", y: cyCenter - 80, icon: drawHelmet },
+        { title: "Rahmenbedingungen", y: cyCenter, icon: null }, // simple text
+        { title: "Fairplay", y: cyCenter + 80, icon: drawWhistle }
+    ];
+
+    // --- DRAW CONNECTIONS ---
+    // Center to Mains
+    drawConnection(cxCenter, cyCenter, cxEndo, cyCenter, '#cbd5e1');
+    drawConnection(cxCenter, cyCenter, cxExo, cyCenter, '#cbd5e1');
+
+    // Mains to Subs
+    endoSubs.forEach(sub => drawConnection(cxEndo, cyCenter, cxEndo - 150, sub.y, '#e2e8f0'));
+    exoSubs.forEach(sub => drawConnection(cxExo, cyCenter, cxExo + 150, sub.y, '#e2e8f0'));
+
+    // --- DRAW NODES ---
+    // Sub-nodes Endogen
+    endoSubs.forEach(sub => {
+        drawRoundRect(cxEndo - 150, sub.y, 160, 40, 20, '#ffffff', colEndo);
+        ctx.fillStyle = textDark; ctx.font = '500 12px Inter'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(sub.title, cxEndo - 140, sub.y);
+        sub.icon(cxEndo - 210, sub.y, colEndo);
+    });
+
+    // Sub-nodes Exogen
+    exoSubs.forEach(sub => {
+        drawRoundRect(cxExo + 150, sub.y, 160, 40, 20, '#ffffff', colExo);
+        ctx.fillStyle = textDark; ctx.font = '500 12px Inter'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(sub.title, cxExo + 140, sub.y);
+        if(sub.icon) sub.icon(cxExo + 210, sub.y, colExo);
+    });
+
+    // Main Nodes
+    drawRoundRect(cxEndo, cyCenter, 140, 50, 8, colEndo, null);
+    ctx.fillStyle = textLight; ctx.font = 'bold 16px Outfit'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('Endogen', cxEndo, cyCenter - 8);
+    ctx.font = '300 12px Inter'; ctx.fillText('(Innerlich)', cxEndo, cyCenter + 8);
+
+    drawRoundRect(cxExo, cyCenter, 140, 50, 8, colExo, null);
+    ctx.fillStyle = textLight; ctx.font = 'bold 16px Outfit'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('Exogen', cxExo, cyCenter - 8);
+    ctx.font = '300 12px Inter'; ctx.fillText('(Äußerlich)', cxExo, cyCenter + 8);
+
+    // Center Node
+    drawRoundRect(cxCenter, cyCenter, 220, 60, 30, colCenter, null);
+    ctx.fillStyle = textLight; ctx.font = 'bold 18px Outfit'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('Verletzungsprophylaxe', cxCenter, cyCenter);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.1b Bewegungsarten und Anwendung - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Outfit:wght@300;500;800&display=swap');
+
+        :root {
+            --bg-page: #f8fafc;
+            --text-dark: #0f172a;
+            --text-mut: #64748b;
+            --color-trans: #0ea5e9; /* Light Blue for Translation */
+            --color-rot: #f97316;   /* Orange for Rotation */
+            --color-mixed: #8b5cf6; /* Violet for Mixed */
+            --premium-bg: #020617;
+            --premium-accent: #facc15;
+            --card-bg: #ffffff;
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.2;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 5px solid var(--color-mixed);
+        }
+
+        .header-section h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: -webkit-linear-gradient(0deg, var(--color-trans), var(--color-rot));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-section .intro-lead {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #cbd5e1;
+        }
+
+        .content-wrapper {
+            max-width: 1100px;
+            margin: -2rem auto 3rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Split Layout */
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .concept-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-top: 6px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-trans { border-top-color: var(--color-trans); }
+        .card-rot { border-top-color: var(--color-rot); }
+
+        .concept-card h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-trans h2 { color: var(--color-trans); }
+        .card-rot h2 { color: var(--color-rot); }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-trans { background: #e0f2fe; color: #0369a1; }
+        .badge-rot { background: #ffedd5; color: #c2410c; }
+
+        .example-box {
+            background: #f1f5f9;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--text-mut);
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* Canvas Elements */
+        .canvas-block {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .canvas-caption {
+            margin-top: 1rem;
+            color: var(--text-mut);
+            font-size: 0.95rem;
+        }
+
+        /* Full Width Section */
+        .full-section {
+            background: white;
+            border-radius: var(--radius);
+            padding: 3rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+            border-left: 6px solid var(--color-mixed);
+        }
+
+        .full-section h2 {
+            font-size: 2.2rem;
+            color: var(--color-mixed);
+            margin-bottom: 1.5rem;
+        }
+
+        .list-styled {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .list-styled li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .list-styled li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-mixed);
+            font-weight: 800;
+        }
+
+        /* Premium Abitur Box */
+        .abitur-premium {
+            background: var(--premium-bg);
+            border-radius: var(--radius);
+            padding: 3rem;
+            color: #f8fafc;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border: 1px solid #334155;
+        }
+
+        .abitur-premium::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--premium-accent), #ef4444, var(--premium-accent));
+        }
+
+        .abitur-premium h2 {
+            color: var(--premium-accent);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abitur-premium .lead-text {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .transfer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .transfer-item {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 3px solid var(--premium-accent);
+        }
+
+        .transfer-item h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-text {
+            background: rgba(250, 204, 21, 0.2);
+            color: var(--premium-accent);
+            padding: 0 4px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .split-grid, .transfer-grid { grid-template-columns: 1fr; }
+            .header-section h1 { font-size: 2.2rem; }
+            .full-section, .concept-card, .abitur-premium { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-section">
+        <h1>2.1.1b Bewegungsarten und Anwendung</h1>
+        <p class="intro-lead">
+            In der Biomechanik lassen sich selbst die komplexesten sportlichen Handlungen auf zwei grundlegende kinematische Bewegungsarten zurückführen: Rotation (Drehbewegung) und Translation (fortschreitende Bewegung). Das exakte Verständnis dieser beiden Formen ist essentiell, um Bewegungen in Teilsysteme zerlegen und analysieren zu können.
+        </p>
+    </header>
+
+    <main class="content-wrapper">
+        
+        <!-- Split Concept Sections -->
+        <div class="split-grid">
+            <!-- Translation -->
+            <article class="concept-card card-trans">
+                <h2>1. Die Translation</h2>
+                <p>Bei einer Translation (fortschreitende Bewegung oder translatorische Bewegung) bewegen sich alle Massepunkte eines Körpers auf parallel verlaufenden, deckungsgleichen Bahnen.</p>
+                
+                <span class="badge badge-trans">Charakteristik</span>
+                <p>Zu jedem Zeitpunkt der Bewegung haben alle Punkte des Körpers (oder des Systems) <strong>exakt dieselbe Geschwindigkeit</strong> und dieselbe Bewegungsrichtung.</p>
+
+                <span class="badge badge-trans">Beispiele aus dem Sport</span>
+                <div class="example-box">
+                    Ein Skeleton-Fahrer auf einer geraden Bahnstrecke oder das Gleiten auf Skiern in der Abfahrtshocke (ohne Kurvenfahrt). 
+                    <br><br>
+                    <em>Hinweis:</em> Streng genommen sind reine Translationen des menschlichen Körpers im Sport selten, da fast jede Fortbewegung durch Rotationen der Extremitäten (z. B. Beinschlag beim Laufen) erzeugt wird.
+                </div>
+            </article>
+
+            <!-- Rotation -->
+            <article class="concept-card card-rot">
+                <h2>2. Die Rotation</h2>
+                <p>Bei einer Rotation (Drehbewegung oder rotatorische Bewegung) bewegen sich alle Punkte des betrachteten Körpers auf konzentrischen Kreisen um eine gemeinsame Drehachse.</p>
+
+                <span class="badge badge-rot">Charakteristik</span>
+                <p>Die Körperpunkte legen in derselben Zeit unterschiedliche Wege zurück. Je weiter ein Körperpunkt von der Drehachse entfernt ist, desto <strong>größer ist sein Weg</strong> und damit auch seine <strong>Bahngeschwindigkeit</strong>.</p>
+
+                <span class="badge badge-rot">Beispiele aus dem Sport</span>
+                <div class="example-box">
+                    Die Riesenfelge am Reck (Drehung um eine feste Geräteachse) oder ein Salto (Drehung um die körpereigene Breitenachse).
+                </div>
+            </article>
+        </div>
+
+        <!-- Canvas 1: Skeleton vs Turner -->
+        <div class="canvas-block">
+            <canvas id="canvasContrast" width="900" height="400"></canvas>
+            <div class="canvas-caption">Abb. 1: Gegenüberstellung. Links: Translation (alle Bahnen parallel & gleich lang). Rechts: Rotation (unterschiedliche Bahnradien).</div>
+        </div>
+
+        <!-- Mixed Section -->
+        <section class="full-section">
+            <h2>3. Zusammengesetzte Bewegungen</h2>
+            <p>In der sportlichen Realität treten reine Translations- oder Rotationsbewegungen kaum isoliert auf. Fast alle Fortbewegungen sind biomechanisch gesehen Mischformen.</p>
+            <p>Ein klassisches Beispiel aus dem Lehrplan ist das <strong>Mountainbiken</strong>:</p>
+            
+            <ul class="list-styled">
+                <li><strong>Rotationsanteile:</strong> Die Beine der Fahrerin bzw. des Fahrers führen während des Tretens eine Rotationsbewegung aus. Ebenso rotieren die Laufräder des Mountainbikes um ihre jeweiligen Achsen.</li>
+                <li><strong>Translationsanteil:</strong> Aus diesen Rotationen resultiert die eigentliche Fortbewegung: Das Gesamtsystem, bestehend aus Fahrrad und Fahrerin bzw. Fahrer, vollzieht eine Translationsbewegung in Fahrtrichtung.</li>
+            </ul>
+        </section>
+
+        <!-- Canvas 2: Mountainbike -->
+        <div class="canvas-block">
+            <canvas id="canvasBike" width="900" height="450"></canvas>
+            <div class="canvas-caption">Abb. 2: Zusammengesetzte Bewegung beim Mountainbiken. Rotationskräfte (orange) wandeln sich in die Translation (blau) des Gesamtsystems um.</div>
+        </div>
+
+        <!-- Premium Abitur Transfer -->
+        <section class="abitur-premium">
+            <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+            <p class="lead-text">
+                Wie dieses Wissen in der eA-Prüfung verlangt wird: Die Unterscheidung von Translation und Rotation wird in Klausuren selten als bloße Definition abgefragt. Das Kultusministerium verlangt hier eine klare Transferleistung an konkreten, oft alltagsnahen Sportarten.
+            </p>
+
+            <div class="transfer-grid">
+                <div class="transfer-item">
+                    <h4>Teilsysteme isolieren</h4>
+                    <p>
+                        In den illustrierenden Prüfungsaufgaben zum Mountainbiken (Aufgabenteil II, 2.2) musst du exakt benennen können, welches Teilsystem welche Bewegung ausführt. Es reicht nicht zu sagen "Fahrradfahren ist beides". 
+                    </p>
+                    <p style="margin-top: 1rem; color: #cbd5e1;">
+                        Du musst präzise formulieren: Die Pedalbewegung und die Räder erzeugen eine <span class="highlight-text">Rotation</span>, während der Körperstamm samt Rahmen <span class="highlight-text">translatorisch</span> nach vorne verschoben wird.
+                    </p>
+                </div>
+                
+                <div class="transfer-item">
+                    <h4>Bewegungsstrukturen vergleichen</h4>
+                    <p>
+                        Ein weiteres klassisches Abitur-Format (siehe Speer- vs. Diskuswurf) verlangt den Vergleich von Wurfdisziplinen. Hier musst du erkennen, dass der Speerwurf primär durch eine <span class="highlight-text">lineare Beschleunigung (translatorischer Ansatz)</span> in der Hauptphase gekennzeichnet ist.
+                    </p>
+                    <p style="margin-top: 1rem; color: #cbd5e1;">
+                        Der Diskuswurf nutzt hingegen eine <span class="highlight-text">rotatorische Beschleunigung</span> (Körperverwringung um die Längsachse), um das Gerät auf Abfluggeschwindigkeit zu bringen. Nutze diese Fachbegriffe zwingend, um strukturelle Unterschiede in der Klausur zu begründen!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Utilities
+        function drawArrowLine(ctx, x1, y1, x2, y2, color, lineWidth = 3) {
+            const headlen = 12; 
+            const angle = Math.atan2(y2 - y1, x2 - x1);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = lineWidth;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+            
+            // Arrowhead
+            ctx.beginPath();
+            ctx.moveTo(x2, y2);
+            ctx.lineTo(x2 - headlen * Math.cos(angle - Math.PI / 6), y2 - headlen * Math.sin(angle - Math.PI / 6));
+            ctx.moveTo(x2, y2);
+            ctx.lineTo(x2 - headlen * Math.cos(angle + Math.PI / 6), y2 - headlen * Math.sin(angle + Math.PI / 6));
+            ctx.stroke();
+        }
+
+        function drawArcArrow(ctx, x, y, radius, startAngle, endAngle, color, lineWidth = 3) {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = lineWidth;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, startAngle, endAngle);
+            ctx.stroke();
+
+            // Arrowhead at end angle
+            const headlen = 12;
+            const arrowX = x + radius * Math.cos(endAngle);
+            const arrowY = y + radius * Math.sin(endAngle);
+            // Tangent angle
+            const tangent = endAngle + Math.PI/2; 
+
+            ctx.beginPath();
+            ctx.moveTo(arrowX, arrowY);
+            ctx.lineTo(arrowX - headlen * Math.cos(tangent - Math.PI / 6), arrowY - headlen * Math.sin(tangent - Math.PI / 6));
+            ctx.moveTo(arrowX, arrowY);
+            ctx.lineTo(arrowX - headlen * Math.cos(tangent + Math.PI / 6), arrowY - headlen * Math.sin(tangent + Math.PI / 6));
+            ctx.stroke();
+        }
+
+        // === Canvas 1: Contrast (Skeleton vs Gymnast) ===
+        const canvas1 = document.getElementById('canvasContrast');
+        const ctx1 = canvas1.getContext('2d');
+        const width1 = canvas1.width;
+        const height1 = canvas1.height;
+
+        // Draw Divider
+        ctx1.strokeStyle = '#e2e8f0';
+        ctx1.lineWidth = 2;
+        ctx1.beginPath();
+        ctx1.moveTo(width1/2, 20);
+        ctx1.lineTo(width1/2, height1-20);
+        ctx1.stroke();
+
+        ctx1.font = 'bold 20px Outfit';
+        ctx1.fillStyle = '#0f172a';
+        ctx1.textAlign = 'center';
+        ctx1.fillText('TRANSLATION', width1/4, 40);
+        ctx1.fillText('ROTATION', (width1/4)*3, 40);
+
+        // --- Left Side: Skeleton (Translation) ---
+        const sX = 100; const sY = 250;
+        // Board
+        ctx1.fillStyle = '#94a3b8';
+        ctx1.fillRect(sX, sY, 150, 10);
+        
+        // Stickman on board
+        ctx1.strokeStyle = '#334155';
+        ctx1.lineWidth = 6;
+        ctx1.lineJoin = 'round';
+        // Head
+        ctx1.beginPath(); ctx1.arc(sX + 130, sY - 15, 12, 0, Math.PI*2); ctx1.stroke();
+        // Body
+        ctx1.beginPath(); ctx1.moveTo(sX + 115, sY - 10); ctx1.lineTo(sX + 40, sY - 10); ctx1.stroke();
+        // Legs
+        ctx1.beginPath(); ctx1.moveTo(sX + 40, sY - 10); ctx1.lineTo(sX, sY - 10); ctx1.stroke();
+        // Arms
+        ctx1.beginPath(); ctx1.moveTo(sX + 100, sY - 10); ctx1.lineTo(sX + 120, sY); ctx1.stroke();
+
+        // Translation Arrows (Light Blue)
+        const transColor = '#0ea5e9';
+        drawArrowLine(ctx1, sX + 130, sY - 40, sX + 230, sY - 40, transColor, 4); // Head
+        drawArrowLine(ctx1, sX + 70,  sY - 40, sX + 170, sY - 40, transColor, 4); // Torso
+        drawArrowLine(ctx1, sX,       sY - 40, sX + 100, sY - 40, transColor, 4); // Feet
+        
+        ctx1.font = 'italic 14px Nunito';
+        ctx1.fillStyle = transColor;
+        ctx1.fillText('Parallele, gleich lange Bahnen', width1/4, 330);
+
+        // --- Right Side: Gymnast (Rotation) ---
+        const gX = width1 * 0.75; const gY = 200;
+        
+        // Reck (Bar)
+        ctx1.fillStyle = '#64748b';
+        ctx1.beginPath(); ctx1.arc(gX, gY, 6, 0, Math.PI*2); ctx1.fill();
+        ctx1.fillRect(gX-3, gY, 6, 150); // support
+
+        // Gymnast Body
+        ctx1.strokeStyle = '#334155';
+        ctx1.lineWidth = 6;
+        // Arms (holding bar)
+        ctx1.beginPath(); ctx1.moveTo(gX, gY); ctx1.lineTo(gX - 40, gY - 40); ctx1.stroke();
+        // Head
+        ctx1.beginPath(); ctx1.arc(gX - 30, gY - 55, 12, 0, Math.PI*2); ctx1.stroke();
+        // Torso
+        ctx1.beginPath(); ctx1.moveTo(gX - 40, gY - 40); ctx1.lineTo(gX - 90, gY - 90); ctx1.stroke();
+        // Legs
+        ctx1.beginPath(); ctx1.moveTo(gX - 90, gY - 90); ctx1.lineTo(gX - 140, gY - 140); ctx1.stroke();
+
+        // Rotation Arrows (Orange)
+        const rotColor = '#f97316';
+        // Center mark
+        ctx1.fillStyle = rotColor;
+        ctx1.beginPath(); ctx1.arc(gX, gY, 4, 0, Math.PI*2); ctx1.fill();
+
+        // Small radius (Shoulder)
+        ctx1.setLineDash([5, 5]);
+        ctx1.beginPath(); ctx1.arc(gX, gY, 56, 0, Math.PI*2); ctx1.strokeStyle = '#fdba74'; ctx1.lineWidth = 1; ctx1.stroke();
+        ctx1.setLineDash([]);
+        drawArcArrow(ctx1, gX, gY, 56, Math.PI, Math.PI*1.4, rotColor, 3);
+
+        // Large radius (Feet)
+        const dist = Math.sqrt(Math.pow(140,2) + Math.pow(140,2)); // ~198
+        ctx1.setLineDash([5, 5]);
+        ctx1.beginPath(); ctx1.arc(gX, gY, dist, 0, Math.PI*2); ctx1.strokeStyle = '#fdba74'; ctx1.lineWidth = 1; ctx1.stroke();
+        ctx1.setLineDash([]);
+        drawArcArrow(ctx1, gX, gY, dist, Math.PI, Math.PI*1.4, rotColor, 3);
+
+        ctx1.font = 'italic 14px Nunito';
+        ctx1.fillStyle = rotColor;
+        ctx1.fillText('Unterschiedliche Bahnradien', width1*0.75, 360);
+
+
+        // === Canvas 2: Mixed Motion (Mountainbike) ===
+        const canvas2 = document.getElementById('canvasBike');
+        const ctx2 = canvas2.getContext('2d');
+        const w2 = canvas2.width;
+        const h2 = canvas2.height;
+
+        // Ground
+        ctx2.fillStyle = '#e2e8f0';
+        ctx2.fillRect(50, 350, 800, 5);
+
+        // Bike variables
+        const wheelR = 60;
+        const rearX = 250; const rearY = 290;
+        const frontX = 500; const frontY = 290;
+        const crankX = 350; const crankY = 290;
+
+        // Draw Bike Frame (Abstract)
+        ctx2.strokeStyle = '#334155';
+        ctx2.lineWidth = 8;
+        ctx2.lineJoin = 'round';
+        ctx2.lineCap = 'round';
+        ctx2.beginPath();
+        ctx2.moveTo(rearX, rearY); // Rear wheel center
+        ctx2.lineTo(crankX, crankY); // Bottom bracket
+        ctx2.lineTo(440, 180); // Top tube front
+        ctx2.lineTo(rearX+30, 180); // Seat post top
+        ctx2.closePath(); // Connect back to rear
+        ctx2.stroke();
+        // Forks & Seat
+        ctx2.beginPath(); ctx2.moveTo(440, 180); ctx2.lineTo(frontX, frontY); ctx2.stroke(); // Front fork
+        ctx2.beginPath(); ctx2.moveTo(440, 180); ctx2.lineTo(430, 140); ctx2.stroke(); // Handlebar stem
+        ctx2.beginPath(); ctx2.moveTo(rearX+30, 180); ctx2.lineTo(rearX+20, 140); ctx2.stroke(); // Seat post
+
+        // Draw Wheels
+        ctx2.strokeStyle = '#475569';
+        ctx2.lineWidth = 6;
+        ctx2.beginPath(); ctx2.arc(rearX, rearY, wheelR, 0, Math.PI*2); ctx2.stroke();
+        ctx2.beginPath(); ctx2.arc(frontX, frontY, wheelR, 0, Math.PI*2); ctx2.stroke();
+
+        // Draw Rider (Stickman)
+        ctx2.strokeStyle = '#0f172a';
+        ctx2.lineWidth = 10;
+        // Head
+        ctx2.beginPath(); ctx2.arc(380, 70, 18, 0, Math.PI*2); ctx2.stroke();
+        // Torso
+        ctx2.beginPath(); ctx2.moveTo(380, 90); ctx2.lineTo(280, 140); ctx2.stroke();
+        // Arms
+        ctx2.beginPath(); ctx2.moveTo(380, 90); ctx2.lineTo(430, 140); ctx2.stroke();
+        // Legs (pedaling)
+        ctx2.beginPath(); ctx2.moveTo(280, 140); ctx2.lineTo(330, 210); ctx2.lineTo(crankX, crankY-25); ctx2.stroke(); // Upper leg
+        
+        // Annotations
+        // 1. Rotation (Orange)
+        const cRot = '#f97316';
+        ctx2.setLineDash([5, 5]);
+        // Wheel 1
+        drawArcArrow(ctx2, rearX, rearY, wheelR+15, Math.PI*1.2, Math.PI*1.8, cRot, 4);
+        // Wheel 2
+        drawArcArrow(ctx2, frontX, frontY, wheelR+15, Math.PI*1.2, Math.PI*1.8, cRot, 4);
+        // Pedal
+        drawArcArrow(ctx2, crankX, crankY, 35, 0, Math.PI, cRot, 4);
+        ctx2.setLineDash([]);
+
+        ctx2.font = 'bold 16px Nunito';
+        ctx2.fillStyle = cRot;
+        ctx2.fillText('ROTATION', rearX-30, rearY+95);
+        ctx2.fillText('ROTATION', frontX-30, frontY+95);
+        ctx2.fillText('ROTATION', crankX-35, crankY+55);
+
+        // 2. Translation (Blue)
+        const cTrans = '#0ea5e9';
+        // Center of mass roughly at hip
+        const kspX = 300; const kspY = 140;
+        ctx2.fillStyle = cTrans;
+        ctx2.beginPath(); ctx2.arc(kspX, kspY, 8, 0, Math.PI*2); ctx2.fill(); // KSP dot
+
+        // Huge Translation Arrow
+        drawArrowLine(ctx2, kspX, kspY, kspX + 350, kspY, cTrans, 8);
+        
+        ctx2.font = 'bold 22px Outfit';
+        ctx2.fillStyle = cTrans;
+        ctx2.fillText('TRANSLATION DES GESAMTSYSTEMS', kspX + 20, kspY - 15);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Anatomie und Mechanik der Atmung</title>
+    <style>
+        /* Biomechanics & Blueprint Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@500&display=swap');
+
+        :root {
+            /* Technical Palette */
+            --bg-blueprint: #f1f5f9;
+            --grid-line: #e2e8f0;
+            --text-main: #334155;
+            --text-dark: #0f172a;
+            
+            --tech-blue: #0284c7;
+            --tech-navy: #1e293b;
+            --tech-cyan: #06b6d4;
+            --tech-coral: #ef4444; /* Für den Muskel / Zwerchfell */
+            
+            --card-bg: #ffffff;
+            --radius-sharp: 4px;
+            --radius-soft: 12px;
+            
+            --abi-bg: #0a192f;
+            --abi-text: #e2e8f0;
+            --abi-glow: #38bdf8;
+            --abi-accent: #fbbf24;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-blueprint);
+            /* Technical Grid Background */
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2rem;
+        }
+
+        .document-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Technical Header */
+        header {
+            background: var(--tech-navy);
+            color: white;
+            padding: 4rem;
+            border-radius: var(--radius-soft);
+            margin-bottom: 2rem;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            right: -50px;
+            top: -50px;
+            width: 300px;
+            height: 300px;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            border-radius: 50%;
+        }
+
+        .sys-id {
+            font-family: 'Fira Code', monospace;
+            color: var(--tech-cyan);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            border: 1px solid var(--tech-cyan);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            font-weight: 300;
+            color: #cbd5e1;
+            max-width: 900px;
+            border-left: 3px solid var(--tech-cyan);
+            padding-left: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Asymmetric CSS Grid Layout */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .grid-layout { grid-template-columns: 1fr; }
+        }
+
+        /* Content Blocks */
+        .blueprint-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: var(--radius-soft);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            color: var(--tech-navy);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .h2-num {
+            background: var(--tech-blue);
+            color: white;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin: 1.5rem 0 0.8rem 0;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Specific Highlights */
+        .highlight-box {
+            background: #f0fdfa;
+            border-left: 4px solid var(--tech-cyan);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: #0f766e;
+        }
+
+        .alert-box {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-top: 4px solid var(--tech-coral);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .alert-box h4 {
+            color: #b91c1c;
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .tech-word {
+            font-family: 'Fira Code', monospace;
+            background: #f1f5f9;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            color: var(--tech-blue);
+            font-size: 0.9em;
+        }
+
+        /* Chemical formatting */
+        .chem {
+            font-weight: 600;
+            color: var(--tech-navy);
+        }
+        .sub { font-size: 0.7em; vertical-align: sub; }
+        .sup { font-size: 0.7em; vertical-align: super; }
+
+        /* Canvas Wrap */
+        .canvas-section {
+            grid-column: 1 / -1; /* Spans full width */
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-soft);
+            border: 1px solid #cbd5e1;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            margin-bottom: 2rem;
+        }
+
+        .canvas-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .canvas-header h3 {
+            border: none;
+            font-size: 1.5rem;
+            color: var(--tech-navy);
+            margin: 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Massive Abitur Transfer Box */
+        .abitur-masterclass {
+            grid-column: 1 / -1;
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            padding: 4rem;
+            border-radius: var(--radius-soft);
+            position: relative;
+            margin-top: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid #1e293b;
+        }
+
+        .abitur-tag {
+            position: absolute;
+            top: 0; left: 0;
+            background: var(--abi-accent);
+            color: var(--abi-bg);
+            padding: 0.6rem 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-radius: 12px 0 12px 0;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+            text-transform: uppercase;
+        }
+
+        .abitur-masterclass > p:first-of-type {
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            color: #94a3b8;
+        }
+
+        .scenario-quote {
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid var(--abi-glow);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #bae6fd;
+        }
+
+        .scenario-quote strong {
+            display: block;
+            font-style: normal;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--abi-glow);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .transfer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .transfer-grid { grid-template-columns: 1fr; }
+        }
+
+        .transfer-card {
+            background: #0f2342;
+            border: 1px solid #1e3a5f;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .transfer-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--abi-accent);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .transfer-card p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="document-wrapper">
+    
+    <header>
+        <span class="sys-id">MODUL 1.4.4a // BIOMECHANICS</span>
+        <h1>Anatomie und Mechanik der Atmung</h1>
+        <div class="intro-text">
+            Das Atmungssystem (Respirationstrakt) ist für den Gasaustausch zwischen dem menschlichen Organismus und seiner Umwelt verantwortlich. Dieser Prozess ist die absolute Grundvoraussetzung für die aerobe Energiebereitstellung der Muskulatur, da hierüber der lebensnotwendige Sauerstoff (<span class="chem">O<span class="sub">2</span></span>) aufgenommen und das als Stoffwechselendprodukt anfallende Kohlendioxid (<span class="chem">CO<span class="sub">2</span></span>) abgeatmet wird.
+        </div>
+    </header>
+
+    <div class="grid-layout">
+        
+        <!-- Left Column (Main Anatomy) -->
+        <div class="blueprint-card">
+            <h2><span class="h2-num">1</span> Makroskopische und mikroskopische Anatomie</h2>
+            <p>Der Weg der Atemluft führt durch ein spezialisiertes Röhrensystem, das die Luft präpariert und schließlich zu den Austauschflächen leitet. Man gliedert das System in zwei Hauptabschnitte:</p>
+            
+            <h3>Die luftleitenden Atemwege (Totraum)</h3>
+            <p>Hier findet noch kein Gasaustausch statt. Diese Zonen dienen ausschließlich dem Transport, der Erwärmung, der Anfeuchtung und der Reinigung (Filtration durch Flimmerepithel) der Atemluft.</p>
+            <ul>
+                <li><strong>Obere Atemwege:</strong> Nasenhöhle und Rachen (Pharynx).</li>
+                <li><strong>Untere Atemwege:</strong> Kehlkopf (Larynx), Luftröhre (Trachea) und der sich immer feiner verzweigende Bronchialbaum. Die Trachea teilt sich in die beiden Hauptbronchien, welche sich in den Lungenflügeln weiter in Lappenbronchien, Segmentbronchien und schließlich in winzige, knorpelfreie Bronchiolen aufzweigen.</li>
+            </ul>
+        </div>
+
+        <!-- Right Column (Anatomy Sidebar) -->
+        <div class="blueprint-card" style="background: #f8fafc; border-color: var(--tech-blue);">
+            <h3 style="margin-top: 0; color: var(--tech-blue);">Die respiratorische Zone</h3>
+            <p style="font-size: 0.95rem;">Am Ende der winzigen Bronchiolen sitzen die Lungenbläschen (<span class="tech-word">Alveolen</span>).</p>
+            
+            <div class="highlight-box" style="margin: 1rem 0; padding: 1rem;">
+                <strong>📊 Anatomischer Fakt:</strong><br>
+                Der Mensch besitzt <strong>ca. 300 Millionen Alveolen</strong>, die von einem dichten Lungenkapillarnetz umgeben sind.
+            </div>
+            
+            <p style="font-size: 0.95rem;">Hier findet durch <strong>Diffusion</strong> (aufgrund von Partialdruckunterschieden zwischen Alveolarluft und Blut) der eigentliche Gasaustausch statt: Sauerstoff diffundiert in das Blutgefäßsystem, Kohlendioxid diffundiert aus dem Blut in die Alveolarinnenräume, um abgeatmet zu werden.</p>
+        </div>
+
+        <!-- Full width row for Mechanik -->
+        <div class="blueprint-card" style="grid-column: 1 / -1;">
+            <h2><span class="h2-num">2</span> Grundlegende Mechanik der Atmung</h2>
+            <p>Die Lunge selbst ist passiv; sie besitzt kein eigenes Muskelgewebe zur Dehnung. Die Belüftung (Ventilation) wird ausschließlich durch Druckunterschiede erzeugt, die aus einer aktiven Volumenänderung des Brustkorbs (Thorax) resultieren.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div>
+                    <h3>Einatmung (Inspiration)</h3>
+                    <p>Dies ist <strong>immer ein aktiver muskulärer Prozess</strong>. Der wichtigste Atemmuskel ist das Zwerchfell (Diaphragma). Es kontrahiert sich und senkt sich ab. Gleichzeitig kontrahieren die äußeren Zwischenrippenmuskeln (Interkostalmuskulatur), wodurch sich der Brustkorb anhebt und weitet.</p>
+                    <p>Durch diese Volumenvergrößerung entsteht im Pleuraspalt und in der Lunge ein <strong>Unterdruck</strong>, der die Außenluft physikalisch in die Atemwege saugt.</p>
+                </div>
+                <div>
+                    <h3>Ausatmung (Exspiration)</h3>
+                    <p>In körperlicher Ruhe ist dies ein <strong>passiver Prozess</strong>. Die Atemmuskulatur erschlafft, und die elastischen Rückstellkräfte des Thorax und der Lunge (Retraktionskräfte) pressen die Luft wieder hinaus. Das Zwerchfell wölbt sich entspannt wieder nach oben.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Graphic -->
+        <div class="canvas-section">
+            <div class="canvas-header">
+                <h3>Vergleichende Biomechanik der Atmung</h3>
+                <p style="color: var(--text-light); font-size: 0.9rem;">Das Zwerchfell (<span style="color: var(--tech-coral); font-weight: bold;">rot markiert</span>) fungiert als primärer Motor der Ventilation.</p>
+            </div>
+            <canvas id="mechanicsBlueprint" width="1000" height="450"></canvas>
+        </div>
+
+        <!-- Left Column (Mechanik unter Belastung) -->
+        <div class="blueprint-card">
+            <h3>Mechanik unter sportlicher Belastung</h3>
+            <p>Bei hohen sportlichen Intensitäten reicht die normale Atemmechanik nicht mehr aus. Die Einatmung wird nun durch die <strong>Atemhilfsmuskulatur</strong> (z. B. großer/kleiner Brustmuskel, Kopfnicker) extrem verstärkt.</p>
+            <div class="highlight-box">
+                <strong>Biomechanische Voraussetzung:</strong><br>
+                Die Arme müssen fixiert sein (z. B. am Lenker eines Mountainbikes), damit der Schultergürtel stabil ist und die Muskeln den Thorax heben können.
+            </div>
+            <p>Gleichzeitig wird die Ausatmung zu einem <strong>aktiven Prozess</strong>: Die Bauchmuskulatur und die inneren Zwischenrippenmuskeln kontrahieren, um den Brustkorb aktiv zusammenzupressen (Bauchpresse) und die verbrauchte Luft maximal schnell auszutreiben.</p>
+        </div>
+
+        <!-- Right Column (Regulation) -->
+        <div class="blueprint-card" style="border-top: 4px solid var(--tech-navy);">
+            <h2><span class="h2-num">3</span> Regulation der Atmung</h2>
+            <p>Die Steuerung der Atemmuskulatur erfolgt unbewusst (autonom) durch das <strong>Atemzentrum</strong> im verlängerten Mark (<span class="tech-word">Medulla oblongata</span>) des Hirnstamms.</p>
+            
+            <div class="alert-box" style="margin-top: 1.5rem;">
+                <h4>Der chemische Atemantrieb</h4>
+                <p style="margin:0; font-size: 0.95rem;">Entgegen der landläufigen Meinung ist ein Sauerstoffmangel <strong>nicht</strong> der primäre Auslöser für unsere Atmung. Der mit Abstand stärkste Atemreiz ist ein <strong>Anstieg des <span class="chem">CO<span class="sub">2</span></span>-Partialdrucks</strong> sowie ein Absinken des pH-Werts im arteriellen Blut.</p>
+            </div>
+            
+            <p style="margin-top: 1.5rem; font-size: 0.95rem;">Spezialisierte Rezeptoren (<strong>Chemorezeptoren</strong>) in der Aorta und den Halsschlagadern messen diese Werte kontinuierlich. Sammelt sich unter sportlicher Belastung mehr <span class="chem">CO<span class="sub">2</span></span> (oder Laktat/<span class="chem">H<span class="sup">+</span></span>-Ionen) im Blut an, feuert das Atemzentrum massiv Nervenimpulse an das Zwerchfell und die Zwischenrippenmuskeln ab, um die Ventilation blitzartig zu steigern und das Blut wieder von <span class="chem">CO<span class="sub">2</span></span> zu "reinigen".</p>
+        </div>
+
+        <!-- Full Width Abitur Transfer -->
+        <div class="abitur-masterclass">
+            <div class="abitur-tag">Abitur-Transfer & Praxis (eA)</div>
+            <p>In der eA-Abiturprüfung wird von dir verlangt, diese physiologischen und mechanischen Grundlagen auf konkrete Belastungssituationen – häufig anhand von Textquellen – anzuwenden.</p>
+
+            <div class="scenario-quote">
+                <strong>Materialauswertung (Bsp. Mountainbike-Tour)</strong>
+                „Beim Anstieg haben wir immer mehr geschnauft - kurz vor der Gorialm habe ich gedacht, mir platzt gleich die Lunge. Und selbst danach war ich noch ganz schön lang außer Atem.“
+            </div>
+
+            <div class="transfer-grid">
+                <div class="transfer-card">
+                    <h4>Transfer der Mechanik</h4>
+                    <p>Du musst erklären, wie sich die Atemmechanik in genau dieser Situation verändert. Durch den enormen Anstieg der Intensität am Berg reicht die passiv ablaufende Exspiration nicht mehr aus. Der Körper schaltet auf die <strong>aktive Ausatmung</strong> unter Nutzung der Atemhilfsmuskulatur (Bauchmuskeln) um, um die Atemstromstärke zu maximieren („immer mehr geschnauft“).</p>
+                    <p style="margin-top: 10px; color: #bae6fd;">Die Fixierung der Hände am Mountainbike-Lenker ist hierbei biomechanisch ideal, da so der Schultergürtel fixiert ist und die Brustmuskulatur optimal als Atemhilfsmuskulatur arbeiten kann.</p>
+                </div>
+
+                <div class="transfer-card">
+                    <h4>Transfer der Regulation (Laktat-Puffer)</h4>
+                    <p>Das Gefühl, dass die „Lunge platzt“, musst du über die Regulation der Atmung begründen. Da der Anstieg die Athleten in den anaerob-laktaziden Stoffwechsel zwingt, fallen massiv Laktat und Wasserstoffionen (<span class="chem" style="color:white;">H<span class="sup">+</span></span>) an. Das Blut puffert diese Säure ab (Bikarbonatpuffer), wodurch chemisch eine immense menge an <span class="chem" style="color:white;">CO<span class="sub">2</span></span> entsteht.</p>
+                    <p style="margin-top: 10px; color: #bae6fd;">Die Chemorezeptoren registrieren diese <span class="chem" style="color:inherit;">CO<span class="sub">2</span></span>-Flut und das Atemzentrum zwingt die Atemmuskulatur zur <strong>Hyperventilation</strong>. Das Weiteratmen danach ("noch lang außer Atem") dient dem Abbau der durch Laktat bedingten Sauerstoffschuld.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Canvas: Blueprint Breathing Mechanics
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('mechanicsBlueprint');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Support
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+
+        // Blueprint Grid Background for Canvas
+        function drawGrid() {
+            ctx.strokeStyle = '#f1f5f9';
+            ctx.lineWidth = 1;
+            for (let x = 0; x <= width; x += 20) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
+            }
+            for (let y = 0; y <= height; y += 20) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
+            }
+        }
+
+        // Arrow drawing utility
+        function drawArrow(x, y, length, angle, color, lineW = 3) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(length, 0);
+            ctx.lineWidth = lineW;
+            ctx.strokeStyle = color;
+            ctx.stroke();
+            
+            // Arrowhead
+            ctx.beginPath();
+            ctx.moveTo(length, 0);
+            ctx.lineTo(length - 12, -6);
+            ctx.lineTo(length - 12, 6);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        // Draw structural thorax/lungs
+        function drawThorax(x, y, scale, state) {
+            const isInsp = state === 'in';
+            
+            // Trachea
+            ctx.beginPath();
+            ctx.moveTo(x, y - 120);
+            ctx.lineTo(x, y - 70);
+            ctx.lineWidth = 14;
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            // Lung shape logic
+            const lungW = isInsp ? 75 : 60;
+            const lungH = isInsp ? 130 : 100;
+            
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#0284c7'; // Tech blue
+            ctx.fillStyle = 'rgba(2, 132, 199, 0.1)';
+
+            // Left Lung (Viewer's left)
+            ctx.beginPath();
+            ctx.moveTo(x - 5, y - 60);
+            ctx.bezierCurveTo(x - lungW, y - 60, x - lungW - 20, y + lungH/2, x - lungW, y + lungH);
+            ctx.bezierCurveTo(x - lungW/2, y + lungH + 10, x - 10, y + lungH - 20, x - 5, y);
+            ctx.fill(); ctx.stroke();
+
+            // Right Lung (Viewer's right)
+            ctx.beginPath();
+            ctx.moveTo(x + 5, y - 60);
+            ctx.bezierCurveTo(x + lungW, y - 60, x + lungW + 20, y + lungH/2, x + lungW, y + lungH);
+            ctx.bezierCurveTo(x + lungW/2, y + lungH + 10, x + 10, y + lungH - 20, x + 5, y);
+            ctx.fill(); ctx.stroke();
+
+            // DIAPHRAGM (The core requirement: highlight extremely well)
+            ctx.beginPath();
+            ctx.moveTo(x - lungW - 15, y + lungH + (isInsp ? 5 : -15));
+            
+            // Control points for the curve
+            if (isInsp) {
+                // Flat / Contracted / Moved down
+                ctx.quadraticCurveTo(x, y + lungH + 20, x + lungW + 15, y + lungH + 5);
+            } else {
+                // Domed / Relaxed / Moved up
+                ctx.quadraticCurveTo(x, y + lungH - 60, x + lungW + 15, y + lungH - 15);
+            }
+            
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = '#ef4444'; // Tech coral - EXTREMELY PROMINENT
+            ctx.lineCap = 'round';
+            ctx.stroke();
+            
+            // Diaphragm label
+            ctx.fillStyle = '#ef4444';
+            ctx.font = 'bold 13px Inter';
+            ctx.textAlign = 'center';
+            if(isInsp) {
+                ctx.fillText('Zwerchfell (kontrahiert, flach)', x, y + lungH + 40);
+                // Diaphragm arrows (moving down)
+                drawArrow(x - 40, y + lungH + 15, 25, Math.PI/2, '#ef4444', 4);
+                drawArrow(x + 40, y + lungH + 15, 25, Math.PI/2, '#ef4444', 4);
+            } else {
+                ctx.fillText('Zwerchfell (entspannt, gewölbt)', x, y + lungH + 30);
+                // Diaphragm arrows (moving up)
+                drawArrow(x - 40, y + lungH - 25, 25, -Math.PI/2, '#ef4444', 4);
+                drawArrow(x + 40, y + lungH - 25, 25, -Math.PI/2, '#ef4444', 4);
+            }
+
+            // Thorax/Air Arrows
+            if (isInsp) {
+                // Air in
+                drawArrow(x, y - 140, 40, Math.PI/2, '#06b6d4', 4);
+                // Ribs expanding
+                drawArrow(x - lungW - 10, y + lungH/2, 30, Math.PI, '#06b6d4', 3);
+                drawArrow(x + lungW + 10, y + lungH/2, 30, 0, '#06b6d4', 3);
+            } else {
+                // Air out
+                drawArrow(x, y - 100, 40, -Math.PI/2, '#0284c7', 4);
+                // Ribs contracting
+                drawArrow(x - lungW - 40, y + lungH/2, 30, 0, '#0284c7', 3);
+                drawArrow(x + lungW + 40, y + lungH/2, 30, Math.PI, '#0284c7', 3);
+            }
+        }
+
+        function drawScene() {
+            drawGrid();
+
+            const cLeft = width * 0.28;
+            const cRight = width * 0.72;
+            const yBase = height / 2 - 20;
+
+            // Dividers
+            ctx.beginPath();
+            ctx.moveTo(width/2, 40);
+            ctx.lineTo(width/2, height - 40);
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([8, 8]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Titles
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#1e293b';
+            ctx.font = 'bold 22px Space Grotesk';
+            ctx.fillText('INSPIRATION', cLeft, 50);
+            ctx.fillText('EXSPIRATION', cRight, 50);
+
+            ctx.font = '14px Inter';
+            ctx.fillStyle = '#64748b';
+            ctx.fillText('Thorax dehnt sich aus, Unterdruck entsteht', cLeft, 75);
+            ctx.fillText('Thorax verengt sich, Luft wird ausgepresst', cRight, 75);
+
+            // Draw Structures
+            drawThorax(cLeft, yBase, 1, 'in');
+            drawThorax(cRight, yBase, 1, 'out');
+            
+            // Legend
+            ctx.fillStyle = '#ef4444';
+            ctx.font = 'bold 14px Inter';
+            ctx.textAlign = 'left';
+            ctx.fillText('■ Zwerchfell (Primärer Atemmuskel)', 30, height - 20);
+        }
+
+        drawScene();
+
+        // Responsive redrawing
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawScene();
+        });
+    });
+</script>
+
+</body>
+</html>

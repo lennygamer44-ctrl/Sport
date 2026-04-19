@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.1b Belastungskomponenten - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-dark: #212529;
+            --text-muted: #6c757d;
+            --primary: #3a0ca3;
+            --secondary: #4361ee;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --abi-dark: #0b090a;
+            --abi-glow: #e5383b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 17px;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Header / Hero Area */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 400;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .intro-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 4rem;
+            border-left: 6px solid var(--accent);
+            font-size: 1.15rem;
+        }
+
+        /* 2x2 Grid for Components */
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        @media (max-width: 850px) {
+            .components-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .component-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .component-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .component-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary);
+        }
+
+        .card-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: rgba(67, 97, 238, 0.1);
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1;
+        }
+
+        .component-card h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .component-card p {
+            margin-bottom: 1.5rem;
+        }
+
+        .measurement-box {
+            background: rgba(76, 201, 240, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1.2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .measurement-box strong {
+            display: block;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+
+        /* Interactive Canvas Section */
+        .interactive-section {
+            background: white;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+            margin-bottom: 5rem;
+            text-align: center;
+        }
+
+        .interactive-section h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .interactive-section p {
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            background: #fafafa;
+            padding: 2rem 1rem;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+        }
+
+        .controls {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slider-label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        input[type=range] {
+            width: 100%;
+            max-width: 400px;
+            accent-color: var(--accent);
+            height: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Abitur Premium Box */
+        .abitur-box {
+            background-color: var(--abi-dark);
+            color: #f8f9fa;
+            padding: 4rem 3rem;
+            border-radius: 24px;
+            margin: 4rem 0 6rem;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(229, 56, 59, 0.2);
+            overflow: hidden;
+        }
+
+        .abitur-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--abi-glow);
+            box-shadow: 0 0 20px var(--abi-glow);
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-glow);
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .abitur-box h2 {
+            font-size: 2.5rem;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .abi-intro {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 2rem;
+            color: #ced4da;
+        }
+
+        .abi-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .abi-content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .abi-item h3 {
+            color: var(--abi-glow);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .abi-item p {
+            color: #adb5bd;
+            line-height: 1.8;
+        }
+
+        .highlight-text {
+            color: white;
+            font-weight: 600;
+            background: rgba(229, 56, 59, 0.2);
+            padding: 0 5px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <h1>1.1.1b Belastungskomponenten</h1>
+            <p>Umfang, Intensität, Dichte, Dauer – Die Steuerungselemente der physiologischen Anpassung</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="intro-box">
+            Das sogenannte <strong>Belastungsgefüge</strong> (auch Belastungsnormative genannt) beschreibt die quantitative und qualitative Ausprägung eines Trainingsreizes. Nur durch die exakte Abstimmung dieser spezifischen Komponenten wird eine gezielte physiologische Anpassung (Adaptation) im Organismus ausgelöst. Eine Veränderung auch nur eines Parameters führt unweigerlich zu einer veränderten Trainingswirkung.
+        </div>
+
+        <div class="components-grid">
+            <!-- Komponente 1 -->
+            <div class="component-card">
+                <div class="card-number">01</div>
+                <h2>Belastungsintensität (Reizstärke)</h2>
+                <p>Die Intensität ist das Maß für die qualitative Stärke und Anstrengung eines einzelnen Trainingsreizes. Sie bestimmt maßgeblich, welche Energiebereitstellungswege und Muskelfasertypen primär beansprucht werden.</p>
+                <div class="measurement-box">
+                    <strong>Messgrößen</strong>
+                    Prozent der Maximalkraft (z. B. 80 % des 1RM - One Repetition Maximum), Herzfrequenz (z. B. 160 S/min), Laufgeschwindigkeit (z. B. 6 m/s) oder auch das subjektive Belastungsempfinden (z. B. Borg-Skala).
+                </div>
+            </div>
+
+            <!-- Komponente 2 -->
+            <div class="component-card">
+                <div class="card-number">02</div>
+                <h2>Belastungsumfang (Reizumfang)</h2>
+                <p>Der Umfang beschreibt die Gesamtmenge (Quantität) der gesetzten Trainingsreize innerhalb einer definierten Trainingseinheit oder eines Trainingszyklus.</p>
+                <div class="measurement-box">
+                    <strong>Messgrößen</strong>
+                    Zurückgelegte Gesamtstrecke (z. B. 10 km beim Ausdauertraining), bewegtes Gesamtgewicht (z. B. bewegte Tonnen im Krafttraining), oder die Gesamtanzahl an Wiederholungen und Serien (z. B. 5 Serien à 10 Wiederholungen).
+                </div>
+            </div>
+
+            <!-- Komponente 3 -->
+            <div class="component-card">
+                <div class="card-number">03</div>
+                <h2>Belastungsdauer (Reizdauer)</h2>
+                <p>Der Dauer definiert die zeitliche Einwirkung eines einzelnen Trainingsreizes oder einer Übungsserie auf den Organismus. Sie ist entscheidend dafür, wann die Ermüdung einsetzt und welche Stoffwechselprozesse dominieren.</p>
+                <div class="measurement-box">
+                    <strong>Messgrößen</strong>
+                    Zeitdauer eines Sprints (z. B. 12 Sekunden), Dauer einer Intervallbelastung oder die "Time Under Tension" (TUT) im Krafttraining (z. B. 40 Sekunden muskuläre Spannungsdauer pro Satz).
+                </div>
+            </div>
+
+            <!-- Komponente 4 -->
+            <div class="component-card">
+                <div class="card-number">04</div>
+                <h2>Belastungsdichte (Pausengestaltung)</h2>
+                <p>Die Dichte beschreibt das zeitliche Verhältnis von Belastung zu Erholung, also primär die Pausenlänge zwischen einzelnen Reizen (Wiederholungen) oder Reizserien (Sätzen). Die Dichte reguliert den Grad der Ermüdung und die Erholungsfähigkeit.</p>
+                <div class="measurement-box" style="border-left-color: var(--accent); background: rgba(247, 37, 133, 0.05);">
+                    <strong style="color: var(--accent);">Differenzierung</strong>
+                    Man unterscheidet zwischen einer "lohnenden Pause" (unvollständige Erholung, meist Intervallmethode) und einer "vollständigen Pause" (komplette Erholung von ZNS/Energiespeicher, zwingend beim Schnelligkeits-/Maximalkrafttraining).
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Canvas: Die Waage des Trainings -->
+        <section class="interactive-section">
+            <h2>Die Waage des Belastungsgefüges</h2>
+            <p>Um Übertraining zu vermeiden, müssen sich <strong>Umfang und Intensität</strong> oft umgekehrt proportional zueinander verhalten. Nutze den Slider, um die Intensität zu verändern und beobachte die physiologische Auswirkung auf den Umfang!</p>
+            
+            <div class="canvas-container">
+                <canvas id="balanceCanvas" width="800" height="350"></canvas>
+                <div class="controls">
+                    <label class="slider-label" for="intensitySlider">Intensität anpassen:</label>
+                    <input type="range" id="intensitySlider" min="10" max="90" value="50">
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-box">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                In der schriftlichen Abiturprüfung (eA) sind die Belastungskomponenten dein <strong>universelles Handwerkszeug</strong>, um Trainingsmethoden wissenschaftlich korrekt zu definieren. Im LehrplanPLUS wird ausdrücklich die "Planung und Steuerung von Trainingseinheiten" gefordert. Dieser Punkt ist absolutes Grundlagenwissen und wird in Klausuren vorausgesetzt!
+            </p>
+
+            <div class="abi-content-grid">
+                <div class="abi-item">
+                    <h3>1. Die Parametrisierung von Methoden</h3>
+                    <p>Wenn in der Prüfung verlangt wird, eine Trainingsmethode zur Verbesserung der Sprungkraft (z. B. für den Volleyball-Block) zu beschreiben, reicht es nicht, "Methode der maximalen Krafteinsätze" als Schlagwort in den Raum zu werfen. <br><br>
+                    <span class="highlight-text">Du musst sie zwingend parametrisieren!</span><br><br>
+                    Das bedeutet, du definierst die <strong>Intensität</strong> (z. B. 90-100 % der Maximalkraft), den <strong>Umfang</strong> (z. B. 1-3 Wiederholungen pro Satz, 3-5 Sätze), die <strong>Dichte</strong> (z. B. vollständige Pause von 3-5 Minuten zur ZNS-Erholung) und die <strong>Dauer</strong> (explosive, schnellstmögliche Kontraktion).</p>
+                </div>
+
+                <div class="abi-item">
+                    <h3>2. Transfer auf Ausdauer & Adaption</h3>
+                    <p>Dasselbe Prinzip gilt für das Ausdauertraining. Erläuterst du Methoden zur Verbesserung der aeroben Ausdauer (z. B. Dauermethode oder extensive Intervallmethode), musst du die Belastungskomponenten exakt angeben, um daraus die <strong>beabsichtigten physiologischen Adaptationen</strong> des Herz-Kreislauf-Systems (wie Sportherzbildung oder Kapillarisierung) logisch abzuleiten.<br><br>
+                    <span class="highlight-text">Merke: Die Adaption des Körpers ist immer das direkte Resultat des gewählten Belastungsgefüges.</span></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('balanceCanvas');
+            const ctx = canvas.getContext('2d');
+            const slider = document.getElementById('intensitySlider');
+
+            // Responsive Canvas Setup
+            function resizeCanvas() {
+                const container = canvas.parentElement;
+                canvas.width = container.clientWidth - 32; // padding offset
+                canvas.height = 350;
+                drawWaage();
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            slider.addEventListener('input', drawWaage);
+
+            function drawWaage() {
+                const intensityVal = parseInt(slider.value, 10);
+                const volumeVal = 100 - intensityVal; // Inverse Proportion
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const cx = canvas.width / 2;
+                const cy = canvas.height - 80;
+
+                // Draw Base Triangle
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(cx - 30, cy + 60);
+                ctx.lineTo(cx + 30, cy + 60);
+                ctx.closePath();
+                ctx.fillStyle = '#495057';
+                ctx.fill();
+
+                // Calculate Rotation
+                // If intensity > 50, left side goes down (positive rotation angle if left is left)
+                // We'll put Intensity on the left, Volume on the right
+                const maxAngle = Math.PI / 8; // Max tilt
+                const normalizedTilt = (intensityVal - 50) / 50; // -1 to 1
+                const angle = normalizedTilt * -maxAngle; // Left side heavy = negative angle
+
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.rotate(angle);
+
+                // Draw Plank
+                const plankWidth = canvas.width > 600 ? 500 : canvas.width * 0.8;
+                const plankThickness = 12;
+                ctx.fillStyle = '#adb5bd';
+                ctx.fillRect(-plankWidth/2, -plankThickness/2, plankWidth, plankThickness);
+
+                // Draw Intensität Box (Left)
+                const leftX = -plankWidth/2 + 20;
+                const boxBaseWidth = 60;
+                const intBoxHeight = 30 + (intensityVal * 1.5); // size scales with value
+                
+                ctx.fillStyle = '#f72585'; // Accent color
+                ctx.fillRect(leftX, -plankThickness/2 - intBoxHeight, boxBaseWidth, intBoxHeight);
+                
+                // Draw Umfang Box (Right)
+                const rightX = plankWidth/2 - 20 - boxBaseWidth;
+                const volBoxHeight = 30 + (volumeVal * 1.5);
+
+                ctx.fillStyle = '#4cc9f0'; // Success color
+                ctx.fillRect(rightX, -plankThickness/2 - volBoxHeight, boxBaseWidth, volBoxHeight);
+
+                // Add Text inside rotated context
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 16px Montserrat';
+                ctx.textAlign = 'center';
+                
+                // Text for Intensität (only show if box is tall enough)
+                if(intBoxHeight > 40) {
+                    ctx.fillText('INT', leftX + boxBaseWidth/2, -plankThickness/2 - 15);
+                }
+                // Text for Umfang
+                if(volBoxHeight > 40) {
+                    ctx.fillText('UMF', rightX + boxBaseWidth/2, -plankThickness/2 - 15);
+                }
+
+                ctx.restore();
+
+                // Draw Static Status Text
+                ctx.fillStyle = '#212529';
+                ctx.font = 'bold 18px Montserrat';
+                ctx.textAlign = 'center';
+                
+                let statusText = "Ausgewogenes Training";
+                if (intensityVal > 75) statusText = "Hohe Intensität -> Geringer Umfang (z.B. Maximalkraft)";
+                else if (intensityVal < 25) statusText = "Hoher Umfang -> Geringe Intensität (z.B. Dauermethode)";
+
+                ctx.fillText(statusText, cx, 40);
+
+                // Display exact values
+                ctx.font = '16px Open Sans';
+                ctx.fillStyle = '#f72585';
+                ctx.textAlign = 'left';
+                ctx.fillText(`Intensität: ${intensityVal}%`, 20, 30);
+                
+                ctx.fillStyle = '#4cc9f0';
+                ctx.textAlign = 'right';
+                ctx.fillText(`Umfang: ${volumeVal}%`, canvas.width - 20, 30);
+            }
+
+            // Init
+            resizeCanvas();
+        });
+    </script>
+</body>
+</html>

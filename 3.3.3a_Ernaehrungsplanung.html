@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.3.3a Ernährungsplanung: Trainings- und Wettkampfzyklus - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800;900&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Base Theme */
+            --bg-main: #f1f5f9;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --card-bg: #ffffff;
+            
+            /* Periodization Colors */
+            --col-prep: #2563eb;       /* Blue for Preparation */
+            --bg-prep: #eff6ff;
+            
+            --col-taper: #d97706;      /* Amber/Gold for Tapering/Loading */
+            --bg-taper: #fffbeb;
+            
+            --col-trans: #059669;      /* Green for Transition/Regen */
+            --bg-trans: #ecfdf5;
+
+            /* Abitur Theme */
+            --abi-bg: #1e1b4b;         /* Deep Indigo */
+            --abi-gold: #facc15;
+            --abi-text: #f8fafc;
+
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-strong: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.65;
+            font-size: 1.05rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- 1. HEADER --- */
+        .doc-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 8px solid var(--text-dark);
+        }
+
+        .doc-header::after {
+            content: 'CYCLE';
+            position: absolute;
+            top: -15px; right: 10px;
+            font-size: 7rem;
+            font-weight: 900;
+            color: #f1f5f9;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .doc-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .doc-header .intro {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight-bold {
+            font-weight: 700;
+            color: var(--text-dark);
+            background: #e2e8f0;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        /* --- 2. PERIODIZATION SECTIONS --- */
+        .cycle-section {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem 3rem;
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .cycle-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Specific Cycle Themes */
+        .sec-prep { border-left: 8px solid var(--col-prep); }
+        .sec-prep h2 { color: var(--col-prep); border-bottom-color: var(--bg-prep); }
+        
+        .sec-taper { border-left: 8px solid var(--col-taper); }
+        .sec-taper h2 { color: var(--col-taper); border-bottom-color: var(--bg-taper); }
+
+        .sec-trans { border-left: 8px solid var(--col-trans); }
+        .sec-trans h2 { color: var(--col-trans); border-bottom-color: var(--bg-trans); }
+
+        /* Grids within cycles */
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .focus-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid #e2e8f0;
+        }
+
+        .focus-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .sec-prep .focus-card h3 { color: var(--col-prep); }
+        .sec-taper .focus-card h3 { color: var(--col-taper); }
+        .sec-trans .focus-card h3 { color: var(--col-trans); }
+
+        .focus-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .focus-card strong {
+            color: var(--text-dark);
+        }
+
+        .alert-box {
+            background: #fff1f2;
+            color: #9f1239;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border-left: 4px solid #e11d48;
+            margin-top: 1.5rem;
+            font-style: italic;
+        }
+
+        /* --- 3. MATRIX TABLE (KI 2) --- */
+        .matrix-wrapper {
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .matrix-wrapper h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .styled-table thead tr {
+            background-color: var(--text-dark);
+            color: #ffffff;
+        }
+
+        .styled-table th {
+            padding: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        .styled-table td {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .styled-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .styled-table tbody tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        /* Table Row Highlights */
+        .tr-prep td:first-child { border-left: 6px solid var(--col-prep); font-weight: 700; color: var(--col-prep); background: var(--bg-prep); }
+        .tr-taper td:first-child { border-left: 6px solid var(--col-taper); font-weight: 700; color: var(--col-taper); background: var(--bg-taper); }
+        .tr-trans td:first-child { border-left: 6px solid var(--col-trans); font-weight: 700; color: var(--col-trans); background: var(--bg-trans); }
+
+        .tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            background: #e2e8f0;
+            color: #334155;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-hyper { background: #fee2e2; color: #b91c1c; }
+        .tag-iso { background: #e0f2fe; color: #0369a1; }
+        .tag-hypo { background: #f3e8ff; color: #6d28d9; }
+
+        /* --- 4. CANVAS GRAPHIC --- */
+        .canvas-section {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .canvas-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- 5. ABITUR EXAM BOX --- */
+        .abitur-board {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            border-radius: var(--radius-lg);
+            padding: 4rem;
+            box-shadow: var(--shadow-strong);
+            border-top: 8px solid var(--abi-gold);
+            position: relative;
+        }
+
+        .abitur-board h2 {
+            color: var(--abi-gold);
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .exam-case {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(250, 204, 21, 0.2);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+        }
+
+        .exam-case h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(250, 204, 21, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .exam-case .scenario {
+            color: #fca5a5;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid #ef4444;
+        }
+
+        .solution-text {
+            color: #e2e8f0;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .solution-text strong {
+            color: var(--abi-gold);
+        }
+
+        .blueprint-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px dashed #10b981;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-top: 2rem;
+        }
+
+        .blueprint-box h4 {
+            color: #34d399;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .blueprint-box p {
+            color: #ecfdf5;
+            font-family: 'Source Sans 3', sans-serif;
+        }
+
+        @media (max-width: 900px) {
+            .focus-grid { grid-template-columns: 1fr; }
+            .doc-header, .cycle-section, .abitur-board { padding: 2rem; }
+            .doc-header h1 { font-size: 2.2rem; }
+            .styled-table th, .styled-table td { padding: 1rem; font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>3.3.3a Ernährungsplanung: Trainings- und Wettkampfzyklus</h1>
+        <p class="intro">
+            Die isolierte Betrachtung von Nährstoffen reicht für die sportliche Leistungsoptimierung nicht aus. Im modernen Leistungssport, und somit auch im Fokus des erhöhten Anforderungsniveaus (eA), muss die Ernährung als hochdynamischer Prozess verstanden werden, der analog zur Trainingssteuerung exakt periodisiert wird. 
+            Man spricht hierbei von der <span class="highlight-bold">Nutritional Periodization</span> (Ernährungsperiodisierung). Der Ernährungsplan muss sich zwingend an den Zielen des jeweiligen Trainingszyklus orientieren.
+        </p>
+    </header>
+
+    <!-- 1. Vorbereitungsperiode -->
+    <section class="cycle-section sec-prep">
+        <h2>⚙️ 1. Vorbereitungsperiode (Makro-/Mesozyklus)</h2>
+        <p class="intro-text">In dieser Phase werden die konditionellen Grundlagen (Kraft, Ausdauer) gelegt. Das Training ist geprägt von hohen Umfängen. Der Ernährungsplan muss den morphologischen Umbau des Körpers unterstützen.</p>
+        
+        <div class="focus-grid">
+            <div class="focus-card">
+                <h3>Fokus Kraftaufbau (Hypertrophie)</h3>
+                <p>Der Ernährungsplan muss zwingend eine <strong>hyperkalorische Bilanz</strong> (Energieüberschuss von ca. 300–500 kcal/Tag) aufweisen, da der Organismus ohne diesen Überschuss keine neuen Sarkomere (Muskelgewebe) synthetisiert.</p>
+                <p style="margin-top: 1rem;">Die Proteinzufuhr wird auf ca. <strong>1,6 bis 2,0 g pro kg Körpergewicht</strong> angehoben und strategisch über den Tag verteilt (alle 3-4 Stunden), um die Proteinbiosynthese konstant aufrechtzuerhalten.</p>
+            </div>
+            
+            <div class="focus-card">
+                <h3>Fokus Ausdaueraufbau (Train-Low)</h3>
+                <p>Hier wird teilweise das Konzept des <strong>"Train-Low"</strong> angewendet. Dabei absolviert der Athlet bestimmte Trainingseinheiten bewusst mit entleerten Glykogenspeichern (z. B. morgens nüchtern).</p>
+                <p style="margin-top: 1rem;">Dies erzwingt eine extreme Anpassung des Fettstoffwechsels (Vermehrung von Mitochondrien und aeroben Enzymen), da der Körper lernt, Fette effizienter unter Belastung zu verbrennen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Tapering Phase -->
+    <section class="cycle-section sec-taper">
+        <h2>⚡ 2. Tapering-Phase (Mikrozyklus vor Wettkampf)</h2>
+        <p class="intro-text">In den 3 bis 7 Tagen unmittelbar vor dem Hauptwettkampf wird das Trainingsvolumen massiv reduziert (Tapering), um Ermüdung abzubauen, während die Form erhalten bleibt. Ernährungsphysiologisch steht diese Phase ganz im Zeichen der Superkompensation der Glykogendepots.</p>
+        
+        <div class="focus-card" style="border-left: 4px solid var(--col-taper);">
+            <h3>Das klassische Carbo-Loading</h3>
+            <p>Während der Trainingsumfang sinkt, wird der Anteil der Kohlenhydrate in der Ernährung extrem gesteigert (auf bis zu <strong>70–80 % der Gesamtenergiezufuhr</strong> bzw. 8–10 g KH pro kg Körpergewicht).</p>
+            
+            <div class="alert-box" style="background: #fffbeb; border-color: #f59e0b; color: #b45309;">
+                <strong style="color: #d97706; display: block; margin-bottom: 5px;">🎯 Physiologisches Ziel:</strong>
+                Die intramuskulären Glykogenspeicher, die normalerweise ca. 300–400 g fassen, können durch diesen systematischen Überschuss auf bis zu 600 g anwachsen (Superkompensation). Dies verzögert die periphere Ermüdung beim Wettkampf drastisch. <em>Wichtig: Da jedes Gramm Glykogen im Muskel ca. 3 g Wasser bindet, geht diese Phase oft mit einer spürbaren, aber gewollten Gewichtszunahme (Wassereinlagerung) einher.</em>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Übergangsperiode -->
+    <section class="cycle-section sec-trans">
+        <h2>🧘 3. Übergangsperiode (Regeneration/Transition)</h2>
+        <p class="intro-text">Nach dem Ende der Wettkampfsaison dient diese Phase der vollständigen physischen und psychischen Erholung.</p>
+        
+        <div class="focus-grid">
+            <div class="focus-card">
+                <h3>Trainingsreduktion</h3>
+                <p>Das Training wird auf ein Minimum reduziert (aktive Erholung). Der Ernährungsplan muss zwingend an den nun drastisch gesunkenen Leistungsumsatz (PAL-Faktor) angepasst werden.</p>
+            </div>
+            
+            <div class="focus-card">
+                <h3>Kalorische Anpassung</h3>
+                <p>Eine <strong>isokalorische bis leicht hypokalorische Bilanz</strong> ist oft nötig, um eine unerwünschte Zunahme von Körperfett durch das wegfallende Trainingsvolumen zu verhindern. Die Mikronährstoffdichte (Vitamine, Mineralien zur Immunstabilisierung) muss jedoch hoch bleiben.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Canvas Graphic -->
+    <section class="canvas-section">
+        <h3>Visualisierung: Trainingsvolumen vs. Kohlenhydratzufuhr</h3>
+        <p>Der gegenläufige Trend in der Nutritional Periodization (Saisonverlauf)</p>
+        <div class="canvas-container">
+            <canvas id="periodizationChart" width="900" height="350"></canvas>
+        </div>
+    </section>
+
+    <!-- KI 2: Matrix Table -->
+    <div class="matrix-wrapper">
+        <h2>Matrix: Ernährungsperiodisierung im Überblick</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>1. Trainingszyklus</th>
+                    <th>2. Primäres Trainingsziel</th>
+                    <th>3. Kalorische Bilanz</th>
+                    <th>4. Ernährungsfokus</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="tr-prep">
+                    <td>Vorbereitungsperiode</td>
+                    <td>Konditionelle Grundlagen, Kraftaufbau, Ausdaueraufbau</td>
+                    <td>
+                        <span class="tag tag-hyper">Hyperkalorisch</span><br>
+                        (Überschuss +300 bis 500 kcal)
+                    </td>
+                    <td><strong>Proteine</strong> (für Hypertrophie)<br><strong>Train-Low</strong> (Fettstoffwechsel)</td>
+                </tr>
+                <tr class="tr-taper">
+                    <td>Tapering-Phase</td>
+                    <td>Form erhalten, Ermüdung abbauen, Speicher füllen</td>
+                    <td>
+                        <span class="tag tag-iso">Isokalorisch</span> bis leicht Hyperkalorisch
+                    </td>
+                    <td><strong>Carbo-Loading</strong> (Superkompensation der Glykogendepots)</td>
+                </tr>
+                <tr class="tr-trans">
+                    <td>Übergangsperiode</td>
+                    <td>Vollständige Regeneration, aktive Erholung</td>
+                    <td>
+                        <span class="tag tag-iso">Isokalorisch</span> bis<br>
+                        <span class="tag tag-hypo">Hypokalorisch</span>
+                    </td>
+                    <td>Gewichtsmanagement,<br>hohe <strong>Mikronährstoffdichte</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Abitur Transfer Box -->
+    <section class="abitur-board">
+        <h2><span style="font-size: 2.8rem;">🏆</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die Erstellung oder Beurteilung eines an den Zyklus angepassten Ernährungsplans ist eine <strong>komplexe Transferleistung</strong>. Du musst hier nachweisen, dass du die Prinzipien der Trainingslehre mit der Biochemie der Ernährung verknüpfen kannst.
+        </p>
+
+        <!-- Case 1 -->
+        <div class="exam-case">
+            <h3>Fehlerhafte Pläne korrigieren</h3>
+            <div class="scenario">
+                <strong>Fallbeispiel:</strong> Ein Marathonläufer absolviert drei Tage vor dem Wettkampf (in der Tapering-Phase) eine Low-Carb-Diät (kohlenhydratarm, proteinreich), um noch etwas Gewicht ("Wettkampfgewicht") zu verlieren.
+            </div>
+            <div class="solution-text">
+                <strong>Die eA-Lösungsstrategie (Biologisch vernichten!):</strong><br>
+                Du musst dieses Vorgehen als fatalen methodischen Fehler entlarven! Du argumentierst: In der Tapering-Phase darf unter keinen Umständen ein Kohlenhydratdefizit herrschen. Eine Low-Carb-Diät entleert die muskulären Glykogendepots, anstatt sie zu superkompensieren. Der Athlet wird im Marathon aufgrund fehlender schneller Energie massiv einbrechen. Der Plan muss in ein Carbo-Loading umgeformt werden.
+            </div>
+        </div>
+
+        <!-- Case 2 -->
+        <div class="blueprint-box">
+            <h4>💡 Blueprint: Den eigenen Ernährungsplan begründen</h4>
+            <p style="margin-bottom: 1rem; font-style: italic; color: #a7f3d0;">Wenn der Operator lautet "Erstellen Sie einen Ernährungsplan...", schreibe keine konkreten Rezepte ("Ein Apfel und zwei Eier"). Das Kultusministerium will das biologische Grundgerüst sehen.</p>
+            <p>
+                <strong>Schreibe stattdessen:</strong><br>
+                "Der Plan für den Makrozyklus 'Kraftaufbau' erfordert zwingend eine hyperkalorische Bilanz (+500 kcal). Die Makronährstoffverteilung wird auf 50% Kohlenhydrate, 30% Protein (ca. 2g/kg Körpergewicht für die Muskelproteinsynthese) und 20% Fette eingestellt."
+            </p>
+            <p style="margin-top: 1rem; font-weight: bold; color: #facc15;">Eine solche biologisch/mathematisch fundierte Begründung garantiert die volle Punktzahl im Anforderungsbereich III!</p>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('periodizationChart');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    const padL = 60;
+    const padR = 40;
+    const padT = 40;
+    const padB = 50;
+    const graphW = w - padL - padR;
+    const graphH = h - padT - padB;
+
+    // Phases (X-Axis)
+    const phases = [
+        { label: 'Vorbereitung', x: padL + graphW * 0.15, color: '#2563eb' },
+        { label: 'Tapering', x: padL + graphW * 0.5, color: '#d97706' },
+        { label: 'Wettkampf', x: padL + graphW * 0.65, color: '#dc2626' },
+        { label: 'Übergang', x: padL + graphW * 0.85, color: '#059669' }
+    ];
+
+    // 1. Draw Grid & Axes
+    ctx.strokeStyle = '#cbd5e1';
+    ctx.lineWidth = 2;
+    // Y-Axis
+    ctx.beginPath(); ctx.moveTo(padL, padT); ctx.lineTo(padL, h - padB); ctx.stroke();
+    // X-Axis
+    ctx.beginPath(); ctx.moveTo(padL, h - padB); ctx.lineTo(w - padR + 20, h - padB); ctx.stroke();
+
+    // Axis Labels
+    ctx.fillStyle = '#64748b';
+    ctx.font = '14px "Source Sans 3"';
+    ctx.textAlign = 'right';
+    ctx.fillText('Intensität / Menge', padL - 10, padT + 10);
+    ctx.fillText('Niedrig', padL - 10, h - padB - 5);
+    ctx.textAlign = 'left';
+    ctx.fillText('Saisonverlauf', w - padR, h - padB + 20);
+
+    // Draw Phase Dividers & Labels
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.textAlign = 'center';
+    
+    phases.forEach(p => {
+        ctx.beginPath();
+        ctx.moveTo(p.x, padT);
+        ctx.lineTo(p.x, h - padB);
+        ctx.stroke();
+        
+        ctx.fillStyle = p.color;
+        ctx.font = 'bold 14px "Montserrat"';
+        ctx.fillText(p.label, p.x, h - padB + 25);
+    });
+    ctx.setLineDash([]);
+
+    // 2. Draw Training Volume Line (High in Prep, drops in Taper, spike in Wettkampf, drops in Trans)
+    ctx.strokeStyle = '#1e293b'; // Dark slate for volume
+    ctx.lineWidth = 4;
+    ctx.lineJoin = 'round';
+    
+    ctx.beginPath();
+    ctx.moveTo(padL, padT + 40); // Start high
+    ctx.lineTo(phases[0].x, padT + 60); // Prep high
+    ctx.lineTo(phases[1].x, padT + 180); // Taper drop
+    ctx.lineTo(phases[2].x, padT + 20); // Wettkampf spike
+    ctx.lineTo(phases[3].x, padT + 220); // Transition low
+    ctx.lineTo(w - padR, padT + 220);
+    ctx.stroke();
+
+    // 3. Draw Carbohydrate Bars (Normal in Prep, Massive in Taper, Normal in Wettkampf, Low in Trans)
+    const barW = 30;
+    ctx.fillStyle = 'rgba(217, 119, 6, 0.7)'; // Amber for Carbs
+    
+    // Prep Bar
+    ctx.fillRect(phases[0].x - barW/2, padT + 120, barW, graphH - 120);
+    // Taper Bar (Carbo Loading)
+    ctx.fillRect(phases[1].x - barW/2, padT + 20, barW, graphH - 20);
+    // Wettkampf Bar
+    ctx.fillRect(phases[2].x - barW/2, padT + 100, barW, graphH - 100);
+    // Transition Bar
+    ctx.fillRect(phases[3].x - barW/2, padT + 180, barW, graphH - 180);
+
+    // 4. Legend
+    ctx.fillStyle = '#1e293b';
+    ctx.fillRect(padL + 20, padT, 20, 4);
+    ctx.font = '14px "Source Sans 3"';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Trainingsvolumen', padL + 50, padT + 2);
+
+    ctx.fillStyle = 'rgba(217, 119, 6, 0.7)';
+    ctx.fillRect(padL + 20, padT + 20, 20, 15);
+    ctx.fillStyle = '#1e293b';
+    ctx.fillText('Kohlenhydratzufuhr (Carbo-Loading)', padL + 50, padT + 27);
+
+</script>
+</body>
+</html>

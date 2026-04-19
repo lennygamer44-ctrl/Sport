@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.2a Die Prinzipien im Überblick: Biomechanische Prinzipien</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
+        :root {
+            --bg-main: #f4f7f6;
+            --text-main: #2b3a42;
+            --text-light: #52616b;
+            --brand-color: #009688; /* Teal */
+            --brand-dark: #00796b;
+            --brand-light: #e0f2f1;
+            --accent-color: #ff9800; /* Orange */
+            --premium-bg: #1a1a2e;
+            --premium-border: #e94560;
+            --premium-text: #e0e0e0;
+            --white: #ffffff;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+            color: var(--brand-dark);
+            line-height: 1.3;
+        }
+
+        .document-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Header Section */
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 8px solid var(--brand-color);
+        }
+
+        .page-header h1 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Timeline Layout for Principles */
+        .principles-container {
+            position: relative;
+            margin-bottom: 4rem;
+        }
+
+        .principles-container::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--brand-light);
+            border-radius: 2px;
+        }
+
+        .principle-card {
+            position: relative;
+            padding-left: 100px;
+            margin-bottom: 3rem;
+        }
+
+        .principle-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 80px;
+            height: 80px;
+            background: var(--brand-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            font-family: 'Merriweather', serif;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
+            border: 6px solid var(--bg-main);
+            z-index: 2;
+        }
+
+        .principle-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .principle-content:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .principle-content h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--brand-dark);
+        }
+
+        .concept-tag {
+            display: inline-block;
+            background: var(--brand-light);
+            color: var(--brand-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .example-block {
+            margin-top: 1.5rem;
+            background: #fff3e0;
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #d84315;
+        }
+
+        /* Interactive Table Section */
+        .table-section {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 4rem;
+            overflow-x: auto;
+        }
+
+        .table-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .styled-table thead tr {
+            background-color: var(--brand-dark);
+            color: var(--white);
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 1.2rem 1.5rem;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+            transition: background-color 0.2s ease;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f9fbfb;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 4px solid var(--brand-color);
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: var(--brand-light);
+            cursor: default;
+        }
+
+        /* Premium Exam Box */
+        .exam-blueprint {
+            background: var(--premium-bg);
+            color: var(--premium-text);
+            padding: 3.5rem;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border-top: 6px solid var(--premium-border);
+            position: relative;
+        }
+
+        .exam-blueprint h2 {
+            color: #fff;
+            font-size: 2.4rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .exam-blueprint h2::before {
+            content: '⚠️';
+            font-size: 2.2rem;
+        }
+
+        .exam-blueprint .intro {
+            font-size: 1.2rem;
+            color: #a0aab2;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1.5rem;
+        }
+
+        .exam-blueprint h3 {
+            color: var(--premium-border);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: inline-block;
+            border-bottom: 2px solid var(--premium-border);
+        }
+
+        .exam-blueprint p {
+            margin-bottom: 1.5rem;
+        }
+
+        .transfer-tipp {
+            background: rgba(233, 69, 96, 0.1);
+            border: 1px solid var(--premium-border);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .transfer-tipp strong {
+            color: var(--premium-border);
+            font-size: 1.2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .principles-container::before {
+                display: none;
+            }
+            .principle-card {
+                padding-left: 0;
+            }
+            .principle-number {
+                position: relative;
+                margin-bottom: 1rem;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                border: 4px solid var(--white);
+            }
+            .exam-blueprint, .page-header, .table-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="document-wrapper">
+
+    <!-- Header -->
+    <header class="page-header">
+        <h1>2.1.2a Die Prinzipien im Überblick: Biomechanische Prinzipien</h1>
+        <p class="intro-text">
+            Biomechanische Prinzipien sind allgemeingültige Erkenntnisse und Regeln, die die optimalen mechanischen Bedingungen für sportliche Bewegungsabläufe beschreiben. Sie dienen als theoretisches Fundament, um Techniken zu analysieren, Fehler zu korrigieren und Bewegungen auf ein Leistungsmaximum zu trimmen. Für das Abitur auf erhöhtem Anforderungsniveau sind insbesondere die folgenden Prinzipien nach Hochmuth bzw. Meinel/Schnabel relevant:
+        </p>
+    </header>
+
+    <!-- Principles List (Timeline Style) -->
+    <main class="principles-container">
+        
+        <!-- Prinzip 1 -->
+        <article class="principle-card">
+            <div class="principle-number">1</div>
+            <div class="principle-content">
+                <h2>Prinzip des optimalen Beschleunigungsweges</h2>
+                <p>Um einem Sportgerät oder dem eigenen Körper eine hohe Endgeschwindigkeit zu verleihen, muss die beschleunigende Kraft über einen möglichst langen und optimal gestalteten Weg einwirken.</p>
+                <br>
+                <div class="concept-tag">Kernaspekt</div>
+                <p>Der Weg ist nicht zwingend maximal, sondern <strong>optimal</strong> zu wählen, da bei einem zu langen Weg die anatomischen Gelenkwinkel ungünstig werden und die Kraftentfaltung absinkt.</p>
+                <br>
+                <div class="concept-tag" style="background: #e3f2fd; color: #1565c0;">Geometrische Form</div>
+                <p>Der Beschleunigungsweg kann geradlinig (z. B. beim Speerwurf) oder stetig gekrümmt (z. B. beim Diskuswurf durch die Körperverwringung) verlaufen.</p>
+            </div>
+        </article>
+
+        <!-- Prinzip 2 -->
+        <article class="principle-card">
+            <div class="principle-number">2</div>
+            <div class="principle-content">
+                <h2>Prinzip der maximalen Anfangskraft</h2>
+                <p>Eine sportliche Bewegung, bei der eine hohe Endgeschwindigkeit erreicht werden soll, muss durch eine entgegengesetzt gerichtete Bewegung (Ausholbewegung) eingeleitet werden.</p>
+                <br>
+                <div class="concept-tag">Kernaspekt</div>
+                <p>Durch das fließende Abbremsen der Gegenbewegung wird eine Vorspannung in der Muskulatur erzeugt (Speicherung elastischer Energie). Zu Beginn der eigentlichen Beschleunigungsphase liegt dadurch bereits eine positive Kraft vor (die sogenannte <strong>Anfangskraft</strong>), wodurch der resultierende Kraftstoß deutlich vergrößert wird.</p>
+                
+                <div class="example-block">
+                    <strong>Beispiel:</strong> Das dynamische Absenken des Körperschwerpunkts durch Beugung in Sprung-, Knie- und Hüftgelenken vor dem Absprung beim Volleyball-Block.
+                </div>
+            </div>
+        </article>
+
+        <!-- Prinzip 3 -->
+        <article class="principle-card">
+            <div class="principle-number">3</div>
+            <div class="principle-content">
+                <h2>Prinzip der zeitlichen und räumlichen Koordination von Einzelimpulsen (Sukzessivkopplung)</h2>
+                <p>Sportliche Bewegungen (insbesondere Würfe, Stöße, Schläge) werden nicht durch einen einzigen Muskel, sondern durch das zeitlich und räumlich exakt abgestimmte Zusammenwirken vieler Körpersegmente erzeugt.</p>
+                <br>
+                <div class="concept-tag">Kernaspekt</div>
+                <p>Die durch große und kräftige Muskelgruppen (Beine, Hüfte, Rumpf) erzeugten Teilimpulse müssen zeitlich optimal (sukzessiv) auf die kleineren, schnelleren Muskelgruppen (Schulter, Arm, Hand) übertragen werden, um sich zu einem maximalen Gesamtimpuls zu addieren.</p>
+            </div>
+        </article>
+
+        <!-- Prinzip 4 -->
+        <article class="principle-card">
+            <div class="principle-number">4</div>
+            <div class="principle-content">
+                <h2>Prinzip der Gegenwirkung</h2>
+                <p>Dieses Prinzip ist die direkte sportliche Übersetzung des dritten Newtonschen Axioms (<strong>Actio = Reactio</strong>): Übt ein Körper A eine Kraft auf einen Körper B aus, so übt B eine gleich große, entgegengesetzt gerichtete Kraft auf A aus.</p>
+                <br>
+                <div class="concept-tag">Kernaspekt</div>
+                <p>Bewegungen einzelner Extremitäten in der Luft (ohne Bodenkontakt) rufen zwangsläufig Gegenbewegungen anderer Körperteile hervor.</p>
+
+                <div class="example-block">
+                    <strong>Beispiel:</strong> Wenn beim Volleyball-Block die gestreckten Arme über das Netz nach vorne geführt werden (Actio), erfolgt unweigerlich eine Ausgleichsbewegung der gestreckten Beine nach vorne (C-Position), um das Gleichgewicht im Flug zu halten (Reactio).
+                </div>
+            </div>
+        </article>
+
+        <!-- Prinzip 5 -->
+        <article class="principle-card">
+            <div class="principle-number">5</div>
+            <div class="principle-content">
+                <h2>Prinzip der Impulserhaltung</h2>
+                <p>Dieses Prinzip gilt für Rotationsbewegungen. Der Drehimpuls (das Produkt aus Trägheitsmoment und Winkelgeschwindigkeit) eines Körpers bleibt konstant, solange keine äußeren Drehmomente (z. B. Reibung am Boden) auf ihn einwirken.</p>
+                <br>
+                <div class="concept-tag">Kernaspekt</div>
+                <p>Da der Drehimpuls in der Flugphase konstant ist, kann der Athlet durch eine Veränderung seiner Körperhaltung (Massenverteilung) seine Drehgeschwindigkeit steuern. Zieht er die Arme/Beine an den Körper (Verringerung des Trägheitsmoments), erhöht sich zwangsläufig die Winkelgeschwindigkeit (die Drehung wird schneller, z. B. bei einer Pirouette).</p>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Interactive Table (AI-2 Task) -->
+    <section class="table-section">
+        <h2>Kompakt-Übersicht der Prinzipien</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Biomechanisches Prinzip</th>
+                    <th style="width: 45%;">Kurze mechanische Definition</th>
+                    <th style="width: 30%;">Klassisches Sportbeispiel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Optimaler Beschleunigungsweg</strong></td>
+                    <td>Krafteinwirkung erfolgt über einen räumlich (geradlinig oder gekrümmt) und anatomisch ideal ausgerichteten Weg, um eine hohe Endgeschwindigkeit zu generieren.</td>
+                    <td>Körperverwringung beim Diskuswurf (gekrümmter Weg).</td>
+                </tr>
+                <tr>
+                    <td><strong>Maximale Anfangskraft</strong></td>
+                    <td>Eine Ausholbewegung erzeugt Muskelvorspannung, sodass der eigentliche Beschleunigungs-Kraftstoß nicht bei null, sondern bei einer positiven Anfangskraft beginnt.</td>
+                    <td>In-die-Knie-Gehen (Ausholbewegung) vor dem Absprung beim Volleyball.</td>
+                </tr>
+                <tr>
+                    <td><strong>Koordination von Einzelimpulsen (Sukzessivkopplung)</strong></td>
+                    <td>Die Teilimpulse von großen/kräftigen Muskelgruppen fließen zeitlich sukzessiv auf kleinere/schnellere Extremitäten über, um sich zu addieren.</td>
+                    <td>Kraftübertragung von Beinen &rarr; Rumpf &rarr; Schulter &rarr; Arm beim Speerwurf.</td>
+                </tr>
+                <tr>
+                    <td><strong>Gegenwirkung</strong></td>
+                    <td>Actio gleich Reactio. Kraftausübung im stützfreien Raum erzeugt immer eine gleich große, entgegengesetzte Ausgleichsbewegung anderer Körperteile.</td>
+                    <td>C-Position in der Luft beim Volleyball-Block (Arme nach vorne, Beine zum Ausgleich nach vorne).</td>
+                </tr>
+                <tr>
+                    <td><strong>Impulserhaltung</strong></td>
+                    <td>Der Drehimpuls bleibt ohne äußere Kräfte konstant. Durch Veränderung der Körpermasse zur Drehachse wird die Rotationsgeschwindigkeit gesteuert.</td>
+                    <td>Pirouette beim Eiskunstlauf (Arme anlegen = schnellere Rotation).</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Abitur Transfer & Praxis -->
+    <aside class="exam-blueprint">
+        <h2>Abitur-Transfer & Praxis</h2>
+        <p class="intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Das reine Aufzählen dieser Prinzipien reicht im Abitur nicht aus. Du wirst fast immer mit Bildreihen (z. B. Volleyball, Leichtathletik) konfrontiert und musst funktionale Bewegungsanalysen durchführen. Das bedeutet: <strong>Du nutzt die biomechanischen Prinzipien als stichhaltiges Argument, um zu erklären, warum ein Athlet eine bestimmte Bewegung ausführt.</strong>
+        </p>
+
+        <h3>Argumentations-Beispiel (Volleyball-Block)</h3>
+        <p>
+            In der Hauptphase des Blocks schreibst du nicht einfach: <em>"Der Spieler springt ab."</em> Du musst die Prinzipien anwenden: Der beidbeinige Absprung erfolgt nach der Ausholbewegung, um nach dem <strong>"Prinzip der maximalen Anfangskraft"</strong> einen möglichst großen Kraftstoß für eine maximale Sprunghöhe zu erzeugen. 
+        </p>
+        <p>
+            Die Haltung in der Luft (Beine klappen nach vorne) begründest du zwingend mit dem <strong>"Prinzip der Gegenwirkung"</strong>, welches die Bewegung der Hände über das Netz erst ermöglicht.
+        </p>
+
+        <div class="transfer-tipp">
+            <strong>Transfer-Tipp:</strong>
+            <p style="margin-top: 0.5rem; margin-bottom: 0;">
+                Wenn du in einer Klausur erklären sollst, <em>wie</em> eine Bewegung (z.B. ein Wurf) verbessert werden kann, greife immer auf diese Prinzipien zurück. Fehlt die Weite? Dann bemängle die fehlende Ausholbewegung (Verstoß gegen das <em>Prinzip des optimalen Beschleunigungsweges</em>) oder das fehlende In-die-Knie-Gehen (Verstoß gegen das <em>Prinzip der maximalen Anfangskraft</em>).
+            </p>
+        </div>
+    </aside>
+
+</div>
+
+</body>
+</html>

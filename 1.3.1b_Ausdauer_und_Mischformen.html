@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.3.1b Ausdauer und Mischformen - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Wearable Tech & Sports Analytics */
+            --bg-page: #f4f7f6;
+            --bg-card: #ffffff;
+            
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            
+            /* Konditions-Farben */
+            --color-kraft: #8b5cf6;     /* Violett - Maximalkraft */
+            --color-ausdauer: #10b981;  /* Mint - Ausdauer */
+            --color-speed: #0ea5e9;     /* Cyan - Schnelligkeit */
+            
+            /* Hybrid-Farben */
+            --color-ka: #34d399;        /* Kraftausdauer (Kraft + Ausdauer) */
+            --color-ska: #2dd4bf;       /* Schnellkraftausdauer */
+            
+            --abi-bg: #0f172a;
+            --abi-gold: #f59e0b;
+            --abi-cyan: #22d3ee;
+            
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --shadow-soft: 0 10px 25px rgba(0,0,0,0.05);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+        }
+
+        h1, h2, h3, h4, .hybrid-font {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Tech Hero Section --- */
+        .hero {
+            background: var(--bg-card);
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            position: relative;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 4rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, var(--color-kraft), var(--color-ausdauer), var(--color-speed));
+        }
+
+        .hero-tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-ausdauer);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* --- Intro Block --- */
+        .intro-box {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            padding: 2.5rem 3rem;
+            border-radius: var(--radius-md);
+            margin: 0 auto 5rem;
+            border-left: 6px solid var(--color-ka);
+            box-shadow: var(--shadow-soft);
+            font-size: 1.2rem;
+        }
+
+        /* --- Section Titles --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 5rem 0 2rem;
+        }
+
+        .section-num {
+            background: var(--bg-card);
+            color: var(--text-main);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        /* --- 1. Kraftausdauer (Main) --- */
+        .ka-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            border: 1px solid #f1f5f9;
+        }
+
+        .ka-card h3 {
+            font-size: 1.6rem;
+            color: var(--color-ka);
+            margin-bottom: 1rem;
+        }
+
+        .ka-card p {
+            margin-bottom: 1.5rem;
+        }
+
+        .physio-box {
+            background: rgba(52, 211, 153, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-ka);
+            margin-top: 2rem;
+        }
+
+        .physio-box strong {
+            color: #047857;
+            font-family: 'Poppins', sans-serif;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* --- 2. Subkategorien Grid --- */
+        .sub-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        @media (max-width: 850px) {
+            .sub-grid { grid-template-columns: 1fr; }
+        }
+
+        .sub-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sub-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .sub-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 6px; height: 100%;
+        }
+
+        .card-dyn::before { background: var(--color-speed); }
+        .card-stat::before { background: var(--color-kraft); }
+
+        .sub-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-dyn h3 { color: var(--color-speed); }
+        .card-stat h3 { color: var(--color-kraft); }
+
+        .example-tag {
+            display: inline-block;
+            background: #f8fafc;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            margin-top: 1.5rem;
+            border: 1px solid #e2e8f0;
+            color: var(--text-muted);
+        }
+        
+        .example-tag strong { color: var(--text-main); }
+
+        /* --- 3. Weitere Mischformen --- */
+        .complex-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        @media (max-width: 800px) {
+            .complex-grid { grid-template-columns: 1fr; }
+        }
+
+        .comp-card {
+            background: #ffffff;
+            border: 2px solid #f1f5f9;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+        }
+
+        .comp-card h3 {
+            color: var(--text-main);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .comp-card p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        /* --- Canvas Section --- */
+        .canvas-section {
+            background: var(--bg-card);
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+        }
+
+        .canvas-section h2 {
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            position: relative;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- Premium Abitur Box --- */
+        .abitur-prep {
+            background: var(--abi-bg);
+            color: #cbd5e1;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            position: relative;
+            border-top: 5px solid var(--abi-gold);
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 900;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #fde68a;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .abi-card {
+            background: rgba(255,255,255,0.03);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-cyan);
+        }
+
+        .abi-card.warn { border-left-color: var(--abi-gold); }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .abi-card p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .abi-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .hl-gold { color: var(--abi-gold); font-weight: 700; }
+        .hl-cyan { color: var(--abi-cyan); font-weight: 700; }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="hero-tag">Lernbereich 1.3.1b</span>
+            <h1>Ausdauer und Mischformen</h1>
+            <p>Kraftausdauer mit Subkategorien und Mischformen – Die Verschmelzung konditioneller Fähigkeiten im sportlichen Anforderungsprofil.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-box">
+            Neben den reinen Ausprägungen der Maximalkraft und Schnellkraft existieren im Sport komplexe konditionelle Mischformen, bei denen die Kraftkomponente mit Ausdauer- oder Schnelligkeitsfähigkeiten verschmilzt. <strong>Die für viele Sportarten dominierende Mischform ist die Kraftausdauer.</strong>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="section-header">
+            <div class="section-num">1</div>
+            <h2>Kraftausdauer</h2>
+        </div>
+        
+        <div class="ka-card">
+            <h3>Definition & Abgrenzung</h3>
+            <p>Die Kraftausdauer ist die Ermüdungswiderstandsfähigkeit der Muskulatur bei langanhaltenden oder sich wiederholenden Krafteinsätzen mit einem Krafteinsatz von <strong>über 30 % der individuellen Maximalkraft</strong>.</p>
+            <p style="color: var(--text-muted); font-size: 1.05rem;"><em>(Liegt der Krafteinsatz unter 30 %, spricht die Sportbiologie von der reinen Ausdauer, da die Durchblutung des Muskels nicht signifikant durch die Muskelkontraktion abgedrückt wird).</em></p>
+            
+            <div class="physio-box">
+                <strong>Physiologische Grundlagen (Der Hybrid):</strong>
+                Sie erfordert einerseits eine gut ausgeprägte Maximalkraft (damit die Teilbelastungen prozentual weniger anstrengend sind) und andererseits eine hochgradig effiziente periphere Energiebereitstellung (Kombination aus aerobem und anaerob-laktazidem Stoffwechsel) sowie eine hohe Laktattoleranz in den primär rekrutierten ST- und FTO-Fasern.
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section-header">
+            <div class="section-num">2</div>
+            <h2>Subkategorien der Kraftausdauer</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Je nach biomechanischer Arbeitsweise der Muskulatur wird die Kraftausdauer weiter ausdifferenziert:</p>
+
+        <div class="sub-grid">
+            <div class="sub-card card-dyn">
+                <h3 class="hybrid-font">🔄 Dynamische Kraftausdauer</h3>
+                <p>Die Ermüdungswiderstandsfähigkeit bei sich wiederholenden, konzentrisch-exzentrischen Bewegungszyklen gegen einen moderaten bis hohen Widerstand.</p>
+                <div class="example-tag">
+                    <strong>Beispiel:</strong> Mehrfaches Hochdrücken des Körpers bei Liegestützen oder der Kraulschlag im Schwimmen über 100 Meter.
+                </div>
+            </div>
+
+            <div class="sub-card card-stat">
+                <h3 class="hybrid-font">⏸️ Statische Kraftausdauer</h3>
+                <p>Die Fähigkeit der Muskulatur, eine isometrische Haltearbeit über einen längeren Zeitraum gegen Ermüdung aufrechtzuerhalten. Durch die dauerhafte Muskelspannung wird ab ca. 15-30 % der Maximalkraft die lokale Blutzufuhr abgedrückt (Okklusion), wodurch die Muskulatur extrem schnell lokal übersäuert.</p>
+                <div class="example-tag">
+                    <strong>Beispiel:</strong> Das Halten der Abfahrtshocke im alpinen Skirennsport oder der Kreuzhang an den Ringen.
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section-header">
+            <div class="section-num">3</div>
+            <h2>Weitere komplexe Mischformen</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Je nach Anforderungsprofil der Sportart verbindet sich die Kraft auch mit der Schnelligkeit zu weiteren spezifischen Mischformen:</p>
+
+        <div class="complex-grid">
+            <div class="comp-card">
+                <h3 class="hybrid-font" style="color: var(--color-ska);">⚡ Schnellkraftausdauer</h3>
+                <p>Die Fähigkeit, wiederholte, schnellkräftige (explosive) Impulse ohne signifikanten Geschwindigkeits- und Leistungsverlust aufrechtzuerhalten.</p>
+                <div class="example-tag" style="background: rgba(45, 212, 191, 0.1); border-color: rgba(45, 212, 191, 0.2);">
+                    <strong>Bsp:</strong> Volleyball-Block in einem langen Ballwechsel oder ein kurzer Endspurt im Radsport.
+                </div>
+            </div>
+            
+            <div class="comp-card">
+                <h3 class="hybrid-font" style="color: var(--color-kraft);">🏋️ Maximalkraftausdauer</h3>
+                <p>Die Fähigkeit, extrem hohe, fast maximale Widerstände mehrfach hintereinander zu überwinden.</p>
+                <div class="example-tag" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.2);">
+                    <strong>Bsp:</strong> Kniebeugen mit 85 % des 1RM (One-Repetition-Maximum) im Kraftdreikampf.
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Canvas: Polar Triangle -->
+        <section class="canvas-section">
+            <h2 class="hybrid-font">Konditions-Dreieck (Polardiagramm)</h2>
+            <p class="subtitle">Die geometrische Verortung der Mischformen zwischen den physischen Hauptbeanspruchungsformen.</p>
+            
+            <div class="canvas-container">
+                <canvas id="polarCanvas" width="800" height="600"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Transfer Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2 class="hybrid-font">Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                In der Abiturprüfung (eA) wird dieses Thema fast immer mit der Analyse von Anforderungsprofilen spezifischer Sportarten verknüpft. Der Lehrplan fordert explizit, dass du sportpraktische Beispiele diesen Kraftarten zuordnen und dies begründen kannst.
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card">
+                    <h3 class="hybrid-font">🚵 Anforderungsprofil Mountainbiken</h3>
+                    <p>Ein absoluter Klausur-Klassiker ist die Bewertung der konditionellen Fähigkeiten beim Mountainbiken. Wenn du die Bedeutung der Kraftausdauer beurteilen sollst, reicht es nicht, "Ausdauer" zu schreiben. <span class="hl-cyan">Du musst präzise argumentieren:</span></p>
+                    <p>Bei steilen Anstiegen im Gelände müssen die Beinstrecker (M. quadriceps) wiederholte, dynamische Krafteinsätze (Pedaltritte) gegen einen extrem hohen Widerstand (Schwerkraft + Steigung + Körpergewicht) leisten, der <strong>deutlich über 30 % der Maximalkraft</strong> liegt. Diese dynamische Kraftausdauer ist leistungsbestimmend, um die Muskelermüdung hinauszuzögern und ein Absteigen zu verhindern.</p>
+                </div>
+
+                <div class="abi-card warn">
+                    <h3 class="hybrid-font">⛷️ Die Okklusion (Blutstau) erklären</h3>
+                    <p>Wenn in einer Aufgabe nach dem Schmerz in den Oberschenkeln eines Skifahrers (Abfahrtshocke) gefragt wird, nutze zwingend den Begriff der <span class="hl-gold">statischen Kraftausdauer</span>.</p>
+                    <p><strong>Die biologische Erklärung:</strong> Die isometrische Haltearbeit schnürt die Kapillaren ab (Ischämie/Okklusion). Der Muskel muss rein anaerob-laktazid arbeiten, übersäuert massiv und die Enzymtätigkeit für weitere Kontraktionen wird blockiert.</p>
+                </div>
+
+                <div class="abi-card">
+                    <h3 class="hybrid-font">⚖️ Abgrenzungsfragen</h3>
+                    <p>Lerne, die Begriffe sauber zu trennen! Ein 100-m-Sprint erfordert Schnellkraft und Schnelligkeit, aber <span class="hl-cyan">keine</span> Kraftausdauer. Ein 400-m-Lauf (oder ein 800-m-Lauf im Zehnkampf) erfordert primär <strong>Schnellkraftausdauer</strong>, da die explosive Laufbewegung gegen die einsetzende Ermüdung beibehalten werden muss.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('polarCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 800;
+            const logicalH = 600;
+            
+            let time = 0;
+            let animationId;
+
+            // Hover state logic
+            let mousePos = {x: -100, y: -100};
+            let hoveredNode = null;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayW = Math.min(rect.width, logicalW);
+                const scale = displayW / logicalW;
+                const displayH = logicalH * scale;
+                
+                canvas.width = displayW * dpr;
+                canvas.height = displayH * dpr;
+                canvas.style.width = `${displayW}px`;
+                canvas.style.height = `${displayH}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // Track mouse for interactivity
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width / dpr;
+                const scaleY = canvas.height / rect.height / dpr;
+                mousePos.x = (e.clientX - rect.left) * scaleX;
+                mousePos.y = (e.clientY - rect.top) * scaleY;
+            });
+            
+            canvas.addEventListener('mouseleave', () => {
+                mousePos = {x: -100, y: -100};
+            });
+
+            function drawTriangle() {
+                ctx.clearRect(0, 0, logicalW, logicalH);
+
+                const cx = logicalW / 2;
+                const cy = logicalH / 2 + 30; // Shift down slightly
+                const R = 220; // Radius of triangle
+
+                // Calculate Corners
+                // Top (Schnelligkeit)
+                const pSpeed = { x: cx, y: cy - R };
+                // Bottom Right (Ausdauer)
+                const pEndur = { x: cx + R * Math.cos(Math.PI/6), y: cy + R * Math.sin(Math.PI/6) };
+                // Bottom Left (Maximalkraft)
+                const pForce = { x: cx - R * Math.cos(Math.PI/6), y: cy + R * Math.sin(Math.PI/6) };
+
+                // Calculate Edges/Hybrid Points
+                // 1. Kraftausdauer (Between Force & Endur)
+                const pKA = { x: cx, y: cy + R * Math.sin(Math.PI/6) };
+                // 2. Reaktivkraft/Schnellkraft (Between Force & Speed)
+                const pSK = { x: cx - (R/2) * Math.cos(Math.PI/6), y: cy - (R/2) * Math.sin(Math.PI/6) - (R/2) + 60}; // Approx mid
+                const realMidSK = { x: (pSpeed.x + pForce.x)/2, y: (pSpeed.y + pForce.y)/2 };
+                // 3. Schnellkraftausdauer (Between Speed & Endur, slightly to center)
+                const realMidSKA = { x: (pSpeed.x + pEndur.x)/2, y: (pSpeed.y + pEndur.y)/2 };
+                const pSKA = { x: realMidSKA.x - 20, y: realMidSKA.y + 30 }; // Inside slightly
+
+                // Draw Background Triangle (Grid)
+                ctx.beginPath();
+                ctx.moveTo(pSpeed.x, pSpeed.y);
+                ctx.lineTo(pEndur.x, pEndur.y);
+                ctx.lineTo(pForce.x, pForce.y);
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.fill();
+                ctx.strokeStyle = '#cbd5e1';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Inner grid lines (Radar effect)
+                for(let i=1; i<4; i++) {
+                    const scale = i/4;
+                    ctx.beginPath();
+                    ctx.moveTo(cx + (pSpeed.x - cx)*scale, cx + (pSpeed.y - cy)*scale - (cx-cy));
+                    // Adjust math for radar concentric triangles
+                    const p1 = {x: cx + (pSpeed.x - cx)*scale, y: cy + (pSpeed.y - cy)*scale};
+                    const p2 = {x: cx + (pEndur.x - cx)*scale, y: cy + (pEndur.y - cy)*scale};
+                    const p3 = {x: cx + (pForce.x - cx)*scale, y: cy + (pForce.y - cy)*scale};
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.lineTo(p3.x, p3.y);
+                    ctx.closePath();
+                    ctx.strokeStyle = 'rgba(203, 213, 225, 0.5)';
+                    ctx.stroke();
+                }
+
+                // Draw connecting lines from center
+                ctx.beginPath();
+                ctx.moveTo(cx, cy); ctx.lineTo(pSpeed.x, pSpeed.y);
+                ctx.moveTo(cx, cy); ctx.lineTo(pEndur.x, pEndur.y);
+                ctx.moveTo(cx, cy); ctx.lineTo(pForce.x, pForce.y);
+                ctx.strokeStyle = 'rgba(203, 213, 225, 0.5)';
+                ctx.stroke();
+
+                // Define Nodes
+                const nodes = [
+                    { ...pSpeed, label: "Schnelligkeit", color: "#0ea5e9", icon: "⚡", isMain: true },
+                    { ...pEndur, label: "Ausdauer", color: "#10b981", icon: "🏃♂️", isMain: true },
+                    { ...pForce, label: "Maximalkraft", color: "#8b5cf6", icon: "🏋️♂️", isMain: true },
+                    { ...pKA, label: "Kraftausdauer", color: "#34d399", icon: "🚴", isMain: false },
+                    { ...realMidSK, label: "Reaktivkraft / Schnellkraft", color: "#6366f1", icon: "🦘", isMain: false },
+                    { ...pSKA, label: "Schnellkraftausdauer", color: "#06b6d4", icon: "🏐", isMain: false }
+                ];
+
+                hoveredNode = null;
+
+                // Draw Nodes
+                nodes.forEach(node => {
+                    const dist = Math.hypot(mousePos.x - node.x, mousePos.y - node.y);
+                    const isHovered = dist < 40;
+                    if(isHovered) hoveredNode = node;
+
+                    const radius = node.isMain ? 25 : 20;
+                    const glow = isHovered ? 20 : (node.isMain ? 10 : 5);
+
+                    // Pulsing animation for hybrids
+                    let pulseR = radius;
+                    if(!node.isMain) {
+                        pulseR += Math.sin(time*3)*2;
+                    }
+
+                    // Shadow / Glow
+                    ctx.shadowColor = node.color;
+                    ctx.shadowBlur = glow;
+                    
+                    // Circle
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, pulseR, 0, Math.PI*2);
+                    ctx.fillStyle = isHovered ? '#ffffff' : node.color;
+                    ctx.fill();
+                    ctx.lineWidth = 3;
+                    ctx.strokeStyle = node.color;
+                    ctx.stroke();
+
+                    ctx.shadowBlur = 0; // reset
+
+                    // Icon
+                    ctx.font = node.isMain ? '22px Arial' : '18px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(node.icon, node.x, node.y);
+
+                    // Label Background
+                    const labelY = node.isMain ? (node.y > cy ? node.y + 40 : node.y - 40) : (node.y > cy ? node.y + 35 : node.y - 35);
+                    ctx.font = 'bold 14px Poppins';
+                    const textW = ctx.measureText(node.label).width;
+                    
+                    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+                    ctx.beginPath();
+                    ctx.roundRect(node.x - textW/2 - 10, labelY - 12, textW + 20, 24, 6);
+                    ctx.fill();
+                    ctx.strokeStyle = node.color;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // Label Text
+                    ctx.fillStyle = node.color;
+                    ctx.fillText(node.label, node.x, labelY);
+                });
+
+                // Tooltip logic for hovered node
+                if (hoveredNode && !hoveredNode.isMain) {
+                    ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+                    ctx.beginPath();
+                    ctx.roundRect(cx - 150, 40, 300, 60, 8);
+                    ctx.fill();
+                    
+                    ctx.fillStyle = 'white';
+                    ctx.font = '13px Nunito';
+                    ctx.textAlign = 'center';
+                    
+                    let tooltip = "";
+                    if(hoveredNode.label === "Kraftausdauer") tooltip = "Mix: Maximalkraft + Ausdauer (Ermüdungswiderstand)";
+                    if(hoveredNode.label === "Reaktivkraft / Schnellkraft") tooltip = "Mix: Maximalkraft + Schnelligkeit (Explosivität)";
+                    if(hoveredNode.label === "Schnellkraftausdauer") tooltip = "Mix aus allen dreien (Schnelle Impulse wiederholen)";
+                    
+                    ctx.fillText(tooltip, cx, 75);
+                }
+            }
+
+            function animate() {
+                time += 0.02;
+                drawTriangle();
+                animationId = requestAnimationFrame(animate);
+            }
+
+            // Init
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

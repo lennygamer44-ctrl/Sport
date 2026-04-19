@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.2.3a Fähigkeiten und Determinanten - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&family=Roboto+Slab:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            
+            /* Performance Theme */
+            --primary-navy: #0f172a;
+            --primary-blue: #1d4ed8;
+            --accent-yellow: #facc15;
+            --accent-gold: #ca8a04;
+            --highlight-green: #22c55e;
+            
+            --card-bg: #ffffff;
+            
+            /* Abitur Exam Box */
+            --abi-bg: #1e293b;
+            --abi-text: #f8fafc;
+            --abi-accent: #facc15;
+
+            --radius-md: 10px;
+            --radius-lg: 20px;
+            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Roboto Slab', serif;
+            line-height: 1.2;
+            color: var(--primary-navy);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER SECTION --- */
+        .doc-header {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 3rem;
+            border-left: 8px solid var(--accent-yellow);
+            position: relative;
+        }
+
+        .doc-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .doc-header .lead {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-text {
+            background: rgba(250, 204, 21, 0.2);
+            color: var(--accent-gold);
+            padding: 0 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        /* --- SECTION 1: ZENTRALE FÄHIGKEITEN --- */
+        .abilities-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: '❖';
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+        }
+
+        .abilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ability-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ability-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Highlighting specific cards */
+        .card-focus {
+            border-bottom: 4px solid var(--accent-yellow);
+        }
+
+        .ability-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .card-focus h3 {
+            color: var(--accent-gold);
+        }
+
+        .ability-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .extra-abilities {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-top: 1.5rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* --- CANVAS SECTION --- */
+        .canvas-container {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .canvas-container h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-container p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- SECTION 2: DETERMINANTEN --- */
+        .determinants-section {
+            margin-bottom: 4rem;
+        }
+
+        .det-intro {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .det-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .det-item {
+            background: var(--card-bg);
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .det-icon {
+            background: var(--primary-navy);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .det-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-navy);
+        }
+
+        .det-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- ABITUR TRANSFER SECTION --- */
+        .abitur-blueprint {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            border-top: 6px solid var(--abi-accent);
+            position: relative;
+        }
+
+        .abitur-blueprint h2 {
+            color: var(--abi-accent);
+            font-size: 2.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .abitur-intro {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .transfer-case {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--abi-accent);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .transfer-case h4 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .transfer-case p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .exam-tip {
+            background: rgba(250, 204, 21, 0.1);
+            border: 1px dashed var(--abi-accent);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-top: 2.5rem;
+        }
+
+        .exam-tip h4 {
+            color: var(--abi-accent);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .doc-header, .abitur-blueprint { padding: 2rem; }
+            .doc-header h1 { font-size: 2rem; }
+            .det-item { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="doc-header">
+        <h1>2.2.3a Fähigkeiten und Determinanten</h1>
+        <p class="lead">
+            Während konditionelle Fähigkeiten (Kraft, Ausdauer) primär energetisch determiniert sind, handelt es sich bei den koordinativen Fähigkeiten um <span class="highlight-text">informationsorientierte Fähigkeiten</span>.
+        </p>
+        <p class="lead" style="margin-top: 1rem;">
+            Sie basieren auf der Informationsaufnahme über die Analysatoren und der exakten Informationsverarbeitung im zentralen Nervensystem (ZNS). Koordination ist das harmonische Zusammenwirken von Sinnesorganen, peripherem und zentralem Nervensystem sowie der Skelettmuskulatur.
+        </p>
+    </header>
+
+    <!-- Section 1: The Abilities -->
+    <section class="abilities-section">
+        <h2 class="section-title">1. Die zentralen koordinativen Fähigkeiten</h2>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">
+            Nach dem klassischen Modell von Meinel/Schnabel werden sieben koordinative Fähigkeiten unterschieden. Für das Abitur sind besonders diejenigen relevant, die komplexe Bewegungsstrukturen (wie z.B. Würfe oder Sprünge) ermöglichen:
+        </p>
+
+        <div class="abilities-grid">
+            
+            <!-- Focus Card 1 -->
+            <article class="ability-card card-focus">
+                <h3>⚖️ Gleichgewichtsfähigkeit</h3>
+                <p>Die Fähigkeit, den gesamten Körper im Gleichgewichtszustand zu halten oder diesen Zustand während und nach umfangreichen Körperverlagerungen (z. B. nach einem Sprung oder Wurf) beizubehalten oder schnellstmöglich wiederherzustellen.</p>
+            </article>
+
+            <!-- Focus Card 2 -->
+            <article class="ability-card card-focus">
+                <h3>🔗 Kopplungsfähigkeit</h3>
+                <p>Die Fähigkeit, Teilkörperbewegungen (Extremitäten, Rumpf, Kopf) untereinander und in Beziehung auf das übergeordnete Handlungsziel räumlich, zeitlich und dynamisch optimal zu koordinieren. Sie ist die absolute Basis für die <strong>Sukzessivkopplung</strong>.</p>
+            </article>
+
+            <!-- Focus Card 3 -->
+            <article class="ability-card card-focus">
+                <h3>🧭 Orientierungsfähigkeit</h3>
+                <p>Die Fähigkeit zur Bestimmung und zielangepassten Veränderung der Lage und Bewegung des Körpers in Raum und Zeit. Dies geschieht stets in Bezug auf ein bestimmtes Aktionsfeld (Spielfeldrand, Wurfkreis) oder ein sich bewegendes Objekt.</p>
+            </article>
+
+            <!-- Normal Card 4 -->
+            <article class="ability-card">
+                <h3>⚡ Reaktionsfähigkeit</h3>
+                <p>Die Fähigkeit, zur schnellen Einleitung und Ausführung zweckmäßiger motorischer Aktionen auf ein Signal.</p>
+            </article>
+
+            <!-- Normal Card 5 -->
+            <article class="ability-card">
+                <h3>🥁 Rhythmisierungsfähigkeit</h3>
+                <p>Die Fähigkeit, einen von außen vorgegebenen Rhythmus zu erfassen und motorisch zu reproduzieren oder einen verinnerlichten Rhythmus in der eigenen Bewegung zu realisieren (z. B. Anlaufrhythmus beim Weitsprung).</p>
+            </article>
+
+        </div>
+
+        <div class="extra-abilities">
+            (Zusätzlich zum 7er-Modell: Differenzierungsfähigkeit und Umstellungsfähigkeit)
+        </div>
+    </section>
+
+    <!-- Canvas Graphic -->
+    <section class="canvas-container">
+        <h3>Das 7-Fähigkeiten-Modell (Meinel/Schnabel)</h3>
+        <p>Visuelle Wichtung der Klausurschwerpunkte (Gold markiert).</p>
+        <canvas id="coordCanvas" width="800" height="600"></canvas>
+    </section>
+
+    <!-- Section 2: Determinants -->
+    <section class="determinants-section">
+        <h2 class="section-title">2. Leistungsbestimmende Faktoren</h2>
+        <p class="det-intro">Warum hat ein Athlet eine bessere Koordination als ein anderer? Die Qualität der koordinativen Fähigkeiten wird durch folgende Faktoren determiniert:</p>
+
+        <div class="det-list">
+            <div class="det-item">
+                <div class="det-icon">1</div>
+                <div class="det-content">
+                    <h4>Qualität der Analysatoren</h4>
+                    <p>Je besser und sensibler optische, akustische, taktile, kinästhetische und vestibuläre Rezeptoren arbeiten, desto hochauflösender ist das Informationsbild, das an das Gehirn gesendet wird.</p>
+                </div>
+            </div>
+
+            <div class="det-item">
+                <div class="det-icon">2</div>
+                <div class="det-content">
+                    <h4>Verarbeitungsgeschwindigkeit im ZNS</h4>
+                    <p>Wie schnell können die afferenten (ankommenden) Reize im Kortex oder Kleinhirn ausgewertet und in einen motorischen Befehl (efferent) umgewandelt werden?</p>
+                </div>
+            </div>
+
+            <div class="det-item">
+                <div class="det-icon">3</div>
+                <div class="det-content">
+                    <h4>Bewegungsschatz (Motorisches Gedächtnis)</h4>
+                    <p>Je mehr unterschiedliche Bewegungen ein Athlet in seinem Leben bereits erlernt hat, desto schneller kann das ZNS auf bekannte "Programme" zurückgreifen und diese neu kombinieren.</p>
+                </div>
+            </div>
+
+            <div class="det-item">
+                <div class="det-icon">4</div>
+                <div class="det-content">
+                    <h4>Qualität der Muskelsteuerung</h4>
+                    <p>Eine hoch ausgeprägte inter- und intramuskuläre Koordination ist zwingend nötig, um den nervalen Befehl auch präzise und ohne Störspannungen (Gegenkoordination) in mechanische Bewegung umzusetzen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abitur Transfer Box -->
+    <section class="abitur-blueprint">
+        <h2>🎓 Abitur-Transfer & Praxis</h2>
+        <p class="abitur-intro">
+            Dieser Themenbereich ist ein klassischer Garant für komplexe Anwendungsaufgaben. Das reine Auswendiglernen der Definitionen bringt dir hier kaum Punkte. Du musst die Fähigkeiten analysieren und zielgerichtet begründen.
+        </p>
+
+        <h3 style="color: white; margin-bottom: 1rem; font-family: 'Poppins';">Der Disziplinen-Transfer (Beispiel: Zehnkampf Würfe)</h3>
+        <p style="color: #cbd5e1; margin-bottom: 2rem;">In der Muster-Abituraufgabe zum Zehnkampf wird verlangt, drei koordinative Fähigkeiten auszuwählen, die für beide Wurfdisziplinen (Speer und Diskus) wesentlich sind, und diese Auswahl zu begründen.</p>
+
+        <div class="transfer-case">
+            <h4>Beispiel Kopplungsfähigkeit</h4>
+            <p>Du nennst sie nicht nur, sondern erklärst konkret: Bei beiden Würfen müssen die Teilimpulse aus Beinstreckung, Rumpfdrehung/Verwringung und Armzug zeitlich (Sukzessivkopplung) und räumlich optimal zu einem Gesamtimpuls verbunden werden.</p>
+        </div>
+
+        <div class="transfer-case">
+            <h4>Beispiel Orientierungsfähigkeit</h4>
+            <p>Du argumentierst, dass der Werfer den Abwurfpunkt genau treffen muss, um das Feld optimal zu nutzen, ohne den Abwurfbogen (beim Speer) oder den Wurfkreis (beim Diskus) zu übertreten.</p>
+        </div>
+
+        <div class="transfer-case">
+            <h4>Beispiel Gleichgewichtsfähigkeit</h4>
+            <p>Du begründest, dass nach dem massiven Kraftausstoß in der Hauptphase die hohe Endgeschwindigkeit abrupt (z.B. durch einen Umspringer) abgebremst werden muss, um in der Endphase regelkonform und ohne Übertreten zum Stehen zu kommen.</p>
+        </div>
+
+        <div class="exam-tip">
+            <h4>💡 Der Klausur-Tipp</h4>
+            <p style="color: #fef3c7; margin: 0;">Gehe in der Prüfung immer zweistufig vor:<br> <strong>1.</strong> Nenne die exakte Fachdefinition der koordinativen Fähigkeit. <br><strong>2.</strong> Beschreibe exakt diejenige Bewegungsphase der vorgegebenen Sportart, in der diese Fähigkeit zwingend gebraucht wird.</p>
+        </div>
+    </section>
+
+</main>
+
+<script>
+    const canvas = document.getElementById('coordCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    const cx = w / 2;
+    const cy = h / 2;
+    
+    // Radii for the segmented ring
+    const rOuter = 200;
+    const rInner = 100;
+
+    // The 7 Abilities
+    const abilities = [
+        { name: "Kopplungs-\nfähigkeit", focus: true },
+        { name: "Reaktions-\nfähigkeit", focus: false },
+        { name: "Gleichgewichts-\nfähigkeit", focus: true },
+        { name: "Differenzierungs-\nfähigkeit", focus: false },
+        { name: "Orientierungs-\nfähigkeit", focus: true },
+        { name: "Umstellungs-\nfähigkeit", focus: false },
+        { name: "Rhythmisierungs-\nfähigkeit", focus: false }
+    ];
+
+    const numSegments = abilities.length;
+    const angleStep = (Math.PI * 2) / numSegments;
+
+    // Colors
+    const colorFocus = '#facc15';    // Highlight Gold/Yellow
+    const colorNormal = '#334155';   // Slate Dark
+    const colorTextFocus = '#000000';
+    const colorTextNormal = '#ffffff';
+
+    // Draw the segments
+    for (let i = 0; i < numSegments; i++) {
+        const startAngle = i * angleStep - (Math.PI / 2); // Start at top
+        const endAngle = (i + 1) * angleStep - (Math.PI / 2);
+        
+        const isFocus = abilities[i].focus;
+        
+        ctx.beginPath();
+        // Outer arc
+        ctx.arc(cx, cy, rOuter, startAngle, endAngle);
+        // Inner arc (drawn backwards to close path)
+        ctx.arc(cx, cy, rInner, endAngle, startAngle, true);
+        ctx.closePath();
+
+        // Fill
+        ctx.fillStyle = isFocus ? colorFocus : colorNormal;
+        ctx.fill();
+
+        // Stroke (gaps)
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = '#ffffff'; // White gaps between segments
+        ctx.stroke();
+
+        // Add Text
+        const midAngle = startAngle + (angleStep / 2);
+        // Calculate text position in the middle of the segment
+        const textRadius = rInner + (rOuter - rInner) / 2;
+        const tx = cx + textRadius * Math.cos(midAngle);
+        const ty = cy + textRadius * Math.sin(midAngle);
+
+        ctx.save();
+        ctx.translate(tx, ty);
+        
+        // Rotate text to face outward/inward nicely
+        let rotAngle = midAngle;
+        if (rotAngle > Math.PI/2 && rotAngle < 3*Math.PI/2) {
+            rotAngle += Math.PI; // Flip text on the left side so it's readable
+        }
+        ctx.rotate(rotAngle);
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = isFocus ? 'bold 13px Poppins' : '500 12px Poppins';
+        ctx.fillStyle = isFocus ? colorTextFocus : colorTextNormal;
+
+        // Handle multiline text
+        const lines = abilities[i].name.split('\n');
+        if(lines.length > 1) {
+            ctx.fillText(lines[0], 0, -8);
+            ctx.fillText(lines[1], 0, 8);
+        } else {
+            ctx.fillText(lines[0], 0, 0);
+        }
+
+        ctx.restore();
+    }
+
+    // Draw Center Circle
+    ctx.beginPath();
+    ctx.arc(cx, cy, rInner - 8, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffffff';
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.stroke();
+
+    // Center Text
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 16px Roboto Slab';
+    ctx.fillText("Koordinative", cx, cy - 10);
+    ctx.fillText("Fähigkeiten", cx, cy + 10);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Arten der Beweglichkeit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: 'Outfit' for round, elastic headers, 'Inter' for clean reading -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        elastic: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            400: '#818cf8',
+                            500: '#6366f1', // Indigo
+                            600: '#4f46e5',
+                            900: '#312e81',
+                        },
+                        fluid: {
+                            400: '#a78bfa', // Violet
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                        },
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#f59e0b',
+                            dark: '#b45309',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(99, 102, 241, 0.15)',
+                        'glow': '0 0 25px rgba(139, 92, 246, 0.3)',
+                        'stretch': '0 20px 50px -15px rgba(49, 46, 129, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Elastic Card Hover Effect */
+        .stretch-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy, elastic easing */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stretch-card:hover {
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 0 20px 50px -15px rgba(49, 46, 129, 0.15);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        /* Fluid Background Shapes */
+        .fluid-bg {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.15;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+            67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(135deg, #6366f1, #a78bfa);
+        }
+
+        /* Canvas Container */
+        .matrix-wrapper {
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: inset 0 2px 20px rgba(99, 102, 241, 0.05), 0 20px 40px -10px rgba(0,0,0,0.1);
+            border: 1px solid #e0e7ff;
+            position: relative;
+            overflow: hidden;
+            padding: 1rem;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #a5b4fc; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #818cf8; }
+
+        /* Abitur Premium Box */
+        .abitur-box {
+            background: linear-gradient(135deg, #312e81 0%, #0f172a 100%);
+            border-top: 6px solid #f59e0b;
+            color: #f8fafc;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(49, 46, 129, 0.4);
+        }
+    </style>
+</head>
+<body class="leading-relaxed py-10 px-4 sm:px-6 relative overflow-x-hidden">
+
+    <!-- Animated Fluid Backgrounds -->
+    <div class="fluid-bg w-[600px] h-[600px] bg-elastic-500 top-[-100px] left-[-100px]"></div>
+    <div class="fluid-bg w-[500px] h-[500px] bg-fluid-400 top-[40%] right-[-150px]" style="animation-delay: -2s;"></div>
+    <div class="fluid-bg w-[700px] h-[700px] bg-sky-300 bottom-[-200px] left-[10%]" style="animation-delay: -4s;"></div>
+
+    <div class="max-w-6xl mx-auto space-y-16 relative z-10">
+        
+        <!-- Header -->
+        <header class="bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 shadow-soft border border-white relative">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6 border-b border-elastic-100 pb-6">
+                <div class="flex items-center gap-4">
+                    <span class="bg-elastic-900 text-white font-bold px-4 py-2 rounded-full text-sm font-display tracking-widest shadow-md">1.7.1a</span>
+                    <span class="text-elastic-600 font-bold tracking-widest text-sm uppercase">Dimensionen der Beweglichkeit</span>
+                </div>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-display font-extrabold uppercase tracking-tight text-slate-900 leading-[1.1] mb-6">
+                Arten der <br>
+                <span class="text-gradient">Beweglichkeit</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-600 font-medium max-w-4xl leading-relaxed">
+                Die Beweglichkeit (Flexibilität) ist die motorische Fähigkeit, Bewegungen mit großer bzw. optimaler Schwingungsweite (Amplitude) in den Gelenken ausführen zu können. 
+            </p>
+            
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-elastic-50 p-5 rounded-2xl border border-elastic-100">
+                    <strong class="text-elastic-900 block mb-1 text-lg">🦴 Die Gelenkigkeit</strong>
+                    <p class="text-sm text-slate-600">Die durch den knöchernen Bau der Gelenke und die Knorpel vorgegebene, anatomisch <strong class="text-elastic-600">unveränderliche</strong> Amplitude.</p>
+                </div>
+                <div class="bg-fluid-400/10 p-5 rounded-2xl border border-fluid-400/20">
+                    <strong class="text-fluid-600 block mb-1 text-lg">🧬 Die Dehnfähigkeit</strong>
+                    <p class="text-sm text-slate-600">Die durch Training <strong class="text-fluid-600">elastisch veränderbare</strong> Weite von Muskeln, Sehnen, Bändern und Gelenkkapseln.</p>
+                </div>
+            </div>
+            
+            <p class="mt-6 text-slate-500 font-medium text-sm text-center bg-white py-2 rounded-full border border-slate-100 shadow-sm max-w-2xl mx-auto">
+                Um die Beweglichkeit präzise zu klassifizieren, wird sie in zwei übergeordnete Dimensionenpaare unterteilt:
+            </p>
+        </header>
+
+        <!-- Section 1: 1. Dimension (Aktiv vs. Passiv) -->
+        <section>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-gradient-to-br from-elastic-500 to-fluid-500 text-white w-12 h-12 flex items-center justify-center rounded-2xl shadow-glow">
+                    <span class="font-display font-bold text-2xl">1</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-slate-900">Die Art der Krafterzeugung</h2>
+            </div>
+            <p class="text-slate-600 mb-8 text-lg pl-4 border-l-4 border-elastic-200">
+                Diese Unterteilung bezieht sich darauf, <strong class="text-elastic-600">woher die Kraft stammt</strong>, die das Gelenk in die Dehnposition bringt.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                <!-- Aktive Beweglichkeit -->
+                <div class="stretch-card p-8 flex flex-col">
+                    <h3 class="text-2xl font-bold text-elastic-900 mb-4 border-b border-elastic-100 pb-2">Aktive Beweglichkeit</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed">
+                        Die größtmögliche Amplitude, die ein Athlet <strong>ausschließlich durch die Kontraktion der eigenen Muskulatur</strong> (Agonisten/Synergisten) erreichen und halten kann.
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 flex-grow">
+                        <strong class="text-xs uppercase tracking-wider text-slate-500 block mb-2">Physiologische Limitation</strong>
+                        <p class="text-sm text-slate-700">Immer ein Resultat aus der Dehnfähigkeit des Antagonisten (gedehnter Muskel) <strong>UND</strong> der isometrischen/konzentrischen Kraft des Agonisten (kontrahierender Muskel).</p>
+                    </div>
+                    <div class="bg-elastic-50 text-elastic-900 p-4 rounded-xl text-sm font-medium">
+                        🤸 <strong>Beispiel:</strong> Ein Turner hebt sein gestrecktes Bein im Stand so hoch wie möglich an und hält es <em>nur durch die Kraft seiner Hüftbeuger</em> oben.
+                    </div>
+                </div>
+
+                <!-- Passive Beweglichkeit -->
+                <div class="stretch-card p-8 flex flex-col">
+                    <h3 class="text-2xl font-bold text-fluid-600 mb-4 border-b border-elastic-100 pb-2">Passive Beweglichkeit</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed">
+                        Die größtmögliche Amplitude, die unter <strong>Einwirkung äußerer Zusatzkräfte</strong> erreicht werden kann (Schwerkraft/Körpergewicht, Trainingspartner, Theraband).
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 flex-grow">
+                        <strong class="text-xs uppercase tracking-wider text-slate-500 block mb-2">Physiologisches Prinzip</strong>
+                        <p class="text-sm text-slate-700">Signifikant <strong>größer als die aktive Beweglichkeit</strong>, da der limitierende Faktor "Kraft des Agonisten" wegfällt. Testet die absolute Toleranzgrenze des Bindegewebes.</p>
+                    </div>
+                    <div class="bg-fluid-400/10 text-fluid-900 p-4 rounded-xl text-sm font-medium">
+                        🧱 <strong>Beispiel:</strong> Der Turner legt sein gestrecktes Bein auf eine hohe Sprossenwand und drückt den Oberkörper <em>durch die Schwerkraft</em> nach vorne.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beweglichkeitsreserve -->
+            <div class="mt-8 bg-white border-2 border-elastic-200 rounded-2xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row items-center gap-6 relative overflow-hidden">
+                <div class="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-elastic-50 to-transparent pointer-events-none"></div>
+                <div class="w-16 h-16 rounded-full bg-elastic-100 flex items-center justify-center shrink-0">
+                    <svg class="w-8 h-8 text-elastic-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-elastic-900 mb-2">Die Beweglichkeitsreserve (Anatomische Reserve)</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Die Differenz zwischen der passiven und der aktiven Beweglichkeit. <strong>Je kleiner diese Reserve, desto besser</strong> ist die koordinative und kraftmäßige Ausnutzung des Gelenkspielraums. Ein reines passives Dehntraining <em>ohne</em> gleichzeitiges Krafttraining der Agonisten vergrößert diese Reserve und kann im schlimmsten Fall (fehlende Gelenkstabilisation) zu Verletzungen führen.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 2. Dimension (Statisch vs. Dynamisch) -->
+        <section>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-gradient-to-br from-elastic-500 to-fluid-500 text-white w-12 h-12 flex items-center justify-center rounded-2xl shadow-glow">
+                    <span class="font-display font-bold text-2xl">2</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-slate-900">Der Bewegungsstatus</h2>
+            </div>
+            <p class="text-slate-600 mb-8 text-lg pl-4 border-l-4 border-fluid-300">
+                Diese Unterteilung bezieht sich darauf, ob die Endposition <strong class="text-fluid-600">gehalten</strong> wird oder ob es sich um eine <strong class="text-fluid-600">fortlaufende Bewegung</strong> handelt.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Statisch -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-slate-400"></span> Statische Beweglichkeit
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4">Einnehmen und <strong>Halten</strong> einer Dehnposition über einen bestimmten Zeitraum (often 10–30s). Die Gelenkwinkelstellung verändert sich nicht (isometrisch).</p>
+                    <div class="bg-slate-50 p-3 rounded-lg text-xs text-slate-700 border-l-2 border-slate-400">
+                        <strong>Physiologie:</strong> Löst nach einigen Sekunden den umgekehrten Dehnungsreflex (autogene Hemmung via Golgi-Sehnenorgane) aus &rarr; Muskelspannung sinkt, tieferes Dehnen möglich.
+                    </div>
+                </div>
+
+                <!-- Dynamisch -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-fluid-500 animate-pulse"></span> Dynamische Beweglichkeit
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-4">Die Amplitude, die während einer <strong>fortlaufenden, schwungvollen Bewegung</strong> kurzzeitig erreicht wird (z. B. Hürdensitz-Kick).</p>
+                    <div class="bg-fluid-50 p-3 rounded-lg text-xs text-fluid-900 border-l-2 border-fluid-400">
+                        <strong>Biomechanik:</strong> IdR. größer als statisch! Durch die kinetische Energie (Schwung) der Körpermasse wird die Muskulatur für den Bruchteil einer Sekunde weiter in die Dehnung gezwungen.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 2x2 Matrix Canvas (KI 2 Task) -->
+        <section class="mt-16">
+            <div class="flex items-end justify-between mb-6">
+                <div>
+                    <h2 class="text-3xl font-display font-bold text-slate-900 tracking-tight">Die Kombinationsmatrix</h2>
+                    <p class="text-slate-500 text-lg mt-1">Die 4 sportpraktischen Erscheinungsformen (Vierfeldertafel)</p>
+                </div>
+            </div>
+
+            <!-- Interactive Canvas Container -->
+            <div class="matrix-wrapper p-4 md:p-8">
+                <canvas id="matrixCanvas" class="w-full h-[450px] md:h-[550px] rounded-xl"></canvas>
+                <p class="text-center text-xs text-slate-400 mt-4">Bewege die Maus über die Quadranten, um die sportpraktischen Beispiele zu isolieren.</p>
+            </div>
+        </section>
+
+        <!-- Abitur Premium Transfer Box -->
+        <section class="abitur-box rounded-[2.5rem] p-8 md:p-12 shadow-stretch mt-20 relative overflow-hidden">
+            <!-- Decorative Hexagons Background -->
+            <svg class="absolute right-0 top-0 opacity-10 transform translate-x-1/4 -translate-y-1/4 w-[500px] h-[500px] text-abitur" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-10 border-b border-slate-700 pb-8">
+                    <div class="bg-gradient-to-br from-yellow-400 to-yellow-600 text-slate-900 p-5 rounded-2xl shadow-glow">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-5xl font-display font-bold text-white tracking-tight mb-2">Abitur-Transfer & Praxis</h2>
+                        <div class="inline-flex items-center gap-3">
+                            <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">eA-Niveau</span>
+                            <span class="text-abitur font-medium text-lg">Terminologische Schärfe & Fallanalysen</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    
+                    <!-- Falle 1: Terminologie -->
+                    <div class="bg-slate-800/50 p-6 md:p-8 rounded-2xl border border-slate-700">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-abitur text-2xl font-display">A</span> Fehlerquelle: Terminologie
+                        </h3>
+                        <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                            Eine häufige Falle in Klausuren ist die unsaubere Trennung von <strong class="text-white">"Trainingsmethode"</strong> (wie trainiere ich es?) und <strong class="text-white">"Erscheinungsform"</strong> (wie sieht es in der Sportart aus?).
+                        </p>
+                        <div class="bg-slate-900 p-4 rounded-xl border-l-4 border-red-500 text-sm">
+                            <strong class="text-red-400 block mb-1">Negativ-Beispiel:</strong>
+                            Wenn die Aufgabe fordert, die "Arten der Beweglichkeit" beim Volleyball aufzuzeigen, darfst du <strong>NICHT</strong> das "Stretching" erklären (das ist eine Methode!).
+                        </div>
+                        <div class="bg-slate-900 p-4 rounded-xl border-l-4 border-green-500 text-sm mt-3">
+                            <strong class="text-green-400 block mb-1">Abitur-Lösung:</strong>
+                            Analysiere die Anforderung der Sportart! Ein Volleyballer benötigt beim weiten Ausfallschritt (Bagger) primär die <strong class="text-white">aktiv-dynamische Beweglichkeit</strong> in der Hüfte, da er diese tiefe Position schwungvoll und aus eigener Muskelkraft erreichen muss.
+                        </div>
+                    </div>
+
+                    <!-- Falle 2: Beweglichkeitsreserve -->
+                    <div class="bg-slate-800/50 p-6 md:p-8 rounded-2xl border border-slate-700">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                            <span class="text-abitur text-2xl font-display">B</span> Transfer: Die Fallstudie
+                        </h3>
+                        <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                            Das Kultusministerium nutzt oft Fallstudien. <br>
+                            <strong>Szenario:</strong> Ein Turner hat eine exzellente <em>passive</em> Beweglichkeit (Partner kann Bein hoch drücken), scheitert aber an der <em>aktiven</em> Haltearbeit (Bein sinkt ohne Hilfe sofort ab).
+                        </p>
+                        <div class="bg-abitur/10 border border-abitur/30 p-5 rounded-xl text-sm font-medium text-slate-200">
+                            <strong class="text-abitur block mb-2 uppercase tracking-wide">Deine sportbiologische Argumentation:</strong>
+                            <p class="mb-2">Wende hier den Begriff der <strong>Beweglichkeitsreserve</strong> an! Das Problem des Turners ist <em>nicht</em> eine verkürzte Muskulatur (die Dehnfähigkeit ist laut passivem Test ja perfekt vorhanden).</p>
+                            <p>Das Defizit ist eine <strong>mangelnde konzentrische/isometrische Kraft des Agonisten</strong> (Hüftbeuger). <br><br>Die trainingsmethodische Konsequenz lautet daher: Kein weiteres Stretching, sondern gezieltes <strong>Krafttraining</strong> für die hüftbeugende Muskulatur!</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="mt-16 pt-8 pb-12 text-center border-t border-slate-200">
+        <p class="font-display font-bold text-slate-800 uppercase tracking-widest text-sm mb-1">Abiturwissen Sport (G9, eA)</p>
+        <p class="text-slate-500 font-sans text-sm">Lernbereich 1.7.1a Dimensionen der Beweglichkeit</p>
+    </footer>
+
+    <!-- Interactive Canvas Logic: The 2x2 Matrix -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('matrixCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            // Track mouse for hover effects
+            let mouseX = -1000;
+            let mouseY = -1000;
+            let hoveredQuad = -1; // 0: TL, 1: TR, 2: BL, 3: BR
+
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+            });
+            
+            canvas.addEventListener('mouseleave', () => {
+                mouseX = -1000;
+                mouseY = -1000;
+                hoveredQuad = -1;
+            });
+
+            // Colors
+            const cActive = '#6366f1';   // Indigo
+            const cPassive = '#a78bfa';  // Violet
+            const cStatic = '#64748b';   // Slate
+            const cDynamic = '#0ea5e9';  // Sky
+            const bgDefault = '#f8fafc';
+            const bgHover = '#ffffff';
+
+            // Animation variables for smooth transitions
+            let hoverScales = [0, 0, 0, 0];
+
+            function drawTextWrap(ctx, text, x, y, maxWidth, lineHeight) {
+                const words = text.split(' ');
+                let line = '';
+                let currentY = y;
+
+                for(let n = 0; n < words.length; n++) {
+                    let testLine = line + words[n] + ' ';
+                    let metrics = ctx.measureText(testLine);
+                    let testWidth = metrics.width;
+                    if (testWidth > maxWidth && n > 0) {
+                        ctx.fillText(line, x, currentY);
+                        line = words[n] + ' ';
+                        currentY += lineHeight;
+                    }
+                    else {
+                        line = testLine;
+                    }
+                }
+                ctx.fillText(line, x, currentY);
+            }
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+
+                // Layout logic
+                const padding = 20;
+                const headerH = 50;
+                const headerW = 50;
+                
+                const gridX = padding + headerW;
+                const gridY = padding + headerH;
+                const gridW = w - gridX - padding;
+                const gridH = h - gridY - padding;
+                
+                const colW = gridW / 2;
+                const rowH = gridH / 2;
+
+                // Determine hovered quadrant
+                hoveredQuad = -1;
+                if(mouseX > gridX && mouseX < gridX + colW && mouseY > gridY && mouseY < gridY + rowH) hoveredQuad = 0; // Top-Left
+                if(mouseX > gridX + colW && mouseX < gridX + gridW && mouseY > gridY && mouseY < gridY + rowH) hoveredQuad = 1; // Top-Right
+                if(mouseX > gridX && mouseX < gridX + colW && mouseY > gridY + rowH && mouseY < gridY + gridH) hoveredQuad = 2; // Bottom-Left
+                if(mouseX > gridX + colW && mouseX < gridX + gridW && mouseY > gridY + rowH && mouseY < gridY + gridH) hoveredQuad = 3; // Bottom-Right
+
+                // Update animation scales
+                for(let i=0; i<4; i++) {
+                    if(hoveredQuad === i || hoveredQuad === -1) {
+                        // If hovered or nothing hovered, scale towards 1
+                        hoverScales[i] += (1 - hoverScales[i]) * 0.1;
+                    } else {
+                        // If something else hovered, scale down
+                        hoverScales[i] += (0.6 - hoverScales[i]) * 0.1;
+                    }
+                }
+
+                // --- Draw Headers ---
+                ctx.font = 'bold 16px "Outfit"';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                // Top Headers (Columns)
+                ctx.fillStyle = cStatic;
+                ctx.fillText('STATISCH', gridX + colW/2, gridY - 20);
+                ctx.fillStyle = cDynamic;
+                ctx.fillText('DYNAMISCH', gridX + colW + colW/2, gridY - 20);
+
+                // Side Headers (Rows)
+                ctx.save();
+                ctx.translate(gridX - 20, gridY + rowH/2);
+                ctx.rotate(-Math.PI/2);
+                ctx.fillStyle = cActive;
+                ctx.fillText('AKTIV', 0, 0);
+                ctx.restore();
+
+                ctx.save();
+                ctx.translate(gridX - 20, gridY + rowH + rowH/2);
+                ctx.rotate(-Math.PI/2);
+                ctx.fillStyle = cPassive;
+                ctx.fillText('PASSIV', 0, 0);
+                ctx.restore();
+
+                // --- Quadrant Data ---
+                const quads = [
+                    { x: gridX, y: gridY, color: cActive, title: 'Aktiv - Statisch', icon: '🤸', text: 'Standwaage im Turnen: Das Bein aus eigener Kraft hochheben und isometrisch halten.' },
+                    { x: gridX + colW, y: gridY, color: cDynamic, title: 'Aktiv - Dynamisch', icon: '🏃', text: 'Schwungvolles Beinkreisen / Lauf-ABC: Die Position wird schwungvoll aus eigener Muskelkraft erreicht.' },
+                    { x: gridX, y: gridY + rowH, color: cStatic, title: 'Passiv - Statisch', icon: '🧘', text: 'Spagat am Boden: Halten der Dehnposition. Die Schwerkraft wirkt als äußere Zusatzkraft.' },
+                    { x: gridX + colW, y: gridY + rowH, color: cPassive, title: 'Passiv - Dynamisch', icon: '🤝', text: 'Partnerübung: Ein Trainingspartner drückt das Bein rhythmisch und federnd nach oben in die Dehnung.' }
+                ];
+
+                // --- Draw Quadrants ---
+                quads.forEach((q, i) => {
+                    const scale = hoverScales[i];
+                    
+                    // Box background
+                    ctx.fillStyle = (hoveredQuad === i) ? bgHover : bgDefault;
+                    ctx.shadowColor = (hoveredQuad === i) ? q.color + '40' : 'rgba(0,0,0,0)';
+                    ctx.shadowBlur = (hoveredQuad === i) ? 20 : 0;
+                    
+                    // Inset the box slightly for grid gaps
+                    const inset = 4;
+                    const qx = q.x + inset;
+                    const qy = q.y + inset;
+                    const qw = colW - inset*2;
+                    const qh = rowH - inset*2;
+
+                    // Draw Rect
+                    ctx.beginPath();
+                    ctx.roundRect(qx, qy, qw, qh, 12);
+                    ctx.fill();
+                    
+                    // Border Top based on row/col logic to match colors
+                    ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    ctx.moveTo(qx+12, qy);
+                    ctx.lineTo(qx+qw-12, qy);
+                    ctx.strokeStyle = q.color;
+                    ctx.stroke();
+
+                    // Content Opacity based on scale
+                    ctx.globalAlpha = scale;
+                    
+                    // Draw Content
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'top';
+                    
+                    // Icon
+                    ctx.font = '30px Arial';
+                    ctx.fillText(q.icon, qx + 20, qy + 20);
+
+                    // Title
+                    ctx.fillStyle = '#0f172a';
+                    ctx.font = 'bold 18px "Outfit"';
+                    ctx.fillText(q.title, qx + 60, qy + 26);
+
+                    // Text
+                    ctx.fillStyle = '#475569';
+                    ctx.font = '14px "Inter"';
+                    drawTextWrap(ctx, q.text, qx + 20, qy + 65, qw - 40, 20);
+
+                    ctx.globalAlpha = 1.0;
+                    ctx.shadowBlur = 0; // reset
+                });
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

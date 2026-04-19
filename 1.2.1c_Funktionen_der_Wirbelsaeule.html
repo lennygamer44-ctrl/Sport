@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.2.1c Funktionen der Wirbelsäule - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Biomechanics & Architecture */
+            --bg-page: #f1f5f9;        /* Slate 100 */
+            --bg-card: #ffffff;
+            
+            --text-main: #334155;      /* Slate 700 */
+            --text-muted: #64748b;     /* Slate 500 */
+            
+            --arch-navy: #0f172a;      /* Deep structural Navy */
+            --arch-navy-light: #1e293b;
+            --arch-yellow: #eab308;    /* Construction Yellow (Function) */
+            --arch-blue: #38bdf8;      /* Blueprint Blue */
+            
+            --abi-bg: #450a0a;         /* Dark Crimson */
+            --abi-red: #ef4444;        /* Alert Red */
+            --abi-text: #fecaca;       /* Light Red Text */
+            
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-heavy: 0 20px 40px -10px rgba(15, 23, 42, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            /* Blueprint Grid Pattern */
+            background-image: 
+                linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        h1, h2, h3, h4, .arch-font {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Blueprint Hero Header --- */
+        .hero {
+            background-color: var(--arch-navy);
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: white;
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            border-bottom: 8px solid var(--arch-yellow);
+            position: relative;
+        }
+
+        .chapter-badge {
+            background: rgba(234, 179, 8, 0.1);
+            color: var(--arch-yellow);
+            border: 1px solid var(--arch-yellow);
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.35rem;
+            color: #cbd5e1;
+            max-width: 900px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* --- Quote / Principle Block --- */
+        .principle-box {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-heavy);
+            margin: -3rem auto 4rem;
+            position: relative;
+            z-index: 10;
+            border-left: 8px solid var(--arch-blue);
+            text-align: center;
+        }
+
+        .principle-box h2 {
+            color: var(--arch-blue);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .principle-box p {
+            font-size: 1.25rem;
+            color: var(--arch-navy);
+        }
+
+        /* --- 4 Functions Layout (Split Cards) --- */
+        .functions-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-bottom: 6rem;
+        }
+
+        .function-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .function-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        @media (min-width: 900px) {
+            .function-card {
+                flex-direction: row;
+            }
+        }
+
+        /* Left Side: The Function */
+        .func-left {
+            background: var(--arch-yellow);
+            color: var(--arch-navy);
+            padding: 2.5rem;
+            flex: 0 0 40%;
+            position: relative;
+        }
+
+        .func-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 4rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            opacity: 0.15;
+            line-height: 1;
+        }
+
+        .func-left h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .func-left p {
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Right Side: The Anatomy */
+        .func-right {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .anatomy-label {
+            display: inline-block;
+            background: var(--arch-navy-light);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 4px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            align-self: flex-start;
+        }
+
+        .func-right p {
+            color: var(--text-main);
+        }
+
+        .func-right strong {
+            color: var(--arch-navy);
+        }
+
+        /* --- Canvas Connection Matrix --- */
+        .matrix-section {
+            background: var(--arch-navy);
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid #334155;
+            position: relative;
+        }
+
+        .matrix-section h2 {
+            text-align: center;
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .matrix-section p.subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            background: #020617; /* Slate 950 */
+            border-radius: 12px;
+            border: 1px solid #1e293b;
+            padding: 1rem;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+
+        /* --- Premium Abitur Transfer Box --- */
+        .abitur-prep {
+            background: var(--abi-bg);
+            color: var(--abi-text);
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 2px solid var(--abi-red);
+            box-shadow: 0 0 40px rgba(239, 68, 68, 0.15);
+            position: relative;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-red);
+            color: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #fca5a5;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+            padding-bottom: 2rem;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .abi-card {
+            background: rgba(0,0,0,0.2);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-red);
+        }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-red { color: var(--abi-red); font-weight: 700; }
+        .highlight-white { color: white; font-weight: 700; }
+
+        .hidden-artifacts { display: none; }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="chapter-badge">Lernbereich 1.2.1c</span>
+            <h1>Funktionen der Wirbelsäule</h1>
+            <p>Bewegungsfunktion, Federungsfunktion, Schutzfunktion und Stützfunktion – Ein architektonisches Meisterwerk der Biomechanik.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="principle-box">
+            <h2>"Die Form bestimmt die Funktion"</h2>
+            <p>In der Sportanatomie und Biomechanik gilt dieser fundamentale Leitsatz. Die komplexe makroskopische und mikroskopische Architektur der menschlichen Wirbelsäule (Columna vertebralis) ist die evolutionäre Antwort auf vier völlig unterschiedliche, teils gegensätzliche mechanische Anforderungen, die sie zeitgleich erfüllen muss.</p>
+        </div>
+
+        <p style="text-align: center; margin-bottom: 3rem; font-size: 1.2rem; color: var(--text-muted);">Man differenziert diese vier essenziellen Hauptfunktionen wie folgt:</p>
+
+        <div class="functions-wrapper">
+            
+            <!-- Funktion 1 -->
+            <div class="function-card">
+                <div class="func-left">
+                    <div class="func-number">1</div>
+                    <h3 class="arch-font">Bewegungsfunktion (Mobilität)</h3>
+                    <p>Obwohl die Wirbelsäule in ihrer Gesamtheit den Rumpf stabilisiert, ermöglicht sie durch die Summation vieler kleiner Einzelbewegungen in den Bewegungssegmenten (den gelenkigen Verbindungen an den Wirbeln) eine enorme Gesamtmobilität in allen drei Raumebenen (Inklination/Reklination, Lateralflexion, Torsion).</p>
+                </div>
+                <div class="func-right">
+                    <span class="anatomy-label">Anatomischer Bezug</span>
+                    <p>Die Beweglichkeit nimmt von oben nach unten stetig ab. Die <strong>Halswirbelsäule (HWS)</strong> ermöglicht durch ihre filigrane anatomische Struktur (z. B. das Zapfengelenk aus Atlas and Axis) a maximum of mobility for the head. The <strong>lumbar spine (LWS)</strong>, on the other hand, is massively restricted in its rotation by interlocking joint processes, as it primarily has to perform a stabilising function for the torso.</p>
+                </div>
+            </div>
+
+            <!-- Funktion 2 -->
+            <div class="function-card">
+                <div class="func-left">
+                    <div class="func-number">2</div>
+                    <h3 class="arch-font">Federungs- & Dämpfungsfunktion</h3>
+                    <p>Die Wirbelsäule muss bei jedem Schritt, Sprung oder Aufprall die enormen axialen Stauchkräfte (Kompression) abfangen, um insbesondere das empfindliche Gehirn vor Erschütterungen zu bewahren.</p>
+                </div>
+                <div class="func-right">
+                    <span class="anatomy-label">Anatomischer Bezug</span>
+                    <p>Diese Dämpfung wird durch zwei Strukturen realisiert: Erstens durch die makroskopische <strong>Doppel-S-Form</strong> (Hals- und Lendenlordose sowie Brust- und Sakralkyphose), die wie eine mechanische Blattfeder wirkt. Zweitens durch die mikroskopischen <strong>Bandscheiben</strong> (Disci intervertebrales), die als flüssigkeitsgefüllte Puffer (Stoßdämpfer) die einwirkenden Kräfte hydraulisch auf die Wirbelkörper verteilen.</p>
+                </div>
+            </div>
+
+            <!-- Funktion 3 -->
+            <div class="function-card">
+                <div class="func-left">
+                    <div class="func-number">3</div>
+                    <h3 class="arch-font">Schutzfunktion</h3>
+                    <p>Das zentrale Nervensystem (ZNS) steuert den gesamten Organismus und ist hochgradig verletzungsanfällig. Die Wirbelsäule dient als mechanischer Panzer für die absteigenden Nervenbahnen.</p>
+                </div>
+                <div class="func-right">
+                    <span class="anatomy-label">Anatomischer Bezug</span>
+                    <p>Das Rückenmark verläuft geschützt im knöchernen <strong>Wirbelkanal (Canalis vertebralis)</strong>, der durch die übereinanderliegenden Wirbellöcher der massiven Wirbelbögen gebildet wird. Dieser knöcherne Ring verhindert bei äußeren Gewalteinwirkungen eine Quetschung der Nerven.</p>
+                </div>
+            </div>
+
+            <!-- Funktion 4 -->
+            <div class="function-card">
+                <div class="func-left">
+                    <div class="func-number">4</div>
+                    <h3 class="arch-font">Stütz- & Haltefunktion</h3>
+                    <p>Als zentrale Längsachse trägt die Wirbelsäule das Gewicht von Kopf, Rumpf und oberen Extremitäten und überträgt dieses über das Becken auf die Beine. Sie ist die biomechanische Voraussetzung für die Bipedie (den aufrechten Gang des Menschen).</p>
+                </div>
+                <div class="func-right">
+                    <span class="anatomy-label">Anatomischer Bezug</span>
+                    <p>Diese Stabilität wird durch eine massive, nach unten hin dicker werdende Knochenstruktur (<strong>massive Wirbelkörper der LWS</strong>) gewährleistet. Unterstützt wird das Knochengerüst durch ein extrem straffes und komplexes System aus <strong>Bandverbindungen (Ligamenta)</strong> und der tiefen, <strong>autochthonen Rückenmuskulatur</strong>, die die Gesamtstruktur wie ein Korsett aufrecht hält.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <span class="hidden-artifacts">Shutterstock Entdecken</span>
+
+        <!-- Interactive Connection Matrix (Canvas) -->
+        <section class="matrix-section">
+            <h2 class="arch-font">Die Kausalitäts-Matrix</h2>
+            <p class="subtitle">Fahre mit der Maus über die linke oder rechte Spalte, um die "Form bestimmt Funktion"-Zuordnung (Kausalkette) zu beleuchten.</p>
+            
+            <div class="canvas-container">
+                <canvas id="causalityMatrix" width="1000" height="500"></canvas>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2 class="arch-font">Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                Dieser Bereich ist nicht nur Theorie, sondern war <strong>exakt so Gegenstand der offiziellen illustrierenden Prüfungsaufgaben (eA)</strong> für das bayerische Abitur!
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card">
+                    <h3 class="arch-font">✍️ Das Zitat im Abitur</h3>
+                    <p>In einer Abituraufgabe kann dir folgendes Zitat vorgelegt werden: <br><span class="highlight-white">"Die Form bestimmt die Funktion. Erklären Sie diese Aussage anhand der vier wichtigen Funktionen der menschlichen Wirbelsäule!"</span>.</p>
+                    <p style="margin-top: 1rem;"><strong>Die korrekte Lösungsstruktur:</strong> Hier machen viele Schüler den Fehler, nur die vier Funktionen aufzuzählen (gibt fast keine Punkte) oder nur die Anatomie zu beschreiben (gibt ebenfalls kaum Punkte). <span class="highlight-red">Du musst zwingend beides verknüpfen!</span></p>
+                </div>
+
+                <div class="abi-card" style="border-left-color: #f59e0b; background: rgba(245, 158, 11, 0.05);">
+                    <h3 class="arch-font" style="color: #f59e0b;">🧩 Argumentations-Beispiel für die Klausur</h3>
+                    <p>Nenne die Federungsfunktion und erkläre <span class="highlight-white">unmittelbar im gleichen Satz</span>, dass diese spezifische Aufgabe (die Funktion) überhaupt nur möglich ist, weil die Wirbelsäule wie eine Doppel-S-Kurve gebogen ist und wasserreiche Bandscheiben besitzt (die Form).</p>
+                    <p style="margin-top: 1rem;">Beschreibe die Stützfunktion und begründe sie <strong>sofort</strong> mit den massiven, nach unten hin größer werdenden Wirbelkörpern und den straffen Bandverbindungen, die den aufrechten Gang gegen die Schwerkraft sichern.</p>
+                    <p style="margin-top: 1rem;"><span class="highlight-white">Nur diese lückenlose Kausalkette zwischen Anatomie und Biomechanik erfüllt den Operator "erklären" vollständig!</span></p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('causalityMatrix');
+            const ctx = canvas.getContext('2d');
+            
+            // Handle high DPI displays
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 1000;
+            const logicalH = 500;
+            
+            let hoveredIndex = -1; // -1 means none, 0-3 corresponds to pairs
+            let hoveredSide = ''; // 'left' or 'right'
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayW = Math.min(rect.width, logicalW);
+                const scale = displayW / logicalW;
+                const displayH = logicalH * scale;
+                
+                canvas.width = displayW * dpr;
+                canvas.height = displayH * dpr;
+                canvas.style.width = `${displayW}px`;
+                canvas.style.height = `${displayH}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                drawMatrix();
+            }
+
+            // Data definition for the 4 pairs
+            const data = [
+                {
+                    func: "Bewegungsfunktion", 
+                    icon: "rot", // Custom draw logic hook
+                    anat: "Gelenkige Verbindungen / Atlas & Axis"
+                },
+                {
+                    func: "Federungsfunktion", 
+                    icon: "spring", 
+                    anat: "Doppel-S-Form & Bandscheiben"
+                },
+                {
+                    func: "Schutzfunktion", 
+                    icon: "shield", 
+                    anat: "Knöcherner Wirbelkanal (Rückenmark)"
+                },
+                {
+                    func: "Stütz- & Haltefunktion", 
+                    icon: "pillar", 
+                    anat: "Massive Wirbelkörper & Ligamenta"
+                }
+            ];
+
+            // Layout parameters
+            const leftX = 250;
+            const rightX = 750;
+            const startY = 80;
+            const gapY = 100;
+            const nodeW = 320;
+            const nodeH = 60;
+
+            function drawRoundedRect(ctx, x, y, width, height, radius, fill, stroke, strokeWidth = 1) {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width - radius, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+                ctx.lineTo(x + width, y + height - radius);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                ctx.lineTo(x + radius, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+                ctx.closePath();
+                
+                ctx.fillStyle = fill;
+                ctx.fill();
+                if(stroke) {
+                    ctx.strokeStyle = stroke;
+                    ctx.lineWidth = strokeWidth;
+                    ctx.stroke();
+                }
+            }
+
+            // Simple Icon Drawing Functions
+            function drawIcon(type, cx, cy, color) {
+                ctx.save();
+                ctx.translate(cx, cy);
+                ctx.strokeStyle = color;
+                ctx.fillStyle = color;
+                ctx.lineWidth = 2;
+
+                if (type === 'rot') { // Rotational arrows
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 12, 0.2, Math.PI - 0.2);
+                    ctx.stroke();
+                    // Arrow head 1
+                    ctx.beginPath(); ctx.moveTo(-10, 6); ctx.lineTo(-14, 0); ctx.lineTo(-6, 0); ctx.fill();
+                    
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 12, Math.PI + 0.2, Math.PI*2 - 0.2);
+                    ctx.stroke();
+                    // Arrow head 2
+                    ctx.beginPath(); ctx.moveTo(10, -6); ctx.lineTo(14, 0); ctx.lineTo(6, 0); ctx.fill();
+                } 
+                else if (type === 'spring') { // Zig-zag spring
+                    ctx.beginPath();
+                    ctx.moveTo(0, -12);
+                    ctx.lineTo(-8, -6); ctx.lineTo(8, 0); ctx.lineTo(-8, 6);
+                    ctx.lineTo(0, 12);
+                    ctx.stroke();
+                }
+                else if (type === 'shield') { // Shield
+                    ctx.beginPath();
+                    ctx.moveTo(0, -12);
+                    ctx.lineTo(12, -8); ctx.lineTo(12, 4);
+                    ctx.quadraticCurveTo(12, 12, 0, 16);
+                    ctx.quadraticCurveTo(-12, 12, -12, 4);
+                    ctx.lineTo(-12, -8);
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+                else if (type === 'pillar') { // Pillar/Column
+                    ctx.fillRect(-10, -12, 20, 3); // Top base
+                    ctx.fillRect(-10, 10, 20, 3);  // Bottom base
+                    ctx.fillRect(-6, -9, 3, 19);   // Left pillar
+                    ctx.fillRect(3, -9, 3, 19);    // Right pillar
+                }
+                ctx.restore();
+            }
+
+            function drawMatrix() {
+                ctx.clearRect(0, 0, logicalW, logicalH);
+
+                // Titles
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = 'bold 16px Space Grotesk';
+                ctx.textAlign = 'center';
+                ctx.fillText('FUNKTION (Ziel)', leftX, 30);
+                ctx.fillText('ANATOMISCHER BEZUG (Form)', rightX, 30);
+
+                // Draw Connections First (so they appear behind boxes)
+                for (let i = 0; i < data.length; i++) {
+                    const y = startY + (i * gapY) + nodeH/2;
+                    
+                    // Determine if this specific line is active
+                    const isActive = (hoveredIndex === i);
+                    const isMuted = (hoveredIndex !== -1 && !isActive);
+
+                    ctx.beginPath();
+                    ctx.moveTo(leftX + nodeW/2, y);
+                    
+                    // Use a nice bezier curve connecting them horizontally
+                    const cp1X = leftX + nodeW/2 + 100;
+                    const cp2X = rightX - nodeW/2 - 100;
+                    ctx.bezierCurveTo(cp1X, y, cp2X, y, rightX - nodeW/2, y);
+
+                    if (isActive) {
+                        // Glowing active line
+                        ctx.strokeStyle = '#eab308'; // Construction Yellow
+                        ctx.lineWidth = 4;
+                        ctx.shadowColor = 'rgba(234, 179, 8, 0.6)';
+                        ctx.shadowBlur = 15;
+                    } else if (isMuted) {
+                        ctx.strokeStyle = 'rgba(51, 65, 85, 0.3)'; // Very faint
+                        ctx.lineWidth = 2;
+                        ctx.shadowBlur = 0;
+                    } else {
+                        // Default state
+                        ctx.strokeStyle = '#334155'; // Slate 700
+                        ctx.lineWidth = 2;
+                        ctx.setLineDash([5, 5]);
+                        ctx.shadowBlur = 0;
+                    }
+                    
+                    ctx.stroke();
+                    ctx.setLineDash([]); // Reset dash
+                    ctx.shadowBlur = 0; // Reset shadow
+                }
+
+                // Draw Nodes
+                for (let i = 0; i < data.length; i++) {
+                    const y = startY + (i * gapY);
+                    const isActive = (hoveredIndex === i);
+                    const isMuted = (hoveredIndex !== -1 && !isActive);
+                    
+                    const activeColorLeft = '#eab308'; // Yellow for Function
+                    const activeColorRight = '#38bdf8'; // Blue for Anatomy
+
+                    // Node styles based on state
+                    const bgFill = isActive ? '#1e293b' : '#0f172a';
+                    const borderColorLeft = isActive ? activeColorLeft : '#334155';
+                    const borderColorRight = isActive ? activeColorRight : '#334155';
+                    const textColorLeft = isActive ? activeColorLeft : (isMuted ? '#475569' : '#f8fafc');
+                    const textColorRight = isActive ? activeColorRight : (isMuted ? '#475569' : '#f8fafc');
+                    const strokeWidth = isActive ? 2 : 1;
+
+                    // Left Node (Function)
+                    drawRoundedRect(ctx, leftX - nodeW/2, y, nodeW, nodeH, 8, bgFill, borderColorLeft, strokeWidth);
+                    drawIcon(data[i].icon, leftX - nodeW/2 + 30, y + nodeH/2, textColorLeft);
+                    
+                    ctx.fillStyle = textColorLeft;
+                    ctx.font = isActive ? 'bold 15px Inter' : '15px Inter';
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(data[i].func, leftX - nodeW/2 + 60, y + nodeH/2);
+
+                    // Right Node (Anatomy)
+                    drawRoundedRect(ctx, rightX - nodeW/2, y, nodeW, nodeH, 8, bgFill, borderColorRight, strokeWidth);
+                    
+                    ctx.fillStyle = textColorRight;
+                    ctx.font = isActive ? 'bold 14px Inter' : '14px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(data[i].anat, rightX, y + nodeH/2);
+                }
+            }
+
+            // Mouse Interaction
+            function getMousePos(evt) {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width / dpr;
+                const scaleY = canvas.height / rect.height / dpr;
+                return {
+                    x: (evt.clientX - rect.left) * scaleX,
+                    y: (evt.clientY - rect.top) * scaleY
+                };
+            }
+
+            canvas.addEventListener('mousemove', (evt) => {
+                const pos = getMousePos(evt);
+                let foundIndex = -1;
+                let foundSide = '';
+
+                for (let i = 0; i < data.length; i++) {
+                    const y = startY + (i * gapY);
+                    
+                    // Check Left Nodes
+                    if (pos.x >= leftX - nodeW/2 && pos.x <= leftX + nodeW/2 && pos.y >= y && pos.y <= y + nodeH) {
+                        foundIndex = i;
+                        foundSide = 'left';
+                    }
+                    // Check Right Nodes
+                    else if (pos.x >= rightX - nodeW/2 && pos.x <= rightX + nodeW/2 && pos.y >= y && pos.y <= y + nodeH) {
+                        foundIndex = i;
+                        foundSide = 'right';
+                    }
+                }
+
+                if (hoveredIndex !== foundIndex) {
+                    hoveredIndex = foundIndex;
+                    hoveredSide = foundSide;
+                    canvas.style.cursor = foundIndex !== -1 ? 'pointer' : 'default';
+                    drawMatrix();
+                }
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                hoveredIndex = -1;
+                hoveredSide = '';
+                drawMatrix();
+            });
+
+            // Initialize
+            window.addEventListener('resize', initCanvas);
+            initCanvas();
+        });
+    </script>
+</body>
+</html>

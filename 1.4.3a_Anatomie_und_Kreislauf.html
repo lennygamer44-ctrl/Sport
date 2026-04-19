@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Anatomie und Kreislauf</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Open+Sans:wght@300;400;600;700&display=swap');
+
+        :root {
+            /* Clinical Theme Colors */
+            --bg-main: #f8fafc;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            
+            --artery-red: #e11d48;     /* Oxygen-rich */
+            --artery-light: #ffe4e6;
+            
+            --vein-blue: #0284c7;      /* Oxygen-poor */
+            --vein-light: #e0f2fe;
+            
+            --myocard-purple: #4c1d95; /* Muscle/Septum */
+            
+            --abi-gold: #eab308;
+            --abi-dark: #0f172a;
+            
+            --border-rad: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 0;
+        }
+
+        /* Hero Header with Heartbeat-like pattern */
+        .hero {
+            background: linear-gradient(135deg, var(--myocard-purple), var(--artery-red));
+            color: white;
+            padding: 6rem 2rem 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 40%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: -40px auto 40px auto;
+            position: relative;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: var(--border-rad);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: var(--myocard-purple);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-main);
+            margin: 2rem 0 1rem 0;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        /* Callout Box / Biomechanik */
+        .biomechanic-box {
+            background: #f8fafc;
+            border-left: 5px solid var(--myocard-purple);
+            padding: 1.5rem;
+            border-radius: 0 var(--border-rad) var(--border-rad) 0;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+
+        .biomechanic-box strong {
+            color: var(--myocard-purple);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-style: normal;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* 2-Column Grid for Atrium/Ventricle & Valves */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+
+        .anatomy-card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anatomy-card.right-heart {
+            background: var(--vein-light);
+            border-color: #bae6fd;
+        }
+
+        .anatomy-card.left-heart {
+            background: var(--artery-light);
+            border-color: #fecdd3;
+        }
+
+        .anatomy-card h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .right-heart h4 { color: var(--vein-blue); }
+        .left-heart h4 { color: var(--artery-red); }
+
+        /* Path Component for Circulation */
+        .circulation-path {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: var(--border-rad);
+            margin: 1.5rem 0;
+        }
+
+        .circulation-path h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .path-steps {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .step-item {
+            background: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .step-arrow {
+            color: #94a3b8;
+            font-weight: bold;
+        }
+
+        .highlight-o2 { color: var(--artery-red); }
+        .highlight-co2 { color: var(--vein-blue); }
+
+        /* Canvas Wrapper */
+        .canvas-container {
+            width: 100%;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-rad);
+            padding: 1rem;
+            margin: 2rem 0;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+            text-align: center;
+        }
+
+        .canvas-container canvas {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+        }
+
+        /* Massive Abitur Transfer Box */
+        .abi-dossier {
+            background: var(--abi-dark);
+            color: #f1f5f9;
+            padding: 4rem;
+            border-radius: var(--border-rad);
+            margin-top: 4rem;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.5);
+            position: relative;
+            border-top: 6px solid var(--abi-gold);
+        }
+
+        .abi-dossier::before {
+            content: 'PRÜFUNGS-DOSSIER (eA)';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--abi-gold);
+            color: var(--abi-dark);
+            padding: 0.5rem 2rem;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);
+        }
+
+        .abi-dossier p {
+            color: #cbd5e1;
+        }
+
+        .abi-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .abi-card h4 {
+            color: var(--abi-gold);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .path-flow-exam {
+            font-family: monospace;
+            background: #000;
+            padding: 1rem;
+            border-radius: 8px;
+            color: #10b981; /* neon green for correct answer */
+            margin-top: 1rem;
+            word-break: break-word;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">Lernbereich 1.4.3a</div>
+        <h1>Anatomie und Kreislauf</h1>
+        <p>Das Herz-Kreislauf-System als zentrales Transportsystem: Anatomie des Herzens im Überblick und der Blutkreislauf.</p>
+    </div>
+</div>
+
+<div class="container">
+    
+    <!-- Einleitung -->
+    <div class="content-card">
+        <p>Das Herz-Kreislauf-System ist das zentrale Transportsystem des Körpers. Für die sportliche Leistungsfähigkeit – insbesondere im Bereich der Ausdauer – ist es von entscheidender Bedeutung, da es die Arbeitsmuskulatur mit Sauerstoff und Nährstoffen versorgt und Stoffwechselendprodukte (wie CO<sub>2</sub> und Laktat) abtransportiert. Das Herz (Cor) fungiert dabei als Saug-Druck-Pumpe.</p>
+    </div>
+
+    <!-- 1. Makroskopische Anatomie -->
+    <div class="content-card">
+        <h2>🫀 1. Makroskopische Anatomie des Herzens</h2>
+        <p>Das menschliche Herz ist ein muskuläres Hohlorgan, das durch die Herzscheidewand (Septum) in eine rechte und eine linke Hälfte getrennt wird. Diese Trennung ist physiologisch essenziell, da so verhindert wird, dass sich sauerstoffarmes und sauerstoffreiches Blut vermischen. Jede Herzhälfte besteht wiederum aus zwei Räumen, sodass das Herz insgesamt vier Hohlräume besitzt:</p>
+
+        <h3>Vorhöfe (Atrium) und Kammern (Ventrikel)</h3>
+        <div class="grid-2">
+            <div class="anatomy-card right-heart">
+                <h4>Rechte Herzhälfte (Sauerstoffarm)</h4>
+                <p>Das <strong>rechte Atrium</strong> sammelt das sauerstoffarme Blut aus dem Körper, der <strong>rechte Ventrikel</strong> pumpt es anschließend in die Lunge.</p>
+            </div>
+            <div class="anatomy-card left-heart">
+                <h4>Linke Herzhälfte (Sauerstoffreich)</h4>
+                <p>Das <strong>linke Atrium</strong> sammelt das sauerstoffreiche Blut aus der Lunge, der <strong>linke Ventrikel</strong> pumpt es mit hohem Druck in den gesamten Körper.</p>
+            </div>
+        </div>
+
+        <div class="biomechanic-box">
+            <strong>⚙️ Biomechanisches Detail:</strong>
+            Da die linke Herzkammer das Blut gegen den hohen Widerstand des gesamten Körperkreislaufs pumpen muss, ist die Herzmuskulatur (Myokard) der linken Kammer deutlich dicker und kräftiger ausgeprägt als die der rechten Kammer.
+        </div>
+
+        <h3>Das Ventilsystem (Herzklappen)</h3>
+        <p>Um zu gewährleisten, dass das Blut nur in eine Richtung fließt (Hämodynamik), besitzt das Herz vier Klappen:</p>
+        <ul>
+            <li><strong>Segelklappen</strong> (Trikuspidalklappe rechts, Mitralklappe links) trennen die Vorhöfe von den Kammern.</li>
+            <li><strong>Taschenklappen</strong> (Pulmonalklappe rechts, Aortenklappe links) trennen die Kammern von den großen abführenden Gefäßen.</li>
+        </ul>
+
+        <!-- Canvas: Herzquerschnitt -->
+        <div class="canvas-container">
+            <h4 style="font-family: 'Montserrat', sans-serif; color: var(--text-main); margin-bottom: 10px;">Anatomischer Querschnitt des Herzens</h4>
+            <canvas id="heartCanvas" width="800" height="500"></canvas>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 10px;">*Anatomische Ansicht: Die linke Herzhälfte (rot) befindet sich auf der rechten Seite der Abbildung.</p>
+        </div>
+    </div>
+
+    <!-- 2. Der Blutkreislauf -->
+    <div class="content-card">
+        <h2>🔄 2. Der Blutkreislauf</h2>
+        <p>Um den ständigen Gasaustausch und die zelluläre Versorgung sicherzustellen, ist das Gefäßsystem in zwei in Reihe geschaltete Kreisläufe unterteilt:</p>
+
+        <!-- Canvas: Kreislauf (Acht) -->
+        <div class="canvas-container" style="margin-top: 2rem;">
+            <h4 style="font-family: 'Montserrat', sans-serif; color: var(--text-main); margin-bottom: 10px;">Der menschliche Blutkreislauf</h4>
+            <canvas id="circulationCanvas" width="800" height="600"></canvas>
+        </div>
+
+        <div class="circulation-path">
+            <h4><span style="color: var(--vein-blue);">🫁</span> Der Lungenkreislauf (Kleiner Kreislauf)</h4>
+            <div class="path-steps">
+                <span class="step-item highlight-co2">Rechter Ventrikel</span> <span class="step-arrow">&rarr;</span>
+                <span class="step-item highlight-co2">Lungenstamm</span> <span class="step-arrow">&rarr;</span>
+                <span class="step-item highlight-co2">Lungenarterie</span> <span class="step-arrow">&rarr;</span>
+                <span class="step-item" style="border-color: #cbd5e1; background: #f1f5f9;">Gasaustausch Lungenkapillaren (O<sub>2</sub> auf, CO<sub>2</sub> ab)</span> <span class="step-arrow">&rarr;</span>
+                <span class="step-item highlight-o2">Lungenvenen</span> <span class="step-arrow">&rarr;</span>
+                <span class="step-item highlight-o2">Linkes Atrium</span>
+            </div>
+            <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-light);"><em>Besonderheit:</em> Dies ist der einzige Ort im Körper, an dem Arterien sauerstoffarmes Blut und Venen sauerstoffreiches Blut führen.</p>
+        </div>
+
+        <div class="circulation-path">
+            <h4><span style="color: var(--artery-red);">🩸</span> Der Körperkreislauf (Großer Kreislauf)</h4>
+            <div class="path-steps">
+                <span class="step-item highlight-o2">Linker Ventrikel</span> <span class="step-arrow">&rarr;</span>
+                <span class="step-item highlight-o2">Aorta</span> <span class="step-arrow">&rarr;</span>
+                <span class="step-item highlight-o2">Arterien / Arteriolen</span> <span class="step-arrow">&rarr;</span>
+                <span class="step-item" style="border-color: #cbd5e1; background: #f1f5f9;">Kapillarbett der Zielorgane (Muskulatur)</span> <span class="step-arrow">&rarr;</span>
+                <span class="step-item highlight-co2">Venolen / Venen</span> <span class="step-arrow">&rarr;</span>
+                <span class="step-item highlight-co2">Hohlvenen (Cava sup./inf.)</span> <span class="step-arrow">&rarr;</span>
+                <span class="step-item highlight-co2">Rechtes Atrium</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Abitur-Transfer -->
+    <div class="abi-dossier">
+        <p>Im Abitur auf erhöhtem Anforderungsniveau wird dieses rein anatomische Grundlagenwissen fast immer als Basis für komplexe Transferaufgaben zur Anpassung (Adaptation) an sportliche Belastungen genutzt. Das bloße Beschriften eines Herzens wird in einer eA-Klausur nicht ausreichen.</p>
+
+        <div class="abi-card">
+            <h4>1. Transfer auf das Herzkreislauf-System (Das Sportherz)</h4>
+            <p>Du musst die anatomischen Strukturen zwingend mit Trainingsmethoden und deren physiologischen Adaptationen verknüpfen. Wenn in einer Aufgabe nach den physiologischen Adaptationen durch regelmäßiges Ausdauertraining (z. B. Dauermethode für einen Marathon) gefragt wird, musst du argumentieren, wie sich genau diese Herzstrukturen verändern:</p>
+            <div style="background: rgba(234, 179, 8, 0.1); border-left: 4px solid var(--abi-gold); padding: 1rem; margin-top: 1rem;">
+                <strong>Argumentationskette:</strong> Ausdauertraining führt zu einer physiologischen Hypertrophie des Herzmuskels (Myokards), insbesondere der <strong>linken Herzkammer (Sportherz)</strong>. Dies führt zu einer Erweiterung (Dilatation) der Herzhöhlen und einer Verdickung der Herzwände.
+            </div>
+        </div>
+
+        <div class="abi-card">
+            <h4>2. Den Weg des Sauerstoffs nachvollziehen</h4>
+            <p>Du musst in der Lage sein, den Transportweg eines Sauerstoffmoleküls funktionell zu beschreiben. Beispielsweise in Kombination mit dem Thema Energiebereitstellung: Wie gelangt der Sauerstoff von der Einatmung in den Oberschenkelmuskel eines Mountainbikers, um dort die aerobe Glykolyse zu ermöglichen?</p>
+            <p style="margin-top: 10px;">Wer diese Kette lückenlos und unter Verwendung der korrekten Fachtermini aufschreiben kann, sichert sich die volle Punktzahl:</p>
+            <div class="path-flow-exam">
+                Lunge &rarr; Lungenvenen &rarr; Linkes Atrium &rarr; Mitralklappe &rarr; Linker Ventrikel &rarr; Aortenklappe &rarr; Aorta &rarr; Arterien &rarr; Arteriolen &rarr; Kapillarbett der Beinmuskulatur &rarr; Diffusion in Mitochondrien
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Helper function for High-DPI canvas scaling
+    function setupCanvas(canvasId) {
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext('2d');
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        return { canvas, ctx, width: rect.width, height: rect.height };
+    }
+
+    // --- 1. Heart Cross-Section Diagram ---
+    function drawHeart() {
+        const { ctx, width, height } = setupCanvas('heartCanvas');
+        ctx.clearRect(0, 0, width, height);
+
+        const centerX = width / 2;
+        const centerY = height / 2 + 20;
+        
+        // Colors
+        const colorMyo = '#d8b4e2'; // Pale purple for myocardium
+        const colorRed = '#fda4af'; // Oxygen-rich (Anatomical Left)
+        const colorBlue = '#bae6fd'; // Oxygen-poor (Anatomical Right)
+        const valveColor = '#94a3b8';
+
+        // Draw Myocardium (Outer Wall)
+        // Note: Anatomical Left (Visual Right) is thicker
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY - 150);
+        // Visual Right side (Anatomical Left - thick wall)
+        ctx.bezierCurveTo(centerX + 200, centerY - 150, centerX + 250, centerY + 100, centerX, centerY + 200);
+        // Visual Left side (Anatomical Right - thinner wall)
+        ctx.bezierCurveTo(centerX - 180, centerY + 100, centerX - 150, centerY - 150, centerX, centerY - 150);
+        ctx.fillStyle = colorMyo;
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#4c1d95';
+        ctx.stroke();
+
+        // Draw Septum (Middle divider)
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY - 150);
+        ctx.quadraticCurveTo(centerX + 20, centerY, centerX, centerY + 200);
+        ctx.lineTo(centerX - 30, centerY + 200);
+        ctx.quadraticCurveTo(centerX - 10, centerY, centerX - 30, centerY - 150);
+        ctx.fillStyle = colorMyo;
+        ctx.fill();
+
+        // Visual Left (Anatomical Right) - Oxygen Poor (Blue)
+        // Right Atrium
+        ctx.beginPath();
+        ctx.moveTo(centerX - 30, centerY - 140);
+        ctx.quadraticCurveTo(centerX - 140, centerY - 140, centerX - 130, centerY - 40);
+        ctx.lineTo(centerX - 10, centerY - 40);
+        ctx.fillStyle = colorBlue;
+        ctx.fill();
+        ctx.stroke();
+
+        // Right Ventricle
+        ctx.beginPath();
+        ctx.moveTo(centerX - 10, centerY - 20);
+        ctx.lineTo(centerX - 140, centerY - 20);
+        ctx.quadraticCurveTo(centerX - 140, centerY + 100, centerX - 20, centerY + 180);
+        ctx.quadraticCurveTo(centerX, centerY + 80, centerX - 10, centerY - 20);
+        ctx.fillStyle = colorBlue;
+        ctx.fill();
+        ctx.stroke();
+
+        // Visual Right (Anatomical Left) - Oxygen Rich (Red)
+        // Left Atrium
+        ctx.beginPath();
+        ctx.moveTo(centerX + 20, centerY - 140);
+        ctx.quadraticCurveTo(centerX + 180, centerY - 140, centerX + 180, centerY - 40);
+        ctx.lineTo(centerX + 15, centerY - 40);
+        ctx.fillStyle = colorRed;
+        ctx.fill();
+        ctx.stroke();
+
+        // Left Ventricle (Notice the wall is thicker, chamber is a bit narrower/longer)
+        ctx.beginPath();
+        ctx.moveTo(centerX + 15, centerY - 20);
+        ctx.lineTo(centerX + 160, centerY - 20);
+        ctx.quadraticCurveTo(centerX + 160, centerY + 100, centerX + 10, centerY + 180);
+        ctx.quadraticCurveTo(centerX + 30, centerY + 80, centerX + 15, centerY - 20);
+        ctx.fillStyle = colorRed;
+        ctx.fill();
+        ctx.stroke();
+
+        // Draw Valves (Schematic lines)
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = valveColor;
+        
+        // Trikuspidalklappe (Visual Left)
+        ctx.beginPath(); ctx.moveTo(centerX - 120, centerY - 30); ctx.lineTo(centerX - 80, centerY - 20); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(centerX - 30, centerY - 30); ctx.lineTo(centerX - 70, centerY - 20); ctx.stroke();
+        
+        // Mitralklappe (Visual Right)
+        ctx.beginPath(); ctx.moveTo(centerX + 150, centerY - 30); ctx.lineTo(centerX + 110, centerY - 20); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(centerX + 30, centerY - 30); ctx.lineTo(centerX + 70, centerY - 20); ctx.stroke();
+
+        // Add Labels
+        ctx.fillStyle = '#1e293b';
+        ctx.font = 'bold 14px Open Sans';
+        ctx.textAlign = 'center';
+
+        // Right side of heart (Visual Left)
+        ctx.fillText('Rechter Vorhof', centerX - 80, centerY - 80);
+        ctx.fillText('Rechte Kammer', centerX - 70, centerY + 80);
+
+        // Left side of heart (Visual Right)
+        ctx.fillText('Linker Vorhof', centerX + 100, centerY - 80);
+        ctx.fillText('Linke Kammer', centerX + 90, centerY + 80);
+        
+        ctx.save();
+        ctx.translate(centerX - 5, centerY + 40);
+        ctx.rotate(-Math.PI/2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText('Septum', 0, 0);
+        ctx.restore();
+
+        // Draw Lines and Valve Labels
+        ctx.font = '12px Open Sans';
+        ctx.fillStyle = '#64748b';
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1;
+        
+        // Trikuspidal Line
+        ctx.beginPath(); ctx.moveTo(centerX - 100, centerY - 25); ctx.lineTo(centerX - 220, centerY - 25); ctx.stroke();
+        ctx.textAlign = 'right';
+        ctx.fillText('Trikuspidalklappe', centerX - 230, centerY - 20);
+        
+        // Mitral Line
+        ctx.beginPath(); ctx.moveTo(centerX + 100, centerY - 25); ctx.lineTo(centerX + 220, centerY - 25); ctx.stroke();
+        ctx.textAlign = 'left';
+        ctx.fillText('Mitralklappe', centerX + 230, centerY - 20);
+    }
+
+    // --- 2. Circulation Figure-8 Diagram ---
+    function drawCirculation() {
+        const { ctx, width, height } = setupCanvas('circulationCanvas');
+        ctx.clearRect(0, 0, width, height);
+
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const radiusY = 120;
+        const radiusX = 140;
+
+        const colorRed = '#e11d48'; // O2 Rich
+        const colorBlue = '#0284c7'; // O2 Poor
+        
+        ctx.lineWidth = 15;
+        ctx.lineCap = 'round';
+
+        // Draw Infinity / Figure 8 (Split into 4 arcs for color coding)
+        
+        // 1. Lungenkreislauf: Vom rechten Ventrikel (Blau) zur Lunge (Oben)
+        // Bottom-to-Top Left side of top loop
+        ctx.beginPath();
+        ctx.strokeStyle = colorBlue;
+        ctx.ellipse(centerX, centerY - radiusY, radiusX, radiusY, 0, Math.PI/2, Math.PI, false);
+        ctx.stroke();
+
+        // 2. Lungenkreislauf: Von der Lunge zum linken Atrium (Rot)
+        // Top-to-Bottom Right side of top loop
+        ctx.beginPath();
+        ctx.strokeStyle = colorRed;
+        ctx.ellipse(centerX, centerY - radiusY, radiusX, radiusY, 0, -Math.PI/2, Math.PI/2, false);
+        ctx.stroke();
+
+        // 3. Körperkreislauf: Vom linken Ventrikel (Rot) zum Körper (Unten)
+        // Top-to-Bottom Left side of bottom loop (anatomically crosses over)
+        ctx.beginPath();
+        ctx.strokeStyle = colorRed;
+        ctx.ellipse(centerX, centerY + radiusY, radiusX, radiusY, 0, Math.PI, Math.PI * 1.5, false);
+        ctx.ellipse(centerX, centerY + radiusY, radiusX, radiusY, 0, Math.PI/2, Math.PI, false); // Draw left half
+        ctx.stroke();
+
+        // 4. Körperkreislauf: Vom Körper zum rechten Atrium (Blau)
+        // Bottom-to-Top Right side of bottom loop
+        ctx.beginPath();
+        ctx.strokeStyle = colorBlue;
+        ctx.ellipse(centerX, centerY + radiusY, radiusX, radiusY, 0, -Math.PI/2, Math.PI/2, false);
+        ctx.stroke();
+
+        // Draw Heart in the middle
+        ctx.fillStyle = '#4c1d95';
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 45, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 16px Montserrat';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('HERZ', centerX, centerY);
+
+        // Draw Lungs (Top)
+        ctx.fillStyle = '#f1f5f9';
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(centerX - 100, centerY - radiusY * 2 - 20, 200, 60, 10);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#1e293b';
+        ctx.fillText('LUNGENKREISLAUF', centerX, centerY - radiusY * 2 + 10);
+        ctx.font = '12px Open Sans';
+        ctx.fillText('O₂ Aufnahme / CO₂ Abgabe', centerX, centerY - radiusY * 2 + 30);
+
+        // Draw Body (Bottom)
+        ctx.fillStyle = '#f1f5f9';
+        ctx.beginPath();
+        ctx.roundRect(centerX - 100, centerY + radiusY * 2 - 40, 200, 60, 10);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#1e293b';
+        ctx.font = 'bold 16px Montserrat';
+        ctx.fillText('KÖRPERKREISLAUF', centerX, centerY + radiusY * 2 - 10);
+        ctx.font = '12px Open Sans';
+        ctx.fillText('O₂ Abgabe / CO₂ Aufnahme', centerX, centerY + radiusY * 2 + 10);
+
+        // Helper to draw little arrows on the path
+        function drawPathArrow(x, y, angle, color) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            ctx.beginPath();
+            ctx.moveTo(-10, -10);
+            ctx.lineTo(10, 0);
+            ctx.lineTo(-10, 10);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        // Draw arrows (approximate positions on the ellipses)
+        drawPathArrow(centerX - radiusX, centerY - radiusY, -Math.PI/2, '#ffffff'); // Left up
+        drawPathArrow(centerX + radiusX, centerY - radiusY, Math.PI/2, '#ffffff'); // Right down
+        drawPathArrow(centerX - radiusX, centerY + radiusY, Math.PI/2, '#ffffff'); // Left down
+        drawPathArrow(centerX + radiusX, centerY + radiusY, -Math.PI/2, '#ffffff'); // Right up
+    }
+
+    // Initialize and handle resize
+    window.onload = function() {
+        drawHeart();
+        drawCirculation();
+    };
+
+    window.addEventListener('resize', () => {
+        drawHeart();
+        drawCirculation();
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.5.4b Weitere Trainingsmethoden: Wiederholung und Wettkampf</title>
+    <style>
+        /* Stadium Track & Scoreboard Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Share+Tech+Mono&display=swap');
+
+        :root {
+            /* Stadium Theme Palette */
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            
+            --track-red: #be123c;       /* Rose 700 - Tartan Track */
+            --track-red-light: #ffe4e6;
+            
+            --stadium-navy: #0f172a;    /* Slate 900 - Night Sky/Scoreboard */
+            --stadium-gray: #334155;
+            
+            --score-neon: #10b981;      /* Emerald - Digital text */
+            --score-amber: #f59e0b;
+            
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            
+            /* Abitur Colors */
+            --abi-gold: #fbbf24;
+            --abi-black: #000000;
+            
+            --radius-sharp: 4px;
+            --radius-box: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            /* Subtle track lines in background */
+            background-image: repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(0,0,0,0.03) 100px, rgba(0,0,0,0.03) 102px);
+        }
+
+        .notebook-container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        /* Stadium Header */
+        .hero-header {
+            background: var(--stadium-navy);
+            color: #f8fafc;
+            padding: 4rem 3rem;
+            border-radius: var(--radius-box);
+            margin-bottom: 3rem;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.4);
+            border-bottom: 8px solid var(--track-red);
+            overflow: hidden;
+        }
+
+        .hero-header::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; width: 40%; height: 100%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
+            pointer-events: none;
+        }
+
+        .topic-id {
+            display: inline-block;
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--score-neon);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: var(--radius-sharp);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .intro-lead {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            max-width: 900px;
+            font-weight: 300;
+        }
+
+        /* Main Sections */
+        .content-section {
+            background: var(--bg-card);
+            border-radius: var(--radius-box);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--track-red);
+        }
+
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.2rem;
+            color: var(--stadium-navy);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .num-box {
+            background: var(--track-red);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sharp);
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            color: var(--track-red);
+            margin: 2rem 0 1rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Scoreboard / Belastungskomponenten */
+        .scoreboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+            background: var(--stadium-navy);
+            padding: 1.5rem;
+            border-radius: var(--radius-box);
+            border: 2px solid #334155;
+        }
+
+        .score-panel {
+            background: #000000;
+            padding: 1.5rem;
+            border-radius: var(--radius-sharp);
+            border-top: 3px solid var(--stadium-gray);
+            text-align: center;
+        }
+
+        .score-label {
+            font-family: 'Oswald', sans-serif;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-value {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--score-amber);
+            font-size: 1.3rem;
+            line-height: 1.3;
+        }
+
+        .score-value.highlight {
+            color: var(--score-neon);
+        }
+
+        .score-value.alert {
+            color: #ef4444; /* Neon Red */
+        }
+
+        /* Text Boxes */
+        .physio-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: var(--radius-box);
+            margin-top: 1.5rem;
+        }
+
+        .physio-box strong {
+            display: block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            color: var(--stadium-navy);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .example-box {
+            background: var(--track-red-light);
+            color: #881337;
+            padding: 1.5rem;
+            border-left: 4px solid var(--track-red);
+            border-radius: 0 var(--radius-box) var(--radius-box) 0;
+            margin-top: 2rem;
+            font-style: italic;
+        }
+
+        /* Canvas Wrap */
+        .canvas-arena {
+            background: #0f172a;
+            border-radius: var(--radius-box);
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+            border: 2px solid #334155;
+        }
+
+        .canvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1rem;
+        }
+
+        .canvas-header h3 {
+            color: #f8fafc;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            display: block;
+            background: #000000;
+            border-radius: 4px;
+        }
+
+        /* Massive Abitur Box */
+        .matchday-dossier {
+            background: var(--abi-black);
+            color: #f1f5f9;
+            padding: 4rem;
+            border-radius: var(--radius-box);
+            margin-top: 5rem;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
+            border: 1px solid #333;
+        }
+
+        .matchday-dossier::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 8px;
+            background: repeating-linear-gradient(90deg, var(--abi-gold), var(--abi-gold) 20px, var(--abi-black) 20px, var(--abi-black) 40px);
+        }
+
+        .abi-tape {
+            position: absolute;
+            top: 30px;
+            right: -40px;
+            background: var(--abi-gold);
+            color: var(--abi-black);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.5rem 4rem;
+            transform: rotate(45deg);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .matchday-dossier h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-top: 1rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 1.5rem;
+        }
+
+        .intro-exam {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        .indicator-box {
+            background: rgba(255,255,255,0.05);
+            border-left: 5px solid var(--abi-gold);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .indicator-box h4 {
+            color: var(--abi-gold);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .scenario-grid { grid-template-columns: 1fr; }
+        }
+
+        .scenario-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            padding: 2.5rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .scenario-card.intervall { border-top: 4px solid #38bdf8; }
+        .scenario-card.wiederholung { border-top: 4px solid var(--track-red); }
+
+        .scenario-card h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .scenario-card.intervall h4 { color: #38bdf8; }
+        .scenario-card.wiederholung h4 { color: var(--track-red); }
+
+        .quote-block {
+            background: #000;
+            padding: 1.5rem;
+            border-radius: 4px;
+            font-family: 'Share Tech Mono', monospace;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border: 1px solid #333;
+        }
+
+        .scenario-card p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 0;
+        }
+
+        .scenario-card strong {
+            color: white;
+        }
+
+        .volition-argument {
+            background: linear-gradient(135deg, #312e81, #1e1b4b);
+            border: 1px solid #4c1d95;
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .volition-argument h4 {
+            color: #c084fc;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .volition-argument p {
+            color: #e2e8f0;
+            margin: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="notebook-container">
+
+    <!-- Header -->
+    <header class="hero-header">
+        <div class="topic-id">SYS.MODUL // 1.5.4b</div>
+        <h1>Wiederholungsmethode und Wettkampfmethode</h1>
+        <p class="intro-lead">Während die Dauer- und Intervallmethode primär dem Aufbau einer breiten Ausdauerbasis dienen, zielen die Wiederholungs- und Wettkampfmethode auf die absolute Leistungsspitze (Ausprägung der speziellen Ausdauer) ab. Sie operieren im Bereich der maximalen physischen und psychischen Belastbarkeit.</p>
+    </header>
+
+    <!-- 1. Wiederholungsmethode -->
+    <section class="content-section">
+        <h2><span class="num-box">1</span> Die Wiederholungsmethode</h2>
+        <p>Das grundlegende Kennzeichen der Wiederholungsmethode ist der wiederholte Wechsel von extrem intensiven (maximalen) Belastungsphasen und <strong>vollständigen Erholungspausen</strong>.</p>
+
+        <h3>Die Belastungskomponenten</h3>
+        <div class="scoreboard-grid">
+            <div class="score-panel">
+                <span class="score-label">Intensität</span>
+                <span class="score-value alert">90–100 %</span>
+                <div style="color:#64748b; font-size: 0.8rem; margin-top:5px;">Nahezu maximal bis maximal</div>
+            </div>
+            <div class="score-panel">
+                <span class="score-label">Dauer</span>
+                <span class="score-value">Sekunden – 3 Min</span>
+                <div style="color:#64748b; font-size: 0.8rem; margin-top:5px;">Kurz bis mittel</div>
+            </div>
+            <div class="score-panel" style="border-top-color: var(--score-neon);">
+                <span class="score-label">Dichte (Pause)</span>
+                <span class="score-value highlight">Sehr gering</span>
+                <div style="color:#10b981; font-size: 0.8rem; margin-top:5px;">Vollständige Pause (5-20 Min)</div>
+            </div>
+            <div class="score-panel">
+                <span class="score-label">Umfang</span>
+                <span class="score-value">2 – 6 Wdh.</span>
+                <div style="color:#64748b; font-size: 0.8rem; margin-top:5px;">Sehr gering (ZNS Erschöpfung)</div>
+            </div>
+        </div>
+
+        <div class="physio-box">
+            <strong>Physiologische Wirkung und Zielsetzung</strong>
+            <p>Das Ziel der vollständigen Pause ist es, dass sich Herzfrequenz (unter 100 Schläge/min) und Atmung nahezu auf das Ruheniveau normalisieren.</p>
+            <p style="margin-bottom: 0;"><strong>Stoffwechseltechnisch bedeutet dies:</strong> Die muskulären ATP- und Kreatinphosphat-Speicher werden durch die Sauerstoffmehraufnahme (alaktazide Phase) komplett wieder aufgefüllt. Nur so ist es dem Athleten möglich, im nächsten Lauf wieder eine Belastung von 100 % zu absolvieren. Die Methode trainiert massiv die <strong>anaerob-laktazide Energiebereitstellung</strong>, die Säuretoleranz, die inter- und intramuskuläre Koordination (Bewegungsökonomie unter Höchsttempo) sowie die Willensspannkraft.</p>
+        </div>
+
+        <div class="example-box">
+            <strong>Beispiel Leichtathletik:</strong> Ein 400-m-Läufer absolviert im Training 3 x 400m in Wettkampftempo (100 % Intensität) mit jeweils 15 Minuten aktiver, vollständiger Gehpause dazwischen.
+        </div>
+    </section>
+
+    <!-- 2. Wettkampfmethode -->
+    <section class="content-section">
+        <h2><span class="num-box">2</span> Die Wettkampfmethode</h2>
+        <p>Diese Methode (oft gepaart mit der Kontrollmethode) dient der komplexen Überprüfung und Ausprägung der wettkampfspezifischen Ausdauer unter realen oder simulierten Stressbedingungen.</p>
+
+        <h3>Die Belastungskomponenten</h3>
+        <div class="scoreboard-grid">
+            <div class="score-panel">
+                <span class="score-label">Intensität</span>
+                <span class="score-value alert">Maximal</span>
+                <div style="color:#64748b; font-size: 0.8rem; margin-top:5px;">Oft >100% (Wettkampfadrenalin)</div>
+            </div>
+            <div class="score-panel">
+                <span class="score-label">Dauer</span>
+                <span class="score-value highlight">Wettkampfdistanz</span>
+                <div style="color:#10b981; font-size: 0.8rem; margin-top:5px;">Ggf. leichte Über-/Unterdistanz</div>
+            </div>
+            <div class="score-panel">
+                <span class="score-label">Dichte (Pause)</span>
+                <span class="score-value">Keine (0)</span>
+                <div style="color:#64748b; font-size: 0.8rem; margin-top:5px;">Sofern Sportart nicht anders vorgibt</div>
+            </div>
+            <div class="score-panel">
+                <span class="score-label">Umfang</span>
+                <span class="score-value">Sehr gering</span>
+                <div style="color:#64748b; font-size: 0.8rem; margin-top:5px;">Meist nur 1 Belastung</div>
+            </div>
+        </div>
+
+        <div class="physio-box">
+            <strong>Physiologische und Psychologische Wirkung</strong>
+            <p>Neben der maximalen Ausschöpfung der funktionellen Potenziale (vollständige Leerung der Glykogenspeicher, maximale Übersäuerung) steht hier vor allem die <strong>psychologische Härte (Volition)</strong> im Fokus.</p>
+            <p style="margin-bottom: 0;">Der Athlet trainiert das Ertragen höchster physischer Schmerzen (periphere und zentrale Ermüdung) und schult gleichzeitig seine renntaktischen Fähigkeiten (z. B. Pacing / Krafteinteilung).</p>
+        </div>
+    </section>
+
+    <!-- Canvas Graph Comparison -->
+    <div class="canvas-arena">
+        <div class="canvas-header">
+            <h3>Erholungsphasen-Tracking (HF-Monitor)</h3>
+            <span style="font-family: 'Share Tech Mono', monospace; color: #10b981;">DATA: ACTIVE</span>
+        </div>
+        <canvas id="hrComparisonGraph" width="1000" height="400"></canvas>
+    </div>
+
+    <!-- Massive Abitur Dossier -->
+    <div class="matchday-dossier">
+        <div class="abi-tape">EXAM (eA)</div>
+        <h2>Abitur-Transfer & Praxis</h2>
+        <p class="intro-exam">In der eA-Klausur ist das absolute Kernproblem (und die häufigste Fehlerquelle) bei der Trainingssteuerung die Verwechslung von Intervallmethode und Wiederholungsmethode. Das Kultusministerium prüft hier sehr detailliert, ob du die physiologischen Begrifflichkeiten trennscharf anwenden kannst.</p>
+
+        <div class="indicator-box">
+            <h4>Der absolute Klausur-Indikator: Die Pause</h4>
+            <p style="margin:0; font-size: 1.1rem; color: #f8fafc;">Wenn du in einer Textaufgabe das Training eines Spitzenathleten analysieren und die Methode benennen musst, <strong>achte ausschließlich auf die Beschreibung der Pause!</strong></p>
+        </div>
+
+        <div class="scenario-grid">
+            <!-- Scenario A: Intervall -->
+            <div class="scenario-card intervall">
+                <h4>Szenario A: Intervallmethode</h4>
+                <div class="quote-block">
+                    "Nach dem Lauf trabte er 90 Sekunden locker aus, der Puls war noch deutlich spürbar, dann erfolgte der nächste Sprint."
+                </div>
+                <p><strong>Zwingende Begründung:</strong> Es handelt sich um eine <strong>lohnende (unvollständige) Pause</strong>. Die ATP/KP-Speicher sind noch nicht wieder ganz voll, das Laktat noch nicht eliminiert. Der nächste Reiz trifft den Körper in einem Vorermüdungszustand, um Laktattoleranz und Sportherz zu trainieren.</p>
+            </div>
+
+            <!-- Scenario B: Wiederholung -->
+            <div class="scenario-card wiederholung">
+                <h4>Szenario B: Wiederholungsmethode</h4>
+                <div class="quote-block">
+                    "Zwischen den Tempoläufen setzte sie sich für 20 Minuten auf die Bank, bis die Atmung wieder völlig ruhig war."
+                </div>
+                <p><strong>Zwingende Begründung:</strong> Es handelt sich um eine <strong>vollständige Pause</strong>. Das Ziel ist die 100%ige Wiederherstellung der energiereichen Phosphate im Muskel, um im nächsten Lauf wieder maximale Geschwindigkeit (intramuskuläre Koordination / max. Laktatproduktion) realisieren zu können.</p>
+            </div>
+        </div>
+
+        <div class="volition-argument">
+            <h4>Die Argumentation for Volition (Wettkampfmethode)</h4>
+            <p>Wenn in einer materialgestützten Aufgabe nach dem Nutzen von "Testrennen" (Wettkampfmethode) im Trainingsplan gefragt wird, argumentierst du <em>nicht</em> primär mit der Vermehrung von Mitochondrien (das macht die Dauermethode). Du argumentierst mit der psychologischen Determinante: Die Wettkampfmethode zwingt den Athleten dazu, den <strong>zentralnervösen Ermüdungswiderstand und die Volition</strong> unter wettkampfspezifischen Stress- und Laktatbedingungen zu trainieren.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    // Canvas: Herzfrequenz Comparison (Intervall vs. Wiederholung)
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById('hrComparisonGraph');
+        const ctx = canvas.getContext('2d');
+        
+        // High-DPI Display Setup
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        
+        const width = rect.width;
+        const height = rect.height;
+
+        function drawGraph() {
+            ctx.clearRect(0, 0, width, height);
+
+            const padX = 60;
+            const padY = 50;
+            const chartW = width - padX * 2;
+            const chartH = height - padY * 2;
+            
+            // Split screen in half
+            const midX = padX + chartW / 2;
+
+            // Y-Axis limits (HR 60 to 200)
+            const minHR = 60;
+            const maxHR = 200;
+
+            const mapY = (hr) => height - padY - ((hr - minHR) / (maxHR - minHR)) * chartH;
+
+            // 1. Draw Base Grid and Labels
+            ctx.strokeStyle = '#1e293b'; // Dark grid
+            ctx.lineWidth = 1;
+
+            // Y-Axis Ticks
+            const hrTicks = [60, 100, 130, 160, 195];
+            hrTicks.forEach(hr => {
+                let y = mapY(hr);
+                ctx.beginPath(); ctx.moveTo(padX, y); ctx.lineTo(width-padX, y); ctx.stroke();
+                
+                ctx.fillStyle = '#64748b';
+                ctx.font = '12px Share Tech Mono';
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(hr + ' bpm', padX - 10, y);
+            });
+
+            // Middle Divider
+            ctx.beginPath(); ctx.setLineDash([5, 5]);
+            ctx.moveTo(midX, padY); ctx.lineTo(midX, height-padY);
+            ctx.strokeStyle = '#334155'; ctx.stroke();
+            ctx.setLineDash([]);
+
+            // X-Axis Line
+            ctx.beginPath(); ctx.moveTo(padX, height-padY); ctx.lineTo(width-padX, height-padY); 
+            ctx.strokeStyle = '#475569'; ctx.lineWidth = 2; ctx.stroke();
+
+            // Titles
+            ctx.fillStyle = '#f8fafc';
+            ctx.font = 'bold 18px Oswald';
+            ctx.textAlign = 'center';
+            ctx.fillText('GRAPH 1: INTERVALLMETHODE', padX + chartW/4, padY - 20);
+            ctx.fillText('GRAPH 2: WIEDERHOLUNGSMETHODE', midX + chartW/4, padY - 20);
+
+            // 2. Draw Threshold Lines (The crucial part)
+            function drawThreshold(hr, color, text) {
+                let y = mapY(hr);
+                ctx.beginPath(); ctx.moveTo(padX, y); ctx.lineTo(width-padX, y);
+                ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
+                
+                ctx.fillStyle = color;
+                ctx.font = '12px Share Tech Mono';
+                ctx.textAlign = 'left';
+                ctx.fillText(text, padX + 10, y - 8);
+            }
+
+            drawThreshold(130, '#0ea5e9', 'Lohnende Pause (~120-130 bpm)'); // Blue for unvollständig
+            drawThreshold(100, '#10b981', 'Vollständige Pause (< 100 bpm)'); // Green for vollständig
+
+            // 3. Draw Curves
+            // LEFT: Intervall (Fast peaks, incomplete recovery)
+            ctx.beginPath();
+            let x = padX;
+            ctx.moveTo(x, mapY(70)); // Start HR
+
+            const numInt = 4;
+            const intW = (chartW/2 - 40) / numInt;
+
+            for(let i=0; i<numInt; i++) {
+                // Peak
+                let peakX = x + intW * 0.4;
+                ctx.quadraticCurveTo(x + 10, mapY(185), peakX, mapY(185));
+                x = peakX;
+
+                // Recovery (Lohnende Pause)
+                let recX = x + intW * 0.6;
+                // Only drop to 130
+                ctx.quadraticCurveTo(x + 10, mapY(130), recX, mapY(130));
+                x = recX;
+            }
+
+            ctx.strokeStyle = '#38bdf8'; // Light Blue
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            // RIGHT: Wiederholung (High peaks, complete recovery, long pauses)
+            ctx.beginPath();
+            x = midX + 20;
+            ctx.moveTo(x, mapY(70)); // Start HR
+
+            const numRep = 2;
+            const repW = (chartW/2 - 40) / numRep;
+
+            for(let i=0; i<numRep; i++) {
+                // Peak (Maximum)
+                let peakX = x + repW * 0.2; // Quick rise
+                ctx.quadraticCurveTo(x + 5, mapY(195), peakX, mapY(195));
+                x = peakX;
+
+                // Recovery (Vollständige Pause)
+                let recX = x + repW * 0.8; // Long gap
+                // Drop sharply then flatten out < 100
+                ctx.bezierCurveTo(x + 20, mapY(90), recX - 40, mapY(85), recX, mapY(85));
+                x = recX;
+            }
+
+            ctx.strokeStyle = '#e11d48'; // Red
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // 4. Annotations
+            ctx.fillStyle = '#f8fafc';
+            ctx.font = '14px Source Sans Pro';
+            ctx.textAlign = 'center';
+            
+            // X-Axis Labels
+            ctx.fillText('Zeitachse (Kurze Pausen)', padX + chartW/4, height - padY + 25);
+            ctx.fillText('Zeitachse (Sehr lange Pausen, 10-20 Min)', midX + chartW/4, height - padY + 25);
+
+            // Mark the pauses visually
+            ctx.fillStyle = 'rgba(14, 165, 233, 0.2)';
+            ctx.fillRect(padX + intW*0.4, mapY(185), intW*0.6, mapY(130) - mapY(185));
+            
+            ctx.fillStyle = 'rgba(16, 185, 129, 0.2)';
+            ctx.fillRect(midX + 20 + repW*0.2, mapY(195), repW*0.8, mapY(85) - mapY(195));
+
+        }
+
+        drawGraph();
+
+        window.addEventListener('resize', () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            drawGraph();
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Anaerobe Energiebereitstellung</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@500;700;800&display=swap');
+
+        :root {
+            --primary-bg: #f8fafc;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --accent-blue: #0ea5e9;
+            --accent-blue-dark: #0284c7;
+            --accent-orange: #f97316;
+            --accent-green: #84cc16;
+            --premium-gold: #fbbf24;
+            --premium-red: #ef4444;
+            --box-bg: #ffffff;
+            --border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 20px;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--box-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, var(--accent-blue-dark), var(--accent-blue));
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-weight: 300;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 40px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .content-section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--accent-blue-dark);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 24px;
+            background-color: var(--accent-orange);
+            border-radius: 3px;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin: 25px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Definition / Example Boxes */
+        .info-box {
+            background: #f1f5f9;
+            border-left: 4px solid var(--accent-blue);
+            padding: 15px 20px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin: 20px 0;
+        }
+
+        .info-box strong {
+            color: var(--accent-blue-dark);
+        }
+
+        /* Equation Box */
+        .equation-box {
+            background: #1e293b;
+            color: #f8fafc;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            box-shadow: inset 0 4px 6px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .equation-box::before {
+            content: 'Reaktionsgleichung';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--accent-blue);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        /* Warn/Limit Box */
+        .limit-box {
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+        }
+        
+        .limit-box h4 {
+            color: #b91c1c;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Flowchart (CSS Grid) */
+        .flowchart-container {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin: 30px 0;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .flowchart-title {
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--text-main);
+        }
+
+        .flowchart {
+            display: grid;
+            grid-template-columns: 1fr 50px 1fr;
+            gap: 15px;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .flowchart {
+                grid-template-columns: 1fr;
+            }
+            .flowchart-arrow {
+                transform: rotate(90deg);
+                margin: 10px auto;
+            }
+        }
+
+        .flow-step {
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 4px solid var(--accent-orange);
+            transition: transform 0.2s ease;
+        }
+
+        .flow-step:hover {
+            transform: translateY(-5px);
+        }
+
+        .flow-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .flow-time {
+            display: inline-block;
+            background: #e2e8f0;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 10px;
+            color: var(--text-light);
+        }
+
+        .flowchart-arrow {
+            text-align: center;
+            font-size: 2rem;
+            color: #cbd5e1;
+            font-weight: bold;
+        }
+
+        /* Canvas Container */
+        .canvas-container {
+            width: 100%;
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin: 30px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+        }
+
+        /* Premium Abitur Box */
+        .premium-box {
+            background: linear-gradient(to bottom right, #fff1f2, #ffffff);
+            border: 2px solid var(--premium-red);
+            padding: 35px;
+            border-radius: var(--border-radius);
+            margin: 40px 0 10px 0;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(239, 68, 68, 0.15);
+        }
+
+        .premium-header {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--premium-red), #b91c1c);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+            white-space: nowrap;
+        }
+
+        .premium-box h3 {
+            color: var(--premium-red);
+            margin-top: 10px;
+        }
+
+        .premium-box ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .premium-box li {
+            margin-bottom: 10px;
+        }
+        
+        .exam-example {
+            background: #fff;
+            padding: 20px;
+            border-left: 4px solid var(--premium-gold);
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+    </style>
+</head>
+<body>
+
+<main>
+    <header>
+        <h1>1.4.1a Anaerobe Prozesse</h1>
+        <p>Anaerobe alaktazide und anaerobe laktazide Energiebereitstellung</p>
+    </header>
+
+    <div class="content-section">
+        <p>Die Muskelzelle benötigt für jede Form der Kontraktion Energie in Form von Adenosintriphosphat (ATP). Da die ATP-Speicher in der Muskelzelle jedoch sehr begrenzt sind, muss dieses ständig neu resynthetisiert werden. Erfolgt diese Energiebereitstellung <strong>ohne die Beteiligung von Sauerstoff</strong>, spricht man von anaeroben Prozessen. Diese werden nochmals danach unterschieden, ob Laktat (Milchsäure) als Stoffwechselendprodukt anfällt oder nicht.</p>
+    </div>
+
+    <!-- Sektion 1: Alaktazid -->
+    <div class="content-section">
+        <h2>1. Anaerob-alaktazide Energiebereitstellung</h2>
+        <p>Diese Form der Energiegewinnung erfolgt ohne die Beteiligung von Sauerstoff (anaerob) und ohne die Bildung von Milchsäure (alaktazid). Sie stellt die am schnellsten verfügbare Energiequelle für die Muskulatur dar und wird bei plötzlichen, hochintensiven Belastungen im Sekundenbereich herangezogen.</p>
+
+        <h3>ATP-Spaltung (Die unmittelbare Energiereserve)</h3>
+        <p>Der Muskel greift zunächst auf das unmittelbar in der Muskulatur gespeicherte ATP zurück. Die exotherme Spaltung dieses energiereichen Phosphats liefert die Energie für die Muskelkontraktion:</p>
+        
+        <div class="equation-box">
+            ATP &rarr; ADP + P + Energie
+        </div>
+
+        <div class="info-box">
+            <strong>Beispiel:</strong> Ein hochintensiver, extrem kurzer Krafteinsatz wie beim Kugelstoßen. Die muskulären ATP-Speicher reichen hierbei jedoch nur für Belastungen von ca. 1 bis 3 Sekunden aus.
+        </div>
+
+        <h3>Kreatinphosphat-Resynthese (Der erste Nachschub)</h3>
+        <p>Um die Belastung aufrechtzuerhalten, muss das entstandene Adenosindiphosphat (ADP) sofort wieder zu ATP resynthetisiert werden. Dies geschieht durch die Spaltung von Kreatinphosphat (KP), einem weiteren energiereichen Phosphat, das in der Muskelzelle gespeichert ist.</p>
+
+        <div class="equation-box" style="border-top-color: var(--accent-green);">
+            KP + ADP &rarr; Kreatin + ATP
+        </div>
+
+        <div class="info-box">
+            <strong>Beispiel:</strong> Beim Weitsprung (ca. 40 m Anlauf, Absprung und Landung) reicht das reine ATP nicht aus; die Belastung wird maßgeblich über die KP-Speicher abgedeckt. Diese Speicher sind nach ca. 5 bis maximal 10 Sekunden maximaler Kontraktion erschöpft.
+        </div>
+
+        <!-- Flowchart / KI 2 Auftrag -->
+        <div class="flowchart-container">
+            <div class="flowchart-title">Ablauf der anaerob-alaktaziden Energiebereitstellung</div>
+            <div class="flowchart">
+                <div class="flow-step">
+                    <div class="flow-icon">🏋️‍♂️</div>
+                    <strong>1. Phase: ATP-Spaltung</strong>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">Sofortige Energie aus dem zellulären ATP-Speicher (z.B. Kugelstoß).</p>
+                    <div class="flow-time">⏱️ 1 - 3 Sekunden</div>
+                </div>
+                <div class="flowchart-arrow">➜</div>
+                <div class="flow-step">
+                    <div class="flow-icon">🏃‍♂️</div>
+                    <strong>2. Phase: KP-Resynthese</strong>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">Kreatinphosphat füllt ATP sofort wieder auf (z.B. Weitsprung).</p>
+                    <div class="flow-time">⏱️ bis ca. 10 Sekunden</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sektion 2: Laktazid -->
+    <div class="content-section">
+        <h2>2. Anaerob-laktazide Energiebereitstellung <br><span style="font-size: 1rem; color: var(--text-light); font-weight: normal;">(Anaerobe Glykolyse)</span></h2>
+        <p>Wenn die hochintensive Belastung länger als ca. 10 Sekunden andauert und der Sauerstoffbedarf des Muskels die Sauerstoffaufnahme übersteigt, greift der Körper auf den unvollständigen Abbau von Glukose (Traubenzucker) bzw. Glykogen (Speicherform) zurück.</p>
+        
+        <h3>Der chemische Prozess</h3>
+        <p>Bei diesem Prozess wird Glukose ohne die Beteiligung von Sauerstoff abgebaut. Das Endprodukt dieser unvollständigen Verbrennung ist Laktat (das Salz der Milchsäure).</p>
+
+        <div class="equation-box" style="background: #27272a;">
+            Glukose + ADP + P &rarr; Laktat + ATP
+        </div>
+
+        <h3>Charakteristik und Limitierung</h3>
+        <p>Dieser Stoffwechselweg liefert schnell relativ viel Energie und dominiert bei intensiven Belastungen, die etwa 15 bis 60 Sekunden andauern.</p>
+        
+        <div class="info-box">
+            <strong>Beispiel:</strong> Ein 400-m-Lauf in der Leichtathletik stellt eine hochintensive Belastung von ca. 50-60 Sekunden dar, bei der die anaerobe Glykolyse stark beansprucht wird.
+        </div>
+
+        <div class="limit-box">
+            <h4>⚠️ Periphere Ermüdung</h4>
+            <p style="margin: 0; font-size: 0.95rem;">Die stetige Anhäufung von Laktat (und den damit einhergehenden H+-Ionen) führt zu einer zunehmenden Übersäuerung (Azidose) der Arbeitsmuskulatur. Der sinkende pH-Wert hemmt die an der Energiegewinnung beteiligten Enzyme, behindert die weitere Energiefreisetzung und zwingt den Athleten letztlich zum Belastungsabbruch oder zur deutlichen Reduktion der Intensität (periphere Ermüdung).</p>
+        </div>
+
+        <!-- Canvas Graph / KI 2 Auftrag -->
+        <div class="canvas-container">
+            <h4 style="text-align: center; margin-bottom: 15px; font-family: 'Poppins', sans-serif;">Zeitlicher Verlauf der anaeroben Energiebereitstellung</h4>
+            <canvas id="energyChart" width="800" height="400"></canvas>
+            <p style="text-align: center; font-size: 0.8rem; color: var(--text-light); margin-top: 10px;">Energiebereitstellungsrate (ATP-Bildung/Zeit) in Abhängigkeit von der Belastungsdauer (0-60s).</p>
+        </div>
+    </div>
+
+    <!-- Sektion 3: Abitur-Transfer -->
+    <div class="content-section">
+        <div class="premium-box">
+            <div class="premium-header">
+                🏆 ABITUR-TRANSFER & PRAXIS (eA)
+            </div>
+            
+            <p>Für das Abitur auf erhöhtem Anforderungsniveau (eA) gilt für diesen Themenbereich ein klarer Grundsatz: <strong>Anwendung schlägt reine Reproduktion!</strong> Gemäß den Vorgaben treten rein reproduktive Aspekte (wie das Auswendiglernen von exakten Reaktionsgleichungen mit konkreten, stöchiometrischen Mengenangaben) in den Hintergrund. Der Fokus liegt stattdessen auf dem Anwendungsbezug und der fallbasierten Analyse.</p>
+
+            <h3>1. Transfer auf Wettkampfsituationen</h3>
+            <p>Du musst in der Lage sein, die genannten energieliefernden Prozesse konkreten Sportarten oder Teildisziplinen (z. B. innerhalb eines Zehnkampfs) begründet zuzuordnen. Begründe deine Wahl immer mit der <strong>Dauer</strong> und der <strong>Intensität</strong> der Belastung.</p>
+
+            <h3>2. Arbeit mit diskontinuierlichen Texten und Quellen</h3>
+            <p>In den Abiturprüfungen werden häufig Fallbeispiele (z.B. Blogauszüge, Streckenprofile) herangezogen.</p>
+
+            <div class="exam-example">
+                <strong style="color: var(--premium-gold); display: block; margin-bottom: 5px;">Beispiel: Mountainbike-Alpencross</strong>
+                <p style="font-style: italic; color: #475569; margin-bottom: 10px;">„Als ich dachte, es geht nichts mehr, ging's endlich wieder bergab“ (Streckenprofil: Steigung von 24%)</p>
+                <p style="margin: 0; font-size: 0.95rem;"><strong>Lösungserwartung:</strong> Du musst dies als extrem hohe Belastungsintensität identifizieren. Das Kultusministerium erwartet hier die exakte Schlussfolgerung: Durch die hohe Steigung gewinnt die <strong>anaerob-laktazide Energiebereitstellung</strong> massiv an Bedeutung. Der Athlet bewegt sich über dem Laktat-Steady-State, die Muskulatur übersäuert, und die <strong>periphere Ermüdung</strong> setzt ein.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Canvas Graph Logik für Energiebereitstellung
+    const canvas = document.getElementById('energyChart');
+    const ctx = canvas.getContext('2d');
+
+    // Anpassung an High-DPI Displays (Retina) für scharfe Schrift
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    
+    // Set actual size in memory (scaled to account for extra pixel density)
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    
+    // Normalize coordinate system to use css pixels
+    ctx.scale(dpr, dpr);
+
+    const width = rect.width;
+    const height = rect.height;
+    const padding = 50;
+
+    // Zeichenbereich
+    const chartWidth = width - padding * 2;
+    const chartHeight = height - padding * 2;
+
+    function drawChart() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Hintergrund Grid (Y-Achse)
+        ctx.strokeStyle = '#f1f5f9';
+        ctx.lineWidth = 1;
+        for(let i = 0; i <= 5; i++) {
+            const y = height - padding - (i/5) * chartHeight;
+            ctx.beginPath();
+            ctx.moveTo(padding, y);
+            ctx.lineTo(width - padding, y);
+            ctx.stroke();
+        }
+
+        // Achsen zeichnen
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        // Y-Achse
+        ctx.moveTo(padding, padding);
+        ctx.lineTo(padding, height - padding);
+        // X-Achse
+        ctx.lineTo(width - padding, height - padding);
+        ctx.stroke();
+
+        // Achsenbeschriftung
+        ctx.fillStyle = '#64748b';
+        ctx.font = '12px Inter';
+        ctx.textAlign = 'center';
+        
+        // X-Achse Labels (Zeit in Sekunden: 0, 10, 20, ..., 60)
+        for(let i = 0; i <= 6; i++) {
+            const sec = i * 10;
+            const x = padding + (i/6) * chartWidth;
+            ctx.fillText(sec + 's', x, height - padding + 20);
+            
+            // kleine Ticks
+            ctx.beginPath();
+            ctx.moveTo(x, height - padding);
+            ctx.lineTo(x, height - padding + 5);
+            ctx.stroke();
+        }
+
+        ctx.textAlign = 'right';
+        ctx.fillText('Hoch', padding - 10, padding + 10);
+        ctx.fillText('Niedrig', padding - 10, height - padding - 10);
+        
+        // Y-Achse Titel
+        ctx.save();
+        ctx.translate(15, height/2);
+        ctx.rotate(-Math.PI/2);
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 12px Inter';
+        ctx.fillText('Energiebereitstellungsrate (ATP)', 0, 0);
+        ctx.restore();
+
+        // X-Achse Titel
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 12px Inter';
+        ctx.fillText('Belastungsdauer in Sekunden', width/2, height - 5);
+
+        // -- Kurve 1: ATP/KP (Alaktazid) --
+        // Startet hoch, fällt steil ab nach ca. 10 Sekunden
+        ctx.beginPath();
+        ctx.moveTo(padding, height - padding - chartHeight * 0.95);
+        
+        // Bezier curve to simulate the rapid drop
+        // Control point 1, Control point 2, End point
+        const cp1x_atp = padding + chartWidth * 0.05;
+        const cp1y_atp = height - padding - chartHeight * 0.95;
+        const cp2x_atp = padding + chartWidth * 0.15; // around 10 seconds
+        const cp2y_atp = height - padding - chartHeight * 0.05;
+        const endx_atp = padding + chartWidth;
+        const endy_atp = height - padding - chartHeight * 0.02;
+
+        ctx.bezierCurveTo(cp1x_atp, cp1y_atp, cp2x_atp, cp2y_atp, padding + chartWidth*0.25, height - padding - chartHeight * 0.05);
+        ctx.bezierCurveTo(padding + chartWidth*0.4, height - padding, padding + chartWidth*0.8, height - padding, endx_atp, endy_atp);
+        
+        ctx.strokeStyle = '#f97316'; // accent-orange
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        // -- Kurve 2: Anaerobe Glykolyse (Laktazid) --
+        // Startet tief, steigt rasant an, peak bei ca 45s, sinkt dann ab
+        ctx.beginPath();
+        ctx.moveTo(padding, height - padding - chartHeight * 0.05);
+
+        const peakX = padding + chartWidth * (45/60); // Peak bei 45s
+        const peakY = height - padding - chartHeight * 0.85;
+
+        // Anstieg
+        ctx.bezierCurveTo(
+            padding + chartWidth * 0.2, height - padding - chartHeight * 0.1, // cp1
+            padding + chartWidth * 0.4, peakY * 0.9,                          // cp2
+            peakX, peakY                                                      // peak
+        );
+
+        // Abfall wegen Ermüdung
+        ctx.bezierCurveTo(
+            padding + chartWidth * 0.85, peakY,                               // cp1
+            padding + chartWidth * 0.95, height - padding - chartHeight * 0.6,// cp2
+            padding + chartWidth, height - padding - chartHeight * 0.5        // end
+        );
+
+        ctx.strokeStyle = '#84cc16'; // accent-green
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        // Legende
+        drawLegend(width - padding - 220, padding + 10, '#f97316', 'Anaerob-alaktazid (ATP/KP)');
+        drawLegend(width - padding - 220, padding + 35, '#84cc16', 'Anaerobe Glykolyse (Laktat)');
+    }
+
+    function drawLegend(x, y, color, text) {
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + 20, y);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 4;
+        ctx.stroke();
+        
+        ctx.fillStyle = '#334155';
+        ctx.font = '12px Inter';
+        ctx.textAlign = 'left';
+        ctx.fillText(text, x + 30, y + 4);
+    }
+
+    // Initiales Zeichnen
+    window.onload = function() {
+        drawChart();
+    };
+
+    // Redraw bei Fenster-Resize (Responsive)
+    window.addEventListener('resize', () => {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.scale(dpr, dpr);
+        drawChart();
+    });
+
+</script>
+
+</body>
+</html>

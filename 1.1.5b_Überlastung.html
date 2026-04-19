@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1.5b Überlastung & Übertraining - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Alert & Neuro-Stress */
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            
+            --warning-orange: #f59e0b;
+            --alert-red: #ef4444;
+            --info-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            
+            --abi-gold: #fbbf24;
+            --abi-bg: #1e1b4b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.1rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .tech-font {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Alert Hero Header --- */
+        .hero {
+            background: linear-gradient(180deg, #020617 0%, var(--bg-dark) 100%);
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            border-bottom: 2px solid var(--alert-red);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-status {
+            display: inline-block;
+            border: 1px solid var(--alert-red);
+            color: var(--alert-red);
+            padding: 0.4rem 1.2rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { opacity: 0.7; box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- Intro Area --- */
+        .intro-section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .intro-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 6px solid var(--warning-orange);
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* --- Section Styling --- */
+        .section-title {
+            margin: 5rem 0 2rem;
+            font-size: 1.8rem;
+            color: var(--warning-orange);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--warning-orange), transparent);
+        }
+
+        /* --- Physiologische Hintergründe --- */
+        .background-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .bg-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .bg-card:hover {
+            border-color: var(--info-blue);
+            transform: translateY(-5px);
+        }
+
+        .bg-card h3 {
+            color: var(--info-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* --- Canvas: Vegetative Schieflage --- */
+        .canvas-section {
+            background: #020617;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--bg-card);
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .canvas-section h3 {
+            margin-bottom: 1rem;
+            color: var(--alert-red);
+        }
+
+        .canvas-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            background: #0a0a0a;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        .toggle-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .toggle-btn {
+            background: var(--bg-card);
+            color: white;
+            border: 1px solid var(--text-muted);
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background: var(--alert-red);
+            border-color: var(--alert-red);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+
+        /* --- Symptom Table --- */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 3rem 0;
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1px;
+        }
+
+        <table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kategorie</th>
+                        <th>Symptome des Übertrainings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="category-tag">Leistung</td>
+                        <td>Stagnation oder massiver Abfall der sportlichen Leistung; Verlängerung der Erholungszeit; Koordinationsstörungen (Technikfehler).</td>
+                    </tr>
+                    <tr>
+                        <td class="category-tag">Physiologie</td>
+                        <td>Erhöhter Ruhepuls (morgens); gestörtes Blutdruckverhalten; Gewichtsverlust; Appetitlosigkeit; erhöhte Infektanfälligkeit durch geschwächtes Immunsystem.</td>
+                    </tr>
+                    <tr>
+                        <td class="category-tag">Psychologie</td>
+                        <td>Depressive Verstimmungen; erhöhte Reizbarkeit oder Apathie; Schlafstörungen; massiver Verlust der Trainingsmotivation und Sinnperspektive.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        /* --- Ursachen & Prävention --- */
+        <h2 class="section-title">3. Ursachen und Prävention</h2>
+        
+        <div class="prevention-grid">
+            <div>
+                <h3 class="tech-font" style="margin-bottom: 1.5rem; color: var(--alert-red);">Ursachenkomplex</h3>
+                <ul class="prevention-list">
+                    <li><strong>Trainingsfehler:</strong> Zu hohe Intensität bei zu geringer Reizdichte; zu schneller Anstieg der Belastung (Verstoß gegen das Prinzip der ansteigenden Belastung).</li>
+                    <li><strong>Exogene Faktoren:</strong> Stress in der Schule/Beruf; Schlafmangel; unzureichende Ernährung (Mangel an Kohlenhydraten/Flüssigkeit).</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="tech-font" style="margin-bottom: 1.5rem; color: var(--info-blue);">Gegenmaßnahmen</h3>
+                <ul class="prevention-list">
+                    <li><strong>Prävention:</strong> Systematische Trainingssteuerung mit Periodisierung (Wechsel von Belastung und Entlastung).</li>
+                    <li><strong>Monitoring:</strong> Regelmäßige Leistungsdiagnostik zur Überprüfung des Funktionszustands.</li>
+                </ul>
+            </div>
+        </div>
+
+        /* --- Abitur Transfer Box --- */
+        <section class="abitur-box">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2>Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-content">In den bayerischen Abituraufgaben (eA) ist das Übertraining das klassische „Negativ-Szenario“, um dein Verständnis für eine korrekte Trainingsplanung zu prüfen.</p>
+
+            <div class="abi-content">
+                <div class="abi-card">
+                    <h3>🔍 Fehleranalyse in Fallbeispielen</h3>
+                    <p>In einer materialgestützten Aufgabe könnte ein Athlet beschrieben werden, der trotz steigendem Trainingsumfang immer schlechtere Ergebnisse erzielt und über Infekte klagt. <br><br>
+                    <strong>Argumentation:</strong> Identifiziere den Zustand als Übertraining. Die Reize wurden konstant in der Phase der unvollständigen Wiederherstellung (Modell der Superkompensation) gesetzt, was zu einer Abwärtsspirale des Leistungsniveaus führte.</p>
+                </div>
+                <div class="abi-card">
+                    <h3>🔗 Vernetzung mit psychischen Aspekten</h3>
+                    <p>Das Übertraining ist die Brücke zum Lernbereich 4 (Sportpsychologie). Du kannst argumentieren, dass Übertraining nicht nur den Körper schädigt, sondern durch den Motivationsverlust und die emotionale Labilität die gesamte <span class="highlight-gold">Sinnperspektive</span> des sportlichen Handelns zerstört.</p>
+                </div>
+                <div class="abi-card">
+                    <h3>📈 Laktat-Diagnostik im Übertraining</h3>
+                    <p>Ein Indiz für Übertraining in einer Laktatleistungskurve kann eine <span class="highlight-gold">Linksverschiebung</span> (oder ein unnatürlich niedriger Laktatwert bei maximaler Erschöpfung durch entleerte Speicher) sein. Dies musst du im Vergleich zur angestrebten Rechtsverschiebung als Warnsignal deuten können.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const canvas = document.getElementById('overloadCanvas');
+        const ctx = canvas.getContext('2d');
+        let currentMode = 'sympathisch';
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            draw();
+        }
+
+        function drawGauge(x, y, radius, value, label, unit, color) {
+            // Background
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0.8 * Math.PI, 0.2 * Math.PI);
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 15;
+            ctx.stroke();
+
+            // Value
+            const endAngle = 0.8 * Math.PI + (value / 100) * (1.4 * Math.PI);
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0.8 * Math.PI, endAngle);
+            ctx.strokeStyle = color;
+            ctx.stroke();
+
+            // Text
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 20px Orbitron';
+            ctx.textAlign = 'center';
+            ctx.fillText(Math.round(value) + unit, x, y);
+            ctx.font = '10px Orbitron';
+            ctx.fillText(label, x, y + 20);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const w = canvas.width;
+            const h = canvas.height;
+
+            // Stats for modes
+            const stats = currentMode === 'sympathisch' ? 
+                { puls: 85, cortisol: 90, testosteron: 20, regeneration: 15, name: 'SYMPATHIKOTON (Typ 1)' } : 
+                { puls: 45, cortisol: 70, testosteron: 30, regeneration: 25, name: 'PARASYMPATHIKOTON (Typ 2)' };
+
+            // Title
+            ctx.fillStyle = currentMode === 'sympathisch' ? '#ef4444' : '#3b82f6';
+            ctx.font = 'bold 24px Orbitron';
+            ctx.textAlign = 'center';
+            ctx.fillText(stats.name, w/2, 50);
+
+            // Draw Gauges
+            const spacing = w / 5;
+            drawGauge(spacing * 1, h/2 + 20, 60, stats.puls, 'RUHEPULS', ' bpm', '#ef4444');
+            drawGauge(spacing * 2, h/2 + 20, 60, stats.cortisol, 'CORTISOL', '%', '#f59e0b');
+            drawGauge(spacing * 3, h/2 + 20, 60, stats.testosteron, 'TESTOSTERON', '%', '#10b981');
+            drawGauge(spacing * 4, h/2 + 20, 60, stats.regeneration, 'REGEN_CAP', '%', '#8b5cf6');
+
+            // Bottom Description
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '12px Inter';
+            let desc = currentMode === 'sympathisch' ? 
+                "Dominanz des Sympathikus: Erregungszustand, Unruhe, erhöhter Stoffwechsel." : 
+                "Dominanz des Parasympathikus: Erschöpfung, Apathie, verlangsamte Reaktionen.";
+            ctx.fillText(desc, w/2, h - 40);
+        }
+
+        window.onload = draw;
+    </script>
+</body>
+</html>

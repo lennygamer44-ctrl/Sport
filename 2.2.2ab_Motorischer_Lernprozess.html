@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.2.2a Der motorische Lernprozess & 2.2.2b Erweiterte Modelle - Sport-Abitur 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Work+Sans:wght@300;400;600;800&display=swap');
+
+        :root {
+            --bg-base: #fafafa;
+            --text-dark: #1f2937;
+            --text-mut: #6b7280;
+            
+            /* Evolutionary Palette for Learning Phases */
+            --phase1-color: #ef4444; /* Coral/Red - Grob */
+            --phase1-bg: #fef2f2;
+            
+            --phase2-color: #3b82f6; /* Blue - Fein */
+            --phase2-bg: #eff6ff;
+            
+            --phase3-color: #10b981; /* Emerald - Feinst */
+            --phase3-bg: #ecfdf5;
+            
+            /* Diff. Learning */
+            --diff-color: #8b5cf6; /* Purple */
+            --diff-bg: #f5f3ff;
+            
+            /* Abitur Box */
+            --abi-bg: #0f172a;
+            --abi-gold: #f59e0b;
+            --abi-text: #f8fafc;
+
+            --radius-md: 12px;
+            --radius-xl: 24px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-dark);
+            line-height: 1.65;
+            font-size: 1.05rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Quicksand', sans-serif;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* --- HEADER --- */
+        .header-block {
+            background: #ffffff;
+            border-radius: var(--radius-xl);
+            padding: 3.5rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 4rem;
+            text-align: center;
+            border-bottom: 6px solid #e5e7eb;
+        }
+
+        .header-block h1 {
+            font-size: 2.6rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .header-block .intro {
+            font-size: 1.2rem;
+            color: var(--text-mut);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- THE 3 PHASES (PROGRESSION CARDS) --- */
+        .phases-container {
+            position: relative;
+            margin-bottom: 4rem;
+        }
+
+        .phase-card {
+            background: #ffffff;
+            border-radius: var(--radius-md);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem;
+            border-left: 8px solid;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .phase-card:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-p1 { border-color: var(--phase1-color); }
+        .card-p2 { border-color: var(--phase2-color); margin-left: 20px; }
+        .card-p3 { border-color: var(--phase3-color); margin-left: 40px; }
+
+        .phase-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-p1 h2 { color: var(--phase1-color); }
+        .card-p2 h2 { color: var(--phase2-color); }
+        .card-p3 h2 { color: var(--phase3-color); }
+
+        .phase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .phase-attr {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .phase-attr h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 800;
+        }
+
+        .card-p1 .phase-attr h4 { color: var(--phase1-color); }
+        .card-p2 .phase-attr h4 { color: var(--phase2-color); }
+        .card-p3 .phase-attr h4 { color: var(--phase3-color); }
+
+        .phase-attr p {
+            font-size: 0.95rem;
+            color: #4b5563;
+        }
+
+        /* --- CANVAS SECTION --- */
+        .canvas-section {
+            background: #ffffff;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .canvas-section h3 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p {
+            color: var(--text-mut);
+            margin-bottom: 2rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+
+        /* --- ALTERNATIVE MODELS --- */
+        .diff-learning {
+            background: var(--diff-bg);
+            border-radius: var(--radius-xl);
+            padding: 3.5rem;
+            margin-bottom: 4rem;
+            border: 2px dashed var(--diff-color);
+            position: relative;
+        }
+
+        .diff-learning h2 {
+            font-size: 2.2rem;
+            color: var(--diff-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .diff-content {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .diff-box {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            flex: 1;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .diff-box h4 {
+            color: var(--diff-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* --- ABITUR PREMIUM BOX --- */
+        .abitur-hack {
+            background: var(--abi-bg);
+            border-radius: var(--radius-xl);
+            padding: 4rem;
+            color: var(--abi-text);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-hack::before {
+            content: 'ELEVATED LEVEL';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--abi-gold);
+            color: #000;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-weight: 800;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .abitur-hack h2 {
+            color: var(--abi-gold);
+            font-size: 2.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .abitur-hack > p {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1.5rem;
+        }
+
+        .abi-scenario {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--abi-gold);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .abi-scenario h4 {
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .abi-scenario p {
+            color: #cbd5e1;
+        }
+
+        .highlight-gold {
+            color: var(--abi-gold);
+            font-weight: 700;
+            background: rgba(245, 158, 11, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 900px) {
+            .phase-grid { grid-template-columns: 1fr; }
+            .card-p2, .card-p3 { margin-left: 0; }
+            .diff-content { flex-direction: column; }
+            .header-block, .abitur-hack { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <header class="header-block">
+        <h1>2.2.2a Der motorische Lernprozess</h1>
+        <p class="intro">
+            Motorisches Lernen ist ein komplexer, prozesshafter Vorgang, bei dem Bewegungsfertigkeiten erworben, optimiert und stabilisiert werden. Das klassische und im Lehrplan zentral verankerte Modell zur Beschreibung dieses Prozesses ist das <strong>Dreiphasenmodell nach Meinel und Schnabel</strong>. Es unterteilt den Lernprozess anhand der von außen beobachtbaren Bewegungsqualität (Koordination) in drei aufeinanderfolgende Stufen.
+        </p>
+    </header>
+
+    <!-- The 3 Phases -->
+    <main class="phases-container">
+        
+        <!-- Phase 1 -->
+        <article class="phase-card card-p1">
+            <h2><span style="font-size: 2rem;">1</span> Phase 1: Die Entwicklung der Grobkoordination</h2>
+            <div class="phase-grid">
+                <div class="phase-attr">
+                    <h4>Verlauf</h4>
+                    <p>Beginnt mit dem ersten Erfassen der neuen Bewegungsaufgabe (oft optisch über Vormachen) und endet, wenn die Bewegung unter günstigen Bedingungen (ohne Störfaktoren) <strong>erstmals in ihren Grundzügen ausgeführt</strong> werden kann.</p>
+                </div>
+                <div class="phase-attr">
+                    <h4>Beobachtbare Merkmale</h4>
+                    <p>Die Bewegung wirkt eckig, verkrampft und wenig flüssig. Es gibt einen falschen Krafteinsatz (meist zu viel Aufwand für zu wenig Ertrag), der Bewegungsrhythmus ist fehlerhaft.</p>
+                </div>
+                <div class="phase-attr">
+                    <h4>Biologischer Hintergrund</h4>
+                    <p>Die intermuskuläre Koordination ist noch mangelhaft. Agonist und Antagonist spannen oft gleichzeitig an (Gegenkoordination, "auf der Bremse stehen"). Die Steuerung erfolgt <strong>stark bewusst</strong> und primär über den optischen Analysator.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Phase 2 -->
+        <article class="phase-card card-p2">
+            <h2><span style="font-size: 2rem;">2</span> Phase 2: Die Entwicklung der Feinkoordination</h2>
+            <div class="phase-grid">
+                <div class="phase-attr">
+                    <h4>Verlauf</h4>
+                    <p>Beginnt mit dem Erreichen der Grobkoordination und endet, wenn die Bewegung unter normalen Bedingungen <strong>flüssig, fehlerfrei und zweckmäßig</strong> ausgeführt wird.</p>
+                </div>
+                <div class="phase-attr">
+                    <h4>Beobachtbare Merkmale</h4>
+                    <p>Ein harmonischer Bewegungsfluss, optimaler Krafteinsatz, konstanter Bewegungsrhythmus. Die Bewegung gelingt nun meist auf Anhieb, erfordert aber noch Konzentration.</p>
+                </div>
+                <div class="phase-attr">
+                    <h4>Biologischer Hintergrund</h4>
+                    <p>Die überflüssigen Mitspannungen sind abgebaut (optimierte intermuskuläre Koordination). Der Fokus der Informationsaufnahme verlagert sich weg vom Sehen hin zum <strong>kinästhetischen Analysator</strong> (Bewegungsgefühl).</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Phase 3 -->
+        <article class="phase-card card-p3">
+            <h2><span style="font-size: 2rem;">3</span> Phase 3: Die variable Verfügbarkeit (Feinstkoordination)</h2>
+            <div class="phase-grid">
+                <div class="phase-attr">
+                    <h4>Verlauf</h4>
+                    <p>Die höchste Stufe. Die Bewegung kann nun <strong>auch unter schwierigen, ungewohnten oder extremen Bedingungen</strong> (z. B. Ermüdung, Gegnerdruck, schlechtes Wetter, Wettkampfstress) sicher und erfolgreich angewendet werden.</p>
+                </div>
+                <div class="phase-attr">
+                    <h4>Beobachtbare Merkmale</h4>
+                    <p>Höchste Präzision, Konstanz und absolute Anpassungsfähigkeit der Technik an sich rasch ändernde Situationen (vor allem in Spielsportarten wichtig).</p>
+                </div>
+                <div class="phase-attr">
+                    <h4>Biologischer Hintergrund</h4>
+                    <p>Die Bewegung ist weitgehend <strong>automatisiert</strong> (unbewusste Steuerung über tiefere Hirnregionen). Dies entlastet die Großhirnrinde, wodurch der Athlet seine kognitive Kapazität für taktische Entscheidungen nutzen kann.</p>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Canvas Graphic -->
+    <section class="canvas-section">
+        <h3>Qualität der Steuerung: Die Lernstufen</h3>
+        <p>Vom eckigen Mitspannen zur perfekten Automatisierung unter Druck.</p>
+        <canvas id="staircaseCanvas" width="900" height="400"></canvas>
+    </section>
+
+    <!-- Alternative Models -->
+    <section class="diff-learning">
+        <h2 style="font-size: 1.5rem; color: #6b7280; font-family: 'Work Sans'; margin-bottom: 0.5rem; letter-spacing: 2px;">2.2.2b ERWEITERTE MODELLE</h2>
+        <h2>Recherche weiterer Lernmodelle (Differentielles Lernen)</h2>
+        <p style="margin-bottom: 2rem;">Während das Phasenmodell von Meinel/Schnabel den klassischen Weg (Idealbild-Erlernen) beschreibt, fordert der Lehrplan auch den Blick auf neuere, alternative Ansätze. Ein wichtiges Stichwort ist hier das <strong>Differentielles Lernen (nach Schöllhorn)</strong>.</p>
+        
+        <div class="diff-content">
+            <div class="diff-box">
+                <h4>Der Grundgedanke</h4>
+                <p>Es gibt nicht die "eine perfekte Idealtechnik" für alle. Der Körper lernt nicht durch monotone Wiederholung (Einschleifen), sondern durch das <strong>Bewältigen von Differenzen</strong> (Fehlern, Schwankungen).</p>
+            </div>
+            <div class="diff-box">
+                <h4>Die Anwendung</h4>
+                <p>Anstatt den Volleyball-Aufschlag 100-mal gleich zu üben, variiert der Athlet im differentiellen Lernen ständig (mal mit gestrecktem Arm, mal aus der Hocke, mal mit schwerem Ball). Das Nervensystem muss sich permanent anpassen und findet so eigenständig die <strong>individuell optimalste Lösung</strong>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abitur Box -->
+    <section class="abitur-hack">
+        <h2>Abitur-Transfer & Praxis</h2>
+        <p>
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Die Charakterisierung der Lernphasen ist ein beliebtes Thema für Fallbeispiele. Du musst die Theorie auf fiktive Athleten anwenden können.
+        </p>
+
+        <div class="abi-scenario">
+            <h4>Fehlerdiagnostik & Phasenbestimmung</h4>
+            <p style="font-style: italic; color: #94a3b8; margin-bottom: 1rem;">Klausurbeispiel: "Ein Volleyballspieler beherrscht den Angriffsschlag im Training fehlerfrei. Im entscheidenden Wettkampf, bei einem Spielstand von 24:24 und hoher physischer Ermüdung, trifft er den Ball jedoch mehrfach unsauber."</p>
+            <p><strong>Die Musterantwort:</strong> Der Spieler befindet sich in der <span class="highlight-gold">Feinkoordination</span>. Er kann die Bewegung unter Normalbedingungen (Training) abrufen. Da die Technik unter erschwerten Bedingungen (Stress, physische Ermüdung) jedoch zusammenbricht, hat er die Stufe der <span class="highlight-gold">variablen Verfügbarkeit noch nicht erreicht</span>. Die Automatisierung ist noch nicht stabil genug.</p>
+        </div>
+
+        <div class="abi-scenario">
+            <h4>Themenvernetzung (Koordination & Nervensystem)</h4>
+            <p>Das Kultusministerium liebt Vernetzungen! Wenn du die Phase der Grobkoordination beschreibst, nutze zwingend dein Wissen aus den vorherigen Kapiteln. Erkläre das unrunde Bewegungsmuster mit der <span class="highlight-gold">mangelhaften intermuskulären Koordination</span> (Agonist/Antagonist-Problem) und die Feinstkoordination mit der Verlagerung der Hirnaktivität (<span class="highlight-gold">Bewusste Großhirn-Steuerung vs. unbewusste, automatisierte Steuerung</span>). Dies zeigt das geforderte erhöhte Anforderungsniveau (eA).</p>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    const canvas = document.getElementById('staircaseCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Palette
+    const cGrob = '#ef4444';   // Red
+    const cFein = '#3b82f6';   // Blue
+    const cFeinst = '#10b981'; // Green
+
+    // Stair dimensions
+    const stepW = 280;
+    const stepH = 80;
+    const startX = 30;
+    const startY = h - 50;
+
+    // --- Draw Stairs ---
+    function drawStair(x, y, width, height, color, text1, text2) {
+        // Block
+        ctx.fillStyle = color;
+        ctx.globalAlpha = 0.15;
+        ctx.fillRect(x, y - height, width, height);
+        
+        // Top border
+        ctx.globalAlpha = 1.0;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(x, y - height);
+        ctx.lineTo(x + width, y - height);
+        ctx.stroke();
+
+        // Right border to next step (if not last)
+        ctx.beginPath();
+        ctx.moveTo(x + width, y - height);
+        ctx.lineTo(x + width, y);
+        ctx.stroke();
+
+        // Text labels inside the step
+        ctx.fillStyle = color;
+        ctx.font = 'bold 18px Quicksand';
+        ctx.textAlign = 'center';
+        ctx.fillText(text1, x + width/2, y - height + 35);
+        
+        ctx.font = 'italic 14px Work Sans';
+        ctx.fillStyle = '#4b5563';
+        ctx.fillText(text2, x + width/2, y - height + 60);
+    }
+
+    // Step 1: Grobkoordination
+    const s1X = startX;
+    const s1Y = startY;
+    drawStair(s1X, s1Y, stepW, stepH, cGrob, '1. Grobkoordination', 'Bewusst, fehlerhaft, unrund');
+
+    // Step 2: Feinkoordination
+    const s2X = startX + stepW;
+    const s2Y = startY - stepH;
+    drawStair(s2X, s2Y, stepW, stepH * 1.5, cFein, '2. Feinkoordination', 'Teil-automatisiert, flüssig');
+
+    // Step 3: Variable Verfügbarkeit
+    const s3X = startX + stepW * 2;
+    const s3Y = startY - stepH - (stepH * 1.5);
+    drawStair(s3X, s3Y, stepW, stepH * 2, cFeinst, '3. Variable Verfügbarkeit', 'Automatisiert, anpassungsfähig');
+
+
+    // --- Draw Stickmen ---
+
+    function drawHead(x, y, color) {
+        ctx.beginPath();
+        ctx.arc(x, y, 14, 0, Math.PI*2);
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+
+    // Stickman 1: Stumbling/Grob (on Step 1)
+    const m1X = s1X + stepW / 2;
+    const m1Y = s1Y - stepH - 10;
+    
+    ctx.strokeStyle = cGrob;
+    ctx.lineWidth = 6;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    
+    drawHead(m1X + 15, m1Y - 60, cGrob); // Head leaning forward
+    
+    ctx.beginPath();
+    // Torso (crooked)
+    ctx.moveTo(m1X + 10, m1Y - 45); 
+    ctx.lineTo(m1X - 10, m1Y - 10);
+    // Left Leg (stumbling)
+    ctx.lineTo(m1X - 30, m1Y);
+    // Right Leg (straight, stiff)
+    ctx.moveTo(m1X - 10, m1Y - 10);
+    ctx.lineTo(m1X + 15, m1Y);
+    // Arms (flailing)
+    ctx.moveTo(m1X, m1Y - 35);
+    ctx.lineTo(m1X - 25, m1Y - 50); // back arm
+    ctx.moveTo(m1X + 5, m1Y - 35);
+    ctx.lineTo(m1X + 35, m1Y - 20); // forward arm
+    ctx.stroke();
+
+    // Stickman 2: Fluid Running (on Step 2)
+    const m2X = s2X + stepW / 2;
+    const m2Y = s2Y - (stepH * 1.5) - 10;
+
+    ctx.strokeStyle = cFein;
+    
+    drawHead(m2X, m2Y - 70, cFein); // Head perfect posture
+    
+    ctx.beginPath();
+    // Torso (straight slight lean)
+    ctx.moveTo(m2X, m2Y - 55); 
+    ctx.lineTo(m2X - 5, m2Y - 20);
+    // Front Leg (high knee)
+    ctx.lineTo(m2X + 15, m2Y - 20);
+    ctx.lineTo(m2X + 25, m2Y);
+    // Back Leg (push off)
+    ctx.moveTo(m2X - 5, m2Y - 20);
+    ctx.lineTo(m2X - 20, m2Y - 5);
+    ctx.lineTo(m2X - 35, m2Y - 15);
+    // Arms (coordinated 90 degrees)
+    ctx.moveTo(m2X - 2, m2Y - 45);
+    ctx.lineTo(m2X - 20, m2Y - 35); // back elbow
+    ctx.lineTo(m2X - 10, m2Y - 15); // back hand
+    ctx.moveTo(m2X - 2, m2Y - 45);
+    ctx.lineTo(m2X + 15, m2Y - 40); // front elbow
+    ctx.lineTo(m2X + 10, m2Y - 60); // front hand
+    ctx.stroke();
+
+    // Stickman 3: Dodging/Variable (on Step 3)
+    const m3X = s3X + stepW / 2 - 20;
+    const m3Y = s3Y - (stepH * 2) - 10;
+
+    // Draw Obstacle (Hurdle)
+    ctx.strokeStyle = '#9ca3af';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(m3X + 30, m3Y);
+    ctx.lineTo(m3X + 30, m3Y - 30);
+    ctx.lineTo(m3X + 50, m3Y - 30);
+    ctx.lineTo(m3X + 50, m3Y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(m3X + 25, m3Y - 25);
+    ctx.lineTo(m3X + 55, m3Y - 25);
+    ctx.stroke();
+
+    // Stickman leaping over
+    ctx.strokeStyle = cFeinst;
+    ctx.lineWidth = 6;
+    
+    drawHead(m3X + 15, m3Y - 80, cFeinst);
+    
+    ctx.beginPath();
+    // Torso (horizontal leap)
+    ctx.moveTo(m3X + 5, m3Y - 70); 
+    ctx.lineTo(m3X - 15, m3Y - 50);
+    // Lead Leg (over hurdle)
+    ctx.lineTo(m3X + 20, m3Y - 45);
+    ctx.lineTo(m3X + 45, m3Y - 40);
+    // Trail Leg (tucked)
+    ctx.moveTo(m3X - 15, m3Y - 50);
+    ctx.lineTo(m3X - 35, m3Y - 45);
+    ctx.lineTo(m3X - 25, m3Y - 25);
+    // Arms
+    ctx.moveTo(m3X, m3Y - 65);
+    ctx.lineTo(m3X + 25, m3Y - 60); // reach
+    ctx.moveTo(m3X - 5, m3Y - 60);
+    ctx.lineTo(m3X - 25, m3Y - 75); // pull back
+    ctx.stroke();
+
+    // Motion lines for Stickman 3 (showing adaptability/speed)
+    ctx.strokeStyle = 'rgba(16, 185, 129, 0.4)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(m3X - 50, m3Y - 60); ctx.lineTo(m3X - 30, m3Y - 60);
+    ctx.moveTo(m3X - 60, m3Y - 50); ctx.lineTo(m3X - 40, m3Y - 50);
+    ctx.moveTo(m3X - 45, m3Y - 40); ctx.lineTo(m3X - 25, m3Y - 40);
+    ctx.stroke();
+
+</script>
+</body>
+</html>

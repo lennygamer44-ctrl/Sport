@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.1.3c Funktionale Bewegungsanalyse: Ableitung von funktionalen Aspekten zur Bewegungsoptimierung</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;400;700&family=Rubik:wght@400;500;700;900&display=swap');
+
+        :root {
+            --bg-base: #f4f5f7;
+            --text-main: #2d3142;
+            --text-muted: #737b8c;
+            
+            --diag-error: #ef4444;    /* Red for Error */
+            --diag-cause: #f59e0b;    /* Amber for Cause */
+            --diag-solve: #10b981;    /* Green for Solution */
+            
+            --brand-dark: #1f2937;
+            --brand-accent: #3b82f6;  /* Coaching Blue */
+            
+            --abi-bg: #2d1b4e;
+            --abi-highlight: #c084fc;
+            --abi-gold: #fbbf24;
+
+            --radius: 12px;
+            --shadow-md: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Karla', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Rubik', sans-serif;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Header Section */
+        .page-header {
+            background: #ffffff;
+            border-radius: var(--radius);
+            padding: 3.5rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 3rem;
+            position: relative;
+            border-top: 8px solid var(--brand-dark);
+        }
+
+        .page-header h1 {
+            font-size: 2.4rem;
+            color: var(--brand-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+        }
+
+        .intro-lead {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .intro-lead strong {
+            color: var(--brand-accent);
+        }
+
+        /* Core Principle Section */
+        .chain-section {
+            background: var(--brand-dark);
+            color: white;
+            padding: 3rem;
+            border-radius: var(--radius);
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .chain-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #f3f4f6;
+            text-align: center;
+        }
+
+        .chain-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: #9ca3af;
+        }
+
+        .chain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .chain-step {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 4px solid;
+            position: relative;
+        }
+
+        .step-error { border-color: var(--diag-error); }
+        .step-cause { border-color: var(--diag-cause); }
+        .step-solve { border-color: var(--diag-solve); }
+
+        .chain-step h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .step-error h3 { color: #fca5a5; }
+        .step-cause h3 { color: #fcd34d; }
+        .step-solve h3 { color: #6ee7b7; }
+
+        .chain-step p {
+            font-size: 0.95rem;
+            color: #d1d5db;
+        }
+
+        /* Case Studies Grid */
+        .case-studies {
+            margin-bottom: 4rem;
+        }
+
+        .case-studies > h2 {
+            font-size: 2.2rem;
+            color: var(--brand-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .case-card {
+            background: #ffffff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-header {
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .case-header h3 {
+            font-size: 1.5rem;
+            color: var(--brand-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .case-body {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .diag-row {
+            padding-left: 1.5rem;
+            border-left: 4px solid;
+        }
+
+        .row-err { border-color: var(--diag-error); }
+        .row-cau { border-color: var(--diag-cause); }
+        .row-sol { border-color: var(--diag-solve); }
+
+        .diag-row h4 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .row-err h4 { color: var(--diag-error); }
+        .row-cau h4 { color: var(--diag-cause); }
+        .row-sol h4 { color: var(--diag-solve); }
+
+        .diag-row p {
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        /* Canvas Flowchart Area */
+        .flowchart-section {
+            background: #ffffff;
+            border-radius: var(--radius);
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .flowchart-section h2 {
+            margin-bottom: 1rem;
+            color: var(--brand-dark);
+        }
+
+        .canvas-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 2rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Premium Abitur Box */
+        .abitur-masterclass {
+            background: var(--abi-bg);
+            border-radius: var(--radius);
+            padding: 4rem;
+            color: #ffffff;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-masterclass::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 6px;
+            background: linear-gradient(90deg, var(--abi-highlight), var(--abi-gold));
+        }
+
+        .abitur-masterclass h2 {
+            color: var(--abi-gold);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .abi-intro {
+            font-size: 1.15rem;
+            color: #d8b4fe;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1.5rem;
+        }
+
+        .abi-content h4 {
+            font-size: 1.3rem;
+            color: white;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .abi-content p {
+            color: #e2e8f0;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-text {
+            background: rgba(192, 132, 252, 0.2);
+            color: #e9d5ff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .pro-tip {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px dashed var(--abi-gold);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .pro-tip h4 {
+            color: var(--abi-gold);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 900px) {
+            .case-grid { grid-template-columns: 1fr; }
+            .page-header, .chain-section, .abitur-masterclass { padding: 2rem; }
+            .page-header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <header class="page-header">
+        <h1>2.1.3c Funktionale Bewegungsanalyse</h1>
+        <p class="intro-lead">
+            Während wir in der funktionalen Analyse geklärt haben, <em>warum</em> eine perfekte Technik so aussieht, wie sie aussieht, gehen wir nun einen Schritt weiter in die sportliche Praxis: <strong>die Bewegungsoptimierung</strong>. Hierbei werden biomechanische Prinzipien genutzt, um Technikfehler bei Athletinnen und Athleten zu identifizieren, deren negative physikalische Konsequenzen zu erklären und gezielte Korrekturmaßnahmen (Optimierungen) abzuleiten.
+        </p>
+    </header>
+
+    <!-- Section 1: The Chain -->
+    <section class="chain-section">
+        <h2>1. Die Fehler-Folge-Korrektur-Kette</h2>
+        <p class="chain-intro">Um eine Bewegung funktional zu optimieren, muss man systematisch vorgehen. Ein sichtbarer Fehler (morphologische Ebene) hat immer eine physikalische Konsequenz (biomechanische Ebene), die das Erreichen des Bewegungsziels gefährdet.</p>
+        
+        <div class="chain-grid">
+            <div class="chain-step step-error">
+                <h3>1. Beobachtungsfehler<br><span style="font-size: 0.9rem; font-weight: normal; color: #9ca3af;">(Symptom)</span></h3>
+                <p>Was macht der Sportler äußerlich falsch? (z. B. zu geringe Ausholbewegung).</p>
+            </div>
+            
+            <div class="chain-step step-cause">
+                <h3>2. Biomech. Konsequenz<br><span style="font-size: 0.9rem; font-weight: normal; color: #9ca3af;">(Ursache)</span></h3>
+                <p>Gegen welches Prinzip wird verstoßen? Welche physikalische Größe fehlt? (z. B. Verstoß gegen das Prinzip des optimalen Beschleunigungsweges; der Kraftstoß wird zu gering).</p>
+            </div>
+
+            <div class="chain-step step-solve">
+                <h3>3. Funktionale Optimierung<br><span style="font-size: 0.9rem; font-weight: normal; color: #9ca3af;">(Therapie)</span></h3>
+                <p>Wie muss die Bewegung verändert werden, um den mechanischen Fehler zu beheben?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Canvas Flowchart -->
+    <section class="flowchart-section">
+        <h2>Die Kette in Aktion (Beispiel: Speerwurf)</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">Visuelles Flowchart der Fehleranalyse und Korrekturableitung</p>
+        <div class="canvas-wrapper">
+            <canvas id="flowchartCanvas" width="1000" height="250"></canvas>
+        </div>
+    </section>
+
+    <!-- Section 2: Case Studies -->
+    <section class="case-studies">
+        <h2>2. Konkrete Fallbeispiele zur Bewegungsoptimierung</h2>
+        
+        <div class="case-grid">
+            <!-- Case A -->
+            <article class="case-card">
+                <div class="case-header">
+                    <h3>🏐 Beispiel A: Volleyball-Block</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Die Vorbereitungsphase</p>
+                </div>
+                <div class="case-body">
+                    <div class="diag-row row-err">
+                        <h4>Symptom / Fehler</h4>
+                        <p>Eine Spielerin springt zum Einerblock hoch, beugt aber in der Vorbereitungsphase die Knie- und Hüftgelenke kaum (sie springt fast aus geraden Beinen).</p>
+                    </div>
+                    <div class="diag-row row-cau">
+                        <h4>Biomechanische Konsequenz</h4>
+                        <p>Es wird keine ausreichende Gegenbewegung durchgeführt. Dadurch kann keine nennenswerte Bremskraft und somit keine Vorspannung in der Arbeitsmuskulatur erzeugt werden. Es wird massiv gegen das <strong>Prinzip der maximalen Anfangskraft</strong> verstoßen.</p>
+                    </div>
+                    <div class="diag-row row-sol">
+                        <h4>Ableitung zur Optimierung</h4>
+                        <p>Die Spielerin muss angewiesen werden, den Körperschwerpunkt vor dem Absprung durch eine deutlichere Gelenkbeugung dynamisch abzusenken. Nur so kann der Beschleunigungsweg für die Absprungbewegung vergrößert und ein maximaler Kraftstoß für eine höhere Sprunghöhe erzeugt werden.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Case B -->
+            <article class="case-card">
+                <div class="case-header">
+                    <h3>🎯 Beispiel B: Speerwurf</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Die Hauptphase</p>
+                </div>
+                <div class="case-body">
+                    <div class="diag-row row-err">
+                        <h4>Symptom / Fehler</h4>
+                        <p>Ein Athlet setzt beim Speerwurf in der Hauptphase das vordere linke Bein (den Stemmschritt) nicht gestreckt, sondern stark gebeugt ("weich") auf.</p>
+                    </div>
+                    <div class="diag-row row-cau">
+                        <h4>Biomechanische Konsequenz</h4>
+                        <p>Der "Block der linken Körperseite" geht verloren. Die hohe translatorische kinetische Energie aus dem Anlauf wird nicht abrupt gestoppt und in den Rumpf/Wurfarm umgeleitet, sondern verpufft in der Beugebewegung des Knies (Dämpfung). Die <strong>Sukzessivkopplung</strong> wird unterbrochen.</p>
+                    </div>
+                    <div class="diag-row row-sol">
+                        <h4>Ableitung zur Optimierung</h4>
+                        <p>Der Athlet muss den Stemmschritt mit einem nahezu gestreckten Bein abrupt blockieren. Die Optimierung besteht darin, das Gelenk zu fixieren, um das Prinzip der <strong>Impulserhaltung bzw. Impulsübertragung</strong> von der unteren auf die obere Extremität zu gewährleisten.</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Premium Abitur Box -->
+    <section class="abitur-masterclass">
+        <h2><span style="font-size: 2.8rem;">🎓</span> Abitur-Transfer & Praxis</h2>
+        <p class="abi-intro">
+            Wie dieses Wissen in der eA-Prüfung verlangt wird: Dieser Punkt ist die <strong>Königsdisziplin der Biomechanik-Klausur</strong> und prüft den höchsten Anforderungsbereich (Transfer und Problemlösung).
+        </p>
+
+        <div class="abi-content">
+            <h4>1. Fehlersuche in Bildreihen</h4>
+            <p>Oftmals zeigt die Abitur-Bildreihe nicht den perfekten Profi-Athleten, sondern einen Vereinsspieler mit einer <span class="highlight-text">Suboptimal-Technik</span> (z. B. eine Serie, bei der ein Turner bei der Landung das Gleichgewicht verliert).</p>
+
+            <h4>2. Argumentationsstruktur</h4>
+            <p>Wenn die Aufgabenstellung lautet <em>"Leiten Sie funktionale Aspekte zur Bewegungsoptimierung ab"</em>, dann reicht es nicht, Trainingsmethoden wie "mehr Krafttraining" vorzuschlagen! Du musst <span class="highlight-text">technische Korrekturen fordern und diese biomechanisch begründen</span>.</p>
+
+            <div class="pro-tip">
+                <h4>💡 Tipp für volle Punktzahl: Den Spieß umdrehen!</h4>
+                <p style="margin-bottom: 0; color: #fef3c7;">
+                    Wenn du weißt, dass eine Bewegung eigentlich nach dem Prinzip der Gegenwirkung funktioniert (z. B. Beine klappen beim Volleyball-Block nach vorne), und auf dem Bild macht der Spieler das <strong>nicht</strong> und berührt stattdessen das Netz, dann lautet deine Optimierung: <em>"Der Spieler muss die gestreckten Beine aktiv nach vorne führen, um durch das Prinzip der Gegenwirkung den Rumpf zu stabilisieren und eine Netzberührung zu vermeiden."</em>
+                </p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    // Flowchart Canvas Rendering
+    const canvas = document.getElementById('flowchartCanvas');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // Helper to draw rounded rectangle
+    function drawRoundRect(x, y, width, height, radius, bgColor, borderColor) {
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.lineTo(x + width - radius, y);
+        ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+        ctx.lineTo(x + width, y + height - radius);
+        ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        ctx.lineTo(x + radius, y + height);
+        ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+        ctx.lineTo(x, y + radius);
+        ctx.quadraticCurveTo(x, y, x + radius, y);
+        ctx.closePath();
+        
+        // Fill
+        ctx.fillStyle = bgColor;
+        ctx.fill();
+        
+        // Stroke
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = borderColor;
+        ctx.stroke();
+    }
+
+    // Helper to draw arrow
+    function drawArrow(fromX, fromY, toX, toY) {
+        const headlen = 15;
+        const angle = Math.atan2(toY - fromY, toX - fromX);
+        
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(fromX, fromY);
+        ctx.lineTo(toX, toY);
+        ctx.stroke();
+        
+        ctx.fillStyle = '#94a3b8';
+        ctx.beginPath();
+        ctx.moveTo(toX, toY);
+        ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+        ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+        ctx.fill();
+    }
+
+    // Helper to draw multiline text
+    function drawText(textArray, x, y, titleColor) {
+        ctx.textAlign = 'center';
+        
+        // Title
+        ctx.font = 'bold 16px Rubik';
+        ctx.fillStyle = titleColor;
+        ctx.fillText(textArray[0], x, y);
+        
+        // Body lines
+        ctx.font = '14px Karla';
+        ctx.fillStyle = '#1f2937';
+        for (let i = 1; i < textArray.length; i++) {
+            ctx.fillText(textArray[i], x, y + 10 + (i * 22));
+        }
+    }
+
+    // ----------------------
+    // Execution
+    // ----------------------
+
+    // Dimensions for boxes
+    const boxW = 260;
+    const boxH = 120;
+    const startY = 65;
+
+    const box1X = 40;
+    const box2X = 370;
+    const box3X = 700;
+
+    // Draw Box 1 (Red - Error)
+    drawRoundRect(box1X, startY, boxW, boxH, 8, '#fef2f2', '#ef4444');
+    drawText([
+        "1. Morphologischer Fehler",
+        "Weicher, stark gebeugter",
+        "Stemmschritt beim Aufsetzen"
+    ], box1X + (boxW/2), startY + 35, '#b91c1c');
+
+    // Arrow 1 to 2
+    drawArrow(box1X + boxW + 10, startY + (boxH/2), box2X - 10, startY + (boxH/2));
+
+    // Draw Box 2 (Yellow - Consequence)
+    drawRoundRect(box2X, startY, boxW, boxH, 8, '#fffbeb', '#f59e0b');
+    drawText([
+        "2. Biomech. Konsequenz",
+        "Verlust der Sukzessivkopplung.",
+        "Kinetische Energie verpufft in",
+        "der Kniebeugung (Dämpfung)."
+    ], box2X + (boxW/2), startY + 25, '#b45309');
+
+    // Arrow 2 to 3
+    drawArrow(box2X + boxW + 10, startY + (boxH/2), box3X - 10, startY + (boxH/2));
+
+    // Draw Box 3 (Green - Optimization)
+    drawRoundRect(box3X, startY, boxW, boxH, 8, '#ecfdf5', '#10b981');
+    drawText([
+        "3. Funktionale Optimierung",
+        "Gestrecktes Blockbein erzwingen,",
+        "für abrupte, optimale",
+        "Impulsübertragung in den Wurfarm."
+    ], box3X + (boxW/2), startY + 25, '#047857');
+
+</script>
+</body>
+</html>

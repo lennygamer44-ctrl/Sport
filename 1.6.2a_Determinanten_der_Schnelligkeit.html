@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hefteintrag: Determinanten der Schnelligkeit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Merriweather for academic headings, Plus Jakarta Sans for clean reading -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    colors: {
+                        paper: {
+                            50: '#fcfcfc',
+                            100: '#f5f5f5',
+                            200: '#e5e5e5',
+                            800: '#262626',
+                            900: '#171717',
+                        },
+                        neuro: '#8b5cf6',   // Violet for ZNS
+                        morpho: '#e11d48',  // Rose/Red for Morphology
+                        energy: '#f59e0b',  // Amber for Energy
+                        biomech: '#10b981', // Emerald for Biomechanics
+                        psych: '#ec4899',   // Pink for Psychology
+                        abitur: {
+                            light: '#fef3c7',
+                            DEFAULT: '#d97706',
+                            dark: '#92400e',
+                            bg: '#1a1c23', // Dark Slate for Premium Box
+                        }
+                    },
+                    boxShadow: {
+                        'journal': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'pillar': '0 10px 30px -5px rgba(0, 0, 0, 0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f3f4f6; /* light gray background */
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #262626;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .journal-container {
+            background-color: #ffffff;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+        }
+
+        /* Color Coded Pillars */
+        .pillar-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f3f4f6;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+        .pillar-indicator {
+            position: absolute;
+            top: 0; left: 0; bottom: 0; width: 6px;
+        }
+
+        /* Canvas Wrapper */
+        .mindmap-wrapper {
+            background: #171717; /* Dark paper */
+            border-radius: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+            border: 1px solid #404040;
+        }
+
+        /* Custom Webkit Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5f5f5; }
+        ::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a3a3a3; }
+
+        /* Premium Abitur Box */
+        .masterclass-box {
+            background: linear-gradient(145deg, #1a1c23 0%, #0d0f12 100%);
+            border: 1px solid #d97706;
+            box-shadow: 0 20px 50px -10px rgba(217, 119, 6, 0.2);
+        }
+        
+        /* Typography refinements */
+        .drop-cap::first-letter {
+            font-family: 'Merriweather', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1;
+            float: left;
+            margin-right: 0.5rem;
+            color: #171717;
+            padding-top: 0.2rem;
+        }
+    </style>
+</head>
+<body class="py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+
+    <main class="max-w-6xl mx-auto journal-container rounded-2xl overflow-hidden relative">
+
+        <!-- Header -->
+        <header class="bg-paper-900 text-white px-8 md:px-16 py-12 md:py-16 relative overflow-hidden">
+            <!-- Decorative Academic Pattern -->
+            <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 1px, transparent 10px);"></div>
+            
+            <div class="relative z-10">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-white text-paper-900 font-bold px-3 py-1 text-sm tracking-widest uppercase">1.6.2a</span>
+                    <span class="text-paper-200 font-semibold tracking-widest text-sm uppercase">Sportwissenschaft</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-serif font-black leading-tight mb-4">
+                    Determinanten der <span class="italic text-gray-300">Schnelligkeit</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 font-sans max-w-2xl">
+                    Leistungsbestimmende Faktoren und das synchrone Zusammenspiel der motorischen Systeme.
+                </p>
+            </div>
+        </header>
+
+        <!-- Intro Content -->
+        <section class="px-8 md:px-16 py-12">
+            <p class="text-lg text-paper-800 leading-relaxed drop-cap max-w-4xl">
+                Die Schnelligkeit ist im Vergleich zur Ausdauer oder Maximalkraft ein weitaus komplexeres Konstrukt. Nach dem <strong class="text-black bg-gray-100 px-2 py-0.5 rounded">Modell von Bös</strong> nimmt sie eine Zwitterstellung ein: Sie ist sowohl durch informationsorientierte (steuernde) als auch durch energetisch determinierte (konditionelle) Parameter limitiert. Die maximal erreichbare Schnelligkeitsleistung eines Athleten ist niemals das Resultat eines einzelnen Faktors, sondern ergibt sich aus dem optimalen und synergetischen Zusammenspiel von fünf zentralen Hauptkategorien.
+            </p>
+        </section>
+
+        <!-- Mindmap Canvas Section -->
+        <section class="px-8 md:px-16 pb-12">
+            <div class="mindmap-wrapper">
+                <div class="p-6 md:p-8 border-b border-white/10 flex justify-between items-center bg-black/20">
+                    <h2 class="text-2xl font-serif font-bold text-white">Wissenschaftliche Mindmap</h2>
+                    <p class="text-sm font-sans text-gray-400">Das 5-Säulen-Modell</p>
+                </div>
+                <!-- Canvas Element -->
+                <div class="relative w-full h-[500px] md:h-[650px]">
+                    <canvas id="mindmapCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 5 Pillars (Grid Layout) -->
+        <section class="px-8 md:px-16 py-8 bg-paper-50">
+            <h2 class="text-3xl font-serif font-bold text-paper-900 mb-10 border-b-2 border-paper-200 pb-4">Die 5 Hauptkategorien im Detail</h2>
+
+            <div class="space-y-12">
+                
+                <!-- 1. ZNS -->
+                <article class="pillar-card p-8 md:p-10">
+                    <div class="pillar-indicator bg-neuro"></div>
+                    <div class="flex items-start gap-5">
+                        <div class="w-14 h-14 rounded-full bg-neuro/10 flex items-center justify-center text-neuro shrink-0">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-serif font-bold text-paper-900 mb-3">1. Zentralnervöse & neuromuskuläre Faktoren</h3>
+                            <p class="text-paper-700 mb-6 font-medium bg-neuro/5 inline-block px-3 py-1 rounded text-sm text-neuro">
+                                Informationsverarbeitung: Der Dirigent der Schnelligkeit (Genetisch stark determiniert, nur 15-20% trainierbar).
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="font-bold text-paper-900 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-neuro"></span>Wechselinnervation</h4>
+                                    <p class="text-sm text-paper-600 mt-1">Fähigkeit des ZNS, Erregungs- und Hemmungsprozesse zwischen Agonist und Antagonist extrem schnell umzuschalten. Absolut limitierend für die <strong>zyklische Frequenzschnelligkeit</strong>.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-paper-900 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-neuro"></span>Intramuskuläre Koordination</h4>
+                                    <p class="text-sm text-paper-600 mt-1">Für max. Aktionsschnelligkeit muss das ZNS viele motorische Einheiten (FT-Fasern) gleichzeitig rekrutieren und mit hoher Reizfrequenz (Impulsdichte) stimulieren.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-paper-900 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-neuro"></span>Leitungsgeschwindigkeit</h4>
+                                    <p class="text-sm text-paper-600 mt-1">Geschwindigkeit der Aktionspotenziale über afferente und efferente Nervenbahnen. Bestimmt maßgeblich die Latenzzeit und <strong>Reaktionsschnelligkeit</strong>.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-paper-900 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-neuro"></span>Intermuskuläre Koordination</h4>
+                                    <p class="text-sm text-paper-600 mt-1">Reibungsloses Zusammenwirken versch. Muskelgruppen (z.B. Sukzessivkopplung beim Speerwurf). Minimiert innere Reibungsverluste.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Grid for 2 and 3 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- 2. Morphologisch -->
+                    <article class="pillar-card p-8">
+                        <div class="pillar-indicator bg-morpho"></div>
+                        <div class="flex items-center gap-4 mb-5">
+                            <div class="w-12 h-12 rounded-full bg-morpho/10 flex items-center justify-center text-morpho shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-paper-900">2. Morphologische Faktoren</h3>
+                        </div>
+                        <p class="text-paper-600 text-sm mb-4">Die physische Architektur des Muskels bildet das Fundament.</p>
+                        <ul class="space-y-4">
+                            <li class="bg-paper-50 p-3 rounded border border-paper-100">
+                                <strong class="text-morpho block text-sm mb-1">Muskelfaserspektrum</strong>
+                                <span class="text-sm text-paper-700">Ein genetisch bedingter, dominanter <strong>FT-Faser-Anteil</strong> (Fast-Twitch) ist die absolute Grundvoraussetzung (höhere Kontraktionsgeschwindigkeit).</span>
+                            </li>
+                            <li class="bg-paper-50 p-3 rounded border border-paper-100">
+                                <strong class="text-morpho block text-sm mb-1">Muskelquerschnitt</strong>
+                                <span class="text-sm text-paper-700">Hypertrophie der FT-Fasern vergrößert das kontraktile Potenzial. Relevant für Kraftschnelligkeit (generiert höheren Kraftstoß).</span>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <!-- 3. Energetisch -->
+                    <article class="pillar-card p-8">
+                        <div class="pillar-indicator bg-energy"></div>
+                        <div class="flex items-center gap-4 mb-5">
+                            <div class="w-12 h-12 rounded-full bg-energy/10 flex items-center justify-center text-energy shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-paper-900">3. Energetisch & Biochemisch</h3>
+                        </div>
+                        <p class="text-paper-600 text-sm mb-4">Stoffwechsel in den ersten Sekunden (primär <strong class="text-energy">alaktazid</strong>).</p>
+                        <ul class="space-y-4">
+                            <li class="bg-paper-50 p-3 rounded border border-paper-100">
+                                <strong class="text-energy block text-sm mb-1">ATP- und KP-Speicher</strong>
+                                <span class="text-sm text-paper-700">Intrazelluläre Kapazität und Verfügbarkeit sind für die ersten 7 bis 10 Sekunden maximaler Belastung limitierend.</span>
+                            </li>
+                            <li class="bg-paper-50 p-3 rounded border border-paper-100">
+                                <strong class="text-energy block text-sm mb-1">Enzymaktivität</strong>
+                                <span class="text-sm text-paper-700">Hohe Konzentration von Schlüsselenzymen (Myokinase/Kreatinkinase) beschleunigt die ATP-Resynthese massiv.</span>
+                            </li>
+                        </ul>
+                        <div class="mt-4 text-xs text-gray-500 italic">
+                            *Für Schnelligkeitsausdauer zusätzlich relevant: Blut-Pufferkapazität & Laktattoleranz.
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Grid for 4 and 5 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- 4. Biomechanisch -->
+                    <article class="pillar-card p-8">
+                        <div class="pillar-indicator bg-biomech"></div>
+                        <div class="flex items-center gap-4 mb-5">
+                            <div class="w-12 h-12 rounded-full bg-biomech/10 flex items-center justify-center text-biomech shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-paper-900">4. Biomechanik & Anatomie</h3>
+                        </div>
+                        <p class="text-paper-600 text-sm mb-4">Hebelgesetze der Physik übertragen Muskelkraft in Geschwindigkeit.</p>
+                        <ul class="space-y-4">
+                            <li class="bg-paper-50 p-3 rounded border border-paper-100">
+                                <strong class="text-biomech block text-sm mb-1">Elastizität (Muskel-Sehnen-Apparat)</strong>
+                                <span class="text-sm text-paper-700">Sehnen speichern kinetische Energie wie Gummibänder. Entscheidend im Dehnungs-Verkürzungs-Zyklus (DVZ).</span>
+                            </li>
+                            <li class="bg-paper-50 p-3 rounded border border-paper-100">
+                                <strong class="text-biomech block text-sm mb-1">Anthropometrische Voraussetzungen</strong>
+                                <span class="text-sm text-paper-700">Hebelverhältnisse, Arm-/Beinlängen oder Lage des Körperschwerpunkts beeinflussen Schrittlänge oder Beschleunigungsweg direkt.</span>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <!-- 5. Psychisch -->
+                    <article class="pillar-card p-8">
+                        <div class="pillar-indicator bg-psych"></div>
+                        <div class="flex items-center gap-4 mb-5">
+                            <div class="w-12 h-12 rounded-full bg-psych/10 flex items-center justify-center text-psych shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-paper-900">5. Psychisch-kognitiv</h3>
+                        </div>
+                        <p class="text-paper-600 text-sm mb-4">Schnelligkeit beginnt im Kopf.</p>
+                        <ul class="space-y-4">
+                            <li class="bg-paper-50 p-3 rounded border border-paper-100">
+                                <strong class="text-psych block text-sm mb-1">Willensspannkraft</strong>
+                                <span class="text-sm text-paper-700">Die Fähigkeit, sich mental zu 100% auf eine explosive Entladung zu fokussieren, beeinflusst die neuronale Frequenzierung direkt.</span>
+                            </li>
+                            <li class="bg-paper-50 p-3 rounded border border-paper-100">
+                                <strong class="text-psych block text-sm mb-1">Antizipation & Konzentration</strong>
+                                <span class="text-sm text-paper-700">Insbesondere für die Handlungsschnelligkeit (Spielsportarten). Kognitive Fähigkeit, Situationen vorwegnehmend zu erfassen.</span>
+                            </li>
+                        </ul>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Premium Abitur Transfer Box -->
+        <section class="masterclass-box p-8 md:p-12 md:m-8 rounded-2xl relative overflow-hidden text-white mt-10 mb-10">
+            <!-- Decorative Hexagons Background -->
+            <svg class="absolute right-0 top-0 opacity-5 transform translate-x-1/4 -translate-y-1/4 w-[500px] h-[500px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
+
+            <div class="relative z-10">
+                <div class="flex items-center gap-4 mb-8 border-b border-gray-700 pb-6">
+                    <div class="bg-gradient-to-br from-abitur to-abitur-dark text-white p-4 rounded-xl shadow-lg">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-serif font-bold text-white mb-1">Der Abitur-Schlüssel <span class="bg-red-600 text-xs font-sans px-2 py-1 rounded ml-2 align-middle">G9 eA</span></h2>
+                        <p class="text-abitur font-medium">Fallanalyse & Differenzierungsvermögen</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Column 1: Sprint Phases -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-200">Klausurklassiker: 100-m-Sprint</h3>
+                        <p class="text-sm text-gray-400 mb-6">
+                            Es reicht <strong>nicht</strong>, alle Faktoren wahllos aufzuzählen. Du musst sie den exakten Phasen des Laufs zuordnen!
+                        </p>
+                        
+                        <!-- Timeline -->
+                        <div class="space-y-0 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-600 before:to-transparent">
+                            
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active mb-6">
+                                <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-abitur-bg bg-abitur text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                                    1
+                                </div>
+                                <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-gray-800 p-4 rounded border border-gray-700">
+                                    <div class="font-bold text-white mb-1">Startschuss</div>
+                                    <div class="text-sm text-abitur">Leitungsgeschwindigkeit</div>
+                                    <div class="text-xs text-gray-400 mt-1">Limitiert die Reaktionsschnelligkeit</div>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active mb-6">
+                                <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-abitur-bg bg-morpho text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                                    2
+                                </div>
+                                <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-gray-800 p-4 rounded border border-gray-700">
+                                    <div class="font-bold text-white mb-1">Beschleunigung</div>
+                                    <div class="text-sm text-morpho">Intramuskuläre Koord. & FT-Fasern</div>
+                                    <div class="text-xs text-gray-400 mt-1">Aktions-/Kraftschnelligkeit aus dem Block</div>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                                <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-abitur-bg bg-neuro text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                                    3
+                                </div>
+                                <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-gray-800 p-4 rounded border border-gray-700">
+                                    <div class="font-bold text-white mb-1">Fliegender Sprint</div>
+                                    <div class="text-sm text-neuro">Wechselinnervation</div>
+                                    <div class="text-xs text-gray-400 mt-1">ZNS limitiert die max. Frequenzschnelligkeit</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Bös Model Transfer -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-200">Das Bös-Modell beweisen</h3>
+                        <div class="bg-gray-800 border-l-4 border-abitur p-5 rounded-r-lg">
+                            <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                                Eine weitere beliebte Transferleistung verlangt, dass du argumentierst, warum die Schnelligkeit eine <strong class="text-white">"Brückenfunktion"</strong> einnimmt.
+                            </p>
+                            <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                                Nutze dafür exakt die hier gelernten Determinanten:
+                            </p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-energy mt-0.5">⚡</span>
+                                    <span class="text-sm">Beweise den <strong>"energetischen" (konditionellen)</strong> Teil durch den ATP/KP-Stoffwechsel.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-neuro mt-0.5">🧠</span>
+                                    <span class="text-sm">Beweise den <strong>"informationsorientierten" (koordinativen)</strong> Teil durch neuronale Faktoren wie Leitungsgeschwindigkeit und Wechselinnervation.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Retina-Ready Mindmap Canvas Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('mindmapCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let time = 0;
+
+            // Definition of nodes
+            const centerNode = { label: "Determinanten der\nSchnelligkeit", color: "#f8fafc", bg: "#171717", r: 70 };
+            
+            const branches = [
+                { angle: Math.PI * 1.5, color: "#8b5cf6", title: "ZNS & Neuromuskulär", subs: ["Wechselinnervation", "Intra-/Inter-Koord.", "Leitungsgeschw."] },
+                { angle: Math.PI * 1.9, color: "#e11d48", title: "Morphologisch", subs: ["FT-Faser-Anteil", "Muskelquerschnitt"] },
+                { angle: Math.PI * 0.3, color: "#f59e0b", title: "Energetisch", subs: ["ATP/KP-Speicher", "Enzymaktivität"] },
+                { angle: Math.PI * 0.7, color: "#10b981", title: "Biomechanisch", subs: ["Elastizität (DVZ)", "Anthropometrie"] },
+                { angle: Math.PI * 1.1, color: "#ec4899", title: "Psychisch", subs: ["Willensspannkraft", "Antizipation"] }
+            ];
+
+            function drawRoundedRect(ctx, x, y, width, height, radius, fill, stroke, textColor, textLines) {
+                ctx.beginPath();
+                ctx.moveTo(x + radius, y);
+                ctx.lineTo(x + width - radius, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+                ctx.lineTo(x + width, y + height - radius);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                ctx.lineTo(x + radius, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+                ctx.lineTo(x, y + radius);
+                ctx.quadraticCurveTo(x, y, x + radius, y);
+                ctx.closePath();
+                
+                if (fill) {
+                    ctx.fillStyle = fill;
+                    ctx.fill();
+                }
+                if (stroke) {
+                    ctx.strokeStyle = stroke;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+
+                if (textLines && textLines.length > 0) {
+                    ctx.fillStyle = textColor;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    const lineHeight = 16;
+                    const startY = y + height/2 - ((textLines.length - 1) * lineHeight) / 2;
+                    textLines.forEach((line, i) => {
+                        ctx.fillText(line, x + width/2, startY + i * lineHeight);
+                    });
+                }
+            }
+
+            function draw() {
+                const w = canvas.parentElement.clientWidth;
+                const h = canvas.parentElement.clientHeight;
+                
+                ctx.clearRect(0, 0, w, h);
+                time += 0.02;
+
+                const cx = w / 2;
+                const cy = h / 2;
+                
+                // Responsiveness scaling
+                const scale = Math.min(w, h) / 600;
+                const branchDist = 140 * scale;
+                const subDist = 90 * scale;
+
+                // Draw Connections first (so they are under nodes)
+                branches.forEach((branch, i) => {
+                    // Floating effect
+                    const bTime = time + i;
+                    const bOffset = Math.sin(bTime) * 10;
+                    
+                    const bx = cx + Math.cos(branch.angle) * (branchDist + bOffset);
+                    const by = cy + Math.sin(branch.angle) * (branchDist + bOffset);
+
+                    // Curve from center to main branch
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.quadraticCurveTo(cx, by, bx, by);
+                    ctx.strokeStyle = branch.color + '66'; // with opacity
+                    ctx.lineWidth = 3;
+                    ctx.stroke();
+
+                    // Sub nodes
+                    const numSubs = branch.subs.length;
+                    const spread = 0.8; // radians
+                    const startAngle = branch.angle - (spread/2) + (spread / (numSubs*2));
+                    
+                    branch.subs.forEach((sub, j) => {
+                        const sAngle = startAngle + (j * (spread / numSubs));
+                        const sx = bx + Math.cos(sAngle) * subDist;
+                        const sy = by + Math.sin(sAngle) * subDist;
+
+                        // Curve to sub
+                        ctx.beginPath();
+                        ctx.moveTo(bx, by);
+                        ctx.lineTo(sx, sy);
+                        ctx.strokeStyle = branch.color + '44';
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    });
+                });
+
+                // Draw Nodes
+                branches.forEach((branch, i) => {
+                    const bTime = time + i;
+                    const bOffset = Math.sin(bTime) * 10;
+                    const bx = cx + Math.cos(branch.angle) * (branchDist + bOffset);
+                    const by = cy + Math.sin(branch.angle) * (branchDist + bOffset);
+
+                    // Draw subs
+                    const numSubs = branch.subs.length;
+                    const spread = 0.8;
+                    const startAngle = branch.angle - (spread/2) + (spread / (numSubs*2));
+                    
+                    branch.subs.forEach((sub, j) => {
+                        const sAngle = startAngle + (j * (spread / numSubs));
+                        const sx = bx + Math.cos(sAngle) * subDist;
+                        const sy = by + Math.sin(sAngle) * subDist;
+
+                        ctx.font = '11px "Plus Jakarta Sans"';
+                        const tWidth = ctx.measureText(sub).width + 20;
+                        drawRoundedRect(ctx, sx - tWidth/2, sy - 12, tWidth, 24, 12, '#262626', branch.color, '#d4d4d4', [sub]);
+                    });
+
+                    // Draw main branch node
+                    ctx.font = 'bold 13px "Plus Jakarta Sans"';
+                    const tWidth = ctx.measureText(branch.title).width + 30;
+                    
+                    // Add glow
+                    ctx.shadowColor = branch.color;
+                    ctx.shadowBlur = 15;
+                    drawRoundedRect(ctx, bx - tWidth/2, by - 16, tWidth, 32, 8, branch.color, null, '#ffffff', [branch.title]);
+                    ctx.shadowBlur = 0;
+                });
+
+                // Draw Center Node
+                // Pulsing glow
+                const pulse = Math.sin(time*2) * 5;
+                ctx.shadowColor = '#ffffff';
+                ctx.shadowBlur = 20 + pulse;
+                
+                ctx.beginPath();
+                ctx.arc(cx, cy, centerNode.r * scale, 0, Math.PI * 2);
+                ctx.fillStyle = centerNode.bg;
+                ctx.fill();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+                // Center Text
+                ctx.fillStyle = centerNode.color;
+                ctx.font = `bold ${14 * scale}px "Merriweather"`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                const lines = centerNode.label.split('\n');
+                ctx.fillText(lines[0], cx, cy - 10 * scale);
+                ctx.fillStyle = '#a3a3a3';
+                ctx.fillText(lines[1], cx, cy + 10 * scale);
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

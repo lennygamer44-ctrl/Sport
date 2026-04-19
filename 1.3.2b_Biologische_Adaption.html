@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.3.2b Biologische Adaption - Sport-Abitur 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme: Bio-Evolution & Time-Lapse */
+            --bg-base: #f8fafc;
+            --bg-card: #ffffff;
+            
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --text-dark: #0f172a;
+            
+            /* The 2 Main Adaptation Colors */
+            --neuro-red: #ef4444;       /* Fast, neural, alert */
+            --neuro-light: #fee2e2;
+            --hyper-blue: #3b82f6;      /* Slow, structural, solid */
+            --hyper-light: #dbeafe;
+            
+            --metabolic-green: #10b981;
+            --passive-slate: #475569;
+            
+            --abi-bg: #1e1b4b;          /* Deep Indigo */
+            --abi-gold: #f59e0b;
+            --abi-cyan: #06b6d4;
+            
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 100% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                              radial-gradient(circle at 0% 100%, rgba(239, 68, 68, 0.05) 0%, transparent 50%);
+        }
+
+        h1, h2, h3, h4, .bio-font {
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: var(--bg-card);
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, var(--neuro-red), var(--hyper-blue));
+        }
+
+        .chapter-tag {
+            background: var(--bg-base);
+            color: var(--hyper-blue);
+            border: 1px solid var(--hyper-light);
+            padding: 0.4rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* --- Intro Block --- */
+        .intro-box {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 2.5rem 3rem;
+            border-radius: var(--radius-md);
+            margin: 0 auto 5rem;
+            border-left: 6px solid var(--hyper-blue);
+            box-shadow: var(--shadow-sm);
+            font-size: 1.2rem;
+        }
+
+        /* --- Custom Section Titles --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 5rem 0 2rem;
+        }
+
+        .section-num {
+            background: var(--bg-card);
+            color: var(--text-dark);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        /* --- Split Grid for 1 & 2 (Neural vs Morph) --- */
+        .adapt-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        @media (max-width: 900px) {
+            .adapt-grid { grid-template-columns: 1fr; }
+        }
+
+        .adapt-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .adapt-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .adapt-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 6px;
+        }
+
+        .card-neuro { border: 1px solid var(--neuro-light); }
+        .card-neuro::before { background: var(--neuro-red); }
+        .card-neuro h3 { color: var(--neuro-red); }
+        .card-neuro .subtitle { color: #b91c1c; }
+
+        .card-hyper { border: 1px solid var(--hyper-light); }
+        .card-hyper::before { background: var(--hyper-blue); }
+        .card-hyper h3 { color: var(--hyper-blue); }
+        .card-hyper .subtitle { color: #1d4ed8; }
+
+        .adapt-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .subtitle {
+            display: block;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        .feature-box {
+            background: var(--bg-base);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        /* --- Grid for 3 & 4 (Metabolic & Passive) --- */
+        .secondary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        @media (max-width: 800px) {
+            .secondary-grid { grid-template-columns: 1fr; }
+        }
+
+        .sec-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid;
+        }
+
+        .card-meta { border-left-color: var(--metabolic-green); }
+        .card-meta h3 { color: var(--metabolic-green); }
+
+        .card-pass { border-left-color: var(--passive-slate); }
+        .card-pass h3 { color: var(--passive-slate); }
+
+        .sec-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        ul.bio-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        ul.bio-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        ul.bio-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--text-muted);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* --- Interactive Canvas Infographic --- */
+        .canvas-section {
+            background: var(--bg-card);
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .canvas-section h2 {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .canvas-section p.subtext {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            overflow-x: auto;
+            position: relative;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .color-dot {
+            width: 16px; height: 16px; border-radius: 50%;
+        }
+
+        /* --- Premium Abitur Transfer Box --- */
+        .abitur-prep {
+            background: var(--abi-bg);
+            color: #e2e8f0;
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 6rem;
+            border-top: 6px solid var(--abi-gold);
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abitur-prep::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; width: 300px; height: 300px;
+            background: radial-gradient(circle at 100% 0%, rgba(245, 158, 11, 0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        .abi-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .abi-icon {
+            background: var(--abi-gold);
+            color: var(--abi-bg);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 2.5rem;
+            font-weight: 900;
+        }
+
+        .abi-header h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+        }
+
+        .abi-intro {
+            font-size: 1.25rem;
+            color: #fde68a;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .abi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .abi-card {
+            background: rgba(0,0,0,0.3);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--abi-gold);
+        }
+
+        .abi-card.warn {
+            border-left-color: var(--abi-cyan);
+        }
+
+        .abi-card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .abi-card p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .abi-card p:last-child { margin-bottom: 0; }
+
+        .hl-gold { color: var(--abi-gold); font-weight: 700; }
+        .hl-cyan { color: var(--abi-cyan); font-weight: 700; }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="chapter-tag">Lernbereich 1.3.2b</span>
+            <h1>Biologische Adaption</h1>
+            <p>Anpassungserscheinungen durch Krafttraining – Die chronologische Entwicklung von neuronaler Steuerung, Muskelwachstum und Belastungstoleranz.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="intro-box">
+            Wird das neuromuskuläre System durch ein überschwelliges Krafttraining (nach der Reizstufenregel) wiederholt belastet, reagiert der Organismus in der Erholungsphase (Superkompensation) mit spezifischen biologischen Anpassungen. Diese Adaptationen zielen darauf ab, die Belastungstoleranz für zukünftige Reize zu erhöhen. <strong>Man unterscheidet hierbei drei fundamentale Anpassungsebenen, die jedoch zeitlich stark versetzt auftreten (Heterochronismus der Anpassung).</strong>
+        </div>
+
+        <!-- Split Section 1 & 2 -->
+        <div class="adapt-grid">
+            
+            <!-- 1. Neural -->
+            <div class="adapt-card card-neuro">
+                <h3 class="bio-font">1. Neuronale Anpassungen</h3>
+                <span class="subtitle">Die schnelle Reaktion (0 - 6 Wochen)</span>
+                <p style="margin-bottom: 1.5rem;">Die ersten signifikanten Leistungssteigerungen im Krafttraining basieren fast ausschließlich auf neuronalen Anpassungen. <strong>Der Muskel wird nicht dicker</strong>, sondern das zentrale Nervensystem (ZNS) lernt, die vorhandene Muskelmasse effizienter anzusteuern:</p>
+                
+                <div class="feature-box" style="border-left: 3px solid var(--neuro-red);">
+                    <h4>Verbesserte intramuskuläre Koordination (IK)</h4>
+                    <p>Das ZNS optimiert die <strong>Rekrutierung</strong> (mehr motorische Einheiten gleichzeitig aktiviert), die <strong>Frequenzierung</strong> (schnellere Aktionspotenziale) und die <strong>Synchronisation</strong> (gleichzeitiges Abfeuern für maximale Explosivkraft).</p>
+                </div>
+                
+                <div class="feature-box" style="border-left: 3px solid var(--neuro-red);">
+                    <h4>Verbesserte intermuskuläre Koordination</h4>
+                    <p>Das Zusammenspiel zwischen Agonist und Synergisten wird harmonisiert. Gleichzeitig hemmt das ZNS die Aktivität des Antagonisten (Gegenspieler) während der Zielbewegung (reziproke Hemmung).</p>
+                </div>
+            </div>
+
+            <!-- 2. Morphological -->
+            <div class="adapt-card card-hyper">
+                <h3 class="bio-font">2. Morphologische Anpassungen</h3>
+                <span class="subtitle">Die langfristige Reaktion (ab 6 Wochen)</span>
+                <p style="margin-bottom: 1.5rem;">Erst nach mehreren Wochen kontinuierlichen Trainings beginnt der Muskel, seinen sichtbaren Querschnitt zu vergrößern. Diesen Vorgang nennt man <strong>Hypertrophie (Dickenwachstum)</strong>.</p>
+                
+                <div class="feature-box" style="border-left: 3px solid var(--hyper-blue);">
+                    <h4>Der zelluläre Mechanismus</h4>
+                    <p>Durch das Training entstehen Mikrotraumata. Der Körper repariert diese und überkompensiert: Er lagert in die vorhandenen Muskelfasern vermehrt neu synthetisierte Strukturproteine (Aktin/Myosin/Titin) ein. Die Anzahl der Sarkomere nimmt zu.</p>
+                </div>
+                
+                <div class="feature-box" style="border-left: 3px solid var(--hyper-blue);">
+                    <h4>Faserspezifität</h4>
+                    <p><strong>FT-Fasern (weiß) haben ein deutlich größeres Hypertrophie-Potenzial als ST-Fasern.</strong> Daher führt ein Maximalkrafttraining zu einem wesentlich stärkeren Muskelwachstum als reines Ausdauertraining. <em>(Hinweis: Die Anzahl der Fasern selbst vermehrt sich nicht!).</em></p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Section 3 & 4 Grid -->
+        <div class="secondary-grid">
+            <!-- 3. Metabolic -->
+            <div class="sec-card card-meta">
+                <h3 class="bio-font">3. Energetisch-metabolische Anpassungen</h3>
+                <p>Parallel zum Dickenwachstum passt die Muskelzelle auch ihre Energiebereitstellung an die spezifische Belastung (z. B. Kraftausdauer oder Maximalkraft) an:</p>
+                <ul class="bio-list">
+                    <li>Die intrazellulären Speicher für energiereiche Phosphate (ATP und Kreatinphosphat) werden signifikant vergrößert.</li>
+                    <li>Die muskulären Glykogenspeicher wachsen.</li>
+                    <li>Die aktivität und Konzentration der Schlüsselenzyme für den anaerob-alaktaziden und anaerob-laktaziden Stoffwechsel nehmen deutlich zu.</li>
+                </ul>
+            </div>
+
+            <!-- 4. Passive -->
+            <div class="sec-card card-pass">
+                <h3 class="bio-font">4. Anpassung des passiven Bewegungsapparates</h3>
+                <p>Auch die knöchernen und bindegewebigen Strukturen adaptieren auf die hohen Zug- und Druckkräfte:</p>
+                <ul class="bio-list">
+                    <li>Sehnen und Bänder vergrößern ihren Querschnitt durch die vermehrte Einlagerung von Kollagenfasern, was ihre Reißfestigkeit erhöht.</li>
+                    <li>Der Knochen erhöht seine mineralische Dichte (Einlagerung von Kalzium), um sich gegen die enormen Zugkräfte der hypertrophierten Muskeln an den Ansatzstellen zu wappnen.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Canvas: Zeitverlauf der Adaption -->
+        <section class="canvas-section">
+            <h2 class="bio-font">Der Heterochronismus der Anpassung</h2>
+            <p class="subtext">Zeitverlauf der Leistungssteigerung: Neuronale Optimierung vs. Strukturelle Hypertrophie.</p>
+            
+            <div class="canvas-container">
+                <canvas id="adaptCanvas" width="900" height="450"></canvas>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item"><div class="color-dot" style="background: var(--neuro-red);"></div> Neuronale Anpassung (Kurve 1)</div>
+                <div class="legend-item"><div class="color-dot" style="background: var(--hyper-blue);"></div> Hypertrophie (Kurve 2)</div>
+            </div>
+        </section>
+
+        <!-- Premium Abitur Transfer Box -->
+        <section class="abitur-prep">
+            <div class="abi-header">
+                <div class="abi-icon">!</div>
+                <h2 class="bio-font">Abitur-Transfer & Praxis</h2>
+            </div>
+            
+            <p class="abi-intro">
+                Dieser Bereich ist ein absoluter Kern für komplexe Transferaufgaben, in denen du die biologischen Gesetzmäßigkeiten mit den Krafttrainings-Grundlagen verknüpfen musst.
+            </p>
+
+            <div class="abi-grid">
+                
+                <div class="abi-card">
+                    <h3 class="bio-font">🏋️ Das Phänomen des Anfängers</h3>
+                    <p>Eine klassische Klausurfrage schildert einen Krafttrainings-Anfänger, der sein Maximalgewicht beim Bankdrücken in nur vier Wochen von 40 kg auf 60 kg steigert, sich aber wundert, dass seine Brustmuskulatur noch nicht sichtlich gewachsen ist.</p>
+                    <p style="margin-top: 1rem;"><span class="hl-gold">Hier musst du den Zeitverlauf der Adaptation erklären!</span> Argumentiere, dass die ersten Kraftzuwächse rein neuronal (verbesserte inter- und intramuskuläre Koordination) bedingt sind. Eine morphologische Hypertrophie benötigt deutlich mehr Zeit (ab 6 Wochen), da die Proteinsynthese von neuen Aktin- und Myosinfilamenten wesentlich komplexer ist als das schnelle "Umlernen" im ZNS.</p>
+                </div>
+
+                <div class="abi-card warn">
+                    <h3 class="bio-font">⚠️ Verletzungsrisiko begründen (Der Heterochronismus)</h3>
+                    <p>Die Anpassung hat eine gefährliche Kehrseite, die oft im Transferteil (Gesundheit/Prävention) abgefragt wird: Die Muskulatur hypertrophiert nach wenigen Wochen. Die Sehnen, Bänder und Knochen (passiver Bewegungsapparat) werden jedoch <span class="hl-cyan">bradytroph (durch Diffusion und Wechseldruck)</span> ernährt und benötigen oft <strong>Monate bis Jahre</strong>, um sich strukturell an die neuen Kräfte anzupassen!</p>
+                    <p style="margin-top: 1rem;">Steigert ein Anfänger seine Trainingsgewichte zu schnell (nur passend zur reinen Muskelkraft), drohen <strong>Sehnenabrisse oder Knorpelschäden</strong>. Dies ist die absolute biologische Rechtfertigung für das Prinzip der ansteigenden und altersgemäßen Belastung.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('adaptCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const logicalW = 900;
+            const logicalH = 450;
+            
+            let progress = 0; // 0 to 20 (representing weeks)
+            let animationId;
+
+            function initCanvas() {
+                const container = canvas.parentElement;
+                const rect = container.getBoundingClientRect();
+                const displayW = Math.min(rect.width, logicalW);
+                const scale = displayW / logicalW;
+                const displayH = logicalH * scale;
+                
+                canvas.width = displayW * dpr;
+                canvas.height = displayH * dpr;
+                canvas.style.width = `${displayW}px`;
+                canvas.style.height = `${displayH}px`;
+                
+                ctx.scale(dpr * scale, dpr * scale);
+                
+                if(!animationId) animate();
+            }
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+                initCanvas();
+            });
+
+            // Mathematical Models for the Curves
+            // Neural adaptation: Rises fast, plateaus early
+            function calcNeural(week) {
+                // f(x) = 100 * (1 - e^(-0.4 * x))
+                // Maxes out around 95-100% relatively quickly
+                return 95 * (1 - Math.exp(-0.4 * week));
+            }
+
+            // Hypertrophy adaptation: Starts flat, rises after week 4-6 (Sigmoid function)
+            function calcHypertrophy(week) {
+                // f(x) = 100 / (1 + e^(-0.4 * (x - 10)))
+                // Sigmoid curve shifted to start rising noticeably around week 4-6
+                return 100 / (1 + Math.exp(-0.4 * (week - 10)));
+            }
+
+            function drawChart(currentWeek) {
+                ctx.clearRect(0, 0, logicalW, logicalH);
+
+                const padL = 70;
+                const padR = 40;
+                const padT = 40;
+                const padB = 60;
+                
+                const plotW = logicalW - padL - padR;
+                const plotH = logicalH - padT - padB;
+                const maxWeeks = 20;
+
+                // --- Grid & Axes ---
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = '#e2e8f0';
+
+                // Vertical grid lines (Weeks)
+                for (let w = 0; w <= maxWeeks; w += 4) {
+                    let x = padL + (w / maxWeeks) * plotW;
+                    ctx.beginPath();
+                    ctx.moveTo(x, padT);
+                    ctx.lineTo(x, logicalH - padB);
+                    ctx.stroke();
+                    
+                    // X-Axis Labels
+                    ctx.fillStyle = '#64748b';
+                    ctx.font = '13px Plus Jakarta Sans';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`Woche ${w}`, x, logicalH - padB + 25);
+                }
+
+                // Horizontal grid lines (Percentage)
+                for (let p = 0; p <= 100; p += 25) {
+                    let y = (logicalH - padB) - (p / 100) * plotH;
+                    ctx.beginPath();
+                    ctx.moveTo(padL, y);
+                    ctx.lineTo(logicalW - padR, y);
+                    ctx.stroke();
+                    
+                    // Y-Axis Labels
+                    ctx.fillStyle = '#64748b';
+                    ctx.font = '13px Plus Jakarta Sans';
+                    ctx.textAlign = 'right';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(`${p}%`, padL - 10, y);
+                }
+
+                // Draw Main Axes
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(padL, padT);
+                ctx.lineTo(padL, logicalH - padB);
+                ctx.lineTo(logicalW - padR + 10, logicalH - padB);
+                ctx.stroke();
+
+                // Axis Titles
+                ctx.fillStyle = '#334155';
+                ctx.font = 'bold 14px Plus Jakarta Sans';
+                ctx.textAlign = 'center';
+                ctx.fillText('Trainingsdauer (Zeit)', padL + plotW/2, logicalH - 10);
+                
+                ctx.save();
+                ctx.translate(20, padT + plotH/2);
+                ctx.rotate(-Math.PI/2);
+                ctx.fillText('Relativer Anteil am Kraftzuwachs', 0, 0);
+                ctx.restore();
+
+                // --- Draw Curves ---
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+
+                // Curve 1: Neural (Red)
+                ctx.beginPath();
+                ctx.moveTo(padL, logicalH - padB); // start at 0,0
+                for (let w = 0; w <= currentWeek; w += 0.2) {
+                    let x = padL + (w / maxWeeks) * plotW;
+                    let y = (logicalH - padB) - (calcNeural(w) / 100) * plotH;
+                    ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = '#ef4444';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+                // Draw end dot for Neural
+                if (currentWeek > 0) {
+                    let ex = padL + (currentWeek / maxWeeks) * plotW;
+                    let ey = (logicalH - padB) - (calcNeural(currentWeek) / 100) * plotH;
+                    ctx.beginPath(); ctx.arc(ex, ey, 6, 0, Math.PI*2);
+                    ctx.fillStyle = '#ef4444'; ctx.fill();
+                    ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+                }
+
+                // Curve 2: Hypertrophy (Blue)
+                ctx.beginPath();
+                ctx.moveTo(padL, logicalH - padB); // start at 0,0
+                for (let w = 0; w <= currentWeek; w += 0.2) {
+                    let x = padL + (w / maxWeeks) * plotW;
+                    let y = (logicalH - padB) - (calcHypertrophy(w) / 100) * plotH;
+                    ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = '#3b82f6';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+                // Draw end dot for Hypertrophy
+                if (currentWeek > 0) {
+                    let ex = padL + (currentWeek / maxWeeks) * plotW;
+                    let ey = (logicalH - padB) - (calcHypertrophy(currentWeek) / 100) * plotH;
+                    ctx.beginPath(); ctx.arc(ex, ey, 6, 0, Math.PI*2);
+                    ctx.fillStyle = '#3b82f6'; ctx.fill();
+                    ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+                }
+
+                // --- Annotations ---
+                if (currentWeek > 8) {
+                    // Neural Text
+                    ctx.fillStyle = '#ef4444';
+                    ctx.font = 'bold 15px Outfit';
+                    ctx.textAlign = 'left';
+                    ctx.fillText('Neuronale Anpassung', padL + (8/maxWeeks)*plotW, (logicalH - padB) - (calcNeural(8)/100)*plotH - 20);
+                    ctx.font = '12px Plus Jakarta Sans';
+                    ctx.fillText('(Steiler Anstieg, frühes Plateau)', padL + (8/maxWeeks)*plotW, (logicalH - padB) - (calcNeural(8)/100)*plotH - 5);
+
+                    // Hypertrophy Text
+                    ctx.fillStyle = '#3b82f6';
+                    ctx.font = 'bold 15px Outfit';
+                    ctx.textAlign = 'right';
+                    ctx.fillText('Hypertrophie', padL + (14/maxWeeks)*plotW, (logicalH - padB) - (calcHypertrophy(14)/100)*plotH - 20);
+                    ctx.font = '12px Plus Jakarta Sans';
+                    ctx.fillText('(Verzögerter, langfristiger Anstieg)', padL + (14/maxWeeks)*plotW, (logicalH - padB) - (calcHypertrophy(14)/100)*plotH - 5);
+                }
+
+                // Mark the critical transition phase (Week 4-6)
+                if (currentWeek > 6) {
+                    const x4 = padL + (4 / maxWeeks) * plotW;
+                    const x6 = padL + (6 / maxWeeks) * plotW;
+                    
+                    ctx.fillStyle = 'rgba(245, 158, 11, 0.1)';
+                    ctx.fillRect(x4, padT, x6 - x4, plotH);
+                    
+                    ctx.strokeStyle = '#f59e0b';
+                    ctx.lineWidth = 1;
+                    ctx.setLineDash([5, 5]);
+                    ctx.beginPath(); ctx.moveTo(x4, padT); ctx.lineTo(x4, logicalH - padB); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(x6, padT); ctx.lineTo(x6, logicalH - padB); ctx.stroke();
+                    ctx.setLineDash([]);
+                    
+                    ctx.fillStyle = '#d97706';
+                    ctx.font = 'bold 12px Plus Jakarta Sans';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Übergangs-', x4 + (x6-x4)/2, padT + 20);
+                    ctx.fillText('phase', x4 + (x6-x4)/2, padT + 35);
+                }
+            }
+
+            function animate() {
+                if (progress <= 20) {
+                    drawChart(progress);
+                    progress += 0.08; // Animation speed
+                    animationId = requestAnimationFrame(animate);
+                } else {
+                    // Stop animation loop when full, no continuous re-rendering needed
+                    drawChart(20);
+                }
+            }
+
+            // Start animation when scrolled into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        progress = 0; // Reset
+                        if(animationId) cancelAnimationFrame(animationId);
+                        animate();
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(canvas);
+            
+            // Initial call
+            initCanvas();
+        });
+    </script>
+</body>
+</html>
